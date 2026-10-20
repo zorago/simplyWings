@@ -115,7 +115,7 @@ public final class WingModel {
         float dorsal = p.axis;
         float vertical = 1f - dorsal;
         float forward = p.sweep - p.curl;
-        side.root.xRot = -HALF_PI * dorsal * folded;
+        side.root.yRot = s * HALF_PI * dorsal * folded;
         side.shoulder.yRot = s * (-1.25f * folded + vertical * forward - dorsal * p.stroke);
         side.shoulder.zRot = s * (-0.1f * folded - vertical * p.stroke - dorsal * forward);
         side.shoulder.xRot = p.twist;
