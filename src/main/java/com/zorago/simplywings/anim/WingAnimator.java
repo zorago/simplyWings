@@ -46,6 +46,7 @@ public final class WingAnimator {
         bank += (targetBank - bank) * 0.25f;
         boolean brake = (flags & FlightMode.FLAG_BRAKE) != 0;
         boolean stall = (flags & FlightMode.FLAG_STALL) != 0;
+        boolean tuck = (flags & FlightMode.FLAG_TUCK) != 0;
         float pitch = player.getXRot();
         float rate = 0.3f;
         boolean hovering = false;
@@ -59,9 +60,12 @@ public final class WingAnimator {
                 if (brake) {
                     baseTarget.set(1f, 0.55f, 0.45f, -0.25f, -0.35f, 1.1f);
                     rate = 0.35f;
+                } else if (tuck) {
+                    baseTarget.set(0.85f, -1.3f, -0.08f, -0.25f, 0.2f, 0f);
+                    rate = 0.25f;
                 } else if (pitch > 35f) {
                     float dive = Mth.clamp((pitch - 35f) / 40f, 0f, 1f);
-                    baseTarget.set(Mth.lerp(dive, 0.9f, 0.3f), Mth.lerp(dive, -0.1f, -0.65f), 0.05f, 0f, -0.1f, 0f);
+                    baseTarget.set(1f, Mth.lerp(dive, -0.05f, -0.25f), 0.06f, 0f, -0.05f, 0f);
                 } else {
                     baseTarget.set(1f, -0.05f, 0.06f, 0f, -0.05f, 0f);
                 }
@@ -117,6 +121,8 @@ public final class WingAnimator {
         }
         if (mode == FlightMode.NONE && (player.onGround() || player.isPassenger())) {
             oscillation.stroke += 0.04f * Mth.sin(age * 0.08f);
+        } else if (tuck) {
+            oscillation.stroke += 0.015f * Mth.sin(age * 1.7f);
         } else if (mode == FlightMode.TRAVEL && !brake) {
             oscillation.stroke += 0.03f * (Mth.sin(age * 0.37f) + Mth.sin(age * 0.23f));
         } else if (brake) {

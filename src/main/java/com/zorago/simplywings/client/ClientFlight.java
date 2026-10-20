@@ -43,6 +43,7 @@ public final class ClientFlight {
     private static int ticksSinceFlap;
     private static boolean stalled;
     private static boolean braking;
+    private static boolean tucked;
     private static float bank;
     private static float prevBank;
 
@@ -437,9 +438,13 @@ public final class ClientFlight {
         double sin = Math.sin(Math.toRadians(pitch));
         double vCap = vMax + (vTerm - vMax) * Math.max(0, sin);
         double drag = g / (vTerm * vTerm);
-        double accel = g * sin - drag * speed * speed - ServerConfig.OVERSPEED_FRICTION.get() * Math.max(0, speed - vCap);
 
+        boolean sprint = o.keySprint.isDown();
         braking = ModKeys.brakeDown() && speed > 0;
+        tucked = sprint && !braking && speed > vMax && pitch >= ServerConfig.TUCK_MIN_PITCH.get();
+        double dragFactor = tucked ? ServerConfig.TUCK_DRAG_FACTOR.get() : 1.0;
+        double overspeed = ServerConfig.OVERSPEED_FRICTION.get() * (tucked ? 5.0 : 1.0);
+        double accel = g * sin - drag * dragFactor * speed * speed - overspeed * Math.max(0, speed - vCap);
         if (braking) {
             accel -= accelStat * ServerConfig.BRAKE_FACTOR.get();
         }
@@ -447,10 +452,9 @@ public final class ClientFlight {
         if (flapCooldown > 0) {
             flapCooldown--;
         }
-        if (o.keySprint.isDown() && !braking && flapCooldown <= 0 && (creative || ClientWings.stamina() >= flapCost())) {
-            if (speed < vCap) {
-                speed += accelStat * (1 - speed / vCap);
-            }
+        boolean flapUseful = speed < vMax;
+        if (sprint && flapUseful && !braking && flapCooldown <= 0 && (creative || ClientWings.stamina() >= flapCost())) {
+            speed += accelStat * (1 - speed / vCap);
             flapCooldown = flapInterval(stats);
             ticksSinceFlap = 0;
             spend(player, flapCost());
@@ -491,7 +495,8 @@ public final class ClientFlight {
         player.setDeltaMovement(velocity.scale(DT));
         lastVelocity = velocity;
 
-        int nextFlags = (braking ? FlightMode.FLAG_BRAKE : 0) | (stalled ? FlightMode.FLAG_STALL : 0);
+        int nextFlags = (braking ? FlightMode.FLAG_BRAKE : 0) | (stalled ? FlightMode.FLAG_STALL : 0)
+                | (tucked ? FlightMode.FLAG_TUCK : 0);
         if (nextFlags != flags) {
             flags = nextFlags;
             PacketDistributor.sendToServer(new Payloads.RequestMode(FlightMode.TRAVEL.ordinal(), flags));

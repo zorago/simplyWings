@@ -9,6 +9,8 @@ public final class ServerConfig {
     public static final ModConfigSpec.DoubleValue TERMINAL_VELOCITY;
     public static final ModConfigSpec.DoubleValue OVERSPEED_FRICTION;
     public static final ModConfigSpec.DoubleValue BRAKE_FACTOR;
+    public static final ModConfigSpec.DoubleValue TUCK_DRAG_FACTOR;
+    public static final ModConfigSpec.DoubleValue TUCK_MIN_PITCH;
     public static final ModConfigSpec.DoubleValue STOP_SPEED_FACTOR;
     public static final ModConfigSpec.DoubleValue ZERO_STAMINA_SINK_SPEED;
     public static final ModConfigSpec.IntValue TAKEOFF_CHARGE_TICKS;
@@ -42,6 +44,10 @@ public final class ServerConfig {
                 .defineInRange("terminalVelocity", 55.0, 10.0, 150.0);
         OVERSPEED_FRICTION = b.comment("Extra friction above cruise speed, in 1/s.")
                 .defineInRange("overspeedFriction", 0.6, 0.0, 10.0);
+        TUCK_DRAG_FACTOR = b.comment("Air drag multiplier with wings tucked in a dive (falcon stoop). Lower = faster acceleration toward terminal velocity.")
+                .defineInRange("tuckDragFactor", 0.35, 0.05, 1.0);
+        TUCK_MIN_PITCH = b.comment("Minimum dive angle (degrees, nose down) to tuck the wings by holding sprint above cruise speed.")
+                .defineInRange("tuckMinPitch", 15.0, 0.0, 85.0);
         BRAKE_FACTOR = b.comment("Brake deceleration = acceleration stat × this factor, in m/s².")
                 .defineInRange("brakeFactor", 2.0, 0.1, 20.0);
         STOP_SPEED_FACTOR = b.comment("Braking below (min speed × this factor) stops the player and switches to stabilized mode.")
