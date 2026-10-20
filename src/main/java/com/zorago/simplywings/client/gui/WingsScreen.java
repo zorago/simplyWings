@@ -2,6 +2,8 @@ package com.zorago.simplywings.client.gui;
 
 import com.zorago.simplywings.client.ClientWings;
 import com.zorago.simplywings.client.WingVisuals;
+import com.zorago.simplywings.data.EffectiveStats;
+import com.zorago.simplywings.data.StatType;
 import com.zorago.simplywings.data.WingDefinition;
 import com.zorago.simplywings.data.WingRarity;
 import com.zorago.simplywings.data.WingRegistries;
@@ -37,6 +39,12 @@ public class WingsScreen extends Screen {
     private static final int PANEL = 0xE0101418;
     private static final int PANEL_LIGHT = 0xFF1E252B;
     private static final int BORDER = 0xFF3A4650;
+    private static final int CELL_WIDTH = 9;
+    private static final int CELL_HEIGHT = 4;
+    private static final int BAR_WIDTH = 10 * CELL_WIDTH + 9;
+    private static final int STAT_HEIGHT = 18;
+
+    private Component hoveredStat;
 
     private record Entry(ResourceLocation id, WingDefinition definition) {
     }
@@ -135,7 +143,7 @@ public class WingsScreen extends Screen {
         g.drawString(font, title, left + 8, top + 8, 0xFFFFFFFF, false);
         renderList(g, mouseX, mouseY);
         renderPreview(g);
-        renderStats(g);
+        renderStats(g, mouseX, mouseY);
     }
 
     private void renderList(GuiGraphics g, int mouseX, int mouseY) {
@@ -211,55 +219,58 @@ public class WingsScreen extends Screen {
         player.yHeadRotO = headRotO;
     }
 
-    private void renderStats(GuiGraphics g) {
+    private void renderStats(GuiGraphics g, int mouseX, int mouseY) {
+        hoveredStat = null;
         int x = left + LIST_WIDTH + PREVIEW_WIDTH + 12;
         int y = top + 24;
         Optional<Entry> entry = entries.stream().filter(e -> e.id().equals(selected)).findFirst();
-        if (entry.isEmpty()) {
+        Minecraft mc = Minecraft.getInstance();
+        if (entry.isEmpty() || mc.level == null) {
             return;
         }
         WingDefinition def = entry.get().definition();
-        WingStats total = WingStats.ZERO;
-        for (Entry e : entries) {
-            if (owned(e.id())) {
-                total = total.add(e.definition().global());
+        WingStats base = def.equipped();
+        WingStats total = EffectiveStats.total(mc.level.registryAccess(), ClientWings.collection(), def);
+        int color = rarityColor(def.rarity());
+        g.drawString(font, Component.translatable(WingItem.translationKey(entry.get().id())), x, y, color, false);
+        y += 14;
+        for (StatType type : StatType.values()) {
+            float own = Math.min(StatType.MAX_SCORE, type.score(base));
+            float full = type.score(total);
+            g.drawString(font, Component.translatable("gui.simplywings.stat." + type.key()), x, y, 0xFFC8D0D6, false);
+            String value = String.format(Locale.ROOT, "%.1f/10", full / 10f);
+            g.drawString(font, value, x + BAR_WIDTH - font.width(value), y, 0xFFFFFFFF, false);
+            renderBar(g, x, y + 10, own, full, color);
+            if (mouseX >= x && mouseX < x + BAR_WIDTH && mouseY >= y && mouseY < y + STAT_HEIGHT) {
+                hoveredStat = Component.translatable("gui.simplywings.stat_value." + type.key(),
+                        String.format(Locale.ROOT, "%.1f", type.value(full)));
+            }
+            y += STAT_HEIGHT;
+        }
+    }
+
+    private static void renderBar(GuiGraphics g, int x, int y, float own, float full, int color) {
+        for (int i = 0; i < 10; i++) {
+            int cx = x + i * (CELL_WIDTH + 1);
+            g.fill(cx, y, cx + CELL_WIDTH, y + CELL_HEIGHT, 0xFF2A3238);
+            float from = i * 10f;
+            int fullWidth = Math.round(Mth.clamp((full - from) / 10f, 0f, 1f) * CELL_WIDTH);
+            int ownWidth = Math.round(Mth.clamp((own - from) / 10f, 0f, 1f) * CELL_WIDTH);
+            if (fullWidth > 0) {
+                g.fill(cx, y, cx + fullWidth, y + CELL_HEIGHT, 0xFF7FD99A);
+            }
+            if (ownWidth > 0) {
+                g.fill(cx, y, cx + ownWidth, y + CELL_HEIGHT, color);
             }
         }
-        g.drawString(font, Component.translatable(WingItem.translationKey(entry.get().id())), x, y,
-                rarityColor(def.rarity()), false);
-        y += 14;
-        int col1 = x + 62;
-        int col2 = x + 98;
-        g.drawString(font, Component.translatable("gui.simplywings.equipped_stats"), col1 - 8, y, 0xFF8A949C, false);
-        g.drawString(font, Component.translatable("gui.simplywings.global_stats"), col2 + 4, y, 0xFF8A949C, false);
-        y += 12;
-        WingStats eq = def.equipped();
-        WingStats gl = def.global();
-        y = row(g, "stamina", eq.stamina(), gl.stamina(), x, col1, col2, y);
-        y = row(g, "acceleration", eq.acceleration(), gl.acceleration(), x, col1, col2, y);
-        y = row(g, "max_speed", eq.maxSpeed(), gl.maxSpeed(), x, col1, col2, y);
-        y = row(g, "handling", eq.handling(), gl.handling(), x, col1, col2, y);
-        y = row(g, "stabilization", eq.stabilization(), gl.stabilization(), x, col1, col2, y);
-        y = row(g, "min_speed", def.stallSpeed(), Float.NaN, x, col1, col2, y);
-        y += 4;
-        g.drawString(font, Component.translatable("gui.simplywings.collection_total"), x, y, 0xFF8A949C, false);
-        y += 11;
-        String totals = String.format(Locale.ROOT, "%.0f / %.1f / %.1f / %.0f / %.1f", total.stamina(),
-                total.acceleration(), total.maxSpeed(), total.handling(), total.stabilization());
-        g.drawString(font, totals, x, y, 0xFFE8ECFF, false);
     }
 
-    private int row(GuiGraphics g, String key, float equipped, float global, int x, int col1, int col2, int y) {
-        g.drawString(font, Component.translatable("gui.simplywings.stat." + key), x, y, 0xFFC8D0D6, false);
-        g.drawString(font, format(equipped), col1, y, 0xFFFFFFFF, false);
-        if (!Float.isNaN(global)) {
-            g.drawString(font, "+" + format(global), col2 + 4, y, 0xFF9BE7B0, false);
+    @Override
+    public void render(GuiGraphics g, int mouseX, int mouseY, float partialTick) {
+        super.render(g, mouseX, mouseY, partialTick);
+        if (hoveredStat != null) {
+            g.renderTooltip(font, hoveredStat, mouseX, mouseY);
         }
-        return y + 11;
-    }
-
-    private static String format(float v) {
-        return v == Math.floor(v) ? String.valueOf((int) v) : String.format(Locale.ROOT, "%.1f", v);
     }
 
     private static int rarityColor(WingRarity rarity) {

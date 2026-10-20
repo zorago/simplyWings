@@ -472,7 +472,7 @@ public final class ClientFlight {
         double glideDrag = g / (glideSpeed * glideSpeed);
         double diveDrag = g / (diveSpeed * diveSpeed);
         double drag = (glideDrag + (diveDrag - glideDrag) * Math.max(0, sin)) * ServerConfig.AIR_DRAG.get()
-                * stats.definition().drag();
+                * stats.drag();
 
         boolean sprint = o.keySprint.isDown();
         braking = ModKeys.brakeDown() && speed > 0;

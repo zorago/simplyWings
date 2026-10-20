@@ -38,6 +38,21 @@ public final class ServerConfig {
     public static final ModConfigSpec.DoubleValue CRASH_THRESHOLD;
     public static final ModConfigSpec.DoubleValue CRASH_DAMAGE_PER_SPEED;
 
+    public static final ModConfigSpec.DoubleValue ENDURANCE_MIN;
+    public static final ModConfigSpec.DoubleValue ENDURANCE_MAX;
+    public static final ModConfigSpec.DoubleValue ACCELERATION_MIN;
+    public static final ModConfigSpec.DoubleValue ACCELERATION_MAX;
+    public static final ModConfigSpec.DoubleValue SPEED_MIN;
+    public static final ModConfigSpec.DoubleValue SPEED_MAX;
+    public static final ModConfigSpec.DoubleValue HANDLING_MIN;
+    public static final ModConfigSpec.DoubleValue HANDLING_MAX;
+    public static final ModConfigSpec.DoubleValue STABILITY_MIN;
+    public static final ModConfigSpec.DoubleValue STABILITY_MAX;
+    public static final ModConfigSpec.DoubleValue GLIDE_MIN;
+    public static final ModConfigSpec.DoubleValue GLIDE_MAX;
+    public static final ModConfigSpec.DoubleValue LIFT_MIN;
+    public static final ModConfigSpec.DoubleValue LIFT_MAX;
+
     static {
         ModConfigSpec.Builder b = new ModConfigSpec.Builder();
 
@@ -112,6 +127,24 @@ public final class ServerConfig {
                 .defineInRange("crashThreshold", 10.0, 0.0, 200.0);
         CRASH_DAMAGE_PER_SPEED = b.comment("Damage per m/s above the threshold.")
                 .defineInRange("crashDamagePerSpeed", 0.5, 0.0, 100.0);
+        b.pop();
+
+        b.comment("Physical value of each wing stat at score 0 and at score 100 (wing JSON stats use a 0-100 scale).").push("stats");
+        ENDURANCE_MIN = b.comment("Stamina points.").defineInRange("enduranceAt0", 50.0, 1.0, 10000.0);
+        ENDURANCE_MAX = b.defineInRange("enduranceAt100", 300.0, 1.0, 10000.0);
+        ACCELERATION_MIN = b.comment("Speed gained per second of beating (m/s per s), also brake power and air jump.")
+                .defineInRange("accelerationAt0", 2.0, 0.0, 100.0);
+        ACCELERATION_MAX = b.defineInRange("accelerationAt100", 10.0, 0.0, 100.0);
+        SPEED_MIN = b.comment("Max cruise speed while beating, m/s.").defineInRange("speedAt0", 12.0, 1.0, 300.0);
+        SPEED_MAX = b.defineInRange("speedAt100", 64.0, 1.0, 300.0);
+        HANDLING_MIN = b.comment("Turn rate, degrees per second.").defineInRange("handlingAt0", 40.0, 1.0, 720.0);
+        HANDLING_MAX = b.defineInRange("handlingAt100", 150.0, 1.0, 720.0);
+        STABILITY_MIN = b.comment("Hover stabilization, 0-10 (10 = creative-like).").defineInRange("stabilityAt0", 0.0, 0.0, 10.0);
+        STABILITY_MAX = b.defineInRange("stabilityAt100", 10.0, 0.0, 10.0);
+        GLIDE_MIN = b.comment("Air drag multiplier (lower = longer glide).").defineInRange("glideAt0", 1.4, 0.05, 5.0);
+        GLIDE_MAX = b.defineInRange("glideAt100", 0.4, 0.05, 5.0);
+        LIFT_MIN = b.comment("Stall speed, m/s (lower = harder to stall).").defineInRange("liftAt0", 14.0, 0.5, 100.0);
+        LIFT_MAX = b.defineInRange("liftAt100", 3.0, 0.5, 100.0);
         b.pop();
 
         SPEC = b.build();

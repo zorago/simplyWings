@@ -181,8 +181,9 @@ public final class WingAnimator {
         } else if (brake) {
             out.stroke += 0.04f * Mth.sin(time * 2.3f);
         }
-        out.sweep += slot.sweep();
-        out.stroke += slot.lift();
+        float offsetWeight = style.folds() ? Mth.clamp(out.spread, 0f, 1f) : 1f;
+        out.sweep += slot.sweep() * offsetWeight;
+        out.stroke += slot.lift() * offsetWeight;
         if (style.flat()) {
             out.twist += HALF_PI * (1f - out.axis);
         }

@@ -1,6 +1,8 @@
 package com.zorago.simplywings.item;
 
 import com.zorago.simplywings.SimplyWings;
+import java.util.ArrayList;
+import java.util.List;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
@@ -11,15 +13,25 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 public final class ModItems {
     private static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(SimplyWings.MOD_ID);
+    private static final List<DeferredItem<WingItem>> WINGS = new ArrayList<>();
 
-    public static final DeferredItem<WingItem> COMMON_WINGS = ITEMS.register("common_wings",
-            () -> new WingItem(new Item.Properties().stacksTo(1).rarity(Rarity.COMMON), SimplyWings.id("common")));
-    public static final DeferredItem<WingItem> BAT_WINGS = ITEMS.register("bat_wings",
-            () -> new WingItem(new Item.Properties().stacksTo(1).rarity(Rarity.RARE), SimplyWings.id("bat")));
-    public static final DeferredItem<WingItem> ANCIENT_WINGS = ITEMS.register("ancient_wings",
-            () -> new WingItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC), SimplyWings.id("ancient")));
-    public static final DeferredItem<WingItem> ANGEL_WINGS = ITEMS.register("angel_wings",
-            () -> new WingItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC), SimplyWings.id("angel")));
+    public static final DeferredItem<WingItem> COMMON_WINGS = wing("common", Rarity.COMMON);
+    public static final DeferredItem<WingItem> BAT_WINGS = wing("bat", Rarity.RARE);
+    public static final DeferredItem<WingItem> ANCIENT_WINGS = wing("ancient", Rarity.EPIC);
+    public static final DeferredItem<WingItem> ANGEL_WINGS = wing("angel", Rarity.EPIC);
+    public static final DeferredItem<WingItem> FALCON_WINGS = wing("falcon", Rarity.EPIC);
+    public static final DeferredItem<WingItem> ALBATROSS_WINGS = wing("albatross", Rarity.EPIC);
+    public static final DeferredItem<WingItem> QUICKSILVER_WINGS = wing("quicksilver", Rarity.EPIC);
+    public static final DeferredItem<WingItem> SERAPH_WINGS = wing("seraph", Rarity.EPIC);
+    public static final DeferredItem<WingItem> DRAGON_WINGS = wing("dragon", Rarity.EPIC);
+    public static final DeferredItem<WingItem> MONARCH_WINGS = wing("monarch", Rarity.EPIC);
+
+    private static DeferredItem<WingItem> wing(String name, Rarity rarity) {
+        DeferredItem<WingItem> item = ITEMS.register(name + "_wings",
+                () -> new WingItem(new Item.Properties().stacksTo(1).rarity(rarity), SimplyWings.id(name)));
+        WINGS.add(item);
+        return item;
+    }
 
     public static void register(IEventBus modBus) {
         ITEMS.register(modBus);
@@ -27,10 +39,7 @@ public final class ModItems {
 
     public static void onBuildCreativeTab(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
-            event.accept(COMMON_WINGS);
-            event.accept(BAT_WINGS);
-            event.accept(ANCIENT_WINGS);
-            event.accept(ANGEL_WINGS);
+            WINGS.forEach(event::accept);
         }
     }
 

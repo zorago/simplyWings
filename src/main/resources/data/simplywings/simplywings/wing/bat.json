@@ -2,25 +2,26 @@
   "rarity": "rare",
   "model": "simplywings:bat",
   "color": -1,
-  "min_speed": 7.0,
   "flap_rate": 2.6,
   "hover_rate": 1.8,
   "hover_speed": 11.0,
   "hover_swing": 1.0,
-  "drag": 0.6,
-  "stall_factor": 1.25,
   "equipped": {
-    "stamina": 150.0,
-    "acceleration": 13.0,
-    "max_speed": 28.0,
-    "handling": 130.0,
-    "stabilization": 3.0
+    "endurance": 40.0,
+    "acceleration": 70.0,
+    "speed": 31.0,
+    "handling": 82.0,
+    "stability": 30.0,
+    "glide": 80.0,
+    "lift": 48.0
   },
   "global": {
-    "stamina": 6.0,
-    "acceleration": 0.225,
-    "max_speed": 1.45,
-    "handling": 2.125,
-    "stabilization": 0.225
+    "endurance": 2.0,
+    "acceleration": 1.625,
+    "speed": 2.2,
+    "handling": 1.825,
+    "stability": 2.25,
+    "glide": 1.5,
+    "lift": 2.25
   }
 }

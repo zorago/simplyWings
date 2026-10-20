@@ -1,0 +1,27 @@
+{
+  "rarity": "legendary",
+  "model": "simplywings:quicksilver",
+  "color": -1,
+  "flap_rate": 6.0,
+  "hover_rate": 5.0,
+  "hover_speed": 18.0,
+  "hover_swing": 0.5,
+  "equipped": {
+    "endurance": 50.0,
+    "acceleration": 75.0,
+    "speed": 60.0,
+    "handling": 100.0,
+    "stability": 35.0,
+    "glide": 45.0,
+    "lift": 50.0
+  },
+  "global": {
+    "endurance": 12.0,
+    "acceleration": 9.75,
+    "speed": 13.2,
+    "handling": 10.95,
+    "stability": 13.5,
+    "glide": 9.0,
+    "lift": 13.5
+  }
+}

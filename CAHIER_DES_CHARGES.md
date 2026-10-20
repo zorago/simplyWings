@@ -41,20 +41,23 @@ Les ailes ne sont pas des items portés mais des entrées de collection débloqu
 
 Chaque paire a deux jeux de stats, comme dans Aion 2. Les **stats équipées** ne s'appliquent que quand la paire est portée. Les **stats globales** sont acquises dès le déblocage et s'additionnent pour toute la collection, quelle que soit la paire portée.
 
-| Stat | Effet en vol | Unité interne |
-| --- | --- | --- |
-| Stamina | Réserve d'énergie consommée par les battements et le maintien en l'air | points |
-| Accélération | Gain de vitesse par battement, et puissance du freinage (même stat) | blocs/s par battement |
-| Vitesse max | Vitesse de croisière atteignable en battant des ailes, hors dive | blocs/s |
-| Maniabilité | Vitesse de rotation (lacet et tangage) avec ZQSD | degrés/s |
-| Stabilisation | Qualité du mode stabilisé, de 0 à 10 (10 = vol créatif) | 0–10, plafonnée à 10 |
+Sept stats, chacune notée de 0 à 100 (affichée sur 10 dans le menu, 1 carreau = 10 points). La config serveur traduit chaque score en valeur physique (valeur à 0, valeur à 100).
+
+| Stat | Effet en vol |
+| --- | --- |
+| Endurance | Réserve de stamina consommée par les battements et le stationnaire |
+| Accélération | Gain de vitesse par seconde de battement, puissance du frein et hauteur du saut ailé |
+| Vitesse | Vitesse de croisière atteignable en battant des ailes, hors piqué |
+| Maniabilité | Vitesse de rotation (lacet et tangage) avec ZQSD |
+| Stabilité | Qualité du mode stabilisé (100 = vol créatif) |
+| Plané | Traînée de l'air : distance de plané et perte de vitesse entre deux battements |
+| Portance | Vitesse de décrochage |
 
 **Règle d'équilibrage**
 
-- La somme des stats globales de toutes les paires commune, rare, épique et légendaire (y compris les globaux des légendaires) égale les stats équipées d'une paire légendaire.
-- C'est voulu : une légendaire équipée avec la collection complète vaut donc 2× une légendaire.
-- Le nombre de paires par rareté n'est pas fixé. Il sera décidé selon l'ambiance de la collection, puis les globaux seront répartis en conséquence.
-- Stabilisation : avec la collection complète (hors mythique), toutes les paires atteignent 10/10. Le global de stabilisation compense donc l'écart de base de chaque paire.
+- Une légendaire a par définition au moins une stat maxée à 100.
+- Avec la collection complète (hors mythique), toutes les paires sont à 100 dans toutes les stats. Pour chaque stat, la somme des globaux vaut donc 100 − le score le plus bas parmi les paires. Le score effectif est plafonné à 100.
+- Les valeurs exactes et leur répartition sont suivies dans `BALANCE.md`.
 - Chaque paire est une identité, à la manière des dragons de HTTYD : un gros bonus se paie par un sacrifice. Les ailes d'ange à plumes ont beaucoup d'accélération, de freinage et de vitesse, mais 2/10 en stabilisation. Les ailes d'abeille montent à 8/10 en stabilisation, mais sont lentes et freinent mal.
 
 **Paire commune de départ**

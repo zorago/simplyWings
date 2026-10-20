@@ -5,10 +5,7 @@ import java.util.Optional;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 
-public record EffectiveStats(ResourceLocation wing, WingDefinition definition, float stamina, float acceleration,
-                             float maxSpeed, float handling, float stabilization) {
-    public static final float MAX_STABILIZATION = 10f;
-
+public record EffectiveStats(ResourceLocation wing, WingDefinition definition, WingStats scores) {
     public static Optional<EffectiveStats> compute(RegistryAccess access, Collection<ResourceLocation> collection,
                                                    Optional<ResourceLocation> equipped) {
         if (equipped.isEmpty()) {
@@ -18,20 +15,50 @@ public record EffectiveStats(ResourceLocation wing, WingDefinition definition, f
         if (def.isEmpty()) {
             return Optional.empty();
         }
-        WingStats total = def.get().equipped();
+        return Optional.of(new EffectiveStats(equipped.get(), def.get(), total(access, collection, def.get())));
+    }
+
+    public static WingStats total(RegistryAccess access, Collection<ResourceLocation> collection, WingDefinition def) {
+        WingStats total = def.equipped();
         for (ResourceLocation id : collection) {
             Optional<WingDefinition> owned = WingRegistries.get(access, id);
             if (owned.isPresent()) {
                 total = total.add(owned.get().global());
             }
         }
-        return Optional.of(new EffectiveStats(equipped.get(), def.get(), Math.max(1f, total.stamina()),
-                total.acceleration(), total.maxSpeed(), total.handling(),
-                Math.min(MAX_STABILIZATION, Math.max(0f, total.stabilization()))));
+        return total.capped();
+    }
+
+    private double value(StatType type) {
+        return type.value(type.score(scores));
+    }
+
+    public float stamina() {
+        return (float) Math.max(1, value(StatType.ENDURANCE));
+    }
+
+    public float acceleration() {
+        return (float) value(StatType.ACCELERATION);
+    }
+
+    public float maxSpeed() {
+        return (float) value(StatType.SPEED);
+    }
+
+    public float handling() {
+        return (float) value(StatType.HANDLING);
+    }
+
+    public float stabilization() {
+        return (float) value(StatType.STABILITY);
+    }
+
+    public float drag() {
+        return (float) value(StatType.GLIDE);
     }
 
     public float minSpeed() {
-        return definition.stallSpeed();
+        return (float) value(StatType.LIFT);
     }
 
     public float flapRate() {
@@ -47,6 +74,6 @@ public record EffectiveStats(ResourceLocation wing, WingDefinition definition, f
     }
 
     public float beatGain() {
-        return acceleration / definition.flapRate();
+        return acceleration() / definition.flapRate();
     }
 }

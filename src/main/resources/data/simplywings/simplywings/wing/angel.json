@@ -2,25 +2,26 @@
   "rarity": "legendary",
   "model": "simplywings:angel",
   "color": -724504,
-  "min_speed": 12.0,
   "flap_rate": 0.5,
   "hover_rate": 0.6,
   "hover_speed": 19.0,
   "hover_swing": 1.0,
-  "drag": 0.7,
-  "stall_factor": 1.0,
   "equipped": {
-    "stamina": 240.0,
-    "acceleration": 9.0,
-    "max_speed": 58.0,
-    "handling": 85.0,
-    "stabilization": 1.0
+    "endurance": 76.0,
+    "acceleration": 100.0,
+    "speed": 88.0,
+    "handling": 41.0,
+    "stability": 10.0,
+    "glide": 70.0,
+    "lift": 18.0
   },
   "global": {
-    "stamina": 6.0,
-    "acceleration": 0.225,
-    "max_speed": 1.45,
-    "handling": 2.125,
-    "stabilization": 0.225
+    "endurance": 2.0,
+    "acceleration": 1.625,
+    "speed": 2.2,
+    "handling": 1.825,
+    "stability": 2.25,
+    "glide": 1.5,
+    "lift": 2.25
   }
 }

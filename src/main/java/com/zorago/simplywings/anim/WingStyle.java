@@ -61,11 +61,43 @@ public record WingStyle(List<Slot> slots, float upFraction, float downFraction, 
             new Slot(WingModel.DRAGONFLY, -0.5f, 3.5f, 0.3f, -0.35f, -0.1f, (float) Math.PI, 0.9f)),
             0.5f, 0.5f, 0.2f, 0f, 0.35f, 25f, false, true, true);
 
+    public static final WingStyle FALCON = new WingStyle(List.of(Slot.single(WingModel.FALCON)),
+            0.45f, 0.15f, 0.85f, 0.9f, 0f, 0f, true, false, false);
+
+    public static final WingStyle ALBATROSS = new WingStyle(List.of(Slot.single(WingModel.ALBATROSS)),
+            0.55f, 0.2f, 0.55f, 0.7f, 0f, 0f, true, false, false);
+
+    public static final WingStyle QUICKSILVER = new WingStyle(List.of(
+            new Slot(WingModel.QUICKSILVER, 0f, -1f, 0f, 0.25f, 0.35f, 0f, 1f),
+            new Slot(WingModel.QUICKSILVER, 0f, 1.5f, 0.2f, 0f, 0f, 0.9f, 1f),
+            new Slot(WingModel.QUICKSILVER, 0f, 4f, 0.4f, -0.3f, -0.3f, 1.8f, 0.9f)),
+            0.4f, 0.3f, 0.9f, 0.9f, 0f, 0f, true, false, false);
+
+    public static final WingStyle SERAPH = new WingStyle(List.of(
+            new Slot(WingModel.ANGEL, 0f, -2.5f, 0.2f, 0.1f, 0.75f, -0.35f, 0.8f),
+            Slot.single(WingModel.ANGEL),
+            new Slot(WingModel.ANGEL, 0f, 3f, 0.4f, -0.15f, -0.6f, 0.35f, 0.8f)),
+            0.55f, 0.15f, 0.9f, 0.9f, 0f, 0f, true, false, false);
+
+    public static final WingStyle DRAGON = new WingStyle(List.of(Slot.single(WingModel.DRAGON)),
+            0.5f, 0.14f, 1.0f, 1.0f, 0f, 0f, true, false, false);
+
+    public static final WingStyle MONARCH = new WingStyle(List.of(
+            new Slot(WingModel.MONARCH_FORE, 0f, 0f, 0f, 0.15f, 0.15f, 0f, 1f),
+            new Slot(WingModel.MONARCH_HIND, 0f, 3.5f, 0.3f, -0.35f, -0.25f, 0.25f, 0.9f)),
+            0.5f, 0.3f, 1.1f, 1.1f, 0f, 0f, false, false, false);
+
     private static final Map<ResourceLocation, WingStyle> STYLES = Map.of(
             SimplyWings.id("basic"), BASIC,
             SimplyWings.id("bat"), BAT,
             SimplyWings.id("angel"), ANGEL,
-            SimplyWings.id("dragonfly"), DRAGONFLY);
+            SimplyWings.id("dragonfly"), DRAGONFLY,
+            SimplyWings.id("falcon"), FALCON,
+            SimplyWings.id("albatross"), ALBATROSS,
+            SimplyWings.id("quicksilver"), QUICKSILVER,
+            SimplyWings.id("seraph"), SERAPH,
+            SimplyWings.id("dragon"), DRAGON,
+            SimplyWings.id("monarch"), MONARCH);
 
     public static WingStyle of(ResourceLocation model) {
         return STYLES.getOrDefault(model, BASIC);
