@@ -39,6 +39,10 @@ public final class ClientWings {
         return stats;
     }
 
+    public static Set<ResourceLocation> collection() {
+        return COLLECTION;
+    }
+
     public static Optional<ResourceLocation> equipped() {
         return equipped;
     }

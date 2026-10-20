@@ -59,6 +59,17 @@ public final class ServerFlight {
         syncAll(player);
     }
 
+    public static void onEquipRequest(ServerPlayer player, Payloads.EquipWing request) {
+        WingsData data = ModAttachments.get(player);
+        if (request.wing().isPresent() && !data.collection().contains(request.wing().get())) {
+            syncAll(player);
+            return;
+        }
+        if (!request.wing().equals(data.equipped())) {
+            equip(player, request.wing());
+        }
+    }
+
     public static void clear(ServerPlayer player) {
         WingsData data = ModAttachments.get(player);
         data.clearCollection();

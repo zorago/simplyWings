@@ -57,7 +57,8 @@ public class SimplyWingsClient {
         game.addListener(SimplyWingsClient::onLogout);
     }
 
-    private static final List<WingModel.Shape> SHAPES = List.of(WingModel.BASIC, WingModel.ANGEL);
+    private static final List<WingModel.Shape> SHAPES = List.of(WingModel.BASIC, WingModel.BAT, WingModel.ANCIENT,
+            WingModel.ANGEL);
 
     private static void onLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
         for (WingModel.Shape shape : SHAPES) {

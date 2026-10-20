@@ -8,16 +8,16 @@
   "hover_speed": 24.0,
   "equipped": {
     "stamina": 300.0,
-    "acceleration": 9.0,
-    "max_speed": 36.0,
+    "acceleration": 18.0,
+    "max_speed": 72.0,
     "handling": 90.0,
     "stabilization": 2.0
   },
   "global": {
-    "stamina": 15.0,
-    "acceleration": 0.8,
-    "max_speed": 3.0,
-    "handling": 6.0,
-    "stabilization": 1.5
+    "stamina": 30.0,
+    "acceleration": 1.8,
+    "max_speed": 7.2,
+    "handling": 9.0,
+    "stabilization": 0.8
   }
 }

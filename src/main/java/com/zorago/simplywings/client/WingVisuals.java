@@ -12,6 +12,7 @@ import net.minecraft.world.entity.player.Player;
 public final class WingVisuals {
     private static final Int2ObjectMap<Visual> REMOTE = new Int2ObjectOpenHashMap<>();
     private static final Visual LOCAL = new Visual();
+    private static Optional<ResourceLocation> preview;
 
     public static final class Visual {
         public Optional<ResourceLocation> equipped = Optional.empty();
@@ -27,7 +28,7 @@ public final class WingVisuals {
     public static Visual of(Player player) {
         Minecraft mc = Minecraft.getInstance();
         if (player == mc.player) {
-            LOCAL.equipped = ClientWings.equipped();
+            LOCAL.equipped = preview != null ? preview : ClientWings.equipped();
             LOCAL.mode = ClientFlight.mode();
             LOCAL.flags = ClientFlight.flags();
             return LOCAL;
@@ -51,6 +52,10 @@ public final class WingVisuals {
         if (visual != null) {
             visual.animator.flap(flapRate);
         }
+    }
+
+    public static void setPreview(Optional<ResourceLocation> wing) {
+        preview = wing;
     }
 
     public static Visual local() {

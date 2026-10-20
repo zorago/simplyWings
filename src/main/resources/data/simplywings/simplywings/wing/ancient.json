@@ -1,0 +1,23 @@
+{
+  "rarity": "epic",
+  "model": "simplywings:ancient",
+  "color": -1,
+  "min_speed": 10.0,
+  "flap_rate": 1.5,
+  "hover_rate": 1.8,
+  "hover_speed": 16.0,
+  "equipped": {
+    "stamina": 220.0,
+    "acceleration": 10.0,
+    "max_speed": 50.0,
+    "handling": 60.0,
+    "stabilization": 4.0
+  },
+  "global": {
+    "stamina": 30.0,
+    "acceleration": 1.8,
+    "max_speed": 7.2,
+    "handling": 9.0,
+    "stabilization": 0.8
+  }
+}

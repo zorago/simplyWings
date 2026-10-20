@@ -14,6 +14,10 @@ public final class ModItems {
 
     public static final DeferredItem<WingItem> COMMON_WINGS = ITEMS.register("common_wings",
             () -> new WingItem(new Item.Properties().stacksTo(1).rarity(Rarity.COMMON), SimplyWings.id("common")));
+    public static final DeferredItem<WingItem> BAT_WINGS = ITEMS.register("bat_wings",
+            () -> new WingItem(new Item.Properties().stacksTo(1).rarity(Rarity.RARE), SimplyWings.id("bat")));
+    public static final DeferredItem<WingItem> ANCIENT_WINGS = ITEMS.register("ancient_wings",
+            () -> new WingItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC), SimplyWings.id("ancient")));
     public static final DeferredItem<WingItem> ANGEL_WINGS = ITEMS.register("angel_wings",
             () -> new WingItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC), SimplyWings.id("angel")));
 
@@ -24,6 +28,8 @@ public final class ModItems {
     public static void onBuildCreativeTab(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
             event.accept(COMMON_WINGS);
+            event.accept(BAT_WINGS);
+            event.accept(ANCIENT_WINGS);
             event.accept(ANGEL_WINGS);
         }
     }

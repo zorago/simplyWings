@@ -14,10 +14,10 @@
     "stabilization": 5.0
   },
   "global": {
-    "stamina": 1.0,
-    "acceleration": 0.05,
-    "max_speed": 0.2,
-    "handling": 1.0,
-    "stabilization": 0.1
+    "stamina": 30.0,
+    "acceleration": 1.8,
+    "max_speed": 7.2,
+    "handling": 9.0,
+    "stabilization": 0.8
   }
 }

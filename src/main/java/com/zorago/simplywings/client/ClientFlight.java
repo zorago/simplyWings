@@ -1,5 +1,6 @@
 package com.zorago.simplywings.client;
 
+import com.zorago.simplywings.client.gui.WingsScreen;
 import com.zorago.simplywings.config.ClientConfig;
 import com.zorago.simplywings.config.ServerConfig;
 import com.zorago.simplywings.data.EffectiveStats;
@@ -154,6 +155,12 @@ public final class ClientFlight {
     }
 
     static void preTick(LocalPlayer player) {
+        Minecraft mc = Minecraft.getInstance();
+        while (ModKeys.MENU.consumeClick()) {
+            if (mc.screen == null) {
+                mc.setScreen(new WingsScreen());
+            }
+        }
         Optional<EffectiveStats> maybeStats = ClientWings.stats();
         boolean jumpDown = Minecraft.getInstance().options.keyJump.isDown();
         boolean jumpPressed = jumpDown && !jumpWasDown;
@@ -437,7 +444,7 @@ public final class ClientFlight {
 
         double sin = Math.sin(Math.toRadians(pitch));
         double vCap = vMax + (vTerm - vMax) * Math.max(0, sin);
-        double drag = g / (vTerm * vTerm);
+        double drag = g / (vTerm * vTerm) * ServerConfig.AIR_DRAG.get();
 
         boolean sprint = o.keySprint.isDown();
         braking = ModKeys.brakeDown() && speed > 0;

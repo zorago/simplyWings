@@ -12,12 +12,15 @@ public final class ModKeys {
 
     public static final KeyMapping TRAVEL = new KeyMapping("key.simplywings.travel", KeyConflictContext.IN_GAME,
             InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_LEFT_ALT, CATEGORY);
+    public static final KeyMapping MENU = new KeyMapping("key.simplywings.menu", KeyConflictContext.IN_GAME,
+            InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_J, CATEGORY);
     public static final KeyMapping BRAKE = new KeyMapping("key.simplywings.brake", KeyConflictContext.IN_GAME,
             InputConstants.UNKNOWN, CATEGORY);
 
     static void register(RegisterKeyMappingsEvent event) {
         event.register(TRAVEL);
         event.register(BRAKE);
+        event.register(MENU);
     }
 
     public static boolean brakeDown() {

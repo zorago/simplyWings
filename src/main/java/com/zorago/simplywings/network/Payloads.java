@@ -104,6 +104,18 @@ public final class Payloads {
         }
     }
 
+    public record EquipWing(Optional<ResourceLocation> wing) implements CustomPacketPayload {
+        public static final Type<EquipWing> TYPE = payloadType("equip_wing");
+        public static final StreamCodec<RegistryFriendlyByteBuf, EquipWing> CODEC = StreamCodec.composite(
+                ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC), EquipWing::wing,
+                EquipWing::new);
+
+        @Override
+        public Type<? extends CustomPacketPayload> type() {
+            return TYPE;
+        }
+    }
+
     public record AirJump() implements CustomPacketPayload {
         public static final Type<AirJump> TYPE = payloadType("air_jump");
         public static final StreamCodec<RegistryFriendlyByteBuf, AirJump> CODEC = StreamCodec.unit(new AirJump());

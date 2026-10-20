@@ -40,6 +40,18 @@ public final class WingModel {
             new Segment(11f, 1f, 4, 21f, 26f, 58),
             128, 32);
 
+    public static final Shape BAT = new Shape("bat",
+            new Segment(9f, 0.8f, 2, 8f, 9f, 0),
+            new Segment(10f, 0.7f, 3, 10f, 6f, 24),
+            new Segment(10f, 0.6f, 4, 8f, 3f, 48),
+            128, 32);
+
+    public static final Shape ANCIENT = new Shape("ancient",
+            new Segment(12f, 1.6f, 3, 12f, 15f, 0),
+            new Segment(12f, 1.4f, 3, 15f, 18f, 30),
+            new Segment(10f, 1.2f, 4, 18f, 22f, 58),
+            128, 32);
+
     private static final float HALF_PI = (float) (Math.PI / 2);
 
     private final ModelPart root;
