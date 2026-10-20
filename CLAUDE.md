@@ -9,6 +9,7 @@ Mod d'ailes standalone pour **NeoForge 1.21.1** (nom de travail : SimplyWings). 
 - `CAHIER_DES_CHARGES.md` : spec complète, **fait foi** en cas de doute (stats, formules de vol, table d'architecture, points ouverts).
 - `HANDOFF.md` : point d'entrée, étapes de travail et ordre d'implémentation.
 
+- `WINGS.md` : catalogue des paires (identité, apparence, ressenti, stats). À mettre à jour avec chaque paire ajoutée ou modifiée.
 - `BALANCE.md` : les 7 stats (échelle 0-100, valeurs physiques à 0 et à 100 dans la config serveur `[stats]`), les scores de chaque paire et la répartition des globaux. À tenir à jour à chaque changement de stats ou de physique.
 - `docs/ANALYSE_REFERENCES.md` : analyse des mods de référence et du pack, avec la table d'architecture corrigée. **Elle prime sur la table du cahier des charges** là où elle la corrige (anti-kick, caméra, souris).
 
