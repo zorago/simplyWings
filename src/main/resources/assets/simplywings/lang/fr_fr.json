@@ -44,8 +44,8 @@
   "gui.simplywings.stat_value.stability": "%s / 10 de stabilité en stationnaire",
   "item.simplywings.demon_wings": "Ailes de démon",
   "wing.simplywings.demon": "Ailes de démon",
-  "item.simplywings.hermes_wings": "Ailes d'Hermès",
-  "wing.simplywings.hermes": "Ailes d'Hermès",
   "item.simplywings.daedalus_wings": "Ailes de Dédale",
-  "wing.simplywings.daedalus": "Ailes de Dédale"
+  "wing.simplywings.daedalus": "Ailes de Dédale",
+  "item.simplywings.psyche_wings": "Ailes de Psyché",
+  "wing.simplywings.psyche": "Ailes de Psyché"
 }

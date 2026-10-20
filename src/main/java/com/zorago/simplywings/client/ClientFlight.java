@@ -247,6 +247,7 @@ public final class ClientFlight {
         spend(player, airJumpCost());
         ticksSinceAirJump = 0;
         WingVisuals.local().animator.flap(stats.flapRate() * 1.5f);
+        WingEffects.strike(player, style(stats), FlightMode.NONE);
         player.playSound(SoundEvents.PHANTOM_FLAP, 0.7f, 1.2f);
         PacketDistributor.sendToServer(new Payloads.AirJump());
     }
@@ -298,6 +299,7 @@ public final class ClientFlight {
         flapCooldown = 0;
         ticksSinceFlap = 0;
         WingVisuals.local().animator.strike(stats.flapRate(), style(stats).strikeAt());
+        WingEffects.strike(player, style(stats), FlightMode.TRAVEL);
         player.playSound(SoundEvents.PHANTOM_FLAP, 1f, 0.9f);
         travelKeyLock = TAKEOFF_KEY_LOCK_TICKS;
         setMode(player, FlightMode.TRAVEL, true);
@@ -321,6 +323,7 @@ public final class ClientFlight {
         flapCooldown = 0;
         ticksSinceFlap = 0;
         WingVisuals.local().animator.strike(stats.flapRate(), style(stats).strikeAt());
+        WingEffects.strike(player, style(stats), FlightMode.TRAVEL);
         player.playSound(SoundEvents.PHANTOM_FLAP, 0.8f, 1.1f);
         setMode(player, FlightMode.TRAVEL, true);
     }
@@ -512,6 +515,7 @@ public final class ClientFlight {
                     spend(player, beatCost);
                     ticksSinceFlap = 0;
                     player.playSound(SoundEvents.PHANTOM_FLAP, 0.7f, Math.min(1.5f, 0.6f + definition.flapRate() * 0.3f));
+                    WingEffects.strike(player, style(stats), FlightMode.TRAVEL);
                     PacketDistributor.sendToServer(new Payloads.Flap());
                 }
             }

@@ -44,8 +44,8 @@
   "gui.simplywings.stat_value.stability": "%s / 10 hover stability",
   "item.simplywings.demon_wings": "Demon Wings",
   "wing.simplywings.demon": "Demon Wings",
-  "item.simplywings.hermes_wings": "Wings of Hermes",
-  "wing.simplywings.hermes": "Wings of Hermes",
   "item.simplywings.daedalus_wings": "Wings of Daedalus",
-  "wing.simplywings.daedalus": "Wings of Daedalus"
+  "wing.simplywings.daedalus": "Wings of Daedalus",
+  "item.simplywings.psyche_wings": "Wings of Psyche",
+  "wing.simplywings.psyche": "Wings of Psyche"
 }

@@ -174,8 +174,9 @@ public final class WingAnimator {
             out.stroke += vw * v;
             out.twist += vw * v * 0.3f;
         }
-        if (idle) {
-            out.stroke += 0.04f * Mth.sin(time * 0.08f);
+        if (idle || !style.folds()) {
+            out.stroke += style.breath() * Mth.sin(time * 0.08f + slot.phase());
+            out.sweep += style.breath() * 0.4f * Mth.sin(time * 0.06f);
         } else if (glide) {
             out.stroke += 0.03f * (Mth.sin(time * 0.37f) + Mth.sin(time * 0.23f));
         } else if (brake) {

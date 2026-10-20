@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.Optional;
 import net.minecraft.client.model.PlayerModel;
 import net.minecraft.client.player.AbstractClientPlayer;
+import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
@@ -55,10 +56,18 @@ public class WingsLayer extends RenderLayer<AbstractClientPlayer, PlayerModel<Ab
             poseStack.pushPose();
             poseStack.translate(slot.x() / 16f, slot.y() / 16f, slot.z() / 16f);
             model.setup(visual.animator.pose(partialTick, style, slot, pose));
-            RenderType type = style.translucent()
-                    ? RenderType.entityTranslucent(model.shape().texture())
-                    : RenderType.entityCutoutNoCull(model.shape().texture());
-            model.render(poseStack, buffer.getBuffer(type), light, OverlayTexture.NO_OVERLAY, color);
+            ResourceLocation texture = model.shape().texture();
+            RenderType type = switch (style.render()) {
+                case CUTOUT -> RenderType.entityCutoutNoCull(texture);
+                case TRANSLUCENT -> RenderType.entityTranslucent(texture);
+                case ETHEREAL -> RenderType.entityTranslucentEmissive(texture);
+            };
+            int packedLight = style.render() == WingStyle.Render.ETHEREAL ? LightTexture.FULL_BRIGHT : light;
+            model.render(poseStack, buffer.getBuffer(type), packedLight, OverlayTexture.NO_OVERLAY, color);
+            if (style.glow() != null) {
+                model.render(poseStack, buffer.getBuffer(RenderType.eyes(style.glow())), LightTexture.FULL_BRIGHT,
+                        OverlayTexture.NO_OVERLAY, -1);
+            }
             poseStack.popPose();
         }
         poseStack.popPose();

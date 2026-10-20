@@ -19,7 +19,7 @@ public final class ModItems {
     public static final DeferredItem<WingItem> BAT_WINGS = wing("bat", Rarity.RARE);
     public static final DeferredItem<WingItem> ANCIENT_WINGS = wing("ancient", Rarity.EPIC);
     public static final DeferredItem<WingItem> ANGEL_WINGS = wing("angel", Rarity.EPIC);
-    public static final DeferredItem<WingItem> HERMES_WINGS = wing("hermes", Rarity.EPIC);
+    public static final DeferredItem<WingItem> PSYCHE_WINGS = wing("psyche", Rarity.EPIC);
     public static final DeferredItem<WingItem> DEMON_WINGS = wing("demon", Rarity.EPIC);
     public static final DeferredItem<WingItem> SERAPH_WINGS = wing("seraph", Rarity.EPIC);
     public static final DeferredItem<WingItem> DAEDALUS_WINGS = wing("daedalus", Rarity.EPIC);

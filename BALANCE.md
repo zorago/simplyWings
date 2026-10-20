@@ -24,7 +24,7 @@ Le plafond de vitesse (64 m/s) correspond à l'ange avec les 4 premières paires
 
 - Score effectif = score de la paire + somme des bonus `global` de toute la collection, plafonné à 100.
 - Pour chaque stat, la somme des bonus de toutes les paires vaut **100 − le score le plus bas** parmi les paires. Avec la collection complète, toutes les paires sont donc à 10/10 partout.
-- Répartition actuelle : les 4 premières paires (commune, chauve-souris, ancienne, ange) donnent 2,5 % chacune (10 % au total), les 4 autres légendaires (démon, séraphin, Hermès, Dédale) 22,5 % chacune (90 %). Si on ajoute ou retire des paires, il faudra redistribuer.
+- Répartition actuelle : les 4 premières paires (commune, chauve-souris, ancienne, ange) donnent 2,5 % chacune (10 % au total), les 4 autres légendaires (démon, séraphin, Psyché, Dédale) 22,5 % chacune (90 %). Si on ajoute ou retire des paires, il faudra redistribuer.
 
 | Stat | Bonus total de la collection | Par paire de départ (2,5 %) | Par autre légendaire (22,5 %) |
 | --- | --- | --- | --- |
@@ -47,9 +47,9 @@ Une légendaire a par définition au moins une stat visible maxée à 100 (en gr
 | Ancienne (libellule) | Épique | 60 | 35 | 23 | 91 | 40 | 40 | 86 | Faite pour construire, médiocre en vol |
 | Ange | Légendaire | **100** | 70 | 75 | 41 | 10 | 85 | 30 | L'endurance : vol majestueux, plane loin |
 | Démon | Légendaire | 55 | **100** | 85 | 50 | 15 | 40 | 25 | La puissance : coups violents et tardifs |
-| Hermès | Légendaire | 50 | 75 | 60 | **100** | 45 | 55 | 60 | La maniabilité ; messager des dieux, 3 ailes dorées par côté |
+| Psyché | Légendaire | 65 | 50 | 50 | 60 | **100** | 60 | 75 | La stabilité ; ailes de papillon en flammes d'âme éthérées |
 | Séraphin | Légendaire | 70 | 60 | **100** | 45 | 40 | 60 | 40 | La vitesse ; 6 ailes d'ange dorées |
-| Dédale | Légendaire | 65 | 55 | 50 | 60 | **100** | 45 | 70 | La stabilité ; ailes mécaniques à réacteurs, poussée continue |
+| Dédale | Légendaire | 55 | 75 | 60 | **100** | 50 | 45 | 65 | La maniabilité ; ailes mécaniques à réacteurs vectorisés |
 
 ## Paramètres d'identité (hors collection)
 
@@ -59,8 +59,8 @@ Une légendaire a par définition au moins une stat visible maxée à 100 (en gr
 | Chauve-souris | 2,6 | 1,8 Hz, 11 m/s, × 1 | 1 |
 | Libellule | 20 (continu) | 25 Hz, 14 m/s, × 0,1 | 2 |
 | Ange | 0,5 | 0,6 Hz, 19 m/s, × 1 | 1 |
-| Hermès | 6 | 6 Hz, 18 m/s, × 0,4 | 3 |
-| Dédale | 20 (continu, réacteurs) | 30 Hz, 20 m/s, × 0 | 1 |
+| Psyché | 0,6 | 0,5 Hz, 20 m/s, × 0 | 2 |
+| Dédale | 20 (continu, réacteurs) | 30 Hz, 18 m/s, × 0,3 | 1 |
 | Démon | 0,7 | 1,0 Hz, 18 m/s, × 1 | 1 |
 | Séraphin | 0,9 | 0,9 Hz, 20 m/s, × 1 | 3 |
 

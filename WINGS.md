@@ -28,8 +28,8 @@ Dernière mise à jour : 20 octobre 2026.
 | Ailes d'ange | Légendaire | **10** | 7,0 | 7,5 | 4,1 | 1,0 | L'endurance, un vol majestueux |
 | Ailes de démon | Légendaire | 5,5 | **10** | 8,5 | 5,0 | 1,5 | La puissance brute, des coups violents |
 | Ailes de séraphin | Légendaire | 7,0 | 6,0 | **10** | 4,5 | 4,0 | La vitesse, six ailes dorées |
-| Ailes d'Hermès | Légendaire | 5,0 | 7,5 | 6,0 | **10** | 4,5 | L'agilité du messager des dieux |
-| Ailes de Dédale | Légendaire | 6,5 | 5,5 | 5,0 | 6,0 | **10** | Ailes mécaniques à réacteurs, le stationnaire parfait |
+| Ailes de Psyché | Légendaire | 6,5 | 5,0 | 5,0 | 6,0 | **10** | Énergie d'âme éthérée qui tient en apesanteur |
+| Ailes de Dédale | Légendaire | 5,5 | 7,5 | 6,0 | **10** | 5,0 | Ailes mécaniques à réacteurs vectorisés |
 
 ---
 
@@ -115,6 +115,11 @@ Dernière mise à jour : 20 octobre 2026.
 
 **Apparence** : une grande aile blanc crème par côté, en trois segments. Les plumes s'allongent vers la pointe et descendent jusqu'aux pieds au repos.
 
+**Effets** :
+- **Rendu** : les pointes des plumes brillent doucement (passe lumineuse).
+- **En continu** : des plumes se détachent et tombent pendant le vol, et des étincelles blanches flottent autour des ailes.
+- **À chaque battement** : une volée de plumes, des souffles d'air au bout des ailes et un tintement cristallin.
+
 **En vol** :
 - **Déplacement** : +15 m/s par battement.
 - **Stationnaire** : un grand battement toutes les 1,7 s, avec un balancement d'environ 1 bloc.
@@ -139,6 +144,11 @@ Dernière mise à jour : 20 octobre 2026.
 
 **Apparence** : une grande membrane par côté, en trois segments épais. Rouge sombre veinée de noir, avec une lueur plus vive sur le bord de fuite.
 
+**Effets** :
+- **Rendu** : les veines et le bord de fuite rougeoient comme de la braise (passe lumineuse).
+- **En continu** : des braises flottent autour de la membrane, avec des flammèches et de la fumée en vol.
+- **À chaque battement** : une explosion de flammes projetée vers l'arrière, de la fumée épaisse, une goutte de lave et le souffle d'un blaze.
+
 **En vol** :
 - **Déplacement** : 0,7 battement par seconde. Le coup arrive très tard dans le cycle et très vite, pour +14 m/s.
 - **Saut ailé** : environ 3 blocs.
@@ -156,20 +166,33 @@ Dernière mise à jour : 20 octobre 2026.
 
 ---
 
-## Ailes d'Hermès
+## Ailes de Psyché
 
-`simplywings:hermes` · **Légendaire** · item `hermes_wings` · **Maniabilité maxée**
+`simplywings:psyche` · **Légendaire** · item `psyche_wings` · **Stabilité maxée**
 
-**Vibe** : l'agilité divine d'Hermès, messager de l'Olympe, le plus vif et le plus rusé des dieux. Elles changent de direction à l'instant et slalomment entre les arbres, les tours et les falaises.
+**Vibe** : la stabilité absolue par la magie. Dans la mythologie grecque, Psyché est la déesse de l'âme, représentée avec des ailes de papillon. Ici, ses ailes ne sont pas de chair : ce sont des flammes d'âme éthérées, bleu-cyan et lumineuses, qui dessinent quatre ailes de papillon. Elles respirent lentement, et l'énergie qui en émane tient le joueur en apesanteur, parfaitement immobile.
 
-**Apparence** : **3 ailes dorées par côté**, aux plumes blanches et aux bords d'or. Elles battent en vague, l'une après l'autre.
+**Apparence** : 4 ailes de papillon, deux par côté, faites de flammes translucides cyan et nacrées qui ondulent sur les bords. Elles brillent dans le noir (rendu émissif) et restent déployées même au repos.
+
+**Effets** :
+- **En continu** : des flammes d'âme s'élèvent des ailes, et des âmes s'en échappent parfois.
+- **À chaque battement** : une gerbe de flammes d'âme, avec un son d'âme qui s'échappe.
 
 **En vol** :
-- **Déplacement** : 6 battements par seconde, rapides et légers.
-- **Stationnaire** : 6 Hz, avec un balancement très réduit.
+- **Déplacement** : 0,6 battement par seconde, lent et ample.
+- **Stationnaire** : respiration très lente (0,5 Hz), aucun balancement, 20 m/s de placement.
 
 | Stat | Note | Valeur |
 | --- | --- | --- |
+| Endurance | 6,5/10 | 213 de stamina |
+| Accélération | 5,0/10 | 6 m/s par s, soit +10 m/s par battement |
+| Vitesse | 5,0/10 | 38 m/s |
+| Maniabilité | 6,0/10 | 106 °/s |
+| Stabilité | **10/10** | 10/10 |
+| Plané *(interne)* | 6,0/10 | traînée × 0,8 |
+| Portance *(interne)* | 7,5/10 | décroche sous 5,8 m/s |
+
+--- | --- | --- |
 | Endurance | 5,0/10 | 175 de stamina |
 | Accélération | 7,5/10 | 8 m/s par s, soit +1,3 m/s par battement |
 | Vitesse | 6,0/10 | 43 m/s |
@@ -187,6 +210,11 @@ Dernière mise à jour : 20 octobre 2026.
 **Vibe** : la vitesse céleste. Six ailes qui battent ensemble comme une seule et emportent le joueur plus vite que tout. Elles restent assez stables pour se poser avec précision.
 
 **Apparence** : **6 ailes d'ange dorées**, trois par côté, en éventail : une haute, une centrale, une basse, qui battent avec un léger décalage.
+
+**Effets** :
+- **Rendu** : les plumes et les os dorés rayonnent (passe lumineuse).
+- **En continu** : une poussière d'or flotte autour des 6 ailes. Au-dessus de 25 m/s, deux traînées lumineuses partent du bout des ailes.
+- **À chaque battement** : un anneau de lumière se propage vers l'arrière, avec une pluie d'or et le son d'un beacon.
 
 **En vol** :
 - **Déplacement** : 0,9 battement par seconde, avec des coups amples (+7,6 m/s).
@@ -206,25 +234,27 @@ Dernière mise à jour : 20 octobre 2026.
 
 ## Ailes de Dédale
 
-`simplywings:daedalus` · **Légendaire** · item `daedalus_wings` · **Stabilité maxée**
+`simplywings:daedalus` · **Légendaire** · item `daedalus_wings` · **Maniabilité maxée**
 
-**Vibe** : les ailes de l'inventeur. Dans la mythologie grecque, Dédale a fabriqué des ailes pour s'évader du labyrinthe avec son fils Icare. Ici, c'est une machine : une armature de laiton, des panneaux d'acier rivetés et deux réacteurs dans le dos. Rien ne bat, tout pousse. En stationnaire, le joueur est parfaitement immobile, comme en vol créatif : c'est l'outil du bâtisseur ultime.
+**Vibe** : les ailes de l'inventeur. Dans la mythologie grecque, Dédale a fabriqué des ailes pour s'évader du labyrinthe avec son fils Icare. Ici, c'est une machine : une armature de laiton, des panneaux d'acier rivetés et deux réacteurs dans le dos. Rien ne bat, tout pousse. Les réacteurs vectorisés changent de cap à l'instant : c'est la paire la plus maniable.
 
-**Apparence** : une aile mécanique par côté, en trois segments épais, dont les panneaux d'acier rivetés s'affinent vers la pointe. Les réacteurs crachent des flammes et de la fumée, vers le bas en stationnaire et vers l'arrière en vol.
+**Apparence** : une aile mécanique par côté, en trois segments épais, dont les panneaux d'acier rivetés s'affinent vers la pointe.
+
+**Effets** : les réacteurs crachent des flammes et de la fumée, vers le bas en stationnaire et vers l'arrière pendant la poussée.
 
 **En vol** :
-- **Déplacement** : poussée continue des réacteurs tant que sprint est maintenu, avec une accélération régulière. Les ailes ne bougent presque pas et ne font que vibrer légèrement.
-- **Stationnaire** : aucun balancement, et la vitesse de placement la plus haute (20 m/s).
+- **Déplacement** : poussée continue tant que sprint est maintenu. Les ailes ne font que vibrer légèrement.
+- **Stationnaire** : vibration du moteur, léger balancement.
 
 | Stat | Note | Valeur |
 | --- | --- | --- |
-| Endurance | 6,5/10 | 213 de stamina |
-| Accélération | 5,5/10 | 6,4 m/s par s, en continu |
-| Vitesse | 5,0/10 | 38 m/s |
-| Maniabilité | 6,0/10 | 106 °/s |
-| Stabilité | **10/10** | 10/10 |
+| Endurance | 5,5/10 | 188 de stamina |
+| Accélération | 7,5/10 | 8 m/s par s, en continu |
+| Vitesse | 6,0/10 | 43 m/s |
+| Maniabilité | **10/10** | 150 °/s |
+| Stabilité | 5,0/10 | 5/10 |
 | Plané *(interne)* | 4,5/10 | traînée × 0,95 |
-| Portance *(interne)* | 7,0/10 | décroche sous 6,3 m/s |
+| Portance *(interne)* | 6,5/10 | décroche sous 6,9 m/s |
 
 ---
 
@@ -240,5 +270,5 @@ Ces paramètres ne dépendent pas de la collection : ils définissent le caract�
 | Ange | 0,5 | 0,6 Hz | 19 m/s | × 1 | 1 |
 | Démon | 0,7 | 1,0 Hz | 18 m/s | × 1 | 1 |
 | Séraphin | 0,9 | 0,9 Hz | 20 m/s | × 1 | 3 |
-| Hermès | 6 | 6 Hz | 18 m/s | × 0,4 | 3 |
-| Dédale | 20, continu (réacteurs) | 30 Hz (vibration) | 20 m/s | × 0 | 1 |
+| Psyché | 0,6 | 0,5 Hz (respiration) | 20 m/s | × 0 | 2 |
+| Dédale | 20, continu (réacteurs) | 30 Hz (vibration) | 18 m/s | × 0,3 | 1 |

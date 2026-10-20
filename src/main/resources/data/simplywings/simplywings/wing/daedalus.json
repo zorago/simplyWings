@@ -4,16 +4,16 @@
   "color": -1,
   "flap_rate": 20.0,
   "hover_rate": 30.0,
-  "hover_speed": 20.0,
-  "hover_swing": 0.0,
+  "hover_speed": 18.0,
+  "hover_swing": 0.3,
   "equipped": {
-    "endurance": 65.0,
-    "acceleration": 55.0,
-    "speed": 50.0,
-    "handling": 60.0,
-    "stability": 100.0,
+    "endurance": 55.0,
+    "acceleration": 75.0,
+    "speed": 60.0,
+    "handling": 100.0,
+    "stability": 50.0,
     "glide": 45.0,
-    "lift": 70.0
+    "lift": 65.0
   },
   "global": {
     "endurance": 18.0,

@@ -47,6 +47,9 @@ public final class ClientNet {
         } else {
             visual.animator.flap(rate * 1.5f);
         }
+        if (mc.level.getEntity(payload.entityId()) instanceof Player target) {
+            WingEffects.strike(target, style, visual.mode);
+        }
     }
 
     private ClientNet() {
