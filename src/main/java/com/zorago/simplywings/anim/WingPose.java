@@ -9,6 +9,8 @@ public final class WingPose {
     public float elbow;
     public float tip;
     public float twist;
+    public float axis;
+    public float curl;
 
     public WingPose set(float spread, float sweep, float stroke, float elbow, float tip, float twist) {
         this.spread = spread;
@@ -17,11 +19,26 @@ public final class WingPose {
         this.elbow = elbow;
         this.tip = tip;
         this.twist = twist;
+        this.axis = 0f;
+        this.curl = 0f;
+        return this;
+    }
+
+    public WingPose withAxis(float axis) {
+        this.axis = axis;
+        return this;
+    }
+
+    public WingPose withCurl(float curl) {
+        this.curl = curl;
         return this;
     }
 
     public WingPose copy(WingPose o) {
-        return set(o.spread, o.sweep, o.stroke, o.elbow, o.tip, o.twist);
+        set(o.spread, o.sweep, o.stroke, o.elbow, o.tip, o.twist);
+        axis = o.axis;
+        curl = o.curl;
+        return this;
     }
 
     public WingPose approach(WingPose target, float rate) {
@@ -31,6 +48,8 @@ public final class WingPose {
         elbow += (target.elbow - elbow) * rate;
         tip += (target.tip - tip) * rate;
         twist += (target.twist - twist) * rate;
+        axis += (target.axis - axis) * rate;
+        curl += (target.curl - curl) * rate;
         return this;
     }
 
@@ -41,11 +60,15 @@ public final class WingPose {
         elbow += o.elbow * scale;
         tip += o.tip * scale;
         twist += o.twist * scale;
+        curl += o.curl * scale;
         return this;
     }
 
     public WingPose lerp(WingPose a, WingPose b, float t) {
-        return set(Mth.lerp(t, a.spread, b.spread), Mth.lerp(t, a.sweep, b.sweep), Mth.lerp(t, a.stroke, b.stroke),
+        set(Mth.lerp(t, a.spread, b.spread), Mth.lerp(t, a.sweep, b.sweep), Mth.lerp(t, a.stroke, b.stroke),
                 Mth.lerp(t, a.elbow, b.elbow), Mth.lerp(t, a.tip, b.tip), Mth.lerp(t, a.twist, b.twist));
+        axis = Mth.lerp(t, a.axis, b.axis);
+        curl = Mth.lerp(t, a.curl, b.curl);
+        return this;
     }
 }

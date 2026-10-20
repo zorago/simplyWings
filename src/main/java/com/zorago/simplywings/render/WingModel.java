@@ -92,7 +92,7 @@ public final class WingModel {
 
     private static void addSide(PartDefinition root, Shape shape, String name, float s) {
         PartDefinition shoulder = root.addOrReplaceChild(name + "_shoulder",
-                segment(shape.shoulder(), s, -0.25f), PartPose.offset(1.5f * s, 1.5f, 2.6f));
+                segment(shape.shoulder(), s, -0.25f), PartPose.offset(3f * s, 1.5f, 2.4f));
         PartDefinition elbow = shoulder.addOrReplaceChild(name + "_elbow",
                 segment(shape.elbow(), s, 0.05f), PartPose.offset(shape.shoulder().length() * s, 0f, 0f));
         elbow.addOrReplaceChild(name + "_tip",
@@ -107,14 +107,17 @@ public final class WingModel {
     private static void apply(Side side, WingPose p) {
         float s = side.sign;
         float folded = 1f - Math.min(1f, p.spread);
-        side.shoulder.yRot = s * (-1.35f * folded + p.sweep);
-        side.shoulder.zRot = s * (-p.stroke + 0.45f * folded);
+        float dorsal = p.axis;
+        float vertical = 1f - dorsal;
+        float forward = p.sweep - p.curl;
+        side.shoulder.yRot = s * (-1.25f * folded + vertical * forward - dorsal * p.stroke);
+        side.shoulder.zRot = s * (-0.1f * folded - vertical * p.stroke - dorsal * forward);
         side.shoulder.xRot = p.twist;
-        side.elbow.yRot = s * (-2.5f * folded);
-        side.elbow.zRot = s * -p.elbow;
+        side.elbow.yRot = s * (2.95f * folded - dorsal * p.elbow);
+        side.elbow.zRot = s * -(vertical * p.elbow);
         side.elbow.xRot = 0f;
-        side.tip.yRot = s * (2.2f * folded);
-        side.tip.zRot = s * -p.tip;
+        side.tip.yRot = s * (-2.85f * folded - dorsal * p.tip);
+        side.tip.zRot = s * -(vertical * p.tip);
         side.tip.xRot = 0f;
     }
 

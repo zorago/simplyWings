@@ -65,6 +65,7 @@ public final class WingAnimator {
                 } else {
                     baseTarget.set(1f, -0.05f, 0.06f, 0f, -0.05f, 0f);
                 }
+                baseTarget.withAxis(1f);
             }
             case NONE -> {
                 if (player.onGround() || player.isPassenger()) {
@@ -99,8 +100,9 @@ public final class WingAnimator {
         if (strokeProgress >= 0) {
             float t = strokeProgress * TWO_PI;
             float envelope = Mth.sin(strokeProgress * (float) Math.PI);
-            scratch.set(-0.2f * Math.max(0f, Mth.cos(t)) * envelope, 0.1f * Mth.sin(t), 0.95f * Mth.sin(t),
-                    0.55f * Mth.sin(t - 0.9f) * envelope, 0.4f * Mth.sin(t - 1.5f) * envelope, 0.1f * Mth.cos(t) * envelope);
+            scratch.set(-0.2f * Math.max(0f, Mth.cos(t)) * envelope, 0f, 0.75f * Mth.sin(t),
+                    0.55f * Mth.sin(t - 0.9f) * envelope, 0.4f * Mth.sin(t - 1.5f) * envelope, 0.1f * Mth.cos(t) * envelope)
+                    .withCurl(0.45f * Math.max(0f, -Mth.cos(t)) * envelope);
             oscillation.addScaled(scratch, 1f - hoverWeight);
             strokeProgress += 1f / strokeDuration;
             if (strokeProgress >= 1f) {
