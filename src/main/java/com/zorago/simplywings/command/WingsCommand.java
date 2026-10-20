@@ -32,6 +32,7 @@ public final class WingsCommand {
         dispatcher.register(Commands.literal("simplywings")
                 .requires(s -> s.hasPermission(2))
                 .then(Commands.literal("unlock")
+                        .then(Commands.literal("all").executes(WingsCommand::unlockAll))
                         .then(Commands.argument("wing", ResourceLocationArgument.id()).suggests(WINGS)
                                 .executes(WingsCommand::unlock)))
                 .then(Commands.literal("equip")
@@ -59,6 +60,12 @@ public final class WingsCommand {
         ServerFlight.unlockAndEquip(player, id);
         ctx.getSource().sendSuccess(() -> Component.translatable("commands.simplywings.unlock", id.toString()), false);
         return 1;
+    }
+
+    private static int unlockAll(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
+        int added = ServerFlight.unlockAll(ctx.getSource().getPlayerOrException());
+        ctx.getSource().sendSuccess(() -> Component.translatable("commands.simplywings.unlock_all", added), false);
+        return added;
     }
 
     private static int equip(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {

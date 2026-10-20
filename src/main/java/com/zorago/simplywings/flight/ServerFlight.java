@@ -3,6 +3,7 @@ package com.zorago.simplywings.flight;
 import com.zorago.simplywings.SimplyWings;
 import com.zorago.simplywings.config.ServerConfig;
 import com.zorago.simplywings.data.EffectiveStats;
+import com.zorago.simplywings.data.WingRegistries;
 import com.zorago.simplywings.network.Payloads;
 import com.zorago.simplywings.player.FlightMode;
 import com.zorago.simplywings.player.ModAttachments;
@@ -41,6 +42,18 @@ public final class ServerFlight {
         WingsData data = ModAttachments.get(player);
         boolean added = data.unlock(wing);
         equip(player, Optional.of(wing));
+        return added;
+    }
+
+    public static int unlockAll(ServerPlayer player) {
+        WingsData data = ModAttachments.get(player);
+        int added = 0;
+        for (ResourceLocation wing : player.registryAccess().registryOrThrow(WingRegistries.WING).keySet()) {
+            if (data.unlock(wing)) {
+                added++;
+            }
+        }
+        equip(player, data.equipped());
         return added;
     }
 

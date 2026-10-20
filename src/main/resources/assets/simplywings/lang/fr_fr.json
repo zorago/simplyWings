@@ -108,5 +108,6 @@
   "item.simplywings.copper_wings": "Ailes de cuivre",
   "wing.simplywings.copper": "Ailes de cuivre",
   "item.simplywings.patchwork_wings": "Ailes rafistolées",
-  "wing.simplywings.patchwork": "Ailes rafistolées"
+  "wing.simplywings.patchwork": "Ailes rafistolées",
+  "commands.simplywings.unlock_all": "Collection complète débloquée (%s nouvelles paires)"
 }
