@@ -16,12 +16,12 @@
     "lift": 50.0
   },
   "global": {
-    "endurance": 2.4,
-    "acceleration": 1.95,
-    "speed": 2.64,
-    "handling": 2.19,
-    "stability": 2.7,
-    "glide": 2.25,
-    "lift": 2.25
+    "endurance": 4.77,
+    "acceleration": 0.6,
+    "speed": 5.74,
+    "handling": 0.39,
+    "stability": 0.83,
+    "glide": 1.52,
+    "lift": 1.05
   }
 }

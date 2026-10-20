@@ -24,17 +24,43 @@ Le plafond de vitesse (64 m/s) correspond à l'ange avec les 4 premières paires
 
 - Score effectif = score de la paire + somme des bonus `global` de toute la collection, plafonné à 100.
 - Pour chaque stat, la somme des bonus de toutes les paires vaut **100 − le score le plus bas** parmi les paires. Avec la collection complète, toutes les paires sont donc à 10/10 partout.
-- Répartition actuelle : les 4 premières paires (commune, chauve-souris, méganeure, ange) donnent 2,5 % chacune (10 % au total), les 10 autres épiques (flamme, marée, pierre, vent, ptérosaure, orage, aurore, ombre, nébuleuse, esprit sylvestre) 3 % chacune (30 %), et les 4 autres légendaires (démon, séraphin, Psyché, Dédale) 15 % chacune (60 %). Si on ajoute ou retire des paires, il faudra redistribuer.
+- Répartition par palier : **50 %** pour le palier de base (commune + rares), **30 %** pour les épiques, **20 %** pour les légendaires. Dans un palier, chaque paire donne la même part du total des points de bonus.
+- **Diversification** : chaque paire donne surtout dans ses points forts. Le poids d'une stat vaut (score ÷ meilleur score de la paire)⁴. Ensuite, un équilibrage itératif garantit deux choses : chaque palier fournit exactement sa part de chaque stat, et chaque paire sa part du total. Ainsi chaque légendaire donne surtout sa stat maxée, la pierre de l'endurance et de la stabilité, l'orage de la vitesse, etc.
+- Le calcul est automatique dans le générateur des JSON : quand on ajoute une paire, tout se recalcule.
+- Tant que les rares ne sont pas créées, la commune et la chauve-souris portent seules les 50 % du palier de base, donc des bonus énormes. Ça se dilue quand les rares arrivent.
 
-| Stat | Bonus total de la collection | Par paire de départ (2,5 %) | Par autre épique (3 %) | Par autre légendaire (15 %) |
-| --- | --- | --- | --- | --- |
-| Endurance | 80 | 2 | 2,4 | 12 |
-| Accélération | 65 | 1,6 | 1,95 | 9,75 |
-| Vitesse | 88 | 2,2 | 2,6 | 13,2 |
-| Maniabilité | 73 | 1,8 | 2,2 | 10,95 |
-| Stabilité | 90 | 2,25 | 2,7 | 13,5 |
-| Plané (interne) | 75 | 1,9 | 2,25 | 11,25 |
-| Portance (interne) | 75 | 1,9 | 2,25 | 11,25 |
+| Stat | Bonus total de la collection |
+| --- | --- |
+| Endurance | 80 |
+| Accélération | 65 |
+| Vitesse | 88 |
+| Maniabilité | 73 |
+| Stabilité | 90 |
+| Plané (interne) | 75 |
+| Portance (interne) | 75 |
+
+Bonus `global` de chaque paire (en points sur 100) :
+
+| Paire | Palier | Part | Endur. | Accél. | Vitesse | Maniab. | Stabil. | Plané | Portance |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Commune | Base | 25,0 % | 15,2 | 22,1 | 14,7 | 3,6 | 38,3 | 12,9 | 29,6 |
+| Chauve-souris | Base | 25,0 % | 24,8 | 10,3 | 29,3 | 32,9 | 6,7 | 24,6 | 7,8 |
+| Méganeure | Épique | 2,7 % | 1,3 | 0,2 | 0,1 | 5,0 | 0,8 | 0,3 | 7,3 |
+| Ptérosaure | Épique | 2,7 % | 4,1 | 1,0 | 0,7 | 0,3 | 0,4 | 6,7 | 1,7 |
+| Flamme | Épique | 2,7 % | 0,4 | 8,6 | 3,4 | 1,1 | 0,3 | 0,4 | 0,6 |
+| Marée | Épique | 2,7 % | 1,6 | 0,4 | 0,6 | 3,7 | 2,7 | 4,8 | 1,1 |
+| Pierre | Épique | 2,7 % | 5,5 | 0,2 | 0,1 | 0,1 | 8,2 | 0,1 | 0,7 |
+| Vent | Épique | 2,7 % | 0,4 | 1,0 | 5,1 | 1,3 | 0,2 | 2,9 | 4,0 |
+| Orage | Épique | 2,7 % | 0,3 | 2,7 | 6,9 | 3,4 | 0,2 | 0,7 | 0,7 |
+| Aurore | Épique | 2,7 % | 1,2 | 0,2 | 0,6 | 0,5 | 6,7 | 3,5 | 2,2 |
+| Ombre | Épique | 2,7 % | 0,9 | 4,3 | 2,9 | 5,2 | 0,4 | 0,6 | 0,6 |
+| Nébuleuse | Épique | 2,7 % | 4,8 | 0,6 | 5,7 | 0,4 | 0,8 | 1,5 | 1,1 |
+| Esprit sylvestre | Épique | 2,7 % | 3,4 | 0,4 | 0,2 | 1,1 | 6,2 | 1,0 | 2,6 |
+| Ange | Légendaire | 4,0 % | 9,0 | 1,1 | 1,8 | 0,5 | 0,3 | 8,5 | 0,7 |
+| Démon | Légendaire | 4,0 % | 1,9 | 9,4 | 6,0 | 1,8 | 0,6 | 1,2 | 1,0 |
+| Séraphin | Légendaire | 4,0 % | 3,6 | 1,0 | 8,9 | 1,0 | 1,7 | 3,6 | 2,0 |
+| Psyché | Légendaire | 4,0 % | 0,8 | 0,1 | 0,2 | 0,8 | 13,6 | 1,0 | 5,4 |
+| Dédale | Légendaire | 4,0 % | 0,8 | 1,3 | 0,7 | 10,6 | 1,9 | 0,7 | 5,9 |
 
 ## Scores des paires (stats équipées, sur 100)
 
