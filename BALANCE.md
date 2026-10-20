@@ -40,17 +40,17 @@ Identités :
 
 Règle : la somme des globaux de toute la collection (hors mythique) égale les stats équipées de la légendaire de référence. Pour la stabilisation, le total vaut ce qu'il faut pour amener la paire la moins stable à 10/10.
 
-| Stat | Total final visé | Par paire actuelle (10 %) |
-| --- | --- | --- |
-| Stamina | 240 | 24 |
-| Accélération | 14 | 1,4 |
-| Vitesse max | 58 | 5,8 |
-| Maniabilité | 85 | 8,5 |
-| Stabilisation | 8 | 0,8 |
+Les 4 paires actuelles donnent **ensemble 10 %** du total final, soit 2,5 % chacune. Les 90 % restants viendront des paires ajoutées plus tard : la pleine puissance de la collection est un objectif de fin de jeu. Un joueur qui débute (la commune plus une paire qui lui plaît) a donc 5 % de bonus.
 
-Avec les 4 paires de test débloquées, chaque paire reçoit +40 % des stats de la légendaire. La commune passe alors à 41 m/s de vitesse max et 8,6 d'accélération. **Pour juger le ressenti brut d'une paire, il faut la tester seule** : `/simplywings reset`, puis débloquer uniquement celle-là.
+| Stat | Total final visé | Par paire actuelle (2,5 %) | 4 paires actuelles (10 %) |
+| --- | --- | --- | --- |
+| Stamina | 240 | 6 | 24 |
+| Accélération | 14 | 0,35 | 1,4 |
+| Vitesse max | 58 | 1,45 | 5,8 |
+| Maniabilité | 85 | 2,125 | 8,5 |
+| Stabilisation | 8 | 0,2 | 0,8 |
 
-Quand la liste définitive des paires sera fixée, les 10 % par paire seront remplacés par une répartition du total final sur toutes les paires.
+Avec les 4 paires débloquées, la commune passe de 18 à 23,8 m/s de vitesse max et de 3 à 4,4 d'accélération.
 
 ## Physique globale (config serveur, `simplywings-server.toml`)
 
