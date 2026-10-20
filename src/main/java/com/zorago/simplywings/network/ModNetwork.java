@@ -1,6 +1,7 @@
 package com.zorago.simplywings.network;
 
 import com.zorago.simplywings.client.ClientNet;
+import com.zorago.simplywings.flight.FuryServer;
 import com.zorago.simplywings.flight.ServerFlight;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
@@ -14,6 +15,7 @@ public final class ModNetwork {
         r.playToClient(Payloads.Stamina.TYPE, Payloads.Stamina.CODEC, (p, ctx) -> ClientNet.onStamina(p));
         r.playToClient(Payloads.FlightState.TYPE, Payloads.FlightState.CODEC, (p, ctx) -> ClientNet.onFlightState(p));
         r.playToClient(Payloads.FlapEvent.TYPE, Payloads.FlapEvent.CODEC, (p, ctx) -> ClientNet.onFlapEvent(p));
+        r.playToClient(Payloads.FuryEvent.TYPE, Payloads.FuryEvent.CODEC, (p, ctx) -> ClientNet.onFuryEvent(p));
 
         r.playToServer(Payloads.RequestMode.TYPE, Payloads.RequestMode.CODEC,
                 (p, ctx) -> ServerFlight.onRequestMode((ServerPlayer) ctx.player(), p));
@@ -25,6 +27,10 @@ public final class ModNetwork {
                 (p, ctx) -> ServerFlight.onEquipRequest((ServerPlayer) ctx.player(), p));
         r.playToServer(Payloads.AirJump.TYPE, Payloads.AirJump.CODEC,
                 (p, ctx) -> ServerFlight.onAirJump((ServerPlayer) ctx.player()));
+        r.playToServer(Payloads.FuryCharge.TYPE, Payloads.FuryCharge.CODEC,
+                (p, ctx) -> FuryServer.onCharge((ServerPlayer) ctx.player(), p));
+        r.playToServer(Payloads.FuryDash.TYPE, Payloads.FuryDash.CODEC,
+                (p, ctx) -> FuryServer.onDash((ServerPlayer) ctx.player()));
         r.playToServer(Payloads.Impact.TYPE, Payloads.Impact.CODEC,
                 (p, ctx) -> ServerFlight.onImpact((ServerPlayer) ctx.player(), p));
     }

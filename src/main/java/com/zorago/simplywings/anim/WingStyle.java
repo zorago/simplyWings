@@ -221,6 +221,16 @@ public record WingStyle(List<Slot> slots, float upFraction, float downFraction, 
     public static final WingStyle PATCHWORK = new WingStyle(List.of(Slot.single(WingModel.PATCHWORK)),
             0.45f, 0.22f, 0.85f, 0.85f, 0f, 0f, 0.04f, true, false, Render.CUTOUT, null, Effects.NONE);
 
+    public static final WingStyle NIGHT = new WingStyle(List.of(
+            Slot.single(WingModel.NIGHT_MAIN),
+            new Slot(WingModel.NIGHT_HIND, 0f, 5f, 0.4f, -0.4f, -0.3f, 0.3f, 0.8f)),
+            0.5f, 0.2f, 0.95f, 0.9f, 0f, 0f, 0.04f, true, false, Render.CUTOUT, null, Effects.NONE);
+
+    public static final WingStyle LIGHT = new WingStyle(List.of(
+            Slot.single(WingModel.LIGHT_MAIN),
+            new Slot(WingModel.LIGHT_HIND, 0f, 5f, 0.4f, -0.4f, -0.3f, 0.3f, 0.8f)),
+            0.5f, 0.2f, 0.95f, 0.9f, 0f, 0f, 0.04f, true, false, Render.CUTOUT, null, Effects.NONE);
+
     private static final Map<ResourceLocation, WingStyle> STYLES = Map.ofEntries(
             Map.entry(SimplyWings.id("basic"), BASIC),
             Map.entry(SimplyWings.id("bat"), BAT),
@@ -240,6 +250,8 @@ public record WingStyle(List<Slot> slots, float upFraction, float downFraction, 
             Map.entry(SimplyWings.id("shadow"), SHADOW),
             Map.entry(SimplyWings.id("nebula"), NEBULA),
             Map.entry(SimplyWings.id("forest"), FOREST),
+            Map.entry(SimplyWings.id("night"), NIGHT),
+            Map.entry(SimplyWings.id("light"), LIGHT),
             Map.entry(SimplyWings.id("crow"), CROW),
             Map.entry(SimplyWings.id("owl"), OWL),
             Map.entry(SimplyWings.id("gull"), GULL),

@@ -1,6 +1,7 @@
 package com.zorago.simplywings.client;
 
 import com.zorago.simplywings.data.EffectiveStats;
+import com.zorago.simplywings.data.FurySet;
 import java.util.Optional;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
@@ -19,7 +20,7 @@ public final class StaminaHud {
         if (stats.isEmpty()) {
             return;
         }
-        float charge = ClientFlight.takeoffProgress();
+        float charge = ClientFlight.chargeProgress();
         if (charge > 0) {
             int cx = graphics.guiWidth() / 2;
             int cy = graphics.guiHeight() / 2 + 10;
@@ -28,7 +29,7 @@ public final class StaminaHud {
         }
         float max = stats.get().stamina();
         float stamina = ClientWings.stamina();
-        if (stamina >= max && !ClientFlight.mode().flying()) {
+        if ((stamina >= max && !ClientFlight.mode().flying()) || FurySet.infiniteStamina(ClientWings.collection())) {
             return;
         }
         int x = graphics.guiWidth() / 2 + 96;

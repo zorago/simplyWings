@@ -1,0 +1,35 @@
+{
+  "rarity": "mythic",
+  "model": "simplywings:night",
+  "color": -1,
+  "flap_rate": 1.2,
+  "hover_rate": 1.2,
+  "hover_speed": 24.0,
+  "equipped": {
+    "endurance": 100.0,
+    "acceleration": 100.0,
+    "speed": 100.0,
+    "handling": 100.0,
+    "stability": 100.0,
+    "glide": 100.0,
+    "lift": 100.0
+  },
+  "global": {
+    "endurance": 0.0,
+    "acceleration": 0.0,
+    "speed": 0.0,
+    "handling": 0.0,
+    "stability": 0.0,
+    "glide": 0.0,
+    "lift": 0.0
+  },
+  "overcap": {
+    "endurance": 0.0,
+    "acceleration": 0.0,
+    "speed": 20.0,
+    "handling": 0.0,
+    "stability": 0.0,
+    "glide": 0.0,
+    "lift": 0.0
+  }
+}

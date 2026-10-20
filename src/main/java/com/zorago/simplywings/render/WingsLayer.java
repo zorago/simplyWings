@@ -24,12 +24,14 @@ public class WingsLayer extends RenderLayer<AbstractClientPlayer, PlayerModel<Ab
     private static final ResourceLocation BASIC = SimplyWings.id("basic");
 
     private final Map<String, WingModel> models;
+    private final Map<ResourceLocation, TailModel> tails;
     private final WingPose pose = new WingPose();
 
     public WingsLayer(RenderLayerParent<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> parent,
-                      Map<String, WingModel> models) {
+                      Map<String, WingModel> models, Map<ResourceLocation, TailModel> tails) {
         super(parent);
         this.models = models;
+        this.tails = tails;
     }
 
     @Override
@@ -42,7 +44,8 @@ public class WingsLayer extends RenderLayer<AbstractClientPlayer, PlayerModel<Ab
         }
         Optional<WingDefinition> definition = visual.equipped.flatMap(id -> WingRegistries.get(player.registryAccess(), id));
         int color = definition.map(WingDefinition::color).orElse(0xFFA0A0A0);
-        WingStyle style = WingStyle.of(definition.map(WingDefinition::model).orElse(BASIC));
+        ResourceLocation modelId = definition.map(WingDefinition::model).orElse(BASIC);
+        WingStyle style = WingStyle.of(modelId);
         poseStack.pushPose();
         getParentModel().body.translateAndRotate(poseStack);
         if (!player.getItemBySlot(EquipmentSlot.CHEST).isEmpty()) {
@@ -69,6 +72,12 @@ public class WingsLayer extends RenderLayer<AbstractClientPlayer, PlayerModel<Ab
                         OverlayTexture.NO_OVERLAY, -1);
             }
             poseStack.popPose();
+        }
+        TailModel tail = tails.get(modelId);
+        if (tail != null) {
+            tail.setup(visual.tail, partialTick);
+            tail.render(poseStack, buffer.getBuffer(RenderType.entityCutoutNoCull(tail.spec().texture())), light,
+                    OverlayTexture.NO_OVERLAY);
         }
         poseStack.popPose();
     }

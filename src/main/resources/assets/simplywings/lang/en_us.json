@@ -109,5 +109,14 @@
   "wing.simplywings.copper": "Copper Wings",
   "item.simplywings.patchwork_wings": "Patchwork Wings",
   "wing.simplywings.patchwork": "Patchwork Wings",
-  "commands.simplywings.unlock_all": "Full collection unlocked (%s new pairs)"
+  "commands.simplywings.unlock_all": "Full collection unlocked (%s new pairs)",
+  "item.simplywings.night_wings": "Night Wings",
+  "wing.simplywings.night": "Night Wings",
+  "item.simplywings.light_wings": "Light Wings",
+  "wing.simplywings.light": "Light Wings",
+  "subtitles.simplywings.night_fury.dive": "Night Fury shrieks",
+  "subtitles.simplywings.night_fury.dash": "Night Fury vanishes",
+  "subtitles.simplywings.light_fury.dive": "Light Fury shrieks",
+  "subtitles.simplywings.light_fury.charge": "Light Fury charges plasma",
+  "subtitles.simplywings.light_fury.blast": "Plasma blast"
 }

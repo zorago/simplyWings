@@ -26,7 +26,7 @@ public record EffectiveStats(ResourceLocation wing, WingDefinition definition, W
                 total = total.add(owned.get().global());
             }
         }
-        return total.capped();
+        return total.capped().add(def.overcap());
     }
 
     private double value(StatType type) {

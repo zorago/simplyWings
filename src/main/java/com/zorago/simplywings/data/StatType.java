@@ -43,7 +43,7 @@ public enum StatType {
     }
 
     public double value(float score) {
-        double t = Math.max(0, Math.min(MAX_SCORE, score)) / MAX_SCORE;
+        double t = Math.max(0, score) / MAX_SCORE;
         return atZero.get() + (atMax.get() - atZero.get()) * t;
     }
 }

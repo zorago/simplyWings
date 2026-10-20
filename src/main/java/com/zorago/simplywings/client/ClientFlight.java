@@ -5,6 +5,7 @@ import com.zorago.simplywings.anim.WingStyle;
 import com.zorago.simplywings.config.ClientConfig;
 import com.zorago.simplywings.config.ServerConfig;
 import com.zorago.simplywings.data.EffectiveStats;
+import com.zorago.simplywings.data.FurySet;
 import com.zorago.simplywings.data.WingDefinition;
 import com.zorago.simplywings.network.Payloads;
 import com.zorago.simplywings.player.FlightMode;
@@ -66,6 +67,10 @@ public final class ClientFlight {
     private static int ticksSinceJump = 100;
     private static int ticksSinceAirJump = 100;
     private static int travelKeyLock;
+    private static int furyCharge;
+    private static int furyWindow;
+    private static boolean furyCharging;
+    private static boolean sprintWasDown;
 
     public static FlightMode mode() {
         return mode;
@@ -79,12 +84,17 @@ public final class ClientFlight {
         return chargeTicks / (float) ServerConfig.TAKEOFF_CHARGE_TICKS.get();
     }
 
+    public static float chargeProgress() {
+        float fury = furyWindow > 0 ? 1f : furyCharge / (float) FurySet.CHARGE_TICKS;
+        return Math.max(takeoffProgress(), fury);
+    }
+
     public static float bank(float partialTick) {
         return Mth.lerp(partialTick, prevBank, bank);
     }
 
     private static boolean creative(LocalPlayer player) {
-        return player.getAbilities().instabuild;
+        return player.getAbilities().instabuild || FurySet.infiniteStamina(ClientWings.collection());
     }
 
     private static float flapCost() {
@@ -143,6 +153,9 @@ public final class ClientFlight {
     static void reset() {
         mode = FlightMode.NONE;
         flags = 0;
+        furyCharging = false;
+        furyCharge = 0;
+        furyWindow = 0;
         FlightCamera.reset();
     }
 
@@ -201,9 +214,70 @@ public final class ClientFlight {
                 }
             }
         }
+        tickFury(player, stats);
         if (creative(player)) {
             ClientWings.setStamina(stats.stamina());
         }
+    }
+
+    private static void tickFury(LocalPlayer player, EffectiveStats stats) {
+        boolean sprint = Minecraft.getInstance().options.keySprint.isDown();
+        boolean sprintPressed = sprint && !sprintWasDown;
+        sprintWasDown = sprint;
+        if (!FurySet.isFury(ClientWings.equipped()) || !mode.flying()) {
+            cancelFury();
+            return;
+        }
+        if (furyWindow > 0) {
+            if (sprintPressed) {
+                furyDash(player, stats);
+            } else if (--furyWindow == 0) {
+                cancelFury();
+            }
+            return;
+        }
+        if (ModKeys.brakeDown()) {
+            if (furyCharge == 0) {
+                furyCharging = true;
+                PacketDistributor.sendToServer(new Payloads.FuryCharge(true));
+            }
+            if (++furyCharge >= FurySet.CHARGE_TICKS) {
+                furyWindow = FurySet.DASH_WINDOW_TICKS;
+            }
+        } else if (furyCharge > 0) {
+            cancelFury();
+        }
+    }
+
+    private static void cancelFury() {
+        if (furyCharging) {
+            PacketDistributor.sendToServer(new Payloads.FuryCharge(false));
+        }
+        furyCharging = false;
+        furyCharge = 0;
+        furyWindow = 0;
+    }
+
+    private static void furyDash(LocalPlayer player, EffectiveStats stats) {
+        furyCharging = false;
+        furyCharge = 0;
+        furyWindow = 0;
+        if (mode != FlightMode.TRAVEL) {
+            initTravel(player, stats);
+            setMode(player, FlightMode.TRAVEL, true);
+        }
+        heading = player.getYRot();
+        pitch = (float) FlightMath.clamp(player.getXRot(), -80, 85);
+        prevHeading = heading;
+        prevPitch = pitch;
+        aimYaw = heading;
+        aimPitch = pitch;
+        yawRate = 0;
+        pitchRate = 0;
+        stalled = false;
+        stallVy = 0;
+        speed = ServerConfig.TERMINAL_VELOCITY.get();
+        PacketDistributor.sendToServer(new Payloads.FuryDash());
     }
 
     private static boolean canFly(LocalPlayer player) {
@@ -383,6 +457,9 @@ public final class ClientFlight {
         double forward = (o.keyUp.isDown() ? 1 : 0) - (o.keyDown.isDown() ? 1 : 0);
         double strafe = (o.keyLeft.isDown() ? 1 : 0) - (o.keyRight.isDown() ? 1 : 0);
         double vertical = (o.keyJump.isDown() ? 1 : 0) - (o.keyShift.isDown() ? 1 : 0);
+        if (furyCharge > 0 || furyWindow > 0) {
+            vertical = Math.max(0, vertical);
+        }
         double s = stats.stabilization();
         double ramp = ServerConfig.STABILIZED_RAMP_TICKS.get() + (10 - s) * ServerConfig.STABILIZED_RAMP_TICKS_PER_POINT.get();
         ClientConfig.RampCurve curve = ClientConfig.STABILIZED_CURVE.get();

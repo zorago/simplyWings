@@ -140,4 +140,41 @@ public final class Payloads {
 
     private Payloads() {
     }
+    public record FuryCharge(boolean charging) implements CustomPacketPayload {
+        public static final Type<FuryCharge> TYPE = payloadType("fury_charge");
+        public static final StreamCodec<RegistryFriendlyByteBuf, FuryCharge> CODEC = StreamCodec.composite(
+                ByteBufCodecs.BOOL, FuryCharge::charging,
+                FuryCharge::new);
+
+        @Override
+        public Type<? extends CustomPacketPayload> type() {
+            return TYPE;
+        }
+    }
+
+    public record FuryDash() implements CustomPacketPayload {
+        public static final Type<FuryDash> TYPE = payloadType("fury_dash");
+        public static final StreamCodec<RegistryFriendlyByteBuf, FuryDash> CODEC = StreamCodec.unit(new FuryDash());
+
+        @Override
+        public Type<? extends CustomPacketPayload> type() {
+            return TYPE;
+        }
+    }
+
+    public record FuryEvent(int entityId, int kind) implements CustomPacketPayload {
+        public static final int CHARGE_START = 0;
+        public static final int CHARGE_STOP = 1;
+        public static final int DASH = 2;
+        public static final Type<FuryEvent> TYPE = payloadType("fury_event");
+        public static final StreamCodec<RegistryFriendlyByteBuf, FuryEvent> CODEC = StreamCodec.composite(
+                ByteBufCodecs.VAR_INT, FuryEvent::entityId,
+                ByteBufCodecs.VAR_INT, FuryEvent::kind,
+                FuryEvent::new);
+
+        @Override
+        public Type<? extends CustomPacketPayload> type() {
+            return TYPE;
+        }
+    }
 }

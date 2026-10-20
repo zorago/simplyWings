@@ -52,6 +52,13 @@ public final class ClientNet {
         }
     }
 
+    public static void onFuryEvent(Payloads.FuryEvent payload) {
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.level != null && mc.level.getEntity(payload.entityId()) instanceof Player player) {
+            FuryEffects.onEvent(player, payload.kind());
+        }
+    }
+
     private ClientNet() {
     }
 }

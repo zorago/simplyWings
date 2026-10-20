@@ -22,7 +22,8 @@ Le plafond de vitesse (64 m/s) correspond à l'ange avec les 4 premières paires
 
 ## Règle de la collection
 
-- Score effectif = score de la paire + somme des bonus `global` de toute la collection, plafonné à 100.
+- Score effectif = score de la paire + somme des bonus `global` de toute la collection, plafonné à 100, puis + le bonus `overcap` de la paire (seulement Night et Light : +20 en vitesse, soit 12/10 et 74 m/s). Les échelles de la config s'extrapolent au-delà de 100.
+- Les mythiques (Night, Light) ne donnent aucun bonus de collection. Posséder les deux donne la stamina infinie.
 - Pour chaque stat, la somme des bonus de toutes les paires vaut **100 − le score le plus bas** parmi les paires. Avec la collection complète, toutes les paires sont donc à 10/10 partout.
 - Répartition par palier : **50 %** pour le palier de base (commune + rares), **30 %** pour les épiques, **20 %** pour les légendaires. Dans un palier, chaque paire donne la même part du total des points de bonus.
 - **Diversification** : chaque paire donne surtout dans ses points forts. Le poids d'une stat vaut (score ÷ meilleur score de la paire)⁴. Ensuite, un équilibrage itératif garantit deux choses : chaque palier fournit exactement sa part de chaque stat, et chaque paire sa part du total. Ainsi chaque légendaire donne surtout sa stat maxée, la pierre de l'endurance et de la stabilité, l'orage de la vitesse, etc.
@@ -125,6 +126,8 @@ Une légendaire a par définition au moins une stat visible maxée à 100 (en gr
 | Psyché | Légendaire | 65 | 50 | 50 | 60 | **100** | 60 | 75 | La stabilité ; ailes de papillon en flammes d'âme éthérées |
 | Séraphin | Légendaire | 70 | 60 | **100** | 45 | 40 | 60 | 40 | La vitesse ; 6 ailes d'ange dorées |
 | Dédale | Légendaire | 55 | 75 | 60 | **100** | 50 | 45 | 65 | La maniabilité ; ailes mécaniques à réacteurs vectorisés |
+| Night | Mythique | 100 | 100 | **120** | 100 | 100 | 100 | 100 | Furie Nocturne : les ailes dieu |
+| Light | Mythique | 100 | 100 | **120** | 100 | 100 | 100 | 100 | Furie Éclair : les ailes dieu |
 
 ## Paramètres d'identité (hors collection)
 

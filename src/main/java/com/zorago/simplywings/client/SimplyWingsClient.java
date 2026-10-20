@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import com.zorago.simplywings.render.BodyPose;
+import com.zorago.simplywings.render.TailModel;
 import com.zorago.simplywings.render.WingModel;
 import com.zorago.simplywings.render.WingsLayer;
 import net.minecraft.client.Camera;
@@ -20,6 +21,7 @@ import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.client.resources.PlayerSkin;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
@@ -64,6 +66,9 @@ public class SimplyWingsClient {
         for (WingModel.Shape shape : WingModel.SHAPES) {
             event.registerLayerDefinition(shape.layer(), () -> WingModel.createLayer(shape));
         }
+        for (TailModel.Spec spec : TailModel.SPECS) {
+            event.registerLayerDefinition(spec.layer(), () -> TailModel.createLayer(spec));
+        }
     }
 
     private static void onAddLayers(EntityRenderersEvent.AddLayers event) {
@@ -71,10 +76,14 @@ public class SimplyWingsClient {
         for (WingModel.Shape shape : WingModel.SHAPES) {
             models.put(shape.name(), new WingModel(event.getEntityModels().bakeLayer(shape.layer()), shape));
         }
+        Map<ResourceLocation, TailModel> tails = new HashMap<>();
+        for (TailModel.Spec spec : TailModel.SPECS) {
+            tails.put(SimplyWings.id(spec.name()), new TailModel(event.getEntityModels().bakeLayer(spec.layer()), spec));
+        }
         for (PlayerSkin.Model skin : event.getSkins()) {
             EntityRenderer<? extends Player> renderer = event.getSkin(skin);
             if (renderer instanceof PlayerRenderer playerRenderer) {
-                playerRenderer.addLayer(new WingsLayer(playerRenderer, models));
+                playerRenderer.addLayer(new WingsLayer(playerRenderer, models, tails));
             }
         }
     }
@@ -103,7 +112,8 @@ public class SimplyWingsClient {
         }
         Optional<WingDefinition> definition = visual.equipped.flatMap(id -> WingRegistries.get(player.registryAccess(), id));
         float hoverRate = definition.map(WingDefinition::hoverRate).orElse(2.5f);
-        WingStyle style = WingStyle.of(definition.map(WingDefinition::model).orElse(SimplyWings.id("basic")));
+        ResourceLocation model = definition.map(WingDefinition::model).orElse(SimplyWings.id("basic"));
+        WingStyle style = WingStyle.of(model);
         if (player == Minecraft.getInstance().player) {
             visual.animator.setCharge(ClientFlight.takeoffProgress());
         }
@@ -115,6 +125,10 @@ public class SimplyWingsClient {
             spawnTrails(player);
         }
         WingEffects.tick(player, style, visual.mode, visual.flags);
+        if (TailModel.SPECS.stream().anyMatch(spec -> SimplyWings.id(spec.name()).equals(model))) {
+            visual.tail.tick(player, visual.mode);
+        }
+        FuryEffects.tick(player, visual);
     }
 
     private static void spawnTrails(Player player) {
@@ -143,5 +157,6 @@ public class SimplyWingsClient {
         ClientFlight.reset();
         ClientWings.reset();
         WingVisuals.clear();
+        FuryEffects.clear();
     }
 }

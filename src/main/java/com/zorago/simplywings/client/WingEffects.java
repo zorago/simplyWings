@@ -104,7 +104,7 @@ public final class WingEffects {
 
     private static boolean active(Player player) {
         Minecraft mc = Minecraft.getInstance();
-        return ClientConfig.PARTICLES.get()
+        return ClientConfig.PARTICLES.get() && !player.isInvisible()
                 && mc.gameRenderer.getMainCamera().getPosition().distanceToSqr(player.position()) <= MAX_DISTANCE_SQR;
     }
 

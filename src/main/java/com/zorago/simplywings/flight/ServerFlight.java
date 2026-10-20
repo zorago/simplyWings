@@ -3,6 +3,7 @@ package com.zorago.simplywings.flight;
 import com.zorago.simplywings.SimplyWings;
 import com.zorago.simplywings.config.ServerConfig;
 import com.zorago.simplywings.data.EffectiveStats;
+import com.zorago.simplywings.data.FurySet;
 import com.zorago.simplywings.data.WingRegistries;
 import com.zorago.simplywings.network.Payloads;
 import com.zorago.simplywings.player.FlightMode;
@@ -115,7 +116,7 @@ public final class ServerFlight {
     }
 
     private static boolean infinite(Player player) {
-        return player.getAbilities().instabuild;
+        return player.getAbilities().instabuild || FurySet.infiniteStamina(ModAttachments.get(player).collection());
     }
 
     public static void onRequestMode(ServerPlayer player, Payloads.RequestMode request) {
@@ -272,6 +273,7 @@ public final class ServerFlight {
         if (data.mode().flying() && !canFly(player)) {
             setMode(player, data, FlightMode.NONE, 0, true);
         }
+        FuryServer.tick(player, data);
         float max = stats.get().stamina();
         float stamina = data.stamina();
         long now = player.level().getGameTime();

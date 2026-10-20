@@ -6,6 +6,7 @@ import com.zorago.simplywings.config.ServerConfig;
 import com.zorago.simplywings.data.WingRegistries;
 import com.zorago.simplywings.flight.ServerFlight;
 import com.zorago.simplywings.item.ModItems;
+import com.zorago.simplywings.sound.ModSounds;
 import com.zorago.simplywings.network.ModNetwork;
 import com.zorago.simplywings.player.ModAttachments;
 import net.minecraft.resources.ResourceLocation;
@@ -23,6 +24,7 @@ public class SimplyWings {
 
     public SimplyWings(IEventBus modBus, ModContainer container) {
         ModItems.register(modBus);
+        ModSounds.register(modBus);
         ModAttachments.register(modBus);
         modBus.addListener(WingRegistries::onNewRegistry);
         modBus.addListener(ModNetwork::register);

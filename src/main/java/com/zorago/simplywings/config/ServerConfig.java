@@ -32,6 +32,7 @@ public final class ServerConfig {
     public static final ModConfigSpec.DoubleValue GROUND_REGEN;
     public static final ModConfigSpec.DoubleValue GLIDE_REGEN;
     public static final ModConfigSpec.DoubleValue STAMINA_SYNC_FRACTION;
+    public static final ModConfigSpec.IntValue FURY_INVISIBILITY_TICKS;
     public static final ModConfigSpec.IntValue RESCUE_JUMPS;
     public static final ModConfigSpec.DoubleValue AIR_JUMP_COST;
 
@@ -120,6 +121,11 @@ public final class ServerConfig {
                 .defineInRange("airJumpBase", 6.0, 0.0, 50.0);
         AIR_JUMP_PER_BEAT = b.comment("Extra upward speed per m/s gained by one wing beat (acceleration / flap rate).")
                 .defineInRange("airJumpPerBeatGain", 0.6, 0.0, 5.0);
+        b.pop();
+
+        b.push("fury");
+        FURY_INVISIBILITY_TICKS = b.comment("Invisibility granted by the Night / Light charged dash, in ticks.")
+                .defineInRange("invisibilityTicks", 300, 0, 72000);
         b.pop();
 
         b.push("damage");

@@ -109,5 +109,14 @@
   "wing.simplywings.copper": "Ailes de cuivre",
   "item.simplywings.patchwork_wings": "Ailes rafistolées",
   "wing.simplywings.patchwork": "Ailes rafistolées",
-  "commands.simplywings.unlock_all": "Collection complète débloquée (%s nouvelles paires)"
+  "commands.simplywings.unlock_all": "Collection complète débloquée (%s nouvelles paires)",
+  "item.simplywings.night_wings": "Ailes de Night",
+  "wing.simplywings.night": "Ailes de Night",
+  "item.simplywings.light_wings": "Ailes de Light",
+  "wing.simplywings.light": "Ailes de Light",
+  "subtitles.simplywings.night_fury.dive": "Cri strident d'une Furie Nocturne",
+  "subtitles.simplywings.night_fury.dash": "Une Furie Nocturne disparaît",
+  "subtitles.simplywings.light_fury.dive": "Cri strident d'une Furie Éclair",
+  "subtitles.simplywings.light_fury.charge": "Une Furie Éclair charge son plasma",
+  "subtitles.simplywings.light_fury.blast": "Tir de plasma"
 }

@@ -30,6 +30,8 @@ public final class WingsData {
     private long lastFlapTick = Long.MIN_VALUE / 2;
     private long lastTravelTick = Long.MIN_VALUE / 2;
     private long lastAirJumpTick = Long.MIN_VALUE / 2;
+    private long furyChargeStart = -1;
+    private long furyReadyTick = Long.MIN_VALUE / 2;
 
     public WingsData() {
         this(List.of(), Optional.empty(), 0f, 0);
@@ -133,5 +135,21 @@ public final class WingsData {
 
     public void setLastTravelTick(long tick) {
         lastTravelTick = tick;
+    }
+
+    public long furyChargeStart() {
+        return furyChargeStart;
+    }
+
+    public void setFuryChargeStart(long tick) {
+        furyChargeStart = tick;
+    }
+
+    public long furyReadyTick() {
+        return furyReadyTick;
+    }
+
+    public void setFuryReadyTick(long tick) {
+        furyReadyTick = tick;
     }
 }

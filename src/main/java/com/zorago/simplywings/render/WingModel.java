@@ -250,8 +250,30 @@ public final class WingModel {
             new Segment(8f, 0.8f, 3, 11f, 6f, 44)),
             64, 32);
 
+    public static final Shape NIGHT_MAIN = new Shape("night_main", List.of(
+            new Segment(10f, 1.4f, 3, 10f, 13f, 0),
+            new Segment(11f, 1.2f, 4, 13f, 12f, 26),
+            new Segment(10f, 1f, 4, 12f, 4f, 54)),
+            128, 32);
+
+    public static final Shape NIGHT_HIND = new Shape("night_hind", List.of(
+            new Segment(7f, 1f, 2, 6f, 7f, 0),
+            new Segment(6f, 0.8f, 2, 7f, 3f, 20)),
+            64, 32);
+
+    public static final Shape LIGHT_MAIN = new Shape("light_main", List.of(
+            new Segment(10f, 1.4f, 3, 10f, 13f, 0),
+            new Segment(11f, 1.2f, 4, 13f, 12f, 26),
+            new Segment(10f, 1f, 4, 12f, 4f, 54)),
+            128, 32);
+
+    public static final Shape LIGHT_HIND = new Shape("light_hind", List.of(
+            new Segment(7f, 1f, 2, 6f, 7f, 0),
+            new Segment(6f, 0.8f, 2, 7f, 3f, 20)),
+            64, 32);
+
     public static final List<Shape> SHAPES = List.of(BASIC, ANGEL, BAT, DRAGONFLY, PSYCHE_FORE, PSYCHE_HIND, DEMON, DAEDALUS,
-            FIRE, WATER, EARTH, AIR, PTERO, STORM, AURORA, SHADOW, NEBULA, FOREST,
+            FIRE, WATER, EARTH, AIR, PTERO, STORM, AURORA, SHADOW, NEBULA, FOREST, NIGHT_MAIN, NIGHT_HIND, LIGHT_MAIN, LIGHT_HIND,
             CROW, OWL, GULL, HUMMINGBIRD, EAGLE, SWIFT, PIGEON, PEACOCK, PARROT, BEE, MOTH, BEETLE, BEETLE_SHELL, SQUIRREL, FLYING_FISH, PHANTOM, AMETHYST, ORNITHOPTER, KITE, COPPER, PATCHWORK);
 
     private final ModelPart root;

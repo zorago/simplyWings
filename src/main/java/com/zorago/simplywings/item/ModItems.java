@@ -64,6 +64,9 @@ public final class ModItems {
         return item;
     }
 
+    public static final DeferredItem<WingItem> NIGHT_WINGS = wing("night", Rarity.EPIC);
+    public static final DeferredItem<WingItem> LIGHT_WINGS = wing("light", Rarity.EPIC);
+
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> TAB = TABS.register("wings",
             () -> CreativeModeTab.builder()
                     .title(Component.translatable("itemGroup.simplywings"))

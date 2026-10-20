@@ -1,0 +1,22 @@
+{
+  "night_fury.dive": {
+    "subtitle": "subtitles.simplywings.night_fury.dive",
+    "sounds": [{"name": "minecraft:entity.phantom.swoop", "type": "event", "pitch": 1.6, "volume": 1.0}]
+  },
+  "night_fury.dash": {
+    "subtitle": "subtitles.simplywings.night_fury.dash",
+    "sounds": [{"name": "minecraft:entity.generic.explode", "type": "event", "pitch": 0.5, "volume": 0.6}]
+  },
+  "light_fury.dive": {
+    "subtitle": "subtitles.simplywings.light_fury.dive",
+    "sounds": [{"name": "minecraft:entity.phantom.swoop", "type": "event", "pitch": 1.9, "volume": 1.0}]
+  },
+  "light_fury.charge": {
+    "subtitle": "subtitles.simplywings.light_fury.charge",
+    "sounds": [{"name": "minecraft:block.beacon.activate", "type": "event", "pitch": 1.4, "volume": 0.8}]
+  },
+  "light_fury.blast": {
+    "subtitle": "subtitles.simplywings.light_fury.blast",
+    "sounds": [{"name": "minecraft:entity.generic.explode", "type": "event", "pitch": 1.2, "volume": 0.8}]
+  }
+}

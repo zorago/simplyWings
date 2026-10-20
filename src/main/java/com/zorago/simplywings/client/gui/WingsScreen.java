@@ -88,6 +88,14 @@ public class WingsScreen extends Screen {
         return ClientWings.collection().contains(id);
     }
 
+    private boolean hidden(Entry entry) {
+        return entry.definition().rarity() == WingRarity.MYTHIC && !owned(entry.id());
+    }
+
+    private boolean selectedHidden() {
+        return entries.stream().anyMatch(e -> e.id().equals(selected) && hidden(e));
+    }
+
     private void updateButtons() {
         boolean isEquipped = selected != null && ClientWings.equipped().filter(selected::equals).isPresent();
         equipButton.active = selected != null && owned(selected) && !isEquipped;
@@ -164,9 +172,9 @@ public class WingsScreen extends Screen {
             }
             int color = isOwned ? rarityColor(entry.definition().rarity()) : 0xFF6A6A6A;
             g.fill(x, rowY, x + 2, rowY + ROW_HEIGHT - 1, color);
-            Component name = Component.translatable(WingItem.translationKey(entry.id()));
+            Component name = hidden(entry) ? Component.literal("???") : Component.translatable(WingItem.translationKey(entry.id()));
             g.drawString(font, name, x + 6, rowY + 2, color, false);
-            Component sub = isOwned
+            Component sub = hidden(entry) ? Component.literal("???") : isOwned
                     ? Component.translatable("gui.simplywings.rarity." + entry.definition().rarity().getSerializedName())
                     : Component.translatable("gui.simplywings.locked");
             g.drawString(font, sub, x + 6, rowY + 11, 0xFF8A949C, false);
@@ -203,7 +211,7 @@ public class WingsScreen extends Screen {
         player.xRotO = 0f;
         player.yHeadRot = 180f;
         player.yHeadRotO = 180f;
-        WingVisuals.setPreview(Optional.ofNullable(selected));
+        WingVisuals.setPreview(selectedHidden() ? Optional.empty() : Optional.ofNullable(selected));
         g.enableScissor(x0, y0, x0 + PREVIEW_WIDTH, y1);
         InventoryScreen.renderEntityInInventory(g, x0 + PREVIEW_WIDTH / 2f, y1 - 34, 34f,
                 new Vector3f(0, player.getBbHeight() / 2f + 0.0625f, 0), pose, null, player);
@@ -226,6 +234,10 @@ public class WingsScreen extends Screen {
         Optional<Entry> entry = entries.stream().filter(e -> e.id().equals(selected)).findFirst();
         Minecraft mc = Minecraft.getInstance();
         if (entry.isEmpty() || mc.level == null) {
+            return;
+        }
+        if (hidden(entry.get())) {
+            g.drawString(font, "???", x, y, 0xFF6A6A6A, false);
             return;
         }
         WingDefinition def = entry.get().definition();

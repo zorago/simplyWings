@@ -1,5 +1,6 @@
 package com.zorago.simplywings.client;
 
+import com.zorago.simplywings.anim.TailAnimator;
 import com.zorago.simplywings.anim.WingAnimator;
 import com.zorago.simplywings.player.FlightMode;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
@@ -19,6 +20,7 @@ public final class WingVisuals {
         public FlightMode mode = FlightMode.NONE;
         public int flags;
         public final WingAnimator animator = new WingAnimator();
+        public final TailAnimator tail = new TailAnimator();
 
         public boolean has(int flag) {
             return (flags & flag) != 0;

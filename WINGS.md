@@ -10,6 +10,7 @@ Dernière mise à jour : 20 octobre 2026.
 - **Rare** : des créatures réelles (oiseaux, insectes, mammifères, mobs vanilla) et des ailes bricolées ou mécaniques, dans une ambiance vanilla, simple, « faite main ». Effets discrets ou absents.
 - **Épique** : des esprits, des éléments et des créatures disparues (préhistoriques), avec des thèmes qui sortent du vanilla.
 - **Légendaire** : des dieux, des êtres divins et des figures mythologiques. Chaque légendaire maxe une stat visible.
+- **Mythique** : Night et Light, les ailes des Furies de *Dragons*. 10/10 partout, +2 en vitesse au-delà du plafond, cachées en « ??? » tant qu'elles ne sont pas débloquées. Les deux ensemble donnent la stamina infinie.
 
 ## Lire les stats
 
@@ -1079,6 +1080,40 @@ Dernière mise à jour : 20 octobre 2026.
 
 ---
 
+## Les mythiques : Night et Light
+
+Clin d'œil à *Dragons* (How to Train Your Dragon) : les ailes de la Furie Nocturne (Krokmou, « Toothless ») et de la Furie Éclair. Ce sont les ailes « dieu ».
+
+- **Rareté Mythique**, au-dessus des légendaires. Dans le menu, tant qu'elles ne sont pas débloquées, elles s'affichent en **« ??? »**, sans nom, sans stats et sans aperçu.
+- **Stats** : 10/10 partout, plané et portance internes compris (aérodynamique maximale, en gardant tout le freinage). Elles ont en plus un **bonus de +2 en vitesse au-delà du plafond** (score 120) : 74 m/s en croisière, plus que le séraphin (64 m/s).
+  - Vérifié : ça reste sous la vitesse de piqué. Ailes ouvertes, un piqué vertical plafonne vers 95 m/s, et en repli faucon il atteint 110 m/s (`terminalVelocity`). Le piqué reste donc plus rapide que le vol battu.
+- **Récompense de la paire** : posséder **les deux** donne la **stamina infinie**, quelle que soit la paire équipée. Elles ne donnent pas de bonus de collection.
+- **Corps** : en plus des ailes (une grande paire et une petite paire arrière), une **queue** de 6 segments part du bas du dos. Elle traîne par terre debout, ondule en marchant, pend et se balance en stationnaire, et suit le vol en déplacement avec du retard, comme une vraie queue. Elle porte deux paires d'ailerons ; chez Night, l'aileron gauche du bout est rouge, avec une marque blanche (la prothèse d'Harold).
+- **Modèle et textures** : volontairement simples (prototype), à affiner par un modeleur.
+
+### Easter egg 1 : le cri du piqué
+Quand le repli faucon s'active en piqué (sprint maintenu au-delà de la vitesse max), le **cri strident** de la Furie retentit et suit le joueur, comme dans le premier film. Les joueurs autour l'entendent aussi.
+
+### Easter egg 2 : la charge et la disparition
+En vol (déplacement ou stationnaire), **maintenir le frein 2 secondes** remplit la barre de charge, la même que celle de l'envol. Le joueur reste en l'air pendant la charge. Ensuite, **appuyer sur sprint dans la demi-seconde** déclenche le dash : le joueur est propulsé à la vitesse maximale du mod (110 m/s) et devient **invisible** (15 s, config serveur `[fury] invisibilityTicks`, ailes et queue comprises). Cooldown de 5 s.
+- **Night** : pendant la charge, des éclairs de Minecraft tombent **autour** du joueur, purement visuels (ni feu ni dégâts), et des étincelles électriques crépitent **sur** lui. Au dash : un bruit sourd, une légère fumée, et il disparaît, sans tir.
+- **Light** : pendant la charge, un bruit de charge et du plasma bleu-blanc qui converge vers la gueule. Au dash : un tir de plasma part de la gueule, explose devant, et le joueur traverse l'explosion pour disparaître.
+
+### Sons
+Les sons sont des événements du mod (`assets/simplywings/sounds.json`) : `night_fury.dive`, `night_fury.dash`, `light_fury.dive`, `light_fury.charge`, `light_fury.blast`. Pour l'instant, ils pointent vers des sons vanilla de remplacement. Pour mettre les vrais sons, il suffit de déposer les `.ogg` dans `assets/simplywings/sounds/` et de remplacer l'entrée correspondante par `{"name": "simplywings:<fichier>"}`. Les sons des films sont protégés par le droit d'auteur : pour une version publique, il faut une recréation libre de droits.
+
+| Stat | Note | Valeur |
+| --- | --- | --- |
+| Endurance | 10/10 | 300 de stamina (infinie avec les deux paires) |
+| Accélération | 10/10 | 10 m/s par s, soit +8,3 m/s par battement |
+| Vitesse | **12/10** | 74 m/s |
+| Maniabilité | 10/10 | 150 °/s |
+| Stabilité | 10/10 | 10/10 |
+| Plané *(interne)* | 10/10 | traînée × 0,4 |
+| Portance *(interne)* | 10/10 | décroche sous 3 m/s |
+
+---
+
 ## Paramètres d'identité
 
 Ces paramètres ne dépendent pas de la collection : ils définissent le caractère de chaque paire.
@@ -1123,6 +1158,8 @@ Ces paramètres ne dépendent pas de la collection : ils définissent le caract�
 | Séraphin | 0,9 | 0,9 Hz | 20 m/s | 3 |
 | Psyché | 0,6 | 0,5 Hz (respiration) | 20 m/s | 2 |
 | Dédale | 20, continu (réacteurs) | 30 Hz (vibration) | 18 m/s | 1 |
+| Night | 1,2 | 1,2 Hz | 24 m/s | 2 + queue |
+| Light | 1,2 | 1,2 Hz | 24 m/s | 2 + queue |
 
 ## Instabilité du stationnaire
 
