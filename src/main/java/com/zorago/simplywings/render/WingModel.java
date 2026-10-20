@@ -55,19 +55,7 @@ public final class WingModel {
             new Segment(17f, 0.5f, 1, 5f, 5f, 0)),
             64, 32);
 
-    public static final Shape FALCON = new Shape("falcon", List.of(
-            new Segment(10f, 1.2f, 2, 9f, 10f, 0),
-            new Segment(11f, 1f, 3, 10f, 7f, 26),
-            new Segment(12f, 0.8f, 4, 7f, 2f, 52)),
-            128, 32);
-
-    public static final Shape ALBATROSS = new Shape("albatross", List.of(
-            new Segment(14f, 1.2f, 3, 6f, 6f, 0),
-            new Segment(15f, 1f, 4, 6f, 5f, 32),
-            new Segment(15f, 0.8f, 4, 5f, 3f, 66)),
-            128, 32);
-
-    public static final Shape SYLPH = new Shape("sylph", List.of(
+    public static final Shape HERMES = new Shape("hermes", List.of(
             new Segment(6f, 0.6f, 2, 5f, 6f, 0),
             new Segment(5f, 0.5f, 2, 6f, 3f, 16)),
             64, 32);
@@ -78,7 +66,13 @@ public final class WingModel {
             new Segment(13f, 1.1f, 4, 10f, 2f, 62)),
             128, 32);
 
-    public static final List<Shape> SHAPES = List.of(BASIC, ANGEL, BAT, DRAGONFLY, FALCON, ALBATROSS, SYLPH, DEMON);
+    public static final Shape DAEDALUS = new Shape("daedalus", List.of(
+            new Segment(11f, 1.8f, 3, 7f, 9f, 0),
+            new Segment(11f, 1.5f, 3, 9f, 8f, 30),
+            new Segment(9f, 1.2f, 3, 8f, 4f, 56)),
+            128, 32);
+
+    public static final List<Shape> SHAPES = List.of(BASIC, ANGEL, BAT, DRAGONFLY, HERMES, DEMON, DAEDALUS);
 
     private final ModelPart root;
     private final Side left;

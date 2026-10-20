@@ -114,6 +114,32 @@ public class SimplyWingsClient {
         if (visual.mode == FlightMode.TRAVEL && visual.has(FlightMode.FLAG_BRAKE)) {
             spawnTrails(player);
         }
+        if (style.thrusters() && (visual.mode == FlightMode.STABILIZED || visual.has(FlightMode.FLAG_THRUST))) {
+            spawnThrusters(player, visual.mode == FlightMode.TRAVEL);
+        }
+    }
+
+    private static void spawnThrusters(Player player, boolean travel) {
+        Minecraft mc = Minecraft.getInstance();
+        if (!ClientConfig.PARTICLES.get()
+                || mc.gameRenderer.getMainCamera().getPosition().distanceToSqr(player.position()) > 48 * 48) {
+            return;
+        }
+        double yaw = Math.toRadians(player.yBodyRot);
+        Vec3 forward = new Vec3(-Math.sin(yaw), 0, Math.cos(yaw));
+        Vec3 side = new Vec3(-Math.cos(yaw), 0, -Math.sin(yaw)).scale(0.35);
+        Vec3 exhaust = travel ? player.getLookAngle().scale(-0.25) : new Vec3(0, -0.25, 0);
+        Vec3 center = travel
+                ? player.position().add(0, player.getBbHeight() * 0.55, 0).subtract(player.getLookAngle().scale(0.3))
+                : player.position().add(0, player.getBbHeight() * 0.7, 0).subtract(forward.scale(0.3));
+        for (int sign = -1; sign <= 1; sign += 2) {
+            Vec3 nozzle = center.add(side.scale(sign));
+            player.level().addParticle(ParticleTypes.SMALL_FLAME, nozzle.x, nozzle.y, nozzle.z, exhaust.x, exhaust.y, exhaust.z);
+            if (player.getRandom().nextInt(3) == 0) {
+                player.level().addParticle(ParticleTypes.SMOKE, nozzle.x, nozzle.y, nozzle.z,
+                        exhaust.x * 0.5, exhaust.y * 0.5, exhaust.z * 0.5);
+            }
+        }
     }
 
     private static void spawnTrails(Player player) {

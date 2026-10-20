@@ -30,10 +30,6 @@
   "gui.simplywings.rarity.epic": "Epic",
   "gui.simplywings.rarity.legendary": "Legendary",
   "gui.simplywings.rarity.mythic": "Mythic",
-  "item.simplywings.falcon_wings": "Peregrine Wings",
-  "wing.simplywings.falcon": "Peregrine Wings",
-  "item.simplywings.albatross_wings": "Albatross Wings",
-  "wing.simplywings.albatross": "Albatross Wings",
   "item.simplywings.seraph_wings": "Seraph Wings",
   "wing.simplywings.seraph": "Seraph Wings",
   "gui.simplywings.stat.endurance": "Endurance",
@@ -46,8 +42,10 @@
   "gui.simplywings.stat_value.handling": "%s °/s turn rate",
   "gui.simplywings.stat.stability": "Stability",
   "gui.simplywings.stat_value.stability": "%s / 10 hover stability",
-  "item.simplywings.sylph_wings": "Sylph Wings",
-  "wing.simplywings.sylph": "Sylph Wings",
   "item.simplywings.demon_wings": "Demon Wings",
-  "wing.simplywings.demon": "Demon Wings"
+  "wing.simplywings.demon": "Demon Wings",
+  "item.simplywings.hermes_wings": "Wings of Hermes",
+  "wing.simplywings.hermes": "Wings of Hermes",
+  "item.simplywings.daedalus_wings": "Wings of Daedalus",
+  "wing.simplywings.daedalus": "Wings of Daedalus"
 }

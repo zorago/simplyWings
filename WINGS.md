@@ -4,6 +4,13 @@ Catalogue des paires d'ailes : identité, apparence, ressenti en vol et stats. L
 
 Dernière mise à jour : 20 octobre 2026.
 
+## Paliers d'ambiance
+
+- **Commune** : la base, des élytres améliorées.
+- **Rare** : des créatures réelles (chauve-souris…).
+- **Épique** : des esprits et des éléments.
+- **Légendaire** : des dieux, des êtres divins et des figures mythologiques. Chaque légendaire maxe une stat visible.
+
 ## Lire les stats
 
 - Le joueur voit **5 stats sur 10** (Endurance, Accélération, Vitesse, Maniabilité, Stabilité). En interne, chaque stat est notée sur 100 : 7,6/10 = 76 points.
@@ -21,9 +28,8 @@ Dernière mise à jour : 20 octobre 2026.
 | Ailes d'ange | Légendaire | **10** | 7,0 | 7,5 | 4,1 | 1,0 | L'endurance, un vol majestueux |
 | Ailes de démon | Légendaire | 5,5 | **10** | 8,5 | 5,0 | 1,5 | La puissance brute, des coups violents |
 | Ailes de séraphin | Légendaire | 7,0 | 6,0 | **10** | 4,5 | 4,0 | La vitesse, six ailes dorées |
-| Ailes de sylphe | Légendaire | 5,0 | 7,5 | 6,0 | **10** | 4,5 | Les virages instantanés d'un esprit de l'air |
-| Ailes de faucon pèlerin | Légendaire | 5,5 | 7,0 | **10** | 3,0 | 1,5 | *Rôle à redéfinir : vitesse, comme le séraphin* |
-| Ailes d'albatros | Légendaire | **10** | 3,5 | 7,0 | 3,5 | 2,0 | *Rôle à redéfinir : endurance, comme l'ange* |
+| Ailes d'Hermès | Légendaire | 5,0 | 7,5 | 6,0 | **10** | 4,5 | L'agilité du messager des dieux |
+| Ailes de Dédale | Légendaire | 6,5 | 5,5 | 5,0 | 6,0 | **10** | Ailes mécaniques à réacteurs, le stationnaire parfait |
 
 ---
 
@@ -150,61 +156,13 @@ Dernière mise à jour : 20 octobre 2026.
 
 ---
 
-## Ailes de faucon pèlerin
+## Ailes d'Hermès
 
-`simplywings:falcon` · **Légendaire** · item `falcon_wings` · **Vitesse maxée** · *rôle à redéfinir (doublon du séraphin)*
+`simplywings:hermes` · **Légendaire** · item `hermes_wings` · **Maniabilité maxée**
 
-**Vibe** : la vitesse pure. Les ailes les plus rapides en croisière, faites pour le piqué en repli faucon. Elles virent mal et décrochent tôt : il faut garder de l'élan.
+**Vibe** : l'agilité divine d'Hermès, messager de l'Olympe, le plus vif et le plus rusé des dieux. Elles changent de direction à l'instant et slalomment entre les arbres, les tours et les falaises.
 
-**Apparence** : une aile pointue par côté, brun-crème rayée de bandes sombres. Les plumes raccourcissent vers une pointe effilée.
-
-**En vol** :
-- **Déplacement** : 1,6 battement par seconde, avec un coup bref et nerveux.
-- **Stationnaire** : 1,4 Hz, très instable.
-
-| Stat | Note | Valeur |
-| --- | --- | --- |
-| Endurance | 5,5/10 | 188 de stamina |
-| Accélération | 7,0/10 | 7,6 m/s par s, soit +4,8 m/s par battement |
-| Vitesse | **10/10** | 64 m/s |
-| Maniabilité | 3,0/10 | 73 °/s |
-| Stabilité | 1,5/10 | 1,5/10 |
-| Plané *(interne)* | 6,0/10 | traînée × 0,8 |
-| Portance *(interne)* | 1,0/10 | décroche sous 12,9 m/s |
-
----
-
-## Ailes d'albatros
-
-`simplywings:albatross` · **Légendaire** · item `albatross_wings` · **Endurance maxée** · *rôle à redéfinir (doublon de l'ange)*
-
-**Vibe** : l'endurance. Des ailes interminables pour traverser le monde sans se poser. Elles accélèrent lentement mais ne s'épuisent jamais et planent très loin.
-
-**Apparence** : une aile très longue et très fine par côté, la plus grande envergure du mod. Blanche, avec des pointes noires.
-
-**En vol** :
-- **Déplacement** : 0,8 battement par seconde, avec des coups amples et économes.
-- **Stationnaire** : 0,9 Hz.
-
-| Stat | Note | Valeur |
-| --- | --- | --- |
-| Endurance | **10/10** | 300 de stamina |
-| Accélération | 3,5/10 | 4,8 m/s par s, soit +6 m/s par battement |
-| Vitesse | 7,0/10 | 48 m/s |
-| Maniabilité | 3,5/10 | 79 °/s |
-| Stabilité | 2,0/10 | 2/10 |
-| Plané *(interne)* | 8,5/10 | traînée × 0,55 |
-| Portance *(interne)* | 4,0/10 | décroche sous 9,6 m/s |
-
----
-
-## Ailes de sylphe
-
-`simplywings:sylph` · **Légendaire** · item `sylph_wings` · **Maniabilité maxée**
-
-**Vibe** : un sylphe, l'esprit élémentaire de l'air des légendes européennes, insaisissable et virevoltant. Il change de direction à l'instant, slalome entre les arbres et les tours, et semble danser dans le vent.
-
-**Apparence** : **3 ailes féeriques par côté**, translucides et irisées, cyan pâle et nacré. Elles battent en vague, l'une après l'autre.
+**Apparence** : **3 ailes dorées par côté**, aux plumes blanches et aux bords d'or. Elles battent en vague, l'une après l'autre.
 
 **En vol** :
 - **Déplacement** : 6 battements par seconde, rapides et légers.
@@ -246,6 +204,30 @@ Dernière mise à jour : 20 octobre 2026.
 
 ---
 
+## Ailes de Dédale
+
+`simplywings:daedalus` · **Légendaire** · item `daedalus_wings` · **Stabilité maxée**
+
+**Vibe** : les ailes de l'inventeur. Dans la mythologie grecque, Dédale a fabriqué des ailes pour s'évader du labyrinthe avec son fils Icare. Ici, c'est une machine : une armature de laiton, des panneaux d'acier rivetés et deux réacteurs dans le dos. Rien ne bat, tout pousse. En stationnaire, le joueur est parfaitement immobile, comme en vol créatif : c'est l'outil du bâtisseur ultime.
+
+**Apparence** : une aile mécanique par côté, en trois segments épais, dont les panneaux d'acier rivetés s'affinent vers la pointe. Les réacteurs crachent des flammes et de la fumée, vers le bas en stationnaire et vers l'arrière en vol.
+
+**En vol** :
+- **Déplacement** : poussée continue des réacteurs tant que sprint est maintenu, avec une accélération régulière. Les ailes ne bougent presque pas et ne font que vibrer légèrement.
+- **Stationnaire** : aucun balancement, et la vitesse de placement la plus haute (20 m/s).
+
+| Stat | Note | Valeur |
+| --- | --- | --- |
+| Endurance | 6,5/10 | 213 de stamina |
+| Accélération | 5,5/10 | 6,4 m/s par s, en continu |
+| Vitesse | 5,0/10 | 38 m/s |
+| Maniabilité | 6,0/10 | 106 °/s |
+| Stabilité | **10/10** | 10/10 |
+| Plané *(interne)* | 4,5/10 | traînée × 0,95 |
+| Portance *(interne)* | 7,0/10 | décroche sous 6,3 m/s |
+
+---
+
 ## Paramètres d'identité
 
 Ces paramètres ne dépendent pas de la collection : ils définissent le caractère de chaque paire.
@@ -256,8 +238,7 @@ Ces paramètres ne dépendent pas de la collection : ils définissent le caract�
 | Chauve-souris | 2,6 | 1,8 Hz | 11 m/s | × 1 | 1 |
 | Ancienne | 20, continu | 25 Hz | 14 m/s | × 0,1 | 2 |
 | Ange | 0,5 | 0,6 Hz | 19 m/s | × 1 | 1 |
-| Faucon pèlerin | 1,6 | 1,4 Hz | 16 m/s | × 1 | 1 |
-| Albatros | 0,8 | 0,9 Hz | 14 m/s | × 1 | 1 |
 | Démon | 0,7 | 1,0 Hz | 18 m/s | × 1 | 1 |
 | Séraphin | 0,9 | 0,9 Hz | 20 m/s | × 1 | 3 |
-| Sylphe | 6 | 6 Hz | 18 m/s | × 0,4 | 3 |
+| Hermès | 6 | 6 Hz | 18 m/s | × 0,4 | 3 |
+| Dédale | 20, continu (réacteurs) | 30 Hz (vibration) | 20 m/s | × 0 | 1 |

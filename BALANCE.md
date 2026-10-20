@@ -24,17 +24,17 @@ Le plafond de vitesse (64 m/s) correspond à l'ange avec les 4 premières paires
 
 - Score effectif = score de la paire + somme des bonus `global` de toute la collection, plafonné à 100.
 - Pour chaque stat, la somme des bonus de toutes les paires vaut **100 − le score le plus bas** parmi les paires. Avec la collection complète, toutes les paires sont donc à 10/10 partout.
-- Répartition actuelle : les 4 premières paires (commune, chauve-souris, ancienne, ange) donnent 2,5 % chacune (10 % au total), les 5 autres légendaires 18 % chacune (90 %). Si on ajoute ou retire des paires, il faudra redistribuer.
+- Répartition actuelle : les 4 premières paires (commune, chauve-souris, ancienne, ange) donnent 2,5 % chacune (10 % au total), les 4 autres légendaires (démon, séraphin, Hermès, Dédale) 22,5 % chacune (90 %). Si on ajoute ou retire des paires, il faudra redistribuer.
 
-| Stat | Bonus total de la collection | Par paire de départ (2,5 %) | Par autre légendaire (18 %) |
+| Stat | Bonus total de la collection | Par paire de départ (2,5 %) | Par autre légendaire (22,5 %) |
 | --- | --- | --- | --- |
-| Endurance | 80 | 2 | 14,4 |
-| Accélération | 65 | 1,6 | 11,7 |
-| Vitesse | 88 | 2,2 | 15,8 |
-| Maniabilité | 73 | 1,8 | 13,1 |
-| Stabilité | 90 | 2,25 | 16,2 |
-| Plané (interne) | 60 | 1,5 | 10,8 |
-| Portance (interne) | 90 | 2,25 | 16,2 |
+| Endurance | 80 | 2 | 18 |
+| Accélération | 65 | 1,6 | 14,6 |
+| Vitesse | 88 | 2,2 | 19,8 |
+| Maniabilité | 73 | 1,8 | 16,4 |
+| Stabilité | 90 | 2,25 | 20,25 |
+| Plané (interne) | 60 | 1,5 | 13,5 |
+| Portance (interne) | 75 | 1,9 | 16,9 |
 
 ## Scores des paires (stats équipées, sur 100)
 
@@ -47,10 +47,9 @@ Une légendaire a par définition au moins une stat visible maxée à 100 (en gr
 | Ancienne (libellule) | Épique | 60 | 35 | 23 | 91 | 40 | 40 | 86 | Faite pour construire, médiocre en vol |
 | Ange | Légendaire | **100** | 70 | 75 | 41 | 10 | 85 | 30 | L'endurance : vol majestueux, plane loin |
 | Démon | Légendaire | 55 | **100** | 85 | 50 | 15 | 40 | 25 | La puissance : coups violents et tardifs |
-| Faucon pèlerin | Légendaire | 55 | 70 | **100** | 30 | 15 | 60 | 10 | Rôle à redéfinir (vitesse, doublon du séraphin) |
-| Albatros | Légendaire | **100** | 35 | 70 | 35 | 20 | 85 | 40 | Rôle à redéfinir (endurance, doublon de l'ange) |
-| Sylphe | Légendaire | 50 | 75 | 60 | **100** | 45 | 55 | 60 | La maniabilité ; esprit de l'air, 3 ailes féeriques par côté |
+| Hermès | Légendaire | 50 | 75 | 60 | **100** | 45 | 55 | 60 | La maniabilité ; messager des dieux, 3 ailes dorées par côté |
 | Séraphin | Légendaire | 70 | 60 | **100** | 45 | 40 | 60 | 40 | La vitesse ; 6 ailes d'ange dorées |
+| Dédale | Légendaire | 65 | 55 | 50 | 60 | **100** | 45 | 70 | La stabilité ; ailes mécaniques à réacteurs, poussée continue |
 
 ## Paramètres d'identité (hors collection)
 
@@ -60,9 +59,8 @@ Une légendaire a par définition au moins une stat visible maxée à 100 (en gr
 | Chauve-souris | 2,6 | 1,8 Hz, 11 m/s, × 1 | 1 |
 | Libellule | 20 (continu) | 25 Hz, 14 m/s, × 0,1 | 2 |
 | Ange | 0,5 | 0,6 Hz, 19 m/s, × 1 | 1 |
-| Faucon | 1,6 | 1,4 Hz, 16 m/s, × 1 | 1 |
-| Albatros | 0,8 | 0,9 Hz, 14 m/s, × 1 | 1 |
-| Sylphe | 6 | 6 Hz, 18 m/s, × 0,4 | 3 |
+| Hermès | 6 | 6 Hz, 18 m/s, × 0,4 | 3 |
+| Dédale | 20 (continu, réacteurs) | 30 Hz, 20 m/s, × 0 | 1 |
 | Démon | 0,7 | 1,0 Hz, 18 m/s, × 1 | 1 |
 | Séraphin | 0,9 | 0,9 Hz, 20 m/s, × 1 | 3 |
 
