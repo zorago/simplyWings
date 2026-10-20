@@ -1,0 +1,17 @@
+{
+  "item.simplywings.common_wings": "Common Wings",
+  "item.simplywings.wing.tooltip": "Right-click to add these wings to your collection",
+  "wing.simplywings.common": "Common Wings",
+  "message.simplywings.unlocked": "Unlocked and equipped: %s",
+  "message.simplywings.already_unlocked": "Already in your collection, equipped",
+  "key.categories.simplywings": "Simply Wings",
+  "key.simplywings.travel": "Travel flight",
+  "key.simplywings.brake": "Brake (unbound = sneak)",
+  "commands.simplywings.unknown": "Unknown wings: %s",
+  "commands.simplywings.not_owned": "Wings not in collection: %s",
+  "commands.simplywings.unlock": "Unlocked and equipped %s",
+  "commands.simplywings.equip": "Equipped %s",
+  "commands.simplywings.unequip": "Wings unequipped",
+  "commands.simplywings.stamina": "Stamina set to %s",
+  "commands.simplywings.reset": "Wing collection cleared"
+}

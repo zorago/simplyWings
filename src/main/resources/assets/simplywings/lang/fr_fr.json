@@ -1,0 +1,17 @@
+{
+  "item.simplywings.common_wings": "Ailes communes",
+  "item.simplywings.wing.tooltip": "Clic droit pour ajouter ces ailes à ta collection",
+  "wing.simplywings.common": "Ailes communes",
+  "message.simplywings.unlocked": "Débloquées et équipées : %s",
+  "message.simplywings.already_unlocked": "Déjà dans ta collection, équipées",
+  "key.categories.simplywings": "Simply Wings",
+  "key.simplywings.travel": "Vol de déplacement",
+  "key.simplywings.brake": "Frein (non assigné = s'accroupir)",
+  "commands.simplywings.unknown": "Ailes inconnues : %s",
+  "commands.simplywings.not_owned": "Ailes absentes de la collection : %s",
+  "commands.simplywings.unlock": "%s débloquées et équipées",
+  "commands.simplywings.equip": "%s équipées",
+  "commands.simplywings.unequip": "Ailes retirées",
+  "commands.simplywings.stamina": "Stamina réglée à %s",
+  "commands.simplywings.reset": "Collection d'ailes vidée"
+}
