@@ -1,6 +1,7 @@
 package com.zorago.simplywings.client;
 
 import com.zorago.simplywings.SimplyWings;
+import com.zorago.simplywings.client.gui.InventoryButton;
 import com.zorago.simplywings.config.ClientConfig;
 import com.zorago.simplywings.data.WingDefinition;
 import com.zorago.simplywings.data.WingRegistries;
@@ -55,6 +56,8 @@ public class SimplyWingsClient {
         game.addListener(SimplyWingsClient::onPlayerTickPre);
         game.addListener(SimplyWingsClient::onPlayerTickPost);
         game.addListener(SimplyWingsClient::onLogout);
+        game.addListener(InventoryButton::onInit);
+        game.addListener(InventoryButton::onRender);
     }
 
     private static final List<WingModel.Shape> SHAPES = List.of(WingModel.BASIC, WingModel.BAT, WingModel.ANCIENT,
