@@ -3,6 +3,7 @@ package com.zorago.simplywings.render;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.zorago.simplywings.SimplyWings;
 import com.zorago.simplywings.anim.WingPose;
+import com.zorago.simplywings.anim.WingStyle;
 import com.zorago.simplywings.client.WingVisuals;
 import com.zorago.simplywings.data.WingDefinition;
 import com.zorago.simplywings.data.WingRegistries;
@@ -21,11 +22,11 @@ import net.minecraft.world.entity.EquipmentSlot;
 public class WingsLayer extends RenderLayer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> {
     private static final ResourceLocation BASIC = SimplyWings.id("basic");
 
-    private final Map<ResourceLocation, WingModel> models;
+    private final Map<String, WingModel> models;
     private final WingPose pose = new WingPose();
 
     public WingsLayer(RenderLayerParent<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> parent,
-                      Map<ResourceLocation, WingModel> models) {
+                      Map<String, WingModel> models) {
         super(parent);
         this.models = models;
     }
@@ -40,15 +41,26 @@ public class WingsLayer extends RenderLayer<AbstractClientPlayer, PlayerModel<Ab
         }
         Optional<WingDefinition> definition = visual.equipped.flatMap(id -> WingRegistries.get(player.registryAccess(), id));
         int color = definition.map(WingDefinition::color).orElse(0xFFA0A0A0);
-        WingModel model = models.getOrDefault(definition.map(WingDefinition::model).orElse(BASIC), models.get(BASIC));
+        WingStyle style = WingStyle.of(definition.map(WingDefinition::model).orElse(BASIC));
         poseStack.pushPose();
         getParentModel().body.translateAndRotate(poseStack);
         if (!player.getItemBySlot(EquipmentSlot.CHEST).isEmpty()) {
             poseStack.translate(0, 0, 0.0625);
         }
-        model.setup(visual.animator.pose(partialTick, pose));
-        model.render(poseStack, buffer.getBuffer(RenderType.entityCutoutNoCull(model.shape().texture())), light,
-                OverlayTexture.NO_OVERLAY, color);
+        for (WingStyle.Slot slot : style.slots()) {
+            WingModel model = models.get(slot.shape().name());
+            if (model == null) {
+                continue;
+            }
+            poseStack.pushPose();
+            poseStack.translate(slot.x() / 16f, slot.y() / 16f, slot.z() / 16f);
+            model.setup(visual.animator.pose(partialTick, style, slot, pose));
+            RenderType type = style.translucent()
+                    ? RenderType.entityTranslucent(model.shape().texture())
+                    : RenderType.entityCutoutNoCull(model.shape().texture());
+            model.render(poseStack, buffer.getBuffer(type), light, OverlayTexture.NO_OVERLAY, color);
+            poseStack.popPose();
+        }
         poseStack.popPose();
     }
 }

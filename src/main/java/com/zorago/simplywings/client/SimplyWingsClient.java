@@ -6,10 +6,10 @@ import com.zorago.simplywings.config.ClientConfig;
 import com.zorago.simplywings.data.WingDefinition;
 import com.zorago.simplywings.data.WingRegistries;
 import com.zorago.simplywings.player.FlightMode;
+import com.zorago.simplywings.anim.WingStyle;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import net.minecraft.resources.ResourceLocation;
+import java.util.Optional;
 import com.zorago.simplywings.render.BodyPose;
 import com.zorago.simplywings.render.WingModel;
 import com.zorago.simplywings.render.WingsLayer;
@@ -60,19 +60,16 @@ public class SimplyWingsClient {
         game.addListener(InventoryButton::onRender);
     }
 
-    private static final List<WingModel.Shape> SHAPES = List.of(WingModel.BASIC, WingModel.BAT, WingModel.ANCIENT,
-            WingModel.ANGEL);
-
     private static void onLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
-        for (WingModel.Shape shape : SHAPES) {
+        for (WingModel.Shape shape : WingModel.SHAPES) {
             event.registerLayerDefinition(shape.layer(), () -> WingModel.createLayer(shape));
         }
     }
 
     private static void onAddLayers(EntityRenderersEvent.AddLayers event) {
-        Map<ResourceLocation, WingModel> models = new HashMap<>();
-        for (WingModel.Shape shape : SHAPES) {
-            models.put(SimplyWings.id(shape.name()), new WingModel(event.getEntityModels().bakeLayer(shape.layer()), shape));
+        Map<String, WingModel> models = new HashMap<>();
+        for (WingModel.Shape shape : WingModel.SHAPES) {
+            models.put(shape.name(), new WingModel(event.getEntityModels().bakeLayer(shape.layer()), shape));
         }
         for (PlayerSkin.Model skin : event.getSkins()) {
             EntityRenderer<? extends Player> renderer = event.getSkin(skin);
@@ -104,12 +101,13 @@ public class SimplyWingsClient {
         if (visual == null || visual.equipped.isEmpty()) {
             return;
         }
-        float hoverRate = visual.equipped.flatMap(id -> WingRegistries.get(player.registryAccess(), id))
-                .map(WingDefinition::hoverRate).orElse(2.5f);
+        Optional<WingDefinition> definition = visual.equipped.flatMap(id -> WingRegistries.get(player.registryAccess(), id));
+        float hoverRate = definition.map(WingDefinition::hoverRate).orElse(2.5f);
+        WingStyle style = WingStyle.of(definition.map(WingDefinition::model).orElse(SimplyWings.id("basic")));
         if (player == Minecraft.getInstance().player) {
             visual.animator.setCharge(ClientFlight.takeoffProgress());
         }
-        visual.animator.tick(player, visual.mode, visual.flags, hoverRate);
+        visual.animator.tick(player, visual.mode, visual.flags, style, hoverRate);
         if (visual.mode.flying()) {
             player.walkAnimation.setSpeed(0f);
         }

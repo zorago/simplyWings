@@ -17,7 +17,16 @@ Mod d'ailes standalone pour **NeoForge 1.21.1** (nom de travail : SimplyWings). 
 Code : package `com.zorago.simplywings`, NeoForge 21.1.257 (comme le pack), ModDevGradle.
 - `flight/ServerFlight` : autorité serveur (mode, stamina, gravité à 0, sauts de secours, crash, sync).
 - `client/ClientFlight` : physique client des deux modes, en m/s, convertie en blocs/tick via `setDeltaMovement` dans `PlayerTickEvent.Pre`.
-- `client/FlightCamera` : caméra et découplage souris. `anim/WingAnimator` + `render/WingModel` : ailes procédurales.
+- `client/FlightCamera` : caméra et découplage souris.
+- Ailes procédurales :
+  - `anim/WingStyle` : par modèle, 1 à 3 ailes par côté (`Slot` : forme, décalage, phase, amplitude) et profil de battement (montée, coup, vibration, ailes à plat ou non, translucide) ;
+  - `anim/WingAnimator` : pose de base lissée par tick, oscillations calculées au rendu (partial tick) ;
+  - `render/WingModel` : formes de 1 à 3 segments ;
+  - `render/WingsLayer` : dessine chaque emplacement.
+- Physique des battements :
+  - accélération = gain par seconde, et gain d'un battement = accélération ÷ `flap_rate` ;
+  - à partir de 8 battements par seconde (`WingDefinition.CONTINUOUS_FLAP_RATE`), la poussée est continue, signalée par `FLAG_THRUST`, sans paquet par battement ;
+  - sinon, le gain s'applique au moment du coup (`WingStyle.strikeAt`), qui envoie le paquet `Flap`.
 - Paquets dans `network/Payloads`. Un battement en vol de déplacement est relayé aux joueurs proches (`FlapEvent`) : c'est un événement (environ 2/s pendant qu'on bat des ailes), pas un paquet par tick.
 
 Contrôles du prototype : saut en l'air = saut ailé (coûte `airJumpCost` de stamina, sans limite de nombre) ; sous ce coût, sauts de secours gratuits (2, rechargés au sol) ; double tap **très rapide** (`doubleTapTicks`, 4 ticks) = mode stabilisé, le saut ailé du premier tap est alors remboursé ; Alt gauche = bascule instantanée stabilisé ↔ déplacement en l'air, et au sol (hors stationnaire) Alt **maintenu** 1 s = envol chargé directement en mode déplacement, possible en marchant ou en courant, puis Alt ignoré 1,5 s pour éviter un passage accidentel en stationnaire ; sprint maintenu = battements ; sneak = frein (touche « Frein » non assignée par défaut) ; ZQSD = déplacent le point visé, et le cap le suit avec un ressort critique (pas de rotation directe).

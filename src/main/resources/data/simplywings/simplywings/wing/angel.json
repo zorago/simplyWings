@@ -3,21 +3,23 @@
   "model": "simplywings:angel",
   "color": -724504,
   "min_speed": 12.0,
-  "flap_rate": 1.2,
-  "hover_rate": 1.4,
+  "flap_rate": 0.5,
+  "hover_rate": 0.6,
   "hover_speed": 19.0,
+  "hover_swing": 1.0,
+  "drag": 1.0,
   "equipped": {
     "stamina": 240.0,
-    "acceleration": 14.0,
+    "acceleration": 9.0,
     "max_speed": 58.0,
     "handling": 85.0,
-    "stabilization": 2.0
+    "stabilization": 1.0
   },
   "global": {
     "stamina": 6.0,
-    "acceleration": 0.35,
+    "acceleration": 0.225,
     "max_speed": 1.45,
     "handling": 2.125,
-    "stabilization": 0.2
+    "stabilization": 0.225
   }
 }

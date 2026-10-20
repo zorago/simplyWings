@@ -4,6 +4,8 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.zorago.simplywings.SimplyWings;
 import com.zorago.simplywings.anim.WingPose;
+import java.util.ArrayList;
+import java.util.List;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -14,11 +16,14 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.resources.ResourceLocation;
 
 public final class WingModel {
+    private static final String[] SEGMENT_NAMES = {"shoulder", "elbow", "tip"};
+    private static final float[] SEGMENT_DEPTHS = {-0.25f, 0.05f, 0.3f};
+    private static final float HALF_PI = (float) (Math.PI / 2);
+
     public record Segment(float length, float bone, int strips, float plateFrom, float plateTo, int u) {
     }
 
-    public record Shape(String name, Segment shoulder, Segment elbow, Segment tip, int textureWidth,
-                        int textureHeight) {
+    public record Shape(String name, List<Segment> segments, int textureWidth, int textureHeight) {
         public ModelLayerLocation layer() {
             return new ModelLayerLocation(SimplyWings.id(name + "_wings"), "main");
         }
@@ -28,57 +33,58 @@ public final class WingModel {
         }
     }
 
-    public static final Shape BASIC = new Shape("basic",
+    public static final Shape BASIC = new Shape("basic", List.of(
             new Segment(9f, 1f, 1, 11f, 11f, 0),
             new Segment(8f, 1f, 1, 9f, 9f, 20),
-            new Segment(6f, 0.8f, 1, 6f, 6f, 40),
+            new Segment(6f, 0.8f, 1, 6f, 6f, 40)),
             64, 32);
 
-    public static final Shape ANGEL = new Shape("angel",
+    public static final Shape ANGEL = new Shape("angel", List.of(
             new Segment(13f, 1.4f, 3, 13f, 17f, 0),
             new Segment(12f, 1.2f, 3, 17f, 21f, 30),
-            new Segment(11f, 1f, 4, 21f, 26f, 58),
+            new Segment(11f, 1f, 4, 21f, 26f, 58)),
             128, 32);
 
-    public static final Shape BAT = new Shape("bat",
+    public static final Shape BAT = new Shape("bat", List.of(
             new Segment(9f, 0.8f, 2, 8f, 9f, 0),
             new Segment(10f, 0.7f, 3, 10f, 6f, 24),
-            new Segment(10f, 0.6f, 4, 8f, 3f, 48),
+            new Segment(10f, 0.6f, 4, 8f, 3f, 48)),
             128, 32);
 
-    public static final Shape ANCIENT = new Shape("ancient",
-            new Segment(12f, 1.6f, 3, 12f, 15f, 0),
-            new Segment(12f, 1.4f, 3, 15f, 18f, 30),
-            new Segment(10f, 1.2f, 4, 18f, 22f, 58),
-            128, 32);
+    public static final Shape DRAGONFLY = new Shape("dragonfly", List.of(
+            new Segment(17f, 0.5f, 1, 5f, 5f, 0)),
+            64, 32);
 
-    private static final float HALF_PI = (float) (Math.PI / 2);
+    public static final List<Shape> SHAPES = List.of(BASIC, ANGEL, BAT, DRAGONFLY);
 
     private final ModelPart root;
     private final Side left;
     private final Side right;
     private final Shape shape;
 
-    private record Side(ModelPart root, ModelPart shoulder, ModelPart elbow, ModelPart tip, float sign) {
+    private record Side(ModelPart base, List<ModelPart> segments, float sign) {
     }
 
     public WingModel(ModelPart root, Shape shape) {
         this.root = root;
         this.shape = shape;
-        this.left = side(root, "left", 1f);
-        this.right = side(root, "right", -1f);
+        this.left = side(root, shape, "left", 1f);
+        this.right = side(root, shape, "right", -1f);
     }
 
     public Shape shape() {
         return shape;
     }
 
-    private static Side side(ModelPart root, String name, float sign) {
+    private static Side side(ModelPart root, Shape shape, String name, float sign) {
         ModelPart base = root.getChild(name + "_root");
-        ModelPart shoulder = base.getChild(name + "_shoulder");
-        ModelPart elbow = shoulder.getChild(name + "_elbow");
-        ModelPart tip = elbow.getChild(name + "_tip");
-        return new Side(base, shoulder, elbow, tip, sign);
+        List<ModelPart> parts = new ArrayList<>();
+        ModelPart parent = base;
+        for (int i = 0; i < shape.segments().size(); i++) {
+            parent = parent.getChild(name + "_" + SEGMENT_NAMES[i]);
+            parts.add(parent);
+        }
+        return new Side(base, parts, sign);
     }
 
     public static LayerDefinition createLayer(Shape shape) {
@@ -106,14 +112,15 @@ public final class WingModel {
     }
 
     private static void addSide(PartDefinition root, Shape shape, String name, float s) {
-        PartDefinition base = root.addOrReplaceChild(name + "_root", CubeListBuilder.create(),
+        PartDefinition parent = root.addOrReplaceChild(name + "_root", CubeListBuilder.create(),
                 PartPose.offset(3f * s, 1.5f, 2.4f));
-        PartDefinition shoulder = base.addOrReplaceChild(name + "_shoulder",
-                segment(shape.shoulder(), s, -0.25f), PartPose.ZERO);
-        PartDefinition elbow = shoulder.addOrReplaceChild(name + "_elbow",
-                segment(shape.elbow(), s, 0.05f), PartPose.offset(shape.shoulder().length() * s, 0f, 0f));
-        elbow.addOrReplaceChild(name + "_tip",
-                segment(shape.tip(), s, 0.3f), PartPose.offset(shape.elbow().length() * s, 0f, 0f));
+        float offset = 0f;
+        for (int i = 0; i < shape.segments().size(); i++) {
+            Segment seg = shape.segments().get(i);
+            parent = parent.addOrReplaceChild(name + "_" + SEGMENT_NAMES[i], segment(seg, s, SEGMENT_DEPTHS[i]),
+                    PartPose.offset(offset * s, 0f, 0f));
+            offset = seg.length();
+        }
     }
 
     public void setup(WingPose pose) {
@@ -127,16 +134,24 @@ public final class WingModel {
         float dorsal = p.axis;
         float vertical = 1f - dorsal;
         float forward = p.sweep - p.curl;
-        side.root.yRot = s * HALF_PI * dorsal * folded;
-        side.shoulder.yRot = s * (-1.25f * folded + vertical * forward - dorsal * p.stroke);
-        side.shoulder.zRot = s * (-0.1f * folded - vertical * p.stroke - dorsal * forward);
-        side.shoulder.xRot = p.twist;
-        side.elbow.yRot = s * (2.95f * folded - dorsal * p.elbow);
-        side.elbow.zRot = s * -(vertical * p.elbow);
-        side.elbow.xRot = 0f;
-        side.tip.yRot = s * (-2.85f * folded - dorsal * p.tip);
-        side.tip.zRot = s * -(vertical * p.tip);
-        side.tip.xRot = 0f;
+        side.base.yRot = s * HALF_PI * dorsal * folded;
+        List<ModelPart> parts = side.segments;
+        ModelPart shoulder = parts.get(0);
+        shoulder.yRot = s * (-1.25f * folded + vertical * forward - dorsal * p.stroke);
+        shoulder.zRot = s * (-0.1f * folded - vertical * p.stroke - dorsal * forward);
+        shoulder.xRot = p.twist;
+        if (parts.size() > 1) {
+            ModelPart elbow = parts.get(1);
+            elbow.yRot = s * (2.95f * folded - dorsal * p.elbow);
+            elbow.zRot = s * -(vertical * p.elbow);
+            elbow.xRot = 0f;
+        }
+        if (parts.size() > 2) {
+            ModelPart tip = parts.get(2);
+            tip.yRot = s * (-2.85f * folded - dorsal * p.tip);
+            tip.zRot = s * -(vertical * p.tip);
+            tip.xRot = 0f;
+        }
     }
 
     public void render(PoseStack poseStack, VertexConsumer consumer, int light, int overlay, int color) {

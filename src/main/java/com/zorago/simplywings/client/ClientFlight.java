@@ -1,9 +1,11 @@
 package com.zorago.simplywings.client;
 
 import com.zorago.simplywings.client.gui.WingsScreen;
+import com.zorago.simplywings.anim.WingStyle;
 import com.zorago.simplywings.config.ClientConfig;
 import com.zorago.simplywings.config.ServerConfig;
 import com.zorago.simplywings.data.EffectiveStats;
+import com.zorago.simplywings.data.WingDefinition;
 import com.zorago.simplywings.network.Payloads;
 import com.zorago.simplywings.player.FlightMode;
 import java.util.Optional;
@@ -45,6 +47,9 @@ public final class ClientFlight {
     private static boolean stalled;
     private static boolean braking;
     private static boolean tucked;
+    private static boolean thrusting;
+    private static int pendingStrike = -1;
+    private static double swayPhase;
     private static float bank;
     private static float prevBank;
 
@@ -295,7 +300,7 @@ public final class ClientFlight {
         spend(player, flapCost());
         flapCooldown = flapInterval(stats);
         ticksSinceFlap = 0;
-        WingVisuals.local().animator.flap(stats.flapRate());
+        WingVisuals.local().animator.strike(stats.flapRate(), style(stats).strikeAt());
         player.playSound(SoundEvents.PHANTOM_FLAP, 1f, 0.9f);
         travelKeyLock = TAKEOFF_KEY_LOCK_TICKS;
         setMode(player, FlightMode.TRAVEL, true);
@@ -318,7 +323,7 @@ public final class ClientFlight {
         spend(player, flapCost());
         flapCooldown = flapInterval(stats);
         ticksSinceFlap = 0;
-        WingVisuals.local().animator.flap(stats.flapRate());
+        WingVisuals.local().animator.strike(stats.flapRate(), style(stats).strikeAt());
         player.playSound(SoundEvents.PHANTOM_FLAP, 0.8f, 1.1f);
         setMode(player, FlightMode.TRAVEL, true);
     }
@@ -331,7 +336,11 @@ public final class ClientFlight {
     }
 
     private static int flapInterval(EffectiveStats stats) {
-        return Math.max(2, Math.round(20f / Math.max(0.1f, stats.flapRate())));
+        return Math.max(1, Math.round(20f / Math.max(0.1f, stats.flapRate())));
+    }
+
+    private static WingStyle style(EffectiveStats stats) {
+        return WingStyle.of(stats.definition().model());
     }
 
     private static void initStabilized(LocalPlayer player, boolean stopped) {
@@ -354,6 +363,8 @@ public final class ClientFlight {
         stallVy = 0;
         stalled = false;
         braking = false;
+        thrusting = false;
+        pendingStrike = -1;
         yawRate = 0;
         pitchRate = 0;
         bank = 0;
@@ -396,16 +407,29 @@ public final class ClientFlight {
         stabVel = new Vec3(horizontal.x, vy, horizontal.z);
 
         double amp = (10 - s) / 10;
-        phase += 2 * Math.PI * stats.hoverRate() * DT;
+        double hoverRate = stats.hoverRate();
+        double hoverSwing = stats.definition().hoverSwing();
+        phase += 2 * Math.PI * hoverRate * DT;
+        swayPhase += Math.PI * hoverRate * DT;
+        if (swayPhase >= 2 * Math.PI) {
+            swayPhase -= 2 * Math.PI;
+        }
         if (phase >= 2 * Math.PI) {
             phase -= 2 * Math.PI;
             double angle = RANDOM.nextDouble() * 2 * Math.PI;
-            double kick = amp * ServerConfig.DRIFT_AMPLITUDE.get();
+            double kick = amp * ServerConfig.DRIFT_AMPLITUDE.get() * hoverSwing * Math.min(1, 2 / hoverRate);
             drift = drift.add(Math.cos(angle) * kick, 0, Math.sin(angle) * kick);
         }
         drift = drift.scale(0.9);
-        double oscillation = amp * ServerConfig.PERTURBATION_AMPLITUDE.get() * Math.cos(phase);
-        Vec3 out = stabVel.add(drift).add(0, oscillation, 0);
+        Vec3 sway = Vec3.ZERO;
+        if (hoverRate < WingDefinition.CONTINUOUS_FLAP_RATE) {
+            double swing = amp * ServerConfig.PERTURBATION_SWING.get() * hoverSwing;
+            double omega = 2 * Math.PI * hoverRate;
+            double heave = swing * omega * Math.cos(phase);
+            double surge = 0.6 * swing * omega * 0.5 * Math.cos(swayPhase);
+            sway = fwd.scale(surge).add(0, heave, 0);
+        }
+        Vec3 out = stabVel.add(drift).add(sway);
         player.setDeltaMovement(out.scale(DT));
         lastVelocity = out;
 
@@ -448,7 +472,8 @@ public final class ClientFlight {
         double diveSpeed = ServerConfig.DIVE_DRAG_SPEED.get();
         double glideDrag = g / (glideSpeed * glideSpeed);
         double diveDrag = g / (diveSpeed * diveSpeed);
-        double drag = (glideDrag + (diveDrag - glideDrag) * Math.max(0, sin)) * ServerConfig.AIR_DRAG.get();
+        double drag = (glideDrag + (diveDrag - glideDrag) * Math.max(0, sin)) * ServerConfig.AIR_DRAG.get()
+                * stats.definition().drag();
 
         boolean sprint = o.keySprint.isDown();
         braking = ModKeys.brakeDown() && speed > 0;
@@ -463,17 +488,42 @@ public final class ClientFlight {
         if (flapCooldown > 0) {
             flapCooldown--;
         }
+        WingDefinition definition = stats.definition();
         boolean flapUseful = speed < vMax;
-        if (sprint && flapUseful && !braking && flapCooldown <= 0 && (creative || ClientWings.stamina() >= flapCost())) {
-            double ratio = speed / vCap;
-            speed += accelStat * (1 - ratio * ratio * ratio);
-            flapCooldown = flapInterval(stats);
-            ticksSinceFlap = 0;
-            spend(player, flapCost());
-            WingVisuals.local().animator.flap(stats.flapRate());
-            player.playSound(SoundEvents.PHANTOM_FLAP, 0.6f, 1.3f);
-            PacketDistributor.sendToServer(new Payloads.Flap());
-        } else if (!creative && ticksSinceFlap > 10 && !braking) {
+        boolean wantsBeat = sprint && flapUseful && !braking;
+        float beatCost = definition.beatCost(flapCost());
+        thrusting = false;
+        if (definition.continuous()) {
+            if (wantsBeat && (creative || ClientWings.stamina() > 0)) {
+                thrusting = true;
+                double ratio = speed / vCap;
+                speed += accelStat * DT * (1 - ratio * ratio * ratio);
+                spend(player, definition.continuousCostPerSecond(flapCost()) * (float) DT);
+                ticksSinceFlap = 0;
+            }
+        } else {
+            if (pendingStrike > 0) {
+                pendingStrike--;
+            }
+            if (pendingStrike == 0) {
+                pendingStrike = -1;
+                if (!braking && speed < vMax && (creative || ClientWings.stamina() >= beatCost)) {
+                    double ratio = speed / vCap;
+                    speed += stats.beatGain() * (1 - ratio * ratio * ratio);
+                    spend(player, beatCost);
+                    ticksSinceFlap = 0;
+                    player.playSound(SoundEvents.PHANTOM_FLAP, 0.7f, Math.min(1.5f, 0.6f + definition.flapRate() * 0.3f));
+                    PacketDistributor.sendToServer(new Payloads.Flap());
+                }
+            }
+            if (wantsBeat && flapCooldown <= 0 && pendingStrike < 0 && (creative || ClientWings.stamina() >= beatCost)) {
+                int duration = flapInterval(stats);
+                flapCooldown = duration;
+                pendingStrike = Math.max(1, Math.round(duration * style(stats).strikeAt()));
+                WingVisuals.local().animator.flap(definition.flapRate());
+            }
+        }
+        if (!thrusting && !creative && ticksSinceFlap > 10 && !braking) {
             ClientWings.setStamina(Math.min(stats.stamina(),
                     ClientWings.stamina() + ServerConfig.GLIDE_REGEN.get().floatValue() / 20f));
         }
@@ -508,7 +558,7 @@ public final class ClientFlight {
         lastVelocity = velocity;
 
         int nextFlags = (braking ? FlightMode.FLAG_BRAKE : 0) | (stalled ? FlightMode.FLAG_STALL : 0)
-                | (tucked ? FlightMode.FLAG_TUCK : 0);
+                | (tucked ? FlightMode.FLAG_TUCK : 0) | (thrusting ? FlightMode.FLAG_THRUST : 0);
         if (nextFlags != flags) {
             flags = nextFlags;
             PacketDistributor.sendToServer(new Payloads.RequestMode(FlightMode.TRAVEL.ordinal(), flags));

@@ -148,7 +148,7 @@ public final class ServerFlight {
             return;
         }
         long now = player.level().getGameTime();
-        float cost = ServerConfig.FLAP_COST.get().floatValue();
+        float cost = stats.get().definition().beatCost(ServerConfig.FLAP_COST.get().floatValue());
         double minInterval = 20.0 / stats.get().flapRate() * 0.6;
         if (now - data.lastFlapTick() < minInterval || (!infinite(player) && data.stamina() < cost)) {
             sendStamina(player, data);
@@ -273,7 +273,12 @@ public final class ServerFlight {
             switch (data.mode()) {
                 case STABILIZED -> stamina -= ServerConfig.STABILIZED_DRAIN.get().floatValue() / 20f;
                 case TRAVEL -> {
-                    if (now - data.lastFlapTick() > 10 && (data.flags() & FlightMode.FLAG_BRAKE) == 0) {
+                    boolean thrust = (data.flags() & FlightMode.FLAG_THRUST) != 0 && stats.get().definition().continuous();
+                    if (thrust) {
+                        stamina -= stats.get().definition().continuousCostPerSecond(
+                                ServerConfig.FLAP_COST.get().floatValue()) / 20f;
+                        data.setLastFlapTick(now);
+                    } else if (now - data.lastFlapTick() > 10 && (data.flags() & FlightMode.FLAG_BRAKE) == 0) {
                         stamina += ServerConfig.GLIDE_REGEN.get().floatValue() / 20f;
                     }
                 }

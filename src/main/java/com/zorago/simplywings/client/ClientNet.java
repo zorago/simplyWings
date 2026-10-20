@@ -1,10 +1,14 @@
 package com.zorago.simplywings.client;
 
+import com.zorago.simplywings.SimplyWings;
+import com.zorago.simplywings.anim.WingStyle;
 import com.zorago.simplywings.data.WingDefinition;
 import com.zorago.simplywings.data.WingRegistries;
 import com.zorago.simplywings.network.Payloads;
 import com.zorago.simplywings.player.FlightMode;
+import java.util.Optional;
 import net.minecraft.client.Minecraft;
+import net.minecraft.world.entity.player.Player;
 
 public final class ClientNet {
     public static void onSync(Payloads.SyncWings payload) {
@@ -30,12 +34,19 @@ public final class ClientNet {
         if (mc.level == null) {
             return;
         }
-        WingVisuals.Visual visual = mc.level.getEntity(payload.entityId()) instanceof net.minecraft.world.entity.player.Player p
-                ? WingVisuals.of(p) : null;
-        float rate = visual == null ? 2f : visual.equipped
-                .flatMap(id -> WingRegistries.get(mc.level.registryAccess(), id))
-                .map(WingDefinition::flapRate).orElse(2f);
-        WingVisuals.flap(payload.entityId(), rate);
+        WingVisuals.Visual visual = mc.level.getEntity(payload.entityId()) instanceof Player p ? WingVisuals.of(p) : null;
+        if (visual == null) {
+            return;
+        }
+        Optional<WingDefinition> definition = visual.equipped
+                .flatMap(id -> WingRegistries.get(mc.level.registryAccess(), id));
+        float rate = definition.map(WingDefinition::flapRate).orElse(2f);
+        WingStyle style = WingStyle.of(definition.map(WingDefinition::model).orElse(SimplyWings.id("basic")));
+        if (visual.mode == FlightMode.TRAVEL) {
+            visual.animator.strike(rate, style.strikeAt());
+        } else {
+            visual.animator.flap(rate * 1.5f);
+        }
     }
 
     private ClientNet() {

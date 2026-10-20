@@ -4,20 +4,22 @@
   "color": -6250336,
   "min_speed": 8.0,
   "flap_rate": 2.0,
-  "hover_rate": 2.5,
+  "hover_rate": 1.2,
   "hover_speed": 8.0,
+  "hover_swing": 1.0,
+  "drag": 1.0,
   "equipped": {
     "stamina": 100.0,
-    "acceleration": 3.0,
+    "acceleration": 6.0,
     "max_speed": 18.0,
     "handling": 70.0,
-    "stabilization": 5.0
+    "stabilization": 3.0
   },
   "global": {
     "stamina": 6.0,
-    "acceleration": 0.35,
+    "acceleration": 0.225,
     "max_speed": 1.45,
     "handling": 2.125,
-    "stabilization": 0.2
+    "stabilization": 0.225
   }
 }

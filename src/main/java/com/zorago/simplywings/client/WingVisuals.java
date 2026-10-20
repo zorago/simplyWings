@@ -47,13 +47,6 @@ public final class WingVisuals {
         visual.flags = flags;
     }
 
-    static void flap(int entityId, float flapRate) {
-        Visual visual = REMOTE.get(entityId);
-        if (visual != null) {
-            visual.animator.flap(flapRate);
-        }
-    }
-
     public static void setPreview(Optional<ResourceLocation> wing) {
         preview = wing;
     }

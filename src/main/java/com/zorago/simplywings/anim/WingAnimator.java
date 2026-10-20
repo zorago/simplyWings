@@ -6,28 +6,43 @@ import net.minecraft.world.entity.player.Player;
 
 public final class WingAnimator {
     private static final float TWO_PI = (float) (Math.PI * 2);
+    private static final float HALF_PI = (float) (Math.PI / 2);
 
     private final WingPose base = new WingPose();
+    private final WingPose prevBase = new WingPose();
     private final WingPose baseTarget = new WingPose();
-    private final WingPose oscillation = new WingPose();
-    private final WingPose current = new WingPose();
-    private final WingPose previous = new WingPose();
     private final WingPose scratch = new WingPose();
 
-    private float hoverPhase;
+    private double hoverPhase;
+    private double prevHoverPhase;
     private float hoverWeight;
+    private float prevHoverWeight;
     private float stallWeight;
+    private float prevStallWeight;
+    private float vibrationWeight;
+    private float prevVibrationWeight;
     private float strokeProgress = -1;
+    private float prevStrokeProgress = -1;
     private float strokeDuration = 10;
     private int age;
     private boolean initialized;
     private float bank;
     private float prevBank;
     private float charge;
+    private boolean idle;
+    private boolean glide;
+    private boolean brake;
 
     public void flap(float flapRate) {
+        strokeDuration = Math.max(4f, 20f / Math.max(0.1f, flapRate));
         strokeProgress = 0;
-        strokeDuration = Math.max(4f, 20f / Math.max(0.5f, flapRate));
+        prevStrokeProgress = 0;
+    }
+
+    public void strike(float flapRate, float strikeAt) {
+        flap(flapRate);
+        strokeProgress = strikeAt;
+        prevStrokeProgress = strikeAt;
     }
 
     public void setCharge(float charge) {
@@ -38,18 +53,23 @@ public final class WingAnimator {
         return Mth.lerp(partialTick, prevBank, bank);
     }
 
-    public void tick(Player player, FlightMode mode, int flags, float hoverRate) {
+    public void tick(Player player, FlightMode mode, int flags, WingStyle style, float hoverRate) {
         age++;
         prevBank = bank;
         float turnRate = Mth.wrapDegrees(player.yBodyRot - player.yBodyRotO) * 20f;
         float targetBank = mode == FlightMode.TRAVEL ? Mth.clamp(turnRate * 0.5f, -45f, 45f) : 0f;
         bank += (targetBank - bank) * 0.25f;
-        boolean brake = (flags & FlightMode.FLAG_BRAKE) != 0;
+
+        brake = (flags & FlightMode.FLAG_BRAKE) != 0;
         boolean stall = (flags & FlightMode.FLAG_STALL) != 0;
         boolean tuck = (flags & FlightMode.FLAG_TUCK) != 0;
+        boolean thrust = (flags & FlightMode.FLAG_THRUST) != 0;
+        boolean grounded = player.onGround() || player.isPassenger();
         float pitch = player.getXRot();
         float rate = 0.3f;
         boolean hovering = false;
+        idle = mode == FlightMode.NONE && grounded;
+        glide = mode == FlightMode.TRAVEL && !brake && !tuck;
 
         switch (mode) {
             case STABILIZED -> {
@@ -72,7 +92,7 @@ public final class WingAnimator {
                 baseTarget.withAxis(1f);
             }
             case NONE -> {
-                if (player.onGround() || player.isPassenger()) {
+                if (grounded) {
                     baseTarget.set(charge * 0.95f, charge * -0.2f, charge * 0.7f, 0f, 0f, 0f);
                     rate = charge > 0 ? 0.3f : 0.2f;
                 } else {
@@ -80,61 +100,97 @@ public final class WingAnimator {
                 }
             }
         }
+        if (!style.folds() && baseTarget.spread < 1f) {
+            float fold = 1f - baseTarget.spread;
+            baseTarget.spread = 1f;
+            baseTarget.sweep -= 0.55f * fold;
+            baseTarget.stroke -= 0.1f * fold;
+        }
 
         if (!initialized) {
             base.copy(baseTarget);
             initialized = true;
         }
+        prevBase.copy(base);
         base.approach(baseTarget, rate);
-        hoverWeight += ((hovering ? 1f : 0f) - hoverWeight) * 0.25f;
+
+        prevHoverWeight = hoverWeight;
+        prevStallWeight = stallWeight;
+        prevVibrationWeight = vibrationWeight;
+        boolean hoverBeats = hovering && style.hoverAmplitude() > 0;
+        boolean vibrating = style.vibration() > 0 && (hovering || thrust || (mode == FlightMode.TRAVEL && !tuck));
+        float vibrationTarget = vibrating ? (hovering || thrust ? 1f : 0.3f) : 0f;
+        hoverWeight += ((hoverBeats ? 1f : 0f) - hoverWeight) * 0.2f;
         stallWeight += ((stall ? 1f : 0f) - stallWeight) * 0.25f;
+        vibrationWeight += (vibrationTarget - vibrationWeight) * 0.3f;
 
+        prevHoverPhase = hoverPhase;
         hoverPhase += TWO_PI * hoverRate / 20f;
-        if (hoverPhase > TWO_PI) {
-            hoverPhase -= TWO_PI;
+        if (hoverPhase > TWO_PI * 64) {
+            hoverPhase -= TWO_PI * 64;
+            prevHoverPhase -= TWO_PI * 64;
         }
 
-        oscillation.set(0, 0, 0, 0, 0, 0);
-        if (hoverWeight > 0.01f) {
-            float s = Mth.sin(hoverPhase);
-            scratch.set(-0.18f * Math.max(0f, Mth.cos(hoverPhase)), 0f, 0.85f * s,
-                    0.5f * Mth.sin(hoverPhase - 0.9f), 0.35f * Mth.sin(hoverPhase - 1.5f), 0.12f * Mth.cos(hoverPhase));
-            oscillation.addScaled(scratch, hoverWeight);
-        }
+        prevStrokeProgress = strokeProgress;
         if (strokeProgress >= 0) {
-            float t = strokeProgress * TWO_PI;
-            float envelope = Mth.sin(strokeProgress * (float) Math.PI);
-            scratch.set(-0.2f * Math.max(0f, Mth.cos(t)) * envelope, 0f, 0.75f * Mth.sin(t),
-                    0.55f * Mth.sin(t - 0.9f) * envelope, 0.4f * Mth.sin(t - 1.5f) * envelope, 0.1f * Mth.cos(t) * envelope)
-                    .withCurl(0.45f * Math.max(0f, -Mth.cos(t)) * envelope);
-            oscillation.addScaled(scratch, 1f - hoverWeight);
             strokeProgress += 1f / strokeDuration;
             if (strokeProgress >= 1f) {
                 strokeProgress = -1;
+                prevStrokeProgress = -1;
             }
         }
-        if (stallWeight > 0.01f) {
-            float a = age * 1.4f;
-            scratch.set(-0.2f, 0.2f * Mth.sin(age * 0.5f), 0.3f + 0.6f * Mth.sin(a), 0.4f * Mth.sin(a - 1f),
-                    0.3f * Mth.sin(a - 1.8f), 0.4f * Mth.sin(age * 0.7f));
-            oscillation.addScaled(scratch, stallWeight);
-        }
-        if (mode == FlightMode.NONE && (player.onGround() || player.isPassenger())) {
-            oscillation.stroke += 0.04f * Mth.sin(age * 0.08f);
-        } else if (tuck) {
-            oscillation.stroke += 0.015f * Mth.sin(age * 1.7f);
-        } else if (mode == FlightMode.TRAVEL && !brake) {
-            oscillation.stroke += 0.03f * (Mth.sin(age * 0.37f) + Mth.sin(age * 0.23f));
-        } else if (brake) {
-            oscillation.stroke += 0.04f * Mth.sin(age * 2.3f);
-        }
-
-        previous.copy(current);
-        current.copy(base).addScaled(oscillation, 1f);
-        current.spread = Mth.clamp(current.spread, 0f, 1.1f);
     }
 
-    public WingPose pose(float partialTick, WingPose out) {
-        return out.lerp(previous, current, partialTick);
+    public WingPose pose(float partialTick, WingStyle style, WingStyle.Slot slot, WingPose out) {
+        out.lerp(prevBase, base, partialTick);
+        float time = age + partialTick;
+        float hoverRaw = Mth.lerp(partialTick, prevHoverWeight, hoverWeight);
+        float hw = hoverRaw * slot.amplitude();
+        if (hw > 0.001f) {
+            float ph = (float) Mth.lerp(partialTick, prevHoverPhase, hoverPhase) + slot.phase();
+            float a = style.hoverAmplitude();
+            scratch.set(-0.18f * Math.max(0f, Mth.cos(ph)), 0f, a * Mth.sin(ph), 0.55f * a * Mth.sin(ph - 0.9f),
+                    0.4f * a * Mth.sin(ph - 1.5f), 0.12f * Mth.cos(ph));
+            out.addScaled(scratch, hw);
+        }
+        if (strokeProgress >= 0 && prevStrokeProgress >= 0) {
+            float t = wrap(Mth.lerp(partialTick, prevStrokeProgress, strokeProgress) + slot.phase() / TWO_PI);
+            float a = style.strokeAmplitude() * slot.amplitude() * (1f - hoverRaw);
+            out.stroke += a * style.stroke(t);
+            out.elbow += 0.6f * a * style.stroke(wrap(t - 0.07f));
+            out.tip += 0.45f * a * style.stroke(wrap(t - 0.14f));
+            out.curl += 0.45f * style.curl(t) * slot.amplitude() * (1f - hoverRaw);
+        }
+        float sw = Mth.lerp(partialTick, prevStallWeight, stallWeight) * slot.amplitude();
+        if (sw > 0.001f) {
+            float a = time * 1.4f + slot.phase();
+            scratch.set(-0.2f, 0.2f * Mth.sin(time * 0.5f), 0.3f + 0.6f * Mth.sin(a), 0.4f * Mth.sin(a - 1f),
+                    0.3f * Mth.sin(a - 1.8f), 0.4f * Mth.sin(time * 0.7f));
+            out.addScaled(scratch, sw);
+        }
+        float vw = Mth.lerp(partialTick, prevVibrationWeight, vibrationWeight) * slot.amplitude();
+        if (vw > 0.001f) {
+            float v = style.vibration() * Mth.sin(time * TWO_PI * style.vibrationRate() / 20f + slot.phase());
+            out.stroke += vw * v;
+            out.twist += vw * v * 0.3f;
+        }
+        if (idle) {
+            out.stroke += 0.04f * Mth.sin(time * 0.08f);
+        } else if (glide) {
+            out.stroke += 0.03f * (Mth.sin(time * 0.37f) + Mth.sin(time * 0.23f));
+        } else if (brake) {
+            out.stroke += 0.04f * Mth.sin(time * 2.3f);
+        }
+        out.sweep += slot.sweep();
+        out.stroke += slot.lift();
+        if (style.flat()) {
+            out.twist += HALF_PI * (1f - out.axis);
+        }
+        out.spread = Mth.clamp(out.spread, 0f, 1.1f);
+        return out;
+    }
+
+    private static float wrap(float t) {
+        return t - (float) Math.floor(t);
     }
 }

@@ -1,23 +1,25 @@
 {
   "rarity": "epic",
-  "model": "simplywings:ancient",
+  "model": "simplywings:dragonfly",
   "color": -1,
   "min_speed": 10.0,
-  "flap_rate": 1.5,
-  "hover_rate": 1.8,
+  "flap_rate": 20.0,
+  "hover_rate": 25.0,
   "hover_speed": 14.0,
+  "hover_swing": 0.1,
+  "drag": 1.0,
   "equipped": {
     "stamina": 200.0,
-    "acceleration": 8.0,
+    "acceleration": 10.0,
     "max_speed": 40.0,
-    "handling": 60.0,
+    "handling": 80.0,
     "stabilization": 4.0
   },
   "global": {
     "stamina": 6.0,
-    "acceleration": 0.35,
+    "acceleration": 0.225,
     "max_speed": 1.45,
     "handling": 2.125,
-    "stabilization": 0.2
+    "stabilization": 0.225
   }
 }

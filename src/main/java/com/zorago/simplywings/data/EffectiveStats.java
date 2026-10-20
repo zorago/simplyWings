@@ -45,4 +45,8 @@ public record EffectiveStats(ResourceLocation wing, WingDefinition definition, f
     public float hoverSpeed() {
         return definition.hoverSpeed();
     }
+
+    public float beatGain() {
+        return acceleration / definition.flapRate();
+    }
 }
