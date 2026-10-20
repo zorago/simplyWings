@@ -16,7 +16,6 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.client.event.MovementInputUpdateEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -131,7 +130,7 @@ public final class ClientFlight {
         }
         switch (next) {
             case STABILIZED -> initStabilized(player, false);
-            case TRAVEL -> initTravel(player, ClientWings.stats().map(EffectiveStats::minSpeed).orElse(5f));
+            case TRAVEL -> ClientWings.stats().ifPresent(stats -> initTravel(player, stats));
             default -> {
             }
         }
@@ -242,7 +241,8 @@ public final class ClientFlight {
 
     private static void airJump(LocalPlayer player, EffectiveStats stats) {
         Vec3 motion = player.getDeltaMovement();
-        player.setDeltaMovement(motion.x, Math.max(motion.y, player.getAttributeValue(Attributes.JUMP_STRENGTH) + 0.1), motion.z);
+        double jump = (ServerConfig.AIR_JUMP_BASE.get() + stats.beatGain() * ServerConfig.AIR_JUMP_PER_BEAT.get()) * DT;
+        player.setDeltaMovement(motion.x, Math.max(motion.y, jump), motion.z);
         player.resetFallDistance();
         spend(player, airJumpCost());
         ticksSinceAirJump = 0;
@@ -290,15 +290,12 @@ public final class ClientFlight {
     }
 
     private static void takeoff(LocalPlayer player, EffectiveStats stats) {
-        initTravel(player, stats.minSpeed());
+        initTravel(player, stats);
         pitch = (float) -ServerConfig.TAKEOFF_PITCH.get().doubleValue();
         prevPitch = pitch;
         aimPitch = pitch;
-        Vec3 motion = player.getDeltaMovement();
-        double horizontal = Math.sqrt(motion.x * motion.x + motion.z * motion.z) * 20;
-        speed = Math.max(stats.minSpeed() * ServerConfig.TAKEOFF_SPEED_FACTOR.get(), horizontal);
         spend(player, flapCost());
-        flapCooldown = flapInterval(stats);
+        flapCooldown = 0;
         ticksSinceFlap = 0;
         WingVisuals.local().animator.strike(stats.flapRate(), style(stats).strikeAt());
         player.playSound(SoundEvents.PHANTOM_FLAP, 1f, 0.9f);
@@ -319,9 +316,9 @@ public final class ClientFlight {
         if (!creative(player) && ClientWings.stamina() < flapCost()) {
             return;
         }
-        initTravel(player, stats.minSpeed());
+        initTravel(player, stats);
         spend(player, flapCost());
-        flapCooldown = flapInterval(stats);
+        flapCooldown = 0;
         ticksSinceFlap = 0;
         WingVisuals.local().animator.strike(stats.flapRate(), style(stats).strikeAt());
         player.playSound(SoundEvents.PHANTOM_FLAP, 0.8f, 1.1f);
@@ -352,19 +349,21 @@ public final class ClientFlight {
         holdV = 0;
     }
 
-    private static void initTravel(LocalPlayer player, float minSpeed) {
+    private static void initTravel(LocalPlayer player, EffectiveStats stats) {
         heading = player.getYRot();
         pitch = player.onGround() ? -15f : (float) FlightMath.clamp(player.getXRot(), -35, 35);
         prevHeading = heading;
         prevPitch = pitch;
         aimYaw = heading;
         aimPitch = pitch;
-        speed = Math.max(minSpeed, player.getDeltaMovement().length() * 20);
+        double launch = Math.max(stats.minSpeed(), stats.maxSpeed() * ServerConfig.LAUNCH_SPEED_FRACTION.get());
+        speed = Math.max(launch, player.getDeltaMovement().length() * 20);
         stallVy = 0;
         stalled = false;
         braking = false;
         thrusting = false;
         pendingStrike = -1;
+        flapCooldown = 0;
         yawRate = 0;
         pitchRate = 0;
         bank = 0;

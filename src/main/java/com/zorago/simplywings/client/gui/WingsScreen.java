@@ -240,7 +240,7 @@ public class WingsScreen extends Screen {
         y = row(g, "max_speed", eq.maxSpeed(), gl.maxSpeed(), x, col1, col2, y);
         y = row(g, "handling", eq.handling(), gl.handling(), x, col1, col2, y);
         y = row(g, "stabilization", eq.stabilization(), gl.stabilization(), x, col1, col2, y);
-        y = row(g, "min_speed", def.minSpeed(), Float.NaN, x, col1, col2, y);
+        y = row(g, "min_speed", def.stallSpeed(), Float.NaN, x, col1, col2, y);
         y += 4;
         g.drawString(font, Component.translatable("gui.simplywings.collection_total"), x, y, 0xFF8A949C, false);
         y += 11;

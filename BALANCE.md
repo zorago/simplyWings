@@ -11,6 +11,7 @@ Dernière mise à jour : 20 octobre 2026.
 | Stamina | points | 80 – 120 | 120 – 170 | 170 – 220 | 220 – 280 |
 | Accélération (gain par seconde de battement, et puissance du frein) | m/s par s | 4 – 8 | 8 – 15 | 8 – 14 | 8 – 12 |
 | Vitesse max (croisière en battant) | m/s | 14 – 22 | 22 – 32 | 32 – 46 | 46 – 62 |
+| Modificateur de décrochage (`stall_factor`) | × V min | 1,1 – 1,3 | 0,8 – 1,3 | 0,4 – 1,1 | 0,7 – 1,0 |
 | Vitesse min (décrochage) | m/s | 6 – 9 | 6 – 10 | 8 – 12 | 10 – 14 |
 | Maniabilité | °/s | 50 – 80 | 60 – 140 | 50 – 110 | 60 – 100 |
 | Stabilisation | 0 – 10 | 2 – 5 | 2 – 6 | 2 – 6 | 0,5 – 4 |
@@ -24,18 +25,25 @@ Le gain d'un battement vaut accélération ÷ battements par seconde. À partir 
 
 Le pourcentage indique où se place la valeur dans la plage de son tier (0 % = minimum, 100 % = maximum).
 
-| Paire | Tier | Stamina | Accél. | V max | V min | Maniab. | Stabil. | Batt./s | Station. | Traînée | Atteindre 90 % de V max |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Commune (`common`) | Commune | 100 (50 %) | 6 (50 %) | 18 (50 %) | 8 (67 %) | 70 (67 %) | 3 (33 %) | 2,0 (56 %) | 8 (50 %) | 1,0 | 5 battements, 2,4 s |
-| Chauve-souris (`bat`) | Rare | 150 (60 %) | 13 (71 %) | 28 (60 %) | 7 (25 %) | 130 (88 %) | 3 (25 %) | 2,6 (73 %) | 11 (50 %) | 0,6 | 5 battements, 1,9 s |
-| Ancienne / libellule (`ancient`) | Épique | 200 (60 %) | 10 (33 %) | 40 (57 %) | 10 (50 %) | 80 (50 %) | 4 (50 %) | 20 (80 %, continue) | 14 (50 %) | 1,0 | poussée continue, 4,1 s |
-| Ange (`angel`) | Légendaire | 240 (33 %) | 9 (25 %) | 58 (75 %) | 12 (50 %) | 85 (63 %) | 1 (14 %) | 0,5 (13 %) | 19 (50 %) | 1,0 | 3 battements, 5,5 s |
+| Paire | Tier | Stamina | Accél. | V max | Décrochage (V min × modif.) | Maniab. | Stabil. | Batt./s | Station. | Traînée | Saut ailé | Atteindre 90 % de V max |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Commune (`common`) | Commune | 100 (50 %) | 6 (50 %) | 18 (50 %) | 8 × 1,2 = 9,6 (malus) | 70 (67 %) | 3 (33 %) | 2,0 (56 %) | 8 (50 %) | 1,0 | ≈ 1 bloc | 5 battements |
+| Chauve-souris (`bat`) | Rare | 150 (60 %) | 13 (71 %) | 28 (60 %) | 7 × 1,25 = 8,75 (malus) | 130 (88 %) | 3 (25 %) | 2,6 (73 %) | 11 (50 %) | 0,6 | ≈ 1,3 bloc | 5 battements |
+| Ancienne / libellule (`ancient`) | Épique | 200 (60 %) | 5 (sous la plage) | 24 (sous la plage) | 10 × 0,45 = 4,5 (gros bonus) | 140 (au-dessus) | 4 (50 %) | 20 (continue) | 14 (50 %) | 1,0 | ≈ 0,6 bloc | poussée continue, lente |
+| Ange (`angel`) | Légendaire | 240 (33 %) | 9 (25 %) | 58 (75 %) | 12 × 1,0 = 12 | 85 (63 %) | 1 (14 %) | 0,5 (13 %) | 19 (50 %) | 0,7 (plane longtemps) | ≈ 4,4 blocs | 3 battements |
+
+« Sous la plage » ou « au-dessus » signale un compromis volontaire : une paire peut sortir de la plage de son tier sur une stat si son identité le justifie.
 
 Identités :
-- **Commune** : la version de base, des élytres améliorées.
-- **Chauve-souris** : aérodynamique (traînée 0,6) et très maniable, mais vitesse max basse.
-- **Ancienne / libellule** : 4 ailes d'un seul bloc qui vibrent à 25 Hz. Accélération presque linéaire, et la seule paire stable en stationnaire.
-- **Ange** : la puissance. Un battement toutes les 2 secondes : longue montée, puis coup sec qui pousse d'environ 18 m/s. Très instable en stationnaire.
+- **Commune** : la version de base, des élytres améliorées. Décroche facilement.
+- **Chauve-souris** : aérodynamique (traînée 0,6) et très maniable, mais vitesse max basse. Décroche facilement.
+- **Ancienne / libellule** : faite pour construire. Ultra stable en stationnaire, mais médiocre en vol : lente, accélère et freine mal. Elle reste très maniable et décroche à très basse vitesse, comme un insecte capable de faire du surplace.
+- **Ange** : la puissance. Un battement toutes les 2 secondes : longue montée, puis coup sec qui pousse d'environ 18 m/s. Pas de bonus de décrochage, mais une traînée faible qui la fait planer longtemps. Très instable en stationnaire.
+
+## Lancement et saut ailé
+
+- **Lancement** (envol chargé au sol, ou passage du stationnaire au déplacement) : il part à `launchSpeedFraction` × V max, soit 50 % par défaut, sans descendre sous la vitesse de décrochage. Le premier battement est disponible tout de suite.
+- **Saut ailé** : vitesse verticale = `airJumpBase` (6 m/s) + gain d'un battement × `airJumpPerBeatGain` (0,6). Le gain d'un battement vaut accélération ÷ battements par seconde. L'ange (18 m/s par battement) saute donc environ 4,4 blocs, la libellule (0,25 m/s par battement) à peine 0,6 bloc.
 
 ## Instabilité en stationnaire
 

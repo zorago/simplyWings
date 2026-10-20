@@ -31,7 +31,7 @@ public record EffectiveStats(ResourceLocation wing, WingDefinition definition, f
     }
 
     public float minSpeed() {
-        return definition.minSpeed();
+        return definition.stallSpeed();
     }
 
     public float flapRate() {

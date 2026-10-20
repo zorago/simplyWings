@@ -18,7 +18,9 @@ public final class ServerConfig {
     public static final ModConfigSpec.DoubleValue ZERO_STAMINA_SINK_SPEED;
     public static final ModConfigSpec.IntValue TAKEOFF_CHARGE_TICKS;
     public static final ModConfigSpec.DoubleValue TAKEOFF_PITCH;
-    public static final ModConfigSpec.DoubleValue TAKEOFF_SPEED_FACTOR;
+    public static final ModConfigSpec.DoubleValue LAUNCH_SPEED_FRACTION;
+    public static final ModConfigSpec.DoubleValue AIR_JUMP_BASE;
+    public static final ModConfigSpec.DoubleValue AIR_JUMP_PER_BEAT;
 
     public static final ModConfigSpec.DoubleValue STABILIZED_RAMP_TICKS;
     public static final ModConfigSpec.DoubleValue STABILIZED_RAMP_TICKS_PER_POINT;
@@ -69,8 +71,8 @@ public final class ServerConfig {
                 .defineInRange("takeoffChargeTicks", 20, 1, 100);
         TAKEOFF_PITCH = b.comment("Climb angle of the ground takeoff, in degrees.")
                 .defineInRange("takeoffPitch", 40.0, 5.0, 85.0);
-        TAKEOFF_SPEED_FACTOR = b.comment("Ground takeoff speed = min speed × this factor.")
-                .defineInRange("takeoffSpeedFactor", 1.5, 1.0, 5.0);
+        LAUNCH_SPEED_FRACTION = b.comment("Entering travel mode (ground takeoff or from hovering) launches at this fraction of max speed.")
+                .defineInRange("launchSpeedFraction", 0.5, 0.0, 1.0);
         b.pop();
 
         b.push("stabilized");
@@ -99,6 +101,10 @@ public final class ServerConfig {
                 .defineInRange("rescueJumps", 2, 0, 10);
         AIR_JUMP_COST = b.comment("Stamina spent per wing-assisted air jump.")
                 .defineInRange("airJumpCost", 20.0, 0.0, 1000.0);
+        AIR_JUMP_BASE = b.comment("Upward speed of an air jump before the wing bonus, in m/s (a vanilla jump is about 8.4).")
+                .defineInRange("airJumpBase", 6.0, 0.0, 50.0);
+        AIR_JUMP_PER_BEAT = b.comment("Extra upward speed per m/s gained by one wing beat (acceleration / flap rate).")
+                .defineInRange("airJumpPerBeatGain", 0.6, 0.0, 5.0);
         b.pop();
 
         b.push("damage");

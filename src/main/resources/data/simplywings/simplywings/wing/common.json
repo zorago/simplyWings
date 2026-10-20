@@ -8,6 +8,7 @@
   "hover_speed": 8.0,
   "hover_swing": 1.0,
   "drag": 1.0,
+  "stall_factor": 1.2,
   "equipped": {
     "stamina": 100.0,
     "acceleration": 6.0,
