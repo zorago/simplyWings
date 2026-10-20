@@ -21,14 +21,29 @@ public final class WingAnimator {
     private float strokeDuration = 10;
     private int age;
     private boolean initialized;
+    private float bank;
+    private float prevBank;
+    private float charge;
 
     public void flap(float flapRate) {
         strokeProgress = 0;
         strokeDuration = Math.max(4f, 20f / Math.max(0.5f, flapRate));
     }
 
+    public void setCharge(float charge) {
+        this.charge = Mth.clamp(charge, 0f, 1f);
+    }
+
+    public float bank(float partialTick) {
+        return Mth.lerp(partialTick, prevBank, bank);
+    }
+
     public void tick(Player player, FlightMode mode, int flags, float hoverRate) {
         age++;
+        prevBank = bank;
+        float turnRate = Mth.wrapDegrees(player.yBodyRot - player.yBodyRotO) * 20f;
+        float targetBank = mode == FlightMode.TRAVEL ? Mth.clamp(turnRate * 0.5f, -45f, 45f) : 0f;
+        bank += (targetBank - bank) * 0.25f;
         boolean brake = (flags & FlightMode.FLAG_BRAKE) != 0;
         boolean stall = (flags & FlightMode.FLAG_STALL) != 0;
         float pitch = player.getXRot();
@@ -53,8 +68,8 @@ public final class WingAnimator {
             }
             case NONE -> {
                 if (player.onGround() || player.isPassenger()) {
-                    baseTarget.set(0f, 0f, 0f, 0f, 0f, 0f);
-                    rate = 0.2f;
+                    baseTarget.set(charge * 0.95f, charge * -0.2f, charge * 0.7f, 0f, 0f, 0f);
+                    rate = charge > 0 ? 0.3f : 0.2f;
                 } else {
                     baseTarget.set(0.55f, 0.1f, 0.5f, 0.1f, 0f, 0.2f);
                 }

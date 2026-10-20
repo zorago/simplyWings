@@ -11,9 +11,10 @@ public final class ServerConfig {
     public static final ModConfigSpec.DoubleValue BRAKE_FACTOR;
     public static final ModConfigSpec.DoubleValue STOP_SPEED_FACTOR;
     public static final ModConfigSpec.DoubleValue ZERO_STAMINA_SINK_SPEED;
+    public static final ModConfigSpec.IntValue TAKEOFF_CHARGE_TICKS;
+    public static final ModConfigSpec.DoubleValue TAKEOFF_PITCH;
+    public static final ModConfigSpec.DoubleValue TAKEOFF_SPEED_FACTOR;
 
-    public static final ModConfigSpec.DoubleValue STABILIZED_HORIZONTAL_SPEED;
-    public static final ModConfigSpec.DoubleValue STABILIZED_VERTICAL_SPEED;
     public static final ModConfigSpec.DoubleValue STABILIZED_RAMP_TICKS;
     public static final ModConfigSpec.DoubleValue STABILIZED_RAMP_TICKS_PER_POINT;
     public static final ModConfigSpec.DoubleValue PERTURBATION_AMPLITUDE;
@@ -46,11 +47,15 @@ public final class ServerConfig {
                 .defineInRange("stopSpeedFactor", 0.6, 0.05, 1.0);
         ZERO_STAMINA_SINK_SPEED = b.comment("Sink speed while braking with no stamina left, in m/s.")
                 .defineInRange("zeroStaminaSinkSpeed", 3.0, 0.5, 20.0);
+        TAKEOFF_CHARGE_TICKS = b.comment("Ticks the travel key must be held on the ground to take off.")
+                .defineInRange("takeoffChargeTicks", 20, 1, 100);
+        TAKEOFF_PITCH = b.comment("Climb angle of the ground takeoff, in degrees.")
+                .defineInRange("takeoffPitch", 40.0, 5.0, 85.0);
+        TAKEOFF_SPEED_FACTOR = b.comment("Ground takeoff speed = min speed × this factor.")
+                .defineInRange("takeoffSpeedFactor", 1.5, 1.0, 5.0);
         b.pop();
 
         b.push("stabilized");
-        STABILIZED_HORIZONTAL_SPEED = b.defineInRange("horizontalSpeed", 8.0, 1.0, 40.0);
-        STABILIZED_VERTICAL_SPEED = b.defineInRange("verticalSpeed", 5.0, 1.0, 40.0);
         STABILIZED_RAMP_TICKS = b.comment("Ticks to reach full speed at stabilization 10.")
                 .defineInRange("rampTicks", 8.0, 1.0, 100.0);
         STABILIZED_RAMP_TICKS_PER_POINT = b.comment("Extra ramp ticks per missing stabilization point.")

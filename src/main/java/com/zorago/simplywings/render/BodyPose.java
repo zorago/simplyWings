@@ -23,8 +23,7 @@ public final class BodyPose {
         float pt = event.getPartialTick();
         float yaw = Mth.rotLerp(pt, player.yBodyRotO, player.yBodyRot);
         float pitch = Mth.lerp(pt, player.xRotO, player.getXRot());
-        float yawRate = Mth.wrapDegrees(player.yBodyRot - player.yBodyRotO) * 20f;
-        float roll = Mth.clamp(yawRate * 0.5f, -45f, 45f);
+        float roll = visual.animator.bank(pt);
         float pivot = player.getBbHeight() * 0.5f;
         PoseStack stack = event.getPoseStack();
         stack.pushPose();

@@ -20,6 +20,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 public final class ClientFlight {
     private static final double DT = 0.05;
     private static final int DOUBLE_TAP_TICKS = 7;
+    private static final int TURN_SUBSTEPS = 4;
     private static final RandomSource RANDOM = RandomSource.create();
 
     private static FlightMode mode = FlightMode.NONE;
@@ -31,8 +32,11 @@ public final class ClientFlight {
     private static float prevPitch;
     private static double speed;
     private static double stallVy;
+    private static float aimYaw;
+    private static float aimPitch;
     private static float yawRate;
     private static float pitchRate;
+    private static int chargeTicks;
     private static int flapCooldown;
     private static int ticksSinceFlap;
     private static boolean stalled;
@@ -56,6 +60,10 @@ public final class ClientFlight {
 
     public static int flags() {
         return flags;
+    }
+
+    public static float takeoffProgress() {
+        return chargeTicks / (float) ServerConfig.TAKEOFF_CHARGE_TICKS.get();
     }
 
     public static float bank(float partialTick) {
@@ -152,6 +160,7 @@ public final class ClientFlight {
             }
             while (ModKeys.TRAVEL.consumeClick()) {
             }
+            chargeTicks = 0;
             return;
         }
         EffectiveStats stats = maybeStats.get();
@@ -161,9 +170,7 @@ public final class ClientFlight {
         if (jumpPressed) {
             handleJump(player);
         }
-        while (ModKeys.TRAVEL.consumeClick()) {
-            toggleTravel(player, stats);
-        }
+        handleTravelKey(player, stats);
         switch (mode) {
             case STABILIZED -> tickStabilized(player, stats);
             case TRAVEL -> tickTravel(player, stats);
@@ -192,22 +199,66 @@ public final class ClientFlight {
         }
         boolean hasStamina = creative(player) || ClientWings.stamina() > 0;
         if (mode == FlightMode.NONE && !player.onGround()) {
-            if (doubleTap && hasStamina) {
+            if (!hasStamina) {
+                if (ClientWings.rescueJumps() > 0) {
+                    rescueJump(player);
+                }
+            } else if (doubleTap) {
                 initStabilized(player, false);
                 setMode(player, FlightMode.STABILIZED, true);
                 ticksSinceJump = 100;
-            } else if (!doubleTap && !hasStamina && ClientWings.rescueJumps() > 0) {
-                Vec3 motion = player.getDeltaMovement();
-                player.setDeltaMovement(motion.x, 0, motion.z);
-                player.resetFallDistance();
-                ClientWings.setRescueJumps(ClientWings.rescueJumps() - 1);
-                WingVisuals.local().animator.flap(3f);
-                PacketDistributor.sendToServer(new Payloads.RescueJump());
             }
         } else if (mode == FlightMode.STABILIZED && doubleTap) {
             setMode(player, FlightMode.NONE, true);
             ticksSinceJump = 100;
         }
+    }
+
+    private static void rescueJump(LocalPlayer player) {
+        Vec3 motion = player.getDeltaMovement();
+        player.setDeltaMovement(motion.x, 0, motion.z);
+        player.resetFallDistance();
+        ClientWings.setRescueJumps(ClientWings.rescueJumps() - 1);
+        WingVisuals.local().animator.flap(3f);
+        player.playSound(SoundEvents.PHANTOM_FLAP, 0.8f, 1.4f);
+        PacketDistributor.sendToServer(new Payloads.RescueJump());
+    }
+
+    private static void handleTravelKey(LocalPlayer player, EffectiveStats stats) {
+        if (mode == FlightMode.NONE && player.onGround()) {
+            while (ModKeys.TRAVEL.consumeClick()) {
+            }
+            boolean affordable = creative(player) || ClientWings.stamina() >= flapCost();
+            if (ModKeys.TRAVEL.isDown() && canFly(player) && affordable) {
+                if (++chargeTicks >= ServerConfig.TAKEOFF_CHARGE_TICKS.get()) {
+                    chargeTicks = 0;
+                    takeoff(player, stats);
+                }
+            } else {
+                chargeTicks = 0;
+            }
+            return;
+        }
+        chargeTicks = 0;
+        while (ModKeys.TRAVEL.consumeClick()) {
+            toggleTravel(player, stats);
+        }
+    }
+
+    private static void takeoff(LocalPlayer player, EffectiveStats stats) {
+        initTravel(player, stats.minSpeed());
+        pitch = (float) -ServerConfig.TAKEOFF_PITCH.get().doubleValue();
+        prevPitch = pitch;
+        aimPitch = pitch;
+        Vec3 motion = player.getDeltaMovement();
+        double horizontal = Math.sqrt(motion.x * motion.x + motion.z * motion.z) * 20;
+        speed = Math.max(stats.minSpeed() * ServerConfig.TAKEOFF_SPEED_FACTOR.get(), horizontal);
+        spend(player, flapCost());
+        flapCooldown = flapInterval(stats);
+        ticksSinceFlap = 0;
+        WingVisuals.local().animator.flap(stats.flapRate());
+        player.playSound(SoundEvents.PHANTOM_FLAP, 1f, 0.9f);
+        setMode(player, FlightMode.TRAVEL, true);
     }
 
     private static void toggleTravel(LocalPlayer player, EffectiveStats stats) {
@@ -244,7 +295,7 @@ public final class ClientFlight {
     }
 
     private static void initStabilized(LocalPlayer player, boolean stopped) {
-        double v = ServerConfig.STABILIZED_VERTICAL_SPEED.get();
+        double v = ClientWings.stats().map(EffectiveStats::hoverVerticalSpeed).orElse(5f);
         Vec3 motion = player.getDeltaMovement().scale(20);
         stabVel = stopped ? Vec3.ZERO : new Vec3(motion.x, Mth.clamp(motion.y, -v, v), motion.z);
         drift = Vec3.ZERO;
@@ -257,6 +308,8 @@ public final class ClientFlight {
         pitch = player.onGround() ? -15f : (float) FlightMath.clamp(player.getXRot(), -35, 35);
         prevHeading = heading;
         prevPitch = pitch;
+        aimYaw = heading;
+        aimPitch = pitch;
         speed = Math.max(minSpeed, player.getDeltaMovement().length() * 20);
         stallVy = 0;
         stalled = false;
@@ -275,8 +328,8 @@ public final class ClientFlight {
         double s = stats.stabilization();
         double ramp = ServerConfig.STABILIZED_RAMP_TICKS.get() + (10 - s) * ServerConfig.STABILIZED_RAMP_TICKS_PER_POINT.get();
         ClientConfig.RampCurve curve = ClientConfig.STABILIZED_CURVE.get();
-        double hSpeed = ServerConfig.STABILIZED_HORIZONTAL_SPEED.get();
-        double vSpeed = ServerConfig.STABILIZED_VERTICAL_SPEED.get();
+        double hSpeed = stats.hoverSpeed();
+        double vSpeed = stats.hoverVerticalSpeed();
 
         double yaw = Math.toRadians(player.getYRot());
         Vec3 fwd = new Vec3(-Math.sin(yaw), 0, Math.cos(yaw));
@@ -335,12 +388,19 @@ public final class ClientFlight {
         double pitchIn = ((o.keyUp.isDown() ? 1 : 0) - (o.keyDown.isDown() ? 1 : 0)) * invert;
         double yawIn = (o.keyRight.isDown() ? 1 : 0) - (o.keyLeft.isDown() ? 1 : 0);
         float handling = stats.handling();
-        yawRate += (float) ((yawIn * handling - yawRate) * 0.3);
-        pitchRate += (float) ((pitchIn * handling - pitchRate) * 0.3);
+        aimYaw += (float) (yawIn * handling * DT);
+        aimPitch = (float) FlightMath.clamp(aimPitch + pitchIn * handling * DT, -80, 85);
         prevHeading = heading;
         prevPitch = pitch;
-        heading += (float) (yawRate * DT);
-        pitch = (float) FlightMath.clamp(pitch + pitchRate * DT, -80, 85);
+        double omega = 3.0 + handling / 15.0;
+        double h = DT / TURN_SUBSTEPS;
+        for (int i = 0; i < TURN_SUBSTEPS; i++) {
+            yawRate += (float) ((omega * omega * (aimYaw - heading) - 2 * omega * yawRate) * h);
+            heading += (float) (yawRate * h);
+            pitchRate += (float) ((omega * omega * (aimPitch - pitch) - 2 * omega * pitchRate) * h);
+            pitch += (float) (pitchRate * h);
+        }
+        pitch = (float) FlightMath.clamp(pitch, -80, 85);
 
         double sin = Math.sin(Math.toRadians(pitch));
         double vCap = vMax + (vTerm - vMax) * Math.max(0, sin);

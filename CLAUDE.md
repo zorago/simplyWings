@@ -19,7 +19,9 @@ Code : package `com.zorago.simplywings`, NeoForge 21.1.257 (comme le pack), ModD
 - `client/FlightCamera` : caméra et découplage souris. `anim/WingAnimator` + `render/WingModel` : ailes procédurales.
 - Paquets dans `network/Payloads`. Un battement en vol de déplacement est relayé aux joueurs proches (`FlapEvent`) : c'est un événement (environ 2/s pendant qu'on bat des ailes), pas un paquet par tick.
 
-Contrôles du prototype : double saut en l'air = mode stabilisé ; Alt gauche = mode déplacement (et retour en stabilisé) ; sprint maintenu = battements ; sneak = frein (touche « Frein » non assignée par défaut) ; ZQSD = tangage et lacet. Commande de debug : `/simplywings unlock|equip|unequip|stamina|reset|info`.
+Contrôles du prototype : double saut en l'air = mode stabilisé ; Alt gauche = bascule instantanée stabilisé ↔ déplacement en l'air, et au sol (hors stationnaire) Alt **maintenu** 1 s = envol chargé directement en mode déplacement, possible en marchant ou en courant ; sprint maintenu = battements ; sneak = frein (touche « Frein » non assignée par défaut) ; ZQSD = déplacent le point visé, et le cap le suit avec un ressort critique (pas de rotation directe) ; saut en l'air à 0 de stamina = saut de secours.
+
+Les paramètres propres à chaque paire (cadence et vitesses du stationnaire : `hover_rate`, `hover_speed`, `hover_vertical_speed`) vivent dans le JSON de l'aile, pas dans la config serveur. Commande de debug : `/simplywings unlock|equip|unequip|stamina|reset|info`.
 
 ## Pack cible et outils d'analyse
 

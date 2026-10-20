@@ -102,6 +102,9 @@ public class SimplyWingsClient {
         }
         float hoverRate = visual.equipped.flatMap(id -> WingRegistries.get(player.registryAccess(), id))
                 .map(WingDefinition::hoverRate).orElse(2.5f);
+        if (player == Minecraft.getInstance().player) {
+            visual.animator.setCharge(ClientFlight.takeoffProgress());
+        }
         visual.animator.tick(player, visual.mode, visual.flags, hoverRate);
         if (visual.mode.flying()) {
             player.walkAnimation.setSpeed(0f);

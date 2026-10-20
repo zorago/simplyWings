@@ -19,6 +19,13 @@ public final class StaminaHud {
         if (stats.isEmpty()) {
             return;
         }
+        float charge = ClientFlight.takeoffProgress();
+        if (charge > 0) {
+            int cx = graphics.guiWidth() / 2;
+            int cy = graphics.guiHeight() / 2 + 10;
+            graphics.fill(cx - 16, cy, cx + 16, cy + 2, 0x90000000);
+            graphics.fill(cx - 16, cy, cx - 16 + Math.round(32 * Math.min(1f, charge)), cy + 2, 0xFFE8ECFF);
+        }
         float max = stats.get().stamina();
         float stamina = ClientWings.stamina();
         if (stamina >= max && !ClientFlight.mode().flying()) {
