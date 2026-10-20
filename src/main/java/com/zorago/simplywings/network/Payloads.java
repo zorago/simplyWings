@@ -104,6 +104,16 @@ public final class Payloads {
         }
     }
 
+    public record AirJump() implements CustomPacketPayload {
+        public static final Type<AirJump> TYPE = payloadType("air_jump");
+        public static final StreamCodec<RegistryFriendlyByteBuf, AirJump> CODEC = StreamCodec.unit(new AirJump());
+
+        @Override
+        public Type<? extends CustomPacketPayload> type() {
+            return TYPE;
+        }
+    }
+
     public record Impact(float speed) implements CustomPacketPayload {
         public static final Type<Impact> TYPE = payloadType("impact");
         public static final StreamCodec<RegistryFriendlyByteBuf, Impact> CODEC = StreamCodec.composite(

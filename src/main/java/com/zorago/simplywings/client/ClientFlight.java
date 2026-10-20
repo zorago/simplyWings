@@ -13,13 +13,15 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.client.event.MovementInputUpdateEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 public final class ClientFlight {
     private static final double DT = 0.05;
-    private static final int DOUBLE_TAP_TICKS = 7;
+    private static final int AIR_JUMP_REFUND_TICKS = 6;
+    private static final int TAKEOFF_KEY_LOCK_TICKS = 30;
     private static final int TURN_SUBSTEPS = 4;
     private static final RandomSource RANDOM = RandomSource.create();
 
@@ -53,6 +55,8 @@ public final class ClientFlight {
     private static Vec3 lastVelocity = Vec3.ZERO;
     private static boolean jumpWasDown;
     private static int ticksSinceJump = 100;
+    private static int ticksSinceAirJump = 100;
+    private static int travelKeyLock;
 
     public static FlightMode mode() {
         return mode;
@@ -154,6 +158,7 @@ public final class ClientFlight {
         boolean jumpPressed = jumpDown && !jumpWasDown;
         jumpWasDown = jumpDown;
         ticksSinceJump++;
+        ticksSinceAirJump++;
         if (maybeStats.isEmpty()) {
             if (mode.flying()) {
                 setMode(player, FlightMode.NONE, true);
@@ -168,7 +173,7 @@ public final class ClientFlight {
             setMode(player, FlightMode.NONE, true);
         }
         if (jumpPressed) {
-            handleJump(player);
+            handleJump(player, stats);
         }
         handleTravelKey(player, stats);
         switch (mode) {
@@ -191,27 +196,46 @@ public final class ClientFlight {
                 && !player.getAbilities().flying && !player.isInWater() && !player.isInLava();
     }
 
-    private static void handleJump(LocalPlayer player) {
-        boolean doubleTap = ticksSinceJump <= DOUBLE_TAP_TICKS;
+    private static float airJumpCost() {
+        return ServerConfig.AIR_JUMP_COST.get().floatValue();
+    }
+
+    private static void handleJump(LocalPlayer player, EffectiveStats stats) {
+        boolean doubleTap = ticksSinceJump <= ClientConfig.DOUBLE_TAP_TICKS.get();
         ticksSinceJump = 0;
         if (player.getAbilities().mayfly || !canFly(player)) {
             return;
         }
-        boolean hasStamina = creative(player) || ClientWings.stamina() > 0;
+        boolean creative = creative(player);
         if (mode == FlightMode.NONE && !player.onGround()) {
-            if (!hasStamina) {
-                if (ClientWings.rescueJumps() > 0) {
-                    rescueJump(player);
+            if (doubleTap && (creative || ClientWings.stamina() > 0)) {
+                if (ticksSinceAirJump <= AIR_JUMP_REFUND_TICKS && !creative) {
+                    ClientWings.setStamina(Math.min(stats.stamina(), ClientWings.stamina() + airJumpCost()));
                 }
-            } else if (doubleTap) {
+                ticksSinceAirJump = 100;
                 initStabilized(player, false);
                 setMode(player, FlightMode.STABILIZED, true);
                 ticksSinceJump = 100;
+            } else if (creative || ClientWings.stamina() >= airJumpCost()) {
+                airJump(player, stats);
+            } else if (ClientWings.rescueJumps() > 0) {
+                rescueJump(player);
             }
         } else if (mode == FlightMode.STABILIZED && doubleTap) {
             setMode(player, FlightMode.NONE, true);
             ticksSinceJump = 100;
         }
+    }
+
+    private static void airJump(LocalPlayer player, EffectiveStats stats) {
+        Vec3 motion = player.getDeltaMovement();
+        player.setDeltaMovement(motion.x, Math.max(motion.y, player.getAttributeValue(Attributes.JUMP_STRENGTH) + 0.1), motion.z);
+        player.resetFallDistance();
+        spend(player, airJumpCost());
+        ticksSinceAirJump = 0;
+        WingVisuals.local().animator.flap(stats.flapRate() * 1.5f);
+        player.playSound(SoundEvents.PHANTOM_FLAP, 0.7f, 1.2f);
+        PacketDistributor.sendToServer(new Payloads.AirJump());
     }
 
     private static void rescueJump(LocalPlayer player) {
@@ -225,6 +249,13 @@ public final class ClientFlight {
     }
 
     private static void handleTravelKey(LocalPlayer player, EffectiveStats stats) {
+        if (travelKeyLock > 0) {
+            travelKeyLock--;
+            while (ModKeys.TRAVEL.consumeClick()) {
+            }
+            chargeTicks = 0;
+            return;
+        }
         if (mode == FlightMode.NONE && player.onGround()) {
             while (ModKeys.TRAVEL.consumeClick()) {
             }
@@ -258,6 +289,7 @@ public final class ClientFlight {
         ticksSinceFlap = 0;
         WingVisuals.local().animator.flap(stats.flapRate());
         player.playSound(SoundEvents.PHANTOM_FLAP, 1f, 0.9f);
+        travelKeyLock = TAKEOFF_KEY_LOCK_TICKS;
         setMode(player, FlightMode.TRAVEL, true);
     }
 
@@ -484,9 +516,14 @@ public final class ClientFlight {
                     PacketDistributor.sendToServer(new Payloads.Impact((float) Math.max(0, -lastVelocity.y)));
                     setMode(player, FlightMode.NONE, true);
                 } else if (player.horizontalCollision) {
-                    double horizontal = Math.sqrt(lastVelocity.x * lastVelocity.x + lastVelocity.z * lastVelocity.z);
-                    PacketDistributor.sendToServer(new Payloads.Impact((float) horizontal));
-                    speed *= 0.2;
+                    Vec3 after = player.getDeltaMovement();
+                    double lostX = after.x == 0 ? lastVelocity.x : 0;
+                    double lostZ = after.z == 0 ? lastVelocity.z : 0;
+                    double impact = Math.sqrt(lostX * lostX + lostZ * lostZ);
+                    if (impact > 0.5) {
+                        PacketDistributor.sendToServer(new Payloads.Impact((float) impact));
+                    }
+                    speed = lastVelocity.subtract(lostX, 0, lostZ).length();
                 }
             }
             case STABILIZED -> {

@@ -26,6 +26,7 @@ public final class ServerConfig {
     public static final ModConfigSpec.DoubleValue GLIDE_REGEN;
     public static final ModConfigSpec.DoubleValue STAMINA_SYNC_FRACTION;
     public static final ModConfigSpec.IntValue RESCUE_JUMPS;
+    public static final ModConfigSpec.DoubleValue AIR_JUMP_COST;
 
     public static final ModConfigSpec.DoubleValue CRASH_THRESHOLD;
     public static final ModConfigSpec.DoubleValue CRASH_DAMAGE_PER_SPEED;
@@ -76,7 +77,10 @@ public final class ServerConfig {
                 .defineInRange("glideRegen", 3.0, 0.0, 1000.0);
         STAMINA_SYNC_FRACTION = b.comment("The server corrects the client when its stamina drifts by this fraction of the max.")
                 .defineInRange("syncFraction", 0.2, 0.01, 1.0);
-        RESCUE_JUMPS = b.defineInRange("rescueJumps", 2, 0, 10);
+        RESCUE_JUMPS = b.comment("Free jumps available when stamina is below the air jump cost. Reset on the ground.")
+                .defineInRange("rescueJumps", 2, 0, 10);
+        AIR_JUMP_COST = b.comment("Stamina spent per wing-assisted air jump.")
+                .defineInRange("airJumpCost", 20.0, 0.0, 1000.0);
         b.pop();
 
         b.push("damage");

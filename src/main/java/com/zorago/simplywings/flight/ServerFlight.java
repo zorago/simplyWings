@@ -26,6 +26,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 public final class ServerFlight {
     private static final ResourceLocation GRAVITY_MODIFIER = SimplyWings.id("flight_gravity");
     private static final int CRASH_WINDOW_TICKS = 10;
+    private static final int AIR_JUMP_REFUND_TICKS = 8;
 
     public static void register(IEventBus bus) {
         bus.addListener(ServerFlight::onPlayerTick);
@@ -114,6 +115,12 @@ public final class ServerFlight {
             }
         } else {
             allowed = infinite(player) || data.stamina() > 0;
+            long now = player.level().getGameTime();
+            if (allowed && current == FlightMode.NONE && now - data.lastAirJumpTick() <= AIR_JUMP_REFUND_TICKS) {
+                float max = stats.get().stamina();
+                data.setStamina(Math.min(max, data.stamina() + ServerConfig.AIR_JUMP_COST.get().floatValue()));
+                data.setLastAirJumpTick(Long.MIN_VALUE / 2);
+            }
         }
         if (allowed) {
             setMode(player, data, wanted, request.flags(), false);
@@ -142,6 +149,25 @@ public final class ServerFlight {
         data.setLastFlapTick(now);
         player.level().playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.PHANTOM_FLAP,
                 SoundSource.PLAYERS, 0.6f, 1.3f);
+        PacketDistributor.sendToPlayersTrackingEntity(player, new Payloads.FlapEvent(player.getId()));
+    }
+
+    public static void onAirJump(ServerPlayer player) {
+        WingsData data = ModAttachments.get(player);
+        float cost = ServerConfig.AIR_JUMP_COST.get().floatValue();
+        boolean valid = data.equipped().isPresent() && data.mode() == FlightMode.NONE && !player.onGround()
+                && canFly(player) && (infinite(player) || data.stamina() >= cost);
+        if (!valid) {
+            sendStamina(player, data);
+            return;
+        }
+        if (!infinite(player)) {
+            data.setStamina(data.stamina() - cost);
+        }
+        data.setLastAirJumpTick(player.level().getGameTime());
+        player.resetFallDistance();
+        player.level().playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.PHANTOM_FLAP,
+                SoundSource.PLAYERS, 0.5f, 1.2f);
         PacketDistributor.sendToPlayersTrackingEntity(player, new Payloads.FlapEvent(player.getId()));
     }
 

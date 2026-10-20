@@ -29,6 +29,7 @@ public final class WingsData {
     private float lastSentStamina = -1;
     private long lastFlapTick = Long.MIN_VALUE / 2;
     private long lastTravelTick = Long.MIN_VALUE / 2;
+    private long lastAirJumpTick = Long.MIN_VALUE / 2;
 
     public WingsData() {
         this(List.of(), Optional.empty(), 0f, 0);
@@ -116,6 +117,14 @@ public final class WingsData {
 
     public void setLastFlapTick(long tick) {
         lastFlapTick = tick;
+    }
+
+    public long lastAirJumpTick() {
+        return lastAirJumpTick;
+    }
+
+    public void setLastAirJumpTick(long tick) {
+        lastAirJumpTick = tick;
     }
 
     public long lastTravelTick() {

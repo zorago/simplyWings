@@ -10,6 +10,7 @@ public final class ClientConfig {
     public static final ModConfigSpec.IntValue CATCH_UP_TICKS;
     public static final ModConfigSpec.IntValue INTO_HEAD_TICKS;
     public static final ModConfigSpec.BooleanValue INVERT_PITCH;
+    public static final ModConfigSpec.IntValue DOUBLE_TAP_TICKS;
     public static final ModConfigSpec.EnumValue<RampCurve> STABILIZED_CURVE;
     public static final ModConfigSpec.DoubleValue CAMERA_ROLL;
     public static final ModConfigSpec.BooleanValue PARTICLES;
@@ -30,6 +31,8 @@ public final class ClientConfig {
         b.push("controls");
         INVERT_PITCH = b.comment("Invert pitch keys in travel mode (forward = pull up).")
                 .define("invertPitch", false);
+        DOUBLE_TAP_TICKS = b.comment("Max ticks between two jump presses to toggle hovering. A slower second press is an air jump.")
+                .defineInRange("doubleTapTicks", 4, 2, 10);
         STABILIZED_CURVE = b.comment("Speed ramp of the stabilized mode.")
                 .defineEnum("stabilizedCurve", RampCurve.EASE_IN);
         b.pop();

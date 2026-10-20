@@ -21,6 +21,8 @@ public final class ModNetwork {
                 (p, ctx) -> ServerFlight.onFlap((ServerPlayer) ctx.player()));
         r.playToServer(Payloads.RescueJump.TYPE, Payloads.RescueJump.CODEC,
                 (p, ctx) -> ServerFlight.onRescueJump((ServerPlayer) ctx.player()));
+        r.playToServer(Payloads.AirJump.TYPE, Payloads.AirJump.CODEC,
+                (p, ctx) -> ServerFlight.onAirJump((ServerPlayer) ctx.player()));
         r.playToServer(Payloads.Impact.TYPE, Payloads.Impact.CODEC,
                 (p, ctx) -> ServerFlight.onImpact((ServerPlayer) ctx.player(), p));
     }
