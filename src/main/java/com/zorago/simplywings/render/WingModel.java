@@ -67,12 +67,18 @@ public final class WingModel {
             new Segment(15f, 0.8f, 4, 5f, 3f, 66)),
             128, 32);
 
-    public static final Shape QUICKSILVER = new Shape("quicksilver", List.of(
+    public static final Shape SYLPH = new Shape("sylph", List.of(
             new Segment(6f, 0.6f, 2, 5f, 6f, 0),
             new Segment(5f, 0.5f, 2, 6f, 3f, 16)),
             64, 32);
 
-    public static final List<Shape> SHAPES = List.of(BASIC, ANGEL, BAT, DRAGONFLY, FALCON, ALBATROSS, QUICKSILVER);
+    public static final Shape DEMON = new Shape("demon", List.of(
+            new Segment(12f, 1.6f, 3, 10f, 14f, 0),
+            new Segment(14f, 1.3f, 4, 14f, 9f, 30),
+            new Segment(13f, 1.1f, 4, 10f, 2f, 62)),
+            128, 32);
+
+    public static final List<Shape> SHAPES = List.of(BASIC, ANGEL, BAT, DRAGONFLY, FALCON, ALBATROSS, SYLPH, DEMON);
 
     private final ModelPart root;
     private final Side left;

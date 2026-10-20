@@ -1,0 +1,27 @@
+{
+  "rarity": "legendary",
+  "model": "simplywings:sylph",
+  "color": -1,
+  "flap_rate": 6.0,
+  "hover_rate": 6.0,
+  "hover_speed": 18.0,
+  "hover_swing": 0.4,
+  "equipped": {
+    "endurance": 50.0,
+    "acceleration": 75.0,
+    "speed": 60.0,
+    "handling": 100.0,
+    "stability": 45.0,
+    "glide": 55.0,
+    "lift": 60.0
+  },
+  "global": {
+    "endurance": 14.4,
+    "acceleration": 11.7,
+    "speed": 15.84,
+    "handling": 13.14,
+    "stability": 16.2,
+    "glide": 10.8,
+    "lift": 16.2
+  }
+}

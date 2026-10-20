@@ -8,20 +8,20 @@
   "hover_swing": 1.0,
   "equipped": {
     "endurance": 70.0,
-    "acceleration": 45.0,
-    "speed": 45.0,
-    "handling": 55.0,
-    "stability": 100.0,
-    "glide": 50.0,
-    "lift": 60.0
+    "acceleration": 60.0,
+    "speed": 100.0,
+    "handling": 45.0,
+    "stability": 40.0,
+    "glide": 60.0,
+    "lift": 40.0
   },
   "global": {
-    "endurance": 18.0,
-    "acceleration": 14.625,
-    "speed": 19.8,
-    "handling": 16.425,
-    "stability": 20.25,
-    "glide": 13.5,
-    "lift": 20.25
+    "endurance": 14.4,
+    "acceleration": 11.7,
+    "speed": 15.84,
+    "handling": 13.14,
+    "stability": 16.2,
+    "glide": 10.8,
+    "lift": 16.2
   }
 }

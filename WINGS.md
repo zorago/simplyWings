@@ -18,11 +18,12 @@ Dernière mise à jour : 20 octobre 2026.
 | Ailes communes | Commune | 2,0 | 5,0 | 1,2 | 2,7 | 3,0 | Des élytres améliorées, le point de départ |
 | Ailes de chauve-souris | Rare | 4,0 | 7,0 | 3,1 | 8,2 | 3,0 | Agiles et aérodynamiques |
 | Ailes anciennes | Épique | 6,0 | 3,5 | 2,3 | 9,1 | 4,0 | Une libellule faite pour construire |
-| Ailes d'ange | Légendaire | 7,6 | **10** | 8,8 | 4,1 | 1,0 | La puissance brute |
-| Ailes de faucon pèlerin | Légendaire | 5,5 | 7,0 | **10** | 3,0 | 1,5 | La vitesse pure |
-| Ailes d'albatros | Légendaire | **10** | 3,5 | 7,0 | 3,5 | 2,0 | L'endurance infinie |
-| Ailes de vif-argent | Légendaire | 5,0 | 7,5 | 6,0 | **10** | 3,5 | Les virages instantanés |
-| Ailes de séraphin | Légendaire | 7,0 | 4,5 | 4,5 | 5,5 | **10** | Le stationnaire parfait |
+| Ailes d'ange | Légendaire | **10** | 7,0 | 7,5 | 4,1 | 1,0 | L'endurance, un vol majestueux |
+| Ailes de démon | Légendaire | 5,5 | **10** | 8,5 | 5,0 | 1,5 | La puissance brute, des coups violents |
+| Ailes de séraphin | Légendaire | 7,0 | 6,0 | **10** | 4,5 | 4,0 | La vitesse, six ailes dorées |
+| Ailes de sylphe | Légendaire | 5,0 | 7,5 | 6,0 | **10** | 4,5 | Les virages instantanés d'un esprit de l'air |
+| Ailes de faucon pèlerin | Légendaire | 5,5 | 7,0 | **10** | 3,0 | 1,5 | *Rôle à redéfinir : vitesse, comme le séraphin* |
+| Ailes d'albatros | Légendaire | **10** | 3,5 | 7,0 | 3,5 | 2,0 | *Rôle à redéfinir : endurance, comme l'ange* |
 
 ---
 
@@ -102,32 +103,56 @@ Dernière mise à jour : 20 octobre 2026.
 
 ## Ailes d'ange
 
-`simplywings:angel` · **Légendaire** · item `angel_wings` · **Accélération maxée**
+`simplywings:angel` · **Légendaire** · item `angel_wings` · **Endurance maxée**
 
-**Vibe** : la puissance. Un battement toutes les 2 secondes : longue montée majestueuse, puis coup sec qui projette en avant. Elles planent longtemps grâce à leur envergure, mais elles sont très instables en stationnaire.
+**Vibe** : l'endurance et la grâce. Un battement toutes les 2 secondes : longue montée majestueuse, puis poussée ample. Elles ne s'épuisent presque jamais et planent très loin grâce à leur envergure, mais elles sont très instables en stationnaire.
 
 **Apparence** : une grande aile blanc crème par côté, en trois segments. Les plumes s'allongent vers la pointe et descendent jusqu'aux pieds au repos.
 
 **En vol** :
-- **Déplacement** : +20 m/s par coup d'aile. Environ 3 battements pour atteindre la vitesse max.
-- **Saut ailé** : environ 4 blocs.
+- **Déplacement** : +15 m/s par battement.
 - **Stationnaire** : un grand battement toutes les 1,7 s, avec un balancement d'environ 1 bloc.
 
 | Stat | Note | Valeur |
 | --- | --- | --- |
-| Endurance | 7,6/10 | 240 de stamina |
-| Accélération | **10/10** | 10 m/s par s, soit +20 m/s par battement |
-| Vitesse | 8,8/10 | 58 m/s |
+| Endurance | **10/10** | 300 de stamina |
+| Accélération | 7,0/10 | 7,6 m/s par s, soit +15 m/s par battement |
+| Vitesse | 7,5/10 | 51 m/s |
 | Maniabilité | 4,1/10 | 85 °/s |
 | Stabilité | 1,0/10 | 1/10 |
-| Plané *(interne)* | 7,0/10 | traînée × 0,7 |
-| Portance *(interne)* | 1,8/10 | décroche sous 12 m/s |
+| Plané *(interne)* | 8,5/10 | traînée × 0,55 |
+| Portance *(interne)* | 3,0/10 | décroche sous 10,7 m/s |
+
+---
+
+## Ailes de démon
+
+`simplywings:demon` · **Légendaire** · item `demon_wings` · **Accélération maxée**
+
+**Vibe** : la puissance brute et la violence. Une membrane de cuir qui se lève lentement puis frappe d'un coup sec et brutal, plus vite et plus fort que tout le reste. Elles sont instables en stationnaire et ne planent pas très bien.
+
+**Apparence** : une grande membrane par côté, en trois segments épais. Rouge sombre veinée de noir, avec une lueur plus vive sur le bord de fuite.
+
+**En vol** :
+- **Déplacement** : 0,7 battement par seconde. Le coup arrive très tard dans le cycle et très vite, pour +14 m/s.
+- **Saut ailé** : environ 3 blocs.
+- **Stationnaire** : 1 Hz, très instable.
+
+| Stat | Note | Valeur |
+| --- | --- | --- |
+| Endurance | 5,5/10 | 188 de stamina |
+| Accélération | **10/10** | 10 m/s par s, soit +14 m/s par battement |
+| Vitesse | 8,5/10 | 56 m/s |
+| Maniabilité | 5,0/10 | 95 °/s |
+| Stabilité | 1,5/10 | 1,5/10 |
+| Plané *(interne)* | 4,0/10 | traînée × 1,0 |
+| Portance *(interne)* | 2,5/10 | décroche sous 11,3 m/s |
 
 ---
 
 ## Ailes de faucon pèlerin
 
-`simplywings:falcon` · **Légendaire** · item `falcon_wings` · **Vitesse maxée**
+`simplywings:falcon` · **Légendaire** · item `falcon_wings` · **Vitesse maxée** · *rôle à redéfinir (doublon du séraphin)*
 
 **Vibe** : la vitesse pure. Les ailes les plus rapides en croisière, faites pour le piqué en repli faucon. Elles virent mal et décrochent tôt : il faut garder de l'élan.
 
@@ -151,7 +176,7 @@ Dernière mise à jour : 20 octobre 2026.
 
 ## Ailes d'albatros
 
-`simplywings:albatross` · **Légendaire** · item `albatross_wings` · **Endurance maxée**
+`simplywings:albatross` · **Légendaire** · item `albatross_wings` · **Endurance maxée** · *rôle à redéfinir (doublon de l'ange)*
 
 **Vibe** : l'endurance. Des ailes interminables pour traverser le monde sans se poser. Elles accélèrent lentement mais ne s'épuisent jamais et planent très loin.
 
@@ -173,17 +198,17 @@ Dernière mise à jour : 20 octobre 2026.
 
 ---
 
-## Ailes de vif-argent
+## Ailes de sylphe
 
-`simplywings:quicksilver` · **Légendaire** · item `quicksilver_wings` · **Maniabilité maxée**
+`simplywings:sylph` · **Légendaire** · item `sylph_wings` · **Maniabilité maxée**
 
-**Vibe** : les virages instantanés, à la manière d'un colibri. Idéales pour slalomer entre les arbres, les tours et les grottes.
+**Vibe** : un sylphe, l'esprit élémentaire de l'air des légendes européennes, insaisissable et virevoltant. Il change de direction à l'instant, slalome entre les arbres et les tours, et semble danser dans le vent.
 
-**Apparence** : **3 petites ailes par côté**, argentées et métalliques. Elles battent en vague, l'une après l'autre.
+**Apparence** : **3 ailes féeriques par côté**, translucides et irisées, cyan pâle et nacré. Elles battent en vague, l'une après l'autre.
 
 **En vol** :
 - **Déplacement** : 6 battements par seconde, rapides et légers.
-- **Stationnaire** : 5 Hz, avec un balancement réduit de moitié.
+- **Stationnaire** : 6 Hz, avec un balancement très réduit.
 
 | Stat | Note | Valeur |
 | --- | --- | --- |
@@ -191,33 +216,33 @@ Dernière mise à jour : 20 octobre 2026.
 | Accélération | 7,5/10 | 8 m/s par s, soit +1,3 m/s par battement |
 | Vitesse | 6,0/10 | 43 m/s |
 | Maniabilité | **10/10** | 150 °/s |
-| Stabilité | 3,5/10 | 3,5/10 |
-| Plané *(interne)* | 4,5/10 | traînée × 0,95 |
-| Portance *(interne)* | 5,0/10 | décroche sous 8,5 m/s |
+| Stabilité | 4,5/10 | 4,5/10 |
+| Plané *(interne)* | 5,5/10 | traînée × 0,85 |
+| Portance *(interne)* | 6,0/10 | décroche sous 7,4 m/s |
 
 ---
 
 ## Ailes de séraphin
 
-`simplywings:seraph` · **Légendaire** · item `seraph_wings` · **Stabilité maxée**
+`simplywings:seraph` · **Légendaire** · item `seraph_wings` · **Vitesse maxée**
 
-**Vibe** : le stationnaire parfait, comme le vol créatif. Les ailes du bâtisseur ultime : immobiles dans les airs, rapides à placer. Elles sont plus lentes en vol de déplacement.
+**Vibe** : la vitesse céleste. Six ailes qui battent ensemble comme une seule et emportent le joueur plus vite que tout. Elles restent assez stables pour se poser avec précision.
 
 **Apparence** : **6 ailes d'ange dorées**, trois par côté, en éventail : une haute, une centrale, une basse, qui battent avec un léger décalage.
 
 **En vol** :
-- **Déplacement** : 0,9 battement par seconde, avec des coups amples.
-- **Stationnaire** : aucun balancement, et la plus grande vitesse de placement (20 m/s).
+- **Déplacement** : 0,9 battement par seconde, avec des coups amples (+7,6 m/s).
+- **Stationnaire** : 0,9 Hz, balancement modéré.
 
 | Stat | Note | Valeur |
 | --- | --- | --- |
 | Endurance | 7,0/10 | 225 de stamina |
-| Accélération | 4,5/10 | 5,6 m/s par s, soit +6,2 m/s par battement |
-| Vitesse | 4,5/10 | 35 m/s |
-| Maniabilité | 5,5/10 | 101 °/s |
-| Stabilité | **10/10** | 10/10 |
-| Plané *(interne)* | 5,0/10 | traînée × 0,9 |
-| Portance *(interne)* | 6,0/10 | décroche sous 7,4 m/s |
+| Accélération | 6,0/10 | 6,8 m/s par s, soit +7,6 m/s par battement |
+| Vitesse | **10/10** | 64 m/s |
+| Maniabilité | 4,5/10 | 90 °/s |
+| Stabilité | 4,0/10 | 4/10 |
+| Plané *(interne)* | 6,0/10 | traînée × 0,8 |
+| Portance *(interne)* | 4,0/10 | décroche sous 9,6 m/s |
 
 ---
 
@@ -233,5 +258,6 @@ Ces paramètres ne dépendent pas de la collection : ils définissent le caract�
 | Ange | 0,5 | 0,6 Hz | 19 m/s | × 1 | 1 |
 | Faucon pèlerin | 1,6 | 1,4 Hz | 16 m/s | × 1 | 1 |
 | Albatros | 0,8 | 0,9 Hz | 14 m/s | × 1 | 1 |
-| Vif-argent | 6 | 5 Hz | 18 m/s | × 0,5 | 3 |
+| Démon | 0,7 | 1,0 Hz | 18 m/s | × 1 | 1 |
 | Séraphin | 0,9 | 0,9 Hz | 20 m/s | × 1 | 3 |
+| Sylphe | 6 | 6 Hz | 18 m/s | × 0,4 | 3 |

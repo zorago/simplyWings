@@ -7,13 +7,13 @@
   "hover_speed": 19.0,
   "hover_swing": 1.0,
   "equipped": {
-    "endurance": 76.0,
-    "acceleration": 100.0,
-    "speed": 88.0,
+    "endurance": 100.0,
+    "acceleration": 70.0,
+    "speed": 75.0,
     "handling": 41.0,
     "stability": 10.0,
-    "glide": 70.0,
-    "lift": 18.0
+    "glide": 85.0,
+    "lift": 30.0
   },
   "global": {
     "endurance": 2.0,

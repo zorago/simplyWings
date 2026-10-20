@@ -1,0 +1,27 @@
+{
+  "rarity": "legendary",
+  "model": "simplywings:demon",
+  "color": -1,
+  "flap_rate": 0.7,
+  "hover_rate": 1.0,
+  "hover_speed": 18.0,
+  "hover_swing": 1.0,
+  "equipped": {
+    "endurance": 55.0,
+    "acceleration": 100.0,
+    "speed": 85.0,
+    "handling": 50.0,
+    "stability": 15.0,
+    "glide": 40.0,
+    "lift": 25.0
+  },
+  "global": {
+    "endurance": 14.4,
+    "acceleration": 11.7,
+    "speed": 15.84,
+    "handling": 13.14,
+    "stability": 16.2,
+    "glide": 10.8,
+    "lift": 16.2
+  }
+}

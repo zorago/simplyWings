@@ -67,11 +67,14 @@ public record WingStyle(List<Slot> slots, float upFraction, float downFraction, 
     public static final WingStyle ALBATROSS = new WingStyle(List.of(Slot.single(WingModel.ALBATROSS)),
             0.55f, 0.2f, 0.55f, 0.7f, 0f, 0f, true, false, false);
 
-    public static final WingStyle QUICKSILVER = new WingStyle(List.of(
-            new Slot(WingModel.QUICKSILVER, 0f, -1f, 0f, 0.25f, 0.35f, 0f, 1f),
-            new Slot(WingModel.QUICKSILVER, 0f, 1.5f, 0.2f, 0f, 0f, 0.9f, 1f),
-            new Slot(WingModel.QUICKSILVER, 0f, 4f, 0.4f, -0.3f, -0.3f, 1.8f, 0.9f)),
-            0.4f, 0.3f, 0.9f, 0.9f, 0f, 0f, true, false, false);
+    public static final WingStyle SYLPH = new WingStyle(List.of(
+            new Slot(WingModel.SYLPH, 0f, -1f, 0f, 0.25f, 0.35f, 0f, 1f),
+            new Slot(WingModel.SYLPH, 0f, 1.5f, 0.2f, 0f, 0f, 0.9f, 1f),
+            new Slot(WingModel.SYLPH, 0f, 4f, 0.4f, -0.3f, -0.3f, 1.8f, 0.9f)),
+            0.4f, 0.3f, 0.9f, 0.9f, 0f, 0f, true, false, true);
+
+    public static final WingStyle DEMON = new WingStyle(List.of(Slot.single(WingModel.DEMON)),
+            0.55f, 0.08f, 1.1f, 1.0f, 0f, 0f, true, false, false);
 
     public static final WingStyle SERAPH = new WingStyle(List.of(
             new Slot(WingModel.ANGEL, 0f, -2.5f, 0.2f, 0.1f, 0.75f, -0.35f, 0.8f),
@@ -86,7 +89,8 @@ public record WingStyle(List<Slot> slots, float upFraction, float downFraction, 
             SimplyWings.id("dragonfly"), DRAGONFLY,
             SimplyWings.id("falcon"), FALCON,
             SimplyWings.id("albatross"), ALBATROSS,
-            SimplyWings.id("quicksilver"), QUICKSILVER,
+            SimplyWings.id("sylph"), SYLPH,
+            SimplyWings.id("demon"), DEMON,
             SimplyWings.id("seraph"), SERAPH);
 
     public static WingStyle of(ResourceLocation model) {

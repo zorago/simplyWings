@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "simplywings:item/quicksilver_wings"
+    "layer0": "simplywings:item/sylph_wings"
   }
 }

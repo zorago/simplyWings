@@ -34,8 +34,6 @@
   "wing.simplywings.falcon": "Peregrine Wings",
   "item.simplywings.albatross_wings": "Albatross Wings",
   "wing.simplywings.albatross": "Albatross Wings",
-  "item.simplywings.quicksilver_wings": "Quicksilver Wings",
-  "wing.simplywings.quicksilver": "Quicksilver Wings",
   "item.simplywings.seraph_wings": "Seraph Wings",
   "wing.simplywings.seraph": "Seraph Wings",
   "gui.simplywings.stat.endurance": "Endurance",
@@ -47,5 +45,9 @@
   "gui.simplywings.stat.handling": "Handling",
   "gui.simplywings.stat_value.handling": "%s °/s turn rate",
   "gui.simplywings.stat.stability": "Stability",
-  "gui.simplywings.stat_value.stability": "%s / 10 hover stability"
+  "gui.simplywings.stat_value.stability": "%s / 10 hover stability",
+  "item.simplywings.sylph_wings": "Sylph Wings",
+  "wing.simplywings.sylph": "Sylph Wings",
+  "item.simplywings.demon_wings": "Demon Wings",
+  "wing.simplywings.demon": "Demon Wings"
 }

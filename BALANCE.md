@@ -24,17 +24,17 @@ Le plafond de vitesse (64 m/s) correspond à l'ange avec les 4 premières paires
 
 - Score effectif = score de la paire + somme des bonus `global` de toute la collection, plafonné à 100.
 - Pour chaque stat, la somme des bonus de toutes les paires vaut **100 − le score le plus bas** parmi les paires. Avec la collection complète, toutes les paires sont donc à 10/10 partout.
-- Répartition actuelle : les 4 premières paires donnent 2,5 % chacune (10 % au total), les 4 légendaires suivantes 22,5 % chacune (90 %). Si on ajoute des paires, il faudra redistribuer.
+- Répartition actuelle : les 4 premières paires (commune, chauve-souris, ancienne, ange) donnent 2,5 % chacune (10 % au total), les 5 autres légendaires 18 % chacune (90 %). Si on ajoute ou retire des paires, il faudra redistribuer.
 
-| Stat | Bonus total de la collection | Par paire de départ (2,5 %) | Par légendaire (22,5 %) |
+| Stat | Bonus total de la collection | Par paire de départ (2,5 %) | Par autre légendaire (18 %) |
 | --- | --- | --- | --- |
-| Endurance | 80 | 2 | 18 |
-| Accélération | 65 | 1,6 | 14,6 |
-| Vitesse | 88 | 2,2 | 19,8 |
-| Maniabilité | 73 | 1,8 | 16,4 |
-| Stabilité | 90 | 2,25 | 20,25 |
-| Plané (interne) | 60 | 1,5 | 13,5 |
-| Portance (interne) | 90 | 2,25 | 20,25 |
+| Endurance | 80 | 2 | 14,4 |
+| Accélération | 65 | 1,6 | 11,7 |
+| Vitesse | 88 | 2,2 | 15,8 |
+| Maniabilité | 73 | 1,8 | 13,1 |
+| Stabilité | 90 | 2,25 | 16,2 |
+| Plané (interne) | 60 | 1,5 | 10,8 |
+| Portance (interne) | 90 | 2,25 | 16,2 |
 
 ## Scores des paires (stats équipées, sur 100)
 
@@ -45,11 +45,12 @@ Une légendaire a par définition au moins une stat visible maxée à 100 (en gr
 | Commune | Commune | 20 | 50 | 12 | 27 | 30 | 40 | 40 | Élytres améliorées, la base |
 | Chauve-souris | Rare | 40 | 70 | 31 | 82 | 30 | 80 | 48 | Aérodynamique et agile |
 | Ancienne (libellule) | Épique | 60 | 35 | 23 | 91 | 40 | 40 | 86 | Faite pour construire, médiocre en vol |
-| Ange | Légendaire | 76 | **100** | 88 | 41 | 10 | 70 | 18 | La puissance : un coup sec toutes les 2 s |
-| Faucon pèlerin | Légendaire | 55 | 70 | **100** | 30 | 15 | 60 | 10 | La vitesse ; peu maniable, décroche tôt |
-| Albatros | Légendaire | **100** | 35 | 70 | 35 | 20 | 85 | 40 | L'endurance ; très longues ailes fines, accélère lentement |
-| Vif-argent | Légendaire | 50 | 75 | 60 | **100** | 35 | 45 | 50 | La maniabilité ; 3 petites ailes par côté, 6 battements/s |
-| Séraphin | Légendaire | 70 | 45 | 45 | 55 | **100** | 50 | 60 | La stabilité ; 6 ailes d'ange, stationnaire parfait |
+| Ange | Légendaire | **100** | 70 | 75 | 41 | 10 | 85 | 30 | L'endurance : vol majestueux, plane loin |
+| Démon | Légendaire | 55 | **100** | 85 | 50 | 15 | 40 | 25 | La puissance : coups violents et tardifs |
+| Faucon pèlerin | Légendaire | 55 | 70 | **100** | 30 | 15 | 60 | 10 | Rôle à redéfinir (vitesse, doublon du séraphin) |
+| Albatros | Légendaire | **100** | 35 | 70 | 35 | 20 | 85 | 40 | Rôle à redéfinir (endurance, doublon de l'ange) |
+| Sylphe | Légendaire | 50 | 75 | 60 | **100** | 45 | 55 | 60 | La maniabilité ; esprit de l'air, 3 ailes féeriques par côté |
+| Séraphin | Légendaire | 70 | 60 | **100** | 45 | 40 | 60 | 40 | La vitesse ; 6 ailes d'ange dorées |
 
 ## Paramètres d'identité (hors collection)
 
@@ -61,7 +62,8 @@ Une légendaire a par définition au moins une stat visible maxée à 100 (en gr
 | Ange | 0,5 | 0,6 Hz, 19 m/s, × 1 | 1 |
 | Faucon | 1,6 | 1,4 Hz, 16 m/s, × 1 | 1 |
 | Albatros | 0,8 | 0,9 Hz, 14 m/s, × 1 | 1 |
-| Vif-argent | 6 | 5 Hz, 18 m/s, × 0,5 | 3 |
+| Sylphe | 6 | 6 Hz, 18 m/s, × 0,4 | 3 |
+| Démon | 0,7 | 1,0 Hz, 18 m/s, × 1 | 1 |
 | Séraphin | 0,9 | 0,9 Hz, 20 m/s, × 1 | 3 |
 
 Rappels de mécanique :

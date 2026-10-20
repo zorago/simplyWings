@@ -34,8 +34,6 @@
   "wing.simplywings.falcon": "Ailes de faucon pèlerin",
   "item.simplywings.albatross_wings": "Ailes d'albatros",
   "wing.simplywings.albatross": "Ailes d'albatros",
-  "item.simplywings.quicksilver_wings": "Ailes de vif-argent",
-  "wing.simplywings.quicksilver": "Ailes de vif-argent",
   "item.simplywings.seraph_wings": "Ailes de séraphin",
   "wing.simplywings.seraph": "Ailes de séraphin",
   "gui.simplywings.stat.endurance": "Endurance",
@@ -47,5 +45,9 @@
   "gui.simplywings.stat.handling": "Maniabilité",
   "gui.simplywings.stat_value.handling": "%s °/s de rotation",
   "gui.simplywings.stat.stability": "Stabilité",
-  "gui.simplywings.stat_value.stability": "%s / 10 de stabilité en stationnaire"
+  "gui.simplywings.stat_value.stability": "%s / 10 de stabilité en stationnaire",
+  "item.simplywings.sylph_wings": "Ailes de sylphe",
+  "wing.simplywings.sylph": "Ailes de sylphe",
+  "item.simplywings.demon_wings": "Ailes de démon",
+  "wing.simplywings.demon": "Ailes de démon"
 }
