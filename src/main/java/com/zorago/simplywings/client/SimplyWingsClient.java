@@ -129,6 +129,10 @@ public class SimplyWingsClient {
             visual.tail.tick(player, visual.mode);
         }
         FuryEffects.tick(player, visual);
+        FuryEffects.ghost(player);
+        if (player == Minecraft.getInstance().player) {
+            GhostView.tick(player);
+        }
     }
 
     private static void spawnTrails(Player player) {
@@ -158,5 +162,6 @@ public class SimplyWingsClient {
         ClientWings.reset();
         WingVisuals.clear();
         FuryEffects.clear();
+        GhostView.clear();
     }
 }

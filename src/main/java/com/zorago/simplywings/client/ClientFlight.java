@@ -71,6 +71,7 @@ public final class ClientFlight {
     private static int furyWindow;
     private static boolean furyCharging;
     private static boolean sprintWasDown;
+    private static double cruiseMax;
 
     public static FlightMode mode() {
         return mode;
@@ -82,6 +83,11 @@ public final class ClientFlight {
 
     public static float takeoffProgress() {
         return chargeTicks / (float) ServerConfig.TAKEOFF_CHARGE_TICKS.get();
+    }
+
+    public static boolean terminalDive() {
+        return mode == FlightMode.TRAVEL && !braking
+                && (tucked || (speed > cruiseMax && pitch >= ServerConfig.TUCK_MIN_PITCH.get()));
     }
 
     public static float chargeProgress() {
@@ -224,7 +230,7 @@ public final class ClientFlight {
         boolean sprint = Minecraft.getInstance().options.keySprint.isDown();
         boolean sprintPressed = sprint && !sprintWasDown;
         sprintWasDown = sprint;
-        if (!FurySet.isFury(ClientWings.equipped()) || !mode.flying()) {
+        if (!FurySet.isFury(ClientWings.equipped()) || mode != FlightMode.TRAVEL) {
             cancelFury();
             return;
         }
@@ -262,10 +268,6 @@ public final class ClientFlight {
         furyCharging = false;
         furyCharge = 0;
         furyWindow = 0;
-        if (mode != FlightMode.TRAVEL) {
-            initTravel(player, stats);
-            setMode(player, FlightMode.TRAVEL, true);
-        }
         heading = player.getYRot();
         pitch = (float) FlightMath.clamp(player.getXRot(), -80, 85);
         prevHeading = heading;
@@ -277,6 +279,7 @@ public final class ClientFlight {
         stalled = false;
         stallVy = 0;
         speed = ServerConfig.TERMINAL_VELOCITY.get();
+        FuryEffects.dashLocal(player);
         PacketDistributor.sendToServer(new Payloads.FuryDash());
     }
 
@@ -457,9 +460,6 @@ public final class ClientFlight {
         double forward = (o.keyUp.isDown() ? 1 : 0) - (o.keyDown.isDown() ? 1 : 0);
         double strafe = (o.keyLeft.isDown() ? 1 : 0) - (o.keyRight.isDown() ? 1 : 0);
         double vertical = (o.keyJump.isDown() ? 1 : 0) - (o.keyShift.isDown() ? 1 : 0);
-        if (furyCharge > 0 || furyWindow > 0) {
-            vertical = Math.max(0, vertical);
-        }
         double s = stats.stabilization();
         double ramp = ServerConfig.STABILIZED_RAMP_TICKS.get() + (10 - s) * ServerConfig.STABILIZED_RAMP_TICKS_PER_POINT.get();
         ClientConfig.RampCurve curve = ClientConfig.STABILIZED_CURVE.get();
@@ -540,6 +540,7 @@ public final class ClientFlight {
         double vMin = stats.minSpeed();
         double vMax = Math.max(stats.maxSpeed(), vMin + 1);
         double accelStat = stats.acceleration();
+        cruiseMax = vMax;
 
         double invert = ClientConfig.INVERT_PITCH.get() ? -1 : 1;
         double pitchIn = ((o.keyUp.isDown() ? 1 : 0) - (o.keyDown.isDown() ? 1 : 0)) * invert;
@@ -626,7 +627,9 @@ public final class ClientFlight {
         double stopSpeed = vMin * ServerConfig.STOP_SPEED_FACTOR.get();
         boolean noStamina = !creative && ClientWings.stamina() <= 0;
         double sink = 0;
-        if (braking && speed <= stopSpeed) {
+        if (braking && speed <= stopSpeed && (furyCharge > 0 || furyWindow > 0)) {
+            speed = stopSpeed;
+        } else if (braking && speed <= stopSpeed) {
             if (!noStamina) {
                 lastVelocity = Vec3.ZERO;
                 player.setDeltaMovement(Vec3.ZERO);

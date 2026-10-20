@@ -9,6 +9,7 @@ import com.zorago.simplywings.data.WingDefinition;
 import com.zorago.simplywings.data.WingRegistries;
 import java.util.Map;
 import java.util.Optional;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.PlayerModel;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.LightTexture;
@@ -22,6 +23,8 @@ import net.minecraft.world.entity.EquipmentSlot;
 
 public class WingsLayer extends RenderLayer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> {
     private static final ResourceLocation BASIC = SimplyWings.id("basic");
+    private static final int GHOST_ALPHA = 0x40;
+    private static final int GHOST_COLOR = GHOST_ALPHA << 24 | 0xFFFFFF;
 
     private final Map<String, WingModel> models;
     private final Map<ResourceLocation, TailModel> tails;
@@ -39,7 +42,11 @@ public class WingsLayer extends RenderLayer<AbstractClientPlayer, PlayerModel<Ab
                        float limbSwing, float limbSwingAmount, float partialTick, float ageInTicks, float netHeadYaw,
                        float headPitch) {
         WingVisuals.Visual visual = WingVisuals.of(player);
-        if (visual == null || visual.equipped.isEmpty() || player.isInvisible()) {
+        if (visual == null || visual.equipped.isEmpty()) {
+            return;
+        }
+        boolean ghost = player.isInvisible();
+        if (ghost && player != Minecraft.getInstance().player) {
             return;
         }
         Optional<WingDefinition> definition = visual.equipped.flatMap(id -> WingRegistries.get(player.registryAccess(), id));
@@ -60,14 +67,14 @@ public class WingsLayer extends RenderLayer<AbstractClientPlayer, PlayerModel<Ab
             poseStack.translate(slot.x() / 16f, slot.y() / 16f, slot.z() / 16f);
             model.setup(visual.animator.pose(partialTick, style, slot, pose));
             ResourceLocation texture = model.shape().texture();
-            RenderType type = switch (style.render()) {
+            RenderType type = ghost ? RenderType.entityTranslucent(texture) : switch (style.render()) {
                 case CUTOUT -> RenderType.entityCutoutNoCull(texture);
                 case TRANSLUCENT -> RenderType.entityTranslucent(texture);
                 case ETHEREAL -> RenderType.entityTranslucentEmissive(texture);
             };
             int packedLight = style.render() == WingStyle.Render.ETHEREAL ? LightTexture.FULL_BRIGHT : light;
-            model.render(poseStack, buffer.getBuffer(type), packedLight, OverlayTexture.NO_OVERLAY, color);
-            if (style.glow() != null) {
+            model.render(poseStack, buffer.getBuffer(type), packedLight, OverlayTexture.NO_OVERLAY, ghost ? ghostColor(color) : color);
+            if (style.glow() != null && !ghost) {
                 model.render(poseStack, buffer.getBuffer(RenderType.eyes(style.glow())), LightTexture.FULL_BRIGHT,
                         OverlayTexture.NO_OVERLAY, -1);
             }
@@ -76,9 +83,14 @@ public class WingsLayer extends RenderLayer<AbstractClientPlayer, PlayerModel<Ab
         TailModel tail = tails.get(modelId);
         if (tail != null) {
             tail.setup(visual.tail, partialTick);
-            tail.render(poseStack, buffer.getBuffer(RenderType.entityCutoutNoCull(tail.spec().texture())), light,
-                    OverlayTexture.NO_OVERLAY);
+            RenderType type = ghost ? RenderType.entityTranslucent(tail.spec().texture())
+                    : RenderType.entityCutoutNoCull(tail.spec().texture());
+            tail.render(poseStack, buffer.getBuffer(type), light, OverlayTexture.NO_OVERLAY, ghost ? GHOST_COLOR : -1);
         }
         poseStack.popPose();
+    }
+
+    private static int ghostColor(int color) {
+        return GHOST_ALPHA << 24 | (color & 0xFFFFFF);
     }
 }

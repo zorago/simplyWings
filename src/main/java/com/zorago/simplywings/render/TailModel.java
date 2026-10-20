@@ -88,7 +88,7 @@ public final class TailModel {
         }
     }
 
-    public void render(PoseStack poseStack, VertexConsumer consumer, int light, int overlay) {
-        root.render(poseStack, consumer, light, overlay);
+    public void render(PoseStack poseStack, VertexConsumer consumer, int light, int overlay, int color) {
+        root.render(poseStack, consumer, light, overlay, color);
     }
 }
