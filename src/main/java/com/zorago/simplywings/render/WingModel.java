@@ -105,8 +105,38 @@ public final class WingModel {
             new Segment(16f, 0.6f, 4, 7f, 1f, 46)),
             128, 32);
 
+    public static final Shape STORM = new Shape("storm", List.of(
+            new Segment(12f, 0.6f, 4, 8f, 12f, 0),
+            new Segment(12f, 0.5f, 4, 12f, 8f, 28),
+            new Segment(12f, 0.4f, 4, 8f, 2f, 56)),
+            128, 32);
+
+    public static final Shape AURORA = new Shape("aurora", List.of(
+            new Segment(13f, 0.4f, 3, 10f, 14f, 0),
+            new Segment(13f, 0.4f, 3, 14f, 12f, 30),
+            new Segment(12f, 0.3f, 4, 12f, 5f, 60)),
+            128, 32);
+
+    public static final Shape SHADOW = new Shape("shadow", List.of(
+            new Segment(11f, 1f, 3, 9f, 12f, 0),
+            new Segment(13f, 0.8f, 4, 12f, 9f, 28),
+            new Segment(12f, 0.6f, 4, 9f, 2f, 58)),
+            128, 32);
+
+    public static final Shape NEBULA = new Shape("nebula", List.of(
+            new Segment(12f, 0.8f, 3, 11f, 15f, 0),
+            new Segment(12f, 0.7f, 3, 15f, 13f, 28),
+            new Segment(11f, 0.6f, 4, 13f, 5f, 56)),
+            128, 32);
+
+    public static final Shape FOREST = new Shape("forest", List.of(
+            new Segment(10f, 1f, 3, 9f, 12f, 0),
+            new Segment(10f, 0.9f, 3, 12f, 10f, 24),
+            new Segment(9f, 0.8f, 3, 10f, 4f, 48)),
+            128, 32);
+
     public static final List<Shape> SHAPES = List.of(BASIC, ANGEL, BAT, DRAGONFLY, PSYCHE_FORE, PSYCHE_HIND, DEMON, DAEDALUS,
-            FIRE, WATER, EARTH, AIR, PTERO);
+            FIRE, WATER, EARTH, AIR, PTERO, STORM, AURORA, SHADOW, NEBULA, FOREST);
 
     private final ModelPart root;
     private final Side left;

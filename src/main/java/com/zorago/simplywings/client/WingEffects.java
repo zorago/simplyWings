@@ -34,6 +34,10 @@ public final class WingEffects {
     private static final ParticleOptions FOAM = new DustParticleOptions(new Vector3f(0.75f, 0.9f, 1f), 0.8f);
     private static final ParticleOptions AMBER = new DustParticleOptions(new Vector3f(0.95f, 0.6f, 0.15f), 0.6f);
     private static final ParticleOptions WISP = new DustParticleOptions(new Vector3f(0.92f, 0.97f, 1f), 0.7f);
+    private static final ParticleOptions AURORA_GREEN = new DustParticleOptions(new Vector3f(0.3f, 1f, 0.6f), 0.9f);
+    private static final ParticleOptions AURORA_VIOLET = new DustParticleOptions(new Vector3f(0.7f, 0.4f, 1f), 0.9f);
+    private static final ParticleOptions SHADE = new DustParticleOptions(new Vector3f(0.08f, 0.04f, 0.12f), 1.3f);
+    private static final ParticleOptions STAR = new DustParticleOptions(new Vector3f(0.9f, 0.9f, 1f), 0.5f);
     private static final ParticleOptions DIRT_DUST = new BlockParticleOption(ParticleTypes.FALLING_DUST, Blocks.COARSE_DIRT.defaultBlockState());
     private static final ParticleOptions STONE_CHIP = new BlockParticleOption(ParticleTypes.BLOCK, Blocks.STONE.defaultBlockState());
     private static final ParticleOptions MOSS_CHIP = new BlockParticleOption(ParticleTypes.BLOCK, Blocks.MOSS_BLOCK.defaultBlockState());
@@ -244,6 +248,50 @@ public final class WingEffects {
                     }
                 }
             }
+            case STORM -> {
+                if (e.chance(0.5f)) {
+                    Vec3 p = f.alongWing(sign, 0.2 + random.nextDouble() * 0.8).add(f.back.scale(0.2));
+                    e.add(ParticleTypes.ELECTRIC_SPARK, p, f.back.scale(0.05));
+                }
+                if (travel && speed > 20 && e.chance(0.4f)) {
+                    e.add(ParticleTypes.ELECTRIC_SPARK, f.alongWing(sign, 1.0).add(f.back.scale(0.4)), f.back.scale(0.1));
+                }
+            }
+            case AURORA -> {
+                if (e.chance(0.6f)) {
+                    Vec3 p = f.alongWing(sign, 0.2 + random.nextDouble() * 0.8)
+                            .add(f.up.scale(random.nextDouble() * 0.6)).add(f.back.scale(0.2));
+                    e.add(random.nextBoolean() ? AURORA_GREEN : AURORA_VIOLET, p, f.back.scale(0.02).add(0, 0.01, 0));
+                }
+            }
+            case SHADOW -> {
+                if (e.chance(0.6f)) {
+                    Vec3 p = f.alongWing(sign, 0.3 + random.nextDouble() * 0.7).add(f.back.scale(0.25));
+                    e.add(SHADE, p, f.back.scale(0.03).add(0, 0.01, 0));
+                }
+                if (travel && e.chance(0.3f)) {
+                    e.add(ParticleTypes.SQUID_INK, f.alongWing(sign, random.nextDouble()).add(f.back.scale(0.5)), f.back.scale(0.05));
+                }
+            }
+            case NEBULA -> {
+                if (e.chance(0.5f)) {
+                    Vec3 p = f.alongWing(sign, 0.2 + random.nextDouble() * 0.8).add(f.up.scale(random.nextDouble() * 0.4 - 0.2));
+                    e.add(STAR, p, 0, 0, 0);
+                }
+                if (travel && speed > 25 && e.chance(0.4f)) {
+                    e.add(ParticleTypes.END_ROD, f.alongWing(sign, 1.0).add(f.back.scale(0.4)), 0, 0, 0);
+                }
+            }
+            case FOREST -> {
+                if (e.chance(0.3f)) {
+                    Vec3 p = f.alongWing(sign, 0.3 + random.nextDouble() * 0.7).add(f.back.scale(0.2));
+                    e.add(ParticleTypes.CHERRY_LEAVES, p, 0, 0, 0);
+                }
+                if (e.chance(0.15f)) {
+                    Vec3 p = f.alongWing(sign, random.nextDouble()).add(f.back.scale(0.2));
+                    e.add(ParticleTypes.SPORE_BLOSSOM_AIR, p, 0, 0, 0);
+                }
+            }
             case FOSSIL -> {
                 if (e.chance(0.2f)) {
                     Vec3 p = f.alongWing(sign, 0.3 + random.nextDouble() * 0.7).add(f.back.scale(0.2));
@@ -351,6 +399,48 @@ public final class WingEffects {
                     e.add(WISP, p, f.back.scale(0.2));
                 }
                 e.sound(player, SoundEvents.BREEZE_IDLE_AIR, 0.6f, 1.2f);
+            }
+            case STORM -> {
+                for (int i = e.count(14); i > 0; i--) {
+                    Vec3 p = f.alongWing(i % 2 == 0 ? 1 : -1, random.nextDouble());
+                    e.add(ParticleTypes.ELECTRIC_SPARK, p, f.back.scale(0.2 + random.nextDouble() * 0.2));
+                }
+                e.sound(player, SoundEvents.LIGHTNING_BOLT_IMPACT, 0.25f, 1.8f);
+            }
+            case AURORA -> {
+                for (int i = e.count(16); i > 0; i--) {
+                    Vec3 p = f.alongWing(i % 2 == 0 ? 1 : -1, random.nextDouble()).add(f.up.scale(random.nextDouble() * 0.5));
+                    e.add(i % 3 == 0 ? AURORA_VIOLET : AURORA_GREEN, p, f.back.scale(0.08).add(0, 0.03, 0));
+                }
+                e.sound(player, SoundEvents.AMETHYST_BLOCK_RESONATE, 0.5f, 1.2f);
+            }
+            case SHADOW -> {
+                for (int i = e.count(12); i > 0; i--) {
+                    Vec3 p = f.alongWing(i % 2 == 0 ? 1 : -1, random.nextDouble()).add(f.back.scale(0.3));
+                    e.add(SHADE, p, f.back.scale(0.12));
+                }
+                for (int i = e.count(4); i > 0; i--) {
+                    Vec3 p = f.alongWing(i % 2 == 0 ? 1 : -1, random.nextDouble()).add(f.back.scale(0.5));
+                    e.add(ParticleTypes.LARGE_SMOKE, p, f.back.scale(0.06));
+                }
+                e.sound(player, SoundEvents.ENDERMAN_TELEPORT, 0.25f, 0.6f);
+            }
+            case NEBULA -> {
+                for (int i = e.count(12); i > 0; i--) {
+                    Vec3 p = f.alongWing(i % 2 == 0 ? 1 : -1, random.nextDouble());
+                    e.add(ParticleTypes.END_ROD, p, f.back.scale(0.06 + random.nextDouble() * 0.06));
+                }
+                for (int i = e.count(8); i > 0; i--) {
+                    e.add(STAR, f.alongWing(i % 2 == 0 ? 1 : -1, random.nextDouble()).add(f.back.scale(0.3)), 0, 0, 0);
+                }
+                e.sound(player, SoundEvents.AMETHYST_CLUSTER_BREAK, 0.4f, 1.5f);
+            }
+            case FOREST -> {
+                for (int i = e.count(12); i > 0; i--) {
+                    Vec3 p = f.alongWing(i % 2 == 0 ? 1 : -1, random.nextDouble()).add(f.back.scale(0.2));
+                    e.add(ParticleTypes.CHERRY_LEAVES, p, 0, 0, 0);
+                }
+                e.sound(player, SoundEvents.AZALEA_LEAVES_BREAK, 0.6f, 0.9f);
             }
             case FOSSIL -> {
                 for (int i = e.count(6); i > 0; i--) {

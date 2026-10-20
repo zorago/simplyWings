@@ -57,5 +57,16 @@
   "item.simplywings.air_wings": "Wings of the Wind",
   "wing.simplywings.air": "Wings of the Wind",
   "item.simplywings.ptero_wings": "Pterosaur Wings",
-  "wing.simplywings.ptero": "Pterosaur Wings"
+  "wing.simplywings.ptero": "Pterosaur Wings",
+  "item.simplywings.storm_wings": "Wings of the Storm",
+  "wing.simplywings.storm": "Wings of the Storm",
+  "item.simplywings.aurora_wings": "Aurora Wings",
+  "wing.simplywings.aurora": "Aurora Wings",
+  "item.simplywings.shadow_wings": "Wings of Shadow",
+  "wing.simplywings.shadow": "Wings of Shadow",
+  "item.simplywings.nebula_wings": "Nebula Wings",
+  "wing.simplywings.nebula": "Nebula Wings",
+  "item.simplywings.forest_wings": "Wings of the Forest Spirit",
+  "wing.simplywings.forest": "Wings of the Forest Spirit",
+  "itemGroup.simplywings": "Simply Wings"
 }

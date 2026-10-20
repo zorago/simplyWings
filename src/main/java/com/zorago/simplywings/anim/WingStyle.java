@@ -29,7 +29,12 @@ public record WingStyle(List<Slot> slots, float upFraction, float downFraction, 
         EARTH,
         AIR,
         FOSSIL,
-        PTERO
+        PTERO,
+        STORM,
+        AURORA,
+        SHADOW,
+        NEBULA,
+        FOREST
     }
 
     public record Slot(WingModel.Shape shape, float x, float y, float z, float sweep, float lift, float phase,
@@ -128,6 +133,25 @@ public record WingStyle(List<Slot> slots, float upFraction, float downFraction, 
     public static final WingStyle PTERO = new WingStyle(List.of(Slot.single(WingModel.PTERO)),
             0.5f, 0.18f, 1.0f, 0.9f, 0f, 0f, 0.03f, true, false, Render.CUTOUT, null, Effects.PTERO);
 
+    public static final WingStyle STORM = new WingStyle(List.of(Slot.single(WingModel.STORM)),
+            0.4f, 0.12f, 0.9f, 0.9f, 0.04f, 17f, 0.05f, true, false, Render.ETHEREAL, null, Effects.STORM);
+
+    public static final WingStyle AURORA = new WingStyle(List.of(
+            new Slot(WingModel.AURORA, 0f, -0.5f, 0f, 0.1f, 0.15f, 0f, 1f),
+            new Slot(WingModel.AURORA, 0f, 3f, 0.3f, -0.3f, -0.25f, 0.5f, 0.8f)),
+            0.55f, 0.3f, 0.6f, 0.4f, 0f, 0f, 0.2f, false, false, Render.ETHEREAL, null, Effects.AURORA);
+
+    public static final WingStyle SHADOW = new WingStyle(List.of(Slot.single(WingModel.SHADOW)),
+            0.45f, 0.14f, 0.95f, 0.9f, 0f, 0f, 0.08f, true, false, Render.TRANSLUCENT, glow("shadow"), Effects.SHADOW);
+
+    public static final WingStyle NEBULA = new WingStyle(List.of(Slot.single(WingModel.NEBULA)),
+            0.55f, 0.2f, 0.85f, 0.8f, 0f, 0f, 0.1f, true, false, Render.TRANSLUCENT, glow("nebula"), Effects.NEBULA);
+
+    public static final WingStyle FOREST = new WingStyle(List.of(
+            new Slot(WingModel.FOREST, 0f, -0.5f, 0f, 0.15f, 0.1f, 0f, 1f),
+            new Slot(WingModel.FOREST, 0f, 3f, 0.3f, -0.3f, -0.2f, 0.4f, 0.85f)),
+            0.5f, 0.25f, 0.8f, 0.7f, 0f, 0f, 0.06f, true, false, Render.CUTOUT, null, Effects.FOREST);
+
     private static final Map<ResourceLocation, WingStyle> STYLES = Map.ofEntries(
             Map.entry(SimplyWings.id("basic"), BASIC),
             Map.entry(SimplyWings.id("bat"), BAT),
@@ -141,7 +165,12 @@ public record WingStyle(List<Slot> slots, float upFraction, float downFraction, 
             Map.entry(SimplyWings.id("water"), WATER),
             Map.entry(SimplyWings.id("earth"), EARTH),
             Map.entry(SimplyWings.id("air"), AIR),
-            Map.entry(SimplyWings.id("ptero"), PTERO));
+            Map.entry(SimplyWings.id("ptero"), PTERO),
+            Map.entry(SimplyWings.id("storm"), STORM),
+            Map.entry(SimplyWings.id("aurora"), AURORA),
+            Map.entry(SimplyWings.id("shadow"), SHADOW),
+            Map.entry(SimplyWings.id("nebula"), NEBULA),
+            Map.entry(SimplyWings.id("forest"), FOREST));
 
     public static WingStyle of(ResourceLocation model) {
         return STYLES.getOrDefault(model, BASIC);

@@ -57,5 +57,16 @@
   "item.simplywings.air_wings": "Ailes du vent",
   "wing.simplywings.air": "Ailes du vent",
   "item.simplywings.ptero_wings": "Ailes de ptérosaure",
-  "wing.simplywings.ptero": "Ailes de ptérosaure"
+  "wing.simplywings.ptero": "Ailes de ptérosaure",
+  "item.simplywings.storm_wings": "Ailes de l'orage",
+  "wing.simplywings.storm": "Ailes de l'orage",
+  "item.simplywings.aurora_wings": "Ailes d'aurore",
+  "wing.simplywings.aurora": "Ailes d'aurore",
+  "item.simplywings.shadow_wings": "Ailes d'ombre",
+  "wing.simplywings.shadow": "Ailes d'ombre",
+  "item.simplywings.nebula_wings": "Ailes de nébuleuse",
+  "wing.simplywings.nebula": "Ailes de nébuleuse",
+  "item.simplywings.forest_wings": "Ailes de l'esprit sylvestre",
+  "wing.simplywings.forest": "Ailes de l'esprit sylvestre",
+  "itemGroup.simplywings": "Simply Wings"
 }

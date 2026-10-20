@@ -24,17 +24,17 @@ Le plafond de vitesse (64 m/s) correspond à l'ange avec les 4 premières paires
 
 - Score effectif = score de la paire + somme des bonus `global` de toute la collection, plafonné à 100.
 - Pour chaque stat, la somme des bonus de toutes les paires vaut **100 − le score le plus bas** parmi les paires. Avec la collection complète, toutes les paires sont donc à 10/10 partout.
-- Répartition actuelle : les 4 premières paires (commune, chauve-souris, méganeure, ange) donnent 2,5 % chacune (10 % au total), les 5 nouvelles épiques (flamme, marée, pierre, vent, ptérosaure) 4 % chacune (20 %), et les 4 autres légendaires (démon, séraphin, Psyché, Dédale) 17,5 % chacune (70 %). Si on ajoute ou retire des paires, il faudra redistribuer.
+- Répartition actuelle : les 4 premières paires (commune, chauve-souris, méganeure, ange) donnent 2,5 % chacune (10 % au total), les 10 autres épiques (flamme, marée, pierre, vent, ptérosaure, orage, aurore, ombre, nébuleuse, esprit sylvestre) 3 % chacune (30 %), et les 4 autres légendaires (démon, séraphin, Psyché, Dédale) 15 % chacune (60 %). Si on ajoute ou retire des paires, il faudra redistribuer.
 
-| Stat | Bonus total de la collection | Par paire de départ (2,5 %) | Par nouvelle épique (4 %) | Par autre légendaire (17,5 %) |
+| Stat | Bonus total de la collection | Par paire de départ (2,5 %) | Par autre épique (3 %) | Par autre légendaire (15 %) |
 | --- | --- | --- | --- | --- |
-| Endurance | 80 | 2 | 3,2 | 14 |
-| Accélération | 65 | 1,6 | 2,6 | 11,4 |
-| Vitesse | 88 | 2,2 | 3,5 | 15,4 |
-| Maniabilité | 73 | 1,8 | 2,9 | 12,8 |
-| Stabilité | 90 | 2,25 | 3,6 | 15,75 |
-| Plané (interne) | 75 | 1,9 | 3 | 13,1 |
-| Portance (interne) | 75 | 1,9 | 3 | 13,1 |
+| Endurance | 80 | 2 | 2,4 | 12 |
+| Accélération | 65 | 1,6 | 1,95 | 9,75 |
+| Vitesse | 88 | 2,2 | 2,6 | 13,2 |
+| Maniabilité | 73 | 1,8 | 2,2 | 10,95 |
+| Stabilité | 90 | 2,25 | 2,7 | 13,5 |
+| Plané (interne) | 75 | 1,9 | 2,25 | 11,25 |
+| Portance (interne) | 75 | 1,9 | 2,25 | 11,25 |
 
 ## Scores des paires (stats équipées, sur 100)
 
@@ -50,6 +50,11 @@ Une légendaire a par définition au moins une stat visible maxée à 100 (en gr
 | Marée | Épique | 60 | 45 | 45 | 80 | 55 | 80 | 50 | L'eau : fluide, maniable, garde son élan |
 | Pierre | Épique | 85 | 40 | 25 | 30 | 75 | 25 | 45 | La terre : endurance et stabilité, lente et lourde |
 | Vent | Épique | 45 | 60 | 82 | 65 | 25 | 75 | 75 | L'air : vitesse et légèreté, instable |
+| Orage | Épique | 40 | 75 | 85 | 80 | 20 | 50 | 45 | Vif et nerveux, s'épuise vite |
+| Aurore | Épique | 65 | 40 | 50 | 55 | 80 | 85 | 70 | Paisible : stabilité et plané |
+| Ombre | Épique | 50 | 80 | 65 | 85 | 30 | 45 | 40 | Départs vifs et virages serrés |
+| Nébuleuse | Épique | 80 | 50 | 80 | 45 | 40 | 60 | 50 | Long cours : endurance et vitesse |
+| Esprit sylvestre | Épique | 75 | 45 | 35 | 60 | 70 | 55 | 65 | Calme : endurance et stabilité, lent |
 | Ange | Légendaire | **100** | 70 | 75 | 41 | 10 | 85 | 30 | L'endurance : vol majestueux, plane loin |
 | Démon | Légendaire | 55 | **100** | 85 | 50 | 15 | 40 | 25 | La puissance : coups violents et tardifs |
 | Psyché | Légendaire | 65 | 50 | 50 | 60 | **100** | 60 | 75 | La stabilité ; ailes de papillon en flammes d'âme éthérées |
@@ -68,6 +73,11 @@ Une légendaire a par définition au moins une stat visible maxée à 100 (en gr
 | Marée | 1,0 | 0,8 Hz, 13 m/s, × 0,6 | 1 |
 | Pierre | 0,8 | 0,7 Hz, 10 m/s, × 0,3 | 1 |
 | Vent | 1,6 | 1,4 Hz, 16 m/s, × 1,2 | 2 |
+| Orage | 1,8 | 2,0 Hz, 16 m/s, × 1,2 | 1 |
+| Aurore | 0,7 | 0,6 Hz, 14 m/s, × 0,2 | 2 |
+| Ombre | 1,2 | 1,3 Hz, 15 m/s, × 0,9 | 1 |
+| Nébuleuse | 0,8 | 0,9 Hz, 16 m/s, × 0,7 | 1 |
+| Esprit sylvestre | 1,0 | 1,0 Hz, 12 m/s, × 0,5 | 2 |
 | Ange | 0,5 | 0,6 Hz, 19 m/s, × 1 | 1 |
 | Psyché | 0,6 | 0,5 Hz, 20 m/s, × 0 | 2 |
 | Dédale | 20 (continu, réacteurs) | 30 Hz, 18 m/s, × 0,3 | 1 |

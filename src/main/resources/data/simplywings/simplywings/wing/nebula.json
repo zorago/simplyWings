@@ -1,0 +1,27 @@
+{
+  "rarity": "epic",
+  "model": "simplywings:nebula",
+  "color": -1,
+  "flap_rate": 0.8,
+  "hover_rate": 0.9,
+  "hover_speed": 16.0,
+  "hover_swing": 0.7,
+  "equipped": {
+    "endurance": 80.0,
+    "acceleration": 50.0,
+    "speed": 80.0,
+    "handling": 45.0,
+    "stability": 40.0,
+    "glide": 60.0,
+    "lift": 50.0
+  },
+  "global": {
+    "endurance": 2.4,
+    "acceleration": 1.95,
+    "speed": 2.64,
+    "handling": 2.19,
+    "stability": 2.7,
+    "glide": 2.25,
+    "lift": 2.25
+  }
+}

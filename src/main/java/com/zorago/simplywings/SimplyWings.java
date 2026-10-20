@@ -26,7 +26,6 @@ public class SimplyWings {
         ModAttachments.register(modBus);
         modBus.addListener(WingRegistries::onNewRegistry);
         modBus.addListener(ModNetwork::register);
-        modBus.addListener(ModItems::onBuildCreativeTab);
         container.registerConfig(ModConfig.Type.SERVER, ServerConfig.SPEC);
         ServerFlight.register(NeoForge.EVENT_BUS);
         NeoForge.EVENT_BUS.addListener(WingsCommand::register);

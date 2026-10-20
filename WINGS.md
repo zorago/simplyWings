@@ -7,7 +7,7 @@ Dernière mise à jour : 20 octobre 2026.
 ## Paliers d'ambiance
 
 - **Commune** : la base, des élytres améliorées.
-- **Rare** : des créatures réelles, dans une ambiance vanilla, simple, « faite main ».
+- **Rare** : des créatures réelles, dans une ambiance vanilla, simple, « faite main ». Idée en attente : des ailes de cristal.
 - **Épique** : des esprits, des éléments et des créatures disparues (préhistoriques), avec des thèmes qui sortent du vanilla.
 - **Légendaire** : des dieux, des êtres divins et des figures mythologiques. Chaque légendaire maxe une stat visible.
 
@@ -30,6 +30,11 @@ Dernière mise à jour : 20 octobre 2026.
 | Ailes de la marée | Épique | 6,0 | 4,5 | 4,5 | 8,0 | 5,5 | L'élément eau : fluide et maniable |
 | Ailes de pierre | Épique | 8,5 | 4,0 | 2,5 | 3,0 | 7,5 | L'élément terre : lourdes, solides, inépuisables |
 | Ailes du vent | Épique | 4,5 | 6,0 | 8,2 | 6,5 | 2,5 | L'élément air : légères et rapides |
+| Ailes de l'orage | Épique | 4,0 | 7,5 | 8,5 | 8,0 | 2,0 | Des éclairs crépitants, vifs et nerveux |
+| Ailes d'aurore | Épique | 6,5 | 4,0 | 5,0 | 5,5 | 8,0 | Des voiles d'aurore boréale, paisibles |
+| Ailes d'ombre | Épique | 5,0 | 8,0 | 6,5 | 8,5 | 3,0 | De la fumée noire, vive et discrète |
+| Ailes de nébuleuse | Épique | 8,0 | 5,0 | 8,0 | 4,5 | 4,0 | Un ciel étoilé, un voyage au long cours |
+| Ailes de l'esprit sylvestre | Épique | 7,5 | 4,5 | 3,5 | 6,0 | 7,0 | Feuilles et fleurs, calmes et patientes |
 | Ailes d'ange | Légendaire | **10** | 7,0 | 7,5 | 4,1 | 1,0 | L'endurance, un vol majestueux |
 | Ailes de démon | Légendaire | 5,5 | **10** | 8,5 | 5,0 | 1,5 | La puissance brute, des coups violents |
 | Ailes de séraphin | Légendaire | 7,0 | 6,0 | **10** | 4,5 | 4,0 | La vitesse, six ailes dorées |
@@ -252,6 +257,146 @@ Dernière mise à jour : 20 octobre 2026.
 
 ---
 
+## Ailes de l'orage
+
+`simplywings:storm` · **Épique** · item `storm_wings` · esprit de l'orage
+
+**Vibe** : un esprit de la tempête. Des ailes d'éclairs qui crépitent, rapides et nerveuses : elles filent et virent sec, mais l'énergie s'épuise vite et elles ne tiennent pas en place.
+
+**Apparence** : une aile d'énergie électrique par côté, lumineuse dans le noir, du bleu clair près du dos au violet orageux au bord, traversée d'éclairs blancs. Le bord s'effiloche.
+
+**Effets** :
+- **En continu** : des étincelles électriques crépitent sur les ailes, et au-dessus de 20 m/s elles partent du bout des ailes.
+- **À chaque battement** : une décharge d'étincelles vers l'arrière et le claquement d'un éclair.
+
+**En vol** :
+- **Déplacement** : 1,8 battement par seconde, +4,4 m/s par coup.
+- **Stationnaire** : 2 Hz, avec un grésillement des ailes, très instable.
+
+| Stat | Note | Valeur |
+| --- | --- | --- |
+| Endurance | 4,0/10 | 150 de stamina |
+| Accélération | 7,5/10 | 8 m/s par s, soit +4,4 m/s par battement |
+| Vitesse | 8,5/10 | 56 m/s |
+| Maniabilité | 8,0/10 | 128 °/s |
+| Stabilité | 2,0/10 | 2/10 |
+| Plané *(interne)* | 5,0/10 | traînée × 0,9 |
+| Portance *(interne)* | 4,5/10 | décroche sous 9 m/s |
+
+---
+
+## Ailes d'aurore
+
+`simplywings:aurora` · **Épique** · item `aurora_wings` · esprit du ciel polaire
+
+**Vibe** : une aurore boréale qui a pris forme. Des voiles de lumière verte et violette, lents et paisibles, qui portent le joueur comme un rideau de ciel. Elles planent très loin et tiennent bien en place, mais elles accélèrent doucement.
+
+**Apparence** : **4 voiles** de lumière, deux par côté, lumineux dans le noir, en rideaux verticaux qui passent du vert au violet. Elles restent déployées et respirent lentement.
+
+**Effets** :
+- **En continu** : des poussières vertes et violettes s'élèvent doucement des voiles.
+- **À chaque battement** : une vague de lumière colorée et une résonance cristalline.
+
+**En vol** :
+- **Déplacement** : 0,7 battement par seconde, +7,4 m/s par coup.
+- **Stationnaire** : 0,6 Hz, presque immobile.
+
+| Stat | Note | Valeur |
+| --- | --- | --- |
+| Endurance | 6,5/10 | 213 de stamina |
+| Accélération | 4,0/10 | 5,2 m/s par s, soit +7,4 m/s par battement |
+| Vitesse | 5,0/10 | 38 m/s |
+| Maniabilité | 5,5/10 | 101 °/s |
+| Stabilité | 8,0/10 | 8/10 |
+| Plané *(interne)* | 8,5/10 | traînée × 0,55 |
+| Portance *(interne)* | 7,0/10 | décroche sous 6,3 m/s |
+
+---
+
+## Ailes d'ombre
+
+`simplywings:shadow` · **Épique** · item `shadow_wings` · esprit de l'ombre
+
+**Vibe** : un esprit des ténèbres. Des ailes de fumée noire qui se défont sur les bords, rapides à réagir : départs vifs et virages serrés. Elles sont discrètes mais peu stables.
+
+**Apparence** : une aile de fumée sombre par côté, translucide, violet-noir avec des remous. Quelques yeux violets brillent dans la fumée, et le bord se défait en volutes.
+
+**Effets** :
+- **En continu** : de la fumée noire s'échappe des ailes, et de l'encre en vol.
+- **À chaque battement** : un nuage de fumée noire vers l'arrière et un son de téléportation étouffé.
+
+**En vol** :
+- **Déplacement** : 1,2 battement par seconde, +7 m/s par coup.
+- **Stationnaire** : 1,3 Hz, instable.
+
+| Stat | Note | Valeur |
+| --- | --- | --- |
+| Endurance | 5,0/10 | 175 de stamina |
+| Accélération | 8,0/10 | 8,4 m/s par s, soit +7 m/s par battement |
+| Vitesse | 6,5/10 | 46 m/s |
+| Maniabilité | 8,5/10 | 134 °/s |
+| Stabilité | 3,0/10 | 3/10 |
+| Plané *(interne)* | 4,5/10 | traînée × 0,95 |
+| Portance *(interne)* | 4,0/10 | décroche sous 9,6 m/s |
+
+---
+
+## Ailes de nébuleuse
+
+`simplywings:nebula` · **Épique** · item `nebula_wings` · esprit des étoiles
+
+**Vibe** : un morceau de ciel nocturne. Des ailes de nébuleuse où scintillent des étoiles : elles ont un fond immense et emportent loin et vite, comme un voyage entre les étoiles. Elles sont lourdes à manœuvrer.
+
+**Apparence** : une aile par côté, translucide, en nuages bleu nuit et pourpres. Des étoiles blanches brillent dans le noir.
+
+**Effets** :
+- **En continu** : des étoiles scintillent autour des ailes. Au-dessus de 25 m/s, des traînées lumineuses partent du bout des ailes.
+- **À chaque battement** : une pluie d'étoiles et un tintement d'améthyste.
+
+**En vol** :
+- **Déplacement** : 0,8 battement par seconde, +7,5 m/s par coup.
+- **Stationnaire** : 0,9 Hz, balancement modéré.
+
+| Stat | Note | Valeur |
+| --- | --- | --- |
+| Endurance | 8,0/10 | 250 de stamina |
+| Accélération | 5,0/10 | 6 m/s par s, soit +7,5 m/s par battement |
+| Vitesse | 8,0/10 | 54 m/s |
+| Maniabilité | 4,5/10 | 90 °/s |
+| Stabilité | 4,0/10 | 4/10 |
+| Plané *(interne)* | 6,0/10 | traînée × 0,8 |
+| Portance *(interne)* | 5,0/10 | décroche sous 8,5 m/s |
+
+---
+
+## Ailes de l'esprit sylvestre
+
+`simplywings:forest` · **Épique** · item `forest_wings` · esprit de la forêt
+
+**Vibe** : un esprit de la forêt, comme un kodama. Des ailes de feuilles et de fleurs, calmes et patientes : elles tiennent bien en place et durent longtemps, mais elles sont lentes.
+
+**Apparence** : **4 ailes** de feuilles, deux par côté, vertes et tachetées de fleurs roses, sur une armature de branches. Le bord est dentelé comme un feuillage.
+
+**Effets** :
+- **En continu** : des pétales tombent des ailes, et des spores flottent autour.
+- **À chaque battement** : une volée de pétales et un bruissement de feuilles.
+
+**En vol** :
+- **Déplacement** : 1 battement par seconde, +5,6 m/s par coup.
+- **Stationnaire** : 1 Hz, peu de balancement.
+
+| Stat | Note | Valeur |
+| --- | --- | --- |
+| Endurance | 7,5/10 | 238 de stamina |
+| Accélération | 4,5/10 | 5,6 m/s par s, soit +5,6 m/s par battement |
+| Vitesse | 3,5/10 | 30 m/s |
+| Maniabilité | 6,0/10 | 106 °/s |
+| Stabilité | 7,0/10 | 7/10 |
+| Plané *(interne)* | 5,5/10 | traînée × 0,85 |
+| Portance *(interne)* | 6,5/10 | décroche sous 6,9 m/s |
+
+---
+
 ## Ailes d'ange
 
 `simplywings:angel` · **Légendaire** · item `angel_wings` · **Endurance maxée**
@@ -408,6 +553,11 @@ Ces paramètres ne dépendent pas de la collection : ils définissent le caract�
 | Marée | 1,0 | 0,8 Hz | 13 m/s | × 0,6 | 1 |
 | Pierre | 0,8 | 0,7 Hz | 10 m/s | × 0,3 | 1 |
 | Vent | 1,6 | 1,4 Hz | 16 m/s | × 1,2 | 2 |
+| Orage | 1,8 | 2,0 Hz | 16 m/s | × 1,2 | 1 |
+| Aurore | 0,7 | 0,6 Hz | 14 m/s | × 0,2 | 2 |
+| Ombre | 1,2 | 1,3 Hz | 15 m/s | × 0,9 | 1 |
+| Nébuleuse | 0,8 | 0,9 Hz | 16 m/s | × 0,7 | 1 |
+| Esprit sylvestre | 1,0 | 1,0 Hz | 12 m/s | × 0,5 | 2 |
 | Ange | 0,5 | 0,6 Hz | 19 m/s | × 1 | 1 |
 | Démon | 0,7 | 1,0 Hz | 18 m/s | × 1 | 1 |
 | Séraphin | 0,9 | 0,9 Hz | 20 m/s | × 1 | 3 |
