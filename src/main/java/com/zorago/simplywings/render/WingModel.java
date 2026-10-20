@@ -40,12 +40,14 @@ public final class WingModel {
             new Segment(11f, 1f, 4, 21f, 26f, 58),
             128, 32);
 
+    private static final float HALF_PI = (float) (Math.PI / 2);
+
     private final ModelPart root;
     private final Side left;
     private final Side right;
     private final Shape shape;
 
-    private record Side(ModelPart shoulder, ModelPart elbow, ModelPart tip, float sign) {
+    private record Side(ModelPart root, ModelPart shoulder, ModelPart elbow, ModelPart tip, float sign) {
     }
 
     public WingModel(ModelPart root, Shape shape) {
@@ -60,10 +62,11 @@ public final class WingModel {
     }
 
     private static Side side(ModelPart root, String name, float sign) {
-        ModelPart shoulder = root.getChild(name + "_shoulder");
+        ModelPart base = root.getChild(name + "_root");
+        ModelPart shoulder = base.getChild(name + "_shoulder");
         ModelPart elbow = shoulder.getChild(name + "_elbow");
         ModelPart tip = elbow.getChild(name + "_tip");
-        return new Side(shoulder, elbow, tip, sign);
+        return new Side(base, shoulder, elbow, tip, sign);
     }
 
     public static LayerDefinition createLayer(Shape shape) {
@@ -91,8 +94,10 @@ public final class WingModel {
     }
 
     private static void addSide(PartDefinition root, Shape shape, String name, float s) {
-        PartDefinition shoulder = root.addOrReplaceChild(name + "_shoulder",
-                segment(shape.shoulder(), s, -0.25f), PartPose.offset(3f * s, 1.5f, 2.4f));
+        PartDefinition base = root.addOrReplaceChild(name + "_root", CubeListBuilder.create(),
+                PartPose.offset(3f * s, 1.5f, 2.4f));
+        PartDefinition shoulder = base.addOrReplaceChild(name + "_shoulder",
+                segment(shape.shoulder(), s, -0.25f), PartPose.ZERO);
         PartDefinition elbow = shoulder.addOrReplaceChild(name + "_elbow",
                 segment(shape.elbow(), s, 0.05f), PartPose.offset(shape.shoulder().length() * s, 0f, 0f));
         elbow.addOrReplaceChild(name + "_tip",
@@ -110,6 +115,7 @@ public final class WingModel {
         float dorsal = p.axis;
         float vertical = 1f - dorsal;
         float forward = p.sweep - p.curl;
+        side.root.xRot = -HALF_PI * dorsal * folded;
         side.shoulder.yRot = s * (-1.25f * folded + vertical * forward - dorsal * p.stroke);
         side.shoulder.zRot = s * (-0.1f * folded - vertical * p.stroke - dorsal * forward);
         side.shoulder.xRot = p.twist;

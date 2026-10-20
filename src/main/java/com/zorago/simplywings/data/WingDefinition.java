@@ -5,8 +5,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.resources.ResourceLocation;
 
 public record WingDefinition(WingRarity rarity, WingStats equipped, WingStats global, float minSpeed, float flapRate,
-                             float hoverRate, float hoverSpeed, float hoverVerticalSpeed, ResourceLocation model,
-                             int color) {
+                             float hoverRate, float hoverSpeed, ResourceLocation model, int color) {
     public static final Codec<WingDefinition> CODEC = RecordCodecBuilder.create(i -> i.group(
             WingRarity.CODEC.fieldOf("rarity").forGetter(WingDefinition::rarity),
             WingStats.CODEC.fieldOf("equipped").forGetter(WingDefinition::equipped),
@@ -15,7 +14,6 @@ public record WingDefinition(WingRarity rarity, WingStats equipped, WingStats gl
             Codec.FLOAT.optionalFieldOf("flap_rate", 2f).forGetter(WingDefinition::flapRate),
             Codec.FLOAT.optionalFieldOf("hover_rate", 2.5f).forGetter(WingDefinition::hoverRate),
             Codec.FLOAT.optionalFieldOf("hover_speed", 8f).forGetter(WingDefinition::hoverSpeed),
-            Codec.FLOAT.optionalFieldOf("hover_vertical_speed", 5f).forGetter(WingDefinition::hoverVerticalSpeed),
             ResourceLocation.CODEC.fieldOf("model").forGetter(WingDefinition::model),
             Codec.INT.optionalFieldOf("color", 0xFFA0A0A0).forGetter(WingDefinition::color)
     ).apply(i, WingDefinition::new));

@@ -328,7 +328,7 @@ public final class ClientFlight {
     }
 
     private static void initStabilized(LocalPlayer player, boolean stopped) {
-        double v = ClientWings.stats().map(EffectiveStats::hoverVerticalSpeed).orElse(5f);
+        double v = ClientWings.stats().map(EffectiveStats::hoverSpeed).orElse(8f);
         Vec3 motion = player.getDeltaMovement().scale(20);
         stabVel = stopped ? Vec3.ZERO : new Vec3(motion.x, Mth.clamp(motion.y, -v, v), motion.z);
         drift = Vec3.ZERO;
@@ -362,7 +362,7 @@ public final class ClientFlight {
         double ramp = ServerConfig.STABILIZED_RAMP_TICKS.get() + (10 - s) * ServerConfig.STABILIZED_RAMP_TICKS_PER_POINT.get();
         ClientConfig.RampCurve curve = ClientConfig.STABILIZED_CURVE.get();
         double hSpeed = stats.hoverSpeed();
-        double vSpeed = stats.hoverVerticalSpeed();
+        double vSpeed = stats.hoverSpeed();
 
         double yaw = Math.toRadians(player.getYRot());
         Vec3 fwd = new Vec3(-Math.sin(yaw), 0, Math.cos(yaw));

@@ -6,7 +6,6 @@
   "flap_rate": 2.0,
   "hover_rate": 2.5,
   "hover_speed": 8.0,
-  "hover_vertical_speed": 5.0,
   "equipped": {
     "stamina": 100.0,
     "acceleration": 3.0,

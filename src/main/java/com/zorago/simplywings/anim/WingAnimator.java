@@ -61,7 +61,7 @@ public final class WingAnimator {
                     baseTarget.set(1f, 0.55f, 0.45f, -0.25f, -0.35f, 1.1f);
                     rate = 0.35f;
                 } else if (tuck) {
-                    baseTarget.set(0.85f, -1.3f, -0.08f, -0.25f, 0.2f, 0f);
+                    baseTarget.set(0.05f, 0f, 0f, 0f, 0f, 0f);
                     rate = 0.25f;
                 } else if (pitch > 35f) {
                     float dive = Mth.clamp((pitch - 35f) / 40f, 0f, 1f);
