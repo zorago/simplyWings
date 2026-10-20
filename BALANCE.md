@@ -128,53 +128,53 @@ Une légendaire a par définition au moins une stat visible maxée à 100 (en gr
 
 ## Paramètres d'identité (hors collection)
 
-| Paire | Battements/s | Stationnaire (cadence, vitesse, amplitude) | Ailes par côté |
+| Paire | Battements/s | Stationnaire (cadence, vitesse) | Ailes par côté |
 | --- | --- | --- | --- |
-| Commune | 2,0 | 1,2 Hz, 8 m/s, × 1 | 1 |
-| Chauve-souris | 2,6 | 1,8 Hz, 11 m/s, × 1 | 1 |
-| Corbeau | 2,4 | 1,6 Hz, 10 m/s, × 1 | 1 |
-| Chouette | 1,2 | 1 Hz, 8 m/s, × 0,4 | 1 |
-| Goéland | 1 | 1,4 Hz, 9 m/s, × 1,1 | 1 |
-| Colibri | 30, continu | 40 Hz, 12 m/s, × 0,1 | 1 |
-| Aigle | 1 | 1 Hz, 10 m/s, × 1 | 1 |
-| Martinet | 2,8 | 2,4 Hz, 11 m/s, × 1,2 | 1 |
-| Pigeon voyageur | 2,2 | 1,8 Hz, 8 m/s, × 0,9 | 1 |
-| Paon | 1,6 | 1,2 Hz, 7 m/s, × 0,5 | 1 |
-| Perroquet | 2,6 | 2 Hz, 10 m/s, × 0,8 | 1 |
-| Abeille | 25, continu | 30 Hz, 10 m/s, × 0,2 | 2 |
-| Papillon de nuit | 1,8 | 1,5 Hz, 8 m/s, × 0,5 | 2 |
-| Scarabée | 12, continu | 20 Hz, 9 m/s, × 0,4 | 2 |
-| Écureuil volant | 1,2 | 1,2 Hz, 8 m/s, × 1,1 | 1 |
-| Poisson volant | 3 | 2,5 Hz, 9 m/s, × 1,2 | 1 |
-| Phantom | 1,3 | 1,2 Hz, 11 m/s, × 1 | 1 |
-| Améthyste | 1,4 | 1,1 Hz, 9 m/s, × 0,3 | 1 |
-| Ornithoptère | 1,2 | 1 Hz, 8 m/s, × 0,4 | 1 |
-| Cerf-volant | 0,8 | 0,8 Hz, 7 m/s, × 1,2 | 1 |
-| Cuivre | 1,6 | 1,4 Hz, 9 m/s, × 0,6 | 1 |
-| Rafistolées | 1,8 | 1,4 Hz, 9 m/s, × 0,9 | 1 |
-| Méganeure | 20 (continu) | 25 Hz, 14 m/s, × 0,1 | 2 |
-| Ptérosaure | 0,9 | 1,1 Hz, 10 m/s, × 1,1 | 1 |
-| Flamme | 1,4 | 1,6 Hz, 14 m/s, × 1 | 1 |
-| Marée | 1,0 | 0,8 Hz, 13 m/s, × 0,6 | 1 |
-| Pierre | 0,8 | 0,7 Hz, 10 m/s, × 0,3 | 1 |
-| Vent | 1,6 | 1,4 Hz, 16 m/s, × 1,2 | 2 |
-| Orage | 1,8 | 2,0 Hz, 16 m/s, × 1,2 | 1 |
-| Aurore | 0,7 | 0,6 Hz, 14 m/s, × 0,2 | 2 |
-| Ombre | 1,2 | 1,3 Hz, 15 m/s, × 0,9 | 1 |
-| Nébuleuse | 0,8 | 0,9 Hz, 16 m/s, × 0,7 | 1 |
-| Esprit sylvestre | 1,0 | 1,0 Hz, 12 m/s, × 0,5 | 2 |
-| Ange | 0,5 | 0,6 Hz, 19 m/s, × 1 | 1 |
-| Psyché | 0,6 | 0,5 Hz, 20 m/s, × 0 | 2 |
-| Dédale | 20 (continu, réacteurs) | 30 Hz, 18 m/s, × 0,3 | 1 |
-| Démon | 0,7 | 1,0 Hz, 18 m/s, × 1 | 1 |
-| Séraphin | 0,9 | 0,9 Hz, 20 m/s, × 1 | 3 |
+| Commune | 2,0 | 1,2 Hz, 8 m/s | 1 |
+| Chauve-souris | 2,6 | 1,8 Hz, 11 m/s | 1 |
+| Corbeau | 2,4 | 1,6 Hz, 10 m/s | 1 |
+| Chouette | 1,2 | 1 Hz, 8 m/s | 1 |
+| Goéland | 1 | 1,4 Hz, 9 m/s | 1 |
+| Colibri | 30, continu | 40 Hz, 12 m/s | 1 |
+| Aigle | 1 | 1 Hz, 10 m/s | 1 |
+| Martinet | 2,8 | 2,4 Hz, 11 m/s | 1 |
+| Pigeon voyageur | 2,2 | 1,8 Hz, 8 m/s | 1 |
+| Paon | 1,6 | 1,2 Hz, 7 m/s | 1 |
+| Perroquet | 2,6 | 2 Hz, 10 m/s | 1 |
+| Abeille | 25, continu | 30 Hz, 10 m/s | 2 |
+| Papillon de nuit | 1,8 | 1,5 Hz, 8 m/s | 2 |
+| Scarabée | 12, continu | 20 Hz, 9 m/s | 2 |
+| Écureuil volant | 1,2 | 1,2 Hz, 8 m/s | 1 |
+| Poisson volant | 3 | 2,5 Hz, 9 m/s | 1 |
+| Phantom | 1,3 | 1,2 Hz, 11 m/s | 1 |
+| Améthyste | 1,4 | 1,1 Hz, 9 m/s | 1 |
+| Ornithoptère | 1,2 | 1 Hz, 8 m/s | 1 |
+| Cerf-volant | 0,8 | 0,8 Hz, 7 m/s | 1 |
+| Cuivre | 1,6 | 1,4 Hz, 9 m/s | 1 |
+| Rafistolées | 1,8 | 1,4 Hz, 9 m/s | 1 |
+| Méganeure | 20 (continu) | 25 Hz, 14 m/s | 2 |
+| Ptérosaure | 0,9 | 1,1 Hz, 10 m/s | 1 |
+| Flamme | 1,4 | 1,6 Hz, 14 m/s | 1 |
+| Marée | 1,0 | 0,8 Hz, 13 m/s | 1 |
+| Pierre | 0,8 | 0,7 Hz, 10 m/s | 1 |
+| Vent | 1,6 | 1,4 Hz, 16 m/s | 2 |
+| Orage | 1,8 | 2,0 Hz, 16 m/s | 1 |
+| Aurore | 0,7 | 0,6 Hz, 14 m/s | 2 |
+| Ombre | 1,2 | 1,3 Hz, 15 m/s | 1 |
+| Nébuleuse | 0,8 | 0,9 Hz, 16 m/s | 1 |
+| Esprit sylvestre | 1,0 | 1,0 Hz, 12 m/s | 2 |
+| Ange | 0,5 | 0,6 Hz, 19 m/s | 1 |
+| Psyché | 0,6 | 0,5 Hz, 20 m/s | 2 |
+| Dédale | 20 (continu, réacteurs) | 30 Hz, 18 m/s | 1 |
+| Démon | 0,7 | 1,0 Hz, 18 m/s | 1 |
+| Séraphin | 0,9 | 0,9 Hz, 20 m/s | 3 |
 
 Rappels de mécanique :
 - **Gain d'un battement** = accélération ÷ battements par seconde. À partir de 8 battements/s, la poussée est continue.
 - **Coût en stamina** : identique par seconde pour toutes les paires.
 - **Saut ailé** : vitesse verticale = `airJumpBase` + gain d'un battement × `airJumpPerBeatGain`.
 - **Lancement** (envol chargé, ou passage du stationnaire au déplacement) : il part à `launchSpeedFraction` × vitesse max, et le premier battement est disponible tout de suite.
-- **Instabilité du stationnaire** : `perturbationSwing` × (10 − stabilité) / 10 × amplitude de la paire.
+- **Instabilité du stationnaire** : `perturbationSwing` × (10 − stabilité) / 10, seulement selon la stat. Balancement rythmé pour les ailes qui battent, remous aléatoires de même ampleur pour les ailes à vibration continue (8 battements/s ou plus).
 
 ## Physique globale (config serveur, `simplywings-server.toml`)
 

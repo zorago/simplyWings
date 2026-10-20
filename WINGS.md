@@ -1083,46 +1083,54 @@ Dernière mise à jour : 20 octobre 2026.
 
 Ces paramètres ne dépendent pas de la collection : ils définissent le caractère de chaque paire.
 
-| Paire | Battements/s (déplacement) | Stationnaire : cadence | Stationnaire : vitesse | Amplitude du balancement | Ailes par côté |
-| --- | --- | --- | --- | --- | --- |
-| Commune | 2,0 | 1,2 Hz | 8 m/s | × 1 | 1 |
-| Chauve-souris | 2,6 | 1,8 Hz | 11 m/s | × 1 | 1 |
-| Corbeau | 2,4 | 1,6 Hz | 10 m/s | × 1 | 1 |
-| Chouette | 1,2 | 1 Hz | 8 m/s | × 0,4 | 1 |
-| Goéland | 1 | 1,4 Hz | 9 m/s | × 1,1 | 1 |
-| Colibri | 30, continu | 40 Hz | 12 m/s | × 0,1 | 1 |
-| Aigle | 1 | 1 Hz | 10 m/s | × 1 | 1 |
-| Martinet | 2,8 | 2,4 Hz | 11 m/s | × 1,2 | 1 |
-| Pigeon voyageur | 2,2 | 1,8 Hz | 8 m/s | × 0,9 | 1 |
-| Paon | 1,6 | 1,2 Hz | 7 m/s | × 0,5 | 1 |
-| Perroquet | 2,6 | 2 Hz | 10 m/s | × 0,8 | 1 |
-| Abeille | 25, continu | 30 Hz | 10 m/s | × 0,2 | 2 |
-| Papillon de nuit | 1,8 | 1,5 Hz | 8 m/s | × 0,5 | 2 |
-| Scarabée | 12, continu | 20 Hz | 9 m/s | × 0,4 | 2 |
-| Écureuil volant | 1,2 | 1,2 Hz | 8 m/s | × 1,1 | 1 |
-| Poisson volant | 3 | 2,5 Hz | 9 m/s | × 1,2 | 1 |
-| Phantom | 1,3 | 1,2 Hz | 11 m/s | × 1 | 1 |
-| Améthyste | 1,4 | 1,1 Hz | 9 m/s | × 0,3 | 1 |
-| Ornithoptère | 1,2 | 1 Hz | 8 m/s | × 0,4 | 1 |
-| Cerf-volant | 0,8 | 0,8 Hz | 7 m/s | × 1,2 | 1 |
-| Cuivre | 1,6 | 1,4 Hz | 9 m/s | × 0,6 | 1 |
-| Rafistolées | 1,8 | 1,4 Hz | 9 m/s | × 0,9 | 1 |
-| Méganeure | 20, continu | 25 Hz | 14 m/s | × 0,1 | 2 |
-| Ptérosaure | 0,9 | 1,1 Hz | 10 m/s | × 1,1 | 1 |
-| Flamme | 1,4 | 1,6 Hz | 14 m/s | × 1 | 1 |
-| Marée | 1,0 | 0,8 Hz | 13 m/s | × 0,6 | 1 |
-| Pierre | 0,8 | 0,7 Hz | 10 m/s | × 0,3 | 1 |
-| Vent | 1,6 | 1,4 Hz | 16 m/s | × 1,2 | 2 |
-| Orage | 1,8 | 2,0 Hz | 16 m/s | × 1,2 | 1 |
-| Aurore | 0,7 | 0,6 Hz | 14 m/s | × 0,2 | 2 |
-| Ombre | 1,2 | 1,3 Hz | 15 m/s | × 0,9 | 1 |
-| Nébuleuse | 0,8 | 0,9 Hz | 16 m/s | × 0,7 | 1 |
-| Esprit sylvestre | 1,0 | 1,0 Hz | 12 m/s | × 0,5 | 2 |
-| Ange | 0,5 | 0,6 Hz | 19 m/s | × 1 | 1 |
-| Démon | 0,7 | 1,0 Hz | 18 m/s | × 1 | 1 |
-| Séraphin | 0,9 | 0,9 Hz | 20 m/s | × 1 | 3 |
-| Psyché | 0,6 | 0,5 Hz (respiration) | 20 m/s | × 0 | 2 |
-| Dédale | 20, continu (réacteurs) | 30 Hz (vibration) | 18 m/s | × 0,3 | 1 |
+| Paire | Battements/s (déplacement) | Stationnaire : cadence | Stationnaire : vitesse | Ailes par côté |
+| --- | --- | --- | --- | --- |
+| Commune | 2,0 | 1,2 Hz | 8 m/s | 1 |
+| Chauve-souris | 2,6 | 1,8 Hz | 11 m/s | 1 |
+| Corbeau | 2,4 | 1,6 Hz | 10 m/s | 1 |
+| Chouette | 1,2 | 1 Hz | 8 m/s | 1 |
+| Goéland | 1 | 1,4 Hz | 9 m/s | 1 |
+| Colibri | 30, continu | 40 Hz | 12 m/s | 1 |
+| Aigle | 1 | 1 Hz | 10 m/s | 1 |
+| Martinet | 2,8 | 2,4 Hz | 11 m/s | 1 |
+| Pigeon voyageur | 2,2 | 1,8 Hz | 8 m/s | 1 |
+| Paon | 1,6 | 1,2 Hz | 7 m/s | 1 |
+| Perroquet | 2,6 | 2 Hz | 10 m/s | 1 |
+| Abeille | 25, continu | 30 Hz | 10 m/s | 2 |
+| Papillon de nuit | 1,8 | 1,5 Hz | 8 m/s | 2 |
+| Scarabée | 12, continu | 20 Hz | 9 m/s | 2 |
+| Écureuil volant | 1,2 | 1,2 Hz | 8 m/s | 1 |
+| Poisson volant | 3 | 2,5 Hz | 9 m/s | 1 |
+| Phantom | 1,3 | 1,2 Hz | 11 m/s | 1 |
+| Améthyste | 1,4 | 1,1 Hz | 9 m/s | 1 |
+| Ornithoptère | 1,2 | 1 Hz | 8 m/s | 1 |
+| Cerf-volant | 0,8 | 0,8 Hz | 7 m/s | 1 |
+| Cuivre | 1,6 | 1,4 Hz | 9 m/s | 1 |
+| Rafistolées | 1,8 | 1,4 Hz | 9 m/s | 1 |
+| Méganeure | 20, continu | 25 Hz | 14 m/s | 2 |
+| Ptérosaure | 0,9 | 1,1 Hz | 10 m/s | 1 |
+| Flamme | 1,4 | 1,6 Hz | 14 m/s | 1 |
+| Marée | 1,0 | 0,8 Hz | 13 m/s | 1 |
+| Pierre | 0,8 | 0,7 Hz | 10 m/s | 1 |
+| Vent | 1,6 | 1,4 Hz | 16 m/s | 2 |
+| Orage | 1,8 | 2,0 Hz | 16 m/s | 1 |
+| Aurore | 0,7 | 0,6 Hz | 14 m/s | 2 |
+| Ombre | 1,2 | 1,3 Hz | 15 m/s | 1 |
+| Nébuleuse | 0,8 | 0,9 Hz | 16 m/s | 1 |
+| Esprit sylvestre | 1,0 | 1,0 Hz | 12 m/s | 2 |
+| Ange | 0,5 | 0,6 Hz | 19 m/s | 1 |
+| Démon | 0,7 | 1,0 Hz | 18 m/s | 1 |
+| Séraphin | 0,9 | 0,9 Hz | 20 m/s | 3 |
+| Psyché | 0,6 | 0,5 Hz (respiration) | 20 m/s | 2 |
+| Dédale | 20, continu (réacteurs) | 30 Hz (vibration) | 18 m/s | 1 |
+
+## Instabilité du stationnaire
+
+L'instabilité dépend uniquement de la stat **Stabilité** : 10/10 = parfaitement immobile, et en dessous, le joueur bouge d'autant plus que la note est basse.
+- Ailes qui battent (moins de 8 battements par seconde) : balancement rythmé, calé sur les battements, plus une petite dérive à chaque battement.
+- Ailes qui vibrent en continu (méganeure, colibri, abeille, scarabée, Dédale) : remous aléatoires de la même ampleur, qui changent de direction environ toutes les 0,7 s.
+
+Les mots « instable », « peu de balancement », etc. dans les fiches décrivent la sensation ; c'est la note de stabilité qui fait foi.
 
 ## Effets et première personne
 

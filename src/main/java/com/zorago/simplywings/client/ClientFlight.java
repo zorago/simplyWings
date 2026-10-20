@@ -54,6 +54,9 @@ public final class ClientFlight {
 
     private static Vec3 stabVel = Vec3.ZERO;
     private static Vec3 drift = Vec3.ZERO;
+    private static Vec3 buffet = Vec3.ZERO;
+    private static final int BUFFET_TICKS = 14;
+    private static Vec3 buffetTarget = Vec3.ZERO;
     private static int holdH;
     private static int holdV;
     private static double phase;
@@ -348,6 +351,8 @@ public final class ClientFlight {
         Vec3 motion = player.getDeltaMovement().scale(20);
         stabVel = stopped ? Vec3.ZERO : new Vec3(motion.x, Mth.clamp(motion.y, -v, v), motion.z);
         drift = Vec3.ZERO;
+        buffet = Vec3.ZERO;
+        buffetTarget = Vec3.ZERO;
         holdH = 0;
         holdV = 0;
     }
@@ -410,7 +415,7 @@ public final class ClientFlight {
 
         double amp = (10 - s) / 10;
         double hoverRate = stats.hoverRate();
-        double hoverSwing = stats.definition().hoverSwing();
+        boolean continuous = hoverRate >= WingDefinition.CONTINUOUS_FLAP_RATE;
         phase += 2 * Math.PI * hoverRate * DT;
         swayPhase += Math.PI * hoverRate * DT;
         if (swayPhase >= 2 * Math.PI) {
@@ -418,14 +423,23 @@ public final class ClientFlight {
         }
         if (phase >= 2 * Math.PI) {
             phase -= 2 * Math.PI;
-            double angle = RANDOM.nextDouble() * 2 * Math.PI;
-            double kick = amp * ServerConfig.DRIFT_AMPLITUDE.get() * hoverSwing * Math.min(1, 2 / hoverRate);
-            drift = drift.add(Math.cos(angle) * kick, 0, Math.sin(angle) * kick);
+            if (!continuous) {
+                double angle = RANDOM.nextDouble() * 2 * Math.PI;
+                double kick = amp * ServerConfig.DRIFT_AMPLITUDE.get() * Math.min(1, 2 / hoverRate);
+                drift = drift.add(Math.cos(angle) * kick, 0, Math.sin(angle) * kick);
+            }
         }
         drift = drift.scale(0.9);
         Vec3 sway = Vec3.ZERO;
-        if (hoverRate < WingDefinition.CONTINUOUS_FLAP_RATE) {
-            double swing = amp * ServerConfig.PERTURBATION_SWING.get() * hoverSwing;
+        double swing = amp * ServerConfig.PERTURBATION_SWING.get();
+        if (continuous) {
+            if (RANDOM.nextInt(BUFFET_TICKS) == 0) {
+                double speed = swing * 2 * Math.PI * 20.0 / (BUFFET_TICKS * 2);
+                buffetTarget = new Vec3(RANDOM.nextGaussian(), RANDOM.nextGaussian(), RANDOM.nextGaussian()).scale(speed);
+            }
+            buffet = buffet.add(buffetTarget.subtract(buffet).scale(0.15));
+            sway = buffet;
+        } else {
             double omega = 2 * Math.PI * hoverRate;
             double heave = swing * omega * Math.cos(phase);
             double surge = 0.6 * swing * omega * 0.5 * Math.cos(swayPhase);

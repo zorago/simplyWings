@@ -5,7 +5,6 @@
   "flap_rate": 2.8,
   "hover_rate": 2.4,
   "hover_speed": 11.0,
-  "hover_swing": 1.2,
   "equipped": {
     "endurance": 35.0,
     "acceleration": 60.0,
