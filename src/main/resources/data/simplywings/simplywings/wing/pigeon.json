@@ -1,0 +1,27 @@
+{
+  "rarity": "rare",
+  "model": "simplywings:pigeon",
+  "color": -1,
+  "flap_rate": 2.2,
+  "hover_rate": 1.8,
+  "hover_speed": 8.0,
+  "hover_swing": 0.9,
+  "equipped": {
+    "endurance": 80.0,
+    "acceleration": 40.0,
+    "speed": 30.0,
+    "handling": 40.0,
+    "stability": 35.0,
+    "glide": 40.0,
+    "lift": 45.0
+  },
+  "global": {
+    "endurance": 9.4,
+    "acceleration": 0.47,
+    "speed": 0.95,
+    "handling": 0.36,
+    "stability": 0.37,
+    "glide": 0.35,
+    "lift": 0.74
+  }
+}

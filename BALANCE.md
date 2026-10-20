@@ -27,12 +27,11 @@ Le plafond de vitesse (64 m/s) correspond à l'ange avec les 4 premières paires
 - Répartition par palier : **50 %** pour le palier de base (commune + rares), **30 %** pour les épiques, **20 %** pour les légendaires. Dans un palier, chaque paire donne la même part du total des points de bonus.
 - **Diversification** : chaque paire donne surtout dans ses points forts. Le poids d'une stat vaut (score ÷ meilleur score de la paire)⁴. Ensuite, un équilibrage itératif garantit deux choses : chaque palier fournit exactement sa part de chaque stat, et chaque paire sa part du total. Ainsi chaque légendaire donne surtout sa stat maxée, la pierre de l'endurance et de la stabilité, l'orage de la vitesse, etc.
 - Le calcul est automatique dans le générateur des JSON : quand on ajoute une paire, tout se recalcule.
-- Tant que les rares ne sont pas créées, la commune et la chauve-souris portent seules les 50 % du palier de base, donc des bonus énormes. Ça se dilue quand les rares arrivent.
 
 | Stat | Bonus total de la collection |
 | --- | --- |
 | Endurance | 80 |
-| Accélération | 65 |
+| Accélération | 75 |
 | Vitesse | 88 |
 | Maniabilité | 73 |
 | Stabilité | 90 |
@@ -43,24 +42,44 @@ Bonus `global` de chaque paire (en points sur 100) :
 
 | Paire | Palier | Part | Endur. | Accél. | Vitesse | Maniab. | Stabil. | Plané | Portance |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Commune | Base | 25,0 % | 15,2 | 22,1 | 14,7 | 3,6 | 38,3 | 12,9 | 29,6 |
-| Chauve-souris | Base | 25,0 % | 24,8 | 10,3 | 29,3 | 32,9 | 6,7 | 24,6 | 7,8 |
-| Méganeure | Épique | 2,7 % | 1,3 | 0,2 | 0,1 | 5,0 | 0,8 | 0,3 | 7,3 |
-| Ptérosaure | Épique | 2,7 % | 4,1 | 1,0 | 0,7 | 0,3 | 0,4 | 6,7 | 1,7 |
-| Flamme | Épique | 2,7 % | 0,4 | 8,6 | 3,4 | 1,1 | 0,3 | 0,4 | 0,6 |
-| Marée | Épique | 2,7 % | 1,6 | 0,4 | 0,6 | 3,7 | 2,7 | 4,8 | 1,1 |
-| Pierre | Épique | 2,7 % | 5,5 | 0,2 | 0,1 | 0,1 | 8,2 | 0,1 | 0,7 |
-| Vent | Épique | 2,7 % | 0,4 | 1,0 | 5,1 | 1,3 | 0,2 | 2,9 | 4,0 |
-| Orage | Épique | 2,7 % | 0,3 | 2,7 | 6,9 | 3,4 | 0,2 | 0,7 | 0,7 |
-| Aurore | Épique | 2,7 % | 1,2 | 0,2 | 0,6 | 0,5 | 6,7 | 3,5 | 2,2 |
-| Ombre | Épique | 2,7 % | 0,9 | 4,3 | 2,9 | 5,2 | 0,4 | 0,6 | 0,6 |
-| Nébuleuse | Épique | 2,7 % | 4,8 | 0,6 | 5,7 | 0,4 | 0,8 | 1,5 | 1,1 |
-| Esprit sylvestre | Épique | 2,7 % | 3,4 | 0,4 | 0,2 | 1,1 | 6,2 | 1,0 | 2,6 |
-| Ange | Légendaire | 4,0 % | 9,0 | 1,1 | 1,8 | 0,5 | 0,3 | 8,5 | 0,7 |
-| Démon | Légendaire | 4,0 % | 1,9 | 9,4 | 6,0 | 1,8 | 0,6 | 1,2 | 1,0 |
-| Séraphin | Légendaire | 4,0 % | 3,6 | 1,0 | 8,9 | 1,0 | 1,7 | 3,6 | 2,0 |
-| Psyché | Légendaire | 4,0 % | 0,8 | 0,1 | 0,2 | 0,8 | 13,6 | 1,0 | 5,4 |
-| Dédale | Légendaire | 4,0 % | 0,8 | 1,3 | 0,7 | 10,6 | 1,9 | 0,7 | 5,9 |
+| Commune | Base | 2,3 % | 0,3 | 6,0 | 0,4 | 0,4 | 1,0 | 1,9 | 2,6 |
+| Chauve-souris | Base | 2,3 % | 0,5 | 2,8 | 0,8 | 4,1 | 0,2 | 3,5 | 0,7 |
+| Corbeau | Base | 2,3 % | 0,9 | 1,4 | 1,9 | 6,1 | 0,3 | 1,0 | 1,0 |
+| Chouette | Base | 2,3 % | 1,0 | 0,3 | 0,5 | 0,8 | 4,7 | 3,2 | 2,1 |
+| Goéland | Base | 2,3 % | 4,0 | 0,3 | 1,4 | 0,4 | 0,2 | 4,7 | 1,5 |
+| Colibri | Base | 2,3 % | 0,1 | 0,8 | 0,4 | 3,1 | 4,9 | 0,1 | 3,1 |
+| Aigle | Base | 2,3 % | 1,1 | 5,4 | 3,7 | 0,4 | 0,1 | 1,7 | 0,3 |
+| Martinet | Base | 2,3 % | 0,3 | 1,9 | 6,6 | 1,5 | 0,1 | 1,9 | 0,4 |
+| Pigeon voyageur | Base | 2,3 % | 9,4 | 0,5 | 0,9 | 0,4 | 0,4 | 0,3 | 0,7 |
+| Paon | Base | 2,3 % | 0,6 | 0,4 | 0,5 | 0,3 | 10,1 | 0,2 | 0,5 |
+| Perroquet | Base | 2,3 % | 0,6 | 2,1 | 1,2 | 5,6 | 0,8 | 0,7 | 1,5 |
+| Abeille | Base | 2,3 % | 0,3 | 0,9 | 0,6 | 2,1 | 4,7 | 0,1 | 3,9 |
+| Papillon de nuit | Base | 2,3 % | 1,3 | 0,2 | 0,7 | 0,7 | 3,4 | 0,7 | 5,8 |
+| Scarabée | Base | 2,3 % | 5,9 | 4,1 | 1,1 | 0,2 | 0,8 | 0,2 | 0,4 |
+| Écureuil volant | Base | 2,3 % | 0,5 | 0,1 | 1,1 | 3,7 | 0,3 | 5,5 | 1,4 |
+| Poisson volant | Base | 2,3 % | 0,3 | 0,9 | 6,8 | 0,5 | 0,2 | 3,8 | 0,2 |
+| Phantom | Base | 2,3 % | 0,7 | 0,7 | 8,1 | 0,9 | 0,1 | 1,7 | 0,5 |
+| Améthyste | Base | 2,3 % | 1,3 | 0,3 | 0,6 | 2,8 | 6,1 | 0,2 | 1,4 |
+| Ornithoptère | Base | 2,3 % | 6,1 | 0,3 | 0,5 | 0,2 | 3,9 | 0,4 | 1,2 |
+| Cerf-volant | Base | 2,3 % | 0,2 | 0,1 | 0,9 | 0,6 | 0,2 | 4,4 | 6,2 |
+| Cuivre | Base | 2,3 % | 2,1 | 6,2 | 2,0 | 0,5 | 1,2 | 0,2 | 0,4 |
+| Rafistolées | Base | 2,3 % | 2,4 | 1,7 | 3,1 | 1,3 | 1,3 | 1,2 | 1,7 |
+| Méganeure | Épique | 2,7 % | 1,3 | 0,2 | 0,1 | 5,1 | 0,8 | 0,3 | 7,3 |
+| Ptérosaure | Épique | 2,7 % | 4,1 | 1,2 | 0,7 | 0,3 | 0,4 | 6,7 | 1,7 |
+| Flamme | Épique | 2,7 % | 0,4 | 9,5 | 3,1 | 1,0 | 0,3 | 0,4 | 0,5 |
+| Marée | Épique | 2,7 % | 1,6 | 0,5 | 0,7 | 3,8 | 2,7 | 4,8 | 1,1 |
+| Pierre | Épique | 2,7 % | 5,6 | 0,3 | 0,1 | 0,1 | 8,2 | 0,1 | 0,7 |
+| Vent | Épique | 2,7 % | 0,4 | 1,2 | 5,2 | 1,3 | 0,2 | 2,9 | 4,0 |
+| Orage | Épique | 2,7 % | 0,3 | 3,2 | 6,8 | 3,3 | 0,2 | 0,7 | 0,7 |
+| Aurore | Épique | 2,7 % | 1,2 | 0,2 | 0,6 | 0,5 | 6,8 | 3,5 | 2,3 |
+| Ombre | Épique | 2,7 % | 0,8 | 5,0 | 2,9 | 5,0 | 0,4 | 0,6 | 0,5 |
+| Nébuleuse | Épique | 2,7 % | 4,7 | 0,7 | 5,9 | 0,4 | 0,8 | 1,5 | 1,1 |
+| Esprit sylvestre | Épique | 2,7 % | 3,4 | 0,5 | 0,2 | 1,1 | 6,3 | 1,0 | 2,7 |
+| Ange | Légendaire | 4,0 % | 9,1 | 1,4 | 1,9 | 0,5 | 0,3 | 8,5 | 0,6 |
+| Démon | Légendaire | 4,0 % | 1,7 | 10,6 | 5,7 | 1,6 | 0,6 | 1,1 | 0,9 |
+| Séraphin | Légendaire | 4,0 % | 3,6 | 1,2 | 9,2 | 1,0 | 1,6 | 3,6 | 2,0 |
+| Psyché | Légendaire | 4,0 % | 0,8 | 0,2 | 0,2 | 0,8 | 13,7 | 1,1 | 5,5 |
+| Dédale | Légendaire | 4,0 % | 0,8 | 1,6 | 0,7 | 10,7 | 1,8 | 0,7 | 5,9 |
 
 ## Scores des paires (stats équipées, sur 100)
 
@@ -70,6 +89,26 @@ Une légendaire a par définition au moins une stat visible maxée à 100 (en gr
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Commune | Commune | 20 | 50 | 12 | 27 | 30 | 40 | 40 | Élytres améliorées, la base |
 | Chauve-souris | Rare | 40 | 70 | 31 | 82 | 30 | 80 | 48 | Aérodynamique et agile |
+| Corbeau | Rare | 40 | 50 | 35 | 78 | 30 | 50 | 45 | Rusé et vif |
+| Chouette | Rare | 45 | 35 | 25 | 50 | 70 | 72 | 60 | Le vol silencieux |
+| Goéland | Rare | 65 | 35 | 35 | 40 | 30 | 80 | 55 | Le voyageur des côtes |
+| Colibri | Rare | 25 | 50 | 25 | 75 | 75 | 30 | 70 | Le roi du surplace |
+| Aigle | Rare | 45 | 75 | 45 | 40 | 25 | 60 | 35 | Le rapace |
+| Martinet | Rare | 35 | 60 | 55 | 60 | 20 | 65 | 40 | Le plus rapide des oiseaux |
+| Pigeon voyageur | Rare | 80 | 40 | 30 | 40 | 35 | 40 | 45 | Gris, banal et infatigable |
+| Paon | Rare | 30 | 30 | 15 | 30 | 65 | 25 | 30 | La paire vitrine |
+| Perroquet | Rare | 35 | 55 | 30 | 75 | 40 | 45 | 50 | Le clin d'œil au perroquet de Minecraft |
+| Abeille | Rare | 30 | 45 | 25 | 60 | 65 | 25 | 65 | Le clin d'œil à l'abeille de Minecraft |
+| Papillon de nuit | Rare | 45 | 30 | 25 | 45 | 60 | 45 | 72 | Poudré et nocturne |
+| Scarabée | Rare | 65 | 65 | 30 | 30 | 40 | 30 | 35 | Le cousin des élytres |
+| Écureuil volant | Rare | 35 | 25 | 30 | 70 | 30 | 78 | 50 | Le planeur |
+| Poisson volant | Rare | 30 | 45 | 50 | 40 | 25 | 70 | 30 | Décalé et fun |
+| Phantom | Rare | 40 | 45 | 55 | 50 | 25 | 60 | 40 | Le cauchemar des insomniaques |
+| Améthyste | Rare | 45 | 35 | 25 | 65 | 70 | 30 | 50 | Du cristal vanilla |
+| Ornithoptère | Rare | 70 | 35 | 25 | 35 | 65 | 40 | 50 | La machine de Léonard de Vinci |
+| Cerf-volant | Rare | 25 | 25 | 30 | 45 | 30 | 78 | 78 | Papier et baguettes |
+| Cuivre | Rare | 50 | 72 | 35 | 40 | 45 | 30 | 35 | La mécanique du cuivre de la 1 |
+| Rafistolées | Rare | 45 | 45 | 35 | 45 | 40 | 45 | 45 | Cuir, plumes et ficelle |
 | Méganeure (libellule fossile) | Épique | 60 | 35 | 23 | 91 | 40 | 40 | 86 | Faite pour construire, médiocre en vol |
 | Ptérosaure | Épique | 75 | 55 | 45 | 40 | 30 | 85 | 55 | Le planeur : fond et plané, lourd à manœuvrer |
 | Flamme | Épique | 35 | 85 | 60 | 50 | 20 | 35 | 35 | Le feu : accélération explosive, s'épuise vite |
@@ -93,6 +132,26 @@ Une légendaire a par définition au moins une stat visible maxée à 100 (en gr
 | --- | --- | --- | --- |
 | Commune | 2,0 | 1,2 Hz, 8 m/s, × 1 | 1 |
 | Chauve-souris | 2,6 | 1,8 Hz, 11 m/s, × 1 | 1 |
+| Corbeau | 2,4 | 1,6 Hz, 10 m/s, × 1 | 1 |
+| Chouette | 1,2 | 1 Hz, 8 m/s, × 0,4 | 1 |
+| Goéland | 1 | 1,4 Hz, 9 m/s, × 1,1 | 1 |
+| Colibri | 30, continu | 40 Hz, 12 m/s, × 0,1 | 1 |
+| Aigle | 1 | 1 Hz, 10 m/s, × 1 | 1 |
+| Martinet | 2,8 | 2,4 Hz, 11 m/s, × 1,2 | 1 |
+| Pigeon voyageur | 2,2 | 1,8 Hz, 8 m/s, × 0,9 | 1 |
+| Paon | 1,6 | 1,2 Hz, 7 m/s, × 0,5 | 1 |
+| Perroquet | 2,6 | 2 Hz, 10 m/s, × 0,8 | 1 |
+| Abeille | 25, continu | 30 Hz, 10 m/s, × 0,2 | 2 |
+| Papillon de nuit | 1,8 | 1,5 Hz, 8 m/s, × 0,5 | 2 |
+| Scarabée | 12, continu | 20 Hz, 9 m/s, × 0,4 | 2 |
+| Écureuil volant | 1,2 | 1,2 Hz, 8 m/s, × 1,1 | 1 |
+| Poisson volant | 3 | 2,5 Hz, 9 m/s, × 1,2 | 1 |
+| Phantom | 1,3 | 1,2 Hz, 11 m/s, × 1 | 1 |
+| Améthyste | 1,4 | 1,1 Hz, 9 m/s, × 0,3 | 1 |
+| Ornithoptère | 1,2 | 1 Hz, 8 m/s, × 0,4 | 1 |
+| Cerf-volant | 0,8 | 0,8 Hz, 7 m/s, × 1,2 | 1 |
+| Cuivre | 1,6 | 1,4 Hz, 9 m/s, × 0,6 | 1 |
+| Rafistolées | 1,8 | 1,4 Hz, 9 m/s, × 0,9 | 1 |
 | Méganeure | 20 (continu) | 25 Hz, 14 m/s, × 0,1 | 2 |
 | Ptérosaure | 0,9 | 1,1 Hz, 10 m/s, × 1,1 | 1 |
 | Flamme | 1,4 | 1,6 Hz, 14 m/s, × 1 | 1 |

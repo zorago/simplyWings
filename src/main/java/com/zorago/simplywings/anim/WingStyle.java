@@ -34,7 +34,10 @@ public record WingStyle(List<Slot> slots, float upFraction, float downFraction, 
         AURORA,
         SHADOW,
         NEBULA,
-        FOREST
+        FOREST,
+        FEATHERS,
+        AMETHYST,
+        COPPER
     }
 
     public record Slot(WingModel.Shape shape, float x, float y, float z, float sweep, float lift, float phase,
@@ -152,6 +155,72 @@ public record WingStyle(List<Slot> slots, float upFraction, float downFraction, 
             new Slot(WingModel.FOREST, 0f, 3f, 0.3f, -0.3f, -0.2f, 0.4f, 0.85f)),
             0.5f, 0.25f, 0.8f, 0.7f, 0f, 0f, 0.06f, true, false, Render.CUTOUT, null, Effects.FOREST);
 
+    public static final WingStyle CROW = new WingStyle(List.of(Slot.single(WingModel.CROW)),
+            0.45f, 0.22f, 0.85f, 0.85f, 0f, 0f, 0.04f, true, false, Render.CUTOUT, null, Effects.FEATHERS);
+
+    public static final WingStyle OWL = new WingStyle(List.of(Slot.single(WingModel.OWL)),
+            0.45f, 0.22f, 0.85f, 0.85f, 0f, 0f, 0.04f, true, false, Render.CUTOUT, null, Effects.FEATHERS);
+
+    public static final WingStyle GULL = new WingStyle(List.of(Slot.single(WingModel.GULL)),
+            0.45f, 0.22f, 0.85f, 0.85f, 0f, 0f, 0.04f, true, false, Render.CUTOUT, null, Effects.FEATHERS);
+
+    public static final WingStyle HUMMINGBIRD = new WingStyle(List.of(Slot.single(WingModel.HUMMINGBIRD)),
+            0.5f, 0.5f, 0.25f, 0f, 0.3f, 30f, 0.02f, true, false, Render.CUTOUT, null, Effects.NONE);
+
+    public static final WingStyle EAGLE = new WingStyle(List.of(Slot.single(WingModel.EAGLE)),
+            0.45f, 0.22f, 0.85f, 0.85f, 0f, 0f, 0.04f, true, false, Render.CUTOUT, null, Effects.FEATHERS);
+
+    public static final WingStyle SWIFT = new WingStyle(List.of(Slot.single(WingModel.SWIFT)),
+            0.45f, 0.22f, 0.85f, 0.85f, 0f, 0f, 0.04f, true, false, Render.CUTOUT, null, Effects.FEATHERS);
+
+    public static final WingStyle PIGEON = new WingStyle(List.of(Slot.single(WingModel.PIGEON)),
+            0.45f, 0.22f, 0.85f, 0.85f, 0f, 0f, 0.04f, true, false, Render.CUTOUT, null, Effects.FEATHERS);
+
+    public static final WingStyle PEACOCK = new WingStyle(List.of(Slot.single(WingModel.PEACOCK)),
+            0.45f, 0.22f, 0.85f, 0.85f, 0f, 0f, 0.04f, true, false, Render.CUTOUT, null, Effects.FEATHERS);
+
+    public static final WingStyle PARROT = new WingStyle(List.of(Slot.single(WingModel.PARROT)),
+            0.45f, 0.22f, 0.85f, 0.85f, 0f, 0f, 0.04f, true, false, Render.CUTOUT, null, Effects.FEATHERS);
+
+    public static final WingStyle BEE = new WingStyle(List.of(
+            new Slot(WingModel.BEE, 0f, -0.5f, 0f, 0.2f, 0.05f, 0f, 1f),
+            new Slot(WingModel.BEE, -0.5f, 2.5f, 0.3f, -0.35f, -0.1f, (float) Math.PI, 0.85f)),
+            0.5f, 0.5f, 0.2f, 0f, 0.35f, 28f, 0.02f, false, true, Render.TRANSLUCENT, null, Effects.NONE);
+
+    public static final WingStyle MOTH = new WingStyle(List.of(
+            new Slot(WingModel.MOTH, 0f, 0f, 0f, 0.15f, 0.15f, 0f, 1f),
+            new Slot(WingModel.MOTH, 0f, 3f, 0.3f, -0.35f, -0.3f, 0.5f, 0.85f)),
+            0.5f, 0.3f, 0.7f, 0.5f, 0f, 0f, 0.08f, false, false, Render.CUTOUT, null, Effects.NONE);
+
+    public static final WingStyle BEETLE = new WingStyle(List.of(
+            new Slot(WingModel.BEETLE, 0f, 0.5f, 0.4f, 0f, 0f, 0f, 1f),
+            new Slot(WingModel.BEETLE_SHELL, 0f, -0.5f, -0.1f, 0.6f, 0.9f, 0f, 0.3f)),
+            0.5f, 0.5f, 0.25f, 0f, 0.25f, 20f, 0.02f, true, false, Render.CUTOUT, null, Effects.NONE);
+
+    public static final WingStyle SQUIRREL = new WingStyle(List.of(Slot.single(WingModel.SQUIRREL)),
+            0.5f, 0.3f, 0.4f, 0.5f, 0f, 0f, 0.03f, true, false, Render.CUTOUT, null, Effects.NONE);
+
+    public static final WingStyle FLYING_FISH = new WingStyle(List.of(Slot.single(WingModel.FLYING_FISH)),
+            0.4f, 0.2f, 0.6f, 0.7f, 0.05f, 8f, 0.03f, true, false, Render.TRANSLUCENT, null, Effects.NONE);
+
+    public static final WingStyle PHANTOM = new WingStyle(List.of(Slot.single(WingModel.PHANTOM)),
+            0.5f, 0.2f, 0.9f, 0.9f, 0f, 0f, 0.04f, true, false, Render.CUTOUT, null, Effects.PTERO);
+
+    public static final WingStyle AMETHYST = new WingStyle(List.of(Slot.single(WingModel.AMETHYST)),
+            0.5f, 0.2f, 0.7f, 0.6f, 0f, 0f, 0.03f, true, false, Render.CUTOUT, glow("amethyst"), Effects.AMETHYST);
+
+    public static final WingStyle ORNITHOPTER = new WingStyle(List.of(Slot.single(WingModel.ORNITHOPTER)),
+            0.5f, 0.3f, 0.7f, 0.6f, 0f, 0f, 0.03f, true, false, Render.CUTOUT, null, Effects.NONE);
+
+    public static final WingStyle KITE = new WingStyle(List.of(Slot.single(WingModel.KITE)),
+            0.5f, 0.3f, 0.4f, 0.6f, 0f, 0f, 0.12f, true, false, Render.CUTOUT, null, Effects.NONE);
+
+    public static final WingStyle COPPER = new WingStyle(List.of(Slot.single(WingModel.COPPER)),
+            0.5f, 0.2f, 0.75f, 0.7f, 0.02f, 10f, 0.02f, true, false, Render.CUTOUT, null, Effects.COPPER);
+
+    public static final WingStyle PATCHWORK = new WingStyle(List.of(Slot.single(WingModel.PATCHWORK)),
+            0.45f, 0.22f, 0.85f, 0.85f, 0f, 0f, 0.04f, true, false, Render.CUTOUT, null, Effects.NONE);
+
     private static final Map<ResourceLocation, WingStyle> STYLES = Map.ofEntries(
             Map.entry(SimplyWings.id("basic"), BASIC),
             Map.entry(SimplyWings.id("bat"), BAT),
@@ -170,7 +239,27 @@ public record WingStyle(List<Slot> slots, float upFraction, float downFraction, 
             Map.entry(SimplyWings.id("aurora"), AURORA),
             Map.entry(SimplyWings.id("shadow"), SHADOW),
             Map.entry(SimplyWings.id("nebula"), NEBULA),
-            Map.entry(SimplyWings.id("forest"), FOREST));
+            Map.entry(SimplyWings.id("forest"), FOREST),
+            Map.entry(SimplyWings.id("crow"), CROW),
+            Map.entry(SimplyWings.id("owl"), OWL),
+            Map.entry(SimplyWings.id("gull"), GULL),
+            Map.entry(SimplyWings.id("hummingbird"), HUMMINGBIRD),
+            Map.entry(SimplyWings.id("eagle"), EAGLE),
+            Map.entry(SimplyWings.id("swift"), SWIFT),
+            Map.entry(SimplyWings.id("pigeon"), PIGEON),
+            Map.entry(SimplyWings.id("peacock"), PEACOCK),
+            Map.entry(SimplyWings.id("parrot"), PARROT),
+            Map.entry(SimplyWings.id("bee"), BEE),
+            Map.entry(SimplyWings.id("moth"), MOTH),
+            Map.entry(SimplyWings.id("beetle"), BEETLE),
+            Map.entry(SimplyWings.id("squirrel"), SQUIRREL),
+            Map.entry(SimplyWings.id("flying_fish"), FLYING_FISH),
+            Map.entry(SimplyWings.id("phantom"), PHANTOM),
+            Map.entry(SimplyWings.id("amethyst"), AMETHYST),
+            Map.entry(SimplyWings.id("ornithopter"), ORNITHOPTER),
+            Map.entry(SimplyWings.id("kite"), KITE),
+            Map.entry(SimplyWings.id("copper"), COPPER),
+            Map.entry(SimplyWings.id("patchwork"), PATCHWORK));
 
     public static WingStyle of(ResourceLocation model) {
         return STYLES.getOrDefault(model, BASIC);

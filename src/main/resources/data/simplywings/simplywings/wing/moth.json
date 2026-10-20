@@ -1,0 +1,27 @@
+{
+  "rarity": "rare",
+  "model": "simplywings:moth",
+  "color": -1,
+  "flap_rate": 1.8,
+  "hover_rate": 1.5,
+  "hover_speed": 8.0,
+  "hover_swing": 0.5,
+  "equipped": {
+    "endurance": 45.0,
+    "acceleration": 30.0,
+    "speed": 25.0,
+    "handling": 45.0,
+    "stability": 60.0,
+    "glide": 45.0,
+    "lift": 72.0
+  },
+  "global": {
+    "endurance": 1.29,
+    "acceleration": 0.22,
+    "speed": 0.67,
+    "handling": 0.69,
+    "stability": 3.36,
+    "glide": 0.66,
+    "lift": 5.75
+  }
+}

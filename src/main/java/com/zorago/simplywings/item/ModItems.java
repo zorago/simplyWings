@@ -20,6 +20,26 @@ public final class ModItems {
 
     public static final DeferredItem<WingItem> COMMON_WINGS = wing("common", Rarity.COMMON);
     public static final DeferredItem<WingItem> BAT_WINGS = wing("bat", Rarity.RARE);
+    public static final DeferredItem<WingItem> CROW_WINGS = wing("crow", Rarity.RARE);
+    public static final DeferredItem<WingItem> OWL_WINGS = wing("owl", Rarity.RARE);
+    public static final DeferredItem<WingItem> GULL_WINGS = wing("gull", Rarity.RARE);
+    public static final DeferredItem<WingItem> HUMMINGBIRD_WINGS = wing("hummingbird", Rarity.RARE);
+    public static final DeferredItem<WingItem> EAGLE_WINGS = wing("eagle", Rarity.RARE);
+    public static final DeferredItem<WingItem> SWIFT_WINGS = wing("swift", Rarity.RARE);
+    public static final DeferredItem<WingItem> PIGEON_WINGS = wing("pigeon", Rarity.RARE);
+    public static final DeferredItem<WingItem> PEACOCK_WINGS = wing("peacock", Rarity.RARE);
+    public static final DeferredItem<WingItem> PARROT_WINGS = wing("parrot", Rarity.RARE);
+    public static final DeferredItem<WingItem> BEE_WINGS = wing("bee", Rarity.RARE);
+    public static final DeferredItem<WingItem> MOTH_WINGS = wing("moth", Rarity.RARE);
+    public static final DeferredItem<WingItem> BEETLE_WINGS = wing("beetle", Rarity.RARE);
+    public static final DeferredItem<WingItem> SQUIRREL_WINGS = wing("squirrel", Rarity.RARE);
+    public static final DeferredItem<WingItem> FLYING_FISH_WINGS = wing("flying_fish", Rarity.RARE);
+    public static final DeferredItem<WingItem> PHANTOM_WINGS = wing("phantom", Rarity.RARE);
+    public static final DeferredItem<WingItem> AMETHYST_WINGS = wing("amethyst", Rarity.RARE);
+    public static final DeferredItem<WingItem> ORNITHOPTER_WINGS = wing("ornithopter", Rarity.RARE);
+    public static final DeferredItem<WingItem> KITE_WINGS = wing("kite", Rarity.RARE);
+    public static final DeferredItem<WingItem> COPPER_WINGS = wing("copper", Rarity.RARE);
+    public static final DeferredItem<WingItem> PATCHWORK_WINGS = wing("patchwork", Rarity.RARE);
     public static final DeferredItem<WingItem> ANCIENT_WINGS = wing("ancient", Rarity.EPIC);
     public static final DeferredItem<WingItem> FIRE_WINGS = wing("fire", Rarity.EPIC);
     public static final DeferredItem<WingItem> WATER_WINGS = wing("water", Rarity.EPIC);

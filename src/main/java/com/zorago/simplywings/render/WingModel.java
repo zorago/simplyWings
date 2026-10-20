@@ -135,8 +135,124 @@ public final class WingModel {
             new Segment(9f, 0.8f, 3, 10f, 4f, 48)),
             128, 32);
 
+    public static final Shape CROW = new Shape("crow", List.of(
+            new Segment(10f, 1f, 3, 9f, 12f, 0),
+            new Segment(10f, 0.9f, 3, 12f, 14f, 24),
+            new Segment(9f, 0.8f, 4, 14f, 10f, 48)),
+            128, 32);
+
+    public static final Shape OWL = new Shape("owl", List.of(
+            new Segment(9f, 1.2f, 3, 11f, 14f, 0),
+            new Segment(9f, 1f, 3, 14f, 15f, 23),
+            new Segment(7f, 0.9f, 3, 15f, 11f, 45)),
+            64, 32);
+
+    public static final Shape GULL = new Shape("gull", List.of(
+            new Segment(11f, 0.8f, 3, 7f, 9f, 0),
+            new Segment(12f, 0.7f, 3, 9f, 8f, 26),
+            new Segment(12f, 0.6f, 4, 8f, 4f, 54)),
+            128, 32);
+
+    public static final Shape HUMMINGBIRD = new Shape("hummingbird", List.of(
+            new Segment(6f, 0.6f, 2, 4f, 5f, 0),
+            new Segment(6f, 0.5f, 2, 5f, 5f, 16),
+            new Segment(5f, 0.4f, 2, 5f, 3f, 31)),
+            64, 32);
+
+    public static final Shape EAGLE = new Shape("eagle", List.of(
+            new Segment(11f, 1.3f, 3, 11f, 14f, 0),
+            new Segment(11f, 1.1f, 3, 14f, 15f, 27),
+            new Segment(9f, 1f, 4, 15f, 12f, 54)),
+            128, 32);
+
+    public static final Shape SWIFT = new Shape("swift", List.of(
+            new Segment(6f, 0.7f, 2, 5f, 6f, 0),
+            new Segment(9f, 0.6f, 3, 6f, 5f, 16),
+            new Segment(12f, 0.5f, 4, 5f, 1f, 38)),
+            128, 32);
+
+    public static final Shape PIGEON = new Shape("pigeon", List.of(
+            new Segment(9f, 1f, 3, 9f, 11f, 0),
+            new Segment(9f, 0.9f, 3, 11f, 11f, 22),
+            new Segment(8f, 0.8f, 3, 11f, 7f, 44)),
+            64, 32);
+
+    public static final Shape PEACOCK = new Shape("peacock", List.of(
+            new Segment(8f, 1f, 3, 10f, 13f, 0),
+            new Segment(8f, 0.9f, 3, 13f, 15f, 20),
+            new Segment(7f, 0.8f, 3, 15f, 17f, 40)),
+            64, 32);
+
+    public static final Shape PARROT = new Shape("parrot", List.of(
+            new Segment(8f, 0.9f, 3, 8f, 11f, 0),
+            new Segment(9f, 0.8f, 3, 11f, 11f, 20),
+            new Segment(8f, 0.7f, 3, 11f, 7f, 42)),
+            64, 32);
+
+    public static final Shape BEE = new Shape("bee", List.of(
+            new Segment(9f, 0.4f, 1, 4f, 4f, 0)),
+            64, 32);
+
+    public static final Shape MOTH = new Shape("moth", List.of(
+            new Segment(8f, 0.6f, 3, 10f, 14f, 0),
+            new Segment(8f, 0.5f, 3, 14f, 10f, 20)),
+            64, 32);
+
+    public static final Shape BEETLE = new Shape("beetle", List.of(
+            new Segment(12f, 0.4f, 3, 6f, 8f, 0)),
+            64, 32);
+
+    public static final Shape BEETLE_SHELL = new Shape("beetle_shell", List.of(
+            new Segment(7f, 1.6f, 2, 6f, 6f, 0)),
+            64, 32);
+
+    public static final Shape SQUIRREL = new Shape("squirrel", List.of(
+            new Segment(8f, 1f, 2, 12f, 14f, 0),
+            new Segment(6f, 0.9f, 2, 14f, 10f, 20)),
+            64, 32);
+
+    public static final Shape FLYING_FISH = new Shape("flying_fish", List.of(
+            new Segment(11f, 0.4f, 4, 5f, 7f, 0)),
+            64, 32);
+
+    public static final Shape PHANTOM = new Shape("phantom", List.of(
+            new Segment(9f, 0.9f, 3, 8f, 10f, 0),
+            new Segment(10f, 0.8f, 3, 10f, 7f, 22),
+            new Segment(9f, 0.6f, 3, 7f, 2f, 46)),
+            128, 32);
+
+    public static final Shape AMETHYST = new Shape("amethyst", List.of(
+            new Segment(8f, 1.2f, 2, 6f, 9f, 0),
+            new Segment(8f, 1f, 3, 9f, 10f, 21),
+            new Segment(7f, 0.8f, 3, 10f, 5f, 41)),
+            64, 32);
+
+    public static final Shape ORNITHOPTER = new Shape("ornithopter", List.of(
+            new Segment(11f, 1.2f, 3, 10f, 12f, 0),
+            new Segment(11f, 1f, 3, 12f, 11f, 27),
+            new Segment(9f, 0.8f, 3, 11f, 6f, 53)),
+            128, 32);
+
+    public static final Shape KITE = new Shape("kite", List.of(
+            new Segment(10f, 0.5f, 2, 12f, 14f, 0),
+            new Segment(10f, 0.5f, 2, 14f, 8f, 23)),
+            64, 32);
+
+    public static final Shape COPPER = new Shape("copper", List.of(
+            new Segment(10f, 1.6f, 3, 8f, 10f, 0),
+            new Segment(10f, 1.4f, 3, 10f, 9f, 26),
+            new Segment(8f, 1.2f, 3, 9f, 4f, 51)),
+            128, 32);
+
+    public static final Shape PATCHWORK = new Shape("patchwork", List.of(
+            new Segment(9f, 1f, 3, 10f, 12f, 0),
+            new Segment(9f, 0.9f, 3, 12f, 11f, 22),
+            new Segment(8f, 0.8f, 3, 11f, 6f, 44)),
+            64, 32);
+
     public static final List<Shape> SHAPES = List.of(BASIC, ANGEL, BAT, DRAGONFLY, PSYCHE_FORE, PSYCHE_HIND, DEMON, DAEDALUS,
-            FIRE, WATER, EARTH, AIR, PTERO, STORM, AURORA, SHADOW, NEBULA, FOREST);
+            FIRE, WATER, EARTH, AIR, PTERO, STORM, AURORA, SHADOW, NEBULA, FOREST,
+            CROW, OWL, GULL, HUMMINGBIRD, EAGLE, SWIFT, PIGEON, PEACOCK, PARROT, BEE, MOTH, BEETLE, BEETLE_SHELL, SQUIRREL, FLYING_FISH, PHANTOM, AMETHYST, ORNITHOPTER, KITE, COPPER, PATCHWORK);
 
     private final ModelPart root;
     private final Side left;

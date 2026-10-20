@@ -7,7 +7,7 @@ Dernière mise à jour : 20 octobre 2026.
 ## Paliers d'ambiance
 
 - **Commune** : la base, des élytres améliorées.
-- **Rare** : des créatures réelles, dans une ambiance vanilla, simple, « faite main ». Idée en attente : des ailes de cristal.
+- **Rare** : des créatures réelles (oiseaux, insectes, mammifères, mobs vanilla) et des ailes bricolées ou mécaniques, dans une ambiance vanilla, simple, « faite main ». Effets discrets ou absents.
 - **Épique** : des esprits, des éléments et des créatures disparues (préhistoriques), avec des thèmes qui sortent du vanilla.
 - **Légendaire** : des dieux, des êtres divins et des figures mythologiques. Chaque légendaire maxe une stat visible.
 
@@ -24,6 +24,26 @@ Dernière mise à jour : 20 octobre 2026.
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | Ailes communes | Commune | 2,0 | 5,0 | 1,2 | 2,7 | 3,0 | Des élytres améliorées, le point de départ |
 | Ailes de chauve-souris | Rare | 4,0 | 7,0 | 3,1 | 8,2 | 3,0 | Agiles et aérodynamiques |
+| Ailes de corbeau | Rare | 4 | 5 | 3,5 | **7,8** | 3 | Rusé et vif |
+| Ailes de chouette | Rare | 4,5 | 3,5 | 2,5 | 5 | **7** | Le vol silencieux |
+| Ailes de goéland | Rare | **6,5** | 3,5 | 3,5 | 4 | 3 | Le voyageur des côtes |
+| Ailes de colibri | Rare | 2,5 | 5 | 2,5 | **7,5** | 7,5 | Le roi du surplace |
+| Ailes d'aigle | Rare | 4,5 | **7,5** | 4,5 | 4 | 2,5 | Le rapace |
+| Ailes de martinet | Rare | 3,5 | **6** | 5,5 | 6 | 2 | Le plus rapide des oiseaux |
+| Ailes de pigeon voyageur | Rare | **8** | 4 | 3 | 4 | 3,5 | Gris, banal et infatigable |
+| Ailes de paon | Rare | 3 | 3 | 1,5 | 3 | **6,5** | La paire vitrine |
+| Ailes de perroquet | Rare | 3,5 | 5,5 | 3 | **7,5** | 4 | Le clin d'œil au perroquet de Minecraft |
+| Ailes d'abeille | Rare | 3 | 4,5 | 2,5 | 6 | **6,5** | Le clin d'œil à l'abeille de Minecraft |
+| Ailes de papillon de nuit | Rare | 4,5 | 3 | 2,5 | 4,5 | **6** | Poudré et nocturne |
+| Ailes de scarabée | Rare | **6,5** | 6,5 | 3 | 3 | 4 | Le cousin des élytres |
+| Ailes d'écureuil volant | Rare | 3,5 | 2,5 | 3 | **7** | 3 | Le planeur |
+| Ailes de poisson volant | Rare | 3 | 4,5 | **5** | 4 | 2,5 | Décalé et fun |
+| Ailes de phantom | Rare | 4 | 4,5 | **5,5** | 5 | 2,5 | Le cauchemar des insomniaques |
+| Ailes d'améthyste | Rare | 4,5 | 3,5 | 2,5 | 6,5 | **7** | Du cristal vanilla |
+| Ailes d'ornithoptère | Rare | **7** | 3,5 | 2,5 | 3,5 | 6,5 | La machine de Léonard de Vinci |
+| Ailes de cerf-volant | Rare | 2,5 | 2,5 | 3 | **4,5** | 3 | Papier et baguettes |
+| Ailes de cuivre | Rare | 5 | **7,2** | 3,5 | 4 | 4,5 | La mécanique du cuivre de la 1 |
+| Ailes rafistolées | Rare | **4,5** | 4,5 | 3,5 | 4,5 | 4 | Cuir, plumes et ficelle |
 | Ailes de méganeure | Épique | 6,0 | 3,5 | 2,3 | 9,1 | 4,0 | Une libellule fossile faite pour construire |
 | Ailes de ptérosaure | Épique | 7,5 | 5,5 | 4,5 | 4,0 | 3,0 | Le planeur préhistorique |
 | Ailes de flamme | Épique | 3,5 | 8,5 | 6,0 | 5,0 | 2,0 | L'élément feu : des coups explosifs |
@@ -90,6 +110,526 @@ Dernière mise à jour : 20 octobre 2026.
 | Stabilité | 3,0/10 | 3/10 |
 | Plané *(interne)* | 8,0/10 | traînée × 0,6 |
 | Portance *(interne)* | 4,8/10 | décroche sous 8,7 m/s |
+
+---
+
+## Ailes de corbeau
+
+`simplywings:crow` · **Rare** · item `crow_wings`
+
+**Vibe** : Rusé et vif. Des plumes noires mates aux reflets bleutés : le corbeau vire sec et se faufile partout.
+
+**Apparence** : Une aile de plumes noires par côté, aux longues rémiges en pointe.
+
+**Effets** : À chaque battement, quelques plumes tombent avec un bruissement d'ailes.
+
+**En vol** :
+- **Déplacement** : 2,4 battements par seconde, +2,5 m/s par coup.
+- **Stationnaire** : 1,6 Hz, instable.
+
+| Stat | Note | Valeur |
+| --- | --- | --- |
+| Endurance | 4/10 | 150 de stamina |
+| Accélération | 5/10 | 6 m/s par s, soit +2,5 m/s par battement |
+| Vitesse | 3,5/10 | 30 m/s |
+| Maniabilité | 7,8/10 | 126 °/s |
+| Stabilité | 3/10 | 3/10 |
+| Plané *(interne)* | 5/10 | traînée × 0,9 |
+| Portance *(interne)* | 4,5/10 | décroche sous 9,1 m/s |
+
+---
+
+## Ailes de chouette
+
+`simplywings:owl` · **Rare** · item `owl_wings`
+
+**Vibe** : Le vol silencieux. De larges ailes duveteuses qui tiennent en place sans bruit et planent doucement.
+
+**Apparence** : Une aile large et arrondie par côté, brun clair barré de bandes sombres.
+
+**Effets** : À chaque battement, quelques plumes tombent avec un bruissement d'ailes.
+
+**En vol** :
+- **Déplacement** : 1,2 battement par seconde, +4 m/s par coup.
+- **Stationnaire** : 1 Hz, peu de balancement.
+
+| Stat | Note | Valeur |
+| --- | --- | --- |
+| Endurance | 4,5/10 | 162 de stamina |
+| Accélération | 3,5/10 | 4,8 m/s par s, soit +4 m/s par battement |
+| Vitesse | 2,5/10 | 25 m/s |
+| Maniabilité | 5/10 | 95 °/s |
+| Stabilité | 7/10 | 7/10 |
+| Plané *(interne)* | 7,2/10 | traînée × 0,68 |
+| Portance *(interne)* | 6/10 | décroche sous 7,4 m/s |
+
+---
+
+## Ailes de goéland
+
+`simplywings:gull` · **Rare** · item `gull_wings`
+
+**Vibe** : Le voyageur des côtes. De longues ailes fines qui planent des heures sans fatigue.
+
+**Apparence** : Une longue aile étroite par côté, blanche et grise, aux pointes noires.
+
+**Effets** : À chaque battement, quelques plumes tombent avec un bruissement d'ailes.
+
+**En vol** :
+- **Déplacement** : 1 battement par seconde, +4,8 m/s par coup.
+- **Stationnaire** : 1,4 Hz, très instable.
+
+| Stat | Note | Valeur |
+| --- | --- | --- |
+| Endurance | 6,5/10 | 212 de stamina |
+| Accélération | 3,5/10 | 4,8 m/s par s, soit +4,8 m/s par battement |
+| Vitesse | 3,5/10 | 30 m/s |
+| Maniabilité | 4/10 | 84 °/s |
+| Stabilité | 3/10 | 3/10 |
+| Plané *(interne)* | 8/10 | traînée × 0,6 |
+| Portance *(interne)* | 5,5/10 | décroche sous 8 m/s |
+
+---
+
+## Ailes de colibri
+
+`simplywings:hummingbird` · **Rare** · item `hummingbird_wings`
+
+**Vibe** : Le roi du surplace. De toutes petites ailes qui battent si vite qu'elles deviennent floues : un stationnaire précis, mais une réserve minuscule.
+
+**Apparence** : Une toute petite aile vert irisé par côté, qui vibre en continu.
+
+**Effets** : Aucun, des ailes simples et discrètes.
+
+**En vol** :
+- **Déplacement** : Les ailes vibrent à 30 Hz, poussée continue tant que sprint est maintenu.
+- **Stationnaire** : 40 Hz, peu de balancement.
+
+| Stat | Note | Valeur |
+| --- | --- | --- |
+| Endurance | 2,5/10 | 112 de stamina |
+| Accélération | 5/10 | 6 m/s par s, en continu |
+| Vitesse | 2,5/10 | 25 m/s |
+| Maniabilité | 7,5/10 | 122 °/s |
+| Stabilité | 7,5/10 | 7,5/10 |
+| Plané *(interne)* | 3/10 | traînée × 1,1 |
+| Portance *(interne)* | 7/10 | décroche sous 6,3 m/s |
+
+---
+
+## Ailes d'aigle
+
+`simplywings:eagle` · **Rare** · item `eagle_wings`
+
+**Vibe** : Le rapace. De larges ailes aux doigts écartés, des coups puissants qui arrachent le joueur du sol.
+
+**Apparence** : Une grande aile brune par côté, aux rémiges écartées comme des doigts.
+
+**Effets** : À chaque battement, quelques plumes tombent avec un bruissement d'ailes.
+
+**En vol** :
+- **Déplacement** : 1 battement par seconde, +8 m/s par coup.
+- **Stationnaire** : 1 Hz, instable.
+
+| Stat | Note | Valeur |
+| --- | --- | --- |
+| Endurance | 4,5/10 | 162 de stamina |
+| Accélération | 7,5/10 | 8 m/s par s, soit +8 m/s par battement |
+| Vitesse | 4,5/10 | 35 m/s |
+| Maniabilité | 4/10 | 84 °/s |
+| Stabilité | 2,5/10 | 2,5/10 |
+| Plané *(interne)* | 6/10 | traînée × 0,8 |
+| Portance *(interne)* | 3,5/10 | décroche sous 10,2 m/s |
+
+---
+
+## Ailes de martinet
+
+`simplywings:swift` · **Rare** · item `swift_wings`
+
+**Vibe** : Le plus rapide des oiseaux. Des ailes en forme de faux, faites pour filer, incapables de tenir en place.
+
+**Apparence** : Une aile sombre en faux par côté, très effilée vers la pointe.
+
+**Effets** : À chaque battement, quelques plumes tombent avec un bruissement d'ailes.
+
+**En vol** :
+- **Déplacement** : 2,8 battements par seconde, +2,4 m/s par coup.
+- **Stationnaire** : 2,4 Hz, très instable.
+
+| Stat | Note | Valeur |
+| --- | --- | --- |
+| Endurance | 3,5/10 | 138 de stamina |
+| Accélération | 6/10 | 6,8 m/s par s, soit +2,4 m/s par battement |
+| Vitesse | 5,5/10 | 41 m/s |
+| Maniabilité | 6/10 | 106 °/s |
+| Stabilité | 2/10 | 2/10 |
+| Plané *(interne)* | 6,5/10 | traînée × 0,75 |
+| Portance *(interne)* | 4/10 | décroche sous 9,6 m/s |
+
+---
+
+## Ailes de pigeon voyageur
+
+`simplywings:pigeon` · **Rare** · item `pigeon_wings`
+
+**Vibe** : Gris, banal et infatigable. Le pigeon voyageur n'impressionne personne, mais il vole des heures.
+
+**Apparence** : Une aile grise par côté, barrée de deux bandes noires.
+
+**Effets** : À chaque battement, quelques plumes tombent avec un bruissement d'ailes.
+
+**En vol** :
+- **Déplacement** : 2,2 battements par seconde, +2,4 m/s par coup.
+- **Stationnaire** : 1,8 Hz, instable.
+
+| Stat | Note | Valeur |
+| --- | --- | --- |
+| Endurance | 8/10 | 250 de stamina |
+| Accélération | 4/10 | 5,2 m/s par s, soit +2,4 m/s par battement |
+| Vitesse | 3/10 | 28 m/s |
+| Maniabilité | 4/10 | 84 °/s |
+| Stabilité | 3,5/10 | 3,5/10 |
+| Plané *(interne)* | 4/10 | traînée × 1 |
+| Portance *(interne)* | 4,5/10 | décroche sous 9,1 m/s |
+
+---
+
+## Ailes de paon
+
+`simplywings:peacock` · **Rare** · item `peacock_wings`
+
+**Vibe** : La paire vitrine. Magnifique, mais le paon vole mal : lent, lourd, il plane à peine. En revanche, il tient bien la pose.
+
+**Apparence** : Une aile vert-bleu par côté, qui descend bas et porte des ocelles dorés.
+
+**Effets** : À chaque battement, quelques plumes tombent avec un bruissement d'ailes.
+
+**En vol** :
+- **Déplacement** : 1,6 battement par seconde, +2,8 m/s par coup.
+- **Stationnaire** : 1,2 Hz, balancement modéré.
+
+| Stat | Note | Valeur |
+| --- | --- | --- |
+| Endurance | 3/10 | 125 de stamina |
+| Accélération | 3/10 | 4,4 m/s par s, soit +2,8 m/s par battement |
+| Vitesse | 1,5/10 | 20 m/s |
+| Maniabilité | 3/10 | 73 °/s |
+| Stabilité | 6,5/10 | 6,5/10 |
+| Plané *(interne)* | 2,5/10 | traînée × 1,15 |
+| Portance *(interne)* | 3/10 | décroche sous 10,7 m/s |
+
+---
+
+## Ailes de perroquet
+
+`simplywings:parrot` · **Rare** · item `parrot_wings`
+
+**Vibe** : Le clin d'œil au perroquet de Minecraft. Des couleurs vives et un vol agile entre les arbres.
+
+**Apparence** : Une aile par côté en bandes rouge, jaune et bleue.
+
+**Effets** : À chaque battement, quelques plumes tombent avec un bruissement d'ailes.
+
+**En vol** :
+- **Déplacement** : 2,6 battements par seconde, +2,5 m/s par coup.
+- **Stationnaire** : 2 Hz, instable.
+
+| Stat | Note | Valeur |
+| --- | --- | --- |
+| Endurance | 3,5/10 | 138 de stamina |
+| Accélération | 5,5/10 | 6,4 m/s par s, soit +2,5 m/s par battement |
+| Vitesse | 3/10 | 28 m/s |
+| Maniabilité | 7,5/10 | 122 °/s |
+| Stabilité | 4/10 | 4/10 |
+| Plané *(interne)* | 4,5/10 | traînée × 0,95 |
+| Portance *(interne)* | 5/10 | décroche sous 8,5 m/s |
+
+---
+
+## Ailes d'abeille
+
+`simplywings:bee` · **Rare** · item `bee_wings`
+
+**Vibe** : Le clin d'œil à l'abeille de Minecraft. Quatre petites ailes qui bourdonnent : un bon stationnaire, mais peu de vitesse.
+
+**Apparence** : **4 petites ailes** translucides veinées de brun, toujours à plat, qui vibrent en continu.
+
+**Effets** : Aucun, des ailes simples et discrètes.
+
+**En vol** :
+- **Déplacement** : Les ailes vibrent à 25 Hz, poussée continue tant que sprint est maintenu.
+- **Stationnaire** : 30 Hz, peu de balancement.
+
+| Stat | Note | Valeur |
+| --- | --- | --- |
+| Endurance | 3/10 | 125 de stamina |
+| Accélération | 4,5/10 | 5,6 m/s par s, en continu |
+| Vitesse | 2,5/10 | 25 m/s |
+| Maniabilité | 6/10 | 106 °/s |
+| Stabilité | 6,5/10 | 6,5/10 |
+| Plané *(interne)* | 2,5/10 | traînée × 1,15 |
+| Portance *(interne)* | 6,5/10 | décroche sous 6,8 m/s |
+
+---
+
+## Ailes de papillon de nuit
+
+`simplywings:moth` · **Rare** · item `moth_wings`
+
+**Vibe** : Poudré et nocturne. Le papillon de nuit flotte doucement et se pose où il veut, sans jamais décrocher.
+
+**Apparence** : **4 ailes** poudrées beige et brun, avec des ocelles sombres, toujours déployées.
+
+**Effets** : Aucun, des ailes simples et discrètes.
+
+**En vol** :
+- **Déplacement** : 1,8 battement par seconde, +2,4 m/s par coup.
+- **Stationnaire** : 1,5 Hz, balancement modéré.
+
+| Stat | Note | Valeur |
+| --- | --- | --- |
+| Endurance | 4,5/10 | 162 de stamina |
+| Accélération | 3/10 | 4,4 m/s par s, soit +2,4 m/s par battement |
+| Vitesse | 2,5/10 | 25 m/s |
+| Maniabilité | 4,5/10 | 90 °/s |
+| Stabilité | 6/10 | 6/10 |
+| Plané *(interne)* | 4,5/10 | traînée × 0,95 |
+| Portance *(interne)* | 7,2/10 | décroche sous 6,1 m/s |
+
+---
+
+## Ailes de scarabée
+
+`simplywings:beetle` · **Rare** · item `beetle_wings`
+
+**Vibe** : Le cousin des élytres. Deux coques vertes rigides s'ouvrent sur des ailes membraneuses qui bourdonnent : robuste et endurant, mais pataud.
+
+**Apparence** : Deux élytres vert métallique et, dessous, deux ailes membraneuses brunes qui vibrent en continu.
+
+**Effets** : Aucun, des ailes simples et discrètes.
+
+**En vol** :
+- **Déplacement** : Les ailes vibrent à 12 Hz, poussée continue tant que sprint est maintenu.
+- **Stationnaire** : 20 Hz, peu de balancement.
+
+| Stat | Note | Valeur |
+| --- | --- | --- |
+| Endurance | 6,5/10 | 212 de stamina |
+| Accélération | 6,5/10 | 7,2 m/s par s, en continu |
+| Vitesse | 3/10 | 28 m/s |
+| Maniabilité | 3/10 | 73 °/s |
+| Stabilité | 4/10 | 4/10 |
+| Plané *(interne)* | 3/10 | traînée × 1,1 |
+| Portance *(interne)* | 3,5/10 | décroche sous 10,2 m/s |
+
+---
+
+## Ailes d'écureuil volant
+
+`simplywings:squirrel` · **Rare** · item `squirrel_wings`
+
+**Vibe** : Le planeur. Une membrane de fourrure tendue entre les bras : elle bat à peine, mais plane loin et se pilote au millimètre.
+
+**Apparence** : Une membrane de fourrure grise par côté, courte et large, au bord clair.
+
+**Effets** : Aucun, des ailes simples et discrètes.
+
+**En vol** :
+- **Déplacement** : 1,2 battement par seconde, +3,3 m/s par coup.
+- **Stationnaire** : 1,2 Hz, très instable.
+
+| Stat | Note | Valeur |
+| --- | --- | --- |
+| Endurance | 3,5/10 | 138 de stamina |
+| Accélération | 2,5/10 | 4 m/s par s, soit +3,3 m/s par battement |
+| Vitesse | 3/10 | 28 m/s |
+| Maniabilité | 7/10 | 117 °/s |
+| Stabilité | 3/10 | 3/10 |
+| Plané *(interne)* | 7,8/10 | traînée × 0,62 |
+| Portance *(interne)* | 5/10 | décroche sous 8,5 m/s |
+
+---
+
+## Ailes de poisson volant
+
+`simplywings:flying_fish` · **Rare** · item `flying_fish_wings`
+
+**Vibe** : Décalé et fun. Des nageoires translucides qui frétillent et filent au ras des vagues.
+
+**Apparence** : Une nageoire translucide bleu argenté par côté, rayée de fines arêtes.
+
+**Effets** : Aucun, des ailes simples et discrètes.
+
+**En vol** :
+- **Déplacement** : 3 battements par seconde, +1,9 m/s par coup.
+- **Stationnaire** : 2,5 Hz, très instable.
+
+| Stat | Note | Valeur |
+| --- | --- | --- |
+| Endurance | 3/10 | 125 de stamina |
+| Accélération | 4,5/10 | 5,6 m/s par s, soit +1,9 m/s par battement |
+| Vitesse | 5/10 | 38 m/s |
+| Maniabilité | 4/10 | 84 °/s |
+| Stabilité | 2,5/10 | 2,5/10 |
+| Plané *(interne)* | 7/10 | traînée × 0,7 |
+| Portance *(interne)* | 3/10 | décroche sous 10,7 m/s |
+
+---
+
+## Ailes de phantom
+
+`simplywings:phantom` · **Rare** · item `phantom_wings`
+
+**Vibe** : Le cauchemar des insomniaques. La membrane déchirée du phantom, rapide en piqué.
+
+**Apparence** : Une membrane bleu-gris par côté, aux nervures vertes et au bord déchiré.
+
+**Effets** : À chaque battement, un claquement de membrane et un petit souffle au bout des ailes.
+
+**En vol** :
+- **Déplacement** : 1,3 battement par seconde, +4,3 m/s par coup.
+- **Stationnaire** : 1,2 Hz, instable.
+
+| Stat | Note | Valeur |
+| --- | --- | --- |
+| Endurance | 4/10 | 150 de stamina |
+| Accélération | 4,5/10 | 5,6 m/s par s, soit +4,3 m/s par battement |
+| Vitesse | 5,5/10 | 41 m/s |
+| Maniabilité | 5/10 | 95 °/s |
+| Stabilité | 2,5/10 | 2,5/10 |
+| Plané *(interne)* | 6/10 | traînée × 0,8 |
+| Portance *(interne)* | 4/10 | décroche sous 9,6 m/s |
+
+---
+
+## Ailes d'améthyste
+
+`simplywings:amethyst` · **Rare** · item `amethyst_wings`
+
+**Vibe** : Du cristal vanilla. Des éclats d'améthyste qui tintent à chaque battement et tiennent le joueur bien en place.
+
+**Apparence** : Une aile de facettes d'améthyste par côté, dont certaines brillent faiblement dans le noir.
+
+**Effets** : Des éclats violets flottent autour des ailes, et chaque battement tinte comme un bloc d'améthyste.
+
+**En vol** :
+- **Déplacement** : 1,4 battement par seconde, +3,4 m/s par coup.
+- **Stationnaire** : 1,1 Hz, peu de balancement.
+
+| Stat | Note | Valeur |
+| --- | --- | --- |
+| Endurance | 4,5/10 | 162 de stamina |
+| Accélération | 3,5/10 | 4,8 m/s par s, soit +3,4 m/s par battement |
+| Vitesse | 2,5/10 | 25 m/s |
+| Maniabilité | 6,5/10 | 112 °/s |
+| Stabilité | 7/10 | 7/10 |
+| Plané *(interne)* | 3/10 | traînée × 1,1 |
+| Portance *(interne)* | 5/10 | décroche sous 8,5 m/s |
+
+---
+
+## Ailes d'ornithoptère
+
+`simplywings:ornithopter` · **Rare** · item `ornithopter_wings`
+
+**Vibe** : La machine de Léonard de Vinci. Une armature de bois et de la toile tendue : lente mais robuste, et stable.
+
+**Apparence** : Une aile par côté, en toile écrue tendue sur des baguettes de bois.
+
+**Effets** : Aucun, des ailes simples et discrètes.
+
+**En vol** :
+- **Déplacement** : 1,2 battement par seconde, +4 m/s par coup.
+- **Stationnaire** : 1 Hz, peu de balancement.
+
+| Stat | Note | Valeur |
+| --- | --- | --- |
+| Endurance | 7/10 | 225 de stamina |
+| Accélération | 3,5/10 | 4,8 m/s par s, soit +4 m/s par battement |
+| Vitesse | 2,5/10 | 25 m/s |
+| Maniabilité | 3,5/10 | 78 °/s |
+| Stabilité | 6,5/10 | 6,5/10 |
+| Plané *(interne)* | 4/10 | traînée × 1 |
+| Portance *(interne)* | 5/10 | décroche sous 8,5 m/s |
+
+---
+
+## Ailes de cerf-volant
+
+`simplywings:kite` · **Rare** · item `kite_wings`
+
+**Vibe** : Papier et baguettes. Presque aucune puissance, mais il porte au moindre souffle et ne décroche presque jamais.
+
+**Apparence** : Une voile de papier rayée rouge et blanc par côté, tendue sur des baguettes.
+
+**Effets** : Aucun, des ailes simples et discrètes.
+
+**En vol** :
+- **Déplacement** : 0,8 battement par seconde, +5 m/s par coup.
+- **Stationnaire** : 0,8 Hz, très instable.
+
+| Stat | Note | Valeur |
+| --- | --- | --- |
+| Endurance | 2,5/10 | 112 de stamina |
+| Accélération | 2,5/10 | 4 m/s par s, soit +5 m/s par battement |
+| Vitesse | 3/10 | 28 m/s |
+| Maniabilité | 4,5/10 | 90 °/s |
+| Stabilité | 3/10 | 3/10 |
+| Plané *(interne)* | 7,8/10 | traînée × 0,62 |
+| Portance *(interne)* | 7,8/10 | décroche sous 5,4 m/s |
+
+---
+
+## Ailes de cuivre
+
+`simplywings:copper` · **Rare** · item `copper_wings`
+
+**Vibe** : La mécanique du cuivre de la 1.21. Des plaques rivetées qui poussent fort, déjà tachées de vert-de-gris.
+
+**Apparence** : Une aile de plaques de cuivre rivetées par côté, piquée de taches de vert-de-gris.
+
+**Effets** : Des copeaux de cuivre s'échappent en vol, et chaque battement sonne comme une plaque de cuivre.
+
+**En vol** :
+- **Déplacement** : 1,6 battement par seconde, +4,8 m/s par coup.
+- **Stationnaire** : 1,4 Hz, balancement modéré.
+
+| Stat | Note | Valeur |
+| --- | --- | --- |
+| Endurance | 5/10 | 175 de stamina |
+| Accélération | 7,2/10 | 7,8 m/s par s, soit +4,8 m/s par battement |
+| Vitesse | 3,5/10 | 30 m/s |
+| Maniabilité | 4/10 | 84 °/s |
+| Stabilité | 4,5/10 | 4,5/10 |
+| Plané *(interne)* | 3/10 | traînée × 1,1 |
+| Portance *(interne)* | 3,5/10 | décroche sous 10,2 m/s |
+
+---
+
+## Ailes rafistolées
+
+`simplywings:patchwork` · **Rare** · item `patchwork_wings`
+
+**Vibe** : Cuir, plumes et ficelle. Des ailes bricolées sans point fort ni point faible : la rare de départ.
+
+**Apparence** : Une aile par côté, faite de pièces de cuir et de tissu cousues ensemble.
+
+**Effets** : Aucun, des ailes simples et discrètes.
+
+**En vol** :
+- **Déplacement** : 1,8 battement par seconde, +3,1 m/s par coup.
+- **Stationnaire** : 1,4 Hz, instable.
+
+| Stat | Note | Valeur |
+| --- | --- | --- |
+| Endurance | 4,5/10 | 162 de stamina |
+| Accélération | 4,5/10 | 5,6 m/s par s, soit +3,1 m/s par battement |
+| Vitesse | 3,5/10 | 30 m/s |
+| Maniabilité | 4,5/10 | 90 °/s |
+| Stabilité | 4/10 | 4/10 |
+| Plané *(interne)* | 4,5/10 | traînée × 0,95 |
+| Portance *(interne)* | 4,5/10 | décroche sous 9,1 m/s |
 
 ---
 
@@ -547,6 +1087,26 @@ Ces paramètres ne dépendent pas de la collection : ils définissent le caract�
 | --- | --- | --- | --- | --- | --- |
 | Commune | 2,0 | 1,2 Hz | 8 m/s | × 1 | 1 |
 | Chauve-souris | 2,6 | 1,8 Hz | 11 m/s | × 1 | 1 |
+| Corbeau | 2,4 | 1,6 Hz | 10 m/s | × 1 | 1 |
+| Chouette | 1,2 | 1 Hz | 8 m/s | × 0,4 | 1 |
+| Goéland | 1 | 1,4 Hz | 9 m/s | × 1,1 | 1 |
+| Colibri | 30, continu | 40 Hz | 12 m/s | × 0,1 | 1 |
+| Aigle | 1 | 1 Hz | 10 m/s | × 1 | 1 |
+| Martinet | 2,8 | 2,4 Hz | 11 m/s | × 1,2 | 1 |
+| Pigeon voyageur | 2,2 | 1,8 Hz | 8 m/s | × 0,9 | 1 |
+| Paon | 1,6 | 1,2 Hz | 7 m/s | × 0,5 | 1 |
+| Perroquet | 2,6 | 2 Hz | 10 m/s | × 0,8 | 1 |
+| Abeille | 25, continu | 30 Hz | 10 m/s | × 0,2 | 2 |
+| Papillon de nuit | 1,8 | 1,5 Hz | 8 m/s | × 0,5 | 2 |
+| Scarabée | 12, continu | 20 Hz | 9 m/s | × 0,4 | 2 |
+| Écureuil volant | 1,2 | 1,2 Hz | 8 m/s | × 1,1 | 1 |
+| Poisson volant | 3 | 2,5 Hz | 9 m/s | × 1,2 | 1 |
+| Phantom | 1,3 | 1,2 Hz | 11 m/s | × 1 | 1 |
+| Améthyste | 1,4 | 1,1 Hz | 9 m/s | × 0,3 | 1 |
+| Ornithoptère | 1,2 | 1 Hz | 8 m/s | × 0,4 | 1 |
+| Cerf-volant | 0,8 | 0,8 Hz | 7 m/s | × 1,2 | 1 |
+| Cuivre | 1,6 | 1,4 Hz | 9 m/s | × 0,6 | 1 |
+| Rafistolées | 1,8 | 1,4 Hz | 9 m/s | × 0,9 | 1 |
 | Méganeure | 20, continu | 25 Hz | 14 m/s | × 0,1 | 2 |
 | Ptérosaure | 0,9 | 1,1 Hz | 10 m/s | × 1,1 | 1 |
 | Flamme | 1,4 | 1,6 Hz | 14 m/s | × 1 | 1 |

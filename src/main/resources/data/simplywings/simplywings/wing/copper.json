@@ -1,0 +1,27 @@
+{
+  "rarity": "rare",
+  "model": "simplywings:copper",
+  "color": -1,
+  "flap_rate": 1.6,
+  "hover_rate": 1.4,
+  "hover_speed": 9.0,
+  "hover_swing": 0.6,
+  "equipped": {
+    "endurance": 50.0,
+    "acceleration": 72.0,
+    "speed": 35.0,
+    "handling": 40.0,
+    "stability": 45.0,
+    "glide": 30.0,
+    "lift": 35.0
+  },
+  "global": {
+    "endurance": 2.14,
+    "acceleration": 6.17,
+    "speed": 1.99,
+    "handling": 0.5,
+    "stability": 1.24,
+    "glide": 0.18,
+    "lift": 0.42
+  }
+}

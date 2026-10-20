@@ -1,0 +1,27 @@
+{
+  "rarity": "rare",
+  "model": "simplywings:swift",
+  "color": -1,
+  "flap_rate": 2.8,
+  "hover_rate": 2.4,
+  "hover_speed": 11.0,
+  "hover_swing": 1.2,
+  "equipped": {
+    "endurance": 35.0,
+    "acceleration": 60.0,
+    "speed": 55.0,
+    "handling": 60.0,
+    "stability": 20.0,
+    "glide": 65.0,
+    "lift": 40.0
+  },
+  "global": {
+    "endurance": 0.35,
+    "acceleration": 1.87,
+    "speed": 6.59,
+    "handling": 1.46,
+    "stability": 0.06,
+    "glide": 1.91,
+    "lift": 0.4
+  }
+}

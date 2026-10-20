@@ -1,0 +1,27 @@
+{
+  "rarity": "rare",
+  "model": "simplywings:beetle",
+  "color": -1,
+  "flap_rate": 12.0,
+  "hover_rate": 20.0,
+  "hover_speed": 9.0,
+  "hover_swing": 0.4,
+  "equipped": {
+    "endurance": 65.0,
+    "acceleration": 65.0,
+    "speed": 30.0,
+    "handling": 30.0,
+    "stability": 40.0,
+    "glide": 30.0,
+    "lift": 35.0
+  },
+  "global": {
+    "endurance": 5.92,
+    "acceleration": 4.1,
+    "speed": 1.11,
+    "handling": 0.17,
+    "stability": 0.77,
+    "glide": 0.17,
+    "lift": 0.4
+  }
+}

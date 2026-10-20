@@ -1,0 +1,27 @@
+{
+  "rarity": "rare",
+  "model": "simplywings:bee",
+  "color": -1,
+  "flap_rate": 25.0,
+  "hover_rate": 30.0,
+  "hover_speed": 10.0,
+  "hover_swing": 0.2,
+  "equipped": {
+    "endurance": 30.0,
+    "acceleration": 45.0,
+    "speed": 25.0,
+    "handling": 60.0,
+    "stability": 65.0,
+    "glide": 25.0,
+    "lift": 65.0
+  },
+  "global": {
+    "endurance": 0.3,
+    "acceleration": 0.9,
+    "speed": 0.59,
+    "handling": 2.14,
+    "stability": 4.7,
+    "glide": 0.09,
+    "lift": 3.92
+  }
+}

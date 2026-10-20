@@ -1,0 +1,27 @@
+{
+  "rarity": "rare",
+  "model": "simplywings:hummingbird",
+  "color": -1,
+  "flap_rate": 30.0,
+  "hover_rate": 40.0,
+  "hover_speed": 12.0,
+  "hover_swing": 0.15,
+  "equipped": {
+    "endurance": 25.0,
+    "acceleration": 50.0,
+    "speed": 25.0,
+    "handling": 75.0,
+    "stability": 75.0,
+    "glide": 30.0,
+    "lift": 70.0
+  },
+  "global": {
+    "endurance": 0.13,
+    "acceleration": 0.81,
+    "speed": 0.44,
+    "handling": 3.09,
+    "stability": 4.93,
+    "glide": 0.1,
+    "lift": 3.13
+  }
+}

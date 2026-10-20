@@ -1,0 +1,27 @@
+{
+  "rarity": "rare",
+  "model": "simplywings:gull",
+  "color": -1,
+  "flap_rate": 1.0,
+  "hover_rate": 1.4,
+  "hover_speed": 9.0,
+  "hover_swing": 1.1,
+  "equipped": {
+    "endurance": 65.0,
+    "acceleration": 35.0,
+    "speed": 35.0,
+    "handling": 40.0,
+    "stability": 30.0,
+    "glide": 80.0,
+    "lift": 55.0
+  },
+  "global": {
+    "endurance": 4.05,
+    "acceleration": 0.29,
+    "speed": 1.45,
+    "handling": 0.36,
+    "stability": 0.23,
+    "glide": 4.72,
+    "lift": 1.52
+  }
+}

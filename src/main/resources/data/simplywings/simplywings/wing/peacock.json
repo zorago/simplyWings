@@ -1,0 +1,27 @@
+{
+  "rarity": "rare",
+  "model": "simplywings:peacock",
+  "color": -1,
+  "flap_rate": 1.6,
+  "hover_rate": 1.2,
+  "hover_speed": 7.0,
+  "hover_swing": 0.5,
+  "equipped": {
+    "endurance": 30.0,
+    "acceleration": 30.0,
+    "speed": 15.0,
+    "handling": 30.0,
+    "stability": 65.0,
+    "glide": 25.0,
+    "lift": 30.0
+  },
+  "global": {
+    "endurance": 0.64,
+    "acceleration": 0.44,
+    "speed": 0.51,
+    "handling": 0.35,
+    "stability": 10.05,
+    "glide": 0.19,
+    "lift": 0.46
+  }
+}

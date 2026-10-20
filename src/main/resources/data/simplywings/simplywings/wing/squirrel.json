@@ -1,0 +1,27 @@
+{
+  "rarity": "rare",
+  "model": "simplywings:squirrel",
+  "color": -1,
+  "flap_rate": 1.2,
+  "hover_rate": 1.2,
+  "hover_speed": 8.0,
+  "hover_swing": 1.1,
+  "equipped": {
+    "endurance": 35.0,
+    "acceleration": 25.0,
+    "speed": 30.0,
+    "handling": 70.0,
+    "stability": 30.0,
+    "glide": 78.0,
+    "lift": 50.0
+  },
+  "global": {
+    "endurance": 0.53,
+    "acceleration": 0.15,
+    "speed": 1.15,
+    "handling": 3.72,
+    "stability": 0.29,
+    "glide": 5.45,
+    "lift": 1.35
+  }
+}
