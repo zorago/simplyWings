@@ -2,8 +2,13 @@ package com.zorago.simplywings.client;
 
 import com.zorago.simplywings.SimplyWings;
 import com.zorago.simplywings.config.ClientConfig;
-import com.zorago.simplywings.config.ServerConfig;
+import com.zorago.simplywings.data.WingDefinition;
+import com.zorago.simplywings.data.WingRegistries;
 import com.zorago.simplywings.player.FlightMode;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import net.minecraft.resources.ResourceLocation;
 import com.zorago.simplywings.render.BodyPose;
 import com.zorago.simplywings.render.WingModel;
 import com.zorago.simplywings.render.WingsLayer;
@@ -52,16 +57,23 @@ public class SimplyWingsClient {
         game.addListener(SimplyWingsClient::onLogout);
     }
 
+    private static final List<WingModel.Shape> SHAPES = List.of(WingModel.BASIC, WingModel.ANGEL);
+
     private static void onLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
-        event.registerLayerDefinition(WingModel.LAYER, WingModel::createLayer);
+        for (WingModel.Shape shape : SHAPES) {
+            event.registerLayerDefinition(shape.layer(), () -> WingModel.createLayer(shape));
+        }
     }
 
     private static void onAddLayers(EntityRenderersEvent.AddLayers event) {
+        Map<ResourceLocation, WingModel> models = new HashMap<>();
+        for (WingModel.Shape shape : SHAPES) {
+            models.put(SimplyWings.id(shape.name()), new WingModel(event.getEntityModels().bakeLayer(shape.layer()), shape));
+        }
         for (PlayerSkin.Model skin : event.getSkins()) {
             EntityRenderer<? extends Player> renderer = event.getSkin(skin);
             if (renderer instanceof PlayerRenderer playerRenderer) {
-                playerRenderer.addLayer(new WingsLayer(playerRenderer,
-                        new WingModel(event.getEntityModels().bakeLayer(WingModel.LAYER))));
+                playerRenderer.addLayer(new WingsLayer(playerRenderer, models));
             }
         }
     }
@@ -88,7 +100,9 @@ public class SimplyWingsClient {
         if (visual == null || visual.equipped.isEmpty()) {
             return;
         }
-        visual.animator.tick(player, visual.mode, visual.flags, ServerConfig.STABILIZED_FLAP_RATE.get().floatValue());
+        float hoverRate = visual.equipped.flatMap(id -> WingRegistries.get(player.registryAccess(), id))
+                .map(WingDefinition::hoverRate).orElse(2.5f);
+        visual.animator.tick(player, visual.mode, visual.flags, hoverRate);
         if (visual.mode.flying()) {
             player.walkAnimation.setSpeed(0f);
         }

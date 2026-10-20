@@ -6,6 +6,8 @@ import com.zorago.simplywings.anim.WingPose;
 import com.zorago.simplywings.client.WingVisuals;
 import com.zorago.simplywings.data.WingDefinition;
 import com.zorago.simplywings.data.WingRegistries;
+import java.util.Map;
+import java.util.Optional;
 import net.minecraft.client.model.PlayerModel;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -17,14 +19,15 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 
 public class WingsLayer extends RenderLayer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> {
-    private static final ResourceLocation TEXTURE = SimplyWings.id("textures/entity/basic_wings.png");
+    private static final ResourceLocation BASIC = SimplyWings.id("basic");
 
-    private final WingModel model;
+    private final Map<ResourceLocation, WingModel> models;
     private final WingPose pose = new WingPose();
 
-    public WingsLayer(RenderLayerParent<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> parent, WingModel model) {
+    public WingsLayer(RenderLayerParent<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> parent,
+                      Map<ResourceLocation, WingModel> models) {
         super(parent);
-        this.model = model;
+        this.models = models;
     }
 
     @Override
@@ -35,15 +38,16 @@ public class WingsLayer extends RenderLayer<AbstractClientPlayer, PlayerModel<Ab
         if (visual == null || visual.equipped.isEmpty() || player.isInvisible()) {
             return;
         }
-        int color = visual.equipped.flatMap(id -> WingRegistries.get(player.registryAccess(), id))
-                .map(WingDefinition::color).orElse(0xFFA0A0A0);
+        Optional<WingDefinition> definition = visual.equipped.flatMap(id -> WingRegistries.get(player.registryAccess(), id));
+        int color = definition.map(WingDefinition::color).orElse(0xFFA0A0A0);
+        WingModel model = models.getOrDefault(definition.map(WingDefinition::model).orElse(BASIC), models.get(BASIC));
         poseStack.pushPose();
         getParentModel().body.translateAndRotate(poseStack);
         if (!player.getItemBySlot(EquipmentSlot.CHEST).isEmpty()) {
             poseStack.translate(0, 0, 0.0625);
         }
         model.setup(visual.animator.pose(partialTick, pose));
-        model.render(poseStack, buffer.getBuffer(RenderType.entityCutoutNoCull(TEXTURE)), light,
+        model.render(poseStack, buffer.getBuffer(RenderType.entityCutoutNoCull(model.shape().texture())), light,
                 OverlayTexture.NO_OVERLAY, color);
         poseStack.popPose();
     }

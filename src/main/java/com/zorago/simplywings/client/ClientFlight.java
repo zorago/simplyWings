@@ -303,7 +303,7 @@ public final class ClientFlight {
         stabVel = new Vec3(horizontal.x, vy, horizontal.z);
 
         double amp = (10 - s) / 10;
-        phase += 2 * Math.PI * ServerConfig.STABILIZED_FLAP_RATE.get() * DT;
+        phase += 2 * Math.PI * stats.hoverRate() * DT;
         if (phase >= 2 * Math.PI) {
             phase -= 2 * Math.PI;
             double angle = RANDOM.nextDouble() * 2 * Math.PI;

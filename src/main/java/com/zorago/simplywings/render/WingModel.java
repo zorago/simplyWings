@@ -11,25 +11,52 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.resources.ResourceLocation;
 
 public final class WingModel {
-    public static final ModelLayerLocation LAYER = new ModelLayerLocation(SimplyWings.id("basic_wings"), "main");
+    public record Segment(float length, float bone, int strips, float plateFrom, float plateTo, int u) {
+    }
 
-    private static final float SHOULDER_LENGTH = 9f;
-    private static final float ELBOW_LENGTH = 8f;
-    private static final float TIP_LENGTH = 6f;
+    public record Shape(String name, Segment shoulder, Segment elbow, Segment tip, int textureWidth,
+                        int textureHeight) {
+        public ModelLayerLocation layer() {
+            return new ModelLayerLocation(SimplyWings.id(name + "_wings"), "main");
+        }
+
+        public ResourceLocation texture() {
+            return SimplyWings.id("textures/entity/" + name + "_wings.png");
+        }
+    }
+
+    public static final Shape BASIC = new Shape("basic",
+            new Segment(9f, 1f, 1, 11f, 11f, 0),
+            new Segment(8f, 1f, 1, 9f, 9f, 20),
+            new Segment(6f, 0.8f, 1, 6f, 6f, 40),
+            64, 32);
+
+    public static final Shape ANGEL = new Shape("angel",
+            new Segment(13f, 1.4f, 3, 13f, 17f, 0),
+            new Segment(12f, 1.2f, 3, 17f, 21f, 30),
+            new Segment(11f, 1f, 4, 21f, 26f, 58),
+            128, 32);
 
     private final ModelPart root;
     private final Side left;
     private final Side right;
+    private final Shape shape;
 
     private record Side(ModelPart shoulder, ModelPart elbow, ModelPart tip, float sign) {
     }
 
-    public WingModel(ModelPart root) {
+    public WingModel(ModelPart root, Shape shape) {
         this.root = root;
+        this.shape = shape;
         this.left = side(root, "left", 1f);
         this.right = side(root, "right", -1f);
+    }
+
+    public Shape shape() {
+        return shape;
     }
 
     private static Side side(ModelPart root, String name, float sign) {
@@ -39,27 +66,37 @@ public final class WingModel {
         return new Side(shoulder, elbow, tip, sign);
     }
 
-    public static LayerDefinition createLayer() {
+    public static LayerDefinition createLayer(Shape shape) {
         MeshDefinition mesh = new MeshDefinition();
         PartDefinition root = mesh.getRoot();
-        addSide(root, "left", 1f);
-        addSide(root, "right", -1f);
-        return LayerDefinition.create(mesh, 64, 32);
+        addSide(root, shape, "left", 1f);
+        addSide(root, shape, "right", -1f);
+        return LayerDefinition.create(mesh, shape.textureWidth(), shape.textureHeight());
     }
 
-    private static void addSide(PartDefinition root, String name, float s) {
-        PartDefinition shoulder = root.addOrReplaceChild(name + "_shoulder", CubeListBuilder.create()
-                        .texOffs(0, 0).addBox(s > 0 ? 0 : -SHOULDER_LENGTH, -0.5f, -0.5f, SHOULDER_LENGTH, 1f, 1f)
-                        .texOffs(0, 4).addBox(s > 0 ? 0 : -SHOULDER_LENGTH, 0.5f, -0.25f, SHOULDER_LENGTH, 11f, 0.5f),
-                PartPose.offset(1.5f * s, 1.5f, 2.6f));
-        PartDefinition elbow = shoulder.addOrReplaceChild(name + "_elbow", CubeListBuilder.create()
-                        .texOffs(20, 0).addBox(s > 0 ? 0 : -ELBOW_LENGTH, -0.5f, -0.5f, ELBOW_LENGTH, 1f, 1f)
-                        .texOffs(20, 4).addBox(s > 0 ? 0 : -ELBOW_LENGTH, 0.5f, 0.05f, ELBOW_LENGTH, 9f, 0.5f),
-                PartPose.offset(SHOULDER_LENGTH * s, 0f, 0f));
-        elbow.addOrReplaceChild(name + "_tip", CubeListBuilder.create()
-                        .texOffs(40, 0).addBox(s > 0 ? 0 : -TIP_LENGTH, -0.4f, -0.4f, TIP_LENGTH, 0.8f, 0.8f)
-                        .texOffs(40, 4).addBox(s > 0 ? 0 : -TIP_LENGTH, 0.4f, 0.3f, TIP_LENGTH, 6f, 0.5f),
-                PartPose.offset(ELBOW_LENGTH * s, 0f, 0f));
+    private static CubeListBuilder segment(Segment seg, float s, float depth) {
+        float half = seg.bone() / 2f;
+        float x0 = s > 0 ? 0 : -seg.length();
+        CubeListBuilder builder = CubeListBuilder.create()
+                .texOffs(seg.u(), 0).addBox(x0, -half, -half, seg.length(), seg.bone(), seg.bone());
+        float stripWidth = seg.length() / seg.strips();
+        for (int i = 0; i < seg.strips(); i++) {
+            float t = seg.strips() == 1 ? 1f : i / (float) (seg.strips() - 1);
+            float along = s > 0 ? t : 1f - t;
+            float height = seg.plateFrom() + (seg.plateTo() - seg.plateFrom()) * along;
+            float x = x0 + i * stripWidth;
+            builder.texOffs(seg.u(), 4).addBox(x, half, depth + i * 0.02f, stripWidth, height, 0.5f);
+        }
+        return builder;
+    }
+
+    private static void addSide(PartDefinition root, Shape shape, String name, float s) {
+        PartDefinition shoulder = root.addOrReplaceChild(name + "_shoulder",
+                segment(shape.shoulder(), s, -0.25f), PartPose.offset(1.5f * s, 1.5f, 2.6f));
+        PartDefinition elbow = shoulder.addOrReplaceChild(name + "_elbow",
+                segment(shape.elbow(), s, 0.05f), PartPose.offset(shape.shoulder().length() * s, 0f, 0f));
+        elbow.addOrReplaceChild(name + "_tip",
+                segment(shape.tip(), s, 0.3f), PartPose.offset(shape.elbow().length() * s, 0f, 0f));
     }
 
     public void setup(WingPose pose) {

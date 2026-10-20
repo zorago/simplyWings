@@ -13,5 +13,7 @@
   "commands.simplywings.equip": "%s équipées",
   "commands.simplywings.unequip": "Ailes retirées",
   "commands.simplywings.stamina": "Stamina réglée à %s",
-  "commands.simplywings.reset": "Collection d'ailes vidée"
+  "commands.simplywings.reset": "Collection d'ailes vidée",
+  "item.simplywings.angel_wings": "Ailes d'ange",
+  "wing.simplywings.angel": "Ailes d'ange"
 }

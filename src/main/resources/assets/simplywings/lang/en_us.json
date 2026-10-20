@@ -13,5 +13,7 @@
   "commands.simplywings.equip": "Equipped %s",
   "commands.simplywings.unequip": "Wings unequipped",
   "commands.simplywings.stamina": "Stamina set to %s",
-  "commands.simplywings.reset": "Wing collection cleared"
+  "commands.simplywings.reset": "Wing collection cleared",
+  "item.simplywings.angel_wings": "Angel Wings",
+  "wing.simplywings.angel": "Angel Wings"
 }

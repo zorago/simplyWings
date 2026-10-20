@@ -16,7 +16,6 @@ public final class ServerConfig {
     public static final ModConfigSpec.DoubleValue STABILIZED_VERTICAL_SPEED;
     public static final ModConfigSpec.DoubleValue STABILIZED_RAMP_TICKS;
     public static final ModConfigSpec.DoubleValue STABILIZED_RAMP_TICKS_PER_POINT;
-    public static final ModConfigSpec.DoubleValue STABILIZED_FLAP_RATE;
     public static final ModConfigSpec.DoubleValue PERTURBATION_AMPLITUDE;
     public static final ModConfigSpec.DoubleValue DRIFT_AMPLITUDE;
 
@@ -56,8 +55,6 @@ public final class ServerConfig {
                 .defineInRange("rampTicks", 8.0, 1.0, 100.0);
         STABILIZED_RAMP_TICKS_PER_POINT = b.comment("Extra ramp ticks per missing stabilization point.")
                 .defineInRange("rampTicksPerMissingPoint", 1.5, 0.0, 20.0);
-        STABILIZED_FLAP_RATE = b.comment("Wing beats per second while hovering.")
-                .defineInRange("flapRate", 2.5, 0.5, 10.0);
         PERTURBATION_AMPLITUDE = b.comment("Vertical oscillation per beat at stabilization 0, in m/s.")
                 .defineInRange("perturbationAmplitude", 1.2, 0.0, 10.0);
         DRIFT_AMPLITUDE = b.comment("Random drift per beat at stabilization 0, in m/s.")

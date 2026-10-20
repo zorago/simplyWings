@@ -4,6 +4,7 @@
   "color": -6250336,
   "min_speed": 8.0,
   "flap_rate": 2.0,
+  "hover_rate": 2.5,
   "equipped": {
     "stamina": 100.0,
     "acceleration": 3.0,

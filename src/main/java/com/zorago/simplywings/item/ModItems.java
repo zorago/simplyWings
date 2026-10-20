@@ -14,6 +14,8 @@ public final class ModItems {
 
     public static final DeferredItem<WingItem> COMMON_WINGS = ITEMS.register("common_wings",
             () -> new WingItem(new Item.Properties().stacksTo(1).rarity(Rarity.COMMON), SimplyWings.id("common")));
+    public static final DeferredItem<WingItem> ANGEL_WINGS = ITEMS.register("angel_wings",
+            () -> new WingItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC), SimplyWings.id("angel")));
 
     public static void register(IEventBus modBus) {
         ITEMS.register(modBus);
@@ -22,6 +24,7 @@ public final class ModItems {
     public static void onBuildCreativeTab(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
             event.accept(COMMON_WINGS);
+            event.accept(ANGEL_WINGS);
         }
     }
 
