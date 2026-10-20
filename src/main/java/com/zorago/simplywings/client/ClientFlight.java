@@ -444,7 +444,11 @@ public final class ClientFlight {
 
         double sin = Math.sin(Math.toRadians(pitch));
         double vCap = vMax + (vTerm - vMax) * Math.max(0, sin);
-        double drag = g / (vTerm * vTerm) * ServerConfig.AIR_DRAG.get();
+        double glideSpeed = ServerConfig.GLIDE_DRAG_SPEED.get();
+        double diveSpeed = ServerConfig.DIVE_DRAG_SPEED.get();
+        double glideDrag = g / (glideSpeed * glideSpeed);
+        double diveDrag = g / (diveSpeed * diveSpeed);
+        double drag = (glideDrag + (diveDrag - glideDrag) * Math.max(0, sin)) * ServerConfig.AIR_DRAG.get();
 
         boolean sprint = o.keySprint.isDown();
         braking = ModKeys.brakeDown() && speed > 0;
@@ -461,7 +465,8 @@ public final class ClientFlight {
         }
         boolean flapUseful = speed < vMax;
         if (sprint && flapUseful && !braking && flapCooldown <= 0 && (creative || ClientWings.stamina() >= flapCost())) {
-            speed += accelStat * (1 - speed / vCap);
+            double ratio = speed / vCap;
+            speed += accelStat * (1 - ratio * ratio * ratio);
             flapCooldown = flapInterval(stats);
             ticksSinceFlap = 0;
             spend(player, flapCost());

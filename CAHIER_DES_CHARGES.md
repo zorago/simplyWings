@@ -111,10 +111,12 @@ C'est le vol de voyage, inspiré de Wuthering Waves : la direction se contrôle 
 - Chaque battement donne une impulsion, puis la traînée réduit la vitesse jusqu'au battement suivant. La courbe obtenue est en dents de scie qui montent vers V max, pas une rampe linéaire.
 
 ```latex
-\Delta v_{battement} = A \cdot \left(1 - \frac{v}{V_{cap}}\right), \quad V_{cap} = V_{max} + (V_{term} - V_{max}) \cdot \max(0, \sin\theta)
+\Delta v_{battement} = A \cdot \left(1 - \left(\frac{v}{V_{cap}}\right)^{3}\right), \quad V_{cap} = V_{max} + (V_{term} - V_{max}) \cdot \max(0, \sin\theta)
 ```
 
-A est la stat d'accélération. À plat ou en montée, V cap = V max : les battements approchent la vitesse max sans la dépasser. En piqué, V cap glisse vers V term : battre des ailes ajoute à la gravité, mais chaque battement rapporte moins à l'approche de la vitesse terminale.
+A est la stat d'accélération (gain d'un battement à basse vitesse). À plat ou en montée, V cap = V max : le gain reste presque constant puis s'écrase près de la vitesse max (exposant 3), ce qui donne 4 à 5 battements pour l'atteindre. Au-dessus de V max, battre ne sert plus à rien : en piqué, sprint replie les ailes en faucon (traînée réduite) pour foncer vers V term.
+
+La traînée k dépend de l'angle : faible à plat (`glideDragSpeed`, 150 m/s par défaut, pour que la vitesse ne fonde pas entre deux battements), forte en piqué ailes ouvertes (`diveDragSpeed`, 60 m/s). Seul le repli faucon dépasse cette vitesse, jusqu'à V term (110 m/s par défaut).
 
 **Freinage**
 

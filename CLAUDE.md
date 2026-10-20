@@ -9,6 +9,7 @@ Mod d'ailes standalone pour **NeoForge 1.21.1** (nom de travail : SimplyWings). 
 - `CAHIER_DES_CHARGES.md` : spec complète, **fait foi** en cas de doute (stats, formules de vol, table d'architecture, points ouverts).
 - `HANDOFF.md` : point d'entrée, étapes de travail et ordre d'implémentation.
 
+- `BALANCE.md` : plages de puissance par tier et position de chaque paire. À tenir à jour à chaque changement de stats d'une aile ou de la physique.
 - `docs/ANALYSE_REFERENCES.md` : analyse des mods de référence et du pack, avec la table d'architecture corrigée. **Elle prime sur la table du cahier des charges** là où elle la corrige (anti-kick, caméra, souris).
 
 Étape en cours : **prototype de vol** (étapes 1 à 5 du handoff, pour la paire commune seulement). Analyse validée. Pas encore d'écran Ailes, de bouton d'inventaire, de table, de forge, de loots ni de JEI.

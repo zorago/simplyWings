@@ -9,6 +9,8 @@ public final class ServerConfig {
     public static final ModConfigSpec.DoubleValue TERMINAL_VELOCITY;
     public static final ModConfigSpec.DoubleValue OVERSPEED_FRICTION;
     public static final ModConfigSpec.DoubleValue AIR_DRAG;
+    public static final ModConfigSpec.DoubleValue GLIDE_DRAG_SPEED;
+    public static final ModConfigSpec.DoubleValue DIVE_DRAG_SPEED;
     public static final ModConfigSpec.DoubleValue BRAKE_FACTOR;
     public static final ModConfigSpec.DoubleValue TUCK_DRAG_FACTOR;
     public static final ModConfigSpec.DoubleValue TUCK_MIN_PITCH;
@@ -43,8 +45,14 @@ public final class ServerConfig {
         TERMINAL_VELOCITY = b.comment("Terminal velocity of a vertical dive, in m/s (1 block = 1 m).",
                         "WARNING: above 55 m/s the server has to load and generate terrain faster than most servers can handle.")
                 .defineInRange("terminalVelocity", 110.0, 10.0, 300.0);
-        AIR_DRAG = b.comment("Air drag multiplier. Below 1, speed bleeds off more slowly; the overspeed friction still caps dives at terminal velocity.")
-                .defineInRange("airDrag", 0.8, 0.1, 2.0);
+        GLIDE_DRAG_SPEED = b.comment("Air drag in level flight, expressed as the speed where it would equal gravity, in m/s.",
+                        "Higher = less speed lost between wing beats.")
+                .defineInRange("glideDragSpeed", 150.0, 10.0, 500.0);
+        DIVE_DRAG_SPEED = b.comment("Terminal speed of an open-wing vertical dive, in m/s.",
+                        "Only a tucked dive (falcon stoop) goes beyond it, up to terminalVelocity.")
+                .defineInRange("diveDragSpeed", 60.0, 10.0, 300.0);
+        AIR_DRAG = b.comment("Air drag multiplier. Below 1, speed bleeds off more slowly.")
+                .defineInRange("airDrag", 1.0, 0.1, 2.0);
         OVERSPEED_FRICTION = b.comment("Extra friction above cruise speed, in 1/s.")
                 .defineInRange("overspeedFriction", 0.6, 0.0, 10.0);
         TUCK_DRAG_FACTOR = b.comment("Air drag multiplier with wings tucked in a dive (falcon stoop). Lower = faster acceleration toward terminal velocity.")

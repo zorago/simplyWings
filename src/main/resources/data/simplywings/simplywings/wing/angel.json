@@ -5,19 +5,19 @@
   "min_speed": 12.0,
   "flap_rate": 1.2,
   "hover_rate": 1.4,
-  "hover_speed": 24.0,
+  "hover_speed": 19.0,
   "equipped": {
-    "stamina": 300.0,
-    "acceleration": 18.0,
-    "max_speed": 72.0,
-    "handling": 90.0,
+    "stamina": 240.0,
+    "acceleration": 14.0,
+    "max_speed": 58.0,
+    "handling": 85.0,
     "stabilization": 2.0
   },
   "global": {
-    "stamina": 30.0,
-    "acceleration": 1.8,
-    "max_speed": 7.2,
-    "handling": 9.0,
+    "stamina": 24.0,
+    "acceleration": 1.4,
+    "max_speed": 5.8,
+    "handling": 8.5,
     "stabilization": 0.8
   }
 }
