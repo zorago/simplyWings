@@ -18,8 +18,8 @@
   "wing.simplywings.angel": "Angel Wings",
   "item.simplywings.bat_wings": "Bat Wings",
   "wing.simplywings.bat": "Bat Wings",
-  "item.simplywings.ancient_wings": "Ancient Wings",
-  "wing.simplywings.ancient": "Ancient Wings",
+  "item.simplywings.ancient_wings": "Meganeura Wings",
+  "wing.simplywings.ancient": "Meganeura Wings",
   "key.simplywings.menu": "Wings menu",
   "gui.simplywings.title": "Wings",
   "gui.simplywings.equip": "Equip",
@@ -47,5 +47,15 @@
   "item.simplywings.daedalus_wings": "Wings of Daedalus",
   "wing.simplywings.daedalus": "Wings of Daedalus",
   "item.simplywings.psyche_wings": "Wings of Psyche",
-  "wing.simplywings.psyche": "Wings of Psyche"
+  "wing.simplywings.psyche": "Wings of Psyche",
+  "item.simplywings.fire_wings": "Wings of Flame",
+  "wing.simplywings.fire": "Wings of Flame",
+  "item.simplywings.water_wings": "Wings of the Tide",
+  "wing.simplywings.water": "Wings of the Tide",
+  "item.simplywings.earth_wings": "Wings of Stone",
+  "wing.simplywings.earth": "Wings of Stone",
+  "item.simplywings.air_wings": "Wings of the Wind",
+  "wing.simplywings.air": "Wings of the Wind",
+  "item.simplywings.ptero_wings": "Pterosaur Wings",
+  "wing.simplywings.ptero": "Pterosaur Wings"
 }

@@ -7,8 +7,8 @@ Dernière mise à jour : 20 octobre 2026.
 ## Paliers d'ambiance
 
 - **Commune** : la base, des élytres améliorées.
-- **Rare** : des créatures réelles (chauve-souris…).
-- **Épique** : des esprits et des éléments.
+- **Rare** : des créatures réelles, dans une ambiance vanilla, simple, « faite main ».
+- **Épique** : des esprits, des éléments et des créatures disparues (préhistoriques), avec des thèmes qui sortent du vanilla.
 - **Légendaire** : des dieux, des êtres divins et des figures mythologiques. Chaque légendaire maxe une stat visible.
 
 ## Lire les stats
@@ -24,7 +24,12 @@ Dernière mise à jour : 20 octobre 2026.
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | Ailes communes | Commune | 2,0 | 5,0 | 1,2 | 2,7 | 3,0 | Des élytres améliorées, le point de départ |
 | Ailes de chauve-souris | Rare | 4,0 | 7,0 | 3,1 | 8,2 | 3,0 | Agiles et aérodynamiques |
-| Ailes anciennes | Épique | 6,0 | 3,5 | 2,3 | 9,1 | 4,0 | Une libellule faite pour construire |
+| Ailes de méganeure | Épique | 6,0 | 3,5 | 2,3 | 9,1 | 4,0 | Une libellule fossile faite pour construire |
+| Ailes de ptérosaure | Épique | 7,5 | 5,5 | 4,5 | 4,0 | 3,0 | Le planeur préhistorique |
+| Ailes de flamme | Épique | 3,5 | 8,5 | 6,0 | 5,0 | 2,0 | L'élément feu : des coups explosifs |
+| Ailes de la marée | Épique | 6,0 | 4,5 | 4,5 | 8,0 | 5,5 | L'élément eau : fluide et maniable |
+| Ailes de pierre | Épique | 8,5 | 4,0 | 2,5 | 3,0 | 7,5 | L'élément terre : lourdes, solides, inépuisables |
+| Ailes du vent | Épique | 4,5 | 6,0 | 8,2 | 6,5 | 2,5 | L'élément air : légères et rapides |
 | Ailes d'ange | Légendaire | **10** | 7,0 | 7,5 | 4,1 | 1,0 | L'endurance, un vol majestueux |
 | Ailes de démon | Légendaire | 5,5 | **10** | 8,5 | 5,0 | 1,5 | La puissance brute, des coups violents |
 | Ailes de séraphin | Légendaire | 7,0 | 6,0 | **10** | 4,5 | 4,0 | La vitesse, six ailes dorées |
@@ -83,13 +88,15 @@ Dernière mise à jour : 20 octobre 2026.
 
 ---
 
-## Ailes anciennes
+## Ailes de méganeure
 
 `simplywings:ancient` · **Épique** · item `ancient_wings` · modèle libellule
 
-**Vibe** : un insecte capable de faire du surplace, l'outil du bâtisseur. Très stable et très maniable en stationnaire, mais médiocre en vol de déplacement : lente, elle accélère et freine mal. En échange, elle ne décroche presque jamais.
+**Vibe** : la méganeure, libellule géante du Carbonifère, il y a 300 millions d'années, avec 70 cm d'envergure. Ses ailes sont restées prises dans l'ambre. C'est un insecte capable de faire du surplace, l'outil du bâtisseur. Très stable et très maniable en stationnaire, mais médiocre en vol de déplacement : lente, elle accélère et freine mal. En échange, elle ne décroche presque jamais.
 
-**Apparence** : **4 ailes**, deux paires avant et arrière, chacune d'un seul bloc. Membranes translucides irisées, veinées de vert sombre. Toujours étalées à plat, en V vers l'arrière au repos.
+**Apparence** : **4 ailes**, deux paires avant et arrière, chacune d'un seul bloc. Membranes translucides couleur d'ambre, veinées de brun fossile et tachetées. Toujours étalées à plat, en V vers l'arrière au repos.
+
+**Effets** : quelques grains d'ambre tombent des ailes.
 
 **En vol** :
 - **Déplacement** : les ailes vibrent à 25 Hz. La poussée est continue tant que sprint est maintenu, avec une accélération presque linéaire.
@@ -104,6 +111,144 @@ Dernière mise à jour : 20 octobre 2026.
 | Stabilité | 4,0/10 | 4/10, et pratiquement sans balancement grâce à la vibration |
 | Plané *(interne)* | 4,0/10 | traînée × 1,0 |
 | Portance *(interne)* | 8,6/10 | décroche sous 4,5 m/s |
+
+---
+
+## Ailes de ptérosaure
+
+`simplywings:ptero` · **Épique** · item `ptero_wings`
+
+**Vibe** : le planeur préhistorique. Les ptérosaures traversaient des océans en planant sur des ailes de peau tendues par un seul doigt immense. Elles battent peu, mais chaque coup est ample. Elles ont du fond et planent très loin, mais elles sont lourdes à manœuvrer.
+
+**Apparence** : une membrane de cuir ocre par côté. L'avant-bras est court, et le doigt qui porte la pointe est très long. La membrane s'affine jusqu'à la pointe, avec des fibres plus sombres.
+
+**Effets** : à chaque battement, un claquement de membrane et un petit souffle au bout des ailes.
+
+**En vol** :
+- **Déplacement** : 0,9 battement par seconde, +7,1 m/s par coup.
+- **Stationnaire** : 1,1 Hz, instable.
+
+| Stat | Note | Valeur |
+| --- | --- | --- |
+| Endurance | 7,5/10 | 238 de stamina |
+| Accélération | 5,5/10 | 6,4 m/s par s, soit +7,1 m/s par battement |
+| Vitesse | 4,5/10 | 35 m/s |
+| Maniabilité | 4,0/10 | 84 °/s |
+| Stabilité | 3,0/10 | 3/10 |
+| Plané *(interne)* | 8,5/10 | traînée × 0,55 |
+| Portance *(interne)* | 5,5/10 | décroche sous 8 m/s |
+
+---
+
+## Ailes de flamme
+
+`simplywings:fire` · **Épique** · item `fire_wings` · élément feu
+
+**Vibe** : un esprit du feu. Les ailes sont faites de flammes vives : elles brûlent fort et vite, avec des coups secs et explosifs. Elles s'épuisent vite et tiennent mal en place.
+
+**Apparence** : une aile de feu par côté, en trois segments, lumineuse dans le noir. Elle passe du jaune près du dos à l'orange, puis au rouge vers le bord, qui se découpe en langues de flamme.
+
+**Effets** :
+- **En continu** : des flammes et des étincelles s'échappent des ailes, avec une traînée de fumée au-dessus de 20 m/s.
+- **À chaque battement** : une gerbe de flammes projetée vers l'arrière, des étincelles et le souffle d'une boule de feu.
+
+**En vol** :
+- **Déplacement** : 1,4 battement par seconde, +6,3 m/s par coup.
+- **Stationnaire** : 1,6 Hz, très instable, avec un léger scintillement des flammes.
+
+| Stat | Note | Valeur |
+| --- | --- | --- |
+| Endurance | 3,5/10 | 138 de stamina |
+| Accélération | 8,5/10 | 8,8 m/s par s, soit +6,3 m/s par battement |
+| Vitesse | 6,0/10 | 43 m/s |
+| Maniabilité | 5,0/10 | 95 °/s |
+| Stabilité | 2,0/10 | 2/10 |
+| Plané *(interne)* | 3,5/10 | traînée × 1,05 |
+| Portance *(interne)* | 3,5/10 | décroche sous 10,2 m/s |
+
+---
+
+## Ailes de la marée
+
+`simplywings:water` · **Épique** · item `water_wings` · élément eau
+
+**Vibe** : un esprit de l'eau. Le vol est fluide, comme une nage dans l'air : les ailes ondulent, glissent et virent sans effort. Elles sont plutôt stables et gardent bien leur élan.
+
+**Apparence** : une aile d'eau translucide par côté, bleue avec des reflets clairs qui ondulent et un liseré d'écume sur le bord. Elle respire lentement comme une vague.
+
+**Effets** :
+- **En continu** : des gouttes tombent des ailes. En vol, de l'écume s'en détache, et des éclaboussures partent du bout des ailes au-dessus de 18 m/s.
+- **À chaque battement** : des éclaboussures, des gouttes qui tombent et le bruit d'une rame dans l'eau.
+
+**En vol** :
+- **Déplacement** : 1 battement par seconde, +5,6 m/s par coup.
+- **Stationnaire** : 0,8 Hz, balancement modéré.
+
+| Stat | Note | Valeur |
+| --- | --- | --- |
+| Endurance | 6,0/10 | 200 de stamina |
+| Accélération | 4,5/10 | 5,6 m/s par s, soit +5,6 m/s par battement |
+| Vitesse | 4,5/10 | 35 m/s |
+| Maniabilité | 8,0/10 | 128 °/s |
+| Stabilité | 5,5/10 | 5,5/10 |
+| Plané *(interne)* | 8,0/10 | traînée × 0,6 |
+| Portance *(interne)* | 5,0/10 | décroche sous 8,5 m/s |
+
+---
+
+## Ailes de pierre
+
+`simplywings:earth` · **Épique** · item `earth_wings` · élément terre
+
+**Vibe** : un esprit de la terre. Des ailes de roche lourdes et lentes qui ne s'épuisent presque jamais et tiennent très bien en place. Elles volent bas et lentement, virent mal, et ne planent pas : la pierre veut retourner au sol.
+
+**Apparence** : une aile de pierre par côté, en trois segments épais : roche grise fissurée, mousse près du dos et éclats d'améthyste qui brillent dans le noir.
+
+**Effets** :
+- **En continu** : de la poussière de terre tombe des ailes. En vol, des éclats de pierre s'en détachent.
+- **À chaque battement** : des éclats de pierre et de mousse, un nuage de poussière et un craquement de roche.
+
+**En vol** :
+- **Déplacement** : 0,8 battement par seconde, lent et lourd, +6,5 m/s par coup.
+- **Stationnaire** : 0,7 Hz, très peu de balancement.
+
+| Stat | Note | Valeur |
+| --- | --- | --- |
+| Endurance | 8,5/10 | 263 de stamina |
+| Accélération | 4,0/10 | 5,2 m/s par s, soit +6,5 m/s par battement |
+| Vitesse | 2,5/10 | 25 m/s |
+| Maniabilité | 3,0/10 | 73 °/s |
+| Stabilité | 7,5/10 | 7,5/10 |
+| Plané *(interne)* | 2,5/10 | traînée × 1,15 |
+| Portance *(interne)* | 4,5/10 | décroche sous 9 m/s |
+
+---
+
+## Ailes du vent
+
+`simplywings:air` · **Épique** · item `air_wings` · élément air
+
+**Vibe** : un esprit du vent. Des ailes presque invisibles, légères et rapides, qui portent loin et ne décrochent presque pas. Comme le vent, elles ne tiennent pas en place.
+
+**Apparence** : **4 ailes** de vent, deux par côté : des voiles blanches très transparentes, striées comme des courants d'air, qui s'effilochent au bord.
+
+**Effets** :
+- **En continu** : des filets d'air blanc partent vers l'arrière. Au-dessus de 20 m/s, des traînées partent du bout des ailes.
+- **À chaque battement** : deux petites rafales au bout des ailes, des filets d'air et un souffle de vent.
+
+**En vol** :
+- **Déplacement** : 1,6 battement par seconde, +4,3 m/s par coup.
+- **Stationnaire** : 1,4 Hz, très instable.
+
+| Stat | Note | Valeur |
+| --- | --- | --- |
+| Endurance | 4,5/10 | 163 de stamina |
+| Accélération | 6,0/10 | 6,8 m/s par s, soit +4,3 m/s par battement |
+| Vitesse | 8,2/10 | 55 m/s |
+| Maniabilité | 6,5/10 | 112 °/s |
+| Stabilité | 2,5/10 | 2,5/10 |
+| Plané *(interne)* | 7,5/10 | traînée × 0,65 |
+| Portance *(interne)* | 7,5/10 | décroche sous 5,8 m/s |
 
 ---
 
@@ -192,15 +337,6 @@ Dernière mise à jour : 20 octobre 2026.
 | Plané *(interne)* | 6,0/10 | traînée × 0,8 |
 | Portance *(interne)* | 7,5/10 | décroche sous 5,8 m/s |
 
---- | --- | --- |
-| Endurance | 5,0/10 | 175 de stamina |
-| Accélération | 7,5/10 | 8 m/s par s, soit +1,3 m/s par battement |
-| Vitesse | 6,0/10 | 43 m/s |
-| Maniabilité | **10/10** | 150 °/s |
-| Stabilité | 4,5/10 | 4,5/10 |
-| Plané *(interne)* | 5,5/10 | traînée × 0,85 |
-| Portance *(interne)* | 6,0/10 | décroche sous 7,4 m/s |
-
 ---
 
 ## Ailes de séraphin
@@ -266,9 +402,19 @@ Ces paramètres ne dépendent pas de la collection : ils définissent le caract�
 | --- | --- | --- | --- | --- | --- |
 | Commune | 2,0 | 1,2 Hz | 8 m/s | × 1 | 1 |
 | Chauve-souris | 2,6 | 1,8 Hz | 11 m/s | × 1 | 1 |
-| Ancienne | 20, continu | 25 Hz | 14 m/s | × 0,1 | 2 |
+| Méganeure | 20, continu | 25 Hz | 14 m/s | × 0,1 | 2 |
+| Ptérosaure | 0,9 | 1,1 Hz | 10 m/s | × 1,1 | 1 |
+| Flamme | 1,4 | 1,6 Hz | 14 m/s | × 1 | 1 |
+| Marée | 1,0 | 0,8 Hz | 13 m/s | × 0,6 | 1 |
+| Pierre | 0,8 | 0,7 Hz | 10 m/s | × 0,3 | 1 |
+| Vent | 1,6 | 1,4 Hz | 16 m/s | × 1,2 | 2 |
 | Ange | 0,5 | 0,6 Hz | 19 m/s | × 1 | 1 |
 | Démon | 0,7 | 1,0 Hz | 18 m/s | × 1 | 1 |
 | Séraphin | 0,9 | 0,9 Hz | 20 m/s | × 1 | 3 |
 | Psyché | 0,6 | 0,5 Hz (respiration) | 20 m/s | × 0 | 2 |
 | Dédale | 20, continu (réacteurs) | 30 Hz (vibration) | 18 m/s | × 0,3 | 1 |
+
+## Effets et première personne
+
+- Les particules sont complètes seulement en vol de déplacement. En stationnaire, elles tombent à 25 %, et au sol ou pendant les sauts ailés à 10 %. Les sons baissent aussi.
+- En vue à la première personne, le joueur ne voit jamais ses propres particules : celles qui apparaîtraient devant la caméra, ou qui partiraient vers elle, ne sont pas créées. Les autres joueurs les voient normalement.

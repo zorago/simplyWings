@@ -1,0 +1,27 @@
+{
+  "rarity": "epic",
+  "model": "simplywings:water",
+  "color": -1,
+  "flap_rate": 1.0,
+  "hover_rate": 0.8,
+  "hover_speed": 13.0,
+  "hover_swing": 0.6,
+  "equipped": {
+    "endurance": 60.0,
+    "acceleration": 45.0,
+    "speed": 45.0,
+    "handling": 80.0,
+    "stability": 55.0,
+    "glide": 80.0,
+    "lift": 50.0
+  },
+  "global": {
+    "endurance": 3.2,
+    "acceleration": 2.6,
+    "speed": 3.52,
+    "handling": 2.92,
+    "stability": 3.6,
+    "glide": 3.0,
+    "lift": 3.0
+  }
+}

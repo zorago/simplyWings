@@ -18,8 +18,8 @@
   "wing.simplywings.angel": "Ailes d'ange",
   "item.simplywings.bat_wings": "Ailes de chauve-souris",
   "wing.simplywings.bat": "Ailes de chauve-souris",
-  "item.simplywings.ancient_wings": "Ailes anciennes",
-  "wing.simplywings.ancient": "Ailes anciennes",
+  "item.simplywings.ancient_wings": "Ailes de méganeure",
+  "wing.simplywings.ancient": "Ailes de méganeure",
   "key.simplywings.menu": "Menu des ailes",
   "gui.simplywings.title": "Ailes",
   "gui.simplywings.equip": "Équiper",
@@ -47,5 +47,15 @@
   "item.simplywings.daedalus_wings": "Ailes de Dédale",
   "wing.simplywings.daedalus": "Ailes de Dédale",
   "item.simplywings.psyche_wings": "Ailes de Psyché",
-  "wing.simplywings.psyche": "Ailes de Psyché"
+  "wing.simplywings.psyche": "Ailes de Psyché",
+  "item.simplywings.fire_wings": "Ailes de flamme",
+  "wing.simplywings.fire": "Ailes de flamme",
+  "item.simplywings.water_wings": "Ailes de la marée",
+  "wing.simplywings.water": "Ailes de la marée",
+  "item.simplywings.earth_wings": "Ailes de pierre",
+  "wing.simplywings.earth": "Ailes de pierre",
+  "item.simplywings.air_wings": "Ailes du vent",
+  "wing.simplywings.air": "Ailes du vent",
+  "item.simplywings.ptero_wings": "Ailes de ptérosaure",
+  "wing.simplywings.ptero": "Ailes de ptérosaure"
 }

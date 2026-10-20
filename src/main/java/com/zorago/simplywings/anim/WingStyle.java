@@ -23,7 +23,13 @@ public record WingStyle(List<Slot> slots, float upFraction, float downFraction, 
         DEMON,
         SERAPH,
         PSYCHE,
-        THRUSTERS
+        THRUSTERS,
+        FIRE,
+        WATER,
+        EARTH,
+        AIR,
+        FOSSIL,
+        PTERO
     }
 
     public record Slot(WingModel.Shape shape, float x, float y, float z, float sweep, float lift, float phase,
@@ -86,7 +92,7 @@ public record WingStyle(List<Slot> slots, float upFraction, float downFraction, 
     public static final WingStyle DRAGONFLY = new WingStyle(List.of(
             new Slot(WingModel.DRAGONFLY, 0f, -0.5f, 0f, 0.2f, 0.05f, 0f, 1f),
             new Slot(WingModel.DRAGONFLY, -0.5f, 3.5f, 0.3f, -0.35f, -0.1f, (float) Math.PI, 0.9f)),
-            0.5f, 0.5f, 0.2f, 0f, 0.35f, 25f, 0.02f, false, true, Render.TRANSLUCENT, null, Effects.NONE);
+            0.5f, 0.5f, 0.2f, 0f, 0.35f, 25f, 0.02f, false, true, Render.TRANSLUCENT, null, Effects.FOSSIL);
 
     public static final WingStyle DEMON = new WingStyle(List.of(Slot.single(WingModel.DEMON)),
             0.55f, 0.08f, 1.1f, 1.0f, 0f, 0f, 0.05f, true, false, Render.CUTOUT, glow("demon"), Effects.DEMON);
@@ -105,15 +111,37 @@ public record WingStyle(List<Slot> slots, float upFraction, float downFraction, 
     public static final WingStyle DAEDALUS = new WingStyle(List.of(Slot.single(WingModel.DAEDALUS)),
             0.5f, 0.5f, 0.15f, 0f, 0.05f, 30f, 0.02f, true, false, Render.CUTOUT, null, Effects.THRUSTERS);
 
-    private static final Map<ResourceLocation, WingStyle> STYLES = Map.of(
-            SimplyWings.id("basic"), BASIC,
-            SimplyWings.id("bat"), BAT,
-            SimplyWings.id("angel"), ANGEL,
-            SimplyWings.id("dragonfly"), DRAGONFLY,
-            SimplyWings.id("demon"), DEMON,
-            SimplyWings.id("seraph"), SERAPH,
-            SimplyWings.id("psyche"), PSYCHE,
-            SimplyWings.id("daedalus"), DAEDALUS);
+    public static final WingStyle FIRE = new WingStyle(List.of(Slot.single(WingModel.FIRE)),
+            0.45f, 0.12f, 0.9f, 0.9f, 0.03f, 11f, 0.08f, true, false, Render.ETHEREAL, null, Effects.FIRE);
+
+    public static final WingStyle WATER = new WingStyle(List.of(Slot.single(WingModel.WATER)),
+            0.5f, 0.3f, 0.8f, 0.7f, 0f, 0f, 0.14f, true, false, Render.TRANSLUCENT, null, Effects.WATER);
+
+    public static final WingStyle EARTH = new WingStyle(List.of(Slot.single(WingModel.EARTH)),
+            0.6f, 0.2f, 0.6f, 0.5f, 0f, 0f, 0.02f, true, false, Render.CUTOUT, glow("earth"), Effects.EARTH);
+
+    public static final WingStyle AIR = new WingStyle(List.of(
+            new Slot(WingModel.AIR, 0f, -0.5f, 0f, 0.1f, 0.1f, 0f, 1f),
+            new Slot(WingModel.AIR, 0f, 2.5f, 0.3f, -0.25f, -0.2f, 0.3f, 0.85f)),
+            0.42f, 0.2f, 0.85f, 0.9f, 0f, 0f, 0.1f, true, false, Render.TRANSLUCENT, null, Effects.AIR);
+
+    public static final WingStyle PTERO = new WingStyle(List.of(Slot.single(WingModel.PTERO)),
+            0.5f, 0.18f, 1.0f, 0.9f, 0f, 0f, 0.03f, true, false, Render.CUTOUT, null, Effects.PTERO);
+
+    private static final Map<ResourceLocation, WingStyle> STYLES = Map.ofEntries(
+            Map.entry(SimplyWings.id("basic"), BASIC),
+            Map.entry(SimplyWings.id("bat"), BAT),
+            Map.entry(SimplyWings.id("angel"), ANGEL),
+            Map.entry(SimplyWings.id("dragonfly"), DRAGONFLY),
+            Map.entry(SimplyWings.id("demon"), DEMON),
+            Map.entry(SimplyWings.id("seraph"), SERAPH),
+            Map.entry(SimplyWings.id("psyche"), PSYCHE),
+            Map.entry(SimplyWings.id("daedalus"), DAEDALUS),
+            Map.entry(SimplyWings.id("fire"), FIRE),
+            Map.entry(SimplyWings.id("water"), WATER),
+            Map.entry(SimplyWings.id("earth"), EARTH),
+            Map.entry(SimplyWings.id("air"), AIR),
+            Map.entry(SimplyWings.id("ptero"), PTERO));
 
     public static WingStyle of(ResourceLocation model) {
         return STYLES.getOrDefault(model, BASIC);

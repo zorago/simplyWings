@@ -24,17 +24,17 @@ Le plafond de vitesse (64 m/s) correspond à l'ange avec les 4 premières paires
 
 - Score effectif = score de la paire + somme des bonus `global` de toute la collection, plafonné à 100.
 - Pour chaque stat, la somme des bonus de toutes les paires vaut **100 − le score le plus bas** parmi les paires. Avec la collection complète, toutes les paires sont donc à 10/10 partout.
-- Répartition actuelle : les 4 premières paires (commune, chauve-souris, ancienne, ange) donnent 2,5 % chacune (10 % au total), les 4 autres légendaires (démon, séraphin, Psyché, Dédale) 22,5 % chacune (90 %). Si on ajoute ou retire des paires, il faudra redistribuer.
+- Répartition actuelle : les 4 premières paires (commune, chauve-souris, méganeure, ange) donnent 2,5 % chacune (10 % au total), les 5 nouvelles épiques (flamme, marée, pierre, vent, ptérosaure) 4 % chacune (20 %), et les 4 autres légendaires (démon, séraphin, Psyché, Dédale) 17,5 % chacune (70 %). Si on ajoute ou retire des paires, il faudra redistribuer.
 
-| Stat | Bonus total de la collection | Par paire de départ (2,5 %) | Par autre légendaire (22,5 %) |
-| --- | --- | --- | --- |
-| Endurance | 80 | 2 | 18 |
-| Accélération | 65 | 1,6 | 14,6 |
-| Vitesse | 88 | 2,2 | 19,8 |
-| Maniabilité | 73 | 1,8 | 16,4 |
-| Stabilité | 90 | 2,25 | 20,25 |
-| Plané (interne) | 60 | 1,5 | 13,5 |
-| Portance (interne) | 75 | 1,9 | 16,9 |
+| Stat | Bonus total de la collection | Par paire de départ (2,5 %) | Par nouvelle épique (4 %) | Par autre légendaire (17,5 %) |
+| --- | --- | --- | --- | --- |
+| Endurance | 80 | 2 | 3,2 | 14 |
+| Accélération | 65 | 1,6 | 2,6 | 11,4 |
+| Vitesse | 88 | 2,2 | 3,5 | 15,4 |
+| Maniabilité | 73 | 1,8 | 2,9 | 12,8 |
+| Stabilité | 90 | 2,25 | 3,6 | 15,75 |
+| Plané (interne) | 75 | 1,9 | 3 | 13,1 |
+| Portance (interne) | 75 | 1,9 | 3 | 13,1 |
 
 ## Scores des paires (stats équipées, sur 100)
 
@@ -44,7 +44,12 @@ Une légendaire a par définition au moins une stat visible maxée à 100 (en gr
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Commune | Commune | 20 | 50 | 12 | 27 | 30 | 40 | 40 | Élytres améliorées, la base |
 | Chauve-souris | Rare | 40 | 70 | 31 | 82 | 30 | 80 | 48 | Aérodynamique et agile |
-| Ancienne (libellule) | Épique | 60 | 35 | 23 | 91 | 40 | 40 | 86 | Faite pour construire, médiocre en vol |
+| Méganeure (libellule fossile) | Épique | 60 | 35 | 23 | 91 | 40 | 40 | 86 | Faite pour construire, médiocre en vol |
+| Ptérosaure | Épique | 75 | 55 | 45 | 40 | 30 | 85 | 55 | Le planeur : fond et plané, lourd à manœuvrer |
+| Flamme | Épique | 35 | 85 | 60 | 50 | 20 | 35 | 35 | Le feu : accélération explosive, s'épuise vite |
+| Marée | Épique | 60 | 45 | 45 | 80 | 55 | 80 | 50 | L'eau : fluide, maniable, garde son élan |
+| Pierre | Épique | 85 | 40 | 25 | 30 | 75 | 25 | 45 | La terre : endurance et stabilité, lente et lourde |
+| Vent | Épique | 45 | 60 | 82 | 65 | 25 | 75 | 75 | L'air : vitesse et légèreté, instable |
 | Ange | Légendaire | **100** | 70 | 75 | 41 | 10 | 85 | 30 | L'endurance : vol majestueux, plane loin |
 | Démon | Légendaire | 55 | **100** | 85 | 50 | 15 | 40 | 25 | La puissance : coups violents et tardifs |
 | Psyché | Légendaire | 65 | 50 | 50 | 60 | **100** | 60 | 75 | La stabilité ; ailes de papillon en flammes d'âme éthérées |
@@ -57,7 +62,12 @@ Une légendaire a par définition au moins une stat visible maxée à 100 (en gr
 | --- | --- | --- | --- |
 | Commune | 2,0 | 1,2 Hz, 8 m/s, × 1 | 1 |
 | Chauve-souris | 2,6 | 1,8 Hz, 11 m/s, × 1 | 1 |
-| Libellule | 20 (continu) | 25 Hz, 14 m/s, × 0,1 | 2 |
+| Méganeure | 20 (continu) | 25 Hz, 14 m/s, × 0,1 | 2 |
+| Ptérosaure | 0,9 | 1,1 Hz, 10 m/s, × 1,1 | 1 |
+| Flamme | 1,4 | 1,6 Hz, 14 m/s, × 1 | 1 |
+| Marée | 1,0 | 0,8 Hz, 13 m/s, × 0,6 | 1 |
+| Pierre | 0,8 | 0,7 Hz, 10 m/s, × 0,3 | 1 |
+| Vent | 1,6 | 1,4 Hz, 16 m/s, × 1,2 | 2 |
 | Ange | 0,5 | 0,6 Hz, 19 m/s, × 1 | 1 |
 | Psyché | 0,6 | 0,5 Hz, 20 m/s, × 0 | 2 |
 | Dédale | 20 (continu, réacteurs) | 30 Hz, 18 m/s, × 0,3 | 1 |
