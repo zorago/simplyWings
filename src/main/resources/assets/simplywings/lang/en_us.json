@@ -38,10 +38,6 @@
   "wing.simplywings.quicksilver": "Quicksilver Wings",
   "item.simplywings.seraph_wings": "Seraph Wings",
   "wing.simplywings.seraph": "Seraph Wings",
-  "item.simplywings.dragon_wings": "Dragon Wings",
-  "wing.simplywings.dragon": "Dragon Wings",
-  "item.simplywings.monarch_wings": "Monarch Wings",
-  "wing.simplywings.monarch": "Monarch Wings",
   "gui.simplywings.stat.endurance": "Endurance",
   "gui.simplywings.stat_value.endurance": "%s stamina",
   "gui.simplywings.stat.acceleration": "Acceleration",
@@ -51,9 +47,5 @@
   "gui.simplywings.stat.handling": "Handling",
   "gui.simplywings.stat_value.handling": "%s °/s turn rate",
   "gui.simplywings.stat.stability": "Stability",
-  "gui.simplywings.stat_value.stability": "%s / 10 hover stability",
-  "gui.simplywings.stat.glide": "Glide",
-  "gui.simplywings.stat_value.glide": "air drag ×%s",
-  "gui.simplywings.stat.lift": "Lift",
-  "gui.simplywings.stat_value.lift": "stalls below %s m/s"
+  "gui.simplywings.stat_value.stability": "%s / 10 hover stability"
 }

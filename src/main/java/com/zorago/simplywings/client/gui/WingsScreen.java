@@ -235,6 +235,9 @@ public class WingsScreen extends Screen {
         g.drawString(font, Component.translatable(WingItem.translationKey(entry.get().id())), x, y, color, false);
         y += 14;
         for (StatType type : StatType.values()) {
+            if (!type.visible()) {
+                continue;
+            }
             float own = Math.min(StatType.MAX_SCORE, type.score(base));
             float full = type.score(total);
             g.drawString(font, Component.translatable("gui.simplywings.stat." + type.key()), x, y, 0xFFC8D0D6, false);

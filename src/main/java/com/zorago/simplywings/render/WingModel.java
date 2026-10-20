@@ -72,22 +72,7 @@ public final class WingModel {
             new Segment(5f, 0.5f, 2, 6f, 3f, 16)),
             64, 32);
 
-    public static final Shape DRAGON = new Shape("dragon", List.of(
-            new Segment(12f, 1.4f, 3, 10f, 14f, 0),
-            new Segment(14f, 1.2f, 4, 14f, 9f, 30),
-            new Segment(13f, 1f, 4, 10f, 3f, 62)),
-            128, 32);
-
-    public static final Shape MONARCH_FORE = new Shape("monarch_fore", List.of(
-            new Segment(15f, 0.6f, 3, 10f, 16f, 0)),
-            64, 32);
-
-    public static final Shape MONARCH_HIND = new Shape("monarch_hind", List.of(
-            new Segment(11f, 0.5f, 3, 13f, 9f, 0)),
-            64, 32);
-
-    public static final List<Shape> SHAPES = List.of(BASIC, ANGEL, BAT, DRAGONFLY, FALCON, ALBATROSS, QUICKSILVER,
-            DRAGON, MONARCH_FORE, MONARCH_HIND);
+    public static final List<Shape> SHAPES = List.of(BASIC, ANGEL, BAT, DRAGONFLY, FALCON, ALBATROSS, QUICKSILVER);
 
     private final ModelPart root;
     private final Side left;

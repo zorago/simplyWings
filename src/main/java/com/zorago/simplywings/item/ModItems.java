@@ -23,8 +23,6 @@ public final class ModItems {
     public static final DeferredItem<WingItem> ALBATROSS_WINGS = wing("albatross", Rarity.EPIC);
     public static final DeferredItem<WingItem> QUICKSILVER_WINGS = wing("quicksilver", Rarity.EPIC);
     public static final DeferredItem<WingItem> SERAPH_WINGS = wing("seraph", Rarity.EPIC);
-    public static final DeferredItem<WingItem> DRAGON_WINGS = wing("dragon", Rarity.EPIC);
-    public static final DeferredItem<WingItem> MONARCH_WINGS = wing("monarch", Rarity.EPIC);
 
     private static DeferredItem<WingItem> wing(String name, Rarity rarity) {
         DeferredItem<WingItem> item = ITEMS.register(name + "_wings",

@@ -1,6 +1,6 @@
 # Équilibrage des ailes
 
-Les ailes ont 7 stats notées de 0 à 100. Dans les JSON (`src/main/resources/data/simplywings/simplywings/wing/*.json`), `equipped` donne les scores de la paire et `global` son bonus de collection. Le menu affiche chaque stat en barre de 10 carreaux : 1 carreau = 10 points, donc 3,7/10 = 37 points.
+Les ailes ont 7 stats notées de 0 à 100. Le menu n'en affiche que 5 : Plané et Portance sont des stats internes, jugées trop techniques pour le joueur, mais elles restent actives et la collection les remplit aussi. Dans les JSON (`src/main/resources/data/simplywings/simplywings/wing/*.json`), `equipped` donne les scores de la paire et `global` son bonus de collection. Le menu affiche chaque stat en barre de 10 carreaux : 1 carreau = 10 points, donc 3,7/10 = 37 points.
 
 La valeur physique correspondant à chaque score est réglée dans la config serveur, section `[stats]` : valeur à 0, valeur à 100, interpolation linéaire. La forme et l'animation de chaque paire sont dans `anim/WingStyle.java`.
 
@@ -15,8 +15,8 @@ Dernière mise à jour : 20 octobre 2026.
 | Vitesse | 12 m/s | 64 m/s | Vitesse de croisière max en battant |
 | Maniabilité | 40 °/s | 150 °/s | Vitesse de rotation au clavier |
 | Stabilité | 0/10 | 10/10 | Précision du stationnaire |
-| Plané | traînée × 1,4 | traînée × 0,4 | Distance de plané, perte de vitesse entre deux battements |
-| Portance | décroche sous 14 m/s | décroche sous 3 m/s | Vitesse de décrochage |
+| Plané (interne) | traînée × 1,4 | traînée × 0,4 | Distance de plané, perte de vitesse entre deux battements |
+| Portance (interne) | décroche sous 14 m/s | décroche sous 3 m/s | Vitesse de décrochage |
 
 Le plafond de vitesse (64 m/s) correspond à l'ange avec les 4 premières paires débloquées : c'est la vitesse max visée.
 
@@ -24,21 +24,21 @@ Le plafond de vitesse (64 m/s) correspond à l'ange avec les 4 premières paires
 
 - Score effectif = score de la paire + somme des bonus `global` de toute la collection, plafonné à 100.
 - Pour chaque stat, la somme des bonus de toutes les paires vaut **100 − le score le plus bas** parmi les paires. Avec la collection complète, toutes les paires sont donc à 10/10 partout.
-- Répartition actuelle : les 4 premières paires donnent 2,5 % chacune (10 % au total), les 6 légendaires 15 % chacune (90 %). Si on ajoute des paires, il faudra redistribuer.
+- Répartition actuelle : les 4 premières paires donnent 2,5 % chacune (10 % au total), les 4 légendaires suivantes 22,5 % chacune (90 %). Si on ajoute des paires, il faudra redistribuer.
 
-| Stat | Bonus total de la collection | Par paire de départ (2,5 %) | Par légendaire (15 %) |
+| Stat | Bonus total de la collection | Par paire de départ (2,5 %) | Par légendaire (22,5 %) |
 | --- | --- | --- | --- |
-| Endurance | 80 | 2 | 12 |
-| Accélération | 65 | 1,6 | 9,75 |
-| Vitesse | 88 | 2,2 | 13,2 |
-| Maniabilité | 73 | 1,8 | 10,95 |
-| Stabilité | 90 | 2,25 | 13,5 |
-| Plané | 60 | 1,5 | 9 |
-| Portance | 90 | 2,25 | 13,5 |
+| Endurance | 80 | 2 | 18 |
+| Accélération | 65 | 1,6 | 14,6 |
+| Vitesse | 88 | 2,2 | 19,8 |
+| Maniabilité | 73 | 1,8 | 16,4 |
+| Stabilité | 90 | 2,25 | 20,25 |
+| Plané (interne) | 60 | 1,5 | 13,5 |
+| Portance (interne) | 90 | 2,25 | 20,25 |
 
 ## Scores des paires (stats équipées, sur 100)
 
-Une légendaire a par définition au moins une stat maxée à 100 (en gras).
+Une légendaire a par définition au moins une stat visible maxée à 100 (en gras). Plané et Portance n'ont pas de légendaire dédiée.
 
 | Paire | Rareté | Endurance | Accél. | Vitesse | Maniab. | Stabilité | Plané | Portance | Identité |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -50,8 +50,6 @@ Une légendaire a par définition au moins une stat maxée à 100 (en gras).
 | Albatros | Légendaire | **100** | 35 | 70 | 35 | 20 | 85 | 40 | L'endurance ; très longues ailes fines, accélère lentement |
 | Vif-argent | Légendaire | 50 | 75 | 60 | **100** | 35 | 45 | 50 | La maniabilité ; 3 petites ailes par côté, 6 battements/s |
 | Séraphin | Légendaire | 70 | 45 | 45 | 55 | **100** | 50 | 60 | La stabilité ; 6 ailes d'ange, stationnaire parfait |
-| Dragon | Légendaire | 65 | 60 | 80 | 50 | 20 | **100** | 35 | Le plané ; grande membrane sombre |
-| Monarque | Légendaire | 60 | 40 | 45 | 70 | 50 | 75 | **100** | La portance ; papillon géant à 4 ailes |
 
 ## Paramètres d'identité (hors collection)
 
@@ -65,8 +63,6 @@ Une légendaire a par définition au moins une stat maxée à 100 (en gras).
 | Albatros | 0,8 | 0,9 Hz, 14 m/s, × 1 | 1 |
 | Vif-argent | 6 | 5 Hz, 18 m/s, × 0,5 | 3 |
 | Séraphin | 0,9 | 0,9 Hz, 20 m/s, × 1 | 3 |
-| Dragon | 0,9 | 1,0 Hz, 18 m/s, × 1 | 1 |
-| Monarque | 1,4 | 1,6 Hz, 12 m/s, × 0,8 | 2 |
 
 Rappels de mécanique :
 - **Gain d'un battement** = accélération ÷ battements par seconde. À partir de 8 battements/s, la poussée est continue.

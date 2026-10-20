@@ -38,10 +38,6 @@
   "wing.simplywings.quicksilver": "Ailes de vif-argent",
   "item.simplywings.seraph_wings": "Ailes de séraphin",
   "wing.simplywings.seraph": "Ailes de séraphin",
-  "item.simplywings.dragon_wings": "Ailes de dragon",
-  "wing.simplywings.dragon": "Ailes de dragon",
-  "item.simplywings.monarch_wings": "Ailes de monarque",
-  "wing.simplywings.monarch": "Ailes de monarque",
   "gui.simplywings.stat.endurance": "Endurance",
   "gui.simplywings.stat_value.endurance": "%s de stamina",
   "gui.simplywings.stat.acceleration": "Accélération",
@@ -51,9 +47,5 @@
   "gui.simplywings.stat.handling": "Maniabilité",
   "gui.simplywings.stat_value.handling": "%s °/s de rotation",
   "gui.simplywings.stat.stability": "Stabilité",
-  "gui.simplywings.stat_value.stability": "%s / 10 de stabilité en stationnaire",
-  "gui.simplywings.stat.glide": "Plané",
-  "gui.simplywings.stat_value.glide": "traînée ×%s",
-  "gui.simplywings.stat.lift": "Portance",
-  "gui.simplywings.stat_value.lift": "décroche sous %s m/s"
+  "gui.simplywings.stat_value.stability": "%s / 10 de stabilité en stationnaire"
 }

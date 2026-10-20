@@ -79,14 +79,6 @@ public record WingStyle(List<Slot> slots, float upFraction, float downFraction, 
             new Slot(WingModel.ANGEL, 0f, 3f, 0.4f, -0.15f, -0.6f, 0.35f, 0.8f)),
             0.55f, 0.15f, 0.9f, 0.9f, 0f, 0f, true, false, false);
 
-    public static final WingStyle DRAGON = new WingStyle(List.of(Slot.single(WingModel.DRAGON)),
-            0.5f, 0.14f, 1.0f, 1.0f, 0f, 0f, true, false, false);
-
-    public static final WingStyle MONARCH = new WingStyle(List.of(
-            new Slot(WingModel.MONARCH_FORE, 0f, 0f, 0f, 0.15f, 0.15f, 0f, 1f),
-            new Slot(WingModel.MONARCH_HIND, 0f, 3.5f, 0.3f, -0.35f, -0.25f, 0.25f, 0.9f)),
-            0.5f, 0.3f, 1.1f, 1.1f, 0f, 0f, false, false, false);
-
     private static final Map<ResourceLocation, WingStyle> STYLES = Map.of(
             SimplyWings.id("basic"), BASIC,
             SimplyWings.id("bat"), BAT,
@@ -95,9 +87,7 @@ public record WingStyle(List<Slot> slots, float upFraction, float downFraction, 
             SimplyWings.id("falcon"), FALCON,
             SimplyWings.id("albatross"), ALBATROSS,
             SimplyWings.id("quicksilver"), QUICKSILVER,
-            SimplyWings.id("seraph"), SERAPH,
-            SimplyWings.id("dragon"), DRAGON,
-            SimplyWings.id("monarch"), MONARCH);
+            SimplyWings.id("seraph"), SERAPH);
 
     public static WingStyle of(ResourceLocation model) {
         return STYLES.getOrDefault(model, BASIC);
