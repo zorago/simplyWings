@@ -7,6 +7,7 @@ import com.zorago.simplywings.render.rig.wings.BatRig;
 import com.zorago.simplywings.render.rig.wings.BeeRig;
 import com.zorago.simplywings.render.rig.wings.BeetleRig;
 import com.zorago.simplywings.render.rig.wings.CommonRig;
+import com.zorago.simplywings.render.rig.wings.CopperRig;
 import com.zorago.simplywings.render.rig.wings.CrowRig;
 import com.zorago.simplywings.render.rig.wings.EagleRig;
 import com.zorago.simplywings.render.rig.wings.FlyingFishRig;
@@ -53,7 +54,8 @@ public final class WingRigs {
             new PhantomRig(),
             new AmethystRig(),
             new OrnithopterRig(),
-            new KiteRig());
+            new KiteRig(),
+            new CopperRig());
     private static final Map<ResourceLocation, WingRig> BOUND = new HashMap<>();
 
     public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {

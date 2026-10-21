@@ -627,7 +627,9 @@ Dernière mise à jour : 21 octobre 2026.
 
 **Vibe** : La mécanique du cuivre de la 1.21. Des plaques rivetées qui poussent fort, déjà tachées de vert-de-gris.
 
-**Apparence** : Une aile de plaques de cuivre rivetées par côté, piquée de taches de vert-de-gris.
+**Apparence** : une aile mécanique de plaques de cuivre rivetées par côté (modèle `rigs/copper.bbmodel`), montée comme une aile d'oiseau : 7 rémiges de tôle, secondaires et tertiaires en plaques jointives, rangées de rivets, os en barre de cuivre, piston sur le bras, engrenage au coude, et une ampoule de cuivre allumée à l'épaule (couche lumineuse `copper_glow`). Asymétrique : les taches de vert-de-gris ne sont pas les mêmes à gauche et à droite.
+
+**Mouvement signature** : (`CopperRig`) mouvement d'automate : coups secs qui s'arrêtent net en butée en haut et en bas, suivis d'un petit cliquetis des plaques ; peu de flexion ; en plané, micro-ajustements par crans.
 
 **Effets** : Des copeaux de cuivre s'échappent en vol, et chaque battement sonne comme une plaque de cuivre.
 
