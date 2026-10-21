@@ -403,7 +403,9 @@ Dernière mise à jour : 21 octobre 2026.
 
 **Vibe** : Poudré et nocturne. Le papillon de nuit flotte doucement et se pose où il veut, sans jamais décrocher.
 
-**Apparence** : **4 ailes** poudrées beige et brun, avec des ocelles sombres, toujours déployées.
+**Apparence** : 4 ailes poudrées (modèle `rigs/moth.bbmodel`) : par côté une grande aile antérieure triangulaire beige et brun, rayée de lignes en zigzag et marquée d'un ocelle doré, et une aile postérieure arrondie bordée de rose avec un grand ocelle (anneaux rouge, doré, noir, cœur blanc) comme le Polyphème ; touffe de fourrure crème entre les épaules. Toujours déployées : au repos, elles forment un triangle à plat sur le dos.
+
+**Mouvement signature** : (`MothRig`) battements amples et un peu erratiques (petites irrégularités de coup et de torsion), aile postérieure en léger retard sur l'antérieure ; au sol et avant l'envol, le frisson d'échauffement des vrais papillons de nuit.
 
 **Effets** : Aucun, des ailes simples et discrètes.
 
