@@ -8,7 +8,6 @@ import com.zorago.simplywings.render.rig.Bone;
 import com.zorago.simplywings.render.rig.Bones;
 import com.zorago.simplywings.render.rig.FeatherWing;
 import com.zorago.simplywings.render.rig.WingRig;
-import java.util.Arrays;
 import net.minecraft.util.Mth;
 
 public final class CrowRig extends WingRig {
@@ -52,30 +51,30 @@ public final class CrowRig extends WingRig {
 
     @Override
     protected void pose(WingMotion m, RigMemory memory) {
-        Arrays.fill(drive.v, 0f);
+        drive.zero();
         float rouse = memory.get(ROUSE, m.partialTick);
         float flick = m.rouse > 0f ? Math.max(0f, Mth.sin(m.rouseProgress * Mth.TWO_PI * 2f)) : 0f;
         float time = m.time;
-        add(m.w(WingMotion.GROUND), state.clear().set(RigPose.FOLD, 1f - 0.35f * flick * rouse)
+        drive.blendIn(m.w(WingMotion.GROUND), state.clear().set(RigPose.FOLD, 1f - 0.35f * flick * rouse)
                 .set(RigPose.STROKE, 0.1f + 0.25f * flick * rouse).set(RigPose.FAN, 0.2f * flick)
                 .set(RigPose.SWEEP, 0.1f * flick));
-        add(m.w(WingMotion.CHARGE), state.clear().set(RigPose.FOLD, 0.08f).set(RigPose.STROKE, 0.9f)
+        drive.blendIn(m.w(WingMotion.CHARGE), state.clear().set(RigPose.FOLD, 0.08f).set(RigPose.STROKE, 0.9f)
                 .set(RigPose.SWEEP, 0.3f).set(RigPose.FAN, 1.2f).set(RigPose.TWIST, 0.1f));
-        add(m.w(WingMotion.AIR), state.clear().set(RigPose.FOLD, 0.4f).set(RigPose.STROKE, 0.3f)
+        drive.blendIn(m.w(WingMotion.AIR), state.clear().set(RigPose.FOLD, 0.4f).set(RigPose.STROKE, 0.3f)
                 .set(RigPose.SWEEP, 0.15f).set(RigPose.FAN, 0.8f));
-        add(m.w(WingMotion.LANDING), state.clear().set(RigPose.FOLD, 0.3f).set(RigPose.STROKE, 0.5f)
+        drive.blendIn(m.w(WingMotion.LANDING), state.clear().set(RigPose.FOLD, 0.3f).set(RigPose.STROKE, 0.5f)
                 .set(RigPose.SWEEP, 0.3f).set(RigPose.FAN, 1.05f).set(RigPose.BEND_TIPS, -0.15f));
-        add(m.w(WingMotion.HOVER), state.clear().set(RigPose.FOLD, 0.04f).set(RigPose.STROKE, 0.25f)
+        drive.blendIn(m.w(WingMotion.HOVER), state.clear().set(RigPose.FOLD, 0.04f).set(RigPose.STROKE, 0.25f)
                 .set(RigPose.SWEEP, 0.12f));
-        add(m.w(WingMotion.CRUISE), state.clear().set(RigPose.STROKE, 0.1f).set(RigPose.SWEEP, 0.02f)
+        drive.blendIn(m.w(WingMotion.CRUISE), state.clear().set(RigPose.STROKE, 0.1f).set(RigPose.SWEEP, 0.02f)
                 .set(RigPose.FAN, 1.12f).set(RigPose.BEND_TIPS, -0.3f).set(RigPose.ASYM, m.bank * 0.35f));
         float d = m.diveDepth;
-        add(m.w(WingMotion.DIVE), state.clear().set(RigPose.FOLD, Mth.lerp(d, 0.2f, 0.6f))
+        drive.blendIn(m.w(WingMotion.DIVE), state.clear().set(RigPose.FOLD, Mth.lerp(d, 0.2f, 0.6f))
                 .set(RigPose.SWEEP, Mth.lerp(d, -0.15f, -0.5f)).set(RigPose.FAN, Mth.lerp(d, 0.6f, 0.1f))
                 .set(RigPose.STROKE, 0.05f).set(RigPose.BEND_TIPS, 0.1f));
-        add(m.w(WingMotion.BRAKE), state.clear().set(RigPose.FOLD, 0.02f).set(RigPose.STROKE, 0.35f)
+        drive.blendIn(m.w(WingMotion.BRAKE), state.clear().set(RigPose.FOLD, 0.02f).set(RigPose.STROKE, 0.35f)
                 .set(RigPose.SWEEP, 0.55f).set(RigPose.TWIST, -0.75f).set(RigPose.FAN, 1.22f).set(RigPose.BEND_TIPS, -0.25f));
-        add(m.w(WingMotion.TUCK), state.clear().set(RigPose.FOLD, 0.82f).set(RigPose.SWEEP, -0.55f)
+        drive.blendIn(m.w(WingMotion.TUCK), state.clear().set(RigPose.FOLD, 0.82f).set(RigPose.SWEEP, -0.55f)
                 .set(RigPose.STROKE, 0.08f).set(RigPose.FAN, 0f));
         if (m.stall > 0.001f) {
             drive.set(RigPose.FOLD, Mth.lerp(m.stall, drive.get(RigPose.FOLD), 0.12f));
@@ -135,26 +134,10 @@ public final class CrowRig extends WingRig {
         FeatherWing.TipCurve tips = (k, n) -> k < 6 ? 1.2f - 0.08f * k : 0.5f;
         right.apply(drive, tips);
         left.apply(drive, tips);
-        stack(right, fold);
-        stack(left, fold);
+        right.stack(fold, 0.68f, 0.5f, 0.4f);
+        left.stack(fold, 0.68f, 0.5f, 0.4f);
         float alula = memory.get(ALULA, m.partialTick) * (1f - fold);
         rightAlula.rotate(0f, 0.35f * alula, 0.55f * alula);
         leftAlula.rotate(0f, -0.35f * alula, -0.55f * alula);
-    }
-
-    private static void stack(FeatherWing w, float fold) {
-        w.secondaries.scale(1f - 0.68f * fold, 1f, 1f);
-        w.tertials.scale(1f - 0.5f * fold, 1f, 1f);
-        w.handFeathers.scale(1f - 0.4f * fold, 1f, 1f);
-        w.handCoverts.scale(1f - 0.4f * fold, 1f, 1f);
-    }
-
-    private void add(float weight, RigPose pose) {
-        if (weight == 0f) {
-            return;
-        }
-        for (int i = 0; i < RigPose.SIZE; i++) {
-            drive.v[i] += weight * pose.v[i];
-        }
     }
 }

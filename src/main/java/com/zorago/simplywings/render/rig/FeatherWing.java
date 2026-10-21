@@ -39,6 +39,13 @@ public final class FeatherWing {
         }
     }
 
+    public void stack(float fold, float secondary, float tertial, float hand) {
+        secondaries.scale(1f - secondary * fold, 1f, 1f);
+        tertials.scale(1f - tertial * fold, 1f, 1f);
+        handFeathers.scale(1f - hand * fold, 1f, 1f);
+        handCoverts.scale(1f - hand * fold, 1f, 1f);
+    }
+
     public interface TipCurve {
         float weight(int index, int count);
     }

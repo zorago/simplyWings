@@ -151,7 +151,9 @@ Dernière mise à jour : 21 octobre 2026.
 
 **Vibe** : Le vol silencieux. De larges ailes duveteuses qui tiennent en place sans bruit et planent doucement.
 
-**Apparence** : Une aile large et arrondie par côté, brun clair barré de bandes sombres.
+**Apparence** : une aile large et arrondie par côté (modèle `rigs/owl.bbmodel`, 40 cubes) : 9 rémiges larges à bout rond, la première bordée d'un peigne (le secret du vol silencieux), longues secondaires, couvertures tachetées de crème, alule. Brun fauve barré de bandes sombres dessus, crème pâle à barres discrètes dessous.
+
+**Mouvement signature** : (`OwlRig`) coups lents, amples et souples, aile peu fléchie à la remontée et long suivi des pointes ; plané à plat, éventail ouvert ; atterrissage en parachute, ailes hautes et avancées ; au sol, de temps en temps, une aile s'étire vers le bas et l'arrière, côté alterné à chaque fois.
 
 **Effets** : À chaque battement, quelques plumes tombent avec un bruissement d'ailes.
 

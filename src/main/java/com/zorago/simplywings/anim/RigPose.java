@@ -33,6 +33,20 @@ public final class RigPose {
         return this;
     }
 
+    public RigPose blendIn(float weight, RigPose pose) {
+        if (weight != 0f) {
+            for (int i = 0; i < SIZE; i++) {
+                v[i] += weight * pose.v[i];
+            }
+        }
+        return this;
+    }
+
+    public RigPose zero() {
+        java.util.Arrays.fill(v, 0f);
+        return this;
+    }
+
     public RigPose clear() {
         java.util.Arrays.fill(v, 0f);
         v[FAN] = 1f;
