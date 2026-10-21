@@ -571,7 +571,9 @@ Dernière mise à jour : 21 octobre 2026.
 
 **Vibe** : La machine de Léonard de Vinci. Une armature de bois et de la toile tendue : lente mais robuste, et stable.
 
-**Apparence** : Une aile par côté, en toile écrue tendue sur des baguettes de bois.
+**Apparence** : par côté une aile de chauve-souris mécanique à la Léonard de Vinci (modèle `rigs/ornithopter.bbmodel`) : longerons de bois articulés par des charnières en laiton, 6 nervures qui rayonnent en éventail, ligatures de corde, toile écrue cousue le long des nervures, festonnée entre elles ; un joug en bois en travers des épaules porte une poulie en laiton au centre du dos.
+
+**Mouvement signature** : (`OrnithopterRig`) battement de manivelle régulier (une sinusoïde, sans l'accélération d'un oiseau) ; le panneau de main, articulé, suit en retard puis claque en butée ; la poulie tourne avec chaque coup ; petits à-coups mécaniques en plané et au repos ; repliée, la machine fait un fagot de baguettes et de toile croisées dans le dos.
 
 **Effets** : Aucun, des ailes simples et discrètes.
 
