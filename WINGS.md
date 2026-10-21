@@ -179,7 +179,9 @@ Dernière mise à jour : 21 octobre 2026.
 
 **Vibe** : Le voyageur des côtes. De longues ailes fines qui planent des heures sans fatigue.
 
-**Apparence** : Une longue aile étroite par côté, blanche et grise, aux pointes noires.
+**Apparence** : une longue aile étroite par côté (modèle `rigs/gull.bbmodel`, 36 cubes) : bras et avant-bras longs, secondaires courtes, 8 rémiges fines en pointe. Manteau gris perle dessus, liseré blanc au bord de fuite, pointes noires à « miroirs » et taches apicales blanches ; dessous blanc. Repliée, les pointes noir et blanc se croisent au bas du dos.
+
+**Mouvement signature** : (`GullRig`) battement assez raide et peu fléchi, mains toujours un peu ramenées en arrière ; plané en M (bras relevés, poignets avancés, mains inclinées vers le bas) qui respire avec de lents ajustements de poignet comme dans les rafales ; stationnaire suspendu au vent, à petits gestes ; au sol, il ouvre parfois grand les ailes pour s'étirer.
 
 **Effets** : À chaque battement, quelques plumes tombent avec un bruissement d'ailes.
 
