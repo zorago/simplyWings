@@ -2,14 +2,14 @@
 
 Catalogue des paires d'ailes : identité, apparence, ressenti en vol et stats. Les chiffres viennent des JSON (`src/main/resources/data/simplywings/simplywings/wing/`) et de la config serveur `[stats]`. Les règles d'équilibrage sont dans `BALANCE.md`.
 
-Dernière mise à jour : 20 octobre 2026.
+Dernière mise à jour : 21 octobre 2026.
 
 ## Paliers d'ambiance
 
 - **Commune** : la base, des élytres améliorées.
 - **Rare** : des créatures réelles (oiseaux, insectes, mammifères, mobs vanilla) et des ailes bricolées ou mécaniques, dans une ambiance vanilla, simple, « faite main ». Effets discrets ou absents.
 - **Épique** : des esprits, des éléments et des créatures disparues (préhistoriques), avec des thèmes qui sortent du vanilla.
-- **Légendaire** : des dieux, des êtres divins et des figures mythologiques. Chaque légendaire maxe une stat visible.
+- **Légendaire** : des dieux, des êtres divins et des figures mythologiques. Chaque légendaire maxe une stat visible, sauf le Yin et le Yang (prévue), qui a 9/10 partout.
 - **Mythique** : Night et Light, les ailes des Furies de *Dragons*. 10/10 partout, +2 en vitesse au-delà du plafond, cachées en « ??? » tant qu'elles ne sont pas débloquées. Night donne la stamina infinie, Light la transmog.
 
 ## Lire les stats
@@ -61,6 +61,7 @@ Dernière mise à jour : 20 octobre 2026.
 | Ailes de séraphin | Légendaire | 7,0 | 6,0 | **10** | 4,5 | 4,0 | La vitesse, six ailes dorées |
 | Ailes de Psyché | Légendaire | 6,5 | 5,0 | 5,0 | 6,0 | **10** | Énergie d'âme éthérée qui tient en apesanteur |
 | Ailes de Dédale | Légendaire | 5,5 | 7,5 | 6,0 | **10** | 5,0 | Ailes mécaniques à réacteurs vectorisés |
+| Ailes du Yin et du Yang *(prévue)* | Légendaire | 9,0 | 9,0 | 9,0 | 9,0 | 9,0 | L'équilibre, première paire asymétrique |
 
 ---
 
@@ -1077,6 +1078,45 @@ Dernière mise à jour : 20 octobre 2026.
 | Stabilité | 5,0/10 | 5/10 |
 | Plané *(interne)* | 4,5/10 | traînée × 0,95 |
 | Portance *(interne)* | 6,5/10 | décroche sous 6,9 m/s |
+
+---
+
+## Ailes du Yin et du Yang
+
+`simplywings:yin_yang` · **Légendaire** · item `yin_yang_wings` · **L'équilibre : 9/10 partout** · *prévue, pas encore dans le mod*
+
+**Vibe** : l'équilibre et la stabilité. Aucune stat maxée, aucune faiblesse : c'est la seule légendaire qui fait exception à la règle « une stat maxée ». Le vol est posé, régulier et sûr, ni le plus rapide ni le plus endurant, mais rien ne le prend en défaut.
+
+**Apparence** : la première paire **asymétrique** du mod, rendue possible par un modèle Blockbench par paire (les deux ailes sont modélisées séparément).
+- **Aile gauche (Yin)** : plumes noires aux reflets bleu nuit, avec un « œil » blanc rond près du poignet.
+- **Aile droite (Yang)** : plumes blanc nacré, avec un « œil » noir rond au même endroit.
+- Les bords de fuite des deux ailes dessinent une courbe en S. Repliées, les pointes se croisent dans le dos et forment le cercle du taijitu.
+
+**Effets** :
+- **En continu** : deux petites sphères, une noire et une blanche, orbitent lentement l'une autour de l'autre derrière le dos.
+- **À chaque battement** : un anneau de particules moitié noires, moitié blanches.
+- **Stationnaire** : la rotation des sphères ralentit et elles s'alignent, ce qui renforce visuellement la stabilité.
+- **Son** : deux tintements, grave pour le Yin et aigu pour le Yang.
+
+**En vol** (proposition, à valider) :
+- **Déplacement** : 1 battement par seconde, +9,2 m/s par battement.
+- **Stationnaire** : battement lent et ample, presque immobile, comme une aile à 9/10 de stabilité.
+
+| Stat | Note | Valeur |
+| --- | --- | --- |
+| Endurance | 9,0/10 | 275 de stamina |
+| Accélération | 9,0/10 | 9,2 m/s par s, soit +9,2 m/s par battement |
+| Vitesse | 9,0/10 | 58,8 m/s |
+| Maniabilité | 9,0/10 | 139 °/s |
+| Stabilité | 9,0/10 | 9/10 |
+| Plané *(interne)* | 9,0/10 | traînée × 0,5 |
+| Portance *(interne)* | 9,0/10 | décroche sous 4,1 m/s |
+
+**À faire avant de l'ajouter au mod** :
+- Recalculer la répartition des bonus de collection dans `BALANCE.md`, puisqu'une 6e légendaire change les parts du palier.
+- Écrire sa route de craft dans `CRAFTING.md`.
+- Modéliser les deux ailes dans Blockbench (rig commun, géométrie différente à gauche et à droite) et les textures.
+- Vérifier que 9/10 partout ne la rend pas meilleure que les autres légendaires une fois les bonus de collection ajoutés.
 
 ---
 

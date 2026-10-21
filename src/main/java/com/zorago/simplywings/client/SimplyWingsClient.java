@@ -76,8 +76,7 @@ public class SimplyWingsClient {
             event.registerLayerDefinition(spec.layer(), () -> TailModel.createLayer(spec));
         }
         for (String rig : RiggedWingModel.RIGS) {
-            event.registerLayerDefinition(RiggedWingModel.layer(rig), () -> RigLoader.load(rig,
-                    RiggedWingModel.ATTACH_X, RiggedWingModel.ATTACH_Y, RiggedWingModel.ATTACH_Z)
+            event.registerLayerDefinition(RiggedWingModel.layer(rig), () -> RigLoader.load(rig)
                     .map(RigLoader.Rig::layer)
                     .orElseGet(() -> LayerDefinition.create(new MeshDefinition(), 64, 32)));
         }
@@ -91,11 +90,10 @@ public class SimplyWingsClient {
         Map<String, RiggedWingModel> rigs = new HashMap<>();
         for (String rig : RiggedWingModel.RIGS) {
             ModelPart baked = event.getEntityModels().bakeLayer(RiggedWingModel.layer(rig));
-            if (!baked.hasChild(RigLoader.RIGHT)) {
-                continue;
-            }
-            RigLoader.cached(rig, RiggedWingModel.ATTACH_X, RiggedWingModel.ATTACH_Y, RiggedWingModel.ATTACH_Z)
-                    .ifPresent(loaded -> rigs.put(rig, new RiggedWingModel(baked, rig, loaded.paths())));
+            RigLoader.cached(rig)
+                    .map(loaded -> new RiggedWingModel(baked, rig, loaded.paths()))
+                    .filter(RiggedWingModel::valid)
+                    .ifPresent(model -> rigs.put(rig, model));
         }
         Map<ResourceLocation, TailModel> tails = new HashMap<>();
         for (TailModel.Spec spec : TailModel.SPECS) {

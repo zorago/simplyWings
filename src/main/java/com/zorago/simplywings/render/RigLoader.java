@@ -23,8 +23,6 @@ import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.util.Mth;
 
 public final class RigLoader {
-    public static final String RIGHT = "right";
-    public static final String LEFT = "left";
     private static final float ROOT_Y = 24f;
 
     public record Rig(LayerDefinition layer, Map<String, List<String>> paths) {
@@ -43,14 +41,14 @@ public final class RigLoader {
         return SimplyWings.id("rigs/" + name + ".bbmodel");
     }
 
-    public static Optional<Rig> load(String name, float attachX, float attachY, float attachZ) {
+    public static Optional<Rig> load(String name) {
         Optional<Resource> resource = Minecraft.getInstance().getResourceManager().getResource(file(name));
         if (resource.isEmpty()) {
             SimplyWings.LOGGER.warn("Wing rig {} not found, falling back to the legacy model", file(name));
             return Optional.empty();
         }
         try (Reader reader = resource.get().openAsReader()) {
-            Rig rig = parse(JsonParser.parseReader(reader).getAsJsonObject(), attachX, attachY, attachZ);
+            Rig rig = parse(JsonParser.parseReader(reader).getAsJsonObject());
             CACHE.put(name, rig);
             SimplyWings.LOGGER.info("Loaded wing rig {} with {} bones", file(name), rig.paths().size());
             return Optional.of(rig);
@@ -60,12 +58,12 @@ public final class RigLoader {
         }
     }
 
-    public static Optional<Rig> cached(String name, float attachX, float attachY, float attachZ) {
+    public static Optional<Rig> cached(String name) {
         Rig rig = CACHE.get(name);
-        return rig != null ? Optional.of(rig) : load(name, attachX, attachY, attachZ);
+        return rig != null ? Optional.of(rig) : load(name);
     }
 
-    private static Rig parse(JsonObject json, float attachX, float attachY, float attachZ) {
+    private static Rig parse(JsonObject json) {
         JsonObject resolution = json.getAsJsonObject("resolution");
         int width = resolution.get("width").getAsInt();
         int height = resolution.get("height").getAsInt();
@@ -96,13 +94,8 @@ public final class RigLoader {
         MeshDefinition mesh = new MeshDefinition();
         PartDefinition root = mesh.getRoot();
         Map<String, List<String>> paths = new HashMap<>();
-        for (String side : List.of(RIGHT, LEFT)) {
-            boolean mirror = side.equals(LEFT);
-            PartDefinition sideRoot = root.addOrReplaceChild(side,
-                    CubeListBuilder.create(), PartPose.offset(mirror ? attachX : -attachX, attachY, attachZ));
-            for (Group g : roots) {
-                build(sideRoot, g, null, elements, mirror, new ArrayList<>(List.of(side)), paths);
-            }
+        for (Group g : roots) {
+            build(root, g, null, elements, new ArrayList<>(), paths);
         }
         return new Rig(LayerDefinition.create(mesh, width, height), paths);
     }
@@ -118,7 +111,7 @@ public final class RigLoader {
     }
 
     private static void build(PartDefinition parent, Group g, Group parentGroup, Map<String, Element> elements,
-                              boolean mirror, List<String> path, Map<String, List<String>> paths) {
+                              List<String> path, Map<String, List<String>> paths) {
         if (!g.export()) {
             return;
         }
@@ -133,43 +126,40 @@ public final class RigLoader {
                 if (e.rotation()[0] != 0 || e.rotation()[1] != 0 || e.rotation()[2] != 0) {
                     rotated.add(e);
                 } else {
-                    addBox(cubes, e, g.origin(), mirror);
+                    addBox(cubes, e, g.origin());
                 }
             }
         }
         PartDefinition part = parent.addOrReplaceChild(g.name(), cubes,
-                pose(g.origin(), parentGroup == null ? null : parentGroup.origin(), g.rotation(), mirror));
+                pose(g.origin(), parentGroup == null ? null : parentGroup.origin(), g.rotation()));
         List<String> own = new ArrayList<>(path);
         own.add(g.name());
-        paths.putIfAbsent(g.name(), own.subList(1, own.size()));
+        paths.putIfAbsent(g.name(), own);
         for (int i = 0; i < rotated.size(); i++) {
             Element e = rotated.get(i);
             CubeListBuilder single = CubeListBuilder.create();
-            addBox(single, e, e.origin(), mirror);
-            part.addOrReplaceChild(g.name() + "_r" + i, single, pose(e.origin(), g.origin(), e.rotation(), mirror));
+            addBox(single, e, e.origin());
+            part.addOrReplaceChild(g.name() + "_r" + i, single, pose(e.origin(), g.origin(), e.rotation()));
         }
         for (Object child : g.children()) {
             if (child instanceof Group sub) {
-                build(part, sub, g, elements, mirror, own, paths);
+                build(part, sub, g, elements, own, paths);
             }
         }
     }
 
-    private static void addBox(CubeListBuilder builder, Element e, float[] pivot, boolean mirror) {
+    private static void addBox(CubeListBuilder builder, Element e, float[] pivot) {
         float sx = e.to()[0] - e.from()[0];
         float sy = e.to()[1] - e.from()[1];
         float sz = e.to()[2] - e.from()[2];
         float x = pivot[0] - e.to()[0];
         float y = -e.from()[1] - sy + pivot[1];
         float z = e.from()[2] - pivot[2];
-        if (mirror) {
-            x = -(x + sx);
-        }
-        builder.texOffs(e.u(), e.v()).mirror(e.mirror() != mirror)
+        builder.texOffs(e.u(), e.v()).mirror(e.mirror())
                 .addBox(x, y, z, sx, sy, sz, new CubeDeformation(e.inflate()));
     }
 
-    private static PartPose pose(float[] origin, float[] parentOrigin, float[] rotation, boolean mirror) {
+    private static PartPose pose(float[] origin, float[] parentOrigin, float[] rotation) {
         float x = origin[0] - (parentOrigin == null ? 0f : parentOrigin[0]);
         float y = origin[1] - (parentOrigin == null ? 0f : parentOrigin[1]);
         float z = origin[2] - (parentOrigin == null ? 0f : parentOrigin[2]);
@@ -178,11 +168,6 @@ public final class RigLoader {
         float xRot = -rotation[0] * Mth.DEG_TO_RAD;
         float yRot = -rotation[1] * Mth.DEG_TO_RAD;
         float zRot = rotation[2] * Mth.DEG_TO_RAD;
-        if (mirror) {
-            x = -x;
-            yRot = -yRot;
-            zRot = -zRot;
-        }
         return PartPose.offsetAndRotation(x, y, z, xRot, yRot, zRot);
     }
 

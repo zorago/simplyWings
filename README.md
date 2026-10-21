@@ -139,6 +139,7 @@ Written in French.
 | `HANDOFF.md` | Implementation order |
 | `docs/ANALYSE_REFERENCES.md` | Analysis of the reference mods and the modpack, architecture decisions |
 | `docs/MIXINS.md` | Override budget: what replaces each would-be mixin |
+| `docs/SOURCES.md` | Research sources and the rules applied to models, animation, textures and interfaces |
 
 ## TODO before release
 

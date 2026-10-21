@@ -61,7 +61,7 @@ Pour chaque mod : la technique retenue, ce qu'on fera différemment et pourquoi.
 
 ## Prochaine session
 
-Installation de Blockbench et de son MCP, puis mise en place de la vision en jeu (commandes de pose et de capture). Vérifier dans la doc du plugin l'URL, le port et le transport du MCP avant de les configurer.
+Refaire toutes les ailes dans Blockbench sur le modèle de la commune (checklist dans `docs/SOURCES.md`, section 7), puis affiner animations, particules et sons. Blockbench doit être ouvert avec le plugin MCP. Les Ailes du Yin et du Yang (légendaire asymétrique, 9/10 partout) sont décrites dans `WINGS.md` mais pas encore dans le mod.
 
 Chaque étape doit se tester en solo **et** sur un serveur dédié local avant de passer à la suivante.
 

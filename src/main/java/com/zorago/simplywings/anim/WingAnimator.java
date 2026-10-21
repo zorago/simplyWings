@@ -198,7 +198,7 @@ public final class WingAnimator {
             case TRAVEL -> {
                 if (brake) {
                     rigTarget.set(RigPose.FOLD, 0.02f).set(RigPose.STROKE, 0.35f).set(RigPose.SWEEP, 0.55f)
-                            .set(RigPose.TWIST, -0.75f).set(RigPose.FAN, 1.35f).set(RigPose.BEND_TIPS, -0.1f);
+                            .set(RigPose.TWIST, -0.75f).set(RigPose.FAN, 1.2f).set(RigPose.BEND_TIPS, -0.1f);
                     stiffness = 0.22f;
                     damping = 0.62f;
                 } else if (tuck) {
@@ -214,7 +214,7 @@ public final class WingAnimator {
                             .set(RigPose.ASYM, bank * Mth.DEG_TO_RAD * 0.3f);
                 }
                 if (stall) {
-                    rigTarget.set(RigPose.FOLD, 0.12f).set(RigPose.STROKE, 0.4f).set(RigPose.FAN, 1.3f);
+                    rigTarget.set(RigPose.FOLD, 0.12f).set(RigPose.STROKE, 0.4f).set(RigPose.FAN, 1.2f);
                 }
             }
             case NONE -> {
@@ -267,7 +267,7 @@ public final class WingAnimator {
             out.add(RigPose.ELBOW, hw * 0.35f * back);
             out.add(RigPose.WRIST, hw * 0.5f * back);
             out.add(RigPose.HAND_TWIST, hw * -0.55f * back);
-            out.add(RigPose.FAN, hw * (0.35f * forward - 0.2f * back));
+            out.add(RigPose.FAN, hw * (0.2f * forward - 0.2f * back));
             out.add(RigPose.BEND_WRIST, hw * a * 0.4f * (Mth.cos(ph - 0.3f) - c));
             out.add(RigPose.BEND_TIPS, hw * a * 0.6f * (Mth.cos(ph - 0.5f) - c));
         }
@@ -282,7 +282,7 @@ public final class WingAnimator {
             out.add(RigPose.ELBOW, sw * 0.45f * (0.5f + 0.5f * Mth.sin(time * 1.7f)));
             out.add(RigPose.TWIST, sw * 0.5f * Mth.sin(time * 0.9f));
             out.add(RigPose.ASYM, sw * 0.35f * Mth.sin(time * 0.6f));
-            out.add(RigPose.FAN, sw * 0.3f);
+            out.add(RigPose.FAN, sw * 0.1f);
         }
         if (idle) {
             out.add(RigPose.FOLD, -0.025f * (1f + Mth.sin(time * 0.08f)));
