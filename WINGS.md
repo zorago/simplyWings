@@ -515,7 +515,9 @@ Dernière mise à jour : 21 octobre 2026.
 
 **Vibe** : Le cauchemar des insomniaques. La membrane déchirée du phantom, rapide en piqué.
 
-**Apparence** : Une membrane bleu-gris par côté, aux nervures vertes et au bord déchiré.
+**Apparence** : par côté une membrane bleu nuit anguleuse en trois segments (modèle `rigs/phantom.bbmodel`) sur un os de bord d'attaque gris-vert, nervures vertes balayées vers l'extérieur qui luisent faiblement dans le noir (couche lumineuse `phantom_glow`), bord de fuite liseré de vert et déchiré. Asymétrique : les déchirures et les trous ne sont pas les mêmes à gauche et à droite.
+
+**Mouvement signature** : (`PhantomRig`) le battement se propage en vague de l'épaule vers la pointe ; en plané, lente ondulation comme une raie, pointes légèrement tombantes ; piqué en flèche, ailes plaquées vers l'arrière ; au sol, repliée en cape déchirée.
 
 **Effets** : À chaque battement, un claquement de membrane et un petit souffle au bout des ailes.
 

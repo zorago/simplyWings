@@ -60,7 +60,7 @@ window.swb.cube = function (c, side) {
   const o = c.origin || g.origin;
   const cube = new Cube({
     name: g.single ? c.name : window.swb.side(c.name, side), from, to, box_uv: true,
-    uv_offset: c.uv.slice(), mirror_uv: mirror, inflate: c.inflate || 0,
+    uv_offset: (mirror && c.leftUv ? c.leftUv : c.uv).slice(), mirror_uv: mirror, inflate: c.inflate || 0,
     origin: mirror ? window.swb.mirrorVec(o) : o.slice(), rotation: mirror ? [r[0], -r[1], -r[2]] : r.slice(),
     color: c.color || 0
   }).init().addTo(grp);
