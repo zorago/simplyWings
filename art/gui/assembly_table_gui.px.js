@@ -75,8 +75,21 @@ sprite("assembly_table_assembly", { w: 256, h: 256 },
   },
   slot(80, 20), slot(56, 44), slot(80, 44), slot(104, 44),
   arrow(125, 45, "m"),
-  bigSlot(150, 44),
-  slot(56, 90))
+  bigSlot(150, 44))
+
+sprite("assembly_table_energy", { w: 256, h: 256 },
+  ...common,
+  (c) => {
+    c.rect(66, 30, 44, 44, "m")
+    c.hline(65, 29, 45, "S"); c.vline(65, 29, 45, "S")
+    c.hline(66, 74, 45, "w"); c.vline(110, 30, 45, "w")
+    for (let i = 0; i < 4; i++) {
+      c.px(68 + i, 32 + i, "g"); c.px(107 - i, 32 + i, "g")
+      c.px(68 + i, 71 - i, "g"); c.px(107 - i, 71 - i, "g")
+    }
+    c.px(87, 31, "G"); c.px(88, 31, "G"); c.px(87, 72, "G"); c.px(88, 72, "G")
+  },
+  slot(80, 44))
 
 sprite("tab_on", { w: 28, h: 32 },
   rect(1, 1, 26, 31, "f"),

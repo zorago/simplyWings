@@ -25,10 +25,13 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 public class AssemblyTableMenu extends AbstractContainerMenu {
     public static final int TAB_ASSEMBLY = 0;
     public static final int TAB_COMPONENTS = 1;
+    public static final int TAB_ENERGY = 2;
+    public static final int TABS = 3;
     public static final int BUTTON_TAB_ASSEMBLY = 0;
     public static final int BUTTON_TAB_COMPONENTS = 1;
     public static final int BUTTON_ASSEMBLE = 2;
     public static final int BUTTON_ENERGY = 3;
+    public static final int BUTTON_TAB_ENERGY = 4;
     public static final int DATA_TANK = 0;
     public static final int DATA_PROGRESS = 1;
     public static final int DATA_COMPONENT_COST = 2;
@@ -79,7 +82,7 @@ public class AssemblyTableMenu extends AbstractContainerMenu {
                 return false;
             }
         });
-        addSlot(new TabSlot(container, AssemblyTableBlockEntity.ENERGY, 56, 90, TAB_ASSEMBLY));
+        addSlot(new TabSlot(container, AssemblyTableBlockEntity.ENERGY, 80, 44, TAB_ENERGY));
         int cell = 0;
         for (int y = 0; y < ComponentInput.SIDE; y++) {
             for (int x = 0; x < ComponentInput.SIDE; x++) {
@@ -141,6 +144,7 @@ public class AssemblyTableMenu extends AbstractContainerMenu {
         switch (id) {
             case BUTTON_TAB_ASSEMBLY -> tab = TAB_ASSEMBLY;
             case BUTTON_TAB_COMPONENTS -> tab = TAB_COMPONENTS;
+            case BUTTON_TAB_ENERGY -> tab = TAB_ENERGY;
             case BUTTON_ASSEMBLE -> {
                 return table != null && table.startAssembly();
             }
@@ -255,6 +259,10 @@ public class AssemblyTableMenu extends AbstractContainerMenu {
             slot.setChanged();
         } else if (tab == TAB_ASSEMBLY) {
             if (!moveItemStackTo(stack, 1, 5, false)) {
+                return ItemStack.EMPTY;
+            }
+        } else if (tab == TAB_ENERGY) {
+            if (!moveItemStackTo(stack, AssemblyTableBlockEntity.ENERGY, AssemblyTableBlockEntity.ENERGY + 1, false)) {
                 return ItemStack.EMPTY;
             }
         } else if (!moveItemStackTo(stack, AssemblyTableBlockEntity.GRID, AssemblyTableBlockEntity.SIZE, false)) {

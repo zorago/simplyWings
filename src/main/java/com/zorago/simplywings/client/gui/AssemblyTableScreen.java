@@ -13,11 +13,14 @@ import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 
 public class AssemblyTableScreen extends AbstractContainerScreen<AssemblyTableMenu> {
     private static final ResourceLocation ASSEMBLY = texture("assembly_table_assembly");
     private static final ResourceLocation COMPONENTS = texture("assembly_table_components");
+    private static final ResourceLocation ENERGY = texture("assembly_table_energy");
     private static final ResourceLocation TAB_ON = texture("tab_on");
     private static final ResourceLocation TAB_OFF = texture("tab_off");
     private static final ResourceLocation ARROW = texture("arrow_progress");
@@ -51,7 +54,7 @@ public class AssemblyTableScreen extends AbstractContainerScreen<AssemblyTableMe
         assemble = addRenderableWidget(Button.builder(Component.translatable("button.simplywings.assemble"),
                 b -> press(AssemblyTableMenu.BUTTON_ASSEMBLE)).bounds(leftPos + 52, topPos + 66, 72, 16).build());
         energy = addRenderableWidget(Button.builder(Component.translatable("button.simplywings.imbue"),
-                b -> press(AssemblyTableMenu.BUTTON_ENERGY)).bounds(leftPos + 76, topPos + 90, 48, 16).build());
+                b -> press(AssemblyTableMenu.BUTTON_ENERGY)).bounds(leftPos + 58, topPos + 80, 60, 16).build());
         updateButtons();
     }
 
@@ -64,7 +67,11 @@ public class AssemblyTableScreen extends AbstractContainerScreen<AssemblyTableMe
     private void selectTab(int tab) {
         if (menu.tab() != tab) {
             menu.setTab(tab);
-            press(tab == AssemblyTableMenu.TAB_ASSEMBLY ? AssemblyTableMenu.BUTTON_TAB_ASSEMBLY : AssemblyTableMenu.BUTTON_TAB_COMPONENTS);
+            press(switch (tab) {
+                case AssemblyTableMenu.TAB_ASSEMBLY -> AssemblyTableMenu.BUTTON_TAB_ASSEMBLY;
+                case AssemblyTableMenu.TAB_COMPONENTS -> AssemblyTableMenu.BUTTON_TAB_COMPONENTS;
+                default -> AssemblyTableMenu.BUTTON_TAB_ENERGY;
+            });
             updateButtons();
         }
     }
@@ -81,7 +88,7 @@ public class AssemblyTableScreen extends AbstractContainerScreen<AssemblyTableMe
         assemble.visible = assembly;
         assemble.active = cost >= 0 && menu.tank() >= cost && menu.progress() < 0 && menu.outputEmpty();
         ItemStack stack = menu.energyItem();
-        energy.visible = assembly;
+        energy.visible = menu.tab() == AssemblyTableMenu.TAB_ENERGY;
         energy.active = !stack.isEmpty();
         energy.setMessage(Component.translatable(WingedEnergy.has(stack) ? "button.simplywings.cleanse" : "button.simplywings.imbue"));
     }
@@ -94,7 +101,7 @@ public class AssemblyTableScreen extends AbstractContainerScreen<AssemblyTableMe
             graphics.renderTooltip(font, Component.translatable("tooltip.simplywings.tank",
                     menu.tank(), AssemblyTableBlockEntity.TANK_CAPACITY), mouseX, mouseY);
         }
-        for (int tab = 0; tab < 2; tab++) {
+        for (int tab = 0; tab < AssemblyTableMenu.TABS; tab++) {
             if (isIn(mouseX, mouseY, tabX(tab) - leftPos, -28, TAB_W, 28)) {
                 graphics.renderTooltip(font, tabTitle(tab), mouseX, mouseY);
             }
@@ -104,13 +111,17 @@ public class AssemblyTableScreen extends AbstractContainerScreen<AssemblyTableMe
     @Override
     protected void renderBg(GuiGraphics graphics, float partialTick, int mouseX, int mouseY) {
         int active = menu.tab();
-        for (int tab = 0; tab < 2; tab++) {
+        for (int tab = 0; tab < AssemblyTableMenu.TABS; tab++) {
             if (tab != active) {
                 graphics.blit(TAB_OFF, tabX(tab), topPos - 26, 0, 0, TAB_W, 28, TAB_W, 28);
                 graphics.renderItem(tabIcon(tab), tabX(tab) + 6, topPos - 20);
             }
         }
-        graphics.blit(active == AssemblyTableMenu.TAB_ASSEMBLY ? ASSEMBLY : COMPONENTS, leftPos, topPos, 0, 0, imageWidth, imageHeight, 256, 256);
+        graphics.blit(switch (active) {
+            case AssemblyTableMenu.TAB_ASSEMBLY -> ASSEMBLY;
+            case AssemblyTableMenu.TAB_COMPONENTS -> COMPONENTS;
+            default -> ENERGY;
+        }, leftPos, topPos, 0, 0, imageWidth, imageHeight, 256, 256);
         graphics.blit(TAB_ON, tabX(active), topPos - 28, 0, 0, TAB_W, 32, TAB_W, 32);
         graphics.renderItem(tabIcon(active), tabX(active) + 6, topPos - 21);
 
@@ -131,7 +142,7 @@ public class AssemblyTableScreen extends AbstractContainerScreen<AssemblyTableMe
         super.renderLabels(graphics, mouseX, mouseY);
         boolean assembly = menu.tab() == AssemblyTableMenu.TAB_ASSEMBLY;
         int cost = assembly ? menu.assemblyCost() : menu.componentCost();
-        if (cost < 0) {
+        if (cost < 0 || menu.tab() == AssemblyTableMenu.TAB_ENERGY) {
             return;
         }
         String text = String.valueOf(cost);
@@ -148,7 +159,7 @@ public class AssemblyTableScreen extends AbstractContainerScreen<AssemblyTableMe
         super.renderTooltip(graphics, mouseX, mouseY);
         int cost = menu.tab() == AssemblyTableMenu.TAB_ASSEMBLY ? menu.assemblyCost() : menu.componentCost();
         int y = menu.tab() == AssemblyTableMenu.TAB_ASSEMBLY ? 68 : 78;
-        if (cost >= 0 && hoveredSlot == null && isIn(mouseX, mouseY, 140, y, 36, 11)) {
+        if (cost >= 0 && menu.tab() != AssemblyTableMenu.TAB_ENERGY && hoveredSlot == null && isIn(mouseX, mouseY, 140, y, 36, 11)) {
             graphics.renderTooltip(font, Component.translatable("tooltip.simplywings.cost", cost)
                     .withStyle(menu.tank() >= cost ? ChatFormatting.GRAY : ChatFormatting.RED), mouseX, mouseY);
         }
@@ -156,7 +167,7 @@ public class AssemblyTableScreen extends AbstractContainerScreen<AssemblyTableMe
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        for (int tab = 0; tab < 2; tab++) {
+        for (int tab = 0; tab < AssemblyTableMenu.TABS; tab++) {
             if (button == 0 && isIn(mouseX, mouseY, tabX(tab) - leftPos, -28, TAB_W, 28)) {
                 selectTab(tab);
                 return true;
@@ -176,12 +187,22 @@ public class AssemblyTableScreen extends AbstractContainerScreen<AssemblyTableMe
     }
 
     private static Component tabTitle(int tab) {
-        return Component.translatable(tab == AssemblyTableMenu.TAB_ASSEMBLY ? "tab.simplywings.assembly" : "tab.simplywings.components");
+        return Component.translatable(switch (tab) {
+            case AssemblyTableMenu.TAB_ASSEMBLY -> "tab.simplywings.assembly";
+            case AssemblyTableMenu.TAB_COMPONENTS -> "tab.simplywings.components";
+            default -> "tab.simplywings.energy";
+        });
     }
 
     private static ItemStack tabIcon(int tab) {
-        return tab == AssemblyTableMenu.TAB_ASSEMBLY
-                ? new ItemStack(ModItems.COMMON_WINGS.get())
-                : new ItemStack(ModBlocks.ASSEMBLY_TABLE_ITEM.get());
+        return switch (tab) {
+            case AssemblyTableMenu.TAB_ASSEMBLY -> new ItemStack(ModItems.COMMON_WINGS.get());
+            case AssemblyTableMenu.TAB_COMPONENTS -> new ItemStack(ModBlocks.ASSEMBLY_TABLE_ITEM.get());
+            default -> {
+                ItemStack feather = new ItemStack(Items.FEATHER);
+                feather.set(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true);
+                yield feather;
+            }
+        };
     }
 }
