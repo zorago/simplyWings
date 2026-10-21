@@ -655,7 +655,9 @@ Dernière mise à jour : 21 octobre 2026.
 
 **Vibe** : Cuir, plumes et ficelle. Des ailes bricolées sans point fort ni point faible : la rare de départ.
 
-**Apparence** : Une aile par côté, faite de pièces de cuir et de tissu cousues ensemble.
+**Apparence** : une aile bricolée par côté (modèle `rigs/patchwork.bbmodel`) sur un squelette d'oiseau : couvertures et rémiges secondaires en patchwork de cuir, toile écrue, laine rouge, bleue et verte, cousues au point avant ; rémiges dépareillées (grise, noire, blanche, brune) attachées à la ficelle. Asymétrique : à droite une attelle de bois bandée sur l'avant-bras et une plume blanche de plus, à gauche une pièce bleue décousue qui pend et un bout de ficelle ; les pièces ne sont pas les mêmes des deux côtés.
+
+**Mouvement signature** : (`PatchworkRig`) battements un peu maladroits : l'aile gauche bat en léger retard et moins ample, et de temps en temps un coup rate (le coude cède un instant) ; la pièce décousue flotte au vent, plus fort avec la vitesse.
 
 **Effets** : Aucun, des ailes simples et discrètes.
 
