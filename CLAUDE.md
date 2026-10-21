@@ -10,6 +10,7 @@ Mod d'ailes standalone pour **NeoForge 1.21.1** (nom de travail : SimplyWings). 
 - `HANDOFF.md` : point d'entrée, étapes de travail et ordre d'implémentation.
 
 - `WINGS.md` : catalogue des paires (identité, apparence, ressenti, stats). À mettre à jour avec chaque paire ajoutée ou modifiée.
+- `README.md` : vitrine du repo, en anglais (présentation, état, contrôles, commandes, TODO avant release). À tenir à jour à chaque fonctionnalité terminée.
 - `CRAFTING.md` : route de craft de chaque paire (étapes, origine des pièces, coût en Cloud Essence par étape et au total). À mettre à jour avec chaque recette ajoutée ou modifiée.
 - `BALANCE.md` : les 7 stats (échelle 0-100, valeurs physiques à 0 et à 100 dans la config serveur `[stats]`), les scores de chaque paire et la répartition des globaux. À tenir à jour à chaque changement de stats ou de physique.
 - `docs/ANALYSE_REFERENCES.md` : analyse des mods de référence et du pack, avec la table d'architecture corrigée. **Elle prime sur la table du cahier des charges** là où elle la corrige (anti-kick, caméra, souris).
@@ -47,7 +48,7 @@ Les paramètres propres à chaque paire (cadence et vitesse du stationnaire, ide
 
 - On échange en français avec zorago (apprenti dev web).
 - Code **sans commentaires**, sauf demande explicite.
-- Le mod est **entièrement en anglais** : code, ids, commentaires de config, UI, HUD, noms d'items, tooltips, sous-titres. Une seule langue, `en_us.json`, pas de `fr_fr.json`. Seuls les documents de conception (`*.md`) sont en français.
+- Le mod est **entièrement en anglais** : code, ids, commentaires de config, UI, HUD, noms d'items, tooltips, sous-titres. Une seule langue, `en_us.json`, pas de `fr_fr.json`. Seuls les documents de conception (`*.md`) sont en français ; `README.md` est en anglais.
 - Les points ouverts (fin du cahier des charges) se posent à zorago quand une étape en dépend, sans trancher seul.
 - Mod id : `simplywings` (tous les ids sont `simplywings:*`).
 
