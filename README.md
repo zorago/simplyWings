@@ -166,10 +166,10 @@ Written in French.
 - [ ] JEI plugin: assembly, components, winged energy, mob drops, block drops, info pages.
 
 ### Art overhaul
-- [ ] **Tooling**: Blockbench with its MCP plugin, plus an in-game capture tool (dev-only commands to pose the wings and take a screenshot from `runClient`) so every model is checked in its real render.
-- [ ] **Shared rig**: one skeleton for every wing (`shoulder`, `arm`, `forearm`, `hand`, feather or membrane groups), and a loader for Blockbench geometry JSON.
+- [x] **Tooling**: Blockbench with its MCP plugin and a live builder (`tools/blockbench/wing_builder.js`), plus the in-game studio (`tools/studio`) that poses the wings and captures review sheets.
+- [x] **Rigs**: `.bbmodel` files loaded directly by the game, one animation class per pair with a shared toolkit (`Cycle`, `FeatherWing`, `Bone`).
 - [ ] **Reference wing**: a designer makes one complete "hero" wing (model, texture, rig); a style guide skill is written from it.
-- [ ] **3D models**: remake every wing model (40 pairs, 1 to 3 wings per side) and the Fury tail from the reference. The current cube models are prototypes.
+- [ ] **3D models**: remake every wing model and the Fury tail. Done: common and the 21 rare pairs (each with its own model, texture and animation class, still to be reviewed in the in-game studio). To do: epic, legendary and mythic pairs.
 - [ ] **Textures**: redo the wing, glow, tail and item textures of every pair (16 px per block, 4 to 6 shades per material), final polish by the designer.
 - [ ] **Animations**: polish the shared procedural animation (beats, glide, dive, brake, hover, stall, banking, blending), add keyframed one-shots (deploy, fold, landing), body and arm pose in flight. The single allowed mixin, `PlayerModel.setupAnim` TAIL for the arms, is used only if needed.
 - [ ] **Sounds**: copyright-free recreations of the Fury shriek, charge and dash sounds; they currently point to vanilla placeholders.

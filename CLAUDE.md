@@ -15,7 +15,7 @@ Mod d'ailes standalone pour **NeoForge 1.21.1** (nom de travail : SimplyWings). 
 - `BALANCE.md` : les 7 stats (échelle 0-100, valeurs physiques à 0 et à 100 dans la config serveur `[stats]`), les scores de chaque paire et la répartition des globaux. À tenir à jour à chaque changement de stats ou de physique.
 - `docs/ANALYSE_REFERENCES.md` : analyse des mods de référence et du pack, avec la table d'architecture corrigée. **Elle prime sur la table du cahier des charges** là où elle la corrige (anti-kick, caméra, souris).
 
-Étape en cours : **prototype de vol** (étapes 1 à 5 du handoff) et conception des routes de craft. Analyse validée. Un premier écran Ailes, le bouton d'inventaire et le HUD de stamina existent. Pas encore de table d'assemblage, de Cloud Essence, de forge, de loots ni de JEI.
+Étape en cours : **refonte art** (commune et 21 rares faites, en attente de la passe studio en jeu), puis épiques, légendaires et mythiques ; en parallèle, conception des routes de craft. Analyse validée. Un premier écran Ailes, le bouton d'inventaire et le HUD de stamina existent. Pas encore de table d'assemblage, de Cloud Essence, de forge, de loots ni de JEI.
 
 Code : package `com.zorago.simplywings`, NeoForge 21.1.257 (comme le pack), ModDevGradle.
 - `flight/ServerFlight` : autorité serveur (mode, stamina, gravité à 0, sauts de secours, crash, sync).

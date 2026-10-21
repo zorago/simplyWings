@@ -61,7 +61,7 @@ Pour chaque mod : la technique retenue, ce qu'on fera différemment et pourquoi.
 
 ## Prochaine session
 
-Refaire toutes les ailes dans Blockbench sur le modèle de la commune (checklist dans `docs/SOURCES.md`, section 7), puis affiner animations, particules et sons. Blockbench doit être ouvert avec le plugin MCP. Les Ailes du Yin et du Yang (légendaire asymétrique, 9/10 partout) sont décrites dans `WINGS.md` mais pas encore dans le mod.
+Les 21 paires rares sont refaites dans Blockbench (modèle, texture pxl, classe `render/rig/wings/<Paire>Rig`), validées par des aperçus Blockbench uniquement. À faire d'abord, quand zorago laisse le PC (le studio partage le GPU avec son jeu) : `tools/studio/start.sh` puis `python -I tools/studio/review.py <modèle>` pour chaque rare (bat, crow, owl, gull, hummingbird, eagle, swift, pigeon, peacock, parrot, bee, moth, beetle, squirrel, flying_fish, phantom, amethyst, ornithopter, kite, copper, patchwork), corriger, puis test en solo et sur le serveur dédié. Ensuite le batch épique, puis légendaire et mythique, avec la même chaîne (`art/wings/<modèle>.rig.js` + `.px.js`, `tools/blockbench/wing_builder.js`, détails dans `docs/SOURCES.md`). Les Ailes du Yin et du Yang (légendaire asymétrique, 9/10 partout) sont décrites dans `WINGS.md` mais pas encore dans le mod.
 
 Chaque étape doit se tester en solo **et** sur un serveur dédié local avant de passer à la suivante.
 
