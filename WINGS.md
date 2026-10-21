@@ -487,7 +487,9 @@ Dernière mise à jour : 21 octobre 2026.
 
 **Vibe** : Décalé et fun. Des nageoires translucides qui frétillent et filent au ras des vagues.
 
-**Apparence** : Une nageoire translucide bleu argenté par côté, rayée de fines arêtes.
+**Apparence** : par côté une grande nageoire pectorale translucide bleu argenté (modèle `rigs/flying_fish.bbmodel`) faite de 7 rayons en éventail, chacun avec son arête sombre et une bande foncée vers la pointe, et une nageoire pelvienne plus petite de 4 rayons plus bas dans le dos, comme le poisson volant « à quatre ailes » ; racines en écailles argentées. Rendu translucide.
+
+**Mouvement signature** : (`FlyingFishRig`) en plané, nageoires tendues et rigides qui frémissent vite, chaque rayon en léger décalage ; l'éventail s'ouvre et se referme avec les battements ; au sol, nageoires plaquées et repliées le long du corps, avec de temps en temps un « flop » de poisson hors de l'eau.
 
 **Effets** : Aucun, des ailes simples et discrètes.
 
