@@ -291,7 +291,9 @@ Dernière mise à jour : 21 octobre 2026.
 
 **Vibe** : Gris, banal et infatigable. Le pigeon voyageur n'impressionne personne, mais il vole des heures.
 
-**Apparence** : Une aile grise par côté, barrée de deux bandes noires.
+**Apparence** : une aile grise par côté (modèle `rigs/pigeon.bbmodel`, 40 cubes) : 9 rémiges ardoise à bouts sombres, secondaires et grandes couvertures barrées de deux bandes noires, petites couvertures gris clair, alule. Gris bleuté dessus, blanc grisé dessous.
+
+**Mouvement signature** : (`PigeonRig`) claquement des ailes au-dessus du dos en haut de chaque remontée, fort au décollage et à basse vitesse, qui s'efface en croisière ; décollage explosif ailes dressées ; plané en V marqué ; atterrissage ailes hautes et cabrées ; au sol, il se secoue parfois les plumes.
 
 **Effets** : À chaque battement, quelques plumes tombent avec un bruissement d'ailes.
 
