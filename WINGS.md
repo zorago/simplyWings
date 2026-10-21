@@ -431,7 +431,9 @@ Dernière mise à jour : 21 octobre 2026.
 
 **Vibe** : Le cousin des élytres. Deux coques vertes rigides s'ouvrent sur des ailes membraneuses qui bourdonnent : robuste et endurant, mais pataud.
 
-**Apparence** : Deux élytres vert métallique et, dessous, deux ailes membraneuses brunes qui vibrent en continu.
+**Apparence** : par côté une élytre bombée vert métallique (modèle `rigs/beetle.bbmodel`, 5 cubes : coque, arrondi, apex, épaule plus sombre, suture centrale) qui recouvre une aile membraneuse brun fumé translucide en deux parties, nervure costale sombre et nervures en éventail, plus deux fantômes de flou. Fermées, les deux élytres forment une carapace dans le dos.
+
+**Mouvement signature** : (`BeetleRig`) à l'envol, les élytres se lèvent et s'écartent avec un léger dépassement, puis les ailes membraneuses se déplient de sous les coques et bourdonnent (coup à l'horloge de rendu, fantômes) ; les coques vibrent un peu pendant le vol ; au sol et en repli faucon tout se referme, et au repos les élytres s'entrouvrent parfois.
 
 **Effets** : Aucun, des ailes simples et discrètes.
 
