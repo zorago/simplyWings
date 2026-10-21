@@ -53,11 +53,11 @@ Dernière mise à jour : 21 octobre 2026.
 
 ## 2. Règles d'animation appliquées
 
-Toutes vivent dans `anim/WingAnimator.java` (états et ressorts), `anim/RigCycles.java` (cycle de battement) et `render/RiggedWingModel.java` (mappage vers les os).
+L'état de vol commun vit dans `anim/WingAnimator.java` : poids des états (`anim/WingMotion`) amortis par ressort, phases de battement et de stationnaire. Le reste appartient à chaque paire : sa classe `render/rig/wings/<Paire>Rig.java` écrit ses propres poses et ses propres cycles. Les règles ci-dessous sont celles de la commune (`CommonRig`), point de départ des oiseaux.
 
 | Observation | Règle | Mise en œuvre |
 | --- | --- | --- |
-| La descente est rapide et puissante, la remontée plus lente | Descente ≈ 25 % du cycle, remontée ≈ 45 %, le reste en fin de course | `upFraction` / `downFraction` du `WingStyle`, clés de `RigCycles.FLAP` |
+| La descente est rapide et puissante, la remontée plus lente | Descente ≈ 25 % du cycle, remontée ≈ 45 %, le reste en fin de course | `upFraction` / `downFraction` du `WingStyle`, cycles `Cycle` de `CommonRig` |
 | Remontée aile pliée, descente aile tendue | Coude et poignet fléchis à mi-remontée, à zéro pendant la descente | Canaux `ELBOW` et `WRIST` du cycle |
 | Retournement de la main en vol lent | Supination de la main à la remontée | Canal `HAND_TWIST` (cycle et stationnaire) |
 | La pointe décrit une ellipse | Balayage avant à la descente, arrière à la remontée | Canal `SWEEP` déphasé par rapport à `STROKE` |
@@ -70,10 +70,10 @@ Toutes vivent dans `anim/WingAnimator.java` (états et ressorts), `anim/RigCycle
 | Atterrissage, frein | Ailes en avant, très cabrées, éventail ouvert, vibration des pointes | État frein (`TWIST` −0,75, `SWEEP` 0,55, `FAN` 1,2) |
 | Décollage | Ailes levées haut avant la première poussée | Envol chargé : `FOLD` → 0,1, `STROKE` → 0,85 |
 | Oiseau au repos | Ailes repliées, respiration, parfois une remise en place des plumes | Respiration lente ; « rouse » de 26 ticks toutes les 20 à 55 s |
-| Poids, follow-through | Toute transition passe par un ressort amorti avec léger dépassement | Ressort par canal : raideur 0,16, amortissement 0,68 ; repli au sol 0,1 / 0,72 ; frein et repli faucon 0,22 / 0,62 |
+| Poids, follow-through | Toute transition passe par un ressort amorti avec léger dépassement | Ressort sur les poids d'état : raideur 0,16, amortissement 0,68 ; repli au sol 0,1 / 0,72 ; frein et repli faucon 0,22 / 0,62 |
 | Pas de paquet par tick | Tout est calculé localement à partir de l'état synchronisé | Mêmes événements qu'avant : `flap`, `beat`, `strike`, mode et drapeaux |
 
-Conventions des canaux de `RigPose` (radians, côté droit ; le gauche est en miroir avec le signe `s`) :
+Conventions des canaux de `RigPose` (utilisé par `FeatherWing`) (radians, côté droit ; le gauche est en miroir avec le signe `s`) :
 - `STROKE` + = vers le dos (vers le haut en vol couché) ; c'est la rotation hors du plan de l'aile (`yRot` de l'épaule).
 - `SWEEP` + = vers la tête, dans le plan de l'aile (`zRot` de l'épaule).
 - `FOLD` 0 = déployée, 1 = repliée en Z dans le plan du dos.
@@ -85,10 +85,11 @@ Conventions des canaux de `RigPose` (radians, côté droit ; le gauche est en mi
 - **Les deux ailes sont modélisées dans Blockbench**. Les os portent le préfixe `right_` ou `left_`. L'aile gauche d'une paire symétrique est le miroir de la droite : géométrie inversée en X, rotations Y et Z inversées, `mirror_uv` activé. Une paire asymétrique (Yin et Yang) a simplement deux géométries différentes.
 - **Taille réelle** : le modèle est fait à sa taille finale, avec 1 px de texture par unité. Le facteur `WingStyle.SCALE` (×1,5) ne concerne que les anciens modèles codés en Java.
 - **Attache** : épaule droite au pivot (2,5 ; 22,5 ; 2,4), épaule gauche à (−2,5 ; 22,5 ; 2,4), dans les coordonnées Blockbench. Un mannequin de joueur à l'échelle (`ref_*`, `export: false`) sert de repère et n'est pas chargé par le jeu.
-- **Os attendus par côté** : `shoulder` > `arm` (+ `tertials`) > `forearm` (+ `secondaries`) > `hand` (+ `hand_feathers`, `hand_coverts`, `primaries` > `primary_1` à `primary_N`). `N` est libre (7 pour la commune, 12 au maximum).
+- **Os** : pour une aile à plumes, `shoulder` > `arm` (+ `tertials`) > `forearm` (+ `secondaries`) > `hand` (+ `hand_feathers`, `hand_coverts`, `primaries` > `primary_1` à `primary_N`), `N` libre, pilotés par `render/rig/FeatherWing`. Les membranes, insectes, cristaux et machines ont les os de leur anatomie. Toutes les ailes d'une paire sont dans le même fichier, avec des noms uniques : `right_` / `left_` pour la paire principale, `right_hind_` / `left_hind_` pour une deuxième, `right_low_` / `left_low_` pour une troisième, puis des noms libres (`tail_1`, `right_shell`…).
+- **Une classe Java par paire** : `render/rig/wings/<Paire>Rig.java` hérite de `WingRig`, est enregistrée dans `WingRigs.ALL`, et lit `WingMotion` (poids des états, phases, vitesse) et sa mémoire par joueur `RigMemory`. Boîte à outils partagée (`Cycle`, `FeatherWing`, `Bone`), jamais une classe générique qui ne changerait que des nombres. Les paires sans rig retombent sur l'ancien modèle Java (`WingModel` + `WingStyle.Slot`).
 - **Les plumes sont des plaques d'épaisseur nulle** (dz = 0) sous leur os. Le contour vient de la transparence de la texture (rendu cutout).
 - **Les plaques de plumes ont leur propre os**, contre-tourné pendant le repli. Chez un vrai oiseau, l'angle des plumes par rapport aux os change quand l'aile se plie. Sans cette contre-rotation, l'aile repliée a des plumes qui pointent vers le corps.
-- **Repli** (constantes dans `RiggedWingModel`) : bras −1,25 rad, coude +2,75, poignet −2,85. Résultat : coude bas, poignet à hauteur d'épaule, rémiges qui descendent jusqu'aux genoux.
+- **Repli** (constantes de `FeatherWing` passées par la classe de la paire, valeurs de la commune) : bras −1,25 rad, coude +2,75, poignet −2,85. Résultat : coude bas, poignet à hauteur d'épaule, rémiges qui descendent jusqu'aux genoux.
 - **Aucun trou une fois déployée** :
   - pour un éventail de rémiges de longueur `L`, de largeur `w` et d'écart angulaire `a`, il faut `L × sin(a) < w`, sinon des fentes s'ouvrent aux pointes. La commune : `L` = 12 à 16, `a` = 12°, `w` = 4 ;
   - une nappe `hand_feathers` sous la main relie les secondaires à la dernière rémige ;
@@ -105,7 +106,8 @@ Conventions des canaux de `RigPose` (radians, côté droit ; le gauche est en mi
 - **Chemins de texture sous Windows** : charger les textures avec des antislashs, sinon Blockbench affiche « The imported texture is not contained in a resource pack » et ne trouve pas le namespace.
 - **`build.gradle`** : le MDK excluait `**/*.bbmodel` des ressources. Cette ligne a été retirée, puisque nos `.bbmodel` sont des assets du jeu. Les sources de travail restent dans `art/`.
 - **`risky_eval`** : pas de commentaires ni de `//` dans le code envoyé. `new Function(...)` perd les variables locales : mettre l'état partagé dans `window` (`swInit`, `swF`).
-- **Prévisualiser une pose** : la fonction `swPose(pose)`, définie dans Blockbench, applique exactement le mappage de `RiggedWingModel` (rotation Blockbench = −xRot, −yRot, +zRot). On valide les poses par captures depuis une vue hors écran, sans toucher la caméra de l'utilisateur. Dans la vue de dessus, l'image est inversée : le haut de l'écran correspond au côté ventral.
+- **Prévisualiser une pose dans Blockbench** : charger `tools/blockbench/rig_preview.js` (par `risky_eval`), puis `swSnapshot()` et `swPair([bras, coude, poignet], pose)`, qui reproduisent `FeatherWing` (rotation Blockbench = −xRot, −yRot, +zRot). On valide les poses par captures depuis une vue hors écran, sans toucher la caméra de l'utilisateur. Dans la vue de dessus, l'image est inversée : le haut de l'écran correspond au côté ventral.
+- **Studio en jeu (validation de référence)** : `tools/studio/start.sh` lance `runStudio` (client de dev avec `-Dsimplywings.studio=true`, monde « New World »). Le client lit `run/studio/commands.txt` (`client/studio/Studio`), fige les ailes dans un état, place une caméra fixe et capture dans `run/studio/shots/`. `python -I tools/studio/review.py <modèle>` produit trois planches dans `run/studio/sheets/` : 15 états, battement vu de dos, battement vu de côté. Après une retouche de modèle ou de texture : `./gradlew processResources` puis la commande `reload`. Le studio est inerte sans la propriété système.
 - **Log** : `Loaded wing rig simplywings:rigs/<nom>.bbmodel with N bones` au chargement, ou un avertissement si le fichier manque. Dans ce cas, l'aile retombe sur l'ancien modèle Java.
 
 ## 5. Textures (pxl)
@@ -127,5 +129,5 @@ Conventions des canaux de `RigPose` (radians, côté droit ; le gauche est en mi
 3. Construire l'aile gauche dans Blockbench : miroir pour une paire symétrique, géométrie propre pour une paire asymétrique.
 4. Peindre la texture avec pxl, aux coordonnées UV du modèle.
 5. Valider avec `swPose` : déployée (aucun trou, vue de dos), repliée (rangée, pas d'intersection avec le corps), haut et bas du battement, frein, repli faucon.
-6. Enregistrer dans `assets/simplywings/rigs/<modèle>.bbmodel`, ajouter le nom à `RiggedWingModel.RIGS`, vérifier le log de chargement.
-7. Tester en jeu en solo et sur le serveur dédié, puis mettre à jour `WINGS.md`.
+6. Enregistrer dans `assets/simplywings/rigs/<modèle>.bbmodel`, écrire `render/rig/wings/<Paire>Rig.java` (poses et cycles propres à la paire) et l'ajouter à `WingRigs.ALL`, vérifier le log de chargement.
+7. Valider au studio (`tools/studio/review.py`), tester en jeu en solo et sur le serveur dédié, puis mettre à jour `WINGS.md`. Style et procédure complets : skill `simplywings-wing-style`.
