@@ -1,0 +1,14 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    " G ",
+    "GFG",
+    " G "
+  ],
+  "key": {
+    "G": { "item": "minecraft:glass" },
+    "F": { "item": "minecraft:feather" }
+  },
+  "result": { "id": "simplywings:cloud_flask", "count": 2 },
+  "essence": 0
+}

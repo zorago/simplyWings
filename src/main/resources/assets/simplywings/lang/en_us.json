@@ -1,4 +1,5 @@
 {
+  "block.simplywings.assembly_table": "Assembly Table",
   "item.simplywings.common_wings": "Common Wings",
   "item.simplywings.wing.tooltip": "Right-click to add these wings to your collection",
   "wing.simplywings.common": "Common Wings",
@@ -120,5 +121,16 @@
   "subtitles.simplywings.night_fury.dash": "Night Fury vanishes",
   "subtitles.simplywings.light_fury.dive": "Light Fury shrieks",
   "subtitles.simplywings.light_fury.charge": "Light Fury charges plasma",
-  "subtitles.simplywings.light_fury.blast": "Plasma blast"
+  "subtitles.simplywings.light_fury.blast": "Plasma blast",
+  "item.simplywings.cloud_flask": "Cloud Flask",
+  "container.simplywings.assembly_table": "Assembly Table",
+  "tab.simplywings.assembly": "Assembly",
+  "tab.simplywings.components": "Components",
+  "button.simplywings.assemble": "Assemble",
+  "button.simplywings.imbue": "Imbue",
+  "button.simplywings.cleanse": "Cleanse",
+  "tooltip.simplywings.cloud_essence": "Cloud Essence: %s / %s",
+  "tooltip.simplywings.tank": "Cloud Essence: %s / %s",
+  "tooltip.simplywings.cost": "Costs %s Cloud Essence",
+  "tooltip.simplywings.winged_energy": "Winged Energy"
 }

@@ -1,6 +1,7 @@
 package com.zorago.simplywings.item;
 
 import com.zorago.simplywings.SimplyWings;
+import com.zorago.simplywings.block.ModBlocks;
 import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.core.registries.Registries;
@@ -67,11 +68,19 @@ public final class ModItems {
     public static final DeferredItem<WingItem> NIGHT_WINGS = wing("night", Rarity.EPIC);
     public static final DeferredItem<WingItem> LIGHT_WINGS = wing("light", Rarity.EPIC);
 
+    public static final DeferredItem<CloudFlaskItem> CLOUD_FLASK = ITEMS.register("cloud_flask",
+            () -> new CloudFlaskItem(new Item.Properties().stacksTo(16)));
+
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> TAB = TABS.register("wings",
             () -> CreativeModeTab.builder()
                     .title(Component.translatable("itemGroup.simplywings"))
                     .icon(() -> ANGEL_WINGS.get().getDefaultInstance())
-                    .displayItems((parameters, output) -> WINGS.forEach(output::accept))
+                    .displayItems((parameters, output) -> {
+                        output.accept(ModBlocks.ASSEMBLY_TABLE_ITEM.get());
+                        output.accept(CLOUD_FLASK.get());
+                        output.accept(CloudFlaskItem.filled(CLOUD_FLASK.get(), CloudFlaskItem.CAPACITY));
+                        WINGS.forEach(output::accept);
+                    })
                     .build());
 
     public static void register(IEventBus modBus) {

@@ -1,0 +1,9 @@
+{
+  "type": "simplywings:assembly",
+  "harness": { "item": "minecraft:leather" },
+  "core": { "item": "minecraft:elytra" },
+  "left_wing": { "item": "minecraft:feather" },
+  "right_wing": { "item": "minecraft:feather" },
+  "result": { "id": "simplywings:common_wings" },
+  "essence": 0
+}

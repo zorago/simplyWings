@@ -1,10 +1,12 @@
 package com.zorago.simplywings;
 
 import com.mojang.logging.LogUtils;
+import com.zorago.simplywings.block.ModBlocks;
 import com.zorago.simplywings.command.WingsCommand;
 import com.zorago.simplywings.config.ServerConfig;
 import com.zorago.simplywings.data.WingRegistries;
 import com.zorago.simplywings.flight.ServerFlight;
+import com.zorago.simplywings.item.ModComponents;
 import com.zorago.simplywings.item.ModItems;
 import com.zorago.simplywings.sound.ModSounds;
 import com.zorago.simplywings.network.ModNetwork;
@@ -24,6 +26,8 @@ public class SimplyWings {
 
     public SimplyWings(IEventBus modBus, ModContainer container) {
         ModItems.register(modBus);
+        ModBlocks.register(modBus);
+        ModComponents.register(modBus);
         ModSounds.register(modBus);
         ModAttachments.register(modBus);
         modBus.addListener(WingRegistries::onNewRegistry);
