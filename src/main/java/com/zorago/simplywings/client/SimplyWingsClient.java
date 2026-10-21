@@ -11,11 +11,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import com.zorago.simplywings.render.BodyPose;
-import com.zorago.simplywings.render.RigLoader;
-import com.zorago.simplywings.render.RiggedWingModel;
-import net.minecraft.client.model.geom.ModelPart;
-import net.minecraft.client.model.geom.builders.LayerDefinition;
-import net.minecraft.client.model.geom.builders.MeshDefinition;
+import com.zorago.simplywings.render.rig.WingRig;
+import com.zorago.simplywings.render.rig.WingRigs;
+import com.zorago.simplywings.anim.WingMotion;
 import com.zorago.simplywings.render.TailModel;
 import com.zorago.simplywings.render.WingModel;
 import com.zorago.simplywings.render.WingsLayer;
@@ -45,6 +43,8 @@ import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
 @Mod(value = SimplyWings.MOD_ID, dist = Dist.CLIENT)
 public class SimplyWingsClient {
+    private static final WingMotion TICK_MOTION = new WingMotion();
+
     public SimplyWingsClient(IEventBus modBus, ModContainer container) {
         container.registerConfig(ModConfig.Type.CLIENT, ClientConfig.SPEC);
         container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
@@ -66,6 +66,7 @@ public class SimplyWingsClient {
         game.addListener(InventoryButton::onInit);
         game.addListener(InventoryButton::onRender);
         AssemblyTableClient.register(modBus, game);
+        com.zorago.simplywings.client.studio.Studio.register(game);
     }
 
     private static void onLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
@@ -75,11 +76,7 @@ public class SimplyWingsClient {
         for (TailModel.Spec spec : TailModel.SPECS) {
             event.registerLayerDefinition(spec.layer(), () -> TailModel.createLayer(spec));
         }
-        for (String rig : RiggedWingModel.RIGS) {
-            event.registerLayerDefinition(RiggedWingModel.layer(rig), () -> RigLoader.load(rig)
-                    .map(RigLoader.Rig::layer)
-                    .orElseGet(() -> LayerDefinition.create(new MeshDefinition(), 64, 32)));
-        }
+        WingRigs.registerLayers(event);
     }
 
     private static void onAddLayers(EntityRenderersEvent.AddLayers event) {
@@ -87,14 +84,7 @@ public class SimplyWingsClient {
         for (WingModel.Shape shape : WingModel.SHAPES) {
             models.put(shape.name(), new WingModel(event.getEntityModels().bakeLayer(shape.layer()), shape));
         }
-        Map<String, RiggedWingModel> rigs = new HashMap<>();
-        for (String rig : RiggedWingModel.RIGS) {
-            ModelPart baked = event.getEntityModels().bakeLayer(RiggedWingModel.layer(rig));
-            RigLoader.cached(rig)
-                    .map(loaded -> new RiggedWingModel(baked, rig, loaded.paths()))
-                    .filter(RiggedWingModel::valid)
-                    .ifPresent(model -> rigs.put(rig, model));
-        }
+        WingRigs.bake(event.getEntityModels());
         Map<ResourceLocation, TailModel> tails = new HashMap<>();
         for (TailModel.Spec spec : TailModel.SPECS) {
             tails.put(SimplyWings.id(spec.name()), new TailModel(event.getEntityModels().bakeLayer(spec.layer()), spec));
@@ -102,7 +92,7 @@ public class SimplyWingsClient {
         for (PlayerSkin.Model skin : event.getSkins()) {
             EntityRenderer<? extends Player> renderer = event.getSkin(skin);
             if (renderer instanceof PlayerRenderer playerRenderer) {
-                playerRenderer.addLayer(new WingsLayer(playerRenderer, models, rigs, tails));
+                playerRenderer.addLayer(new WingsLayer(playerRenderer, models, tails));
             }
         }
     }
@@ -140,6 +130,12 @@ public class SimplyWingsClient {
             visual.animator.setCharge(ClientFlight.takeoffProgress());
         }
         visual.animator.tick(player, visual.mode, visual.flags, style, hoverRate);
+        WingRig rig = WingRigs.get(model);
+        if (rig != null) {
+            visual.rig.claim(rig.name());
+            visual.rig.begin();
+            rig.tick(visual.animator.motion(1f, style, TICK_MOTION), visual.rig);
+        }
         if (visual.mode.flying()) {
             player.walkAnimation.setSpeed(0f);
         }

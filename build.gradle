@@ -57,6 +57,13 @@ neoForge {
             systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
         }
 
+        studio {
+            client()
+            gameDirectory = project.file('run')
+            systemProperty 'simplywings.studio', 'true'
+            programArguments.addAll '--quickPlaySingleplayer', 'New World', '--width', '1280', '--height', '960'
+        }
+
         server {
             server()
             programArgument '--nogui'

@@ -1,5 +1,6 @@
 package com.zorago.simplywings.client;
 
+import com.zorago.simplywings.anim.RigMemory;
 import com.zorago.simplywings.anim.TailAnimator;
 import com.zorago.simplywings.anim.WingAnimator;
 import com.zorago.simplywings.player.FlightMode;
@@ -22,6 +23,7 @@ public final class WingVisuals {
         public int flags;
         public final WingAnimator animator = new WingAnimator();
         public final TailAnimator tail = new TailAnimator();
+        public final RigMemory rig = new RigMemory();
 
         public Optional<ResourceLocation> look() {
             return equipped.isEmpty() || appearance.isEmpty() ? equipped : appearance;
@@ -37,7 +39,7 @@ public final class WingVisuals {
         if (player == mc.player) {
             LOCAL.equipped = preview != null ? preview : ClientWings.equipped();
             LOCAL.appearance = preview != null ? Optional.empty() : ClientWings.appearance();
-            LOCAL.mode = ClientFlight.mode();
+            LOCAL.mode = com.zorago.simplywings.client.studio.Studio.mode(ClientFlight.mode());
             LOCAL.flags = ClientFlight.flags();
             return LOCAL;
         }

@@ -2,12 +2,14 @@ package com.zorago.simplywings.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.zorago.simplywings.SimplyWings;
-import com.zorago.simplywings.anim.RigPose;
+import com.zorago.simplywings.anim.WingMotion;
 import com.zorago.simplywings.anim.WingPose;
 import com.zorago.simplywings.anim.WingStyle;
 import com.zorago.simplywings.client.WingVisuals;
 import com.zorago.simplywings.data.WingDefinition;
 import com.zorago.simplywings.data.WingRegistries;
+import com.zorago.simplywings.render.rig.WingRig;
+import com.zorago.simplywings.render.rig.WingRigs;
 import java.util.Map;
 import java.util.Optional;
 import net.minecraft.client.Minecraft;
@@ -28,17 +30,15 @@ public class WingsLayer extends RenderLayer<AbstractClientPlayer, PlayerModel<Ab
     private static final int GHOST_COLOR = GHOST_ALPHA << 24 | 0xFFFFFF;
 
     private final Map<String, WingModel> models;
-    private final Map<String, RiggedWingModel> rigs;
     private final Map<ResourceLocation, TailModel> tails;
     private final WingPose pose = new WingPose();
-    private final RigPose rigPose = new RigPose();
+    private final WingMotion motion = new WingMotion();
 
     public WingsLayer(RenderLayerParent<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> parent,
-                      Map<String, WingModel> models, Map<String, RiggedWingModel> rigs,
+                      Map<String, WingModel> models,
                       Map<ResourceLocation, TailModel> tails) {
         super(parent);
         this.models = models;
-        this.rigs = rigs;
         this.tails = tails;
     }
 
@@ -63,34 +63,34 @@ public class WingsLayer extends RenderLayer<AbstractClientPlayer, PlayerModel<Ab
         if (!player.getItemBySlot(EquipmentSlot.CHEST).isEmpty()) {
             poseStack.translate(0, 0, 0.0625);
         }
-        for (WingStyle.Slot slot : style.slots()) {
-            RiggedWingModel rig = rigs.get(slot.shape().name());
+        WingRig rig = WingRigs.get(modelId);
+        if (rig != null) {
+            visual.rig.claim(rig.name());
+            rig.setup(visual.animator.motion(partialTick, style, motion), visual.rig);
+            rig.render(poseStack, buffer.getBuffer(rig.renderType(ghost)), rig.light(light), OverlayTexture.NO_OVERLAY,
+                    ghost ? GHOST_COLOR : -1);
+            if (rig.glow() != null && !ghost) {
+                rig.render(poseStack, buffer.getBuffer(RenderType.eyes(rig.glow())), LightTexture.FULL_BRIGHT,
+                        OverlayTexture.NO_OVERLAY, -1);
+            }
+        }
+        for (WingStyle.Slot slot : rig != null ? java.util.List.<WingStyle.Slot>of() : style.slots()) {
             WingModel model = models.get(slot.shape().name());
-            if (rig == null && model == null) {
+            if (model == null) {
                 continue;
             }
             poseStack.pushPose();
             poseStack.translate(slot.x() / 16f, slot.y() / 16f, slot.z() / 16f);
-            ResourceLocation texture;
-            if (rig != null) {
-                rig.setup(visual.animator.rig(partialTick, style, slot, rigPose));
-                texture = rig.texture();
-            } else {
-                model.setup(visual.animator.pose(partialTick, style, slot, pose));
-                texture = model.shape().texture();
-            }
+            model.setup(visual.animator.pose(partialTick, style, slot, pose));
+            ResourceLocation texture = model.shape().texture();
             RenderType type = ghost ? RenderType.entityTranslucent(texture) : switch (style.render()) {
                 case CUTOUT -> RenderType.entityCutoutNoCull(texture);
                 case TRANSLUCENT -> RenderType.entityTranslucent(texture);
                 case ETHEREAL -> RenderType.entityTranslucentEmissive(texture);
             };
             int packedLight = style.render() == WingStyle.Render.ETHEREAL ? LightTexture.FULL_BRIGHT : light;
-            if (rig != null) {
-                rig.render(poseStack, buffer.getBuffer(type), packedLight, OverlayTexture.NO_OVERLAY, ghost ? GHOST_COLOR : -1);
-            } else {
-                model.render(poseStack, buffer.getBuffer(type), packedLight, OverlayTexture.NO_OVERLAY, ghost ? ghostColor(color) : color);
-            }
-            if (style.glow() != null && !ghost && rig == null) {
+            model.render(poseStack, buffer.getBuffer(type), packedLight, OverlayTexture.NO_OVERLAY, ghost ? ghostColor(color) : color);
+            if (style.glow() != null && !ghost) {
                 model.render(poseStack, buffer.getBuffer(RenderType.eyes(style.glow())), LightTexture.FULL_BRIGHT,
                         OverlayTexture.NO_OVERLAY, -1);
             }
