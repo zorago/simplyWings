@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.zorago.simplywings.SimplyWings;
 import com.zorago.simplywings.anim.WingPose;
+import com.zorago.simplywings.anim.WingStyle;
 import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -354,6 +355,9 @@ public final class WingModel {
         float vertical = 1f - dorsal;
         float forward = p.sweep - p.curl;
         side.base.yRot = s * HALF_PI * dorsal * folded;
+        side.base.xScale = WingStyle.SCALE;
+        side.base.yScale = WingStyle.SCALE;
+        side.base.zScale = WingStyle.SCALE;
         List<ModelPart> parts = side.segments;
         ModelPart shoulder = parts.get(0);
         shoulder.yRot = s * (-1.25f * folded + vertical * forward - dorsal * p.stroke);

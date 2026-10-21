@@ -11,6 +11,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import com.zorago.simplywings.render.BodyPose;
+import com.zorago.simplywings.render.RigLoader;
+import com.zorago.simplywings.render.RiggedWingModel;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
 import com.zorago.simplywings.render.TailModel;
 import com.zorago.simplywings.render.WingModel;
 import com.zorago.simplywings.render.WingsLayer;
@@ -60,6 +64,7 @@ public class SimplyWingsClient {
         game.addListener(SimplyWingsClient::onLogout);
         game.addListener(InventoryButton::onInit);
         game.addListener(InventoryButton::onRender);
+        AssemblyTableClient.register(modBus, game);
     }
 
     private static void onLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
@@ -69,12 +74,24 @@ public class SimplyWingsClient {
         for (TailModel.Spec spec : TailModel.SPECS) {
             event.registerLayerDefinition(spec.layer(), () -> TailModel.createLayer(spec));
         }
+        for (String rig : RiggedWingModel.RIGS) {
+            event.registerLayerDefinition(RiggedWingModel.layer(rig), () -> RigLoader.load(rig,
+                    RiggedWingModel.ATTACH_X, RiggedWingModel.ATTACH_Y, RiggedWingModel.ATTACH_Z)
+                    .map(RigLoader.Rig::layer)
+                    .orElseGet(() -> LayerDefinition.create(new MeshDefinition(), 64, 32)));
+        }
     }
 
     private static void onAddLayers(EntityRenderersEvent.AddLayers event) {
         Map<String, WingModel> models = new HashMap<>();
         for (WingModel.Shape shape : WingModel.SHAPES) {
             models.put(shape.name(), new WingModel(event.getEntityModels().bakeLayer(shape.layer()), shape));
+        }
+        Map<String, RiggedWingModel> rigs = new HashMap<>();
+        for (String rig : RiggedWingModel.RIGS) {
+            RigLoader.cached(rig, RiggedWingModel.ATTACH_X, RiggedWingModel.ATTACH_Y, RiggedWingModel.ATTACH_Z)
+                    .ifPresent(loaded -> rigs.put(rig, new RiggedWingModel(
+                            event.getEntityModels().bakeLayer(RiggedWingModel.layer(rig)), rig, loaded.paths())));
         }
         Map<ResourceLocation, TailModel> tails = new HashMap<>();
         for (TailModel.Spec spec : TailModel.SPECS) {
@@ -83,7 +100,7 @@ public class SimplyWingsClient {
         for (PlayerSkin.Model skin : event.getSkins()) {
             EntityRenderer<? extends Player> renderer = event.getSkin(skin);
             if (renderer instanceof PlayerRenderer playerRenderer) {
-                playerRenderer.addLayer(new WingsLayer(playerRenderer, models, tails));
+                playerRenderer.addLayer(new WingsLayer(playerRenderer, models, rigs, tails));
             }
         }
     }

@@ -1,5 +1,6 @@
 package com.zorago.simplywings.client.gui;
 
+import com.zorago.simplywings.SimplyWings;
 import com.zorago.simplywings.client.ClientWings;
 import com.zorago.simplywings.client.WingVisuals;
 import com.zorago.simplywings.data.EffectiveStats;
@@ -24,30 +25,40 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.Mth;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
 public class WingsScreen extends Screen {
-    private static final int WIDTH = 330;
-    private static final int HEIGHT = 196;
-    private static final int LIST_WIDTH = 116;
+    private static final ResourceLocation BACKGROUND = SimplyWings.id("textures/gui/wings/wings_screen.png");
+    private static final int WIDTH = 320;
+    private static final int HEIGHT = 188;
+    private static final int LIST_X = 8;
+    private static final int LIST_Y = 19;
+    private static final int LIST_W = 108;
+    private static final int ROWS = 8;
     private static final int ROW_HEIGHT = 20;
-    private static final int PREVIEW_WIDTH = 80;
-    private static final int PANEL = 0xE0101418;
-    private static final int PANEL_LIGHT = 0xFF1E252B;
-    private static final int BORDER = 0xFF3A4650;
-    private static final int CELL_WIDTH = 9;
+    private static final int SCROLL_X = 116;
+    private static final int SCROLL_W = 6;
+    private static final int PREVIEW_X = 128;
+    private static final int PREVIEW_W = 78;
+    private static final int INFO_X = 214;
+    private static final int INFO_W = 96;
+    private static final int CELL_WIDTH = 8;
     private static final int CELL_HEIGHT = 4;
-    private static final int BAR_WIDTH = 10 * CELL_WIDTH + 9;
-    private static final int STAT_HEIGHT = 18;
+    private static final int STAT_HEIGHT = 17;
+    private static final int TEXT_DARK = 0xFF404040;
+    private static final int TEXT_DIM = 0xFF8A949C;
+    private static final int TEXT_LABEL = 0xFFC8D0D6;
+    private static final String ELLIPSIS = "…";
 
-    private Component hoveredStat;
-
-    private record Entry(ResourceLocation id, WingDefinition definition) {
+    private record Entry(ResourceLocation id, WingDefinition definition, ItemStack icon) {
     }
 
     private final List<Entry> entries = new ArrayList<>();
@@ -58,6 +69,7 @@ public class WingsScreen extends Screen {
     private Button equipButton;
     private Button unequipButton;
     private Button appearanceButton;
+    private Component hoverText;
 
     public WingsScreen() {
         super(Component.translatable("gui.simplywings.title"));
@@ -71,21 +83,29 @@ public class WingsScreen extends Screen {
         Minecraft mc = Minecraft.getInstance();
         if (mc.level != null) {
             Optional<Registry<WingDefinition>> registry = mc.level.registryAccess().registry(WingRegistries.WING);
-            registry.ifPresent(r -> r.entrySet().forEach(e -> entries.add(new Entry(e.getKey().location(), e.getValue()))));
+            registry.ifPresent(r -> r.entrySet().forEach(e -> {
+                ResourceLocation id = e.getKey().location();
+                entries.add(new Entry(id, e.getValue(), icon(id)));
+            }));
         }
         entries.sort(Comparator.comparing((Entry e) -> e.definition().rarity()).thenComparing(e -> e.id().toString()));
         if (selected == null) {
             selected = ClientWings.equipped().orElse(entries.isEmpty() ? null : entries.get(0).id());
         }
-        int buttonY = top + HEIGHT - 26;
-        int statsX = left + LIST_WIDTH + PREVIEW_WIDTH + 12;
+        scroll = Mth.clamp(scroll, 0, maxScroll());
+        int x = left + INFO_X;
         equipButton = addRenderableWidget(Button.builder(Component.translatable("gui.simplywings.equip"), b -> equip())
-                .bounds(statsX, buttonY, 60, 20).build());
+                .bounds(x, top + 160, 47, 16).build());
         unequipButton = addRenderableWidget(Button.builder(Component.translatable("gui.simplywings.unequip"), b -> unequip())
-                .bounds(statsX + 64, buttonY, 60, 20).build());
+                .bounds(x + 49, top + 160, 47, 16).build());
         appearanceButton = addRenderableWidget(Button.builder(Component.empty(), b -> toggleAppearance())
-                .bounds(statsX, buttonY - 22, 124, 20).build());
+                .bounds(x, top + 141, INFO_W, 16).build());
         updateButtons();
+    }
+
+    private static ItemStack icon(ResourceLocation id) {
+        ResourceLocation itemId = ResourceLocation.fromNamespaceAndPath(id.getNamespace(), id.getPath() + "_wings");
+        return BuiltInRegistries.ITEM.getOptional(itemId).map(ItemStack::new).orElse(ItemStack.EMPTY);
     }
 
     private boolean owned(ResourceLocation id) {
@@ -135,17 +155,17 @@ public class WingsScreen extends Screen {
         updateButtons();
     }
 
-    private int visibleRows() {
-        return (HEIGHT - 30) / ROW_HEIGHT;
+    private int maxScroll() {
+        return Math.max(0, entries.size() - ROWS);
     }
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        int listX = left + 6;
-        int listY = top + 24;
-        if (mouseX >= listX && mouseX < listX + LIST_WIDTH - 6 && mouseY >= listY) {
+        int listX = left + LIST_X;
+        int listY = top + LIST_Y;
+        if (mouseX >= listX && mouseX < listX + LIST_W && mouseY >= listY && mouseY < listY + ROWS * ROW_HEIGHT) {
             int row = (int) ((mouseY - listY) / ROW_HEIGHT) + scroll;
-            if (row >= 0 && row < entries.size() && row - scroll < visibleRows()) {
+            if (row < entries.size()) {
                 selected = entries.get(row).id();
                 updateButtons();
                 return true;
@@ -156,53 +176,88 @@ public class WingsScreen extends Screen {
 
     @Override
     public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY) {
-        int max = Math.max(0, entries.size() - visibleRows());
-        scroll = Mth.clamp(scroll - (int) Math.signum(scrollY), 0, max);
+        scroll = Mth.clamp(scroll - (int) Math.signum(scrollY), 0, maxScroll());
         return true;
     }
 
     @Override
     public void renderBackground(GuiGraphics g, int mouseX, int mouseY, float partialTick) {
         super.renderBackground(g, mouseX, mouseY, partialTick);
-        g.fill(left, top, left + WIDTH, top + HEIGHT, PANEL);
-        g.renderOutline(left, top, WIDTH, HEIGHT, BORDER);
-        g.drawString(font, title, left + 8, top + 8, 0xFFFFFFFF, false);
+        hoverText = null;
+        g.blit(BACKGROUND, left, top, 0, 0, WIDTH, HEIGHT, WIDTH, HEIGHT);
+        g.drawString(font, title, left + 8, top + 7, TEXT_DARK, false);
         renderList(g, mouseX, mouseY);
         renderPreview(g);
-        renderStats(g, mouseX, mouseY);
+        renderInfo(g, mouseX, mouseY);
     }
 
     private void renderList(GuiGraphics g, int mouseX, int mouseY) {
-        int x = left + 6;
-        int y = top + 24;
-        g.fill(x - 1, y - 1, x + LIST_WIDTH - 5, top + HEIGHT - 6, PANEL_LIGHT);
-        int rows = visibleRows();
-        for (int i = 0; i < rows && i + scroll < entries.size(); i++) {
+        int x = left + LIST_X;
+        int y = top + LIST_Y;
+        for (int i = 0; i < ROWS && i + scroll < entries.size(); i++) {
             Entry entry = entries.get(i + scroll);
             int rowY = y + i * ROW_HEIGHT;
             boolean isOwned = owned(entry.id());
-            boolean isSelected = entry.id().equals(selected);
-            boolean hovered = mouseX >= x && mouseX < x + LIST_WIDTH - 6 && mouseY >= rowY && mouseY < rowY + ROW_HEIGHT;
-            if (isSelected) {
-                g.fill(x, rowY, x + LIST_WIDTH - 6, rowY + ROW_HEIGHT - 1, 0xFF34424E);
+            boolean isHidden = hidden(entry);
+            boolean hovered = mouseX >= x && mouseX < x + LIST_W && mouseY >= rowY && mouseY < rowY + ROW_HEIGHT;
+            if (entry.id().equals(selected)) {
+                g.fill(x, rowY, x + LIST_W, rowY + ROW_HEIGHT, 0xFF34424E);
             } else if (hovered) {
-                g.fill(x, rowY, x + LIST_WIDTH - 6, rowY + ROW_HEIGHT - 1, 0xFF283239);
+                g.fill(x, rowY, x + LIST_W, rowY + ROW_HEIGHT, 0xFF283239);
             }
             int color = isOwned ? rarityColor(entry.definition().rarity()) : 0xFF6A6A6A;
-            g.fill(x, rowY, x + 2, rowY + ROW_HEIGHT - 1, color);
-            Component name = hidden(entry) ? Component.literal("???") : Component.translatable(WingItem.translationKey(entry.id()));
-            g.drawString(font, name, x + 6, rowY + 2, color, false);
-            Component sub = hidden(entry) ? Component.literal("???") : isOwned
+            g.fill(x, rowY + 1, x + 2, rowY + ROW_HEIGHT - 1, color);
+            if (isHidden) {
+                g.drawString(font, "?", x + 9, rowY + 6, TEXT_DIM, false);
+            } else {
+                g.renderItem(entry.icon(), x + 4, rowY + 2);
+                if (!isOwned) {
+                    g.pose().pushPose();
+                    g.pose().translate(0, 0, 200);
+                    g.fill(x + 4, rowY + 2, x + 20, rowY + 18, 0xA01E2226);
+                    g.pose().popPose();
+                }
+            }
+            int textX = x + 23;
+            int markers = markerWidth(entry);
+            int textW = LIST_W - 23 - markers - 2;
+            Component name = isHidden ? Component.literal("???") : Component.translatable(WingItem.translationKey(entry.id()));
+            boolean cut = drawFitted(g, name, textX, rowY + 2, textW, color);
+            Component sub = isHidden ? Component.literal("???") : isOwned
                     ? Component.translatable("gui.simplywings.rarity." + entry.definition().rarity().getSerializedName())
                     : Component.translatable("gui.simplywings.locked");
-            g.drawString(font, sub, x + 6, rowY + 11, 0xFF8A949C, false);
+            drawFitted(g, sub, textX, rowY + 11, textW, TEXT_DIM);
+            int markerX = x + LIST_W - 9;
             if (ClientWings.equipped().filter(entry.id()::equals).isPresent()) {
-                g.drawString(font, "✔", x + LIST_WIDTH - 16, rowY + 6, 0xFF7CFC9A, false);
+                g.drawString(font, "✔", markerX, rowY + 2, 0xFF7CFC9A, false);
             }
             if (ClientWings.appearance().filter(entry.id()::equals).isPresent()) {
-                g.drawString(font, "◆", x + LIST_WIDTH - 24, rowY + 6, 0xFFFFD86A, false);
+                g.drawString(font, "◆", markerX, rowY + 11, 0xFFFFD86A, false);
+            }
+            if (hovered && cut) {
+                hoverText = name;
             }
         }
+        renderScrollbar(g);
+    }
+
+    private int markerWidth(Entry entry) {
+        boolean marked = ClientWings.equipped().filter(entry.id()::equals).isPresent()
+                || ClientWings.appearance().filter(entry.id()::equals).isPresent();
+        return marked ? 10 : 0;
+    }
+
+    private void renderScrollbar(GuiGraphics g) {
+        int trackTop = top + LIST_Y;
+        int trackHeight = ROWS * ROW_HEIGHT;
+        int x = left + SCROLL_X;
+        if (maxScroll() == 0) {
+            return;
+        }
+        int thumb = Math.max(12, trackHeight * ROWS / entries.size());
+        int thumbY = trackTop + (trackHeight - thumb) * scroll / maxScroll();
+        g.fill(x + 1, thumbY, x + SCROLL_W - 1, thumbY + thumb, 0xFF8B8B8B);
+        g.fill(x + 1, thumbY, x + SCROLL_W - 2, thumbY + thumb - 1, 0xFFC6C6C6);
     }
 
     private void renderPreview(GuiGraphics g) {
@@ -210,10 +265,9 @@ public class WingsScreen extends Screen {
         if (player == null) {
             return;
         }
-        int x0 = left + LIST_WIDTH + 4;
-        int y0 = top + 24;
-        int y1 = top + HEIGHT - 6;
-        g.fill(x0, y0, x0 + PREVIEW_WIDTH, y1, PANEL_LIGHT);
+        int x0 = left + PREVIEW_X;
+        int y0 = top + LIST_Y;
+        int y1 = y0 + ROWS * ROW_HEIGHT;
         float angle = (Util.getMillis() % 12000L) / 12000f * (float) (Math.PI * 2);
         Quaternionf pose = new Quaternionf().rotateZ((float) Math.PI).rotateY(angle);
         float bodyRot = player.yBodyRot;
@@ -233,8 +287,8 @@ public class WingsScreen extends Screen {
         player.yHeadRot = 180f;
         player.yHeadRotO = 180f;
         WingVisuals.setPreview(selectedHidden() ? Optional.empty() : Optional.ofNullable(selected));
-        g.enableScissor(x0, y0, x0 + PREVIEW_WIDTH, y1);
-        InventoryScreen.renderEntityInInventory(g, x0 + PREVIEW_WIDTH / 2f, y1 - 34, 34f,
+        g.enableScissor(x0, y0, x0 + PREVIEW_W, y1);
+        InventoryScreen.renderEntityInInventory(g, x0 + PREVIEW_W / 2f, top + 128, 34f,
                 new Vector3f(0, player.getBbHeight() / 2f + 0.0625f, 0), pose, null, player);
         g.disableScissor();
         WingVisuals.setPreview(null);
@@ -248,47 +302,63 @@ public class WingsScreen extends Screen {
         player.yHeadRotO = headRotO;
     }
 
-    private void renderStats(GuiGraphics g, int mouseX, int mouseY) {
-        hoveredStat = null;
-        int x = left + LIST_WIDTH + PREVIEW_WIDTH + 12;
-        int y = top + 24;
+    private void renderInfo(GuiGraphics g, int mouseX, int mouseY) {
+        int x = left + INFO_X;
+        int y = top + LIST_Y + 3;
         Optional<Entry> entry = entries.stream().filter(e -> e.id().equals(selected)).findFirst();
         Minecraft mc = Minecraft.getInstance();
         if (entry.isEmpty() || mc.level == null) {
             return;
         }
         if (hidden(entry.get())) {
-            g.drawString(font, "???", x, y, 0xFF6A6A6A, false);
+            g.drawString(font, "???", x, y, TEXT_DIM, false);
             return;
         }
         WingDefinition def = entry.get().definition();
+        int color = rarityColor(def.rarity());
+        List<FormattedCharSequence> lines = font.split(Component.translatable(WingItem.translationKey(entry.get().id())), INFO_W);
+        for (int i = 0; i < Math.min(2, lines.size()); i++) {
+            g.drawString(font, lines.get(i), x, y + i * 9, color, false);
+        }
+        Component rarity = Component.translatable("gui.simplywings.rarity." + def.rarity().getSerializedName());
+        drawFitted(g, owned(entry.get().id()) ? rarity : Component.translatable("gui.simplywings.locked"), x, y + 19, INFO_W, TEXT_DIM);
+
         WingStats base = def.equipped();
         WingStats total = EffectiveStats.total(mc.level.registryAccess(), ClientWings.collection(), def);
-        int color = rarityColor(def.rarity());
-        g.drawString(font, Component.translatable(WingItem.translationKey(entry.get().id())), x, y, color, false);
-        y += 14;
+        int statY = y + 32;
         for (StatType type : StatType.values()) {
             if (!type.visible()) {
                 continue;
             }
             float own = Math.min(StatType.MAX_SCORE, type.score(base));
             float full = type.score(total);
-            g.drawString(font, Component.translatable("gui.simplywings.stat." + type.key()), x, y, 0xFFC8D0D6, false);
-            String value = String.format(Locale.ROOT, "%.1f/10", full / 10f);
-            g.drawString(font, value, x + BAR_WIDTH - font.width(value), y, 0xFFFFFFFF, false);
-            renderBar(g, x, y + 10, own, full, color);
-            if (mouseX >= x && mouseX < x + BAR_WIDTH && mouseY >= y && mouseY < y + STAT_HEIGHT) {
-                hoveredStat = Component.translatable("gui.simplywings.stat_value." + type.key(),
+            String value = String.format(Locale.ROOT, "%.1f", full / 10f);
+            int valueW = font.width(value);
+            g.drawString(font, value, x + INFO_W - valueW, statY, 0xFFFFFFFF, false);
+            drawFitted(g, Component.translatable("gui.simplywings.stat." + type.key()), x, statY, INFO_W - valueW - 4, TEXT_LABEL);
+            renderBar(g, x, statY + 10, own, full, color);
+            if (mouseX >= x && mouseX < x + INFO_W && mouseY >= statY && mouseY < statY + STAT_HEIGHT) {
+                hoverText = Component.translatable("gui.simplywings.stat_value." + type.key(),
                         String.format(Locale.ROOT, "%.1f", type.value(full)));
             }
-            y += STAT_HEIGHT;
+            statY += STAT_HEIGHT;
         }
+    }
+
+    private boolean drawFitted(GuiGraphics g, Component text, int x, int y, int maxWidth, int color) {
+        if (font.width(text) <= maxWidth) {
+            g.drawString(font, text, x, y, color, false);
+            return false;
+        }
+        String cut = font.plainSubstrByWidth(text.getString(), maxWidth - font.width(ELLIPSIS)).stripTrailing();
+        g.drawString(font, cut + ELLIPSIS, x, y, color, false);
+        return true;
     }
 
     private static void renderBar(GuiGraphics g, int x, int y, float own, float full, int color) {
         for (int i = 0; i < 10; i++) {
             int cx = x + i * (CELL_WIDTH + 1);
-            g.fill(cx, y, cx + CELL_WIDTH, y + CELL_HEIGHT, 0xFF2A3238);
+            g.fill(cx, y, cx + CELL_WIDTH, y + CELL_HEIGHT, 0xFF3A4048);
             float from = i * 10f;
             int fullWidth = Math.round(Mth.clamp((full - from) / 10f, 0f, 1f) * CELL_WIDTH);
             int ownWidth = Math.round(Mth.clamp((own - from) / 10f, 0f, 1f) * CELL_WIDTH);
@@ -304,8 +374,8 @@ public class WingsScreen extends Screen {
     @Override
     public void render(GuiGraphics g, int mouseX, int mouseY, float partialTick) {
         super.render(g, mouseX, mouseY, partialTick);
-        if (hoveredStat != null) {
-            g.renderTooltip(font, hoveredStat, mouseX, mouseY);
+        if (hoverText != null) {
+            g.renderTooltip(font, hoverText, mouseX, mouseY);
         }
     }
 

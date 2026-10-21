@@ -10,6 +10,7 @@ public record WingStyle(List<Slot> slots, float upFraction, float downFraction, 
                         float hoverAmplitude, float vibration, float vibrationRate, float breath, boolean folds,
                         boolean flat, Render render, ResourceLocation glow, Effects effects) {
     public static final int MAX_SLOTS_PER_SIDE = 3;
+    public static final float SCALE = 1.5f;
 
     public enum Render {
         CUTOUT,
@@ -76,7 +77,7 @@ public record WingStyle(List<Slot> slots, float upFraction, float downFraction, 
         for (WingModel.Segment segment : slots.get(0).shape().segments()) {
             span += segment.length();
         }
-        return span / 16f + 0.2f;
+        return span * SCALE / 16f + 0.2f;
     }
 
     private static float smooth(float x) {

@@ -383,7 +383,7 @@ Les décisions du 20 et du 21 octobre sont intégrées dans les sections plus ha
 - [ ] **Kills à distance** : un arc ou un trident imprégné compte-t-il ? Ce sera alors l'arme du tireur, pas le projectile.
 - [ ] **Cloud Essence** : bande de Y et débit de la récolte, modes de vol qui comptent (déplacement seul, ou aussi le stationnaire), recettes du flacon et de l'absorbeur, flacons empilables vides ou non.
 - [ ] **Nom des essences de blocs** : à distinguer de la Cloud Essence pour éviter la confusion en jeu.
-- [ ] **Import des modèles** : export Java « Modded Entity » ou chargeur maison du JSON Blockbench (recommandé).
+- [x] **Import des modèles** (21 octobre) : chargeur maison. Le mod lit directement le `.bbmodel` (format Modded Entity, UV de boîte) dans `assets/simplywings/rigs/<modèle>.bbmodel`, avec la même conversion que l'export Java de Blockbench. L'aile modélisée est la droite, la gauche est son miroir. Première aile migrée : la commune (`basic`), sur le rig `shoulder` / `arm` (+ `tertials`) / `forearm` (+ `secondaries`) / `hand` (+ `hand_coverts`) / `primaries` (`primary_1` à `primary_5`). Toutes les ailes sont agrandies de 50 % (`WingStyle.SCALE`).
 - [ ] **Designer et aile hero** : qui, et quelle paire. Une seule référence couvre mal les familles très différentes (plumes, membranes, insectes, mécanique, éthéré) : prévoir peut-être une référence par famille.
 - [ ] **Budget de cubes** par aile, à fixer sur l'aile hero.
 - [ ] **One-shots** : faire de `WingModel` un `HierarchicalModel`, ou échantillonner les keyframes nous-mêmes.

@@ -56,6 +56,11 @@ Refonte des modèles, textures et animations : section « Pipeline art » du cah
 - Les points ouverts (fin du cahier des charges) se posent à zorago quand une étape en dépend, sans trancher seul.
 - Mod id : `simplywings` (tous les ids sont `simplywings:*`).
 
+## Git
+
+- Après chaque modification : commit puis `git push` sur le remote, sans attendre qu'on le demande.
+- Ne jamais citer Claude comme co-auteur : aucune ligne `Co-Authored-By` ni mention de Claude dans les commits et les PR.
+
 ## Règles non négociables
 
 1. **Zéro dépendance** hors NeoForge : ni Curios, GeckoLib, Architectury, Cloth Config, ni lib de config tierce (la config passe par `ModConfigSpec`). Si une lib manque, on l'écrit dans le mod. Seule exception validée : JEI en intégration optionnelle (API en `compileOnly`, dépendance `optional`, code JEI isolé dans un package `compat.jei` chargé uniquement par `@JeiPlugin`).
