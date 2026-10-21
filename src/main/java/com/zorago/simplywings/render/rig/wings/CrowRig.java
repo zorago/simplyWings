@@ -67,7 +67,7 @@ public final class CrowRig extends WingRig {
         drive.blendIn(m.w(WingMotion.HOVER), state.clear().set(RigPose.FOLD, 0.04f).set(RigPose.STROKE, 0.25f)
                 .set(RigPose.SWEEP, 0.12f));
         drive.blendIn(m.w(WingMotion.CRUISE), state.clear().set(RigPose.STROKE, 0.1f).set(RigPose.SWEEP, 0.02f)
-                .set(RigPose.FAN, 1.12f).set(RigPose.BEND_TIPS, -0.3f).set(RigPose.ASYM, m.bank * 0.35f));
+                .set(RigPose.FAN, 1.12f).set(RigPose.BEND_TIPS, 0.3f).set(RigPose.ASYM, m.bank * 0.35f));
         float d = m.diveDepth;
         drive.blendIn(m.w(WingMotion.DIVE), state.clear().set(RigPose.FOLD, Mth.lerp(d, 0.2f, 0.6f))
                 .set(RigPose.SWEEP, Mth.lerp(d, -0.15f, -0.5f)).set(RigPose.FAN, Mth.lerp(d, 0.6f, 0.1f))

@@ -235,7 +235,9 @@ Dernière mise à jour : 21 octobre 2026.
 
 **Vibe** : Le rapace. De larges ailes aux doigts écartés, des coups puissants qui arrachent le joueur du sol.
 
-**Apparence** : Une grande aile brune par côté, aux rémiges écartées comme des doigts.
+**Apparence** : une grande aile brune par côté (modèle `rigs/eagle.bbmodel`, 40 cubes) : 9 larges rémiges dont 6 profondément échancrées, qui s'écartent comme des doigts, longues secondaires, épaulettes fauves dorées sur les petites couvertures, alule. Brun sombre dessus, gris-brun barré dessous.
+
+**Mouvement signature** : (`EagleRig`) remontée lente et coup de descente explosif (la pause en haut prépare la puissance) ; plané les doigts grands ouverts et relevés, plus relevés à l'extérieur, qui frémissent dans le vent ; piqué en goutte, ailes plaquées et relevées ; atterrissage et frein ailes en avant, doigts écartés qui vibrent, alule levée ; au sol, il étire parfois les deux ailes en grand.
 
 **Effets** : À chaque battement, quelques plumes tombent avec un bruissement d'ailes.
 

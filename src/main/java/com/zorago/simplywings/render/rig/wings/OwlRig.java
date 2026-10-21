@@ -70,7 +70,7 @@ public final class OwlRig extends WingRig {
         drive.blendIn(m.w(WingMotion.HOVER), state.clear().set(RigPose.FOLD, 0.03f).set(RigPose.STROKE, 0.2f)
                 .set(RigPose.SWEEP, 0.1f).set(RigPose.FAN, 1.1f));
         drive.blendIn(m.w(WingMotion.CRUISE), state.clear().set(RigPose.STROKE, -0.03f).set(RigPose.SWEEP, 0.06f)
-                .set(RigPose.FAN, 1.15f).set(RigPose.BEND_TIPS, -0.1f).set(RigPose.ASYM, m.bank * 0.3f));
+                .set(RigPose.FAN, 1.15f).set(RigPose.BEND_TIPS, 0.08f).set(RigPose.ASYM, m.bank * 0.3f));
         float d = m.diveDepth;
         drive.blendIn(m.w(WingMotion.DIVE), state.clear().set(RigPose.FOLD, Mth.lerp(d, 0.15f, 0.5f))
                 .set(RigPose.SWEEP, Mth.lerp(d, -0.1f, -0.4f)).set(RigPose.FAN, Mth.lerp(d, 0.8f, 0.25f))
