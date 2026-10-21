@@ -263,7 +263,9 @@ Dernière mise à jour : 21 octobre 2026.
 
 **Vibe** : Le plus rapide des oiseaux. Des ailes en forme de faux, faites pour filer, incapables de tenir en place.
 
-**Apparence** : Une aile sombre en faux par côté, très effilée vers la pointe.
+**Apparence** : une aile en faux par côté (modèle `rigs/swift.bbmodel`, 36 cubes) : bras et avant-bras très courts, secondaires minuscules, main immense et 8 longues rémiges balayées vers l'arrière. Brun suie presque noir, liserés pâles en écailles dessous. Repliées, les pointes se croisent en X au bas du dos, comme au-dessus de la queue du vrai martinet.
+
+**Mouvement signature** : (`SwiftRig`) faux verrouillée balayée en arrière, battements courts et raides venus de l'épaule seule (poignet bloqué), petites rafales de coups d'aile entre deux longues glissades ; piqué en V étroit ; stationnaire frénétique et instable.
 
 **Effets** : À chaque battement, quelques plumes tombent avec un bruissement d'ailes.
 
