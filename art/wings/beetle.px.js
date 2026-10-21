@@ -15,7 +15,7 @@ const P = FEATHERS
 
 const metal = (cube, dark) => (c) => {
   const w = cube.to[0] - cube.from[0], h = cube.to[1] - cube.from[1], d = cube.to[2] - cube.from[2]
-  const fw = Math.ceil(2 * (w + d)), fh = Math.ceil(h + d)
+  const fw = Math.ceil(2 * (w + d) - 1e-6), fh = Math.ceil(h + d - 1e-6)
   const [u, v] = cube.uv
   const tones = dark ? ["a", "b", "c", "b"] : ["b", "c", "d", "e", "d", "c"]
   for (let y = 0; y < fh; y++) {

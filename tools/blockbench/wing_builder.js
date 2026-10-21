@@ -78,7 +78,7 @@ window.swb.step = function (groupNames, sides) {
       const g = rig.groups.find(x => x.name === n);
       if (g.single && side === 'left') continue;
       window.swb.groupFor(g, side);
-      for (const c of rig.cubes.filter(x => x.group === n)) made.push(window.swb.cube(c, side));
+      for (const c of rig.cubes.filter(x => x.group === n && (!x.only || x.only === side))) made.push(window.swb.cube(c, side));
     }
   }
   Undo.finishEdit('build ' + names.join(','), {outliner: true, elements: made, selection: true});

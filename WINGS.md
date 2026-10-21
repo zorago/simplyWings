@@ -543,7 +543,9 @@ Dernière mise à jour : 21 octobre 2026.
 
 **Vibe** : Du cristal vanilla. Des éclats d'améthyste qui tintent à chaque battement et tiennent le joueur bien en place.
 
-**Apparence** : Une aile de facettes d'améthyste par côté, dont certaines brillent faiblement dans le noir.
+**Apparence** : une aile de prismes d'améthyste en volume par côté (modèle `rigs/amethyst.bbmodel`, environ 37 cubes par côté) : barres de cristal pour le bras, 7 longs éclats taillés en éventail sur la main, éclats pendants sous le bras et l'avant-bras, druse à l'épaule ; quelques éclats luisent faiblement dans le noir (couche lumineuse `amethyst_glow`). Asymétrique : une druse en plus au poignet droit, une autre au coude gauche.
+
+**Mouvement signature** : (`AmethystRig`) aile rigide qui ne plie pas comme une plume ; chaque coup fait « sonner » les éclats d'une vibration rapide qui s'amortit, comme un cristal frappé ; en stationnaire, tenue très stable, les éclats dérivent doucement chacun à son rythme.
 
 **Effets** : Des éclats violets flottent autour des ailes, et chaque battement tinte comme un bloc d'améthyste.
 

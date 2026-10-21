@@ -16,7 +16,7 @@ var FEATHERS = (() => {
 
   const box = (c, cube, top, mid, low) => {
     const w = cube.to[0] - cube.from[0], h = cube.to[1] - cube.from[1], d = cube.to[2] - cube.from[2]
-    const fw = Math.ceil(2 * (w + d)), fh = Math.ceil(h + d)
+    const fw = Math.ceil(2 * (w + d) - 1e-6), fh = Math.ceil(h + d - 1e-6)
     const [u, v] = cube.uv
     c.rect(u, v, fw, fh, mid)
     c.hline(u, v, fw, top)
