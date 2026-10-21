@@ -97,7 +97,9 @@ Dernière mise à jour : 21 octobre 2026.
 
 **Vibe** : aérodynamiques et nerveuses. Elles fendent l'air avec peu de traînée et virent sec, mais leur vitesse de pointe reste modeste. Elles décrochent facilement.
 
-**Apparence** : une membrane sombre violet-gris par côté, sur trois segments fins, qui s'affine en pointe vers l'extrémité.
+**Apparence** : une vraie main de chauve-souris par côté (modèle `rigs/bat.bbmodel`, 74 cubes) : bras, avant-bras et quatre doigts de deux phalanges en éventail, pouce griffu au poignet, touffe de fourrure à l'épaule. Membrane violet-gris sombre tendue entre les doigts, festons profonds au bord de fuite, patagium jusqu'à la cuisse et propatagium devant le bras. Face dorsale plus sombre, liseré clair le long du bord de fuite, os en relief des deux côtés.
+
+**Mouvement signature** (`BatRig`) : la membrane est élastique, elle se contracte quand l'aile se plie (au repos, cape en V dans le dos, poignets et griffes de pouce à hauteur d'épaule) ; remontée très fléchie, doigts à demi fermés ; descente ample balayée vers l'avant, membrane gonflée en creux ; frémissement du bord de fuite en plané, au frein et en piqué.
 
 **En vol** :
 - **Déplacement** : 2,6 battements par seconde, rapides et vifs. Elles gardent bien leur vitesse entre deux battements.
