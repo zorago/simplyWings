@@ -207,7 +207,9 @@ Dernière mise à jour : 21 octobre 2026.
 
 **Vibe** : Le roi du surplace. De toutes petites ailes qui battent si vite qu'elles deviennent floues : un stationnaire précis, mais une réserve minuscule.
 
-**Apparence** : Une toute petite aile vert irisé par côté, qui vibre en continu.
+**Apparence** : une toute petite aile en lame par côté (modèle `rigs/hummingbird.bbmodel`, 42 cubes) : bras et avant-bras minuscules, presque tout en « main », 9 longues rémiges gris violacé, couvertures vert émeraude irisé. Rendu translucide pour deux « fantômes » de l'aile qui figurent le flou du battement.
+
+**Mouvement signature** : (`HummingbirdRig`) coup en huit horizontal, l'aile s'inverse à chaque demi-battement, coude et poignet verrouillés ; le battement visuel suit l'horloge de rendu (environ 10 Hz apparents, lisible à 60 i/s) pendant que la physique tourne à 30-40 Hz, et deux fantômes translucides marquent les extrémités du coup ; au repos, ailes rangées sur le dos, avec parfois une courte rafale de bourdonnement.
 
 **Effets** : Aucun, des ailes simples et discrètes.
 
