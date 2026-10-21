@@ -319,7 +319,9 @@ Dernière mise à jour : 21 octobre 2026.
 
 **Vibe** : La paire vitrine. Magnifique, mais le paon vole mal : lent, lourd, il plane à peine. En revanche, il tient bien la pose.
 
-**Apparence** : Une aile vert-bleu par côté, qui descend bas et porte des ocelles dorés.
+**Apparence** : une aile par côté (modèle `rigs/peacock.bbmodel`, 46 cubes) aux rémiges marron comme chez le vrai paon, couvertures écailleuses bleu-vert et bleu profond, tertiaires barrées crème, plus une traîne de 4 longues plumes vert bronze par côté, chacune terminée par un ocelle (anneaux doré, vert, bleu, cœur noir). Au repos, la traîne descend bas dans le dos comme une cape.
+
+**Mouvement signature** : (`PeacockRig`) vol lourd et laborieux, aile très fléchie à la remontée ; la traîne suit en vol, ondule et se balance avec les virages ; en stationnaire (et parfois au sol) elle se dresse en roue au-dessus de la tête, avec le frisson de la traîne du vrai paon.
 
 **Effets** : À chaque battement, quelques plumes tombent avec un bruissement d'ailes.
 
