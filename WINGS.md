@@ -599,7 +599,9 @@ Dernière mise à jour : 21 octobre 2026.
 
 **Vibe** : Papier et baguettes. Presque aucune puissance, mais il porte au moindre souffle et ne décroche presque jamais.
 
-**Apparence** : Une voile de papier rayée rouge et blanc par côté, tendue sur des baguettes.
+**Apparence** : par côté une voile de papier rayée rouge et blanc (modèle `rigs/kite.bbmodel`) tendue entre un longeron de bambou en deux parties et une traverse en diagonale, ourlet rouge foncé et ligature de ficelle à l'épaule ; au bas du dos, une queue de cerf-volant de 5 rubans rayés avec un nœud papillon à chaque segment.
+
+**Mouvement signature** : (`KiteRig`) la voile flotte et claque au vent en permanence, plus fort avec la vitesse, le panneau extérieur frémissant ; battements à peine marqués, comme des tirs de ficelle ; la queue ondule en vague, chaque segment en retard sur le précédent, et suit les virages ; au sol, fermé comme un parapluie, la queue pendante.
 
 **Effets** : Aucun, des ailes simples et discrètes.
 
