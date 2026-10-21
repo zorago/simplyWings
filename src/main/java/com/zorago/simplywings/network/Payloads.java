@@ -14,12 +14,14 @@ public final class Payloads {
         return new CustomPacketPayload.Type<>(SimplyWings.id(name));
     }
 
-    public record SyncWings(List<ResourceLocation> collection, Optional<ResourceLocation> equipped, float stamina,
-                            int rescueJumps) implements CustomPacketPayload {
+    public record SyncWings(List<ResourceLocation> collection, Optional<ResourceLocation> equipped,
+                            Optional<ResourceLocation> appearance, float stamina, int rescueJumps)
+            implements CustomPacketPayload {
         public static final Type<SyncWings> TYPE = payloadType("sync_wings");
         public static final StreamCodec<RegistryFriendlyByteBuf, SyncWings> CODEC = StreamCodec.composite(
                 ResourceLocation.STREAM_CODEC.apply(ByteBufCodecs.list()), SyncWings::collection,
                 ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC), SyncWings::equipped,
+                ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC), SyncWings::appearance,
                 ByteBufCodecs.FLOAT, SyncWings::stamina,
                 ByteBufCodecs.VAR_INT, SyncWings::rescueJumps,
                 SyncWings::new);
@@ -43,12 +45,13 @@ public final class Payloads {
         }
     }
 
-    public record FlightState(int entityId, Optional<ResourceLocation> equipped, int mode, int flags)
-            implements CustomPacketPayload {
+    public record FlightState(int entityId, Optional<ResourceLocation> equipped, Optional<ResourceLocation> appearance,
+                              int mode, int flags) implements CustomPacketPayload {
         public static final Type<FlightState> TYPE = payloadType("flight_state");
         public static final StreamCodec<RegistryFriendlyByteBuf, FlightState> CODEC = StreamCodec.composite(
                 ByteBufCodecs.VAR_INT, FlightState::entityId,
                 ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC), FlightState::equipped,
+                ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC), FlightState::appearance,
                 ByteBufCodecs.VAR_INT, FlightState::mode,
                 ByteBufCodecs.VAR_INT, FlightState::flags,
                 FlightState::new);
@@ -109,6 +112,18 @@ public final class Payloads {
         public static final StreamCodec<RegistryFriendlyByteBuf, EquipWing> CODEC = StreamCodec.composite(
                 ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC), EquipWing::wing,
                 EquipWing::new);
+
+        @Override
+        public Type<? extends CustomPacketPayload> type() {
+            return TYPE;
+        }
+    }
+
+    public record EquipAppearance(Optional<ResourceLocation> wing) implements CustomPacketPayload {
+        public static final Type<EquipAppearance> TYPE = payloadType("equip_appearance");
+        public static final StreamCodec<RegistryFriendlyByteBuf, EquipAppearance> CODEC = StreamCodec.composite(
+                ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC), EquipAppearance::wing,
+                EquipAppearance::new);
 
         @Override
         public Type<? extends CustomPacketPayload> type() {

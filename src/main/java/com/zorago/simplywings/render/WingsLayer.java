@@ -49,7 +49,7 @@ public class WingsLayer extends RenderLayer<AbstractClientPlayer, PlayerModel<Ab
         if (ghost && player != Minecraft.getInstance().player) {
             return;
         }
-        Optional<WingDefinition> definition = visual.equipped.flatMap(id -> WingRegistries.get(player.registryAccess(), id));
+        Optional<WingDefinition> definition = visual.look().flatMap(id -> WingRegistries.get(player.registryAccess(), id));
         int color = definition.map(WingDefinition::color).orElse(0xFFA0A0A0);
         ResourceLocation modelId = definition.map(WingDefinition::model).orElse(BASIC);
         WingStyle style = WingStyle.of(modelId);

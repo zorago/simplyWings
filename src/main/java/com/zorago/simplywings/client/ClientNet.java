@@ -12,7 +12,8 @@ import net.minecraft.world.entity.player.Player;
 
 public final class ClientNet {
     public static void onSync(Payloads.SyncWings payload) {
-        ClientWings.apply(payload.collection(), payload.equipped(), payload.stamina(), payload.rescueJumps());
+        ClientWings.apply(payload.collection(), payload.equipped(), payload.appearance(), payload.stamina(),
+                payload.rescueJumps());
     }
 
     public static void onStamina(Payloads.Stamina payload) {
@@ -26,7 +27,8 @@ public final class ClientNet {
             ClientFlight.forceMode(FlightMode.byId(payload.mode()));
             return;
         }
-        WingVisuals.update(payload.entityId(), payload.equipped(), FlightMode.byId(payload.mode()), payload.flags());
+        WingVisuals.update(payload.entityId(), payload.equipped(), payload.appearance(), FlightMode.byId(payload.mode()),
+                payload.flags());
     }
 
     public static void onFlapEvent(Payloads.FlapEvent payload) {
@@ -41,7 +43,8 @@ public final class ClientNet {
         Optional<WingDefinition> definition = visual.equipped
                 .flatMap(id -> WingRegistries.get(mc.level.registryAccess(), id));
         float rate = definition.map(WingDefinition::flapRate).orElse(2f);
-        WingStyle style = WingStyle.of(definition.map(WingDefinition::model).orElse(SimplyWings.id("basic")));
+        WingStyle style = WingStyle.of(visual.look().flatMap(id -> WingRegistries.get(mc.level.registryAccess(), id))
+                .map(WingDefinition::model).orElse(SimplyWings.id("basic")));
         if (visual.mode == FlightMode.TRAVEL) {
             visual.animator.strike(rate, style.strikeAt());
         } else {

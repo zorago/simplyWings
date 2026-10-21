@@ -25,6 +25,8 @@ public final class ModNetwork {
                 (p, ctx) -> ServerFlight.onRescueJump((ServerPlayer) ctx.player()));
         r.playToServer(Payloads.EquipWing.TYPE, Payloads.EquipWing.CODEC,
                 (p, ctx) -> ServerFlight.onEquipRequest((ServerPlayer) ctx.player(), p));
+        r.playToServer(Payloads.EquipAppearance.TYPE, Payloads.EquipAppearance.CODEC,
+                (p, ctx) -> ServerFlight.onAppearanceRequest((ServerPlayer) ctx.player(), p));
         r.playToServer(Payloads.AirJump.TYPE, Payloads.AirJump.CODEC,
                 (p, ctx) -> ServerFlight.onAirJump((ServerPlayer) ctx.player()));
         r.playToServer(Payloads.FuryCharge.TYPE, Payloads.FuryCharge.CODEC,

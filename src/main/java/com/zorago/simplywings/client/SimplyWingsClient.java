@@ -112,7 +112,8 @@ public class SimplyWingsClient {
         }
         Optional<WingDefinition> definition = visual.equipped.flatMap(id -> WingRegistries.get(player.registryAccess(), id));
         float hoverRate = definition.map(WingDefinition::hoverRate).orElse(2.5f);
-        ResourceLocation model = definition.map(WingDefinition::model).orElse(SimplyWings.id("basic"));
+        ResourceLocation model = visual.look().flatMap(id -> WingRegistries.get(player.registryAccess(), id))
+                .map(WingDefinition::model).orElse(SimplyWings.id("basic"));
         WingStyle style = WingStyle.of(model);
         if (player == Minecraft.getInstance().player) {
             visual.animator.setCharge(ClientFlight.takeoffProgress());

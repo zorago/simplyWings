@@ -12,7 +12,11 @@ public final class FurySet {
     public static final int DASH_WINDOW_TICKS = 10;
 
     public static boolean infiniteStamina(Collection<ResourceLocation> collection) {
-        return collection.contains(NIGHT) && collection.contains(LIGHT);
+        return collection.contains(NIGHT);
+    }
+
+    public static boolean transmog(Collection<ResourceLocation> collection) {
+        return collection.contains(LIGHT);
     }
 
     public static boolean isFury(Optional<ResourceLocation> wing) {

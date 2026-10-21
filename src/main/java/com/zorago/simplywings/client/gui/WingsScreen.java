@@ -3,6 +3,7 @@ package com.zorago.simplywings.client.gui;
 import com.zorago.simplywings.client.ClientWings;
 import com.zorago.simplywings.client.WingVisuals;
 import com.zorago.simplywings.data.EffectiveStats;
+import com.zorago.simplywings.data.FurySet;
 import com.zorago.simplywings.data.StatType;
 import com.zorago.simplywings.data.WingDefinition;
 import com.zorago.simplywings.data.WingRarity;
@@ -56,6 +57,7 @@ public class WingsScreen extends Screen {
     private int top;
     private Button equipButton;
     private Button unequipButton;
+    private Button appearanceButton;
 
     public WingsScreen() {
         super(Component.translatable("gui.simplywings.title"));
@@ -81,6 +83,8 @@ public class WingsScreen extends Screen {
                 .bounds(statsX, buttonY, 60, 20).build());
         unequipButton = addRenderableWidget(Button.builder(Component.translatable("gui.simplywings.unequip"), b -> unequip())
                 .bounds(statsX + 64, buttonY, 60, 20).build());
+        appearanceButton = addRenderableWidget(Button.builder(Component.empty(), b -> toggleAppearance())
+                .bounds(statsX, buttonY - 22, 124, 20).build());
         updateButtons();
     }
 
@@ -100,6 +104,20 @@ public class WingsScreen extends Screen {
         boolean isEquipped = selected != null && ClientWings.equipped().filter(selected::equals).isPresent();
         equipButton.active = selected != null && owned(selected) && !isEquipped;
         unequipButton.active = ClientWings.equipped().isPresent();
+        boolean isAppearance = selected != null && ClientWings.appearance().filter(selected::equals).isPresent();
+        appearanceButton.visible = FurySet.transmog(ClientWings.collection());
+        appearanceButton.active = isAppearance || (selected != null && owned(selected));
+        appearanceButton.setMessage(Component.translatable(isAppearance
+                ? "gui.simplywings.reset_appearance" : "gui.simplywings.equip_appearance"));
+    }
+
+    private void toggleAppearance() {
+        boolean isAppearance = selected != null && ClientWings.appearance().filter(selected::equals).isPresent();
+        if (isAppearance) {
+            PacketDistributor.sendToServer(new Payloads.EquipAppearance(Optional.empty()));
+        } else if (selected != null && owned(selected)) {
+            PacketDistributor.sendToServer(new Payloads.EquipAppearance(Optional.of(selected)));
+        }
     }
 
     private void equip() {
@@ -180,6 +198,9 @@ public class WingsScreen extends Screen {
             g.drawString(font, sub, x + 6, rowY + 11, 0xFF8A949C, false);
             if (ClientWings.equipped().filter(entry.id()::equals).isPresent()) {
                 g.drawString(font, "✔", x + LIST_WIDTH - 16, rowY + 6, 0xFF7CFC9A, false);
+            }
+            if (ClientWings.appearance().filter(entry.id()::equals).isPresent()) {
+                g.drawString(font, "◆", x + LIST_WIDTH - 24, rowY + 6, 0xFFFFD86A, false);
             }
         }
     }

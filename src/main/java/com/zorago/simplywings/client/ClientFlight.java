@@ -7,6 +7,7 @@ import com.zorago.simplywings.config.ServerConfig;
 import com.zorago.simplywings.data.EffectiveStats;
 import com.zorago.simplywings.data.FurySet;
 import com.zorago.simplywings.data.WingDefinition;
+import com.zorago.simplywings.data.WingRegistries;
 import com.zorago.simplywings.network.Payloads;
 import com.zorago.simplywings.player.FlightMode;
 import java.util.Optional;
@@ -420,7 +421,10 @@ public final class ClientFlight {
     }
 
     private static WingStyle style(EffectiveStats stats) {
-        return WingStyle.of(stats.definition().model());
+        Minecraft mc = Minecraft.getInstance();
+        return WingStyle.of(ClientWings.appearance()
+                .flatMap(id -> WingRegistries.get(mc.level.registryAccess(), id))
+                .map(WingDefinition::model).orElse(stats.definition().model()));
     }
 
     private static void initStabilized(LocalPlayer player, boolean stopped) {

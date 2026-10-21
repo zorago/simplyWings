@@ -73,7 +73,8 @@ Sept stats, chacune notée de 0 à 100. Le menu en affiche cinq, sur 10 (1 carre
 
 - Deux paires, les ailes des Furies Nocturne et Éclair de *Dragons* (détail dans `WINGS.md`). Tant qu'elles ne sont pas débloquées, le menu les affiche en « ??? ».
 - Stats équipées à 100 partout, plus un bonus `overcap` de +20 en vitesse (74 m/s). Elles ne donnent aucun bonus de collection.
-- Posséder **les deux** donne la **stamina infinie**, quelle que soit la paire équipée.
+- Posséder **Night** donne la **stamina infinie**, quelle que soit la paire équipée.
+- Posséder **Light** débloque la **transmog** : un troisième bouton, « Equip appearance », apparaît dans l'écran Ailes. Il pose l'apparence de la paire sélectionnée (débloquée) sur la paire équipée ; sur la paire déjà portée en apparence, il devient « Reset appearance ». L'apparence couvre le modèle, les textures, la couleur, le profil d'animation et la queue. La cadence des battements, la physique, les stats et les pouvoirs des Furies (cri, charge, dash) restent ceux de la paire équipée. Elle est enregistrée côté serveur, conservée quand on change de paire, et envoyée aux joueurs proches avec l'état de vol.
 - Chacune demande un craft géant qui couvre l'exploration vanilla : souffle du dragon, étoile du Nether, éclats d'écho, archéologie et sniffer, entre autres, et 1 000 de Cloud Essence à l'assemblage. La liste reste à écrire dans `CRAFTING.md`.
 - Toutes les valeurs vivent dans des fichiers JSON de datapack, pour que l'équilibrage et l'ajout de paires se fassent sans recompiler.
 
@@ -283,7 +284,7 @@ Tout passe par des events et API NeoForge natives : 0 access transformer et 0 mi
 | Module | Rôle | Mécanisme | Côté |
 | --- | --- | --- | --- |
 | Définitions d'ailes | Stats, raretés, pièces, apparence | Registre datapack custom, synchronisé au client | Commun |
-| Données joueur | Collection, paire équipée, stamina, sauts de secours | Data Attachment avec codec, conservé à la mort | Serveur (autorité) |
+| Données joueur | Collection, paire équipée, apparence (transmog), stamina, sauts de secours | Data Attachment avec codec, conservé à la mort | Serveur (autorité) |
 | Réseau | Équiper, état de vol, stamina, battements | CustomPacketPayload, envoyé seulement sur changement ; un battement en déplacement est un événement relayé aux joueurs proches | Les deux |
 | Physique de vol | Modes stabilisé et déplacement, dive, décrochage | `MovementInputUpdateEvent` + `PlayerTickEvent.Pre` sur le joueur local (le mouvement est client-autoritaire en vanilla) | Client |
 | Validation serveur | Pas de kick « flying is not enabled », dégâts de chute et de crash | `AttributeModifier` −100 % sur `minecraft:generic.gravity` pendant le vol + `LivingFallEvent` | Serveur |
@@ -314,13 +315,13 @@ Les décisions du 20 et du 21 octobre sont intégrées dans les sections plus ha
 - [ ] **Recettes mythiques** : la grande liste d'items d'exploration vanilla, pour Night et pour Light.
 - [ ] **Mobs et blocs sources** : quelle pièce ou essence tombe de quel mob ou bloc.
 - [ ] **Kills à distance** : un arc ou un trident imprégné compte-t-il ? Ce sera alors l'arme du tireur, pas le projectile.
-- [ ] **Transmog** : prévue à l'origine comme bonus de la paire mythique, elle n'existe pas dans le mod. À garder (et sur quelle condition) ou à abandonner.
 - [ ] **Cloud Essence** : bande de Y et débit de la récolte, modes de vol qui comptent (déplacement seul, ou aussi le stationnaire), recettes du flacon et de l'absorbeur, flacons empilables vides ou non.
 - [ ] **Nom des essences de blocs** : à distinguer de la Cloud Essence pour éviter la confusion en jeu.
 - [x] Liste des paires : 40 paires (1 commune, 21 rares, 11 épiques, 5 légendaires, 2 mythiques), dans `WINGS.md`.
 - [x] Stats de la paire commune et de toutes les paires : dans `BALANCE.md`.
 - [x] Courbe du mode stabilisé : les deux, au choix en config client, ease-in par défaut.
 - [x] Langue : mod entièrement en anglais, sans traduction.
+- [x] Bonus mythiques : Night = stamina infinie, Light = transmog.
 - [x] Table d'assemblage : deux onglets (assemblage, grille 5×5 sans les coins) et un réservoir de 1 000 unités de Cloud Essence.
 - [x] Accès à la forge : en élytre, tonneaux de plumes et de cuir sur place, paire commune de départ.
 - [x] Compas : tous les joueurs de l'île centrale, à chaque mort de dragon qui pose ou répare la forge.

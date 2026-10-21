@@ -10,7 +10,7 @@ Dernière mise à jour : 20 octobre 2026.
 - **Rare** : des créatures réelles (oiseaux, insectes, mammifères, mobs vanilla) et des ailes bricolées ou mécaniques, dans une ambiance vanilla, simple, « faite main ». Effets discrets ou absents.
 - **Épique** : des esprits, des éléments et des créatures disparues (préhistoriques), avec des thèmes qui sortent du vanilla.
 - **Légendaire** : des dieux, des êtres divins et des figures mythologiques. Chaque légendaire maxe une stat visible.
-- **Mythique** : Night et Light, les ailes des Furies de *Dragons*. 10/10 partout, +2 en vitesse au-delà du plafond, cachées en « ??? » tant qu'elles ne sont pas débloquées. Les deux ensemble donnent la stamina infinie.
+- **Mythique** : Night et Light, les ailes des Furies de *Dragons*. 10/10 partout, +2 en vitesse au-delà du plafond, cachées en « ??? » tant qu'elles ne sont pas débloquées. Night donne la stamina infinie, Light la transmog.
 
 ## Lire les stats
 
@@ -1087,7 +1087,7 @@ Clin d'œil à *Dragons* (How to Train Your Dragon) : les ailes de la Furie Noct
 - **Rareté Mythique**, au-dessus des légendaires. Dans le menu, tant qu'elles ne sont pas débloquées, elles s'affichent en **« ??? »**, sans nom, sans stats et sans aperçu.
 - **Stats** : 10/10 partout, plané et portance internes compris (aérodynamique maximale, en gardant tout le freinage). Elles ont en plus un **bonus de +2 en vitesse au-delà du plafond** (score 120) : 74 m/s en croisière, plus que le séraphin (64 m/s).
   - Vérifié : ça reste sous la vitesse de piqué. Ailes ouvertes, un piqué vertical plafonne vers 95 m/s, et en repli faucon il atteint 110 m/s (`terminalVelocity`). Le piqué reste donc plus rapide que le vol battu.
-- **Récompense de la paire** : posséder **les deux** donne la **stamina infinie**, quelle que soit la paire équipée. Elles ne donnent pas de bonus de collection.
+- **Récompenses** : posséder **Night** donne la **stamina infinie**, quelle que soit la paire équipée. Posséder **Light** débloque la **transmog** : le bouton « Equip appearance » de l'écran Ailes pose l'apparence d'une paire débloquée sur la paire équipée (visuel seulement, stats et physique inchangées). Elles ne donnent pas de bonus de collection.
 - **Corps** : en plus des ailes (une grande paire et une petite paire arrière), une **queue** de 6 segments part du bas du dos. Elle traîne par terre debout, ondule en marchant, pend et se balance en stationnaire, et suit le vol en déplacement avec du retard, comme une vraie queue. Elle porte deux paires d'ailerons ; chez Night, l'aileron gauche du bout est rouge, avec une marque blanche (la prothèse d'Harold).
 - **Modèle et textures** : volontairement simples (prototype), à affiner par un modeleur.
 
@@ -1106,7 +1106,7 @@ Les sons sont des événements du mod (`assets/simplywings/sounds.json`) : `nigh
 
 | Stat | Note | Valeur |
 | --- | --- | --- |
-| Endurance | 10/10 | 300 de stamina (infinie avec les deux paires) |
+| Endurance | 10/10 | 300 de stamina (infinie dès que Night est possédée) |
 | Accélération | 10/10 | 10 m/s par s, soit +8,3 m/s par battement |
 | Vitesse | **12/10** | 74 m/s |
 | Maniabilité | 10/10 | 150 °/s |

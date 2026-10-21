@@ -84,6 +84,14 @@ public final class ServerFlight {
         }
     }
 
+    public static void onAppearanceRequest(ServerPlayer player, Payloads.EquipAppearance request) {
+        WingsData data = ModAttachments.get(player);
+        if (FurySet.transmog(data.collection()) && request.wing().map(data.collection()::contains).orElse(true)) {
+            data.setAppearance(request.wing());
+        }
+        syncAll(player);
+    }
+
     public static void clear(ServerPlayer player) {
         WingsData data = ModAttachments.get(player);
         data.clearCollection();
@@ -101,13 +109,18 @@ public final class ServerFlight {
     public static void syncAll(ServerPlayer player) {
         WingsData data = ModAttachments.get(player);
         PacketDistributor.sendToPlayer(player, new Payloads.SyncWings(List.copyOf(data.collection()), data.equipped(),
-                data.stamina(), data.rescueJumps()));
+                appearance(data), data.stamina(), data.rescueJumps()));
         data.setLastSentStamina(data.stamina());
         PacketDistributor.sendToPlayersTrackingEntityAndSelf(player, state(player, data));
     }
 
     private static Payloads.FlightState state(Player player, WingsData data) {
-        return new Payloads.FlightState(player.getId(), data.equipped(), data.mode().ordinal(), data.flags());
+        return new Payloads.FlightState(player.getId(), data.equipped(), appearance(data), data.mode().ordinal(),
+                data.flags());
+    }
+
+    private static Optional<ResourceLocation> appearance(WingsData data) {
+        return FurySet.transmog(data.collection()) ? data.appearance() : Optional.empty();
     }
 
     private static boolean canFly(ServerPlayer player) {

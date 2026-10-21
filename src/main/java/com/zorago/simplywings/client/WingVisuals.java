@@ -17,10 +17,15 @@ public final class WingVisuals {
 
     public static final class Visual {
         public Optional<ResourceLocation> equipped = Optional.empty();
+        public Optional<ResourceLocation> appearance = Optional.empty();
         public FlightMode mode = FlightMode.NONE;
         public int flags;
         public final WingAnimator animator = new WingAnimator();
         public final TailAnimator tail = new TailAnimator();
+
+        public Optional<ResourceLocation> look() {
+            return equipped.isEmpty() || appearance.isEmpty() ? equipped : appearance;
+        }
 
         public boolean has(int flag) {
             return (flags & flag) != 0;
@@ -31,6 +36,7 @@ public final class WingVisuals {
         Minecraft mc = Minecraft.getInstance();
         if (player == mc.player) {
             LOCAL.equipped = preview != null ? preview : ClientWings.equipped();
+            LOCAL.appearance = preview != null ? Optional.empty() : ClientWings.appearance();
             LOCAL.mode = ClientFlight.mode();
             LOCAL.flags = ClientFlight.flags();
             return LOCAL;
@@ -38,13 +44,15 @@ public final class WingVisuals {
         return REMOTE.get(player.getId());
     }
 
-    static void update(int entityId, Optional<ResourceLocation> equipped, FlightMode mode, int flags) {
+    static void update(int entityId, Optional<ResourceLocation> equipped, Optional<ResourceLocation> appearance,
+                       FlightMode mode, int flags) {
         if (equipped.isEmpty()) {
             REMOTE.remove(entityId);
             return;
         }
         Visual visual = REMOTE.computeIfAbsent(entityId, id -> new Visual());
         visual.equipped = equipped;
+        visual.appearance = appearance;
         visual.mode = mode;
         visual.flags = flags;
     }

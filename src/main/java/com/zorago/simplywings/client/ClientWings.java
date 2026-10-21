@@ -11,21 +11,24 @@ import net.minecraft.resources.ResourceLocation;
 public final class ClientWings {
     private static final Set<ResourceLocation> COLLECTION = new LinkedHashSet<>();
     private static Optional<ResourceLocation> equipped = Optional.empty();
+    private static Optional<ResourceLocation> appearance = Optional.empty();
     private static float stamina;
     private static int rescueJumps;
     private static Optional<EffectiveStats> stats;
 
-    static void apply(List<ResourceLocation> collection, Optional<ResourceLocation> equippedWing, float staminaValue, int rescue) {
+    static void apply(List<ResourceLocation> collection, Optional<ResourceLocation> equippedWing,
+                      Optional<ResourceLocation> appearanceWing, float staminaValue, int rescue) {
         COLLECTION.clear();
         COLLECTION.addAll(collection);
         equipped = equippedWing;
+        appearance = appearanceWing;
         stamina = staminaValue;
         rescueJumps = rescue;
         stats = null;
     }
 
     static void reset() {
-        apply(List.of(), Optional.empty(), 0, 0);
+        apply(List.of(), Optional.empty(), Optional.empty(), 0, 0);
     }
 
     public static Optional<EffectiveStats> stats() {
@@ -45,6 +48,10 @@ public final class ClientWings {
 
     public static Optional<ResourceLocation> equipped() {
         return equipped;
+    }
+
+    public static Optional<ResourceLocation> appearance() {
+        return appearance;
     }
 
     public static float stamina() {

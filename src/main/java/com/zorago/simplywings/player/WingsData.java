@@ -14,12 +14,14 @@ public final class WingsData {
     public static final Codec<WingsData> CODEC = RecordCodecBuilder.create(i -> i.group(
             ResourceLocation.CODEC.listOf().optionalFieldOf("collection", List.of()).forGetter(d -> List.copyOf(d.collection)),
             ResourceLocation.CODEC.optionalFieldOf("equipped").forGetter(d -> d.equipped),
+            ResourceLocation.CODEC.optionalFieldOf("appearance").forGetter(d -> d.appearance),
             Codec.FLOAT.optionalFieldOf("stamina", 0f).forGetter(d -> d.stamina),
             Codec.INT.optionalFieldOf("rescue_jumps", 0).forGetter(d -> d.rescueJumps)
     ).apply(i, WingsData::new));
 
     private final Set<ResourceLocation> collection;
     private Optional<ResourceLocation> equipped;
+    private Optional<ResourceLocation> appearance;
     private float stamina;
     private int rescueJumps;
 
@@ -34,12 +36,14 @@ public final class WingsData {
     private long furyReadyTick = Long.MIN_VALUE / 2;
 
     public WingsData() {
-        this(List.of(), Optional.empty(), 0f, 0);
+        this(List.of(), Optional.empty(), Optional.empty(), 0f, 0);
     }
 
-    private WingsData(List<ResourceLocation> collection, Optional<ResourceLocation> equipped, float stamina, int rescueJumps) {
+    private WingsData(List<ResourceLocation> collection, Optional<ResourceLocation> equipped,
+                      Optional<ResourceLocation> appearance, float stamina, int rescueJumps) {
         this.collection = new LinkedHashSet<>(collection);
         this.equipped = equipped;
+        this.appearance = appearance;
         this.stamina = stamina;
         this.rescueJumps = rescueJumps;
     }
@@ -57,6 +61,7 @@ public final class WingsData {
     public void clearCollection() {
         collection.clear();
         equipped = Optional.empty();
+        appearance = Optional.empty();
         stats = null;
     }
 
@@ -67,6 +72,14 @@ public final class WingsData {
     public void equip(Optional<ResourceLocation> id) {
         equipped = id;
         stats = null;
+    }
+
+    public Optional<ResourceLocation> appearance() {
+        return appearance;
+    }
+
+    public void setAppearance(Optional<ResourceLocation> id) {
+        appearance = id;
     }
 
     public Optional<EffectiveStats> stats(RegistryAccess access) {

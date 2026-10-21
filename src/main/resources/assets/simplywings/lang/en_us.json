@@ -24,6 +24,8 @@
   "gui.simplywings.title": "Wings",
   "gui.simplywings.equip": "Equip",
   "gui.simplywings.unequip": "Unequip",
+  "gui.simplywings.equip_appearance": "Equip appearance",
+  "gui.simplywings.reset_appearance": "Reset appearance",
   "gui.simplywings.locked": "Locked",
   "gui.simplywings.rarity.common": "Common",
   "gui.simplywings.rarity.rare": "Rare",

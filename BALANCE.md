@@ -23,7 +23,7 @@ Le plafond de vitesse (64 m/s) correspond à l'ange avec les 4 premières paires
 ## Règle de la collection
 
 - Score effectif = score de la paire + somme des bonus `global` de toute la collection, plafonné à 100, puis + le bonus `overcap` de la paire (seulement Night et Light : +20 en vitesse, soit 12/10 et 74 m/s). Les échelles de la config s'extrapolent au-delà de 100.
-- Les mythiques (Night, Light) ne donnent aucun bonus de collection. Posséder les deux donne la stamina infinie.
+- Les mythiques (Night, Light) ne donnent aucun bonus de collection. Posséder Night donne la stamina infinie, posséder Light débloque la transmog (visuel seulement, aucun effet sur les stats).
 - Pour chaque stat, la somme des bonus de toutes les paires vaut **100 − le score le plus bas** parmi les paires. Avec la collection complète, toutes les paires sont donc à 10/10 partout.
 - Répartition par palier : **50 %** pour le palier de base (commune + rares), **30 %** pour les épiques, **20 %** pour les légendaires. Dans un palier, chaque paire donne la même part du total des points de bonus.
 - **Diversification** : chaque paire donne surtout dans ses points forts. Le poids d'une stat vaut (score ÷ meilleur score de la paire)⁴. Ensuite, un équilibrage itératif garantit deux choses : chaque palier fournit exactement sa part de chaque stat, et chaque paire sa part du total. Ainsi chaque légendaire donne surtout sa stat maxée, la pierre de l'endurance et de la stabilité, l'orage de la vitesse, etc.
