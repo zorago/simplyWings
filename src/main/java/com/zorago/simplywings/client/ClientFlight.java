@@ -327,7 +327,7 @@ public final class ClientFlight {
         player.resetFallDistance();
         spend(player, airJumpCost());
         ticksSinceAirJump = 0;
-        WingVisuals.local().animator.flap(stats.flapRate() * 1.5f);
+        WingVisuals.local().animator.flap(look(stats).flapRate() * 1.5f);
         WingEffects.strike(player, style(stats), FlightMode.NONE);
         player.playSound(SoundEvents.PHANTOM_FLAP, 0.7f, 1.2f);
         PacketDistributor.sendToServer(new Payloads.AirJump());
@@ -379,7 +379,7 @@ public final class ClientFlight {
         spend(player, flapCost());
         flapCooldown = 0;
         ticksSinceFlap = 0;
-        WingVisuals.local().animator.strike(stats.flapRate(), style(stats).strikeAt());
+        WingVisuals.local().animator.strike(look(stats).flapRate(), style(stats).strikeAt());
         WingEffects.strike(player, style(stats), FlightMode.TRAVEL);
         player.playSound(SoundEvents.PHANTOM_FLAP, 1f, 0.9f);
         travelKeyLock = TAKEOFF_KEY_LOCK_TICKS;
@@ -403,7 +403,7 @@ public final class ClientFlight {
         spend(player, flapCost());
         flapCooldown = 0;
         ticksSinceFlap = 0;
-        WingVisuals.local().animator.strike(stats.flapRate(), style(stats).strikeAt());
+        WingVisuals.local().animator.strike(look(stats).flapRate(), style(stats).strikeAt());
         WingEffects.strike(player, style(stats), FlightMode.TRAVEL);
         player.playSound(SoundEvents.PHANTOM_FLAP, 0.8f, 1.1f);
         setMode(player, FlightMode.TRAVEL, true);
@@ -420,11 +420,18 @@ public final class ClientFlight {
         return Math.max(1, Math.round(20f / Math.max(0.1f, stats.flapRate())));
     }
 
-    private static WingStyle style(EffectiveStats stats) {
+    private static boolean transmog(EffectiveStats stats) {
+        return ClientWings.appearance().filter(id -> !id.equals(stats.wing())).isPresent();
+    }
+
+    private static WingDefinition look(EffectiveStats stats) {
         Minecraft mc = Minecraft.getInstance();
-        return WingStyle.of(ClientWings.appearance()
-                .flatMap(id -> WingRegistries.get(mc.level.registryAccess(), id))
-                .map(WingDefinition::model).orElse(stats.definition().model()));
+        return ClientWings.appearance().flatMap(id -> WingRegistries.get(mc.level.registryAccess(), id))
+                .orElse(stats.definition());
+    }
+
+    private static WingStyle style(EffectiveStats stats) {
+        return WingStyle.of(look(stats).model());
     }
 
     private static void initStabilized(LocalPlayer player, boolean stopped) {
@@ -619,7 +626,11 @@ public final class ClientFlight {
                 int duration = flapInterval(stats);
                 flapCooldown = duration;
                 pendingStrike = Math.max(1, Math.round(duration * style(stats).strikeAt()));
-                WingVisuals.local().animator.flap(definition.flapRate());
+                if (transmog(stats)) {
+                    WingVisuals.local().animator.beat(look(stats).flapRate(), duration + 2);
+                } else {
+                    WingVisuals.local().animator.flap(definition.flapRate());
+                }
             }
         }
         if (!thrusting && !creative && ticksSinceFlap > 10 && !braking) {

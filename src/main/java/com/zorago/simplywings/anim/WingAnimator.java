@@ -24,6 +24,8 @@ public final class WingAnimator {
     private float strokeProgress = -1;
     private float prevStrokeProgress = -1;
     private float strokeDuration = 10;
+    private float loopRate;
+    private int loopTicks;
     private int age;
     private boolean initialized;
     private float bank;
@@ -37,6 +39,14 @@ public final class WingAnimator {
         strokeDuration = Math.max(4f, 20f / Math.max(0.1f, flapRate));
         strokeProgress = 0;
         prevStrokeProgress = 0;
+    }
+
+    public void beat(float flapRate, int holdTicks) {
+        loopRate = flapRate;
+        loopTicks = Math.max(loopTicks, holdTicks);
+        if (strokeProgress < 0) {
+            flap(flapRate);
+        }
     }
 
     public void strike(float flapRate, float strikeAt) {
@@ -63,7 +73,7 @@ public final class WingAnimator {
         brake = (flags & FlightMode.FLAG_BRAKE) != 0;
         boolean stall = (flags & FlightMode.FLAG_STALL) != 0;
         boolean tuck = (flags & FlightMode.FLAG_TUCK) != 0;
-        boolean thrust = (flags & FlightMode.FLAG_THRUST) != 0;
+        boolean thrust = (flags & FlightMode.FLAG_THRUST) != 0 || loopTicks > 0;
         boolean grounded = player.onGround() || player.isPassenger();
         float pitch = player.getXRot();
         float rate = 0.3f;
@@ -134,10 +144,17 @@ public final class WingAnimator {
         prevStrokeProgress = strokeProgress;
         if (strokeProgress >= 0) {
             strokeProgress += 1f / strokeDuration;
-            if (strokeProgress >= 1f) {
+            if (strokeProgress >= 1f && loopTicks > 0) {
+                strokeDuration = Math.max(4f, 20f / Math.max(0.1f, loopRate));
+                strokeProgress -= 1f;
+                prevStrokeProgress = 0;
+            } else if (strokeProgress >= 1f) {
                 strokeProgress = -1;
                 prevStrokeProgress = -1;
             }
+        }
+        if (loopTicks > 0) {
+            loopTicks--;
         }
     }
 

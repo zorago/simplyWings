@@ -43,12 +43,16 @@ public final class ClientNet {
         Optional<WingDefinition> definition = visual.equipped
                 .flatMap(id -> WingRegistries.get(mc.level.registryAccess(), id));
         float rate = definition.map(WingDefinition::flapRate).orElse(2f);
-        WingStyle style = WingStyle.of(visual.look().flatMap(id -> WingRegistries.get(mc.level.registryAccess(), id))
-                .map(WingDefinition::model).orElse(SimplyWings.id("basic")));
-        if (visual.mode == FlightMode.TRAVEL) {
+        Optional<WingDefinition> look = visual.look().flatMap(id -> WingRegistries.get(mc.level.registryAccess(), id));
+        float lookRate = look.map(WingDefinition::flapRate).orElse(rate);
+        WingStyle style = WingStyle.of(look.map(WingDefinition::model).orElse(SimplyWings.id("basic")));
+        boolean transmog = !visual.look().equals(visual.equipped);
+        if (visual.mode == FlightMode.TRAVEL && transmog) {
+            visual.animator.beat(lookRate, Math.round(20f / Math.max(0.1f, rate)) + 2);
+        } else if (visual.mode == FlightMode.TRAVEL) {
             visual.animator.strike(rate, style.strikeAt());
         } else {
-            visual.animator.flap(rate * 1.5f);
+            visual.animator.flap(lookRate * 1.5f);
         }
         if (mc.level.getEntity(payload.entityId()) instanceof Player target) {
             WingEffects.strike(target, style, visual.mode);
