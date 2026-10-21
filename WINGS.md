@@ -347,7 +347,9 @@ Dernière mise à jour : 21 octobre 2026.
 
 **Vibe** : Le clin d'œil au perroquet de Minecraft. Des couleurs vives et un vol agile entre les arbres.
 
-**Apparence** : Une aile par côté en bandes rouge, jaune et bleue.
+**Apparence** : une aile d'ara par côté (modèle `rigs/parrot.bbmodel`, 40 cubes), clin d'œil au perroquet rouge de Minecraft : petites couvertures rouge vif, large bande jaune des grandes couvertures et des tertiaires (pointes vertes), rémiges et secondaires bleu roi ; dessous rouge sombre et or.
+
+**Mouvement signature** : (`ParrotRig`) coups vifs et agiles ; en virage, l'aile intérieure se fléchit pendant que l'extérieure s'allonge ; au sol, de temps en temps, la petite danse du perroquet de Minecraft, ailes à demi ouvertes qui frétillent en rythme.
 
 **Effets** : À chaque battement, quelques plumes tombent avec un bruissement d'ailes.
 
