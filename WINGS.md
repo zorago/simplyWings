@@ -375,7 +375,9 @@ Dernière mise à jour : 21 octobre 2026.
 
 **Vibe** : Le clin d'œil à l'abeille de Minecraft. Quatre petites ailes qui bourdonnent : un bon stationnaire, mais peu de vitesse.
 
-**Apparence** : **4 petites ailes** translucides veinées de brun, toujours à plat, qui vibrent en continu.
+**Apparence** : 4 petites ailes translucides (modèle `rigs/bee.bbmodel`, 8 plaques par côté dont 4 fantômes) : une aile antérieure ovale et une postérieure plus petite par côté, membrane blanc nacré, nervure costale brune, nervure médiane et cellules fermées, charnière sombre bordée de jaune. Rendu translucide. Repliées, elles se couchent à plat sur le dos.
+
+**Mouvement signature** : (`BeeRig`) les deux ailes d'un côté restent accrochées et battent ensemble comme une seule surface (les hamuli de la vraie abeille), coup en huit à l'horloge de rendu avec inversion, fantômes translucides aux extrémités ; plus ample en stationnaire qu'en déplacement ; au sol, de temps en temps, un court bourdonnement d'échauffement.
 
 **Effets** : Aucun, des ailes simples et discrètes.
 
