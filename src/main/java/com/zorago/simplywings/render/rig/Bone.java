@@ -25,6 +25,9 @@ public final class Bone {
     public void reset() {
         if (part != null) {
             part.loadPose(rest);
+            part.xScale = 1f;
+            part.yScale = 1f;
+            part.zScale = 1f;
             part.visible = true;
         }
     }

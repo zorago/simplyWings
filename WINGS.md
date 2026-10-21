@@ -97,7 +97,7 @@ Dernière mise à jour : 21 octobre 2026.
 
 **Vibe** : aérodynamiques et nerveuses. Elles fendent l'air avec peu de traînée et virent sec, mais leur vitesse de pointe reste modeste. Elles décrochent facilement.
 
-**Apparence** : une vraie main de chauve-souris par côté (modèle `rigs/bat.bbmodel`, 74 cubes) : bras, avant-bras et quatre doigts de deux phalanges en éventail, pouce griffu au poignet, touffe de fourrure à l'épaule. Membrane violet-gris sombre tendue entre les doigts, festons profonds au bord de fuite, patagium jusqu'à la cuisse et propatagium devant le bras. Face dorsale plus sombre, liseré clair le long du bord de fuite, os en relief des deux côtés.
+**Apparence** : une vraie main de chauve-souris par côté (modèle `rigs/bat.bbmodel`, 50 cubes) : bras, avant-bras et quatre doigts de deux phalanges en éventail, pouce griffu au poignet, touffe de fourrure à l'épaule. Membrane violet-gris sombre tendue entre les doigts, festons profonds au bord de fuite, patagium jusqu'à la cuisse et propatagium devant le bras. Face dorsale plus sombre, liseré clair le long du bord de fuite, os en relief des deux côtés.
 
 **Mouvement signature** (`BatRig`) : la membrane est élastique, elle se contracte quand l'aile se plie (au repos, cape en V dans le dos, poignets et griffes de pouce à hauteur d'épaule) ; remontée très fléchie, doigts à demi fermés ; descente ample balayée vers l'avant, membrane gonflée en creux ; frémissement du bord de fuite en plané, au frein et en piqué.
 
@@ -123,7 +123,9 @@ Dernière mise à jour : 21 octobre 2026.
 
 **Vibe** : Rusé et vif. Des plumes noires mates aux reflets bleutés : le corbeau vire sec et se faufile partout.
 
-**Apparence** : Une aile de plumes noires par côté, aux longues rémiges en pointe.
+**Apparence** : une aile de corvidé large par côté (modèle `rigs/crow.bbmodel`, 38 cubes) : 8 rémiges primaires dont 5 échancrées, qui laissent des « doigts » séparés au bout de l'aile, secondaires et tertiaires longues, rangées de couvertures, petites couvertures irisées et alule au poignet. Noir mat dessous, noir à reflets bleu-violet dessus.
+
+**Mouvement signature** (`CrowRig`) : battement profond « à la rame », main très fléchie et retournée à la remontée, doigts qui s'écartent à la descente et se referment à la remontée ; pointes relevées en plané ; alule levée au frein, à l'atterrissage et au décrochage ; au sol, deux petits coups d'ailes nerveux de temps en temps.
 
 **Effets** : À chaque battement, quelques plumes tombent avec un bruissement d'ailes.
 

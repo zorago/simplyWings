@@ -2,7 +2,8 @@ window.swb = window.swb || {};
 window.swb.root = 'D:\\Bureau\\General\\SimplyWings';
 window.swb.load = function (model) {
   const fs = require('fs');
-  const lib = fs.readFileSync(window.swb.root + '\\art\\wings\\lib\\rig_pack.js', 'utf8');
+  const dir = window.swb.root + '\\art\\wings\\lib\\';
+  const lib = ['rig_pack.js', 'bird.js'].map(f => fs.readFileSync(dir + f, 'utf8')).join('\n');
   const code = lib + '\n' + fs.readFileSync(window.swb.root + '\\art\\wings\\' + model + '.rig.js', 'utf8');
   window.swb.rig = new Function(code + '\nreturn RIG;')();
   return window.swb.rig;
@@ -134,4 +135,17 @@ window.swb.pose = function (deg) {
   }
   Canvas.updateAll();
   return true;
+};
+window.swb.fresh = function (model) {
+  const previous = window.swb.rig ? window.swb.rig.model : null;
+  for (const p of ModelProject.all.filter(p => p.name === model || p.name === previous)) {
+    p.saved = true;
+    p.close(true);
+  }
+  const r = window.swb.start(model);
+  window.swb.texture();
+  return r;
+};
+window.swb.all = function () {
+  return window.swb.rig.groups.filter(g => !g.single).map(g => g.name);
 };

@@ -52,7 +52,7 @@ var GEOM = (() => {
     return out
   }
 
-  const plates = (rig) => rig.cubes.filter(c => c.from[2] === c.to[2])
+  const plates = (rig) => rig.cubes.filter(c => c.to[2] - c.from[2] < 0.05)
 
   const pixels = (rig, cube, fn) => {
     const w = Math.round(cube.to[0] - cube.from[0]), h = Math.round(cube.to[1] - cube.from[1])

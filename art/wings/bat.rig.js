@@ -52,6 +52,7 @@ var RIG = (() => {
     cubes.push({ name: g + '_bone', group: g, from: [W[0], 22, 1.9], to: [jx, 23, 2.9] })
     cubes.push({ name: t + '_bone', group: t, from: [jx, 22.15, 2.05], to: [jx + f.d, 22.85, 2.75] })
   }
+  for (const c of cubes) if (c.from[2] === c.to[2]) c.to[2] = c.from[2] + 0.02
   const rig = { model: 'bat', texture: [128, 64], S, E, W, fingers, groups, cubes }
   rig.used = PACK(rig, 128)
   return rig
