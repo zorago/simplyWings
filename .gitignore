@@ -44,3 +44,6 @@ repo/
 modsRef/
 tools/*.jar
 *.log
+
+# Skill pxl : la règle Eclipse bin/ ne doit pas exclure son exécutable
+!.claude/skills/pxl-pixel-art/bin/
