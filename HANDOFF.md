@@ -61,9 +61,31 @@ Pour chaque mod : la technique retenue, ce qu'on fera différemment et pourquoi.
 
 ## Prochaine session
 
-Les 21 paires rares sont refaites dans Blockbench (modèle, texture pxl, classe `render/rig/wings/<Paire>Rig`), validées par des aperçus Blockbench uniquement. À faire d'abord, quand zorago laisse le PC (le studio partage le GPU avec son jeu) : `tools/studio/start.sh` puis `python -I tools/studio/review.py <modèle>` pour chaque rare (bat, crow, owl, gull, hummingbird, eagle, swift, pigeon, peacock, parrot, bee, moth, beetle, squirrel, flying_fish, phantom, amethyst, ornithopter, kite, copper, patchwork), corriger, puis test en solo et sur le serveur dédié. Ensuite le batch épique, puis légendaire et mythique, avec la même chaîne (`art/wings/<modèle>.rig.js` + `.px.js`, `tools/blockbench/wing_builder.js`, détails dans `docs/SOURCES.md`). Les Ailes du Yin et du Yang (légendaire asymétrique, 9/10 partout) sont décrites dans `WINGS.md` mais pas encore dans le mod.
+Ordre fixé par zorago (21/10/2026) : **1. correctifs ci-dessous** (rares + commune) → **2. épiques** → **3. légendaires** → **4. mythiques** → **5. gameplay** réfléchi et bien intégré à Minecraft, avec des lignes de craft de plus en plus complexes en montant les paliers.
 
-Chaque étape doit se tester en solo **et** sur un serveur dédié local avant de passer à la suivante.
+Avant tout, quand zorago laisse le PC : passe studio sur les 21 rares (`tools/studio/start.sh`, puis `python -I tools/studio/review.py <modèle>`), jamais pendant qu'il joue (le studio partage le GPU avec son jeu).
+
+### Correctifs à faire (rares et commune)
+
+1. **Saut dans le battement, sur toutes les ailes.** Au « reset » du cycle, les ailes se téléportent d'un coup, ce qui casse la sensation naturelle. Règle : des keyframes procédurales qui bouclent, et **jamais de remise à zéro brutale d'une position** ; même une animation annulée se termine par un lissage, même rapide.
+   - Causes probables, à vérifier dans `anim/WingAnimator` : `strokeProgress` repart à 0 (nouvel appui sur sprint, fin de boucle) alors que le cycle était ailleurs ; `beat` passe à −1 et `beatWeight` tombe à 0 d'une image à l'autre (`m.beating()` devient faux, toute la contribution du battement disparaît) ; `beatWeight = 1 − hoverRaw` change d'un coup ; les poids d'état qui basculent sans ressort.
+   - Correctif proposé : la phase du battement ne se remet jamais à zéro, elle continue de tourner et seule l'amplitude monte ou descend, par un ressort dans `RigMemory` ; un nouveau battement reprend depuis la phase courante, ou se cale sur la prochaine phase compatible ; enfin, un filet de sécurité commun : chaque canal de sortie (`RigPose` et rotations propres à une paire) passe par un ressort critique raide, qui absorbe tout saut restant sans ajouter de mollesse.
+2. **Artefacts visuels des plaques plates superposées, sur toutes les ailes.** Les plaques coplanaires ou presque (couches de plumes à 0,02-0,06 d'écart, éventail replié, ailes gauche et droite qui se croisent, membranes adjacentes) se battent au z-buffer, surtout de loin. Avec les RenderTypes vanilla, pas de polygon offset possible.
+   - Correctif proposé, en trois étapes. **Partition** : chaque pixel de la surface de l'aile appartient à une seule plaque. Les masques se calculent depuis la géométrie partagée, comme pour la membrane de la chauve-souris (`lib/rig_geom.js`). Les recouvrements de plumes sont peints dans la texture au lieu d'être faits par des plaques superposées. **Décalage franc** : là où un recouvrement reste inévitable (éventail replié, croisement en X du martinet), on décale d'au moins 0,1 à 0,15 en Z, toujours dans le même ordre, et dynamiquement pendant le repli (`Bone.move`). **Fusion** : on fusionne les plaques coplanaires d'un même os (secondaires et couvertures sur une seule plaque) dès que l'animation ne les sépare pas.
+   - À vérifier au studio, de près et de loin, sur chaque paire.
+3. **Battements trop rapides pour beaucoup d'ailes.** La chauve-souris garde une cadence cohérente ; l'aigle et la chouette doivent avoir une vibe majestueuse.
+   - Attention : `flap_rate` (JSON de l'aile) règle aussi la physique (gain par coup = accélération ÷ `flap_rate`, appliqué au moment du coup). Le ralentir rend chaque coup plus puissant à accélération égale.
+   - Pistes : baisser `flap_rate` (aigle et chouette en priorité, puis goéland, paon, pigeon, corbeau, perroquet…) et revoir `BALANCE.md` et `WINGS.md` ; ou découpler la cadence visuelle de la cadence physique, mais le coup visuel doit rester calé sur l'application du gain.
+   - Proposer les valeurs à zorago avant de toucher l'équilibrage.
+4. **Appliquer les mêmes corrections à la commune** (`CommonRig`, `basic.bbmodel` : plaques à dz = 0, à passer à 0,02 et à partitionner).
+
+### Animations d'idle et de récupération
+
+Les idles des rares (une par paire : étirement de la chouette, danse du perroquet, roue du paon…) sont validées et très appréciées. Règle par palier :
+- **Rare** : 1 idle par paire (déjà fait), plus **une animation de récupération après l'atterrissage** (à ajouter à chaque rare : remise en place, secousse, repli…).
+- **Épique** : 3 idles tirées au hasard.
+- **Légendaire** : 5 idles tirées au hasard.
+- **Mythique** : tout ce qu'on trouve.
 
 ## Points encore ouverts
 
