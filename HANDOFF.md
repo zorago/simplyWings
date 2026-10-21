@@ -1,24 +1,25 @@
 # Handoff — Mod d'ailes (NeoForge 1.21.1)
 
-Ce fichier sert de point d'entrée pour la session Claude Code. La spec complète et à jour est dans `CAHIER_DES_CHARGES.md`, qui fait foi en cas de doute. Le projet en est au stade conception : aucune ligne de code n'existe encore.
+Ce fichier sert de point d'entrée pour la session Claude Code. La spec complète et à jour est dans `CAHIER_DES_CHARGES.md`, qui fait foi en cas de doute. Les étapes 1 à 5 sont codées (vol, rendu, 40 paires), ainsi qu'un premier écran Ailes et le HUD de stamina. Les routes de craft se conçoivent dans `CRAFTING.md`.
 
 ## Contexte
 
 - Le dev est zorago (apprenti dev web, francophone). Il veut un mod d'ailes standalone pour son modpack NeoForge 1.21.1, publié ensuite sur CurseForge avec la mention d'un développement majoritairement fait par IA.
 - Claude fait la majorité du travail : code, textures, modèles en cubes et animations procédurales.
 - On échange en français. Le code est écrit sans commentaires, sauf demande explicite.
+- Le mod est entièrement en anglais (code, ids, config, UI, HUD, noms d'items) et n'a que `en_us`, sans traduction. Seuls les documents de conception sont en français.
 
 ## Règles non négociables
 
 1. **Zéro dépendance** autre que NeoForge : pas de Curios, GeckoLib, Architectury, Cloth Config ni lib de config tierce. Si une lib est nécessaire, on l'écrit dans le mod.
-2. **Events et API NeoForge d'abord**. Chaque mixin doit être justifié dans `docs/MIXINS.md` (cible, raison, alternative écartée). Budget visé : 1 mixin (découplage souris / rotation joueur) + 1 access transformer (compteur anti-kick du serveur).
+2. **Events et API NeoForge d'abord**. Chaque mixin doit être justifié dans `docs/MIXINS.md` (cible, raison, alternative écartée). Budget issu de l'analyse : 0 access transformer, 0 mixin, au plus 1 (`PlayerModel.setupAnim` TAIL pour les bras).
 3. **Rendu** : ModelPart + RenderTypes vanilla uniquement, sans shader ni RenderType custom. Ça doit marcher avec Iris et les shaderpacks.
 4. **Serveur autoritaire** pour la collection, la paire équipée, la stamina et les sauts de secours. Physique de vol côté client (le mouvement joueur est client-autoritaire en vanilla). Aucun paquet par tick.
 5. **Pas de copie de code** depuis les mods de référence. On les décompile pour comprendre une technique, puis on la réimplémente from scratch.
 
-## Étape 1 — Analyse des mods de référence
+## Étape 1 — Analyse des mods de référence (terminée et validée)
 
-Les jars sont dans `reference-mods/`, avec la liste des mods du modpack. Décompile avec Vineflower ou CFR dans `reference-mods/_decompiled/` (à ignorer dans git), puis produis `docs/ANALYSE_REFERENCES.md` en répondant précisément à ces questions :
+Les jars sont dans `modsRef/`. Décompilation avec Vineflower dans `modsRef/_decompiled/` (ignoré par git), puis production de `docs/ANALYSE_REFERENCES.md` en répondant précisément à ces questions :
 
 | Mod | Questions |
 | --- | --- |
@@ -36,7 +37,7 @@ Pour chaque mod : la technique retenue, ce qu'on fera différemment et pourquoi.
 
 ## Étape 2 — Squelette (après validation)
 
-- Projet généré depuis le MDK NeoForge 1.21.1 officiel. Mod id à confirmer avec zorago (proposition : `wings` est déjà pris sur CurseForge, prévoir un id unique).
+- Projet généré depuis le MDK NeoForge 1.21.1 officiel. Mod id : `simplywings`.
 - Packages par module, alignés sur la table d'architecture : `data` (définitions datapack), `player` (attachment), `network`, `flight` (physique), `camera`, `render`, `anim`, `loot`, `block` (table d'assemblage), `structure`, `client.gui`, `config`.
 - Une seule paire de test codée en dur côté datapack, pour valider toute la chaîne de bout en bout.
 
@@ -48,9 +49,9 @@ Pour chaque mod : la technique retenue, ce qu'on fera différemment et pourquoi.
 4. Mode déplacement : battements, contrôles ZQSD, caméra découplée, transitions « laissée derrière » et « dans la tête ».
 5. Dive, freinage, décrochage, dégâts de crash, stamina à 0, sauts de secours.
 6. Écran Ailes + bouton d'inventaire + HUD stamina.
-7. Énergie ailée (Data Component) + Global Loot Modifiers + table d'assemblage.
+7. Énergie ailée (Data Component) + Global Loot Modifiers + Cloud Essence (flacon, absorbeur, récolte) + table d'assemblage (onglets assemblage et composants, réservoir).
 8. Forge de l'End (template NBT, placement à la mort du dragon, SavedData).
-9. Contenu : paires, recettes, mythique, équilibrage des globaux.
+9. Contenu : routes de craft de `CRAFTING.md` en JSON, recettes mythiques.
 
 Chaque étape doit se tester en solo **et** sur un serveur dédié local avant de passer à la suivante.
 

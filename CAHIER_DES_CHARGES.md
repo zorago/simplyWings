@@ -1,6 +1,6 @@
 # Mod d'ailes — Cahier des charges
 
-Version du 20 octobre 2026 · zorago
+Version du 21 octobre 2026 · zorago
 
 ## Vision et contraintes
 
@@ -13,6 +13,7 @@ Contraintes non négociables :
 - **Rendu** : les ailes sont faites de cubes (ModelPart vanilla) avec des RenderTypes vanilla, pour rester compatible avec Iris, les shaders et Sodium-like. Les effets passent par des particules classiques.
 - **Multi et performance** : le serveur fait autorité sur la stamina, la collection et les stats. Les paquets réseau sont minimaux, et rien de coûteux ne tourne à chaque tick par joueur.
 - **Publication** : CurseForge, avec la mention d'un développement en grande partie assisté par IA (code, textures, animations).
+- **Langue** : le mod est entièrement en anglais (code, identifiants, config, UI, HUD, noms d'items, tooltips, sous-titres) et n'a qu'une langue, `en_us`, sans traduction française. Seuls les documents de conception du repo sont en français.
 
 ## Collection et interface
 
@@ -31,7 +32,8 @@ Les ailes ne sont pas des items portés mais des entrées de collection débloqu
 
 **Écran Ailes**
 
-- À gauche, la liste de la collection, avec rareté, nom et paire équipée.
+- Ouvert par le bouton d'inventaire ou la touche J (rebindable).
+- À gauche, la liste de toutes les paires du registre, avec rareté, nom et paire équipée. Les paires non débloquées sont grisées ; les mythiques non débloquées s'affichent en « ??? ».
 - À droite, le panneau d'aperçu : une moitié pour le joueur, l'autre pour les stats de la paire (stats équipées) et le total des bonus globaux.
 - **Une seule visualisation** : le joueur debout et immobile en pose idle, les ailes dans le dos animées d'un léger mouvement. La caméra tourne lentement autour à 360° en boucle.
 - Le rendu du joueur passe par la fonction vanilla de rendu d'entité en GUI, avec une rotation pilotée par le temps.
@@ -41,7 +43,7 @@ Les ailes ne sont pas des items portés mais des entrées de collection débloqu
 
 Chaque paire a deux jeux de stats, comme dans Aion 2. Les **stats équipées** ne s'appliquent que quand la paire est portée. Les **stats globales** sont acquises dès le déblocage et s'additionnent pour toute la collection, quelle que soit la paire portée.
 
-Sept stats, chacune notée de 0 à 100 (affichée sur 10 dans le menu, 1 carreau = 10 points). La config serveur traduit chaque score en valeur physique (valeur à 0, valeur à 100).
+Sept stats, chacune notée de 0 à 100. Le menu en affiche cinq, sur 10 (1 carreau = 10 points) ; Plané et Portance restent internes. La config serveur (section `[stats]`) traduit chaque score en valeur physique (valeur à 0, valeur à 100).
 
 | Stat | Effet en vol |
 | --- | --- |
@@ -55,30 +57,32 @@ Sept stats, chacune notée de 0 à 100 (affichée sur 10 dans le menu, 1 carreau
 
 **Règle d'équilibrage**
 
-- Une légendaire a par définition au moins une stat maxée à 100.
-- Avec la collection complète (hors mythique), toutes les paires sont à 100 dans toutes les stats. Pour chaque stat, la somme des globaux vaut donc 100 − le score le plus bas parmi les paires. Le score effectif est plafonné à 100.
-- Les valeurs exactes et leur répartition sont suivies dans `BALANCE.md`.
-- Chaque paire est une identité, à la manière des dragons de HTTYD : un gros bonus se paie par un sacrifice. Les ailes d'ange à plumes ont beaucoup d'accélération, de freinage et de vitesse, mais 2/10 en stabilisation. Les ailes d'abeille montent à 8/10 en stabilisation, mais sont lentes et freinent mal.
+- Une légendaire a par définition au moins une stat visible maxée à 100.
+- Avec la collection complète (hors mythiques), toutes les paires sont à 100 dans toutes les stats. Pour chaque stat, la somme des globaux vaut donc 100 − le score le plus bas parmi les paires. Le score effectif est plafonné à 100, puis reçoit le bonus `overcap` de la paire (seulement les mythiques).
+- Les valeurs exactes et leur répartition sont suivies dans `BALANCE.md`, le catalogue des paires dans `WINGS.md`.
+- Chaque paire est une identité, à la manière des dragons de HTTYD : un gros bonus se paie par un sacrifice. Les ailes d'ange ont l'endurance maxée et beaucoup de vitesse, mais 1/10 en stabilité. Les ailes d'abeille montent à 6,5/10 en stabilité, mais sont lentes.
 
 **Paire commune de départ**
 
 - C'est la seule paire de rareté **commune** : les ailes les plus simples, celles qui débloquent le mod et la progression.
-- Ses stats équipées sont basiques. Ses stats globales existent mais sont très faibles.
-- Recette à la table d'assemblage, uniquement avec des ressources vanilla de base : 1 plume par aile (2 au total), 1 élytre en cœur (enchantée ou non), 1 cuir en harnais.
+- Ses stats équipées sont basiques. Ses stats globales existent mais sont très faibles (valeurs dans `BALANCE.md`).
+- Recette à la table d'assemblage, uniquement avec des ressources vanilla de base : 1 plume par aile (2 au total), 1 élytre en cœur (enchantée ou non), 1 cuir en harnais. Elle ne coûte pas de Cloud Essence.
 - Les tonneaux de la forge fournissent plumes et cuir en grande quantité. L'élytre vient des cités de l'End, sur le trajet.
 
-**Paire mythique**
+**Paires mythiques : Night et Light**
 
-- Elle demande un craft géant qui couvre l'exploration vanilla : souffle du dragon, étoile du Nether, éclats d'écho, archéologie et sniffer, entre autres. La liste reste à écrire.
-- Ses stats équipées sont au niveau moyen d'une légendaire, avec un profil propre. Ce n'est pas une paire « best in slot ».
-- Elle débloque deux bonus globaux : la **stamina infinie** et la **transmog** (l'apparence de n'importe quelle paire débloquée sur les stats d'une autre).
+- Deux paires, les ailes des Furies Nocturne et Éclair de *Dragons* (détail dans `WINGS.md`). Tant qu'elles ne sont pas débloquées, le menu les affiche en « ??? ».
+- Stats équipées à 100 partout, plus un bonus `overcap` de +20 en vitesse (74 m/s). Elles ne donnent aucun bonus de collection.
+- Posséder **les deux** donne la **stamina infinie**, quelle que soit la paire équipée.
+- Chacune demande un craft géant qui couvre l'exploration vanilla : souffle du dragon, étoile du Nether, éclats d'écho, archéologie et sniffer, entre autres, et 1 000 de Cloud Essence à l'assemblage. La liste reste à écrire dans `CRAFTING.md`.
 - Toutes les valeurs vivent dans des fichiers JSON de datapack, pour que l'équilibrage et l'ajout de paires se fassent sans recompiler.
 
 ## Mode stabilisé
 
 C'est le mode de vol stationnaire pour builder : un vol créatif plus ou moins perturbé par les battements d'ailes, selon la stat de stabilisation S (de 0 à 10).
 
-- **Contrôles** : ZQSD pour le plan horizontal, saut pour monter, sneak pour descendre. La caméra reste en première personne.
+- **Entrée** : double tap très rapide du saut en l'air (`doubleTapTicks`, 4 ticks, config client). Le saut ailé du premier tap est alors remboursé.
+- **Contrôles** : ZQSD pour le plan horizontal, saut pour monter, sneak pour descendre. La caméra reste en première personne. La vitesse (`hover_speed`) et la cadence (`hover_rate`) sont propres à chaque paire, dans son JSON.
 - **Perturbation** : chaque battement ajoute une oscillation verticale et une petite dérive, d'amplitude proportionnelle à (10 − S). À 10/10, plus aucune perturbation.
 - **Inertie** : toujours présente mais légère, même à 10/10. Lâcher la touche donne un freinage rapide et non instantané.
 
@@ -90,7 +94,9 @@ Pour qu'un tap rapide déplace de quelques pixels seulement, la courbe doit êtr
 v(t) = v_{max} \cdot \left(\frac{t}{T}\right)^{p}, \quad t \le T, \quad p \approx 2
 ```
 
-Ici T est le temps pour atteindre la vitesse max (il dépend de S), et p règle la finesse au tap. Un tap de 2 ticks avec T = 20 ticks donne 1 % de v max, soit un déplacement quasi nul. Le spam permet donc un placement précis au bloc près. Alternative : une courbe en S (smoothstep), avec un départ plat et une arrivée douce sur v max. Choix en attente.
+Ici T est le temps pour atteindre la vitesse max (il dépend de S), et p règle la finesse au tap. Un tap de 2 ticks avec T = 20 ticks donne 1 % de v max, soit un déplacement quasi nul. Le spam permet donc un placement précis au bloc près. Alternative : une courbe en S (smoothstep), avec un départ plat et une arrivée douce sur v max.
+
+Décision : les deux courbes existent, au choix dans la config client (`stabilizedCurve`, `EASE_IN` par défaut). T vaut `rampTicks` (8 ticks) à stabilité 10, plus `rampTicksPerMissingPoint` (1,5 tick) par point manquant (config serveur).
 
 ## Mode déplacement
 
@@ -98,20 +104,23 @@ C'est le vol de voyage, inspiré de Wuthering Waves : la direction se contrôle 
 
 **Activation**
 
-- Une touche dédiée, **Alt gauche** par défaut. Le combo sprint + sneak reste une option de config désactivée par défaut, parce qu'en vanilla le sneak coupe le sprint et qu'en mode stabilisé, le sneak sert à descendre.
-- **Transition caméra « laissée derrière »** : au déclenchement, la caméra se détache de la tête et reste figée à sa position dans le monde. Le joueur donne un gros battement qui le projette à la **V min de la paire équipée**, et s'éloigne de la caméra. La caméra rattrape ensuite en douceur sa position de suivi en troisième personne derrière le joueur.
-- Ordre conseillé : position figée pendant environ 4 ticks, puis rattrapage amorti (ressort critique) sur environ 10 ticks. Les deux durées sont réglables en config client.
+- Une touche dédiée, **Alt gauche** par défaut, rebindable. En l'air, elle bascule instantanément entre stabilisé et déplacement.
+- **Envol chargé** : au sol, hors stationnaire, maintenir Alt 1 s (`takeoffChargeTicks`) lance directement en mode déplacement, à l'arrêt, en marchant ou en courant, avec un angle de montée de `takeoffPitch` (40°). Alt est ensuite ignoré 1,5 s, pour éviter un passage accidentel en stationnaire.
+- **Saut ailé** : un saut en l'air coûte `airJumpCost` (20) de stamina, sans limite de nombre. Sa vitesse verticale = `airJumpBase` + gain d'un battement × `airJumpPerBeatGain`.
+- **Transition caméra « laissée derrière »** : au déclenchement, la caméra se détache de la tête et reste figée à sa position dans le monde. Le joueur part à `launchSpeedFraction` × V max (0,5), avec un premier battement disponible tout de suite, et s'éloigne de la caméra. La caméra rattrape ensuite en douceur sa position de suivi en troisième personne derrière le joueur.
+- Position figée pendant 4 ticks (`freezeTicks`), puis rattrapage amorti (ressort critique) sur 10 ticks (`catchUpTicks`), en config client.
 
 **Contrôles**
 
-- Z et S règlent le tangage (piquer et cabrer), avec une option pour inverser l'axe Y. Q et D règlent le lacet, avec une inclinaison visuelle du corps dans les virages.
-- La vitesse de rotation vaut la stat de maniabilité. La souris pilote uniquement la caméra en orbite libre.
-- Toutes les touches sont rebindables dans les contrôles vanilla.
+- ZQSD déplacent un point visé (Z et S en tangage, Q et D en lacet), à la vitesse de la stat de maniabilité. Le cap du joueur suit ce point avec un ressort critique, sans rotation directe, avec une inclinaison visuelle du corps dans les virages. Option client pour inverser le tangage (`invertPitch`).
+- La souris pilote uniquement la caméra en orbite libre.
+- Toutes les touches sont rebindables dans les contrôles vanilla. Le frein a sa propre touche, non assignée par défaut : c'est alors le sneak.
 
 **Accélération par battements**
 
-- Maintenir sprint déclenche des battements à cadence fixe, environ 2 par seconde selon la paire. Chaque battement coûte de la stamina.
+- Maintenir sprint déclenche des battements à la cadence de la paire (`flap_rate` dans son JSON, de 0,5 à 3 par seconde pour les ailes qui battent). Le coût en stamina par seconde est le même pour toutes les paires (`flapCost` pour un battement de référence à 2 par seconde).
 - Chaque battement donne une impulsion, puis la traînée réduit la vitesse jusqu'au battement suivant. La courbe obtenue est en dents de scie qui montent vers V max, pas une rampe linéaire.
+- Gain d'un battement = stat d'accélération ÷ `flap_rate`. À partir de 8 battements par seconde (insectes, colibri, Dédale), la poussée devient continue, sans paquet par battement.
 
 ```latex
 \Delta v_{battement} = A \cdot \left(1 - \left(\frac{v}{V_{cap}}\right)^{3}\right), \quad V_{cap} = V_{max} + (V_{term} - V_{max}) \cdot \max(0, \sin\theta)
@@ -124,8 +133,8 @@ La traînée k dépend de l'angle : faible à plat (`glideDragSpeed`, 150 m/s pa
 **Freinage**
 
 - Maintenir la touche de frein ouvre les ailes en parachute, comme Krokmou dans la scène du vol d'essai de HTTYD 1. Des traînées blanches partent du bout des ailes.
-- La décélération est égale à la stat d'accélération : les grandes ailes à plumes freinent fort, les ailes d'abeille très peu.
-- **Transition caméra « balancée dans la tête »** : sous un seuil de vitesse, un dernier battement stoppe net le joueur. La caméra, toujours en troisième personne, est projetée vers l'avant et rentre dans la tête du joueur (interpolation rapide en ease-in, environ 5 ticks, puis bascule en première personne). Le vol passe alors en mode stabilisé.
+- La décélération vaut la stat d'accélération × `brakeFactor` (2) : les ailes puissantes freinent fort, les faibles très peu.
+- **Transition caméra « balancée dans la tête »** : sous V min × `stopSpeedFactor` (0,6), un dernier battement stoppe net le joueur. La caméra, toujours en troisième personne, est projetée vers l'avant et rentre dans la tête du joueur (interpolation rapide en ease-in, 5 ticks `intoHeadTicks`, puis bascule en première personne). Le vol passe alors en mode stabilisé.
 
 ## Dive, physique et vitesse terminale
 
@@ -148,13 +157,13 @@ V_{term} = \sqrt{g / k}
 
 **Vitesse terminale (config serveur)**
 
-- Valeur par défaut proposée : 55 m/s (environ 2,75 blocs/tick), soit la chute libre humaine à plat. Un piqué tête la première monte vers 80 à 90 m/s.
-- Attention à la génération de chunks : l'élytre avec fusées, autour de 30 à 35 m/s, met déjà les serveurs sous tension. Au-delà de 55 m/s, le serveur doit charger plus de terrain qu'il n'en génère. La config affichera un avertissement au-dessus de cette valeur.
+- Valeur par défaut : `terminalVelocity` = 110 m/s, atteinte seulement en repli faucon (sprint maintenu en piqué au-delà de V max, au moins `tuckMinPitch` = 15°). Ailes ouvertes, un piqué vertical plafonne à `diveDragSpeed` (60 m/s) ; à plat, la traînée vaut `glideDragSpeed` (150 m/s), multipliée par la stat de Plané.
+- Attention à la génération de chunks : l'élytre avec fusées, autour de 30 à 35 m/s, met déjà les serveurs sous tension. Au-delà de 55 m/s, le serveur doit charger plus de terrain qu'il n'en génère. Le commentaire de la config l'indique.
 - La physique est écrite en m/s puis convertie en blocs/tick (1 bloc = 1 m, 20 ticks/s). On n'utilise pas la gravité d'entité vanilla (0,08 bloc/tick², environ 32 m/s²), trop forte pour un vol réaliste.
 
 **Freinage en piqué**
 
-Maintenir le frein en fonçant vers le sol applique une décélération égale à la stat d'accélération, en concurrence directe avec g sin θ. Une paire faible en accélération ne peut pas compenser un piqué raide : il faut redresser tôt.
+Maintenir le frein en fonçant vers le sol applique la décélération du frein (accélération × `brakeFactor`), en concurrence directe avec g sin θ. Une paire faible en accélération ne peut pas compenser un piqué raide : il faut redresser tôt.
 
 **Décrochage**
 
@@ -166,7 +175,7 @@ Maintenir le frein en fonçant vers le sol applique une décélération égale �
 d\acute{e}g\hat{a}ts = c \cdot \max(0,\; v_{impact} - v_{seuil})
 ```
 
-Ici v impact est la composante de vitesse perpendiculaire au sol, et c et v seuil viennent de la config serveur (par exemple v seuil = 10 m/s). Un atterrissage rasant à grande vitesse reste donc survivable, contrairement à un piqué droit dans le sol.
+Ici v impact est la composante de vitesse perpendiculaire au sol, et c et v seuil viennent de la config serveur (`crashDamagePerSpeed` = 0,5, `crashThreshold` = 10 m/s). Un atterrissage rasant à grande vitesse reste donc survivable, contrairement à un piqué droit dans le sol.
 
 ## Stamina et chute
 
@@ -174,19 +183,46 @@ Ici v impact est la composante de vitesse perpendiculaire au sol, et c et v seui
 
 | Situation à 0 stamina | Accélérer | Planer | Freiner | Changer de mode | Résultat |
 | --- | --- | --- | --- | --- | --- |
-| Mode déplacement | Non | Oui | Oui | Non | Il plane et freine jusqu'au sol (le décrochage s'applique toujours) |
+| Mode déplacement | Non | Oui | Oui | Non | Il plane et freine jusqu'au sol (le décrochage s'applique toujours ; frein à 0 stamina : descente à `zeroStaminaSinkSpeed`, 3 m/s) |
 | Mode stabilisé | Non | Non | Non | Non | Il tombe (pas d'inertie pour le porter), avec les 2 sauts de secours |
 
-- **Consommation** : chaque battement a un coût. Le maintien en mode stabilisé coûte un débit continu. Le plané, le piqué et le freinage ne coûtent rien.
-- **Récupération** : au sol, plus lentement en vol plané. La paire mythique rend la stamina infinie (bonus global).
-- **Sauts de secours** : 2 sauts en l'air, chacun remet la vitesse verticale à 0 et annule **totalement** les dégâts de chute accumulés. Ils ne se rechargent qu'au contact du sol. Le premier part souvent par réflexe, le second sert à se sauver vraiment.
+- **Consommation** : chaque battement a un coût, le saut ailé aussi (`airJumpCost`). Le maintien en mode stabilisé coûte un débit continu (`stabilizedDrain`, 2,5/s). Le plané, le piqué et le freinage ne coûtent rien.
+- **Récupération** : au sol (`groundRegen`, 20/s), plus lentement en vol plané (`glideRegen`, 3/s). Posséder Night et Light rend la stamina infinie.
+- **Sauts de secours** : quand la stamina est sous le coût d'un saut ailé, 2 sauts gratuits (`rescueJumps`) restent disponibles. Chacun remet la vitesse verticale à 0 et annule **totalement** les dégâts de chute accumulés. Ils ne se rechargent qu'au contact du sol. Le premier part souvent par réflexe, le second sert à se sauver vraiment.
 - **Autorité** : la stamina est calculée sur le serveur. Le client en affiche une prédiction, corrigée par synchronisation quand ça change de façon significative, et non à chaque tick.
 
 ## Craft : table d'assemblage
 
-Toutes les paires se craftent dans la table d'assemblage de la forge de l'End, à partir de 4 pièces : un harnais, un cœur, une aile gauche et une aile droite. Ces pièces sont des items du mod, sauf pour la paire commune de départ, dont les 4 emplacements prennent directement des items vanilla (plume, plume, élytre, cuir).
+Toutes les paires se craftent dans la table d'assemblage de la forge de l'End (`simplywings:assembly_table`, « Assembly Table »). Les routes de chaque paire (étapes, origine des pièces, coût en Cloud Essence par étape et au total) sont tenues dans `CRAFTING.md`.
 
-- **Craft** : à partir d'items vanilla et/ou moddés. Les ingrédients moddés passent par les tags communs `c:`, ce qui permet de fonctionner avec tout mod qui les fournit, sans dépendance.
+**Onglet 1 « Assembly »**
+
+- 4 emplacements : un harnais, un cœur, une aile gauche et une aile droite → la paire. Ces pièces sont des items du mod, sauf pour la paire commune de départ, dont les 4 emplacements prennent directement des items vanilla (plume, plume, élytre, cuir).
+- Pose et retrait de l'énergie ailée sur un item.
+
+**Onglet 2 « Components »**
+
+- Une grille de craft 5×5 sans les quatre coins, soit 21 cases : 3 cases centrées sur la première et la dernière ligne, 5 sur les trois lignes du milieu. Elle sert à fabriquer les pièces (harnais, cœurs, ailes) et leurs intermédiaires.
+- Recettes avec forme, sur un `RecipeType` du mod, plus le coût en Cloud Essence de la recette.
+
+**Réservoir de Cloud Essence**
+
+- Les deux onglets partagent le même réservoir, qui contient au plus **1 000 unités**, soit 10 flacons. Un craft ne se lance que si le réservoir contient assez d'essence, et la consomme à la sortie du résultat.
+- Coût d'un assemblage (onglet 1) selon la rareté :
+
+| Rareté | Cloud Essence | Flacons |
+| --- | --- | --- |
+| Commune | 0 | 0 |
+| Rare | 100 | 1 |
+| Épique | 300 | 3 |
+| Légendaire | 800 | 8 |
+| Mythique | 1 000 | 10, le réservoir plein |
+
+- Craft d'une pièce (onglet 2) : de 1 à 100 unités, selon sa complexité et ses ingrédients. La valeur vit dans le JSON de la recette.
+
+**Pièces**
+
+- **Craft** : à partir d'items vanilla et/ou moddés, dans l'onglet 2 (ou à l'établi vanilla pour les intermédiaires simples). Les ingrédients moddés passent par les tags communs `c:`, ce qui permet de fonctionner avec tout mod qui les fournit, sans dépendance.
 - **Drops de mobs** : sur une liste de mobs définie, seulement si le coup fatal est porté avec un item imprégné d'« énergie ailée ».
 - **Essences de blocs** : sur une liste de blocs vanilla définie, seulement si le bloc est cassé avec un item imprégné. Les essences servent aux différentes paires.
 - **Liberté totale** : l'énergie ailée se pose sur n'importe quel item. Le joueur peut tuer un mob avec un escalier ou miner avec une épée s'il le veut.
@@ -198,6 +234,16 @@ C'est un Data Component custom, posé ou retiré sur n'importe quel item à la t
 **Sources de loot** : la liste « mob ou bloc → pièce ou essence, avec chance » vit dans un registre datapack du mod, `simplywings:loot_source`, synchronisé au client. Les Global Loot Modifiers ne sont pas envoyés au client, alors que JEI a besoin de ces données (voir « Intégration JEI »).
 
 Les loots passent par des Global Loot Modifiers NeoForge (data-driven, sans mixin) avec une condition maison, qui lisent ce registre. Elle exige deux choses : que l'item tenu porte l'énergie ailée, et que le mob ou le bloc figure dans la liste de la pièce. Sans ces deux conditions, les loot tables restent intactes. Pour les mobs, la condition lit l'item en main principale du tueur au moment du kill.
+
+## Cloud Essence
+
+Ressource propre au mod, consommée par la table d'assemblage. Elle se récolte en planant dans les nuages.
+
+- **Cloud Flask** (`simplywings:cloud_flask`) : le contenant. Il contient de 0 à 100 unités, stockées dans un Data Component du mod et affichées dans le tooltip et en barre sur l'item.
+- **Cloud Absorber** (`simplywings:cloud_absorber`) : il suffit qu'il soit dans l'inventaire. Pendant que le joueur vole dans la couche de nuages, il remplit les flacons de l'inventaire l'un après l'autre : le premier flacon non plein jusqu'à 100, puis le suivant. Un seul absorbeur suffit pour tout l'inventaire ; en avoir plusieurs ne remplit pas plus vite.
+- **Couche de nuages** : dans l'Overworld, une bande de Y autour de la hauteur des nuages vanilla (192, à vérifier dans `DimensionSpecialEffects` du jar du pack). Le serveur ne connaît pas le rendu des nuages : la bande est en config serveur, et Distant Horizons ou un shaderpack qui déplace les nuages visibles ne changent rien.
+- **Calcul serveur** : le serveur vérifie la position et le mode de vol à intervalle fixe (par exemple 1 fois par seconde), pas à chaque tick, et ajoute l'essence. Le client ne voit que l'item mis à jour, sans paquet dédié.
+- **Remplissage de la table** : un flacon déposé dans la table vide son contenu dans le réservoir, dans la limite des 1 000 unités, et ressort vide.
 
 ## Forge d'ailes dans l'End
 
@@ -222,31 +268,33 @@ JEI est une intégration **optionnelle** : le mod compile contre l'API JEI en `c
 
 | Onglet JEI | Contenu | Source des données |
 | --- | --- | --- |
-| Table d'assemblage | Assemblage d'une paire à partir de harnais, cœur, aile gauche et aile droite, plus le craft des pièces | Recettes `RecipeType` du mod (synchronisées au client en 1.21.1) |
+| Assemblage | Assemblage d'une paire à partir de harnais, cœur, aile gauche et aile droite, avec son coût en Cloud Essence | Recettes `RecipeType` du mod (synchronisées au client en 1.21.1) |
+| Composants | Grille 5×5 sans les coins, avec le coût en Cloud Essence | Recettes `RecipeType` du mod |
 | Énergie ailée | Poser ou retirer l'énergie ailée sur un item quelconque | Recette spéciale, affichée avec quelques items d'exemple |
 | Drops de mobs | Mob (rendu de l'entité), pièce lâchée, chance, condition « coup fatal avec un item imprégné » | Registre `simplywings:loot_source` |
 | Essences de blocs | Bloc, essence lâchée, chance, condition « cassé avec un item imprégné » | Registre `simplywings:loot_source` |
 
-La table d'assemblage est déclarée comme catalyseur de ses onglets. Une page d'info JEI sur la table et sur le compas de la forge explique comment trouver la forge (deuxième dragon, compas).
+La table d'assemblage est déclarée comme catalyseur de ses onglets. Une page d'info JEI sur la table et sur le compas de la forge explique comment trouver la forge (deuxième dragon, compas). Une page d'info sur le Cloud Flask et le Cloud Absorber explique la récolte dans les nuages.
 
 ## Architecture technique NeoForge
 
-Presque tout passe par des events et API NeoForge natives. Un seul mixin est probable (découplage souris), plus un access transformer pour l'anti-kick serveur.
+Tout passe par des events et API NeoForge natives : 0 access transformer et 0 mixin aujourd'hui (détail dans `docs/MIXINS.md`). Un seul mixin reste possible, `PlayerModel.setupAnim` TAIL pour les bras, si le prototype le justifie.
 
 | Module | Rôle | Mécanisme | Côté |
 | --- | --- | --- | --- |
 | Définitions d'ailes | Stats, raretés, pièces, apparence | Registre datapack custom, synchronisé au client | Commun |
-| Données joueur | Collection, paire équipée, transmog, stamina, sauts de secours | Data Attachment avec codec, conservé à la mort | Serveur (autorité) |
-| Réseau | Équiper, état de vol, stamina | CustomPacketPayload, envoyé seulement sur changement | Les deux |
-| Physique de vol | Modes stabilisé et déplacement, dive, décrochage | Tick client du joueur local (le mouvement est client-autoritaire en vanilla) | Client |
-| Validation serveur | Pas de kick « flying is not enabled », dégâts de chute et de crash | Access transformer sur le compteur de temps en l'air + LivingFallEvent | Serveur |
-| Caméra | 3e personne, orbite libre, transitions « laissée derrière » et « dans la tête » | ViewportEvent.ComputeCameraAngles + caméra détachée interpolée | Client |
-| Découplage souris | La souris tourne la caméra, pas le corps | Mixin probable sur la rotation joueur (à confirmer en analysant Shoulder Surfing) | Client |
-| Rendu des ailes | Cubes, matériaux solide, transparent, émissif | RenderLayer ajouté au joueur, RenderTypes vanilla | Client |
+| Données joueur | Collection, paire équipée, stamina, sauts de secours | Data Attachment avec codec, conservé à la mort | Serveur (autorité) |
+| Réseau | Équiper, état de vol, stamina, battements | CustomPacketPayload, envoyé seulement sur changement ; un battement en déplacement est un événement relayé aux joueurs proches | Les deux |
+| Physique de vol | Modes stabilisé et déplacement, dive, décrochage | `MovementInputUpdateEvent` + `PlayerTickEvent.Pre` sur le joueur local (le mouvement est client-autoritaire en vanilla) | Client |
+| Validation serveur | Pas de kick « flying is not enabled », dégâts de chute et de crash | `AttributeModifier` −100 % sur `minecraft:generic.gravity` pendant le vol + `LivingFallEvent` | Serveur |
+| Caméra | 3e personne, orbite libre, transitions « laissée derrière » et « dans la tête » | `ViewportEvent.ComputeCameraAngles` + `CalculateDetachedCameraDistanceEvent` + `Options.setCameraType` | Client |
+| Découplage souris | La souris tourne la caméra, pas le corps | `CalculatePlayerTurnEvent` + `MouseHandler.getXVelocity()` / `getYVelocity()`, sans mixin | Client |
+| Rendu des ailes | Cubes, matériaux solide, transparent, émissif | RenderLayer ajouté au joueur, RenderTypes vanilla ; pose du corps par `RenderPlayerEvent.Pre` / `Post` | Client |
 | Animation | Idle, battements, repli, parachute | Animation procédurale (phase de battement + interpolation), mini-lib maison | Client |
-| Joueurs distants | Voir les ailes et l'état des autres | Envoi aux joueurs qui suivent l'entité, interpolation locale | Client |
+| Joueurs distants | Voir les ailes et l'état des autres | Paire et mode sur changement ; phase, banking et intensité déduits localement du mouvement interpolé | Client |
 | Énergie ailée et loots | Imprégnation, drops de mobs, essences de blocs | Data Component + Global Loot Modifiers + condition de loot maison | Serveur |
-| Table d'assemblage | Assembler une paire, poser ou retirer l'énergie ailée | Block + BlockEntity + Menu + recettes custom (RecipeType) | Les deux |
+| Cloud Essence | Flacons, absorbeur, récolte dans les nuages | Data Component sur le flacon + vérification serveur à intervalle fixe | Serveur |
+| Table d'assemblage | Onglet assemblage et énergie ailée, onglet grille de composants, réservoir de Cloud Essence | Block + BlockEntity + Menu + 2 RecipeType custom | Les deux |
 | Interface | Bouton inventaire, écran Ailes, HUD stamina | ScreenEvent.Init, Screen custom, RegisterGuiLayersEvent | Client |
 | Config | V term, coûts, dégâts de crash, transitions caméra | ModConfigSpec (intégré à NeoForge, pas une lib tierce) | Serveur et client |
 | Structure | Forge de l'End (dans le vide, à partir du 2e dragon) et compas | `LivingDeathEvent` du dragon + StructureTemplate + SavedData + `lodestone_tracker` | Serveur |
@@ -255,19 +303,25 @@ Presque tout passe par des events et API NeoForge natives. Un seul mixin est pro
 **Performance**
 
 - Les stats effectives (équipées + globales) sont mises en cache et recalculées seulement quand la collection ou la paire équipée change.
-- Rien ne part sur le réseau à chaque tick. Les joueurs distants reçoivent un état compact (mode, phase, vitesse) à faible fréquence et interpolent.
+- Rien ne part sur le réseau à chaque tick. Les joueurs distants reçoivent la paire et le mode sur changement, plus les battements comme événements, et déduisent le reste du mouvement interpolé.
 - Les particules sont limitées par une option client et désactivées automatiquement au-delà d'une certaine distance de la caméra.
 
 ## Décisions et points ouverts
 
-Les décisions du 20 octobre sont intégrées dans les sections plus haut. Les points ouverts restants ne bloquent pas le début de l'implémentation.
+Les décisions du 20 et du 21 octobre sont intégrées dans les sections plus haut.
 
-- [ ] **Liste des paires** : nombre par rareté, noms et profils de stats, à fixer selon l'ambiance voulue.
-- [ ] **Recette mythique** : la grande liste d'items d'exploration vanilla.
+- [ ] **Routes de craft** : les pièces de chaque paire, leurs ingrédients et leur coût en Cloud Essence, dans `CRAFTING.md`.
+- [ ] **Recettes mythiques** : la grande liste d'items d'exploration vanilla, pour Night et pour Light.
 - [ ] **Mobs et blocs sources** : quelle pièce ou essence tombe de quel mob ou bloc.
 - [ ] **Kills à distance** : un arc ou un trident imprégné compte-t-il ? Ce sera alors l'arme du tireur, pas le projectile.
-- [ ] **Courbe du mode stabilisé** : ease-in ou smoothstep.
-- [ ] **Stats de la paire commune** : valeurs exactes, à fixer avec la liste des paires.
+- [ ] **Transmog** : prévue à l'origine comme bonus de la paire mythique, elle n'existe pas dans le mod. À garder (et sur quelle condition) ou à abandonner.
+- [ ] **Cloud Essence** : bande de Y et débit de la récolte, modes de vol qui comptent (déplacement seul, ou aussi le stationnaire), recettes du flacon et de l'absorbeur, flacons empilables vides ou non.
+- [ ] **Nom des essences de blocs** : à distinguer de la Cloud Essence pour éviter la confusion en jeu.
+- [x] Liste des paires : 40 paires (1 commune, 21 rares, 11 épiques, 5 légendaires, 2 mythiques), dans `WINGS.md`.
+- [x] Stats de la paire commune et de toutes les paires : dans `BALANCE.md`.
+- [x] Courbe du mode stabilisé : les deux, au choix en config client, ease-in par défaut.
+- [x] Langue : mod entièrement en anglais, sans traduction.
+- [x] Table d'assemblage : deux onglets (assemblage, grille 5×5 sans les coins) et un réservoir de 1 000 unités de Cloud Essence.
 - [x] Accès à la forge : en élytre, tonneaux de plumes et de cuir sur place, paire commune de départ.
 - [x] Compas : tous les joueurs de l'île centrale, à chaque mort de dragon qui pose ou répare la forge.
 - [x] Combat abandonné, hors périmètre.
@@ -277,9 +331,9 @@ Les décisions du 20 octobre sont intégrées dans les sections plus haut. Les p
 - [x] JEI : plugin optionnel avec tous les crafts et les loots de mobs et de blocs.
 - [x] Forge : dans le vide, à mi-parcours vers les îles extérieures, à partir du deuxième dragon, avec un compas.
 
-## Mods à fournir pour analyse
+## Mods de référence
 
-Rien n'est repris tel quel. Chaque jar sert à comprendre comment un problème précis a été résolu, avant d'écrire notre propre version.
+Analyse terminée et validée : `docs/ANALYSE_REFERENCES.md`, qui prime sur cette table là où elle la corrige. Rien n'est repris tel quel. Chaque jar sert à comprendre comment un problème précis a été résolu, avant d'écrire notre propre version.
 
 | Mod (jar NeoForge 1.21.1 si possible) | Ce qu'on y cherche |
 | --- | --- |
@@ -290,4 +344,4 @@ Rien n'est repris tel quel. Chaque jar sert à comprendre comment un problème p
 | Wings (fork communautaire 1.21.1) | RenderLayer sur le joueur, animation procédurale des ailes |
 | JEI ou EMI (celui du pack) | Vérifier que la zone du bouton d'inventaire reste libre |
 
-Les jars vont dans `reference-mods/`, avec la liste des mods du modpack, pour vérifier les conflits probables : shaders (Iris), moteurs de rendu et mods qui modifient l'End.
+Les jars sont dans `modsRef/` (sources décompilées dans `modsRef/_decompiled/`, hors git).
