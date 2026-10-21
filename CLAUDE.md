@@ -36,6 +36,10 @@ Contrôles du prototype : saut en l'air = saut ailé (coûte `airJumpCost` de st
 
 Les paramètres propres à chaque paire (cadence et vitesse du stationnaire, identique à l’horizontale et à la verticale : `hover_rate`, `hover_speed`) vivent dans le JSON de l'aile, pas dans la config serveur. Commande de debug : `/simplywings unlock <aile>|unlock all|equip|unequip|stamina|reset|info` (`unlock all` débloque tout le registre). Mythiques Night et Light (`data/FurySet`, `flight/FuryServer`, `client/FuryEffects`, queue `render/TailModel` + `anim/TailAnimator`) : Night possédée = stamina infinie, Light possédée = transmog (bouton « Equip appearance » dans le menu, l'apparence change tout le visuel, rythme des battements compris via `WingAnimator.beat` en boucle ; physique, stats et pouvoirs des Furies restent ceux de la paire équipée), cri en repli faucon, charge au frein 2 s puis sprint = dash + invisibilité. Menu des ailes : touche J (`client/gui/WingsScreen`, liste de toutes les ailes du registre, verrouillées grisées, équiper/retirer via `EquipWing`).
 
+## Pipeline art
+
+Refonte des modèles, textures et animations : section « Pipeline art » du cahier des charges. En résumé : Blockbench + MCP, rig commun `shoulder` / `arm` / `forearm` / `hand` pour toutes les ailes, procédural pour tout ce qui réagit au vol, keyframes `AnimationDefinition` seulement pour les one-shots, boucle visuelle obligatoire (captures Blockbench + captures en jeu) avant de juger une aile, style figé par un skill dans `.claude/skills/` après l'aile hero du designer. Prochaine étape : installation de Blockbench, du MCP et de la vision en jeu.
+
 ## Pack cible et outils d'analyse
 
 - Pack de destination : `A:\CurseForge\Instances\PleasePlayWithMe` (NeoForge 21.1.257, 195 mods, liste dans `MODLIST.md`). Mods lourds sur le moteur : Iris, Sodium, Distant Horizons, Create Aeronautics + Sable, YUNG's Better End Island. La règle « zéro mixin / zéro dépendance » sert d'abord à éviter les conflits avec eux.

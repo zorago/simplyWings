@@ -290,8 +290,9 @@ Tout passe par des events et API NeoForge natives : 0 access transformer et 0 mi
 | Validation serveur | Pas de kick « flying is not enabled », dégâts de chute et de crash | `AttributeModifier` −100 % sur `minecraft:generic.gravity` pendant le vol + `LivingFallEvent` | Serveur |
 | Caméra | 3e personne, orbite libre, transitions « laissée derrière » et « dans la tête » | `ViewportEvent.ComputeCameraAngles` + `CalculateDetachedCameraDistanceEvent` + `Options.setCameraType` | Client |
 | Découplage souris | La souris tourne la caméra, pas le corps | `CalculatePlayerTurnEvent` + `MouseHandler.getXVelocity()` / `getYVelocity()`, sans mixin | Client |
-| Rendu des ailes | Cubes, matériaux solide, transparent, émissif | RenderLayer ajouté au joueur, RenderTypes vanilla ; pose du corps par `RenderPlayerEvent.Pre` / `Post` | Client |
-| Animation | Idle, battements, repli, parachute | Animation procédurale (phase de battement + interpolation), mini-lib maison | Client |
+| Rendu des ailes | Cubes, matériaux solide, transparent, émissif | RenderLayer ajouté au joueur, RenderTypes vanilla ; pose du corps par `RenderPlayerEvent.Pre` / `Post`. Modèles Blockbench sur un rig commun (voir « Pipeline art ») | Client |
+| Animation | Idle, battements, repli, parachute | Animation procédurale commune à toutes les ailes (phase de battement + interpolation), mini-lib maison ; one-shots en `AnimationDefinition` vanilla | Client |
+| Outillage art | Captures en jeu pour la boucle visuelle | Commandes de debug client (pose, capture via `Screenshot.grab`), réservées au dev | Client |
 | Joueurs distants | Voir les ailes et l'état des autres | Paire et mode sur changement ; phase, banking et intensité déduits localement du mouvement interpolé | Client |
 | Énergie ailée et loots | Imprégnation, drops de mobs, essences de blocs | Data Component + Global Loot Modifiers + condition de loot maison | Serveur |
 | Cloud Essence | Flacons, absorbeur, récolte dans les nuages | Data Component sur le flacon + vérification serveur à intervalle fixe | Serveur |
@@ -307,6 +308,71 @@ Tout passe par des events et API NeoForge natives : 0 access transformer et 0 mi
 - Rien ne part sur le réseau à chaque tick. Les joueurs distants reçoivent la paire et le mode sur changement, plus les battements comme événements, et déduisent le reste du mouvement interpolé.
 - Les particules sont limitées par une option client et désactivées automatiquement au-delà d'une certaine distance de la caméra.
 
+## Pipeline art : modèles, textures, animations
+
+Objectif : Claude produit environ 90 % des modèles et des animations, à partir d'une aile de référence faite par un designer, qui assure aussi la finition des textures. Source : le brainstorm « simplyWings — Pipeline modèles 3D & animations » du 21 octobre 2026.
+
+**Outils**
+
+- **Blockbench desktop** avec le plugin MCP [jasonjgardner/blockbench-mcp-plugin](https://github.com/jasonjgardner/blockbench-mcp-plugin), le plus mature (alternative plus légère : [sosadly/blockbench-mcp](https://github.com/sosadly/blockbench-mcp)). Il connecte Claude à l'API JavaScript de Blockbench pour créer et éditer les modèles et les textures pixel art, et pour faire des captures.
+- Installation prévue : dans Blockbench, File > Plugins > Load Plugin from URL avec `https://jasonjgardner.github.io/blockbench-mcp-plugin/mcp.js`, puis `claude mcp add blockbench --transport http http://localhost:3000/bb-mcp`. URL, port et transport sont à vérifier dans la doc du plugin au moment de l'installation.
+- Pas de Blender, inadapté au low voxel Minecraft. Pas de GeckoLib (zéro dépendance).
+
+**Format des modèles**
+
+- Les ailes restent des `ModelPart` vanilla, rendues avec des RenderTypes vanilla (compatibilité Iris et shaders).
+- Deux façons d'amener un modèle Blockbench dans le mod (point ouvert) :
+  - l'export « Modded Entity » de Blockbench : une classe Java `LayerDefinition` / `ModelPart` en Mojmap par modèle. Simple, mais 40 classes générées et une recompilation à chaque retouche ;
+  - un chargeur maison, qui lit dans les assets le JSON de géométrie exporté par Blockbench et construit le `LayerDefinition`. Plus de code au départ, mais les modèles se retouchent sans recompiler, se remplacent par resource pack, et restent data-driven comme les définitions d'ailes. C'est la voie recommandée.
+
+**Rig commun**
+
+C'est le levier n°1 : tous les modèles partagent le même squelette, avec les mêmes noms de bones et les mêmes pivots.
+
+| Bone | Rôle | Équivalent actuel |
+| --- | --- | --- |
+| `shoulder` | Racine, attache dans le dos : déploiement, balayage, coup d'aile | Pivot du `Slot` de `anim/WingStyle` |
+| `arm` | Premier segment | Segment `shoulder` de `render/WingModel` |
+| `forearm` | Deuxième segment | Segment `elbow` |
+| `hand` | Pointe | Segment `tip` |
+| Groupes de plumes ou de membranes | Enfants des segments, mouvements secondaires | Aucun (plaques fixes) |
+
+- Les ailes à un seul segment (insectes, Psyché) n'utilisent que `shoulder` et `arm`.
+- Une seule animation procédurale sert toutes les ailes, comme aujourd'hui avec `anim/WingAnimator` et `anim/WingPose`. Chaque aile n'apporte que ses paramètres dans `WingStyle` : amplitude, raideur, délai entre segments, profil de battement. On polit une fois, le gain vaut partout.
+
+**Animations**
+
+- **Procédural** pour tout ce qui réagit au vol : battements, plané, piqué, frein, stationnaire, décrochage, inclinaison en virage, avec blending entre états. Des rotations pilotées par sinus, vitesse, pitch, mode et stamina. C'est la base actuelle, à garder et à polir.
+- **Keyframes Blockbench** seulement pour les one-shots : déploiement, repli, atterrissage, avec le système vanilla `AnimationDefinition`. En 1.21.1, `KeyframeAnimations.animate` exige un `HierarchicalModel` (vérifié dans les sources NeoForge 21.1.257) : le modèle d'aile doit en devenir un, ou le mod échantillonne lui-même les keyframes. Le fondu entre un one-shot et le procédural reste à écrire.
+
+**Boucle visuelle**
+
+Sans voir le résultat, Claude modélise à l'aveugle et plafonne vers 60 %. Il lui faut deux sources d'images :
+
+- **Captures Blockbench via le MCP** : forme, silhouette, texture.
+- **Captures en jeu automatisées**, un outil qui vit dans le repo. Claude Code lance `runClient` avec `--quickPlaySingleplayer <monde de test>`. Une commande de debug client fige le joueur et les ailes dans un état (repos, battement à une phase donnée, plané, piqué, frein, stationnaire) et place la caméra. La capture est prise avec `Screenshot.grab` dans `run/screenshots/`, puis Claude relit l'image. C'est le seul moyen de valider le rendu réel : éclairage, shaders, échelle par rapport au joueur.
+- Commandes proposées : `/simplywings pose <state> [phase]` et `/simplywings shot <name>`. Elles sont réservées au dev : absentes du jar de release, ou limitées aux opérateurs.
+
+**Style guide**
+
+Un skill Claude Code versionné dans le repo (`.claude/skills/`) fige le style pour que chaque aile reste cohérente :
+
+- densité de pixels : 16 px par bloc, sans mélange de résolutions ;
+- budget de cubes par aile ;
+- règles de silhouette ;
+- palettes de 4 à 6 teintes par matériau, avec rampes d'ombrage ;
+- conventions du rig ;
+- captures de référence des pièces jugées réussies.
+
+**Ordre de travail**
+
+1. Installer Blockbench, le MCP et l'outil de capture en jeu.
+2. Le designer fait une aile « hero » complète : modèle, texture, rig. Quelques heures de travail.
+3. Claude écrit le style guide à partir d'elle, puis décline les autres paires. Il extrapole très bien un exemple, beaucoup moins bien un style à inventer.
+4. Le designer repasse en finition, surtout sur les textures.
+
+Les 90 % sont réalistes pour le gameplay, le rig, l'animation procédurale et la géométrie. Ils ne le sont pas pour la texture pixel art from scratch : Claude s'en sort en procédural scripté (rampes, bruit, palettes imposées), mais le rendu reste générique.
+
 ## Décisions et points ouverts
 
 Les décisions du 20 et du 21 octobre sont intégrées dans les sections plus haut.
@@ -317,6 +383,10 @@ Les décisions du 20 et du 21 octobre sont intégrées dans les sections plus ha
 - [ ] **Kills à distance** : un arc ou un trident imprégné compte-t-il ? Ce sera alors l'arme du tireur, pas le projectile.
 - [ ] **Cloud Essence** : bande de Y et débit de la récolte, modes de vol qui comptent (déplacement seul, ou aussi le stationnaire), recettes du flacon et de l'absorbeur, flacons empilables vides ou non.
 - [ ] **Nom des essences de blocs** : à distinguer de la Cloud Essence pour éviter la confusion en jeu.
+- [ ] **Import des modèles** : export Java « Modded Entity » ou chargeur maison du JSON Blockbench (recommandé).
+- [ ] **Designer et aile hero** : qui, et quelle paire. Une seule référence couvre mal les familles très différentes (plumes, membranes, insectes, mécanique, éthéré) : prévoir peut-être une référence par famille.
+- [ ] **Budget de cubes** par aile, à fixer sur l'aile hero.
+- [ ] **One-shots** : faire de `WingModel` un `HierarchicalModel`, ou échantillonner les keyframes nous-mêmes.
 - [x] Liste des paires : 40 paires (1 commune, 21 rares, 11 épiques, 5 légendaires, 2 mythiques), dans `WINGS.md`.
 - [x] Stats de la paire commune et de toutes les paires : dans `BALANCE.md`.
 - [x] Courbe du mode stabilisé : les deux, au choix en config client, ease-in par défaut.

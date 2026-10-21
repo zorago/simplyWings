@@ -52,6 +52,16 @@ Pour chaque mod : la technique retenue, ce qu'on fera différemment et pourquoi.
 7. Énergie ailée (Data Component) + Global Loot Modifiers + Cloud Essence (flacon, absorbeur, récolte) + table d'assemblage (onglets assemblage et composants, réservoir).
 8. Forge de l'End (template NBT, placement à la mort du dragon, SavedData).
 9. Contenu : routes de craft de `CRAFTING.md` en JSON, recettes mythiques.
+10. Refonte art, en parallèle du gameplay (détail dans `CAHIER_DES_CHARGES.md`, section « Pipeline art ») :
+    1. installer Blockbench, son plugin MCP et l'outil de capture en jeu (`/simplywings pose`, `/simplywings shot`, `runClient --quickPlaySingleplayer`) ;
+    2. trancher l'import des modèles (chargeur JSON maison recommandé) et migrer `WingModel` sur le rig commun `shoulder` / `arm` / `forearm` / `hand` ;
+    3. le designer livre l'aile hero, puis Claude écrit le skill style guide dans `.claude/skills/` ;
+    4. Claude décline les 40 paires et la queue des Furies, avec captures Blockbench et en jeu à chaque paire ;
+    5. one-shots en keyframes (déploiement, repli, atterrissage), puis finition des textures par le designer.
+
+## Prochaine session
+
+Installation de Blockbench et de son MCP, puis mise en place de la vision en jeu (commandes de pose et de capture). Vérifier dans la doc du plugin l'URL, le port et le transport du MCP avant de les configurer.
 
 Chaque étape doit se tester en solo **et** sur un serveur dédié local avant de passer à la suivante.
 
