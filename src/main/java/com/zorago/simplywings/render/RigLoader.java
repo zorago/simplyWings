@@ -46,11 +46,13 @@ public final class RigLoader {
     public static Optional<Rig> load(String name, float attachX, float attachY, float attachZ) {
         Optional<Resource> resource = Minecraft.getInstance().getResourceManager().getResource(file(name));
         if (resource.isEmpty()) {
+            SimplyWings.LOGGER.warn("Wing rig {} not found, falling back to the legacy model", file(name));
             return Optional.empty();
         }
         try (Reader reader = resource.get().openAsReader()) {
             Rig rig = parse(JsonParser.parseReader(reader).getAsJsonObject(), attachX, attachY, attachZ);
             CACHE.put(name, rig);
+            SimplyWings.LOGGER.info("Loaded wing rig {} with {} bones", file(name), rig.paths().size());
             return Optional.of(rig);
         } catch (Exception e) {
             SimplyWings.LOGGER.error("Failed to load wing rig {}", file(name), e);
