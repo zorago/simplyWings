@@ -17,7 +17,10 @@ import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.gui.handlers.IGuiClickableArea;
 import mezz.jei.api.gui.handlers.IGuiContainerHandler;
 import mezz.jei.api.helpers.IGuiHelper;
+import mezz.jei.api.constants.VanillaTypes;
+import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
+import mezz.jei.api.runtime.IJeiRuntime;
 import mezz.jei.api.recipe.transfer.IRecipeTransferInfo;
 import mezz.jei.api.registration.IGuiHandlerRegistration;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
@@ -35,6 +38,7 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 
 @JeiPlugin
 public class SimplyWingsJeiPlugin implements IModPlugin {
+    private static IJeiRuntime runtime;
     static final RecipeType<RecipeHolder<AssemblyRecipe>> ASSEMBLY = RecipeType.createRecipeHolderType(SimplyWings.id("assembly"));
     static final RecipeType<RecipeHolder<ComponentRecipe>> COMPONENTS = RecipeType.createRecipeHolderType(SimplyWings.id("components"));
     static final RecipeType<ItemStack> ENERGY = RecipeType.create(SimplyWings.MOD_ID, "winged_energy", ItemStack.class);
@@ -146,4 +150,38 @@ public class SimplyWingsJeiPlugin implements IModPlugin {
         }
     }
 
+
+    @Override
+    public void onRuntimeAvailable(IJeiRuntime jeiRuntime) {
+        runtime = jeiRuntime;
+    }
+
+    public static boolean showItem(ItemStack stack, boolean uses) {
+        if (runtime == null) {
+            return false;
+        }
+        RecipeIngredientRole role = uses ? RecipeIngredientRole.INPUT : RecipeIngredientRole.OUTPUT;
+        runtime.getRecipesGui().show(runtime.getJeiHelpers().getFocusFactory().createFocus(role, VanillaTypes.ITEM_STACK, stack));
+        return true;
+    }
+
+    public static boolean showCategory(String name) {
+        if (runtime == null) {
+            return false;
+        }
+        RecipeType<?> type = switch (name) {
+            case "assembly" -> ASSEMBLY;
+            case "components" -> COMPONENTS;
+            case "energy" -> ENERGY;
+            case "mob" -> MOB_DROPS;
+            case "block" -> BLOCK_DROPS;
+            case "fishing" -> FISHING;
+            default -> null;
+        };
+        if (type == null) {
+            return false;
+        }
+        runtime.getRecipesGui().showTypes(List.of(type));
+        return true;
+    }
 }

@@ -128,6 +128,21 @@ final class StudioTest {
                 log.accept("drops " + counts);
             }
             case "sprint" -> player.setSprinting(a[1].equals("on"));
+            case "jei", "jeitype" -> {
+                if (!net.neoforged.fml.ModList.get().isLoaded("jei")) {
+                    log.accept("jei absent");
+                    return true;
+                }
+                try {
+                    Class<?> plugin = Class.forName("com.zorago.simplywings.compat.jei.SimplyWingsJeiPlugin");
+                    Object ok = a[0].equals("jei")
+                            ? plugin.getMethod("showItem", ItemStack.class, boolean.class).invoke(null, stack(a[1]), a.length > 2 && a[2].equals("uses"))
+                            : plugin.getMethod("showCategory", String.class).invoke(null, a[1]);
+                    log.accept(a[0] + " " + a[1] + " " + ok + " screen=" + (mc.screen == null ? "-" : mc.screen.getClass().getSimpleName()));
+                } catch (ReflectiveOperationException e) {
+                    log.accept("jei error " + e);
+                }
+            }
             case "select" -> player.getInventory().selected = Integer.parseInt(a[1]);
             case "attack" -> {
                 double range = a.length > 1 ? Double.parseDouble(a[1]) : 6.0;
