@@ -11,11 +11,11 @@ Mod d'ailes standalone pour **NeoForge 1.21.1** (nom de travail : SimplyWings). 
 
 - `WINGS.md` : catalogue des paires (identité, apparence, ressenti, stats). À mettre à jour avec chaque paire ajoutée ou modifiée.
 - `README.md` : vitrine du repo, en anglais (présentation, état, contrôles, commandes, TODO avant release). À tenir à jour à chaque fonctionnalité terminée.
-- `CRAFTING.md` : route de craft de chaque paire (étapes, origine des pièces, coût en Cloud Essence par étape et au total). À mettre à jour avec chaque recette ajoutée ou modifiée.
+- `CRAFTING.md` : règles des routes de craft (sources vanilla, répétabilité, profondeur max par rareté), objets partagés, registre des drops du mod et récapitulatif des coûts. La route complète de chaque paire est dans `crafting/<id>.md` (matières premières, étapes, recettes dessinées). À mettre à jour avec chaque recette ajoutée ou modifiée.
 - `BALANCE.md` : les 7 stats (échelle 0-100, valeurs physiques à 0 et à 100 dans la config serveur `[stats]`), les scores de chaque paire et la répartition des globaux. À tenir à jour à chaque changement de stats ou de physique.
 - `docs/ANALYSE_REFERENCES.md` : analyse des mods de référence et du pack, avec la table d'architecture corrigée. **Elle prime sur la table du cahier des charges** là où elle la corrige (anti-kick, caméra, souris).
 
-Étape en cours : **refonte art** (commune et 21 rares faites, en attente de la passe studio en jeu), puis épiques, légendaires et mythiques ; en parallèle, conception des routes de craft. Analyse validée. Un premier écran Ailes, le bouton d'inventaire et le HUD de stamina existent. Pas encore de table d'assemblage, de Cloud Essence, de forge, de loots ni de JEI.
+Étape en cours : **refonte art** (commune et 21 rares faites, en attente de la passe studio en jeu), puis épiques, légendaires et mythiques ; les routes de craft des 40 paires sont conçues (`crafting/`), reste à les implémenter (items, drops, table d'assemblage). Analyse validée. Un premier écran Ailes, le bouton d'inventaire et le HUD de stamina existent. Pas encore de table d'assemblage, de Cloud Essence, de forge, de loots ni de JEI.
 
 Code : package `com.zorago.simplywings`, NeoForge 21.1.257 (comme le pack), ModDevGradle.
 - `flight/ServerFlight` : autorité serveur (mode, stamina, gravité à 0, sauts de secours, crash, sync).

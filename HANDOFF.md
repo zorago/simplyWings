@@ -1,6 +1,6 @@
 # Handoff — Mod d'ailes (NeoForge 1.21.1)
 
-Ce fichier sert de point d'entrée pour la session Claude Code. La spec complète et à jour est dans `CAHIER_DES_CHARGES.md`, qui fait foi en cas de doute. Les étapes 1 à 5 sont codées (vol, rendu, 40 paires), ainsi qu'un premier écran Ailes et le HUD de stamina. Les routes de craft se conçoivent dans `CRAFTING.md`.
+Ce fichier sert de point d'entrée pour la session Claude Code. La spec complète et à jour est dans `CAHIER_DES_CHARGES.md`, qui fait foi en cas de doute. Les étapes 1 à 5 sont codées (vol, rendu, 40 paires), ainsi qu'un premier écran Ailes et le HUD de stamina. Les routes de craft des 40 paires sont conçues : règles dans `CRAFTING.md`, une route par paire dans `crafting/<id>.md`.
 
 ## Contexte
 
@@ -51,7 +51,7 @@ Pour chaque mod : la technique retenue, ce qu'on fera différemment et pourquoi.
 6. Écran Ailes + bouton d'inventaire + HUD stamina.
 7. Énergie ailée (Data Component) + Global Loot Modifiers + Cloud Essence (flacon, absorbeur, récolte) + table d'assemblage (onglets assemblage et composants, réservoir).
 8. Forge de l'End (template NBT, placement à la mort du dragon, SavedData).
-9. Contenu : routes de craft de `CRAFTING.md` en JSON, recettes mythiques.
+9. Contenu : routes de `crafting/*.md` en JSON (recettes `GRID` et `ASM`, entrées du registre `simplywings:loot_source`).
 10. Refonte art, en parallèle du gameplay (détail dans `CAHIER_DES_CHARGES.md`, section « Pipeline art ») :
     1. installer Blockbench, son plugin MCP et l'outil de capture en jeu (`/simplywings pose`, `/simplywings shot`, `runClient --quickPlaySingleplayer`) ;
     2. trancher l'import des modèles (chargeur JSON maison recommandé) et migrer `WingModel` sur le rig commun `shoulder` / `arm` / `forearm` / `hand` ;
