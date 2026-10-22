@@ -159,9 +159,10 @@ Une ligne par source (« ok » quand le drop tombe dans la bonne condition **et*
 
 ## 7. Forge de l'End et compas
 
-- [ ] Premier dragon tué : aucune forge, aucun compas.
+- [x] Premier dragon tué : aucune forge, aucun compas. *(22/10, studio, mort attribuée au joueur avec `/damage … by @s`.)*
 - [ ] Deuxième dragon (réinvoqué avec 4 cristaux) : la forge apparaît dans le vide à environ 512 blocs de (0, 0), à Y 80. Les joueurs à moins de 192 blocs de (0, 0) reçoivent un compas (inventaire plein : il tombe au sol) et un message.
-- [ ] La structure : plateforme, 4 piliers en purpur, end rods, la table d'assemblage au centre, 6 tonneaux remplis de plumes, cuir et ficelle.
+  - 22/10 : avec des dragons invoqués par `/summon`, la forge et le compas (message compris) sont apparus au **troisième** dragon et non au deuxième ; forge posée en (274, 80, 432), à 511 blocs. À refaire avec un vrai respawn (4 cristaux) avant de conclure à un bug.
+- [x] La structure : plateforme, 4 piliers en purpur, end rods, la table d'assemblage au centre, 6 tonneaux. *(Contenu des tonneaux : non ouvert.)*
 - [ ] Troisième dragon : la forge est réparée au même endroit (blocs cassés reposés, tonneaux à nouveau remplis), les blocs posés par les joueurs dans les zones vides de la structure restent.
 - [ ] La position est mémorisée (SavedData `simplywings_wing_forge`) : changer `[forge] radius` après coup ne la déplace pas.
 - [ ] Compas : l'aiguille pointe vers la forge dans l'End, tourne dans le vide dans l'Overworld et le Nether.
@@ -172,7 +173,7 @@ Une ligne par source (« ok » quand le drop tombe dans la bonne condition **et*
 ## 8. JEI et gestionnaires de recettes
 
 - [ ] JEI absent : le mod se charge sans erreur (dépendance optionnelle, plugin isolé dans `compat.jei`).
-- [ ] Catégories JEI :
+- [x] Catégories JEI (22/10 : les 6 s'ouvrent et s'affichent ; corrigé : le coût en essence débordait du cadre d'Assembly et de Components, et le texte de Winged Energy débordait de sa case) :
   - **Wing Assembly** : harnais en haut, ailes gauche et droite, cœur au centre, résultat, coût en Cloud Essence ;
   - **Wing Components** : grille 5×5 sans coins, résultat avec la quantité, coût ;
   - **Winged Energy** : un item, puis la table, puis l'item imprégné ;
@@ -180,8 +181,8 @@ Une ligne par source (« ok » quand le drop tombe dans la bonne condition **et*
 - [ ] Les 59 sources se répartissent bien : 27 mobs, 29 blocs, 3 pêche (aucune ne manque, aucune en double).
 - [ ] Les outils imprégnés (épée, pioche, canne) sont catalyseurs de leur catégorie : cliquer dessus dans JEI ouvre la liste de leurs drops.
 - [ ] Les tags s'affichent bien comme sources : minerais (`#minecraft:iron_ores`…), pierre (`#minecraft:base_stone_overworld`), fleurs, cuivre vieilli ; les blocs défilent dans le slot source.
-- [ ] Les textes ne débordent pas (chance et quantité à droite, condition sur plusieurs lignes).
-- [ ] « Recettes » (R) et « usages » (U) marchent sur : un drop (Hushed Down → où il tombe, où il sert), un minerai (minerai de fer → Sky Iron Fleck), un œuf de mob, une pièce, une paire.
+- [x] Les textes ne débordent pas (chance et quantité à droite, condition sur plusieurs lignes).
+- [x] « Recettes » (R) et « usages » (U) marchent sur : un drop (Hushed Down → où il tombe, où il sert), un minerai (minerai de fer → Sky Iron Fleck), une pièce, une paire. *(Œuf de mob : non testé.)*
 - [ ] La table d'assemblage est catalyseur des catégories Assembly, Components et Winged Energy.
 - [ ] Zones cliquables dans l'écran de la table : la flèche ouvre la catégorie de l'onglet actif.
 - [ ] Bouton « + » (transfert) : il remplit la grille depuis l'inventaire **seulement** sur l'onglet correspondant ; sur un autre onglet, JEI refuse.
