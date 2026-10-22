@@ -96,7 +96,7 @@ public class WingsLayer extends RenderLayer<AbstractClientPlayer, PlayerModel<Ab
             }
             poseStack.popPose();
         }
-        TailModel tail = tails.get(modelId);
+        TailModel tail = rig == null ? tails.get(modelId) : null;
         if (tail != null) {
             tail.setup(visual.tail, partialTick);
             RenderType type = ghost ? RenderType.entityTranslucent(tail.spec().texture())
