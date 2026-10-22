@@ -2,6 +2,7 @@ package com.zorago.simplywings.render.rig;
 
 import com.zorago.simplywings.SimplyWings;
 import com.zorago.simplywings.render.RigLoader;
+import com.zorago.simplywings.render.rig.wings.AirRig;
 import com.zorago.simplywings.render.rig.wings.AmethystRig;
 import com.zorago.simplywings.render.rig.wings.BatRig;
 import com.zorago.simplywings.render.rig.wings.BeeRig;
@@ -9,7 +10,10 @@ import com.zorago.simplywings.render.rig.wings.BeetleRig;
 import com.zorago.simplywings.render.rig.wings.CommonRig;
 import com.zorago.simplywings.render.rig.wings.CopperRig;
 import com.zorago.simplywings.render.rig.wings.CrowRig;
+import com.zorago.simplywings.render.rig.wings.DragonflyRig;
 import com.zorago.simplywings.render.rig.wings.EagleRig;
+import com.zorago.simplywings.render.rig.wings.EarthRig;
+import com.zorago.simplywings.render.rig.wings.FireRig;
 import com.zorago.simplywings.render.rig.wings.FlyingFishRig;
 import com.zorago.simplywings.render.rig.wings.GullRig;
 import com.zorago.simplywings.render.rig.wings.HummingbirdRig;
@@ -22,8 +26,10 @@ import com.zorago.simplywings.render.rig.wings.PatchworkRig;
 import com.zorago.simplywings.render.rig.wings.PeacockRig;
 import com.zorago.simplywings.render.rig.wings.PhantomRig;
 import com.zorago.simplywings.render.rig.wings.PigeonRig;
+import com.zorago.simplywings.render.rig.wings.PteroRig;
 import com.zorago.simplywings.render.rig.wings.SquirrelRig;
 import com.zorago.simplywings.render.rig.wings.SwiftRig;
+import com.zorago.simplywings.render.rig.wings.WaterRig;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -57,7 +63,13 @@ public final class WingRigs {
             new OrnithopterRig(),
             new KiteRig(),
             new CopperRig(),
-            new PatchworkRig());
+            new PatchworkRig(),
+            new DragonflyRig(),
+            new PteroRig(),
+            new FireRig(),
+            new WaterRig(),
+            new EarthRig(),
+            new AirRig());
     private static final Map<ResourceLocation, WingRig> BOUND = new HashMap<>();
 
     public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
