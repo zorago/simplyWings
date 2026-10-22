@@ -95,7 +95,10 @@ Points transverses qui demandent de lire plusieurs sections du cahier des charge
 ./gradlew runClient      # client de dev (dossier run/)
 ./gradlew runServer      # serveur dédié de dev (run/eula.txt déjà accepté, flat, online-mode=false)
 ./gradlew build          # jar dans build/libs, à copier dans le dossier mods du pack
+python tools/craft_tree/craft_tree.py [id…]   # planches visuelles des routes (crafting/*.md) dans craft-img/
 ```
+
+`craft_tree.py` lit les textures vanilla dans le jar client-extra de ModDevGradle (`build/moddev/artifacts/`, créé par un premier `./gradlew compileJava`) et celles du mod dans `assets/simplywings/textures/item/`. Une texture absente devient le « ? » de `tools/craft_tree/ui.px.js` (sprites pxl de l'interface, reconstruits automatiquement si `ui/sprites/` est vide). À relancer après chaque modification d'une route ou d'une texture d'item.
 
 Il n'y a pas de tests automatisés : la validation se fait en jeu, en solo et sur le serveur dédié.
 
