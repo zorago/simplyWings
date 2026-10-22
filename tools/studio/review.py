@@ -31,14 +31,14 @@ lines = [f"wing {wing}", "time 100"]
 names = []
 if only in ("all", "poses"):
     for name, state, cam in poses:
-        lines += ["live", "time 100", state, cam, f"shot {wing}_{name}"]
+        lines += ["live", "time 100", state, cam, "wait 30", f"shot {wing}_{name}"]
         names.append(f"{wing}_{name}")
 beat_names = []
 if only in ("all", "beat"):
     for view, cam in (("back", "cam 0 30 4"), ("side", "cam 90 0 4")):
         for t in beats:
             name = f"{wing}_beat_{view}_{int(t * 100):02d}"
-            lines += ["live", "time 100", "state cruise", cam, f"beat {t}", f"shot {name}"]
+            lines += ["live", "time 100", "state cruise", cam, f"beat {t}", "wait 12", f"shot {name}"]
             beat_names.append(name)
 lines += ["live", "beat off"]
 mark = f"m{time.time_ns()}"

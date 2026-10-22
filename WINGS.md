@@ -2,7 +2,7 @@
 
 Catalogue des paires d'ailes : identité, apparence, ressenti en vol et stats. Les chiffres viennent des JSON (`src/main/resources/data/simplywings/simplywings/wing/`) et de la config serveur `[stats]`. Les règles d'équilibrage sont dans `BALANCE.md`.
 
-Dernière mise à jour : 21 octobre 2026.
+Dernière mise à jour : 22 octobre 2026.
 
 ## Paliers d'ambiance
 
@@ -683,7 +683,9 @@ Dernière mise à jour : 21 octobre 2026.
 
 **Vibe** : la méganeure, libellule géante du Carbonifère, il y a 300 millions d'années, avec 70 cm d'envergure. Ses ailes sont restées prises dans l'ambre. C'est un insecte capable de faire du surplace, l'outil du bâtisseur. Très stable et très maniable en stationnaire, mais médiocre en vol de déplacement : lente, elle accélère et freine mal. En échange, elle ne décroche presque jamais.
 
-**Apparence** : **4 ailes**, deux paires avant et arrière, chacune d'un seul bloc. Membranes translucides couleur d'ambre, veinées de brun fossile et tachetées. Toujours étalées à plat, en V vers l'arrière au repos.
+**Apparence** : **4 ailes** de libellule (modèle `rigs/dragonfly.bbmodel`), chacune d'un seul bloc : membranes d'ambre translucides, nervures brun fossile, ptérostigma sombre, quelques bulles d'air prises dans l'ambre et une broche d'ambre fossile au milieu du dos. Au repos, les ailes descendent en V ; en vol, elles s'étalent en X, l'aile arrière plus en retrait.
+
+**Mouvement signature** : (`DragonflyRig`) les paires avant et arrière battent en opposition, comme une vraie libellule, avec des images fantômes de vibration à pleine poussée ; en croisière, plané à plat avec un léger dièdre ; repli en flèche au piqué. 3 idles : vrombissement d'échauffement, bain de soleil (ailes basses et avancées), toilette d'un côté puis de l'autre ; récupération après l'atterrissage par une ondulation amortie.
 
 **Effets** : quelques grains d'ambre tombent des ailes.
 
@@ -709,7 +711,9 @@ Dernière mise à jour : 21 octobre 2026.
 
 **Vibe** : le planeur préhistorique. Les ptérosaures traversaient des océans en planant sur des ailes de peau tendues par un seul doigt immense. Elles battent peu, mais chaque coup est ample. Elles ont du fond et planent très loin, mais elles sont lourdes à manœuvrer.
 
-**Apparence** : une membrane de cuir ocre par côté. L'avant-bras est court, et le doigt qui porte la pointe est très long. La membrane s'affine jusqu'à la pointe, avec des fibres plus sombres.
+**Apparence** : une membrane de cuir ocre par côté (modèle `rigs/ptero.bbmodel`) : humérus court, avant-bras, métacarpe, puis le doigt ailé en 4 phalanges jusqu'à la pointe griffue ; trois petites griffes au poignet, le ptéroïde et la petite membrane avant, une crinière de pycnofibres à l'épaule. Les fibres sombres (actinofibrilles) suivent les os, la membrane descend jusqu'à la hanche. Repliée, le poing remonte au-dessus de l'épaule et le doigt ailé redescend le long du bras, comme un ptérosaure au sol.
+
+**Mouvement signature** : (`PteroRig`) peu de battements mais amples : la pointe fouette avec beaucoup de retard, la membrane se gonfle au coup ; long plané avec un frémissement du bord de fuite qui augmente avec la vitesse. 3 idles : grand étirement, ailes à demi ouvertes pour sécher (comme un cormoran), secousse ; récupération après l'atterrissage.
 
 **Effets** : à chaque battement, un claquement de membrane et un petit souffle au bout des ailes.
 
@@ -735,7 +739,9 @@ Dernière mise à jour : 21 octobre 2026.
 
 **Vibe** : un esprit du feu. Les ailes sont faites de flammes vives : elles brûlent fort et vite, avec des coups secs et explosifs. Elles s'épuisent vite et tiennent mal en place.
 
-**Apparence** : une aile de feu par côté, en trois segments, lumineuse dans le noir. Elle passe du jaune près du dos à l'orange, puis au rouge vers le bord, qui se découpe en langues de flamme.
+**Apparence** : une aile de feu par côté (modèle `rigs/fire.bbmodel`), émissive : squelette d'oiseau dont chaque plume est une langue de feu indépendante (7 primaires, 4 secondaires, 3 tertiaires), un cœur blanc-jaune sous les langues, une crête de petites flammes sur le bord d'attaque et des braises qui montent autour de l'aile.
+
+**Mouvement signature** : (`FireRig`) chaque langue vacille avec sa propre phase et s'allonge ; au coup, les flammes s'embrasent, et elles traînent vers l'arrière avec la vitesse ; les braises montent au sol et filent derrière en vol. 3 idles : embrasement, braises qui couvent puis se rallument, secousse d'étincelles ; à l'atterrissage, les flammes vacillent puis reprennent.
 
 **Effets** :
 - **En continu** : des flammes et des étincelles s'échappent des ailes, avec une traînée de fumée au-dessus de 20 m/s.
@@ -763,7 +769,9 @@ Dernière mise à jour : 21 octobre 2026.
 
 **Vibe** : un esprit de l'eau. Le vol est fluide, comme une nage dans l'air : les ailes ondulent, glissent et virent sans effort. Elles sont plutôt stables et gardent bien leur élan.
 
-**Apparence** : une aile d'eau translucide par côté, bleue avec des reflets clairs qui ondulent et un liseré d'écume sur le bord. Elle respire lentement comme une vague.
+**Apparence** : une aile d'eau translucide par côté (modèle `rigs/water.bbmodel`) en 5 segments, bleue avec des reflets qui ondulent, une crête d'eau claire sur le bord d'attaque et un liseré d'écume en vagues sur le bord de fuite. Repliée, elle tombe en cascade le long du flanc et remonte en volute d'écume à hauteur de taille. Des gouttes tombent des pointes.
+
+**Mouvement signature** : (`WaterRig`) une vague court en permanence de l'épaule à la pointe ; le battement fouette d'un segment à l'autre, et en stationnaire l'aile nage comme une raie. 3 idles : vague qui roule dans la cascade, ailes qui se lèvent et « versent » en avant, déploiement avec onde ; éclaboussure amortie à l'atterrissage.
 
 **Effets** :
 - **En continu** : des gouttes tombent des ailes. En vol, de l'écume s'en détache, et des éclaboussures partent du bout des ailes au-dessus de 18 m/s.
@@ -791,7 +799,9 @@ Dernière mise à jour : 21 octobre 2026.
 
 **Vibe** : un esprit de la terre. Des ailes de roche lourdes et lentes qui ne s'épuisent presque jamais et tiennent très bien en place. Elles volent bas et lentement, virent mal, et ne planent pas : la pierre veut retourner au sol.
 
-**Apparence** : une aile de pierre par côté, en trois segments épais : roche grise fissurée, mousse près du dos et éclats d'améthyste qui brillent dans le noir.
+**Apparence** : une aile de pierre par côté (modèle `rigs/earth.bbmodel`) : de vrais blocs de roche grise fissurée (épaule, bras, avant-bras, main), de la mousse sur le dessus, des éclats d'ardoise en guise de plumes et cinq cristaux d'améthyste lumineux (couche `earth_glow`).
+
+**Mouvement signature** : (`EarthRig`) battements lents et lourds ; les éclats s'entrechoquent au coup et à l'atterrissage (choc lourd vers le bas). 3 idles : tremblement de terre, cristaux qui pulsent, déploiement qui grince.
 
 **Effets** :
 - **En continu** : de la poussière de terre tombe des ailes. En vol, des éclats de pierre s'en détachent.
@@ -819,7 +829,9 @@ Dernière mise à jour : 21 octobre 2026.
 
 **Vibe** : un esprit du vent. Des ailes presque invisibles, légères et rapides, qui portent loin et ne décrochent presque pas. Comme le vent, elles ne tiennent pas en place.
 
-**Apparence** : **4 ailes** de vent, deux par côté : des voiles blanches très transparentes, striées comme des courants d'air, qui s'effilochent au bord.
+**Apparence** : **4 voiles** de vent (modèle `rigs/air.bbmodel`), deux par côté, très transparentes : chaque voile est faite de rubans superposés en 3 segments, striés de courants d'air et effilochés au bout.
+
+**Mouvement signature** : (`AirRig`) les rubans ondulent comme des bannières, de plus en plus vite avec la vitesse ; le battement fouette d'un segment à l'autre ; au sol, les voiles retombent comme une écharpe. 3 idles : rafale, tourbillon, expiration.
 
 **Effets** :
 - **En continu** : des filets d'air blanc partent vers l'arrière. Au-dessus de 20 m/s, des traînées partent du bout des ailes.
@@ -847,7 +859,9 @@ Dernière mise à jour : 21 octobre 2026.
 
 **Vibe** : un esprit de la tempête. Des ailes d'éclairs qui crépitent, rapides et nerveuses : elles filent et virent sec, mais l'énergie s'épuise vite et elles ne tiennent pas en place.
 
-**Apparence** : une aile d'énergie électrique par côté, lumineuse dans le noir, du bleu clair près du dos au violet orageux au bord, traversée d'éclairs blancs. Le bord s'effiloche.
+**Apparence** : une aile d'énergie électrique par côté (modèle `rigs/storm.bbmodel`), émissive : un squelette d'éclairs en zigzag (os et 5 « doigts » d'éclair), une membrane de plasma bleu clair à violet traversée d'éclairs ramifiés, au bord effiloché, et six arcs électriques qui s'allument au hasard.
+
+**Mouvement signature** : (`StormRig`) grésillement permanent des pointes, arcs qui sautent d'une image à l'autre, décharge au coup (plus d'arcs, pointes qui s'allongent). 3 idles : crépitement, éclair (déploiement brusque), secousses électriques.
 
 **Effets** :
 - **En continu** : des étincelles électriques crépitent sur les ailes, et au-dessus de 20 m/s elles partent du bout des ailes.
@@ -875,7 +889,9 @@ Dernière mise à jour : 21 octobre 2026.
 
 **Vibe** : une aurore boréale qui a pris forme. Des voiles de lumière verte et violette, lents et paisibles, qui portent le joueur comme un rideau de ciel. Elles planent très loin et tiennent bien en place, mais elles accélèrent doucement.
 
-**Apparence** : **4 voiles** de lumière, deux par côté, lumineux dans le noir, en rideaux verticaux qui passent du vert au violet. Elles restent déployées et respirent lentement.
+**Apparence** : **4 rideaux** de lumière (modèle `rigs/aurora.bbmodel`), émissifs : chaque rideau pend d'un rail en arc, en pans verticaux du vert au violet, avec des rayons plus clairs.
+
+**Mouvement signature** : (`AuroraRig`) ondulation lente qui court le long des rails, la lumière respire ; battement ample et majestueux avec retard des pans. 3 idles : couronne (les rideaux se dressent), grande vague, plissé en accordéon.
 
 **Effets** :
 - **En continu** : des poussières vertes et violettes s'élèvent doucement des voiles.
@@ -903,7 +919,9 @@ Dernière mise à jour : 21 octobre 2026.
 
 **Vibe** : un esprit des ténèbres. Des ailes de fumée noire qui se défont sur les bords, rapides à réagir : départs vifs et virages serrés. Elles sont discrètes mais peu stables.
 
-**Apparence** : une aile de fumée sombre par côté, translucide, violet-noir avec des remous. Quelques yeux violets brillent dans la fumée, et le bord se défait en volutes.
+**Apparence** : une aile de fumée par côté (modèle `rigs/shadow.bbmodel`), translucide : nappes de fumée violet-noir à remous et trouées, volutes qui pendent et se tordent, et cinq yeux violets lumineux (couche `shadow_glow`).
+
+**Mouvement signature** : (`ShadowRig`) les volutes se tordent avec retard comme des tentacules ; les yeux clignent et regardent autour d'eux. 3 idles : regard fixe (les yeux s'ouvrent grand et suivent), dissipation, enroulement.
 
 **Effets** :
 - **En continu** : de la fumée noire s'échappe des ailes, et de l'encre en vol.
@@ -931,7 +949,9 @@ Dernière mise à jour : 21 octobre 2026.
 
 **Vibe** : un morceau de ciel nocturne. Des ailes de nébuleuse où scintillent des étoiles : elles ont un fond immense et emportent loin et vite, comme un voyage entre les étoiles. Elles sont lourdes à manœuvrer.
 
-**Apparence** : une aile par côté, translucide, en nuages bleu nuit et pourpres. Des étoiles blanches brillent dans le noir.
+**Apparence** : une aile cosmique par côté (modèle `rigs/nebula.bbmodel`), translucide : lobes de nuages bleu nuit, pourpres et roses, poussière d'étoiles, étoiles en croix qui scintillent et une petite galaxie spirale dans la main (couche `nebula_glow`).
+
+**Mouvement signature** : (`NebulaRig`) battements lents, lobes qui dérivent, galaxie qui tourne (plus vite avec la vitesse), étoiles qui scintillent. 3 idles : constellation (les étoiles s'écartent), galaxie qui s'emballe, grande ouverture lente.
 
 **Effets** :
 - **En continu** : des étoiles scintillent autour des ailes. Au-dessus de 25 m/s, des traînées lumineuses partent du bout des ailes.
@@ -959,7 +979,9 @@ Dernière mise à jour : 21 octobre 2026.
 
 **Vibe** : un esprit de la forêt, comme un kodama. Des ailes de feuilles et de fleurs, calmes et patientes : elles tiennent bien en place et durent longtemps, mais elles sont lentes.
 
-**Apparence** : **4 ailes** de feuilles, deux par côté, vertes et tachetées de fleurs roses, sur une armature de branches. Le bord est dentelé comme un feuillage.
+**Apparence** : **4 ailes** de branches (modèle `rigs/forest.bbmodel`), deux par côté : des branches d'écorce en 3 segments, 25 feuilles dentelées, chacune sur son propre os, et des fleurs roses à cœur jaune.
+
+**Mouvement signature** : (`ForestRig`) chaque feuille frémit avec sa propre phase, plus fort avec la vitesse ; les branches fouettent au battement. 3 idles : floraison (les fleurs s'ouvrent), bruissement, étirement vers le soleil (les feuilles se tournent vers le ciel).
 
 **Effets** :
 - **En continu** : des pétales tombent des ailes, et des spores flottent autour.
@@ -987,7 +1009,9 @@ Dernière mise à jour : 21 octobre 2026.
 
 **Vibe** : l'endurance et la grâce. Un battement toutes les 2 secondes : longue montée majestueuse, puis poussée ample. Elles ne s'épuisent presque jamais et planent très loin grâce à leur envergure, mais elles sont très instables en stationnaire.
 
-**Apparence** : une grande aile blanc crème par côté, en trois segments. Les plumes s'allongent vers la pointe et descendent jusqu'aux pieds au repos.
+**Apparence** : une grande aile blanc nacré par côté (modèle `rigs/angel.bbmodel`) : 11 rémiges qui descendent jusqu'aux pieds au repos, secondaires, tertiaires, couvertures, alule et scapulaires ; les pointes brillent (couche `angel_glow`). Une auréole dorée flotte derrière la tête, en nimbe.
+
+**Mouvement signature** : (`AngelRig`) longue montée majestueuse puis coup bref et puissant, pointes qui fouettent ; l'auréole tourne et respire. 5 idles : déploiement glorieux, toilette d'une aile puis de l'autre, ailes refermées en manteau, ébrouement en cascade, ailes dressées vers le ciel ; récupération après l'atterrissage.
 
 **Effets** :
 - **Rendu** : les pointes des plumes brillent doucement (passe lumineuse).
@@ -1016,7 +1040,9 @@ Dernière mise à jour : 21 octobre 2026.
 
 **Vibe** : la puissance brute et la violence. Une membrane de cuir qui se lève lentement puis frappe d'un coup sec et brutal, plus vite et plus fort que tout le reste. Elles sont instables en stationnaire et ne planent pas très bien.
 
-**Apparence** : une grande membrane par côté, en trois segments épais. Rouge sombre veinée de noir, avec une lueur plus vive sur le bord de fuite.
+**Apparence** : une grande membrane de dragon par côté (modèle `rigs/demon.bbmodel`) : rouge sombre veinée de noir, quelques déchirures, ossature épaisse hérissée d'épines, griffes au bout des doigts et un pouce en crochet ; le bord de fuite et les veines proches brillent comme de la lave (couche `demon_glow`). Repliées, les poignets pointent au-dessus des épaules.
+
+**Mouvement signature** : (`DemonRig`) coup sec et brutal qui fait claquer la membrane. 5 idles : intimidation (ailes grandes ouvertes), étirement griffu d'un côté puis de l'autre, cape, frémissement de braise, griffe qui tapote.
 
 **Effets** :
 - **Rendu** : les veines et le bord de fuite rougeoient comme de la braise (passe lumineuse).
@@ -1046,7 +1072,9 @@ Dernière mise à jour : 21 octobre 2026.
 
 **Vibe** : la stabilité absolue par la magie. Dans la mythologie grecque, Psyché est la déesse de l'âme, représentée avec des ailes de papillon. Ici, ses ailes ne sont pas de chair : ce sont des flammes d'âme éthérées, bleu-cyan et lumineuses, qui dessinent quatre ailes de papillon. Elles respirent lentement, et l'énergie qui en émane tient le joueur en apesanteur, parfaitement immobile.
 
-**Apparence** : 4 ailes de papillon, deux par côté, faites de flammes translucides cyan et nacrées qui ondulent sur les bords. Elles brillent dans le noir (rendu émissif) et restent déployées même au repos.
+**Apparence** : **4 ailes** de papillon (modèle `rigs/psyche.bbmodel`), émissives : dessus bleu morpho nacré, revers nacré à ocelles, nervures sombres, bordure à points blancs, flammes d'âme cyan qui vacillent tout autour, queues de machaon terminées par une flamme, et la lampe de Psyché suspendue dans le dos.
+
+**Mouvement signature** : (`PsycheRig`) au repos, les ailes se dressent et se referment au-dessus du dos, comme un papillon posé, et s'ouvrent lentement au soleil ; battements amples, flammes qui traînent avec la vitesse, lampe en pendule. 5 idles : bain de soleil, embrasement, frémissement, lampe qui se balance et brille, envol figé.
 
 **Effets** :
 - **En continu** : des flammes d'âme s'élèvent des ailes, et des âmes s'en échappent parfois.
@@ -1074,7 +1102,9 @@ Dernière mise à jour : 21 octobre 2026.
 
 **Vibe** : la vitesse céleste. Six ailes qui battent ensemble comme une seule et emportent le joueur plus vite que tout. Elles restent assez stables pour se poser avec précision.
 
-**Apparence** : **6 ailes d'ange dorées**, trois par côté, en éventail : une haute, une centrale, une basse, qui battent avec un léger décalage.
+**Apparence** : **6 ailes** dorées (modèle `rigs/seraph.bbmodel`), haute, centrale et basse, chacune sur un squelette d'oiseau complet. Au repos, la paire haute se dresse et croise ses pointes au-dessus de la tête, la paire basse enveloppe les jambes.
+
+**Mouvement signature** : (`SeraphRig`) les trois paires battent en vague décalée. 5 idles : adoration (la paire haute couvre le visage, la basse les pieds, celle du milieu s'ouvre), éventail de gloire qui s'ouvre de haut en bas, onde, frémissement de la paire haute, révérence.
 
 **Effets** :
 - **Rendu** : les plumes et les os dorés rayonnent (passe lumineuse).
@@ -1103,7 +1133,9 @@ Dernière mise à jour : 21 octobre 2026.
 
 **Vibe** : les ailes de l'inventeur. Dans la mythologie grecque, Dédale a fabriqué des ailes pour s'évader du labyrinthe avec son fils Icare. Ici, c'est une machine : une armature de laiton, des panneaux d'acier rivetés et deux réacteurs dans le dos. Rien ne bat, tout pousse. Les réacteurs vectorisés changent de cap à l'instant : c'est la paire la plus maniable.
 
-**Apparence** : une aile mécanique par côté, en trois segments épais, dont les panneaux d'acier rivetés s'affinent vers la pointe.
+**Apparence** : une aile mécanique par côté (modèle `rigs/daedalus.bbmodel`) : longerons de laiton en 3 segments, entretoises, panneaux d'acier rivetés, aileron, engrenages à l'épaule et au coude, et trois plumes d'Icare collées à la cire au bord de fuite. Dans le dos, un caisson de laiton avec cadran et deux réacteurs à flamme (couche `daedalus_glow`).
+
+**Mouvement signature** : (`DaedalusRig`) rien ne bat : ailes à flèche variable qui se replient vers l'arrière avec la vitesse, réacteurs vectorisés (poussée inversée au freinage, différentiel en virage), ailerons qui suivent le roulis, engrenages qui tournent avec la poussée, panneaux qui se rétractent au sol. 5 idles : vérification des panneaux un par un, engrenages et ratés de réacteur, test des ailerons, balayage des tuyères, dépliage et test de la flèche.
 
 **Effets** : les réacteurs crachent des flammes et de la fumée, vers le bas en stationnaire et vers l'arrière pendant la poussée.
 
@@ -1129,10 +1161,9 @@ Dernière mise à jour : 21 octobre 2026.
 
 **Vibe** : l'équilibre et la stabilité. Aucune stat maxée, aucune faiblesse : c'est la seule légendaire qui fait exception à la règle « une stat maxée ». Le vol est posé, régulier et sûr, ni le plus rapide ni le plus endurant, mais rien ne le prend en défaut.
 
-**Apparence** : la première paire **asymétrique** du mod. Comme les autres légendaires, elle utilise un modèle procédural de base (`WingModel.YIN_YANG`, gabarit proche de l'ange, 3 segments) ; sa texture `yin_yang_wings.png` fait 128×64 : la moitié haute habille l'aile gauche (Yin), la moitié basse l'aile droite (Yang). La refonte Blockbench viendra avec celle des autres légendaires.
-- **Aile gauche (Yin)** : plumes noires aux reflets bleu nuit, avec un « œil » blanc rond près du poignet.
-- **Aile droite (Yang)** : plumes blanc nacré, avec un « œil » noir rond au même endroit.
-- Les bords de fuite des deux ailes dessinent une courbe en S. Repliées, les pointes se croisent dans le dos et forment le cercle du taijitu.
+**Apparence** : la première paire **asymétrique** du mod (modèle `rigs/yin_yang.bbmodel`, texture 256×128 avec une zone par aile). Aile gauche (Yin) : plumes noires à reflets bleu nuit, « œil » blanc près du poignet. Aile droite (Yang) : plumes blanc nacré, « œil » noir. Bord de fuite des secondaires en S. Un médaillon du taijitu tourne lentement entre les épaules ; repliées, les pointes se croisent derrière lui.
+
+**Mouvement signature** : (`YinYangRig`) symétrie parfaite et calme, le médaillon tourne plus lentement en stationnaire. 5 idles : balance (les ailes oscillent en sens opposés), cercle des pointes, respiration, échange (une aile s'ouvre pendant que l'autre se ferme), méditation.
 
 **Effets** :
 - **En continu** : deux petites sphères, une noire et une blanche, orbitent lentement l'une autour de l'autre derrière le dos.
@@ -1167,7 +1198,8 @@ Clin d'œil à *Dragons* (How to Train Your Dragon) : les ailes de la Furie Noct
   - Vérifié : ça reste sous la vitesse de piqué. Ailes ouvertes, un piqué vertical plafonne vers 95 m/s, et en repli faucon il atteint 110 m/s (`terminalVelocity`). Le piqué reste donc plus rapide que le vol battu.
 - **Récompenses** : posséder **Night** donne la **stamina infinie**, quelle que soit la paire équipée. Posséder **Light** débloque la **transmog** : le bouton « Equip appearance » de l'écran Ailes pose l'apparence d'une paire débloquée sur la paire équipée (tout le visuel, rythme des battements compris ; stats et physique inchangées). Elles ne donnent pas de bonus de collection.
 - **Corps** : en plus des ailes (une grande paire et une petite paire arrière), une **queue** de 6 segments part du bas du dos. Elle traîne par terre debout, ondule en marchant, pend et se balance en stationnaire, et suit le vol en déplacement avec du retard, comme une vraie queue. Elle porte deux paires d'ailerons ; chez Night, l'aileron gauche du bout est rouge, avec une marque blanche (la prothèse d'Harold).
-- **Modèle et textures** : volontairement simples (prototype), à affiner par un modeleur.
+- **Modèle et textures** (modèles `rigs/night.bbmodel` et `rigs/light.bbmodel`, construits avec `art/wings/lib/fury.js`) : grandes ailes de dragon à 4 doigts et petite paire arrière à 3 doigts, queue de 6 segments avec deux paires d'ailerons, intégrée au modèle (la queue procédurale `TailModel` ne sert plus que de repli). Night : cuir noir mat à écailles, épines dorsales qui se lèvent ou se couchent, aileron gauche rouge à marque blanche (la prothèse, qui bouge par à-coups mécaniques). Light : blanche à reflets irisés, sans épines, bords qui brillent (couche `light_glow`).
+- **Mouvement signature** : `NightRig` et `LightRig`, boîte à outils `DragonWing` et `DragonTail`. La queue suit le vol avec retard (gouvernail en virage, ailerons qui s'ouvrent côté virage), traîne et s'enroule au sol, ondule en marchant. Night : épines qui se couchent au piqué, et **charge plasma** visible (les épines s'allument en bleu, de la base vers la queue) quand le frein est tenu, comme la charge du dash. 8 idles pour Night (étirement de chat, ébrouement, queue qui fouette, grattage d'une aile, épines hérissées, charge plasma, sommeil enroulé, clic de la prothèse) et 7 pour Light (étirement élégant, scintillement, queue autour des jambes, toilette, regard vers le ciel, balancement, repos enroulé).
 
 ### Easter egg 1 : le cri du piqué
 Quand le piqué dépasse la vitesse max (repli faucon, ou simplement un piqué assez raide et rapide), le **cri strident** de la Furie retentit, comme dans le premier film. Le joueur l'entend sans spatialisation, comme une musique, pour ne pas le « semer » à grande vitesse. Les joueurs autour l'entendent venir du joueur.
