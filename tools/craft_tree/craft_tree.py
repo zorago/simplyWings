@@ -32,6 +32,9 @@ MOB_FACES = {
     "breeze": ("breeze/breeze", (7, 8, 10, 8)), "creeper": ("creeper/creeper", (8, 8, 8, 8)),
     "enderman": ("enderman/enderman", (8, 8, 8, 8)), "shulker": ("shulker/shulker", (6, 58, 6, 6)),
     "vex": ("illager/vex", (5, 5, 5, 5)), "ender dragon": ("enderdragon/dragon", (128, 46, 16, 16)),
+    "cow": ("cow/cow", (6, 6, 8, 8)), "spider": ("spider/spider", (40, 12, 8, 8)), "skeleton": ("skeleton/skeleton", (8, 8, 8, 8)),
+    "slime": ("slime/slime", (8, 8, 8, 8)), "sheep": ("sheep/sheep", (8, 8, 6, 6)), "squid": ("squid/squid", (12, 12, 12, 16)),
+    "ghast": ("ghast/ghast", (16, 16, 16, 16)),
 }
 MOB_ITEMS = {"goat": "goat_horn"}
 BLOCK_ALIASES = {"#minecraft:small_flowers": "poppy", "#minecraft:base_stone_overworld": "stone",
@@ -42,7 +45,7 @@ ENTITY_ICONS = {"wither_skeleton_skull": ("skeleton/wither_skeleton", (8, 8, 8, 
 FOLIAGE = (72, 181, 24)
 COND_ICONS = [("nuit", "cond_night"), ("orage", "cond_storm"), ("accroupi", "cond_sneak"), ("sprint", "cond_sprint"),
               ("y ≥", "cond_up"), ("y ≤", "cond_down"), ("nuages", "cond_cloud"), ("village", "cond_village"),
-              ("lumière", "cond_dark"), ("pleine", "cond_full"), ("biome", "cond_biome")]
+              ("lumière", "cond_dark"), ("pleine", "cond_full"), ("biome", "cond_biome"), ("partout", "cond_chance")]
 
 
 def find_jar(arg):
