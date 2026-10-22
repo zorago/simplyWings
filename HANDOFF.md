@@ -61,6 +61,10 @@ Pour chaque mod : la technique retenue, ce qu'on fera différemment et pourquoi.
 
 ## Prochaine session
 
+**Session du 22-23 octobre** : 19 paires épiques, légendaires et mythiques refaites dans Blockbench, correctif 1 codé, la plupart des tests en solo faits par le studio. Le point de reprise et l'ordre des tâches restantes sont en tête de `ToDoTesting.md` (« Reprise »).
+
+## Session précédente
+
 **Session de test du 22 octobre au soir** : suivre `ToDoTesting.md` dans l'ordre (chargement, items, drops imprégnés, Cloud Essence, table, forge, JEI, Yin et Yang), puis les correctifs ci-dessous.
 
 Ordre fixé par zorago (21/10/2026) : **1. correctifs ci-dessous** (rares + commune) → **2. épiques** → **3. légendaires** → **4. mythiques** → **5. gameplay** réfléchi et bien intégré à Minecraft, avec des lignes de craft de plus en plus complexes en montant les paliers.

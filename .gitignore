@@ -14,6 +14,7 @@ out/
 
 .run/
 run-pack/
+run-mp/
 
 ### Eclipse ###
 .apt_generated

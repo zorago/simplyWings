@@ -4,6 +4,18 @@ Tout ce qui doit être testé et validé en jeu, puis les modèles 3D qui resten
 
 Dernière mise à jour : 22 octobre 2026 au soir. Session de test sur le PC de jeu, **en solo dans le client de dev** (Simply Wings + JEI), pilotée par le studio (`tools/studio/send.py`, commandes de test de `client/studio/StudioTest`). Les cases cochées ce soir l'ont été en solo seulement : la règle « solo et serveur dédié » reste à compléter pour elles.
 
+## Reprise (état au 23/10, 2 h)
+
+Fait cette session : passe studio des 21 rares, correctif 1 (battement sans saut, `WingAnimator`), les 19 modèles restants, sections 2 à 6 et 9-10 validées en solo par le studio, JEI corrigé, forge testée, vol testé en solo.
+Reste, dans l'ordre :
+1. **Serveur dédié** : `run/ops.json` contient maintenant Dev (op). Lancer `./gradlew runServer`, puis `./gradlew runStudioMp` (client studio qui rejoint `localhost`, dossier `run-mp/`) et piloter avec `python -I tools/studio/send.py --dir=run-mp …`. Refaire : vol (aucun kick, `allow-flight=false`), quelques drops, table, Cloud Essence.
+2. **Pack complet** (§ 1) : `./gradlew build`, copier le jar dans le pack ; ou client de dev avec les mods du pack (`runPackStudio`, dossier `run-pack/`, sans le jar JEI du pack qui est déjà en `localRuntime`).
+3. Forge : refaire le test « 2e dragon » avec un vrai respawn (4 cristaux).
+4. Questions pour zorago : valeurs de `flap_rate` (correctif 3) et les 6 questions du wiki (`docs/WIKI_PLAN.md`).
+5. Correctif 2 (z-fighting des plaques) et récupération d'atterrissage des rares.
+
+Outils de test (studio) : `tools/studio/drop_test.py` (59 sources de drops), `tools/studio/table_test.py all` (173 recettes à la table), `review.py <aile>` (planches). Commandes du studio dans `client/studio/StudioTest` (`screen`, `slot`, `tooltips`, `icons`, `tab`, `attack`, `key`, `status`, `inv`, `drops`, `jei`, `jeitype`, `respawn`…).
+
 ## 0. Préparation
 
 - [ ] `./gradlew build`, puis copier `build/libs/simplywings-*.jar` dans `A:\CurseForge\Instances\PleasePlayWithMe\mods` (retirer l'ancien jar).
@@ -27,7 +39,7 @@ Déjà validé le 22 octobre sur le portable, avec un serveur dédié de dev (Si
 - [ ] Le jeu démarre avec le pack (195 mods), sans erreur Simply Wings dans `logs/latest.log`.
 - [ ] Aucune erreur de parsing pour `data/simplywings/recipe/component/*` (133 recettes) et `recipe/assembly/*` (40 recettes).
 - [ ] Aucune erreur pour le registre `simplywings:loot_source` (59 entrées) ni pour le Global Loot Modifier `simplywings:winged_drops`.
-- [ ] Connexion d'un client au serveur dédié sans « registry mismatch » (le registre `loot_source` est synchronisé sans ses conditions).
+- [x] Connexion d'un client au serveur dédié sans « registry mismatch » (le registre `loot_source` est synchronisé sans ses conditions). *(23/10, serveur de dev + client `runStudioMp`, sans le pack.)*
 - [ ] `/reload` ne casse rien (recettes, sources de loot, JEI se recharge).
 
 ## 2. Items (232) et tooltips
@@ -227,48 +239,22 @@ Rien n'est codé : le plan est dans `docs/WIKI_PLAN.md`.
 - [ ] Animation de récupération après l'atterrissage : à ajouter à chaque rare.
 - [x] Passe studio des 21 rares (planches dans `run/studio/sheets/`) : 22/10, la commune et les 21 rares se chargent et s'affichent dans les 15 états, sans texture manquante.
 
-## 12. Modèles 3D restants (refonte Blockbench)
+## 12. Modèles 3D (refonte Blockbench)
 
-Fait : la commune et les 21 rares (un `.bbmodel` par paire dans `assets/simplywings/rigs/` et une classe `render/rig/wings/<Paire>Rig`), en attente de la passe studio.
+**Fait le 22-23/10** : les 19 paires restantes ont leur modèle Blockbench, leur texture pxl et leur classe de rig (épiques avec 3 idles, légendaires avec 5, Night 8 et Light 7, plus une récupération après l'atterrissage). Les queues des Furies sont dans leur modèle (`DragonTail`), la queue procédurale `TailModel` ne sert plus que de repli. Détail par paire dans `WINGS.md` (« Apparence » et « Mouvement signature »). Passe studio faite sur les 19 (planches dans `run/studio/sheets/`) : tous les états se lisent, aucune pièce cassée.
 
-Reste à faire : les épiques, les légendaires et les mythiques. Aujourd'hui, ils utilisent l'ancien modèle procédural (`render/WingModel` + `anim/WingStyle`), avec des plaques simples. Pour chacun : un `.bbmodel` à taille réelle sur le rig commun `shoulder` / `arm` / `forearm` / `hand`, une texture, une classe `<Paire>Rig` enregistrée dans `WingRigs`, puis la boucle visuelle (captures Blockbench et studio). Relire `docs/SOURCES.md` et le skill `simplywings-wing-style` avant chaque paire.
-
-Animations demandées par palier : **épique** 3 idles tirées au hasard, **légendaire** 5 idles, **mythique** tout ce qu'on trouve ; plus une récupération après l'atterrissage.
-
-### Épiques (11)
-
-| Paire | Modèle actuel | Cible (`WINGS.md`) | Points d'attention | Fait |
-| --- | --- | --- | --- | --- |
-| Meganeura `ancient` | `DRAGONFLY`, 2 ailes par côté | 4 ailes de libellule d'un seul bloc, membranes ambre translucides veinées de brun fossile, à plat, en V au repos | translucide, vibration continue (20 battements/s), effets fossiles || [ ] |
-| Pterosaur `ptero` | `PTERO`, 3 segments | membrane de cuir ocre, avant-bras court, 4e doigt immense jusqu'à la pointe, fibres sombres | un seul doigt porteur, membrane jusqu'à la cuisse || [ ] |
-| Flame `fire` | `FIRE` | aile de flammes, jaune près du dos, orange puis rouge, langues de flamme au bord | émissive (ETHEREAL), langues animées || [ ] |
-| Tide `water` | `WATER` | aile d'eau translucide bleue, reflets qui ondulent, liseré d'écume | translucide, ondulation lente (« respire comme une vague ») || [ ] |
-| Stone `earth` | `EARTH` | 3 segments épais de roche grise fissurée, mousse près du dos, éclats d'améthyste lumineux | couche lumineuse `earth_glow` || [ ] |
-| Wind `air` | `AIR`, 2 ailes par côté | 4 voiles blanches très transparentes, striées comme des courants d'air, effilochées | très translucide || [ ] |
-| Storm `storm` | `STORM` | énergie électrique bleu clair à violet, éclairs blancs, bord effiloché | émissive, crépitement || [ ] |
-| Aurora `aurora` | `AURORA`, 2 voiles par côté | rideaux verticaux de lumière vert à violet, toujours déployés | émissive, respiration lente || [ ] |
-| Shadow `shadow` | `SHADOW` | fumée violet-noir translucide, remous, yeux violets, bord en volutes | couche lumineuse `shadow_glow` (yeux) || [ ] |
-| Nebula `nebula` | `NEBULA` | nuages bleu nuit et pourpres, étoiles blanches | couche lumineuse `nebula_glow` || [ ] |
-| Forest Spirit `forest` | `FOREST`, 2 ailes par côté | 4 ailes de feuilles vertes tachetées de fleurs roses, armature de branches, bord dentelé | feuillage découpé || [ ] |
-
-### Légendaires (6)
-
-| Paire | Modèle actuel | Cible (`WINGS.md`) | Points d'attention | Fait |
-| --- | --- | --- | --- | --- |
-| Angel `angel` | `ANGEL` | grande aile blanc crème, plumes allongées vers la pointe, jusqu'aux pieds au repos | battement majestueux (0,5/s), couche `angel_glow` || [ ] |
-| Demon `demon` | `DEMON` | grande membrane rouge sombre veinée de noir, 3 segments épais, lueur au bord de fuite | coup sec et brutal, couche `demon_glow` || [ ] |
-| Seraph `seraph` | `SERAPH`, 3 ailes par côté | 6 ailes d'ange dorées en éventail (haute, centrale, basse), léger décalage de battement | couche `seraph_glow` || [ ] |
-| Psyche `psyche` | `PSYCHE_FORE` + `PSYCHE_HIND` | 4 ailes de papillon en flammes d'âme cyan et nacrées, bords qui ondulent, toujours déployées | émissive || [ ] |
-| Daedalus `daedalus` | `DAEDALUS` | armature de laiton, panneaux d'acier rivetés, deux réacteurs dans le dos | rien ne bat, tout pousse (réacteurs vectorisés), effets `THRUSTERS` || [ ] |
-| Yin and Yang `yin_yang` | `YIN_YANG` (ajouté le 22 octobre, gabarit proche de l'ange) | gauche : plumes noires à reflets bleu nuit, « œil » blanc près du poignet ; droite : plumes blanc nacré, « œil » noir ; bords de fuite en S ; repliées, les pointes forment le cercle du taijitu | **première paire asymétrique** : deux ailes différentes dans le même `.bbmodel` (préfixes `left_` / `right_`) || [ ] |
-
-### Mythiques (2)
-
-| Paire | Modèle actuel | Cible (`WINGS.md`) | Points d'attention | Fait |
-| --- | --- | --- | --- | --- |
-| Night `night` | `NIGHT_MAIN` + `NIGHT_HIND`, queue `TailModel` | ailes de la Furie Nocturne : grande paire et petite paire arrière, cuir noir | queue de 6 segments avec 2 paires d'ailerons ; aileron gauche du bout rouge à marque blanche (prothèse d'Harold) || [ ] |
-| Light `light` | `LIGHT_MAIN` + `LIGHT_HIND`, queue `TailModel` | ailes de la Furie Éclair : blanches, irisées | queue et ailerons blancs ; effets de plasma et de camouflage || [ ] |
-
-- [ ] Queues des Furies : passer `render/TailModel` + `anim/TailAnimator` en Blockbench, avec le même rig et le même style que les ailes.
+À valider ou affiner, par paire, avec zorago et le designer :
+- [ ] Méganeure : l'ambre est un peu terne sur ciel clair ; vérifier les images fantômes de vibration en vol réel.
+- [ ] Ptérosaure : pose de charge (le doigt ailé descend très bas).
+- [ ] Flamme, Orage, Aurore, Psyché : rendu émissif à vérifier de nuit et avec un shaderpack (Iris).
+- [ ] Marée : en repli faucon, les ailes restent assez ouvertes.
+- [ ] Vent : au repos, les voiles forment une collerette de rubans ; à revoir si ça ne plaît pas.
+- [ ] Esprit sylvestre : vue de dessus en vol, les feuilles paraissent clairsemées.
+- [ ] Nébuleuse et Ombre : lobes et volutes encore un peu carrés.
+- [ ] Séraphin : la paire haute qui se croise au-dessus de la tête au repos (choix iconographique) à valider.
+- [ ] Dédale : vérifier la rétraction des panneaux au sol et les flammes des réacteurs en vol réel.
+- [ ] Night et Light : sens d'ouverture des ailerons en virage, clic de la prothèse, épines qui s'allument pendant la charge (frein tenu) ; la queue en marchant.
+- [ ] Tester chaque idle en jeu (variantes tirées au hasard ; au studio : `rouse <0..1> <variante>`).
+- [ ] Rares : ajouter la récupération après l'atterrissage (demandée, pas encore faite).
 - [ ] One-shots en keyframes (déploiement, repli, atterrissage) pour toutes les paires.
 - [ ] Finition des textures par le designer.
