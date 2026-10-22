@@ -65,6 +65,7 @@ public class SimplyWingsClient {
         game.addListener(SimplyWingsClient::onLogout);
         game.addListener(InventoryButton::onInit);
         game.addListener(InventoryButton::onRender);
+        game.addListener(ItemLore::onTooltip);
         AssemblyTableClient.register(modBus, game);
         com.zorago.simplywings.client.studio.Studio.register(game);
     }

@@ -3,7 +3,9 @@ package com.zorago.simplywings.item;
 import com.zorago.simplywings.SimplyWings;
 import com.zorago.simplywings.block.ModBlocks;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -71,6 +73,22 @@ public final class ModItems {
     public static final DeferredItem<CloudFlaskItem> CLOUD_FLASK = ITEMS.register("cloud_flask",
             () -> new CloudFlaskItem(new Item.Properties().stacksTo(16)));
 
+    private static final Map<String, DeferredItem<Item>> MATERIALS = new LinkedHashMap<>();
+
+    static {
+        MaterialIds.DROPS.forEach(id -> material(id, 64));
+        MaterialIds.INTERMEDIATES.forEach(id -> material(id, 64));
+        MaterialIds.PARTS.forEach(id -> material(id, 16));
+    }
+
+    private static void material(String id, int stackSize) {
+        MATERIALS.put(id, ITEMS.register(id, () -> new Item(new Item.Properties().stacksTo(stackSize))));
+    }
+
+    public static Item material(String id) {
+        return MATERIALS.get(id).get();
+    }
+
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> TAB = TABS.register("wings",
             () -> CreativeModeTab.builder()
                     .title(Component.translatable("itemGroup.simplywings"))
@@ -80,6 +98,7 @@ public final class ModItems {
                         output.accept(CLOUD_FLASK.get());
                         output.accept(CloudFlaskItem.filled(CLOUD_FLASK.get(), CloudFlaskItem.CAPACITY));
                         WINGS.forEach(output::accept);
+                        MATERIALS.values().forEach(output::accept);
                     })
                     .build());
 
