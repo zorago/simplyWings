@@ -173,7 +173,11 @@ Une ligne par source (« ok » quand le drop tombe dans la bonne condition **et*
   - **Wing Assembly** : harnais en haut, ailes gauche et droite, cœur au centre, résultat, coût en Cloud Essence ;
   - **Wing Components** : grille 5×5 sans coins, résultat avec la quantité, coût ;
   - **Winged Energy** : un item, puis la table, puis l'item imprégné ;
-  - **Winged Drops** : la source (œuf du mob, bloc ou canne à pêche), le drop, la chance, la condition en violet.
+  - **Winged Mob Drops**, **Winged Block Drops**, **Winged Fishing** : trois catégories séparées, une par type de récupération. Chaque recette montre la source (œuf du mob, bloc, ou canne), l'outil imprégné requis, le drop, la **chance en %**, la **quantité** (« Quantity: 3 » ou « Quantity: 1 to 2 ») et la condition en violet.
+- [ ] Les 59 sources se répartissent bien : 27 mobs, 29 blocs, 3 pêche (aucune ne manque, aucune en double).
+- [ ] Les outils imprégnés (épée, pioche, canne) sont catalyseurs de leur catégorie : cliquer dessus dans JEI ouvre la liste de leurs drops.
+- [ ] Les tags s'affichent bien comme sources : minerais (`#minecraft:iron_ores`…), pierre (`#minecraft:base_stone_overworld`), fleurs, cuivre vieilli ; les blocs défilent dans le slot source.
+- [ ] Les textes ne débordent pas (chance et quantité à droite, condition sur plusieurs lignes).
 - [ ] « Recettes » (R) et « usages » (U) marchent sur : un drop (Hushed Down → où il tombe, où il sert), un minerai (minerai de fer → Sky Iron Fleck), un œuf de mob, une pièce, une paire.
 - [ ] La table d'assemblage est catalyseur des catégories Assembly, Components et Winged Energy.
 - [ ] Zones cliquables dans l'écran de la table : la flèche ouvre la catégorie de l'onglet actif.
@@ -183,6 +187,13 @@ Une ligne par source (« ok » quand le drop tombe dans la bonne condition **et*
 - [ ] EMI (si installé à la place ou en plus de JEI) : il lit les plugins JEI ; vérifier que les 4 catégories apparaissent.
 - [ ] REI : seulement avec l'addon « REI Plugin Compatibilities » ; à vérifier si le pack l'utilise.
 - [ ] Bouton Ailes de l'inventaire : il ne chevauche ni la bande de favoris de JEI ni le livre de recettes.
+
+## 8 bis. Wiki (quatrième onglet de la table) : plan à valider
+
+Rien n'est codé : le plan est dans `docs/WIKI_PLAN.md`.
+- [ ] Lire le plan et répondre aux 6 questions de sa dernière section (accès depuis le menu J, niveau de révélation des routes, chiffres dans le wiki ou seulement dans JEI, langue, arbre dessiné ou renvoi JEI, découvertes par joueur ou par équipe).
+- [ ] Valider le principe anti-spoil : pages cachées, teaser (énigme seule) puis révélées, révélation par paliers, mythiques cachées jusqu'à la première légendaire.
+- [ ] Une fois validé : implémentation (suivi des découvertes dans `WingsData`, pages JSON générées, quatrième onglet), puis une section de tests dédiée ici.
 
 ## 9. Ailes de Yin et Yang
 
