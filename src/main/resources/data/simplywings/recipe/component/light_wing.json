@@ -1,0 +1,26 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " MDM ",
+    " S S ",
+    "     ",
+    "     "
+  ],
+  "key": {
+    "M": {
+      "item": "simplywings:shimmer_membrane"
+    },
+    "D": {
+      "item": "simplywings:dragonbone_spar"
+    },
+    "S": {
+      "item": "simplywings:light_scale"
+    }
+  },
+  "result": {
+    "id": "simplywings:light_wing",
+    "count": 1
+  },
+  "essence": 100
+}

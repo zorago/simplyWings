@@ -1,0 +1,19 @@
+{
+  "type": "simplywings:assembly",
+  "harness": {
+    "item": "simplywings:fury_saddle"
+  },
+  "core": {
+    "item": "simplywings:light_core"
+  },
+  "left_wing": {
+    "item": "simplywings:light_wing"
+  },
+  "right_wing": {
+    "item": "simplywings:light_wing"
+  },
+  "result": {
+    "id": "simplywings:light_wings"
+  },
+  "essence": 1000
+}

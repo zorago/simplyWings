@@ -1,0 +1,26 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " MIM ",
+    "  R  ",
+    "     ",
+    "     "
+  ],
+  "key": {
+    "M": {
+      "item": "simplywings:infernal_membrane"
+    },
+    "I": {
+      "item": "simplywings:infernal_frame"
+    },
+    "R": {
+      "item": "simplywings:brimstone"
+    }
+  },
+  "result": {
+    "id": "simplywings:demon_wing",
+    "count": 1
+  },
+  "essence": 80
+}

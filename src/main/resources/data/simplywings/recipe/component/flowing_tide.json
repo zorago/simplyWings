@@ -1,0 +1,26 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " TCT ",
+    "  S  ",
+    "     ",
+    "     "
+  ],
+  "key": {
+    "T": {
+      "item": "simplywings:tide_pearl"
+    },
+    "C": {
+      "item": "minecraft:prismarine_crystals"
+    },
+    "S": {
+      "item": "minecraft:prismarine_shard"
+    }
+  },
+  "result": {
+    "id": "simplywings:flowing_tide",
+    "count": 1
+  },
+  "essence": 15
+}

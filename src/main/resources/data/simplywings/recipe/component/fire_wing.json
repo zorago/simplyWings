@@ -1,0 +1,26 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " LFL ",
+    " P P ",
+    "     ",
+    "     "
+  ],
+  "key": {
+    "L": {
+      "item": "simplywings:living_flame"
+    },
+    "F": {
+      "item": "simplywings:gilded_frame"
+    },
+    "P": {
+      "item": "minecraft:blaze_powder"
+    }
+  },
+  "result": {
+    "id": "simplywings:fire_wing",
+    "count": 1
+  },
+  "essence": 40
+}

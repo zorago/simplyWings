@@ -1,0 +1,35 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    " MMM ",
+    " RYB ",
+    " FIF ",
+    "     ",
+    "     "
+  ],
+  "key": {
+    "M": {
+      "item": "simplywings:macaw_plume"
+    },
+    "R": {
+      "item": "minecraft:red_dye"
+    },
+    "Y": {
+      "item": "minecraft:yellow_dye"
+    },
+    "B": {
+      "item": "simplywings:lapis_glint"
+    },
+    "F": {
+      "item": "simplywings:pristine_feather"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "id": "simplywings:parrot_wing",
+    "count": 1
+  },
+  "essence": 15
+}

@@ -1,0 +1,29 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    " FCF ",
+    " FCF ",
+    " KIK ",
+    "  C  ",
+    "     "
+  ],
+  "key": {
+    "F": {
+      "item": "minecraft:feather"
+    },
+    "C": {
+      "item": "simplywings:crow_feather"
+    },
+    "K": {
+      "item": "minecraft:ink_sac"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "id": "simplywings:crow_wing",
+    "count": 1
+  },
+  "essence": 15
+}

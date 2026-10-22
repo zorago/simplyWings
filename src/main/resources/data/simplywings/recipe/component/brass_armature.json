@@ -1,0 +1,23 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " BDB ",
+    " B B ",
+    "     ",
+    "     "
+  ],
+  "key": {
+    "B": {
+      "item": "simplywings:brass_ingot"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    }
+  },
+  "result": {
+    "id": "simplywings:brass_armature",
+    "count": 1
+  },
+  "essence": 40
+}

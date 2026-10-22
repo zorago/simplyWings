@@ -1,0 +1,29 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " P P ",
+    " GVG ",
+    "  B  ",
+    "     "
+  ],
+  "key": {
+    "P": {
+      "item": "simplywings:polar_glimmer"
+    },
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "V": {
+      "item": "simplywings:spirit_vessel"
+    },
+    "B": {
+      "item": "minecraft:blue_ice"
+    }
+  },
+  "result": {
+    "id": "simplywings:aurora_core",
+    "count": 1
+  },
+  "essence": 60
+}

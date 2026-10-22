@@ -1,0 +1,19 @@
+{
+  "type": "simplywings:assembly",
+  "harness": {
+    "item": "simplywings:iron_harness"
+  },
+  "core": {
+    "item": "simplywings:beetle_core"
+  },
+  "left_wing": {
+    "item": "simplywings:beetle_wing"
+  },
+  "right_wing": {
+    "item": "simplywings:beetle_wing"
+  },
+  "result": {
+    "id": "simplywings:beetle_wings"
+  },
+  "essence": 100
+}

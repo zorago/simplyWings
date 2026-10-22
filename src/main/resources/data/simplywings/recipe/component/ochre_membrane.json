@@ -1,0 +1,26 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " LOL ",
+    " LPL ",
+    "     ",
+    "     "
+  ],
+  "key": {
+    "L": {
+      "item": "minecraft:leather"
+    },
+    "O": {
+      "item": "minecraft:orange_dye"
+    },
+    "P": {
+      "item": "simplywings:elastic_gel"
+    }
+  },
+  "result": {
+    "id": "simplywings:ochre_membrane",
+    "count": 1
+  },
+  "essence": 15
+}

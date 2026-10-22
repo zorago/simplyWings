@@ -1,0 +1,29 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " IFI ",
+    " EPE ",
+    " IFI ",
+    "     "
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "F": {
+      "item": "simplywings:crow_feather"
+    },
+    "E": {
+      "item": "simplywings:emerald_sliver"
+    },
+    "P": {
+      "item": "minecraft:spyglass"
+    }
+  },
+  "result": {
+    "id": "simplywings:crow_core",
+    "count": 1
+  },
+  "essence": 30
+}

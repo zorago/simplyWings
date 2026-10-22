@@ -1,0 +1,26 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " F   ",
+    "  FG ",
+    "   FB",
+    "     "
+  ],
+  "key": {
+    "F": {
+      "item": "simplywings:fossil_fragment"
+    },
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "B": {
+      "item": "simplywings:hollow_bone"
+    }
+  },
+  "result": {
+    "id": "simplywings:fossil_spar",
+    "count": 1
+  },
+  "essence": 15
+}

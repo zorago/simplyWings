@@ -1,0 +1,29 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "  B  ",
+    " PRP ",
+    " BPB ",
+    "  S  ",
+    "     "
+  ],
+  "key": {
+    "B": {
+      "item": "minecraft:bamboo"
+    },
+    "P": {
+      "item": "minecraft:paper"
+    },
+    "R": {
+      "item": "minecraft:red_dye"
+    },
+    "S": {
+      "item": "simplywings:silk_thread"
+    }
+  },
+  "result": {
+    "id": "simplywings:kite_wing",
+    "count": 1
+  },
+  "essence": 10
+}

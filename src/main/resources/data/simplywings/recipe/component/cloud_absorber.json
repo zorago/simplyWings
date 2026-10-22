@@ -1,0 +1,29 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " GCG ",
+    " UFU ",
+    " GCG ",
+    "     "
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
+    "U": {
+      "item": "simplywings:updraft_shard"
+    },
+    "F": {
+      "item": "minecraft:feather"
+    }
+  },
+  "result": {
+    "id": "simplywings:cloud_absorber",
+    "count": 1
+  },
+  "essence": 0
+}

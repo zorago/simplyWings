@@ -1,0 +1,29 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " PHP ",
+    " DTD ",
+    " D D ",
+    "     "
+  ],
+  "key": {
+    "P": {
+      "item": "simplywings:blessed_plume"
+    },
+    "H": {
+      "item": "simplywings:halo"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "T": {
+      "item": "minecraft:totem_of_undying"
+    }
+  },
+  "result": {
+    "id": "simplywings:angel_core",
+    "count": 1
+  },
+  "essence": 100
+}

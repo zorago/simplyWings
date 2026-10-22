@@ -1,0 +1,26 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " MFM ",
+    " A A ",
+    "     ",
+    "     "
+  ],
+  "key": {
+    "M": {
+      "item": "simplywings:mossbound_stone"
+    },
+    "F": {
+      "item": "simplywings:gilded_frame"
+    },
+    "A": {
+      "item": "minecraft:amethyst_shard"
+    }
+  },
+  "result": {
+    "id": "simplywings:earth_wing",
+    "count": 1
+  },
+  "essence": 40
+}

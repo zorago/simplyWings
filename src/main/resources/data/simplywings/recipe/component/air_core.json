@@ -1,0 +1,29 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " BGB ",
+    " UVU ",
+    "  G  ",
+    "     "
+  ],
+  "key": {
+    "B": {
+      "item": "simplywings:bottled_gale"
+    },
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "U": {
+      "item": "simplywings:updraft_shard"
+    },
+    "V": {
+      "item": "simplywings:spirit_vessel"
+    }
+  },
+  "result": {
+    "id": "simplywings:air_core",
+    "count": 1
+  },
+  "essence": 60
+}

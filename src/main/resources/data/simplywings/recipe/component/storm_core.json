@@ -1,0 +1,32 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " KGK ",
+    " BVW ",
+    "  G  ",
+    "     "
+  ],
+  "key": {
+    "K": {
+      "item": "simplywings:charged_coil"
+    },
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "B": {
+      "item": "simplywings:bottled_gale"
+    },
+    "V": {
+      "item": "simplywings:spirit_vessel"
+    },
+    "W": {
+      "item": "minecraft:glowstone_dust"
+    }
+  },
+  "result": {
+    "id": "simplywings:storm_core",
+    "count": 1
+  },
+  "essence": 60
+}

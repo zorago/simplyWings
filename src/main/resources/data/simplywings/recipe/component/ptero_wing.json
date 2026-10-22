@@ -1,0 +1,26 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " SMM ",
+    "  F  ",
+    "     ",
+    "     "
+  ],
+  "key": {
+    "S": {
+      "item": "simplywings:fossil_spar"
+    },
+    "M": {
+      "item": "simplywings:ochre_membrane"
+    },
+    "F": {
+      "item": "simplywings:gilded_frame"
+    }
+  },
+  "result": {
+    "id": "simplywings:ptero_wing",
+    "count": 1
+  },
+  "essence": 40
+}

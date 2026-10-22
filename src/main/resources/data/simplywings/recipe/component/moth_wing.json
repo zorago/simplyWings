@@ -1,0 +1,32 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    " WDW ",
+    " DPD ",
+    " BSB ",
+    "     ",
+    "     "
+  ],
+  "key": {
+    "W": {
+      "item": "simplywings:fleece_tuft"
+    },
+    "D": {
+      "item": "simplywings:moth_dust"
+    },
+    "P": {
+      "item": "minecraft:pink_dye"
+    },
+    "B": {
+      "item": "minecraft:brown_dye"
+    },
+    "S": {
+      "item": "simplywings:silk_thread"
+    }
+  },
+  "result": {
+    "id": "simplywings:moth_wing",
+    "count": 1
+  },
+  "essence": 15
+}

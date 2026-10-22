@@ -1,0 +1,32 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    " SCS ",
+    " PCP ",
+    " PIP ",
+    "  D  ",
+    "     "
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:armadillo_scute"
+    },
+    "C": {
+      "item": "simplywings:chitin_shard"
+    },
+    "P": {
+      "item": "minecraft:glass_pane"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "D": {
+      "item": "minecraft:green_dye"
+    }
+  },
+  "result": {
+    "id": "simplywings:beetle_wing",
+    "count": 1
+  },
+  "essence": 15
+}

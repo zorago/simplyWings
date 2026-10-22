@@ -1,0 +1,19 @@
+{
+  "type": "simplywings:assembly",
+  "harness": {
+    "item": "simplywings:radiant_harness"
+  },
+  "core": {
+    "item": "simplywings:psyche_core"
+  },
+  "left_wing": {
+    "item": "simplywings:psyche_wing"
+  },
+  "right_wing": {
+    "item": "simplywings:psyche_wing"
+  },
+  "result": {
+    "id": "simplywings:psyche_wings"
+  },
+  "essence": 800
+}

@@ -1,0 +1,29 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " MAM ",
+    " CSC ",
+    "     ",
+    "     "
+  ],
+  "key": {
+    "M": {
+      "item": "minecraft:phantom_membrane"
+    },
+    "A": {
+      "item": "simplywings:aurora_veil"
+    },
+    "C": {
+      "item": "simplywings:glimmering_scale"
+    },
+    "S": {
+      "item": "simplywings:light_scale"
+    }
+  },
+  "result": {
+    "id": "simplywings:shimmer_membrane",
+    "count": 1
+  },
+  "essence": 50
+}

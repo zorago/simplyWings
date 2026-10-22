@@ -231,7 +231,7 @@ PAIRS = [
        "**Brass Ingot** et **Steel Plate** : le laiton de l'armature et l'acier des panneaux rivetés. **Crafter** : la machine qui fabrique.",
        "**Icarus Feather** : des plumes collées à la cire de rayon de miel, les ailes d'Icare. Un rappel : ne pas voler trop près du soleil."]),
     P("yin_yang", "Wings of Yin and Yang", "Légendaire", "yin_yang_core", "yin_wing",
-      "L'équilibre, première paire asymétrique : une aile noire et une aile blanche. *Paire prévue, pas encore dans le mod* : la route est prête pour son ajout.",
+      "L'équilibre, première paire asymétrique : une aile noire et une aile blanche.",
       ["Deux ailes différentes : la **Yin Wing** (gauche) et la **Yang Wing** (droite), chacune avec sa propre chaîne.",
        "**Yin** : **Echo Resonance** du deep dark, encre et obsidienne, le silence et le noir. **Yang** : **Heavenly Down** des nuages, poudre d'os et quartz, la lumière et le blanc.",
        "**Yin Sphere** et **Yang Sphere** : les deux sphères qui orbitent dans le dos, réunies dans le **Taiji Core**.",

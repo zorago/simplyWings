@@ -1,0 +1,19 @@
+{
+  "type": "simplywings:assembly",
+  "harness": {
+    "item": "simplywings:iron_harness"
+  },
+  "core": {
+    "item": "simplywings:amethyst_core"
+  },
+  "left_wing": {
+    "item": "simplywings:amethyst_wing"
+  },
+  "right_wing": {
+    "item": "simplywings:amethyst_wing"
+  },
+  "result": {
+    "id": "simplywings:amethyst_wings"
+  },
+  "essence": 100
+}

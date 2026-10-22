@@ -1,0 +1,26 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    " AAA ",
+    " ARA ",
+    "  I  ",
+    "     ",
+    "     "
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:amethyst_shard"
+    },
+    "R": {
+      "item": "simplywings:resonant_shard"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "id": "simplywings:amethyst_wing",
+    "count": 1
+  },
+  "essence": 15
+}

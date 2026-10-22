@@ -38,7 +38,8 @@ public record WingStyle(List<Slot> slots, float upFraction, float downFraction, 
         FOREST,
         FEATHERS,
         AMETHYST,
-        COPPER
+        COPPER,
+        YIN_YANG
     }
 
     public record Slot(WingModel.Shape shape, float x, float y, float z, float sweep, float lift, float phase,
@@ -232,6 +233,9 @@ public record WingStyle(List<Slot> slots, float upFraction, float downFraction, 
             new Slot(WingModel.LIGHT_HIND, 0f, 5f, 0.4f, -0.4f, -0.3f, 0.3f, 0.8f)),
             0.5f, 0.2f, 0.95f, 0.9f, 0f, 0f, 0.04f, true, false, Render.CUTOUT, null, Effects.NONE);
 
+    public static final WingStyle YIN_YANG = new WingStyle(List.of(Slot.single(WingModel.YIN_YANG)),
+            0.5f, 0.2f, 0.9f, 0.6f, 0f, 0f, 0.05f, true, false, Render.CUTOUT, null, Effects.YIN_YANG);
+
     private static final Map<ResourceLocation, WingStyle> STYLES = Map.ofEntries(
             Map.entry(SimplyWings.id("basic"), BASIC),
             Map.entry(SimplyWings.id("bat"), BAT),
@@ -241,6 +245,7 @@ public record WingStyle(List<Slot> slots, float upFraction, float downFraction, 
             Map.entry(SimplyWings.id("seraph"), SERAPH),
             Map.entry(SimplyWings.id("psyche"), PSYCHE),
             Map.entry(SimplyWings.id("daedalus"), DAEDALUS),
+            Map.entry(SimplyWings.id("yin_yang"), YIN_YANG),
             Map.entry(SimplyWings.id("fire"), FIRE),
             Map.entry(SimplyWings.id("water"), WATER),
             Map.entry(SimplyWings.id("earth"), EARTH),

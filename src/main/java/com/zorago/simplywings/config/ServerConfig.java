@@ -33,6 +33,10 @@ public final class ServerConfig {
     public static final ModConfigSpec.DoubleValue GLIDE_REGEN;
     public static final ModConfigSpec.DoubleValue STAMINA_SYNC_FRACTION;
     public static final ModConfigSpec.IntValue FURY_INVISIBILITY_TICKS;
+    public static final ModConfigSpec.DoubleValue CLOUD_MIN_Y;
+    public static final ModConfigSpec.DoubleValue CLOUD_MAX_Y;
+    public static final ModConfigSpec.IntValue CLOUD_ESSENCE_PER_SECOND;
+    public static final ModConfigSpec.BooleanValue CLOUD_HOVER_HARVEST;
     public static final ModConfigSpec.IntValue RESCUE_JUMPS;
     public static final ModConfigSpec.DoubleValue AIR_JUMP_COST;
 
@@ -126,6 +130,17 @@ public final class ServerConfig {
         b.push("fury");
         FURY_INVISIBILITY_TICKS = b.comment("Invisibility granted by the Night / Light charged dash, in ticks.")
                 .defineInRange("invisibilityTicks", 300, 0, 72000);
+        b.pop();
+
+        b.push("cloud");
+        CLOUD_MIN_Y = b.comment("Bottom of the Overworld cloud layer where a Cloud Absorber fills Cloud Flasks.")
+                .defineInRange("minY", 186.0, -64.0, 512.0);
+        CLOUD_MAX_Y = b.comment("Top of the Overworld cloud layer.")
+                .defineInRange("maxY", 204.0, -64.0, 512.0);
+        CLOUD_ESSENCE_PER_SECOND = b.comment("Cloud Essence added to the flasks each second of flight inside the cloud layer.")
+                .defineInRange("essencePerSecond", 2, 0, 100);
+        CLOUD_HOVER_HARVEST = b.comment("Whether hovering (stabilized mode) also harvests, not only travel flight.")
+                .define("hoverHarvest", true);
         b.pop();
 
         b.push("damage");

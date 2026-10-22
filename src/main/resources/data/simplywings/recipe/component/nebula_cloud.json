@@ -1,0 +1,26 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " SGS ",
+    "  U  ",
+    "     ",
+    "     "
+  ],
+  "key": {
+    "S": {
+      "item": "simplywings:stardust"
+    },
+    "G": {
+      "item": "minecraft:glowstone_dust"
+    },
+    "U": {
+      "item": "minecraft:purple_dye"
+    }
+  },
+  "result": {
+    "id": "simplywings:nebula_cloud",
+    "count": 1
+  },
+  "essence": 15
+}

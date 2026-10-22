@@ -1,0 +1,19 @@
+{
+  "type": "simplywings:assembly",
+  "harness": {
+    "item": "simplywings:gilded_harness"
+  },
+  "core": {
+    "item": "simplywings:storm_core"
+  },
+  "left_wing": {
+    "item": "simplywings:storm_wing"
+  },
+  "right_wing": {
+    "item": "simplywings:storm_wing"
+  },
+  "result": {
+    "id": "simplywings:storm_wings"
+  },
+  "essence": 300
+}

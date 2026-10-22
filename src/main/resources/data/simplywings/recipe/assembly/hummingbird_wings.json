@@ -1,0 +1,19 @@
+{
+  "type": "simplywings:assembly",
+  "harness": {
+    "item": "simplywings:iron_harness"
+  },
+  "core": {
+    "item": "simplywings:hummingbird_core"
+  },
+  "left_wing": {
+    "item": "simplywings:hummingbird_wing"
+  },
+  "right_wing": {
+    "item": "simplywings:hummingbird_wing"
+  },
+  "result": {
+    "id": "simplywings:hummingbird_wings"
+  },
+  "essence": 100
+}

@@ -1,0 +1,29 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    " G G ",
+    " LHL ",
+    " GVG ",
+    "     ",
+    "     "
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "L": {
+      "item": "minecraft:leather"
+    },
+    "H": {
+      "item": "simplywings:iron_harness"
+    },
+    "V": {
+      "item": "simplywings:gilded_vein"
+    }
+  },
+  "result": {
+    "id": "simplywings:gilded_harness",
+    "count": 1
+  },
+  "essence": 25
+}

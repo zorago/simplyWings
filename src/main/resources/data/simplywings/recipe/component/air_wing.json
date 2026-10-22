@@ -1,0 +1,29 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " PBP ",
+    " SFS ",
+    "     ",
+    "     "
+  ],
+  "key": {
+    "P": {
+      "item": "minecraft:glass_pane"
+    },
+    "B": {
+      "item": "simplywings:bottled_gale"
+    },
+    "S": {
+      "item": "simplywings:silk_thread"
+    },
+    "F": {
+      "item": "simplywings:gilded_frame"
+    }
+  },
+  "result": {
+    "id": "simplywings:air_wing",
+    "count": 1
+  },
+  "essence": 40
+}

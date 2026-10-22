@@ -1,0 +1,29 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " TGT ",
+    " NVN ",
+    "  G  ",
+    "     "
+  ],
+  "key": {
+    "T": {
+      "item": "simplywings:flowing_tide"
+    },
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "N": {
+      "item": "minecraft:nautilus_shell"
+    },
+    "V": {
+      "item": "simplywings:spirit_vessel"
+    }
+  },
+  "result": {
+    "id": "simplywings:water_core",
+    "count": 1
+  },
+  "essence": 60
+}

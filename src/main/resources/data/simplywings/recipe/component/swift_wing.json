@@ -1,0 +1,29 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    "IF   ",
+    " FQ  ",
+    "  FQ ",
+    "  CQ "
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "F": {
+      "item": "minecraft:feather"
+    },
+    "Q": {
+      "item": "simplywings:swift_quill"
+    },
+    "C": {
+      "item": "minecraft:charcoal"
+    }
+  },
+  "result": {
+    "id": "simplywings:swift_wing",
+    "count": 1
+  },
+  "essence": 15
+}

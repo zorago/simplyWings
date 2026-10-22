@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## État du projet
 
-Mod d'ailes standalone pour **NeoForge 1.21.1** (nom de travail : SimplyWings). Prototype de vol codé, 40 paires.
+Mod d'ailes standalone pour **NeoForge 1.21.1** (nom de travail : SimplyWings). Prototype de vol codé, 41 paires.
 
 - `CAHIER_DES_CHARGES.md` : spec complète, **fait foi** en cas de doute (stats, formules de vol, table d'architecture, points ouverts).
 - `HANDOFF.md` : point d'entrée, étapes de travail et ordre d'implémentation.
@@ -15,7 +15,7 @@ Mod d'ailes standalone pour **NeoForge 1.21.1** (nom de travail : SimplyWings). 
 - `BALANCE.md` : les 7 stats (échelle 0-100, valeurs physiques à 0 et à 100 dans la config serveur `[stats]`), les scores de chaque paire et la répartition des globaux. À tenir à jour à chaque changement de stats ou de physique.
 - `docs/ANALYSE_REFERENCES.md` : analyse des mods de référence et du pack, avec la table d'architecture corrigée. **Elle prime sur la table du cahier des charges** là où elle la corrige (anti-kick, caméra, souris).
 
-Étape en cours : **refonte art** (commune et 21 rares faites, en attente de la passe studio en jeu), puis épiques, légendaires et mythiques ; les routes de craft des 40 paires sont conçues (`crafting/`), reste à les implémenter (items, drops, table d'assemblage). Analyse validée. Un premier écran Ailes, le bouton d'inventaire et le HUD de stamina existent. Les 181 matériaux et pièces des routes sont enregistrés (`item/MaterialIds`, générés), avec texture et tooltip : description romancée puis énigme d'obtention (`client/ItemLore`, clés `<item>.lore` et `<item>.riddle` dans `en_us.json`, pour tous les items du mod). Pas encore de loots (registre `loot_source`, GLM), de recettes JSON des routes, de forge ni de JEI.
+Étape en cours : **refonte art** (commune et 21 rares faites, en attente de la passe studio en jeu), puis épiques, légendaires et mythiques ; les routes de craft des 41 paires sont conçues (`crafting/`) et générées en recettes JSON (`data/simplywings/recipe/component` et `assembly`). Analyse validée. Un premier écran Ailes, le bouton d'inventaire et le HUD de stamina existent. Les 188 matériaux et pièces des routes sont enregistrés (`item/MaterialIds`, générés), avec texture et tooltip : description romancée puis énigme d'obtention (`client/ItemLore`, clés `<item>.lore` et `<item>.riddle` dans `en_us.json`, pour tous les items du mod). Cloud Absorber et récolte des nuages faits (`flight/CloudHarvest`, config `[cloud]`) ; item `forge_compass` prêt (aiguille via `lodestone_tracker`), mais la forge qui le donne n'existe pas encore. Pas encore de loots (registre `loot_source`, GLM), de forge ni de JEI. Audit des items : `python tools/crafting_gen/audit.py`.
 
 Code : package `com.zorago.simplywings`, NeoForge 21.1.257 (comme le pack), ModDevGradle.
 - `flight/ServerFlight` : autorité serveur (mode, stamina, gravité à 0, sauts de secours, crash, sync).

@@ -1,0 +1,29 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    "  D  ",
+    " PMP ",
+    "  T  ",
+    "     "
+  ],
+  "key": {
+    "D": {
+      "item": "simplywings:dragonbone_spar"
+    },
+    "P": {
+      "item": "simplywings:night_plating"
+    },
+    "M": {
+      "item": "simplywings:silent_membrane"
+    },
+    "T": {
+      "item": "simplywings:prosthetic_tailfin"
+    }
+  },
+  "result": {
+    "id": "simplywings:night_tail",
+    "count": 1
+  },
+  "essence": 90
+}

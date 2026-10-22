@@ -1,0 +1,32 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " NCN ",
+    " SHS ",
+    "  T  ",
+    "     "
+  ],
+  "key": {
+    "N": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "C": {
+      "item": "simplywings:blast_chamber"
+    },
+    "S": {
+      "item": "minecraft:shulker_shell"
+    },
+    "H": {
+      "item": "minecraft:pitcher_plant"
+    },
+    "T": {
+      "item": "simplywings:light_tail"
+    }
+  },
+  "result": {
+    "id": "simplywings:light_core",
+    "count": 1
+  },
+  "essence": 100
+}

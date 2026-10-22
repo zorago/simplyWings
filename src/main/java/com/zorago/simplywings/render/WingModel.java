@@ -24,7 +24,11 @@ public final class WingModel {
     public record Segment(float length, float bone, int strips, float plateFrom, float plateTo, int u) {
     }
 
-    public record Shape(String name, List<Segment> segments, int textureWidth, int textureHeight) {
+    public record Shape(String name, List<Segment> segments, int textureWidth, int textureHeight, int rightV) {
+        public Shape(String name, List<Segment> segments, int textureWidth, int textureHeight) {
+            this(name, segments, textureWidth, textureHeight, 0);
+        }
+
         public ModelLayerLocation layer() {
             return new ModelLayerLocation(SimplyWings.id(name + "_wings"), "main");
         }
@@ -273,7 +277,13 @@ public final class WingModel {
             new Segment(6f, 0.8f, 2, 7f, 3f, 20)),
             64, 32);
 
-    public static final List<Shape> SHAPES = List.of(BASIC, ANGEL, BAT, DRAGONFLY, PSYCHE_FORE, PSYCHE_HIND, DEMON, DAEDALUS,
+    public static final Shape YIN_YANG = new Shape("yin_yang", List.of(
+            new Segment(12f, 1.3f, 3, 12f, 16f, 0),
+            new Segment(12f, 1.1f, 3, 16f, 19f, 30),
+            new Segment(10f, 1f, 4, 19f, 22f, 58)),
+            128, 64, 32);
+
+    public static final List<Shape> SHAPES = List.of(YIN_YANG, BASIC, ANGEL, BAT, DRAGONFLY, PSYCHE_FORE, PSYCHE_HIND, DEMON, DAEDALUS,
             FIRE, WATER, EARTH, AIR, PTERO, STORM, AURORA, SHADOW, NEBULA, FOREST, NIGHT_MAIN, NIGHT_HIND, LIGHT_MAIN, LIGHT_HIND,
             CROW, OWL, GULL, HUMMINGBIRD, EAGLE, SWIFT, PIGEON, PEACOCK, PARROT, BEE, MOTH, BEETLE, BEETLE_SHELL, SQUIRREL, FLYING_FISH, PHANTOM, AMETHYST, ORNITHOPTER, KITE, COPPER, PATCHWORK);
 
@@ -315,18 +325,18 @@ public final class WingModel {
         return LayerDefinition.create(mesh, shape.textureWidth(), shape.textureHeight());
     }
 
-    private static CubeListBuilder segment(Segment seg, float s, float depth) {
+    private static CubeListBuilder segment(Segment seg, float s, float depth, int v) {
         float half = seg.bone() / 2f;
         float x0 = s > 0 ? 0 : -seg.length();
         CubeListBuilder builder = CubeListBuilder.create()
-                .texOffs(seg.u(), 0).addBox(x0, -half, -half, seg.length(), seg.bone(), seg.bone());
+                .texOffs(seg.u(), v).addBox(x0, -half, -half, seg.length(), seg.bone(), seg.bone());
         float stripWidth = seg.length() / seg.strips();
         for (int i = 0; i < seg.strips(); i++) {
             float t = seg.strips() == 1 ? 1f : i / (float) (seg.strips() - 1);
             float along = s > 0 ? t : 1f - t;
             float height = seg.plateFrom() + (seg.plateTo() - seg.plateFrom()) * along;
             float x = x0 + i * stripWidth;
-            builder.texOffs(seg.u(), 4).addBox(x, half, depth + i * 0.02f, stripWidth, height, 0.5f);
+            builder.texOffs(seg.u(), v + 4).addBox(x, half, depth + i * 0.02f, stripWidth, height, 0.5f);
         }
         return builder;
     }
@@ -337,7 +347,7 @@ public final class WingModel {
         float offset = 0f;
         for (int i = 0; i < shape.segments().size(); i++) {
             Segment seg = shape.segments().get(i);
-            parent = parent.addOrReplaceChild(name + "_" + SEGMENT_NAMES[i], segment(seg, s, SEGMENT_DEPTHS[i]),
+            parent = parent.addOrReplaceChild(name + "_" + SEGMENT_NAMES[i], segment(seg, s, SEGMENT_DEPTHS[i], s < 0 ? shape.rightV() : 0),
                     PartPose.offset(offset * s, 0f, 0f));
             offset = seg.length();
         }

@@ -1,0 +1,32 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " LKP ",
+    " UFU ",
+    "     ",
+    "     "
+  ],
+  "key": {
+    "L": {
+      "item": "minecraft:light_blue_dye"
+    },
+    "K": {
+      "item": "simplywings:charged_coil"
+    },
+    "P": {
+      "item": "minecraft:purple_dye"
+    },
+    "U": {
+      "item": "simplywings:updraft_shard"
+    },
+    "F": {
+      "item": "simplywings:gilded_frame"
+    }
+  },
+  "result": {
+    "id": "simplywings:storm_wing",
+    "count": 1
+  },
+  "essence": 40
+}

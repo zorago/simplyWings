@@ -1,0 +1,29 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " IMI ",
+    " CNC ",
+    " IMI ",
+    "     "
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "M": {
+      "item": "simplywings:macaw_plume"
+    },
+    "C": {
+      "item": "minecraft:cocoa_beans"
+    },
+    "N": {
+      "item": "minecraft:note_block"
+    }
+  },
+  "result": {
+    "id": "simplywings:parrot_core",
+    "count": 1
+  },
+  "essence": 30
+}

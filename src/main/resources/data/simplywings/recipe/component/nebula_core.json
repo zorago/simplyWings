@@ -1,0 +1,29 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " NGN ",
+    " CVC ",
+    "  G  ",
+    "     "
+  ],
+  "key": {
+    "N": {
+      "item": "simplywings:nebula_cloud"
+    },
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "C": {
+      "item": "minecraft:popped_chorus_fruit"
+    },
+    "V": {
+      "item": "simplywings:spirit_vessel"
+    }
+  },
+  "result": {
+    "id": "simplywings:nebula_core",
+    "count": 1
+  },
+  "essence": 60
+}

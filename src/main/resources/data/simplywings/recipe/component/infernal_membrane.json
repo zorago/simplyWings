@@ -1,0 +1,29 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " VLV ",
+    " NMN ",
+    "  L  ",
+    "     "
+  ],
+  "key": {
+    "V": {
+      "item": "simplywings:vex_wing"
+    },
+    "L": {
+      "item": "simplywings:elastic_gel"
+    },
+    "N": {
+      "item": "minecraft:nether_wart"
+    },
+    "M": {
+      "item": "minecraft:magma_cream"
+    }
+  },
+  "result": {
+    "id": "simplywings:infernal_membrane",
+    "count": 1
+  },
+  "essence": 25
+}

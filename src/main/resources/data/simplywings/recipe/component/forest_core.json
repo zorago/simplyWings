@@ -1,0 +1,32 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " BGB ",
+    " SVL ",
+    "  G  ",
+    "     "
+  ],
+  "key": {
+    "B": {
+      "item": "simplywings:blossom_spirit"
+    },
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "S": {
+      "item": "minecraft:spore_blossom"
+    },
+    "V": {
+      "item": "simplywings:spirit_vessel"
+    },
+    "L": {
+      "item": "simplywings:living_bough"
+    }
+  },
+  "result": {
+    "id": "simplywings:forest_core",
+    "count": 1
+  },
+  "essence": 60
+}

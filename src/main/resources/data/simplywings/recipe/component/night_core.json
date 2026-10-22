@@ -1,0 +1,32 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " NCN ",
+    " EHE ",
+    "  T  ",
+    "     "
+  ],
+  "key": {
+    "N": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "C": {
+      "item": "simplywings:plasma_chamber"
+    },
+    "E": {
+      "item": "simplywings:echo_resonance"
+    },
+    "H": {
+      "item": "minecraft:torchflower"
+    },
+    "T": {
+      "item": "simplywings:night_tail"
+    }
+  },
+  "result": {
+    "id": "simplywings:night_core",
+    "count": 1
+  },
+  "essence": 100
+}

@@ -1,0 +1,26 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    " PPP ",
+    " PCP ",
+    "  B  ",
+    "     ",
+    "     "
+  ],
+  "key": {
+    "P": {
+      "item": "simplywings:golden_plume"
+    },
+    "C": {
+      "item": "simplywings:celestial_frame"
+    },
+    "B": {
+      "item": "simplywings:bottled_gale"
+    }
+  },
+  "result": {
+    "id": "simplywings:seraph_wing",
+    "count": 1
+  },
+  "essence": 80
+}

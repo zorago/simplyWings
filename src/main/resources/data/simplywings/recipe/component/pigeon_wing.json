@@ -1,0 +1,35 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    " FHF ",
+    " PKP ",
+    " YIY ",
+    "  H  ",
+    "     "
+  ],
+  "key": {
+    "F": {
+      "item": "minecraft:feather"
+    },
+    "H": {
+      "item": "simplywings:homing_feather"
+    },
+    "P": {
+      "item": "simplywings:pristine_feather"
+    },
+    "K": {
+      "item": "simplywings:abyssal_ink"
+    },
+    "Y": {
+      "item": "minecraft:light_gray_dye"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "id": "simplywings:pigeon_wing",
+    "count": 1
+  },
+  "essence": 15
+}

@@ -1,0 +1,19 @@
+{
+  "type": "simplywings:assembly",
+  "harness": {
+    "item": "simplywings:iron_harness"
+  },
+  "core": {
+    "item": "simplywings:moth_core"
+  },
+  "left_wing": {
+    "item": "simplywings:moth_wing"
+  },
+  "right_wing": {
+    "item": "simplywings:moth_wing"
+  },
+  "result": {
+    "id": "simplywings:moth_wings"
+  },
+  "essence": 100
+}

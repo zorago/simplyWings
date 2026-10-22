@@ -1,0 +1,29 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " GPG ",
+    "  V  ",
+    " GEG ",
+    "     "
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "P": {
+      "item": "minecraft:blaze_powder"
+    },
+    "V": {
+      "item": "simplywings:gilded_vein"
+    },
+    "E": {
+      "item": "simplywings:ember_wisp"
+    }
+  },
+  "result": {
+    "id": "simplywings:gilded_frame",
+    "count": 1
+  },
+  "essence": 15
+}

@@ -1,0 +1,29 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " CGC ",
+    " EVE ",
+    "  G  ",
+    "     "
+  ],
+  "key": {
+    "C": {
+      "item": "simplywings:condensed_shadow"
+    },
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "E": {
+      "item": "minecraft:ender_eye"
+    },
+    "V": {
+      "item": "simplywings:spirit_vessel"
+    }
+  },
+  "result": {
+    "id": "simplywings:shadow_core",
+    "count": 1
+  },
+  "essence": 60
+}

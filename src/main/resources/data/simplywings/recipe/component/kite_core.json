@@ -1,0 +1,29 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " TIT ",
+    " BUB ",
+    " T T ",
+    "     "
+  ],
+  "key": {
+    "T": {
+      "item": "simplywings:silk_thread"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "B": {
+      "item": "minecraft:bamboo"
+    },
+    "U": {
+      "item": "simplywings:updraft_shard"
+    }
+  },
+  "result": {
+    "id": "simplywings:kite_core",
+    "count": 1
+  },
+  "essence": 20
+}

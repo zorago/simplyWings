@@ -1,0 +1,26 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " SKS ",
+    " SOS ",
+    "     ",
+    "     "
+  ],
+  "key": {
+    "S": {
+      "item": "simplywings:dragon_scale"
+    },
+    "K": {
+      "item": "simplywings:soot_flake"
+    },
+    "O": {
+      "item": "minecraft:obsidian"
+    }
+  },
+  "result": {
+    "id": "simplywings:night_scale",
+    "count": 4
+  },
+  "essence": 40
+}

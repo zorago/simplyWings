@@ -1,0 +1,19 @@
+{
+  "type": "simplywings:assembly",
+  "harness": {
+    "item": "simplywings:radiant_harness"
+  },
+  "core": {
+    "item": "simplywings:angel_core"
+  },
+  "left_wing": {
+    "item": "simplywings:angel_wing"
+  },
+  "right_wing": {
+    "item": "simplywings:angel_wing"
+  },
+  "result": {
+    "id": "simplywings:angel_wings"
+  },
+  "essence": 800
+}

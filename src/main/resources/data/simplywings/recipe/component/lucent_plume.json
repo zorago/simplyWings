@@ -1,0 +1,26 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " FBF ",
+    " FHF ",
+    "     ",
+    "     "
+  ],
+  "key": {
+    "F": {
+      "item": "simplywings:pristine_feather"
+    },
+    "B": {
+      "item": "minecraft:bone_meal"
+    },
+    "H": {
+      "item": "simplywings:heavenly_down"
+    }
+  },
+  "result": {
+    "id": "simplywings:lucent_plume",
+    "count": 2
+  },
+  "essence": 20
+}

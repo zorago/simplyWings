@@ -1,0 +1,32 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    " B B ",
+    "BMMMB",
+    " MIM ",
+    " LGL ",
+    "     "
+  ],
+  "key": {
+    "B": {
+      "item": "simplywings:hollow_bone"
+    },
+    "M": {
+      "item": "simplywings:bat_membrane"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "L": {
+      "item": "minecraft:leather"
+    },
+    "G": {
+      "item": "simplywings:elastic_gel"
+    }
+  },
+  "result": {
+    "id": "simplywings:bat_wing",
+    "count": 1
+  },
+  "essence": 15
+}

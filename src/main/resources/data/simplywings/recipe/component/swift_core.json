@@ -1,0 +1,29 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "  Q  ",
+    " ISI ",
+    " IUI ",
+    "  S  ",
+    "  Q  "
+  ],
+  "key": {
+    "Q": {
+      "item": "simplywings:swift_quill"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "S": {
+      "item": "minecraft:sugar"
+    },
+    "U": {
+      "item": "simplywings:updraft_shard"
+    }
+  },
+  "result": {
+    "id": "simplywings:swift_core",
+    "count": 1
+  },
+  "essence": 30
+}

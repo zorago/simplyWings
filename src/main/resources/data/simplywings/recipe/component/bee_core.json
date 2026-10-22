@@ -1,0 +1,35 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " IHI ",
+    " JBJ ",
+    " KNK ",
+    "     "
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "H": {
+      "item": "minecraft:honeycomb"
+    },
+    "J": {
+      "item": "simplywings:royal_jelly"
+    },
+    "B": {
+      "item": "minecraft:honey_bottle"
+    },
+    "K": {
+      "item": "simplywings:sky_iron"
+    },
+    "N": {
+      "item": "simplywings:nectar_drop"
+    }
+  },
+  "result": {
+    "id": "simplywings:bee_core",
+    "count": 1
+  },
+  "essence": 30
+}

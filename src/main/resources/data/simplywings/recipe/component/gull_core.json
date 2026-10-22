@@ -1,0 +1,29 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "  G  ",
+    " ICI ",
+    " INI ",
+    "  C  ",
+    "  G  "
+  ],
+  "key": {
+    "G": {
+      "item": "simplywings:gull_feather"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "C": {
+      "item": "minecraft:cod"
+    },
+    "N": {
+      "item": "minecraft:nautilus_shell"
+    }
+  },
+  "result": {
+    "id": "simplywings:gull_core",
+    "count": 1
+  },
+  "essence": 30
+}

@@ -1,0 +1,29 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    " PPP ",
+    " AFA ",
+    " PBP ",
+    "     ",
+    "     "
+  ],
+  "key": {
+    "P": {
+      "item": "minecraft:glass_pane"
+    },
+    "A": {
+      "item": "simplywings:fossil_amber"
+    },
+    "F": {
+      "item": "simplywings:gilded_frame"
+    },
+    "B": {
+      "item": "minecraft:brown_dye"
+    }
+  },
+  "result": {
+    "id": "simplywings:ancient_wing",
+    "count": 1
+  },
+  "essence": 40
+}

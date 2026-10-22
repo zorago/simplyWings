@@ -1,0 +1,38 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    " FFF ",
+    " RBG ",
+    " LSL ",
+    "  T  ",
+    "     "
+  ],
+  "key": {
+    "F": {
+      "item": "minecraft:feather"
+    },
+    "R": {
+      "item": "minecraft:red_wool"
+    },
+    "B": {
+      "item": "simplywings:fleece_tuft"
+    },
+    "G": {
+      "item": "minecraft:green_wool"
+    },
+    "L": {
+      "item": "minecraft:leather"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "T": {
+      "item": "simplywings:silk_thread"
+    }
+  },
+  "result": {
+    "id": "simplywings:patchwork_wing",
+    "count": 1
+  },
+  "essence": 5
+}

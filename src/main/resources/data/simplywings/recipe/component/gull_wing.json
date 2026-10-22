@@ -1,0 +1,29 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    "FFGGK",
+    " IFG ",
+    "  F  ",
+    "     "
+  ],
+  "key": {
+    "F": {
+      "item": "minecraft:feather"
+    },
+    "G": {
+      "item": "simplywings:gull_feather"
+    },
+    "K": {
+      "item": "simplywings:abyssal_ink"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "id": "simplywings:gull_wing",
+    "count": 1
+  },
+  "essence": 15
+}

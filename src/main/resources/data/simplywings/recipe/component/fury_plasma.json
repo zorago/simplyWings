@@ -1,0 +1,26 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " BPB ",
+    "  T  ",
+    "     ",
+    "     "
+  ],
+  "key": {
+    "B": {
+      "item": "minecraft:dragon_breath"
+    },
+    "P": {
+      "item": "minecraft:blaze_powder"
+    },
+    "T": {
+      "item": "simplywings:ghast_wisp"
+    }
+  },
+  "result": {
+    "id": "simplywings:fury_plasma",
+    "count": 1
+  },
+  "essence": 30
+}

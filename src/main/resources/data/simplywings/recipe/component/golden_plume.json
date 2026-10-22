@@ -1,0 +1,26 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " GPG ",
+    " WPW ",
+    "     ",
+    "     "
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "P": {
+      "item": "simplywings:blessed_plume"
+    },
+    "W": {
+      "item": "simplywings:gilded_vein"
+    }
+  },
+  "result": {
+    "id": "simplywings:golden_plume",
+    "count": 2
+  },
+  "essence": 35
+}

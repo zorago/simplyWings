@@ -1,0 +1,29 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " CTC ",
+    " RLR ",
+    "  T  ",
+    "     "
+  ],
+  "key": {
+    "C": {
+      "item": "simplywings:copper_spark"
+    },
+    "T": {
+      "item": "simplywings:thunder_spark"
+    },
+    "R": {
+      "item": "simplywings:redstone_pulse"
+    },
+    "L": {
+      "item": "minecraft:lightning_rod"
+    }
+  },
+  "result": {
+    "id": "simplywings:charged_coil",
+    "count": 1
+  },
+  "essence": 15
+}

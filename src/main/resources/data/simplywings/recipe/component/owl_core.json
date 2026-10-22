@@ -1,0 +1,29 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "  B  ",
+    " IDI ",
+    " G G ",
+    " IDI ",
+    "     "
+  ],
+  "key": {
+    "B": {
+      "item": "minecraft:book"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "D": {
+      "item": "simplywings:hushed_down"
+    },
+    "G": {
+      "item": "minecraft:golden_carrot"
+    }
+  },
+  "result": {
+    "id": "simplywings:owl_core",
+    "count": 1
+  },
+  "essence": 30
+}

@@ -1,0 +1,29 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " PGP ",
+    " L U ",
+    "     ",
+    "     "
+  ],
+  "key": {
+    "P": {
+      "item": "simplywings:polar_glimmer"
+    },
+    "G": {
+      "item": "simplywings:glimmer_spore"
+    },
+    "L": {
+      "item": "minecraft:lime_dye"
+    },
+    "U": {
+      "item": "minecraft:purple_dye"
+    }
+  },
+  "result": {
+    "id": "simplywings:aurora_veil",
+    "count": 1
+  },
+  "essence": 15
+}

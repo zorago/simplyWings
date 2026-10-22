@@ -1,6 +1,6 @@
 # Handoff — Mod d'ailes (NeoForge 1.21.1)
 
-Ce fichier sert de point d'entrée pour la session Claude Code. La spec complète et à jour est dans `CAHIER_DES_CHARGES.md`, qui fait foi en cas de doute. Les étapes 1 à 5 sont codées (vol, rendu, 40 paires), ainsi qu'un premier écran Ailes et le HUD de stamina. Les routes de craft des 40 paires sont conçues : règles dans `CRAFTING.md`, une route par paire dans `crafting/<id>.md`.
+Ce fichier sert de point d'entrée pour la session Claude Code. La spec complète et à jour est dans `CAHIER_DES_CHARGES.md`, qui fait foi en cas de doute. Les étapes 1 à 5 sont codées (vol, rendu, 41 paires), ainsi qu'un premier écran Ailes et le HUD de stamina. Les routes de craft des 40 paires sont conçues : règles dans `CRAFTING.md`, une route par paire dans `crafting/<id>.md`.
 
 ## Contexte
 

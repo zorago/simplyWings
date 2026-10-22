@@ -1,0 +1,26 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " SNS ",
+    " S S ",
+    "  P  ",
+    "     "
+  ],
+  "key": {
+    "S": {
+      "item": "simplywings:night_scale"
+    },
+    "N": {
+      "item": "simplywings:ancient_ember"
+    },
+    "P": {
+      "item": "minecraft:phantom_membrane"
+    }
+  },
+  "result": {
+    "id": "simplywings:night_plating",
+    "count": 1
+  },
+  "essence": 50
+}

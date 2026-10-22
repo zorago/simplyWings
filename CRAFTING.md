@@ -172,10 +172,11 @@ Les intermédiaires utilisés par plusieurs paires. Leur recette dessinée est r
 
 | # | Produit | Où | Entrées | Essence |
 | --- | --- | --- | --- | --- |
-| C1 | Cloud Absorber `simplywings:cloud_absorber` ×1 | à définir | à définir | 0 |
-| C2 | Cloud Flask `simplywings:cloud_flask` (vide) ×1 | à définir | à définir | 0 |
-| C3 | Cloud Flask (pleine, 100 unités) | `CLOUD` | Flacon vide, absorbeur dans l'inventaire | 0 |
+| C1 | Cloud Absorber `simplywings:cloud_absorber` ×1 | `GRID` | Glass ×4, Copper Ingot ×2, Updraft Shard ×2, Feather ×1 | 0 |
+| C2 | Cloud Flask `simplywings:cloud_flask` (vide) ×2 | `GRID` | Glass ×4, Feather ×1 | 0 |
+| C3 | Cloud Flask (pleine, 100 unités) | `CLOUD` | Flacon vide, absorbeur dans l'inventaire, vol dans la couche de nuages (Y 186 à 204, 2 unités/s) | 0 |
 | C4 | Assembly Table `simplywings:assembly_table` | Forge de l'End | Déjà posée dans la structure | 0 |
+| C5 | Forge Compass `simplywings:forge_compass` | Mort d'un dragon | Donné aux joueurs de l'île centrale, à partir du 2e dragon | 0 |
 
 ## Récapitulatif
 

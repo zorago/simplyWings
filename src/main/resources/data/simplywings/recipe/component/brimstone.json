@@ -1,0 +1,26 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " GPG ",
+    "  M  ",
+    "     ",
+    "     "
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:gunpowder"
+    },
+    "P": {
+      "item": "minecraft:blaze_powder"
+    },
+    "M": {
+      "item": "simplywings:soot_flake"
+    }
+  },
+  "result": {
+    "id": "simplywings:brimstone",
+    "count": 2
+  },
+  "essence": 20
+}

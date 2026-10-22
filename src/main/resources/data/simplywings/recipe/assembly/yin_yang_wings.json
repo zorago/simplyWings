@@ -1,0 +1,19 @@
+{
+  "type": "simplywings:assembly",
+  "harness": {
+    "item": "simplywings:radiant_harness"
+  },
+  "core": {
+    "item": "simplywings:yin_yang_core"
+  },
+  "left_wing": {
+    "item": "simplywings:yin_wing"
+  },
+  "right_wing": {
+    "item": "simplywings:yang_wing"
+  },
+  "result": {
+    "id": "simplywings:yin_yang_wings"
+  },
+  "essence": 800
+}

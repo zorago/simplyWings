@@ -1,0 +1,26 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    " PPP ",
+    " PCP ",
+    "  D  ",
+    "     ",
+    "     "
+  ],
+  "key": {
+    "P": {
+      "item": "simplywings:blessed_plume"
+    },
+    "C": {
+      "item": "simplywings:celestial_frame"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    }
+  },
+  "result": {
+    "id": "simplywings:angel_wing",
+    "count": 1
+  },
+  "essence": 80
+}

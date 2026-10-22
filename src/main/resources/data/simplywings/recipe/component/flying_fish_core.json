@@ -1,0 +1,29 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " IRI ",
+    " KTK ",
+    " IRI ",
+    "     "
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "R": {
+      "item": "simplywings:fin_ray"
+    },
+    "K": {
+      "item": "simplywings:glimmering_scale"
+    },
+    "T": {
+      "item": "minecraft:tropical_fish"
+    }
+  },
+  "result": {
+    "id": "simplywings:flying_fish_core",
+    "count": 1
+  },
+  "essence": 30
+}

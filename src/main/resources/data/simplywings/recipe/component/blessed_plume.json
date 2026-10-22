@@ -1,0 +1,29 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " FHF ",
+    " PWP ",
+    "  H  ",
+    "     "
+  ],
+  "key": {
+    "F": {
+      "item": "minecraft:feather"
+    },
+    "H": {
+      "item": "simplywings:heavenly_down"
+    },
+    "P": {
+      "item": "simplywings:pristine_feather"
+    },
+    "W": {
+      "item": "minecraft:white_dye"
+    }
+  },
+  "result": {
+    "id": "simplywings:blessed_plume",
+    "count": 2
+  },
+  "essence": 15
+}

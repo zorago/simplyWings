@@ -1,10 +1,11 @@
 import json
+import math
 import shutil
 import subprocess
 from collections import OrderedDict
 from pathlib import Path
 
-from PIL import Image
+from PIL import Image, ImageDraw
 
 from art import GEMS, ITEMS, METALS, palette, px_js, ramp
 from data import C, D, V
@@ -16,7 +17,9 @@ ROOT = HERE.parents[1]
 ASSETS = ROOT / "src/main/resources/assets/simplywings"
 JAVA = ROOT / "src/main/java/com/zorago/simplywings/item/MaterialIds.java"
 PXL = ROOT / ".claude/skills/pxl-pixel-art/src/node/cli.ts"
-SKIP_PAIRS = {"yin_yang"}
+SKIP_PAIRS = set()
+STANDALONE = ["cloud_absorber"]
+RECIPES = ROOT / "src/main/resources/data/simplywings/recipe"
 ASM_COST = {"Rare": 100, "Épique": 300, "Légendaire": 800, "Mythique": 1000}
 TEMPLATES = [
     "Of {list}, it is shaped at the Assembly Table.",
@@ -102,6 +105,18 @@ def lang(drops, crafts):
     out["item.simplywings.common_wings.riddle"] = "At the Assembly Table, join leather, an elytra and two feathers. No Cloud Essence needed."
     out["item.simplywings.cloud_flask.lore"] = EXTRA["cloud_flask"][0]
     out["item.simplywings.cloud_flask.riddle"] = "At the Assembly Table, wrap a feather in glass. Then fly through the clouds with a Cloud Absorber to fill it."
+    for i in STANDALONE:
+        out[f"item.simplywings.{i}"] = C[i]["name"]
+        out[f"item.simplywings.{i}.lore"] = CRAFT_LORE[i]
+    out["item.simplywings.cloud_absorber.riddle"] = (
+        "Of Glass, Copper Ingot, Updraft Shard and a Feather, it is shaped at the Assembly Table. "
+        "Keep it in your bag and fly through the clouds: it fills your Cloud Flasks.")
+    out["item.simplywings.forge_compass"] = "Forge Compass"
+    out["item.simplywings.forge_compass.lore"] = CRAFT_LORE["forge_compass"]
+    out["item.simplywings.forge_compass.riddle"] = (
+        "Stand on the central End island when a dragon falls, from the second one on. It points to the Wing Forge.")
+    out["item.simplywings.yin_yang_wings"] = "Wings of Yin and Yang"
+    out["wing.simplywings.yin_yang"] = "Wings of Yin and Yang"
     out["block.simplywings.assembly_table.lore"] = EXTRA["assembly_table"][0]
     out["block.simplywings.assembly_table.riddle"] = EXTRA["assembly_table"][1]
     return out
@@ -122,6 +137,7 @@ def write_models(ids):
 
 
 def write_java(drops, crafts):
+    crafts = [i for i in crafts if i not in STANDALONE]
     parts = [i for i in crafts if pair_of(i) or i.endswith("_harness") or i == "fury_saddle"]
     others = [i for i in crafts if i not in parts]
     fmt = lambda ids: ",\n            ".join(f'"{i}"' for i in ids)
@@ -147,7 +163,7 @@ public final class MaterialIds {{
 
 def textures(drops, crafts):
     sprites = OrderedDict()
-    for i in drops + crafts:
+    for i in drops + crafts + STANDALONE:
         p = pair_of(i)
         if p and i == p["core"]:
             pal = ramp(GEMS[p["id"]])
@@ -173,21 +189,85 @@ def textures(drops, crafts):
         p = pair_of(i)
         if p and i in (p["left"], p["right"]) and i not in sprites:
             src = Image.open(tex / f"{p['id']}_wings.png").convert("RGBA")
-            half = src.crop((0, 0, src.width // 2, src.height))
+            right = i == p["right"] and p["left"] != p["right"]
+            half = src.crop((src.width // 2, 0, src.width, src.height) if right else (0, 0, src.width // 2, src.height))
             bbox = half.getbbox()
             if bbox:
                 half = half.crop(bbox)
             out = Image.new("RGBA", (16, 16))
             out.alpha_composite(half, ((16 - half.width) // 2, (16 - half.height) // 2))
             out.save(tex / f"{i}.png")
-    missing = [i for i in drops + crafts if not (tex / f"{i}.png").exists()]
+    compass(tex)
+    missing = [i for i in drops + crafts + STANDALONE + ["forge_compass"] if not (tex / f"{i}.png").exists()]
     return missing
+
+
+def compass(tex):
+    rim, ring, face, pin = (34, 22, 48, 255), (110, 60, 140, 255), (222, 220, 160, 255), (60, 40, 70, 255)
+    base = Image.new("RGBA", (16, 16))
+    for y in range(16):
+        for x in range(16):
+            d = math.hypot(x - 7.5, y - 7.5)
+            if d <= 7.6:
+                base.putpixel((x, y), rim if d > 6.6 else ring if d > 5.6 else face)
+    for k in range(32):
+        frame = base.copy()
+        draw = ImageDraw.Draw(frame)
+        a = k / 32 * 2 * math.pi
+        dx, dy = math.sin(a), -math.cos(a)
+        draw.line([(7.5, 7.5), (7.5 + dx * 5, 7.5 + dy * 5)], fill=(200, 60, 230, 255))
+        draw.line([(7.5, 7.5), (7.5 - dx * 3, 7.5 - dy * 3)], fill=(90, 90, 100, 255))
+        frame.putpixel((7, 7), pin)
+        frame.save(tex / f"forge_compass_{k:02d}.png")
+    shutil.copy(tex / "forge_compass_00.png", tex / "forge_compass.png")
+    models = ASSETS / "models/item"
+    for k in range(32):
+        (models / f"forge_compass_{k:02d}.json").write_text(json.dumps(
+            {"parent": "minecraft:item/generated", "textures": {"layer0": f"simplywings:item/forge_compass_{k:02d}"}},
+            indent=2) + "\n", encoding="utf-8", newline="\n")
+    overrides = [{"predicate": {"simplywings:angle": (k - 0.5) / 32}, "model": f"simplywings:item/forge_compass_{k:02d}"}
+                 for k in range(1, 32)]
+    overrides.append({"predicate": {"simplywings:angle": 31.5 / 32}, "model": "simplywings:item/forge_compass_00"})
+    (models / "forge_compass.json").write_text(json.dumps(
+        {"parent": "minecraft:item/generated", "textures": {"layer0": "simplywings:item/forge_compass_00"},
+         "overrides": overrides}, indent=2) + "\n", encoding="utf-8", newline="\n")
+
+
+def rid(i):
+    return f"minecraft:{i}" if i in V else f"simplywings:{i}"
+
+
+def write_recipes(crafts):
+    comp = RECIPES / "component"
+    asm = RECIPES / "assembly"
+    for folder in (comp, asm):
+        if folder.exists():
+            shutil.rmtree(folder)
+        folder.mkdir(parents=True)
+    for i in crafts + STANDALONE:
+        r = C[i]
+        recipe = {"type": "simplywings:component",
+                  "pattern": ["".join(" " if ch in "._" else ch for ch in row) for row in r["rows"]],
+                  "key": {k: {"item": rid(v)} for k, v in r["key"].items()},
+                  "result": {"id": f"simplywings:{i}", "count": r["out"]},
+                  "essence": r["cost"]}
+        (comp / f"{i}.json").write_text(json.dumps(recipe, indent=2) + "\n", encoding="utf-8", newline="\n")
+    for p in PAIRS:
+        if p["id"] in SKIP_PAIRS:
+            continue
+        recipe = {"type": "simplywings:assembly",
+                  "harness": {"item": rid(p["harness"])}, "core": {"item": rid(p["core"])},
+                  "left_wing": {"item": rid(p["left"])}, "right_wing": {"item": rid(p["right"])},
+                  "result": {"id": f"simplywings:{p['id']}_wings"}, "essence": ASM_COST[p["rarity"]]}
+        (asm / f"{p['id']}_wings.json").write_text(json.dumps(recipe, indent=2) + "\n", encoding="utf-8", newline="\n")
 
 
 def main():
     drops, crafts = used_items()
     write_lang(lang(drops, crafts))
-    write_models(drops + crafts)
+    write_models(drops + crafts + STANDALONE)
+    write_models([f"{p['id']}_wings" for p in PAIRS if not (ASSETS / f"models/item/{p['id']}_wings.json").exists()])
+    write_recipes(crafts)
     write_java(drops, crafts)
     missing = textures(drops, crafts)
     print(f"{len(drops)} drops, {len(crafts)} crafted, missing textures: {missing}")

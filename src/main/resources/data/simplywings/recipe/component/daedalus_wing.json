@@ -1,0 +1,26 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    " PPP ",
+    " PAP ",
+    " I I ",
+    "     ",
+    "     "
+  ],
+  "key": {
+    "P": {
+      "item": "simplywings:steel_plate"
+    },
+    "A": {
+      "item": "simplywings:brass_armature"
+    },
+    "I": {
+      "item": "simplywings:icarus_feather"
+    }
+  },
+  "result": {
+    "id": "simplywings:daedalus_wing",
+    "count": 1
+  },
+  "essence": 80
+}

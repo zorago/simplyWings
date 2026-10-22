@@ -1,0 +1,32 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " I I ",
+    " NPN ",
+    " CUC ",
+    "     "
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "N": {
+      "item": "simplywings:copper_spark"
+    },
+    "P": {
+      "item": "minecraft:piston"
+    },
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
+    "U": {
+      "item": "simplywings:updraft_shard"
+    }
+  },
+  "result": {
+    "id": "simplywings:ornithopter_core",
+    "count": 1
+  },
+  "essence": 30
+}

@@ -161,6 +161,15 @@ CRAFT_LORE = {
     "shimmer_membrane": "A wing skin that bends light around it.",
     "blast_chamber": "Where the Light Fury's blast is born.",
     "light_tail": "A pale tail, quick as lightning.",
+    "umbral_plume": "A black feather that drinks the light around it.",
+    "lucent_plume": "A white feather that glows faintly, like dawn.",
+    "yin_sphere": "A black sphere, silent and deep. It wants its twin.",
+    "yang_sphere": "A white sphere, bright and warm. It wants its twin.",
+    "yin_yang_core": "Two spheres in one heart, forever chasing each other.",
+    "yin_wing": "The Yin wing: black feathers with a midnight sheen.",
+    "yang_wing": "The Yang wing: pearl-white feathers, bright as noon.",
+    "cloud_absorber": "A copper funnel that drinks the clouds as you fly through them.",
+    "forge_compass": "Its needle trembles toward the Wing Forge, somewhere out in the End.",
 }
 
 PAIR_LORE = {
@@ -280,6 +289,9 @@ PAIR_LORE = {
     "night": ("The wings of the Night Fury. Unholy offspring of lightning and death itself.",
               "The heart of a Night Fury: plasma, a tail and a dragon's soul.",
               "One great black wing of a Night Fury."),
+    "yin_yang": ("Balance itself: one black wing, one white. Never the strongest, never found wanting.",
+                 "The heart of balance.",
+                 "One wing of the pair."),
     "light": ("The wings of the Light Fury: white, swift, and gone in a flash.",
               "The heart of a Light Fury: a blast of pure light.",
               "One great pale wing of a Light Fury."),

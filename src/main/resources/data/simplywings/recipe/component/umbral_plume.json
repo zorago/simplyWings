@@ -1,0 +1,26 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " FKF ",
+    " FEF ",
+    "     ",
+    "     "
+  ],
+  "key": {
+    "F": {
+      "item": "minecraft:feather"
+    },
+    "K": {
+      "item": "simplywings:abyssal_ink"
+    },
+    "E": {
+      "item": "simplywings:echo_resonance"
+    }
+  },
+  "result": {
+    "id": "simplywings:umbral_plume",
+    "count": 2
+  },
+  "essence": 20
+}

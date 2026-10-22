@@ -381,13 +381,13 @@ Les décisions du 20 et du 21 octobre sont intégrées dans les sections plus ha
 - [x] **Recettes mythiques** (22 octobre) : `crafting/night.md` et `crafting/light.md`. Les éclats d'écho (coffres de cité antique seulement) sont remplacés par l'Echo Resonance, drop des hurleurs de sculk.
 - [x] **Mobs et blocs sources** (22 octobre) : registre dans `CRAFTING.md`, section « Drops du mod », avec des conditions vanilla facultatives (biome, heure, météo, hauteur, structure, tueur accroupi ou en sprint). Ajout d'une source `FISH` (canne imprégnée). Chances à régler en jeu.
 - [ ] **Kills à distance** : un arc ou un trident imprégné compte-t-il ? Ce sera alors l'arme du tireur, pas le projectile.
-- [ ] **Cloud Essence** : bande de Y et débit de la récolte, modes de vol qui comptent (déplacement seul, ou aussi le stationnaire), recettes du flacon et de l'absorbeur, flacons empilables vides ou non.
+- [ ] **Cloud Essence** (valeurs par défaut posées le 22 octobre, à valider en jeu) : bande Y 186 à 204, 2 unités par seconde, déplacement et stationnaire comptent (config `[cloud]`) ; flacon = verre ×4 + plume à la table d'assemblage (×2) ; absorbeur = verre ×4, cuivre ×2, Updraft Shard ×2, plume ; flacons vides empilables par 16, pleins par 1.
 - [ ] **Nom des essences de blocs** : proposition à valider, plus de catégorie générique, chaque drop a un nom concret et « Essence » reste réservé à la Cloud Essence.
 - [x] **Import des modèles** (21 octobre) : chargeur maison. Le mod lit directement le `.bbmodel` (format Modded Entity, UV de boîte) dans `assets/simplywings/rigs/<modèle>.bbmodel`, avec la même conversion que l'export Java de Blockbench. Un modèle par paire, les deux ailes modélisées dans Blockbench (préfixes `right_` / `left_`, miroir fait dans Blockbench), pour permettre les paires asymétriques. Modèles à taille réelle, environ 50 % plus grands que les anciens ; les anciens modèles Java prennent le même agrandissement via `WingStyle.SCALE`. Première aile migrée : la commune (`basic`), rig `shoulder` / `arm` (+ `tertials`) / `forearm` (+ `secondaries`) / `hand` (+ `hand_feathers`, `hand_coverts`) / `primaries` (7 rémiges). Règles et sources : `docs/SOURCES.md`.
 - [ ] **Designer et aile hero** : qui, et quelle paire. Une seule référence couvre mal les familles très différentes (plumes, membranes, insectes, mécanique, éthéré) : prévoir peut-être une référence par famille.
 - [ ] **Budget de cubes** par aile, à fixer sur l'aile hero.
 - [ ] **One-shots** : faire de `WingModel` un `HierarchicalModel`, ou échantillonner les keyframes nous-mêmes.
-- [x] Liste des paires : 40 paires (1 commune, 21 rares, 11 épiques, 5 légendaires, 2 mythiques), dans `WINGS.md`.
+- [x] Liste des paires : 41 paires (1 commune, 21 rares, 11 épiques, 6 légendaires dont Yin et Yang, 2 mythiques), dans `WINGS.md`.
 - [x] Stats de la paire commune et de toutes les paires : dans `BALANCE.md`.
 - [x] Courbe du mode stabilisé : les deux, au choix en config client, ease-in par défaut.
 - [x] Langue : mod entièrement en anglais, sans traduction.

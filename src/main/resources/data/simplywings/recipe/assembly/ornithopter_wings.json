@@ -1,0 +1,19 @@
+{
+  "type": "simplywings:assembly",
+  "harness": {
+    "item": "simplywings:iron_harness"
+  },
+  "core": {
+    "item": "simplywings:ornithopter_core"
+  },
+  "left_wing": {
+    "item": "simplywings:ornithopter_wing"
+  },
+  "right_wing": {
+    "item": "simplywings:ornithopter_wing"
+  },
+  "result": {
+    "id": "simplywings:ornithopter_wings"
+  },
+  "essence": 100
+}

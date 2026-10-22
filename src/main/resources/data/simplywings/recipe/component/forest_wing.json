@@ -1,0 +1,32 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " KBK ",
+    " PLP ",
+    "  G  ",
+    "     "
+  ],
+  "key": {
+    "K": {
+      "item": "minecraft:oak_leaves"
+    },
+    "B": {
+      "item": "simplywings:blossom_spirit"
+    },
+    "P": {
+      "item": "minecraft:pink_petals"
+    },
+    "L": {
+      "item": "simplywings:living_bough"
+    },
+    "G": {
+      "item": "minecraft:gold_ingot"
+    }
+  },
+  "result": {
+    "id": "simplywings:forest_wing",
+    "count": 1
+  },
+  "essence": 40
+}

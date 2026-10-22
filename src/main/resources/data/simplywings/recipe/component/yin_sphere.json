@@ -1,0 +1,26 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " OPO ",
+    "  D  ",
+    "     ",
+    "     "
+  ],
+  "key": {
+    "O": {
+      "item": "minecraft:obsidian"
+    },
+    "P": {
+      "item": "simplywings:umbral_plume"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    }
+  },
+  "result": {
+    "id": "simplywings:yin_sphere",
+    "count": 1
+  },
+  "essence": 40
+}

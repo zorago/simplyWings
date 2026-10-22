@@ -1,0 +1,26 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " CFC ",
+    " B B ",
+    "     ",
+    "     "
+  ],
+  "key": {
+    "C": {
+      "item": "simplywings:condensed_shadow"
+    },
+    "F": {
+      "item": "simplywings:gilded_frame"
+    },
+    "B": {
+      "item": "minecraft:black_dye"
+    }
+  },
+  "result": {
+    "id": "simplywings:shadow_wing",
+    "count": 1
+  },
+  "essence": 40
+}

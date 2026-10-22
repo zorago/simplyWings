@@ -1,0 +1,23 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " R R ",
+    "  F  ",
+    " R R ",
+    "     "
+  ],
+  "key": {
+    "R": {
+      "item": "simplywings:raw_resin"
+    },
+    "F": {
+      "item": "simplywings:fossil_fragment"
+    }
+  },
+  "result": {
+    "id": "simplywings:fossil_amber",
+    "count": 2
+  },
+  "essence": 15
+}

@@ -1,0 +1,19 @@
+{
+  "type": "simplywings:assembly",
+  "harness": {
+    "item": "simplywings:iron_harness"
+  },
+  "core": {
+    "item": "simplywings:flying_fish_core"
+  },
+  "left_wing": {
+    "item": "simplywings:flying_fish_wing"
+  },
+  "right_wing": {
+    "item": "simplywings:flying_fish_wing"
+  },
+  "result": {
+    "id": "simplywings:flying_fish_wings"
+  },
+  "essence": 100
+}

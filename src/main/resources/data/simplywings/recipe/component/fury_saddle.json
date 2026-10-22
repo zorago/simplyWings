@@ -1,0 +1,35 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    " S S ",
+    " LHL ",
+    " SAS ",
+    " ENE ",
+    "     "
+  ],
+  "key": {
+    "S": {
+      "item": "simplywings:dragon_scale"
+    },
+    "L": {
+      "item": "minecraft:leather"
+    },
+    "H": {
+      "item": "simplywings:radiant_harness"
+    },
+    "A": {
+      "item": "minecraft:saddle"
+    },
+    "N": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "E": {
+      "item": "simplywings:ancient_ember"
+    }
+  },
+  "result": {
+    "id": "simplywings:fury_saddle",
+    "count": 1
+  },
+  "essence": 80
+}

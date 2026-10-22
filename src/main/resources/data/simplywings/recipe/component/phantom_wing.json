@@ -1,0 +1,29 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    " BMM ",
+    " MSM ",
+    "  SI ",
+    "     ",
+    "     "
+  ],
+  "key": {
+    "B": {
+      "item": "simplywings:hollow_bone"
+    },
+    "M": {
+      "item": "minecraft:phantom_membrane"
+    },
+    "S": {
+      "item": "simplywings:phantom_sinew"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "id": "simplywings:phantom_wing",
+    "count": 1
+  },
+  "essence": 15
+}

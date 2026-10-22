@@ -1,0 +1,29 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "  T  ",
+    " IUI ",
+    " IRI ",
+    "  U  ",
+    "  T  "
+  ],
+  "key": {
+    "T": {
+      "item": "simplywings:raptor_talon"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "U": {
+      "item": "simplywings:updraft_shard"
+    },
+    "R": {
+      "item": "minecraft:rabbit_foot"
+    }
+  },
+  "result": {
+    "id": "simplywings:eagle_core",
+    "count": 1
+  },
+  "essence": 30
+}

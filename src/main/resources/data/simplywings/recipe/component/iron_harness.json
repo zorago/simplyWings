@@ -1,0 +1,32 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    " L L ",
+    " H H ",
+    " ITI ",
+    " LKL ",
+    " L L "
+  ],
+  "key": {
+    "L": {
+      "item": "minecraft:leather"
+    },
+    "H": {
+      "item": "simplywings:supple_hide"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "T": {
+      "item": "simplywings:silk_thread"
+    },
+    "K": {
+      "item": "simplywings:sky_iron"
+    }
+  },
+  "result": {
+    "id": "simplywings:iron_harness",
+    "count": 1
+  },
+  "essence": 10
+}

@@ -1,0 +1,19 @@
+{
+  "type": "simplywings:assembly",
+  "harness": {
+    "item": "simplywings:radiant_harness"
+  },
+  "core": {
+    "item": "simplywings:demon_core"
+  },
+  "left_wing": {
+    "item": "simplywings:demon_wing"
+  },
+  "right_wing": {
+    "item": "simplywings:demon_wing"
+  },
+  "result": {
+    "id": "simplywings:demon_wings"
+  },
+  "essence": 800
+}

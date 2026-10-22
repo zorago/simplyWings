@@ -1,0 +1,29 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    "  D  ",
+    " PMP ",
+    "  R  ",
+    "     "
+  ],
+  "key": {
+    "D": {
+      "item": "simplywings:dragonbone_spar"
+    },
+    "P": {
+      "item": "simplywings:light_plating"
+    },
+    "M": {
+      "item": "simplywings:shimmer_membrane"
+    },
+    "R": {
+      "item": "minecraft:breeze_rod"
+    }
+  },
+  "result": {
+    "id": "simplywings:light_tail",
+    "count": 1
+  },
+  "essence": 90
+}

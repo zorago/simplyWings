@@ -1,0 +1,26 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " MDM ",
+    " S S ",
+    "     ",
+    "     "
+  ],
+  "key": {
+    "M": {
+      "item": "simplywings:silent_membrane"
+    },
+    "D": {
+      "item": "simplywings:dragonbone_spar"
+    },
+    "S": {
+      "item": "simplywings:night_scale"
+    }
+  },
+  "result": {
+    "id": "simplywings:night_wing",
+    "count": 1
+  },
+  "essence": 100
+}

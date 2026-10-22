@@ -1,0 +1,26 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " WLW ",
+    "  B  ",
+    "     ",
+    "     "
+  ],
+  "key": {
+    "W": {
+      "item": "simplywings:soul_wisp"
+    },
+    "L": {
+      "item": "minecraft:soul_lantern"
+    },
+    "B": {
+      "item": "minecraft:glass_bottle"
+    }
+  },
+  "result": {
+    "id": "simplywings:soul_flame",
+    "count": 2
+  },
+  "essence": 20
+}

@@ -59,6 +59,7 @@ public final class ModItems {
     public static final DeferredItem<WingItem> DEMON_WINGS = wing("demon", Rarity.EPIC);
     public static final DeferredItem<WingItem> SERAPH_WINGS = wing("seraph", Rarity.EPIC);
     public static final DeferredItem<WingItem> DAEDALUS_WINGS = wing("daedalus", Rarity.EPIC);
+    public static final DeferredItem<WingItem> YIN_YANG_WINGS = wing("yin_yang", Rarity.EPIC);
 
     private static DeferredItem<WingItem> wing(String name, Rarity rarity) {
         DeferredItem<WingItem> item = ITEMS.register(name + "_wings",
@@ -72,6 +73,12 @@ public final class ModItems {
 
     public static final DeferredItem<CloudFlaskItem> CLOUD_FLASK = ITEMS.register("cloud_flask",
             () -> new CloudFlaskItem(new Item.Properties().stacksTo(16)));
+
+    public static final DeferredItem<Item> CLOUD_ABSORBER = ITEMS.register("cloud_absorber",
+            () -> new Item(new Item.Properties().stacksTo(1)));
+
+    public static final DeferredItem<Item> FORGE_COMPASS = ITEMS.register("forge_compass",
+            () -> new Item(new Item.Properties().stacksTo(1)));
 
     private static final Map<String, DeferredItem<Item>> MATERIALS = new LinkedHashMap<>();
 
@@ -97,6 +104,8 @@ public final class ModItems {
                         output.accept(ModBlocks.ASSEMBLY_TABLE_ITEM.get());
                         output.accept(CLOUD_FLASK.get());
                         output.accept(CloudFlaskItem.filled(CLOUD_FLASK.get(), CloudFlaskItem.CAPACITY));
+                        output.accept(CLOUD_ABSORBER.get());
+                        output.accept(FORGE_COMPASS.get());
                         WINGS.forEach(output::accept);
                         MATERIALS.values().forEach(output::accept);
                     })

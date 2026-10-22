@@ -1,0 +1,19 @@
+{
+  "type": "simplywings:assembly",
+  "harness": {
+    "item": "simplywings:gilded_harness"
+  },
+  "core": {
+    "item": "simplywings:ptero_core"
+  },
+  "left_wing": {
+    "item": "simplywings:ptero_wing"
+  },
+  "right_wing": {
+    "item": "simplywings:ptero_wing"
+  },
+  "result": {
+    "id": "simplywings:ptero_wings"
+  },
+  "essence": 300
+}

@@ -1,0 +1,23 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " FHF ",
+    "     ",
+    "     ",
+    "     "
+  ],
+  "key": {
+    "F": {
+      "item": "simplywings:pristine_feather"
+    },
+    "H": {
+      "item": "minecraft:honeycomb"
+    }
+  },
+  "result": {
+    "id": "simplywings:icarus_feather",
+    "count": 2
+  },
+  "essence": 15
+}

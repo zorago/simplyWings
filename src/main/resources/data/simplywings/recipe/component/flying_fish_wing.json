@@ -1,0 +1,29 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    " RRR ",
+    " PLP ",
+    "  I  ",
+    "     ",
+    "     "
+  ],
+  "key": {
+    "R": {
+      "item": "simplywings:fin_ray"
+    },
+    "P": {
+      "item": "minecraft:glass_pane"
+    },
+    "L": {
+      "item": "minecraft:light_blue_dye"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "id": "simplywings:flying_fish_wing",
+    "count": 1
+  },
+  "essence": 15
+}

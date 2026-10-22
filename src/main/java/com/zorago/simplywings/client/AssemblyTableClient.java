@@ -7,8 +7,11 @@ import com.zorago.simplywings.item.CloudFlaskItem;
 import com.zorago.simplywings.item.ModItems;
 import com.zorago.simplywings.item.WingedEnergy;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.renderer.item.CompassItemPropertyFunction;
 import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.component.LodestoneTracker;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
@@ -26,8 +29,15 @@ public final class AssemblyTableClient {
     }
 
     private static void onSetup(FMLClientSetupEvent event) {
-        event.enqueueWork(() -> ItemProperties.register(ModItems.CLOUD_FLASK.get(), SimplyWings.id("fill"),
-                (stack, level, entity, seed) -> CloudFlaskItem.essence(stack) / (float) CloudFlaskItem.CAPACITY));
+        event.enqueueWork(() -> {
+            ItemProperties.register(ModItems.CLOUD_FLASK.get(), SimplyWings.id("fill"),
+                    (stack, level, entity, seed) -> CloudFlaskItem.essence(stack) / (float) CloudFlaskItem.CAPACITY);
+            ItemProperties.register(ModItems.FORGE_COMPASS.get(), SimplyWings.id("angle"),
+                    new CompassItemPropertyFunction((level, stack, entity) -> {
+                        LodestoneTracker tracker = stack.get(DataComponents.LODESTONE_TRACKER);
+                        return tracker != null ? tracker.target().orElse(null) : null;
+                    }));
+        });
     }
 
     private static void onTooltip(ItemTooltipEvent event) {

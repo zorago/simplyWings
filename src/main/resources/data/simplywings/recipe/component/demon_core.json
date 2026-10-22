@@ -1,0 +1,32 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " RWR ",
+    " DCD ",
+    " DTD ",
+    "     "
+  ],
+  "key": {
+    "R": {
+      "item": "simplywings:brimstone"
+    },
+    "W": {
+      "item": "minecraft:wither_skeleton_skull"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "C": {
+      "item": "minecraft:crying_obsidian"
+    },
+    "T": {
+      "item": "simplywings:ghast_wisp"
+    }
+  },
+  "result": {
+    "id": "simplywings:demon_core",
+    "count": 1
+  },
+  "essence": 100
+}

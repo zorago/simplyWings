@@ -1,0 +1,26 @@
+{
+  "rarity": "legendary",
+  "model": "simplywings:yin_yang",
+  "color": -1,
+  "flap_rate": 1.0,
+  "hover_rate": 0.5,
+  "hover_speed": 19.0,
+  "equipped": {
+    "endurance": 90.0,
+    "acceleration": 90.0,
+    "speed": 90.0,
+    "handling": 90.0,
+    "stability": 90.0,
+    "glide": 90.0,
+    "lift": 90.0
+  },
+  "global": {
+    "endurance": 1.86,
+    "acceleration": 1.24,
+    "speed": 1.27,
+    "handling": 2.17,
+    "stability": 4.16,
+    "glide": 2.98,
+    "lift": 4.86
+  }
+}

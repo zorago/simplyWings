@@ -42,6 +42,8 @@ public final class WingEffects {
     private static final ParticleOptions DIRT_DUST = new BlockParticleOption(ParticleTypes.FALLING_DUST, Blocks.COARSE_DIRT.defaultBlockState());
     private static final ParticleOptions STONE_CHIP = new BlockParticleOption(ParticleTypes.BLOCK, Blocks.STONE.defaultBlockState());
     private static final ParticleOptions MOSS_CHIP = new BlockParticleOption(ParticleTypes.BLOCK, Blocks.MOSS_BLOCK.defaultBlockState());
+    private static final ParticleOptions YIN = new DustParticleOptions(new Vector3f(0.05f, 0.05f, 0.09f), 1.1f);
+    private static final ParticleOptions YANG = new DustParticleOptions(new Vector3f(1f, 1f, 0.97f), 1.1f);
 
     private record Frame(Vec3 center, Vec3 side, Vec3 back, Vec3 up, Vec3 velocity) {
         Vec3 alongWing(double sign, double t) {
@@ -305,6 +307,17 @@ public final class WingEffects {
                     e.add(ParticleTypes.SCRAPE, p, f.back.scale(0.05));
                 }
             }
+            case YIN_YANG -> {
+                boolean hover = mode == FlightMode.STABILIZED;
+                double angle = player.tickCount * (hover ? 0.04 : 0.18);
+                double radius = hover ? 0.22 : 0.35;
+                Vec3 axisA = f.side.normalize();
+                Vec3 axisB = hover ? f.back.scale(0.3) : f.up;
+                Vec3 hub = f.center.add(f.back.scale(0.55));
+                Vec3 orbit = axisA.scale(Math.cos(angle) * radius).add(axisB.scale(Math.sin(angle) * radius));
+                e.add(YIN, hub.add(orbit), 0, 0, 0);
+                e.add(YANG, hub.subtract(orbit), 0, 0, 0);
+            }
             case FOSSIL -> {
                 if (e.chance(0.2f)) {
                     Vec3 p = f.alongWing(sign, 0.3 + random.nextDouble() * 0.7).add(f.back.scale(0.2));
@@ -479,6 +492,16 @@ public final class WingEffects {
                 for (int i = e.count(6); i > 0; i--) {
                     e.add(AMBER, f.alongWing(i % 2 == 0 ? 1 : -1, random.nextDouble()), f.back.scale(0.05));
                 }
+            }
+            case YIN_YANG -> {
+                int ring = e.count(24);
+                for (int i = 0; i < ring; i++) {
+                    double angle = i / (double) ring * Math.PI * 2;
+                    Vec3 offset = f.side.normalize().scale(Math.cos(angle) * 1.1).add(f.up.scale(Math.sin(angle) * 1.1));
+                    e.add(i < ring / 2 ? YIN : YANG, f.center.add(f.back.scale(0.4)).add(offset), f.back.scale(0.08));
+                }
+                e.sound(player, SoundEvents.AMETHYST_BLOCK_CHIME, 0.5f, 0.6f);
+                e.sound(player, SoundEvents.AMETHYST_BLOCK_CHIME, 0.5f, 1.7f);
             }
             case PTERO -> {
                 for (int i = e.count(4); i > 0; i--) {

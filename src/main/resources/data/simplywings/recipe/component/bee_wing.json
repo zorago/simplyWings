@@ -1,0 +1,26 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " PSP ",
+    " PHP ",
+    "  S  ",
+    "     "
+  ],
+  "key": {
+    "P": {
+      "item": "minecraft:glass_pane"
+    },
+    "S": {
+      "item": "simplywings:silk_thread"
+    },
+    "H": {
+      "item": "minecraft:honeycomb"
+    }
+  },
+  "result": {
+    "id": "simplywings:bee_wing",
+    "count": 1
+  },
+  "essence": 10
+}

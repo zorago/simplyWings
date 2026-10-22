@@ -1,0 +1,29 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    " S S ",
+    " HHH ",
+    " HLH ",
+    " T T ",
+    "     "
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "H": {
+      "item": "minecraft:rabbit_hide"
+    },
+    "L": {
+      "item": "minecraft:leather"
+    },
+    "T": {
+      "item": "simplywings:silk_thread"
+    }
+  },
+  "result": {
+    "id": "simplywings:squirrel_wing",
+    "count": 1
+  },
+  "essence": 15
+}

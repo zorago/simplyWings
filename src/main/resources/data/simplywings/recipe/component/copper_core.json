@@ -1,0 +1,29 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " CRC ",
+    " IBI ",
+    " CRC ",
+    "     "
+  ],
+  "key": {
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
+    "R": {
+      "item": "simplywings:redstone_pulse"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "B": {
+      "item": "minecraft:copper_bulb"
+    }
+  },
+  "result": {
+    "id": "simplywings:copper_core",
+    "count": 1
+  },
+  "essence": 30
+}

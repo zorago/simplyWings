@@ -1,0 +1,19 @@
+{
+  "type": "simplywings:assembly",
+  "harness": {
+    "item": "simplywings:gilded_harness"
+  },
+  "core": {
+    "item": "simplywings:water_core"
+  },
+  "left_wing": {
+    "item": "simplywings:water_wing"
+  },
+  "right_wing": {
+    "item": "simplywings:water_wing"
+  },
+  "result": {
+    "id": "simplywings:water_wings"
+  },
+  "essence": 300
+}

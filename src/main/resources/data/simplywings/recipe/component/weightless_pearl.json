@@ -1,0 +1,26 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " SPS ",
+    "  M  ",
+    "     ",
+    "     "
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:shulker_shell"
+    },
+    "P": {
+      "item": "minecraft:ender_pearl"
+    },
+    "M": {
+      "item": "minecraft:phantom_membrane"
+    }
+  },
+  "result": {
+    "id": "simplywings:weightless_pearl",
+    "count": 1
+  },
+  "essence": 25
+}

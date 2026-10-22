@@ -1,0 +1,29 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " FXF ",
+    "  P  ",
+    "  N  ",
+    "     "
+  ],
+  "key": {
+    "F": {
+      "item": "simplywings:fury_plasma"
+    },
+    "X": {
+      "item": "minecraft:nether_star"
+    },
+    "P": {
+      "item": "simplywings:night_plating"
+    },
+    "N": {
+      "item": "minecraft:netherite_ingot"
+    }
+  },
+  "result": {
+    "id": "simplywings:plasma_chamber",
+    "count": 1
+  },
+  "essence": 75
+}

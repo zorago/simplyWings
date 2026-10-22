@@ -1,0 +1,26 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " SQS ",
+    " SWS ",
+    "     ",
+    "     "
+  ],
+  "key": {
+    "S": {
+      "item": "simplywings:dragon_scale"
+    },
+    "Q": {
+      "item": "simplywings:pale_quartz"
+    },
+    "W": {
+      "item": "minecraft:white_dye"
+    }
+  },
+  "result": {
+    "id": "simplywings:light_scale",
+    "count": 4
+  },
+  "essence": 40
+}

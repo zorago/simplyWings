@@ -1,0 +1,19 @@
+{
+  "type": "simplywings:assembly",
+  "harness": {
+    "item": "simplywings:radiant_harness"
+  },
+  "core": {
+    "item": "simplywings:daedalus_core"
+  },
+  "left_wing": {
+    "item": "simplywings:daedalus_wing"
+  },
+  "right_wing": {
+    "item": "simplywings:daedalus_wing"
+  },
+  "result": {
+    "id": "simplywings:daedalus_wings"
+  },
+  "essence": 800
+}

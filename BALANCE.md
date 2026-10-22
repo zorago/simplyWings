@@ -4,7 +4,7 @@ Les ailes ont 7 stats notées de 0 à 100. Le menu n'en affiche que 5 : Plané e
 
 La valeur physique correspondant à chaque score est réglée dans la config serveur, section `[stats]` : valeur à 0, valeur à 100, interpolation linéaire. La forme et l'animation de chaque paire sont dans `anim/WingStyle.java`.
 
-Dernière mise à jour : 20 octobre 2026.
+Dernière mise à jour : 22 octobre 2026.
 
 ## Les 7 stats
 
@@ -27,7 +27,7 @@ Le plafond de vitesse (64 m/s) correspond à l'ange avec les 4 premières paires
 - Pour chaque stat, la somme des bonus de toutes les paires vaut **100 − le score le plus bas** parmi les paires. Avec la collection complète, toutes les paires sont donc à 10/10 partout.
 - Répartition par palier : **50 %** pour le palier de base (commune + rares), **30 %** pour les épiques, **20 %** pour les légendaires. Dans un palier, chaque paire donne la même part du total des points de bonus.
 - **Diversification** : chaque paire donne surtout dans ses points forts. Le poids d'une stat vaut (score ÷ meilleur score de la paire)⁴. Ensuite, un équilibrage itératif garantit deux choses : chaque palier fournit exactement sa part de chaque stat, et chaque paire sa part du total. Ainsi chaque légendaire donne surtout sa stat maxée, la pierre de l'endurance et de la stabilité, l'orage de la vitesse, etc.
-- Le calcul est automatique dans le générateur des JSON : quand on ajoute une paire, tout se recalcule.
+- Le calcul est fait par `tools/balance_globals.py` (poids (score ÷ meilleur score)⁴ + 0,01, puis équilibrage itératif) : `python tools/balance_globals.py --write` réécrit les `global` de tous les JSON quand on ajoute ou modifie une paire.
 
 | Stat | Bonus total de la collection |
 | --- | --- |
@@ -76,15 +76,16 @@ Bonus `global` de chaque paire (en points sur 100) :
 | Ombre | Épique | 2,7 % | 0,8 | 5,0 | 2,9 | 5,0 | 0,4 | 0,6 | 0,5 |
 | Nébuleuse | Épique | 2,7 % | 4,7 | 0,7 | 5,9 | 0,4 | 0,8 | 1,5 | 1,1 |
 | Esprit sylvestre | Épique | 2,7 % | 3,4 | 0,5 | 0,2 | 1,1 | 6,3 | 1,0 | 2,7 |
-| Ange | Légendaire | 4,0 % | 9,1 | 1,4 | 1,9 | 0,5 | 0,3 | 8,5 | 0,6 |
-| Démon | Légendaire | 4,0 % | 1,7 | 10,6 | 5,7 | 1,6 | 0,6 | 1,1 | 0,9 |
-| Séraphin | Légendaire | 4,0 % | 3,6 | 1,2 | 9,2 | 1,0 | 1,6 | 3,6 | 2,0 |
-| Psyché | Légendaire | 4,0 % | 0,8 | 0,2 | 0,2 | 0,8 | 13,7 | 1,1 | 5,5 |
-| Dédale | Légendaire | 4,0 % | 0,8 | 1,6 | 0,7 | 10,7 | 1,8 | 0,7 | 5,9 |
+| Ange | Légendaire | 3,3 % | 7,9 | 1,3 | 1,7 | 0,3 | 0,2 | 6,7 | 0,4 |
+| Démon | Légendaire | 3,3 % | 1,4 | 9,3 | 5,0 | 1,2 | 0,3 | 0,8 | 0,5 |
+| Séraphin | Légendaire | 3,3 % | 3,1 | 1,2 | 8,6 | 0,7 | 1,0 | 2,8 | 1,2 |
+| Psyché | Légendaire | 3,3 % | 0,9 | 0,2 | 0,2 | 0,8 | 11,1 | 1,1 | 4,2 |
+| Dédale | Légendaire | 3,3 % | 0,8 | 1,7 | 0,8 | 9,4 | 1,3 | 0,7 | 3,9 |
+| Yin et Yang | Légendaire | 3,3 % | 1,9 | 1,2 | 1,3 | 2,2 | 4,2 | 3,0 | 4,9 |
 
 ## Scores des paires (stats équipées, sur 100)
 
-Une légendaire a par définition au moins une stat visible maxée à 100 (en gras). Plané et Portance n'ont pas de légendaire dédiée.
+Une légendaire a par définition au moins une stat visible maxée à 100 (en gras), sauf Yin et Yang, à 90 partout. Plané et Portance n'ont pas de légendaire dédiée.
 
 | Paire | Rareté | Endurance | Accél. | Vitesse | Maniab. | Stabilité | Plané | Portance | Identité |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -126,6 +127,7 @@ Une légendaire a par définition au moins une stat visible maxée à 100 (en gr
 | Psyché | Légendaire | 65 | 50 | 50 | 60 | **100** | 60 | 75 | La stabilité ; ailes de papillon en flammes d'âme éthérées |
 | Séraphin | Légendaire | 70 | 60 | **100** | 45 | 40 | 60 | 40 | La vitesse ; 6 ailes d'ange dorées |
 | Dédale | Légendaire | 55 | 75 | 60 | **100** | 50 | 45 | 65 | La maniabilité ; ailes mécaniques à réacteurs vectorisés |
+| Yin et Yang | Légendaire | 90 | 90 | 90 | 90 | 90 | 90 | 90 | L'équilibre : aucune stat maxée, aucune faiblesse (exception à la règle) |
 | Night | Mythique | 100 | 100 | **120** | 100 | 100 | 100 | 100 | Furie Nocturne : les ailes dieu |
 | Light | Mythique | 100 | 100 | **120** | 100 | 100 | 100 | 100 | Furie Éclair : les ailes dieu |
 
@@ -171,6 +173,7 @@ Une légendaire a par définition au moins une stat visible maxée à 100 (en gr
 | Dédale | 20 (continu, réacteurs) | 30 Hz, 18 m/s | 1 |
 | Démon | 0,7 | 1,0 Hz, 18 m/s | 1 |
 | Séraphin | 0,9 | 0,9 Hz, 20 m/s | 3 |
+| Yin et Yang | 1,0 | 0,5 Hz, 19 m/s | 1 (asymétrique) |
 
 Rappels de mécanique :
 - **Gain d'un battement** = accélération ÷ battements par seconde. À partir de 8 battements/s, la poussée est continue.

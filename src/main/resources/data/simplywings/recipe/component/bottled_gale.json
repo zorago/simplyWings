@@ -1,0 +1,26 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " MWM ",
+    "  B  ",
+    "     ",
+    "     "
+  ],
+  "key": {
+    "M": {
+      "item": "simplywings:gust_mote"
+    },
+    "W": {
+      "item": "minecraft:wind_charge"
+    },
+    "B": {
+      "item": "minecraft:glass_bottle"
+    }
+  },
+  "result": {
+    "id": "simplywings:bottled_gale",
+    "count": 1
+  },
+  "essence": 15
+}

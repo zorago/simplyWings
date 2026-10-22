@@ -1,0 +1,35 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "  P  ",
+    " FPF ",
+    " CPL ",
+    "  I  ",
+    "  N  "
+  ],
+  "key": {
+    "P": {
+      "item": "simplywings:peacock_plume"
+    },
+    "F": {
+      "item": "minecraft:feather"
+    },
+    "C": {
+      "item": "minecraft:cyan_dye"
+    },
+    "L": {
+      "item": "simplywings:lapis_glint"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "N": {
+      "item": "minecraft:gold_nugget"
+    }
+  },
+  "result": {
+    "id": "simplywings:peacock_wing",
+    "count": 1
+  },
+  "essence": 15
+}

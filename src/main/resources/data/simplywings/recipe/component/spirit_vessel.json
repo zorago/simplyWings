@@ -1,0 +1,26 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " GAG ",
+    " AWA ",
+    " GAG ",
+    "     "
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "A": {
+      "item": "minecraft:glass"
+    },
+    "W": {
+      "item": "simplywings:ghast_wisp"
+    }
+  },
+  "result": {
+    "id": "simplywings:spirit_vessel",
+    "count": 1
+  },
+  "essence": 20
+}

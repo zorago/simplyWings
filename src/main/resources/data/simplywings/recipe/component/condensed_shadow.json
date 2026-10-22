@@ -1,0 +1,26 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " SKS ",
+    "  P  ",
+    "     ",
+    "     "
+  ],
+  "key": {
+    "S": {
+      "item": "simplywings:shade_wisp"
+    },
+    "K": {
+      "item": "simplywings:abyssal_ink"
+    },
+    "P": {
+      "item": "minecraft:ender_pearl"
+    }
+  },
+  "result": {
+    "id": "simplywings:condensed_shadow",
+    "count": 1
+  },
+  "essence": 15
+}

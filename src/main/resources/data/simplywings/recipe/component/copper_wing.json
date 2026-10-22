@@ -1,0 +1,29 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    " CCC ",
+    " NPN ",
+    " CVC ",
+    "     ",
+    "     "
+  ],
+  "key": {
+    "C": {
+      "item": "simplywings:copper_spark"
+    },
+    "N": {
+      "item": "simplywings:sky_iron"
+    },
+    "P": {
+      "item": "minecraft:piston"
+    },
+    "V": {
+      "item": "simplywings:verdigris_flake"
+    }
+  },
+  "result": {
+    "id": "simplywings:copper_wing",
+    "count": 1
+  },
+  "essence": 15
+}

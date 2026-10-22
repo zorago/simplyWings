@@ -1,0 +1,26 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " WLW ",
+    " D D ",
+    " D D ",
+    "     "
+  ],
+  "key": {
+    "W": {
+      "item": "simplywings:weightless_pearl"
+    },
+    "L": {
+      "item": "simplywings:psyche_lamp"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    }
+  },
+  "result": {
+    "id": "simplywings:psyche_core",
+    "count": 1
+  },
+  "essence": 100
+}

@@ -1,0 +1,29 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " ILI ",
+    " PEP ",
+    " ILI ",
+    "     "
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "L": {
+      "item": "simplywings:lapis_glint"
+    },
+    "P": {
+      "item": "simplywings:peacock_plume"
+    },
+    "E": {
+      "item": "simplywings:emerald_sliver"
+    }
+  },
+  "result": {
+    "id": "simplywings:peacock_core",
+    "count": 1
+  },
+  "essence": 30
+}

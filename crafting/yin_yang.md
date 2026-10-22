@@ -2,7 +2,7 @@
 
 `simplywings:yin_yang` · **Légendaire** · item `yin_yang_wings` · fiche : [`WINGS.md`](../WINGS.md#ailes-du-yin-et-du-yang)
 
-L'équilibre, première paire asymétrique : une aile noire et une aile blanche. *Paire prévue, pas encore dans le mod* : la route est prête pour son ajout.
+L'équilibre, première paire asymétrique : une aile noire et une aile blanche.
 
 Règles, légende et objets partagés : [`CRAFTING.md`](../CRAFTING.md). Dernière mise à jour : 22 octobre 2026.
 

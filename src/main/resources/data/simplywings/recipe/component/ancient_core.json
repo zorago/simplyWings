@@ -1,0 +1,26 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " AGA ",
+    "  T  ",
+    " AGA ",
+    "     "
+  ],
+  "key": {
+    "A": {
+      "item": "simplywings:fossil_amber"
+    },
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "T": {
+      "item": "minecraft:torchflower"
+    }
+  },
+  "result": {
+    "id": "simplywings:ancient_core",
+    "count": 1
+  },
+  "essence": 60
+}

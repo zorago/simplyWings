@@ -396,3 +396,5 @@ C.update({
     "light_plating": R("Light Plating", 50, [".___.", "_SNS_", "_S_S_", "__G__", ".___."], dict(S="light_scale", N="ancient_ember", G="glimmer_spore")),
     "shimmer_membrane": R("Shimmer Membrane", 50, [".___.", "_MAM_", "_CSC_", "_____", ".___."], dict(M="phantom_membrane", A="aurora_veil", C="glimmering_scale", S="light_scale")),
 })
+
+C["cloud_absorber"] = R("Cloud Absorber", 0, [".___.", "_GCG_", "_UFU_", "_GCG_", ".___."], dict(G="glass", C="copper_ingot", U="updraft_shard", F="feather"))

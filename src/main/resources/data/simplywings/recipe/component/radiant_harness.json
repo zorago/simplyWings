@@ -1,0 +1,29 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    " D D ",
+    " PHP ",
+    " DQD ",
+    "     ",
+    "     "
+  ],
+  "key": {
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "P": {
+      "item": "minecraft:phantom_membrane"
+    },
+    "H": {
+      "item": "simplywings:gilded_harness"
+    },
+    "Q": {
+      "item": "simplywings:prism_shard"
+    }
+  },
+  "result": {
+    "id": "simplywings:radiant_harness",
+    "count": 1
+  },
+  "essence": 50
+}

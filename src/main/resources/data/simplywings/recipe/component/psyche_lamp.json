@@ -1,0 +1,26 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    "  D  ",
+    " FGF ",
+    " GGG ",
+    "     "
+  ],
+  "key": {
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "F": {
+      "item": "simplywings:soul_flame"
+    },
+    "G": {
+      "item": "minecraft:gold_ingot"
+    }
+  },
+  "result": {
+    "id": "simplywings:psyche_lamp",
+    "count": 1
+  },
+  "essence": 40
+}

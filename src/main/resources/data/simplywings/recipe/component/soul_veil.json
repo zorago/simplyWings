@@ -1,0 +1,26 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " FKF ",
+    "  D  ",
+    "     ",
+    "     "
+  ],
+  "key": {
+    "F": {
+      "item": "simplywings:soul_flame"
+    },
+    "K": {
+      "item": "simplywings:glimmer_spore"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    }
+  },
+  "result": {
+    "id": "simplywings:soul_veil",
+    "count": 1
+  },
+  "essence": 40
+}

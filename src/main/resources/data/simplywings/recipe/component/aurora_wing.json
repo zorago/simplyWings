@@ -1,0 +1,26 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " AFA ",
+    " E E ",
+    "     ",
+    "     "
+  ],
+  "key": {
+    "A": {
+      "item": "simplywings:aurora_veil"
+    },
+    "F": {
+      "item": "simplywings:gilded_frame"
+    },
+    "E": {
+      "item": "minecraft:glass_pane"
+    }
+  },
+  "result": {
+    "id": "simplywings:aurora_wing",
+    "count": 1
+  },
+  "essence": 40
+}

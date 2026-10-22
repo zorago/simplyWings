@@ -9,7 +9,7 @@ Dernière mise à jour : 21 octobre 2026.
 - **Commune** : la base, des élytres améliorées.
 - **Rare** : des créatures réelles (oiseaux, insectes, mammifères, mobs vanilla) et des ailes bricolées ou mécaniques, dans une ambiance vanilla, simple, « faite main ». Effets discrets ou absents.
 - **Épique** : des esprits, des éléments et des créatures disparues (préhistoriques), avec des thèmes qui sortent du vanilla.
-- **Légendaire** : des dieux, des êtres divins et des figures mythologiques. Chaque légendaire maxe une stat visible, sauf le Yin et le Yang (prévue), qui a 9/10 partout.
+- **Légendaire** : des dieux, des êtres divins et des figures mythologiques. Chaque légendaire maxe une stat visible, sauf le Yin et le Yang, qui a 9/10 partout.
 - **Mythique** : Night et Light, les ailes des Furies de *Dragons*. 10/10 partout, +2 en vitesse au-delà du plafond, cachées en « ??? » tant qu'elles ne sont pas débloquées. Night donne la stamina infinie, Light la transmog.
 
 ## Lire les stats
@@ -61,7 +61,7 @@ Dernière mise à jour : 21 octobre 2026.
 | Ailes de séraphin | Légendaire | 7,0 | 6,0 | **10** | 4,5 | 4,0 | La vitesse, six ailes dorées |
 | Ailes de Psyché | Légendaire | 6,5 | 5,0 | 5,0 | 6,0 | **10** | Énergie d'âme éthérée qui tient en apesanteur |
 | Ailes de Dédale | Légendaire | 5,5 | 7,5 | 6,0 | **10** | 5,0 | Ailes mécaniques à réacteurs vectorisés |
-| Ailes du Yin et du Yang *(prévue)* | Légendaire | 9,0 | 9,0 | 9,0 | 9,0 | 9,0 | L'équilibre, première paire asymétrique |
+| Ailes du Yin et du Yang | Légendaire | 9,0 | 9,0 | 9,0 | 9,0 | 9,0 | L'équilibre, première paire asymétrique |
 
 ---
 
@@ -1125,11 +1125,11 @@ Dernière mise à jour : 21 octobre 2026.
 
 ## Ailes du Yin et du Yang
 
-`simplywings:yin_yang` · **Légendaire** · item `yin_yang_wings` · **L'équilibre : 9/10 partout** · *prévue, pas encore dans le mod*
+`simplywings:yin_yang` · **Légendaire** · item `yin_yang_wings` · **L'équilibre : 9/10 partout**
 
 **Vibe** : l'équilibre et la stabilité. Aucune stat maxée, aucune faiblesse : c'est la seule légendaire qui fait exception à la règle « une stat maxée ». Le vol est posé, régulier et sûr, ni le plus rapide ni le plus endurant, mais rien ne le prend en défaut.
 
-**Apparence** : la première paire **asymétrique** du mod, rendue possible par un modèle Blockbench par paire (les deux ailes sont modélisées séparément).
+**Apparence** : la première paire **asymétrique** du mod. Comme les autres légendaires, elle utilise un modèle procédural de base (`WingModel.YIN_YANG`, gabarit proche de l'ange, 3 segments) ; sa texture `yin_yang_wings.png` fait 128×64 : la moitié haute habille l'aile gauche (Yin), la moitié basse l'aile droite (Yang). La refonte Blockbench viendra avec celle des autres légendaires.
 - **Aile gauche (Yin)** : plumes noires aux reflets bleu nuit, avec un « œil » blanc rond près du poignet.
 - **Aile droite (Yang)** : plumes blanc nacré, avec un « œil » noir rond au même endroit.
 - Les bords de fuite des deux ailes dessinent une courbe en S. Repliées, les pointes se croisent dans le dos et forment le cercle du taijitu.
@@ -1140,7 +1140,7 @@ Dernière mise à jour : 21 octobre 2026.
 - **Stationnaire** : la rotation des sphères ralentit et elles s'alignent, ce qui renforce visuellement la stabilité.
 - **Son** : deux tintements, grave pour le Yin et aigu pour le Yang.
 
-**En vol** (proposition, à valider) :
+**En vol** :
 - **Déplacement** : 1 battement par seconde, +9,2 m/s par battement.
 - **Stationnaire** : battement lent et ample, presque immobile, comme une aile à 9/10 de stabilité.
 
@@ -1154,11 +1154,7 @@ Dernière mise à jour : 21 octobre 2026.
 | Plané *(interne)* | 9,0/10 | traînée × 0,5 |
 | Portance *(interne)* | 9,0/10 | décroche sous 4,1 m/s |
 
-**À faire avant de l'ajouter au mod** :
-- Recalculer la répartition des bonus de collection dans `BALANCE.md`, puisqu'une 6e légendaire change les parts du palier.
-- Écrire sa route de craft dans `CRAFTING.md`.
-- Modéliser les deux ailes dans Blockbench (rig commun, géométrie différente à gauche et à droite) et les textures.
-- Vérifier que 9/10 partout ne la rend pas meilleure que les autres légendaires une fois les bonus de collection ajoutés.
+**Dans le mod** (22 octobre 2026) : JSON `wing/yin_yang.json` (1 battement par seconde, stationnaire 0,5 Hz à 19 m/s), item `yin_yang_wings`, style `WingStyle.YIN_YANG` avec les effets `Effects.YIN_YANG` (sphères en orbite, anneau noir et blanc, deux tintements), route de craft `crafting/yin_yang.md`. Les bonus de collection des six légendaires ont été recalculés (`tools/balance_globals.py`). Avec la collection complète, toutes les paires sont à 10/10 : le 9/10 partout ne la rend pas meilleure que les autres en fin de partie.
 
 ---
 

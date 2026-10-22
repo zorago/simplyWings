@@ -32,6 +32,7 @@ public final class ServerFlight {
 
     public static void register(IEventBus bus) {
         bus.addListener(ServerFlight::onPlayerTick);
+        bus.addListener(CloudHarvest::onPlayerTick);
         bus.addListener(ServerFlight::onFall);
         bus.addListener(ServerFlight::onLogin);
         bus.addListener(ServerFlight::onRespawn);

@@ -1,0 +1,29 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " LGL ",
+    " CVC ",
+    "  G  ",
+    "     "
+  ],
+  "key": {
+    "L": {
+      "item": "simplywings:living_flame"
+    },
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "C": {
+      "item": "minecraft:fire_charge"
+    },
+    "V": {
+      "item": "simplywings:spirit_vessel"
+    }
+  },
+  "result": {
+    "id": "simplywings:fire_core",
+    "count": 1
+  },
+  "essence": 60
+}

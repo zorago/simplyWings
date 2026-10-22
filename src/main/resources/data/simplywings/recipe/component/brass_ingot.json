@@ -1,0 +1,23 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " CGC ",
+    "  C  ",
+    "     ",
+    "     "
+  ],
+  "key": {
+    "C": {
+      "item": "simplywings:copper_spark"
+    },
+    "G": {
+      "item": "simplywings:gilded_vein"
+    }
+  },
+  "result": {
+    "id": "simplywings:brass_ingot",
+    "count": 2
+  },
+  "essence": 10
+}

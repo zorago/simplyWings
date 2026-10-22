@@ -1,0 +1,29 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " GSG ",
+    " GPG ",
+    "  N  ",
+    "     "
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "S": {
+      "item": "simplywings:fossil_spar"
+    },
+    "P": {
+      "item": "minecraft:pitcher_plant"
+    },
+    "N": {
+      "item": "minecraft:nautilus_shell"
+    }
+  },
+  "result": {
+    "id": "simplywings:ptero_core",
+    "count": 1
+  },
+  "essence": 60
+}

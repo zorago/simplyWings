@@ -1,0 +1,19 @@
+{
+  "type": "simplywings:assembly",
+  "harness": {
+    "item": "simplywings:radiant_harness"
+  },
+  "core": {
+    "item": "simplywings:seraph_core"
+  },
+  "left_wing": {
+    "item": "simplywings:seraph_wing"
+  },
+  "right_wing": {
+    "item": "simplywings:seraph_wing"
+  },
+  "result": {
+    "id": "simplywings:seraph_wings"
+  },
+  "essence": 800
+}

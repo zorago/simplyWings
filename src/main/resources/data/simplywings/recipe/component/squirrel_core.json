@@ -1,0 +1,26 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " IAI ",
+    " HAH ",
+    " IAI ",
+    "     "
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "A": {
+      "item": "simplywings:acorn"
+    },
+    "H": {
+      "item": "minecraft:rabbit_hide"
+    }
+  },
+  "result": {
+    "id": "simplywings:squirrel_core",
+    "count": 1
+  },
+  "essence": 30
+}

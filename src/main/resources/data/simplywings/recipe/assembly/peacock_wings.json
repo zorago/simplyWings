@@ -1,0 +1,19 @@
+{
+  "type": "simplywings:assembly",
+  "harness": {
+    "item": "simplywings:iron_harness"
+  },
+  "core": {
+    "item": "simplywings:peacock_core"
+  },
+  "left_wing": {
+    "item": "simplywings:peacock_wing"
+  },
+  "right_wing": {
+    "item": "simplywings:peacock_wing"
+  },
+  "result": {
+    "id": "simplywings:peacock_wings"
+  },
+  "essence": 100
+}

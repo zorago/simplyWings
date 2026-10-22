@@ -432,6 +432,20 @@ bcd...........
 ..eeeeeeeebbb.
 ....eeeebbb...
 .......bbb....""",
+    "absorber": """
+..dddddddddd..
+.dcccccccccca.
+.bccccccccbba.
+..bcccccccba..
+...bccccccb...
+....bcccba....
+.....bcba.....
+.....ebe......
+....eeeee.....
+...effffee....
+...efffffe....
+...effffee....
+....eeeee.....""",
 }
 
 
@@ -561,6 +575,11 @@ ITEMS = {
     "shimmer_membrane": ("membrane", "#dce4ff", "#c0a0ff"),
     "blast_chamber": ("jar", "#d8d8e4", "#a0e0ff", "#ffffff"),
     "light_tail": ("tail", "#e8e8f0", "#b8c0e0"),
+    "umbral_plume": ("feather", "#2a2c40"),
+    "lucent_plume": ("feather", "#f4f2ff"),
+    "yin_sphere": ("orb", "#24243a"),
+    "yang_sphere": ("orb", "#f2f0ea"),
+    "cloud_absorber": ("absorber", "#d07040", "#a8b8c8", "#f4faff"),
 }
 
 GEMS = {
@@ -571,7 +590,7 @@ GEMS = {
     "patchwork": "#c04040", "ancient": "#e0a020", "ptero": "#c08040", "fire": "#ff7020", "water": "#3080e0",
     "earth": "#8a8a7a", "air": "#d8f0ff", "storm": "#60a0ff", "aurora": "#60e0a0", "shadow": "#6a30a0",
     "nebula": "#4a4ab0", "forest": "#60c060", "angel": "#f4f0e0", "demon": "#c02020", "seraph": "#f0c040",
-    "psyche": "#60e0f0", "daedalus": "#c0a050", "night": "#4a4a6a", "light": "#e8f4ff",
+    "psyche": "#60e0f0", "daedalus": "#c0a050", "yin_yang": "#8a8aa0", "night": "#4a4a6a", "light": "#e8f4ff",
 }
 METALS = {"Rare": ("#5a5a5a", "#c8c8c8"), "Épique": ("#8a6a10", "#f0d040"),
           "Légendaire": ("#2a8a8a", "#a0f0e8"), "Mythique": ("#2a2226", "#6a5e62")}

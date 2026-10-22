@@ -145,11 +145,12 @@ Written in French.
 
 ### Gameplay
 - [ ] Assembly Table: block, block entity, menu, the two tabs, the Cloud Essence tank, the two recipe types.
-- [ ] Cloud Essence: Cloud Flask and Cloud Absorber items, server-side harvest in the cloud layer (Y band, rate, which flight modes count).
+- [x] Cloud Essence: Cloud Flask and Cloud Absorber items, server-side harvest in the cloud layer (config `[cloud]`; values to tune in game).
 - [ ] Winged energy data component, `simplywings:loot_source` registry, Global Loot Modifiers and the custom loot condition.
-- [ ] Component items (harnesses, cores, wings) and their textures.
-- [ ] Write the crafting route of the 39 non-common pairs in `CRAFTING.md`, then as recipe JSON.
-- [ ] Mythic recipes for Night and Light: the big list of vanilla exploration items.
+- [x] Component items (harnesses, cores, wings, 56 imbued drops, intermediates), textures, and lore plus riddle tooltips.
+- [x] Crafting routes of the 40 non-common pairs (`crafting/`), generated as recipe JSON.
+- [x] Mythic recipes for Night and Light.
+- [ ] Forge Compass: given on dragon death once the End forge exists (the item and its needle are ready).
 - [ ] Remove `/simplywings unlock` from normal play once wings can be crafted (keep it for operators).
 - [ ] Open questions in the specification: ranged kills with an imbued bow or trident, name of the block essences.
 

@@ -1,0 +1,19 @@
+{
+  "type": "simplywings:assembly",
+  "harness": {
+    "item": "simplywings:gilded_harness"
+  },
+  "core": {
+    "item": "simplywings:nebula_core"
+  },
+  "left_wing": {
+    "item": "simplywings:nebula_wing"
+  },
+  "right_wing": {
+    "item": "simplywings:nebula_wing"
+  },
+  "result": {
+    "id": "simplywings:nebula_wings"
+  },
+  "essence": 300
+}

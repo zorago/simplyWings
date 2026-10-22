@@ -1,0 +1,32 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " BWB ",
+    " PXP ",
+    "  O  ",
+    "     "
+  ],
+  "key": {
+    "B": {
+      "item": "simplywings:brass_ingot"
+    },
+    "W": {
+      "item": "simplywings:gust_mote"
+    },
+    "P": {
+      "item": "simplywings:steel_plate"
+    },
+    "X": {
+      "item": "minecraft:breeze_rod"
+    },
+    "O": {
+      "item": "minecraft:observer"
+    }
+  },
+  "result": {
+    "id": "simplywings:wind_thruster",
+    "count": 1
+  },
+  "essence": 40
+}
