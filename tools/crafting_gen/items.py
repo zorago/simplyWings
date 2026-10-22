@@ -99,8 +99,10 @@ def lang(drops, crafts):
         if p["id"] in SKIP_PAIRS:
             continue
         out[f"item.simplywings.{p['id']}_wings.lore"] = PAIR_LORE[p["id"]][0]
+        wings = (f"and two {name(p['left'])}s" if p["left"] == p["right"]
+                 else f", a {name(p['left'])} and a {name(p['right'])}")
         out[f"item.simplywings.{p['id']}_wings.riddle"] = (
-            f"At the Assembly Table, join the {name(p['harness'])}, the {name(p['core'])} and two {name(p['left'])}s, "
+            f"At the Assembly Table, join the {name(p['harness'])}, the {name(p['core'])}{'' if wings[0] == ',' else ' '}{wings}, "
             f"for {ASM_COST[p['rarity']]} Cloud Essence.")
     out["item.simplywings.common_wings.lore"] = PAIR_LORE["common"][0]
     out["item.simplywings.common_wings.riddle"] = "At the Assembly Table, join leather, an elytra and two feathers. No Cloud Essence needed."

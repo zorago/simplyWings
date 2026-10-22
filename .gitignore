@@ -13,6 +13,7 @@ out/
 !**/src/**/out/
 
 .run/
+run-pack/
 
 ### Eclipse ###
 .apt_generated

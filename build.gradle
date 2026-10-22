@@ -71,6 +71,14 @@ neoForge {
             programArguments.addAll '--quickPlaySingleplayer', 'New World', '--width', '1280', '--height', '960'
         }
 
+        packStudio {
+            client()
+            gameDirectory = project.file('run-pack')
+            systemProperty 'simplywings.studio', 'true'
+            programArguments.addAll '--width', '1280', '--height', '960'
+            jvmArguments.addAll '-Xmx12G'
+        }
+
         server {
             server()
             programArgument '--nogui'

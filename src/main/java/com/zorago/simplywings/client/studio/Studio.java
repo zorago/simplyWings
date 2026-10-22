@@ -45,6 +45,7 @@ public final class Studio {
     private static float hover = Float.NaN;
     private static float time = Float.NaN;
     private static float rouse = -1f;
+    private static int variant = -1;
     private static float camYaw = 25f;
     private static float camPitch = 10f;
     private static float camDistance = 4f;
@@ -66,6 +67,7 @@ public final class Studio {
             game.addListener(Studio::onTick);
             game.addListener(Studio::onFrame);
             game.addListener(EventPriority.LOWEST, Studio::onAngles);
+            game.addListener((net.neoforged.neoforge.client.event.ClientChatReceivedEvent e) -> StudioTest.chat(e, Studio::log));
             SimplyWings.LOGGER.info("Wing studio enabled, reading {}", dir().resolve("commands.txt"));
         }
     }
@@ -85,6 +87,7 @@ public final class Studio {
             return;
         }
         readCommands();
+        StudioTest.tick();
         if (active) {
             hold(mc, player);
         }
@@ -153,13 +156,17 @@ public final class Studio {
                 case "beat" -> beat = a[1].equals("off") ? -1f : Float.parseFloat(a[1]);
                 case "hover" -> hover = a[1].equals("off") ? Float.NaN : Float.parseFloat(a[1]) * Mth.TWO_PI;
                 case "time" -> time = a[1].equals("off") ? Float.NaN : Float.parseFloat(a[1]);
-                case "rouse" -> rouse = a[1].equals("off") ? -1f : Float.parseFloat(a[1]);
+                case "rouse" -> {
+                    rouse = a[1].equals("off") ? -1f : Float.parseFloat(a[1]);
+                    variant = a.length > 2 ? Integer.parseInt(a[2]) : -1;
+                }
                 case "live" -> {
                     forcedState = -1;
                     beat = -1f;
                     hover = Float.NaN;
                     time = Float.NaN;
                     rouse = -1f;
+                    variant = -1;
                     visual.animator.release();
                 }
                 case "cam" -> {
@@ -183,7 +190,11 @@ public final class Studio {
                     wait = 4;
                     frames = 0;
                 }
-                default -> throw new IllegalArgumentException("Unknown command");
+                default -> {
+                    if (!StudioTest.run(mc, player, a, line, Studio::log)) {
+                        throw new IllegalArgumentException("Unknown command");
+                    }
+                }
             }
         } catch (RuntimeException e) {
             write(dir().resolve("errors.txt"), line + " -> " + e.getMessage());
@@ -241,6 +252,7 @@ public final class Studio {
         visual.animator.forceBeat(beat);
         visual.animator.forceHover(hover);
         visual.animator.forceTime(time);
+        visual.animator.forceVariant(variant);
         if (rouse >= 0f) {
             visual.animator.forceRouse(rouse);
         }
@@ -289,6 +301,10 @@ public final class Studio {
         } catch (IOException e) {
             write(dir().resolve("errors.txt"), "shot " + name + " -> " + e.getMessage());
         }
+    }
+
+    private static void log(String line) {
+        write(dir().resolve("log.txt"), line);
     }
 
     private static void write(Path file, String line) {
