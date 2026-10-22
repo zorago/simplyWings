@@ -215,11 +215,12 @@ Rien n'est codé : le plan est dans `docs/WIKI_PLAN.md`.
 - [ ] Vol : stabilisé, déplacement, envol chargé, dive, frein, crash, sauts de secours, stamina, aucun kick sur le serveur dédié.
 - [ ] Night : stamina infinie, cri du piqué, charge et dash avec invisibilité.
 - [ ] Correctif 1 : saut au reset du cycle de battement (toutes les ailes).
+  - 22/10 : codé dans `WingAnimator` (phase continue qui ne revient jamais à zéro, amplitude par ressort, recalage progressif sur le coup ; simulé sans saut). Reste à le sentir en vol réel.
 - [ ] Correctif 2 : z-fighting des plaques superposées, de près et de loin (toutes les ailes).
 - [ ] Correctif 3 : battements trop rapides (aigle, chouette en priorité) ; proposer les nouvelles valeurs de `flap_rate`.
 - [ ] Correctif 4 : mêmes corrections sur la commune (`CommonRig`, `basic.bbmodel`).
 - [ ] Animation de récupération après l'atterrissage : à ajouter à chaque rare.
-- [ ] Passe studio des 21 rares (planches dans `run/studio/sheets/`).
+- [x] Passe studio des 21 rares (planches dans `run/studio/sheets/`) : 22/10, la commune et les 21 rares se chargent et s'affichent dans les 15 états, sans texture manquante.
 
 ## 12. Modèles 3D restants (refonte Blockbench)
 

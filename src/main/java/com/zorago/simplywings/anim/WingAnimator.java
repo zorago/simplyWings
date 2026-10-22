@@ -22,10 +22,14 @@ public final class WingAnimator {
     private float prevStallWeight;
     private float vibrationWeight;
     private float prevVibrationWeight;
-    private float strokeProgress = -1;
-    private float prevStrokeProgress = -1;
-    private float strokeDuration = 10;
-    private float loopRate;
+    private float phase;
+    private float prevPhase;
+    private float phaseTarget = Float.NaN;
+    private float cycleTicks = 10;
+    private float amp;
+    private float prevAmp;
+    private float ampVelocity;
+    private int activeTicks;
     private int loopTicks;
     private int age;
     private boolean initialized;
@@ -61,24 +65,44 @@ public final class WingAnimator {
     private int nextRouse = 300;
 
     public void flap(float flapRate) {
-        this.flapRate = flapRate;
-        strokeDuration = Math.max(4f, 20f / Math.max(0.1f, flapRate));
-        strokeProgress = 0;
-        prevStrokeProgress = 0;
+        start(flapRate, 0f);
     }
 
     public void beat(float flapRate, int holdTicks) {
-        loopRate = flapRate;
+        boolean resting = activeTicks <= 0;
+        cycleTicks = cycle(flapRate);
+        this.flapRate = flapRate;
+        activeTicks = Math.max(activeTicks, holdTicks);
         loopTicks = Math.max(loopTicks, holdTicks);
-        if (strokeProgress < 0) {
-            flap(flapRate);
+        if (resting) {
+            align(0f);
         }
     }
 
     public void strike(float flapRate, float strikeAt) {
-        flap(flapRate);
-        strokeProgress = strikeAt;
-        prevStrokeProgress = strikeAt;
+        start(flapRate, strikeAt);
+    }
+
+    private void start(float flapRate, float at) {
+        this.flapRate = flapRate;
+        cycleTicks = cycle(flapRate);
+        activeTicks = Math.max(activeTicks, Math.round(cycleTicks * (1f - at)) + 1);
+        align(at);
+    }
+
+    private void align(float at) {
+        if (amp < 0.12f) {
+            float shift = wrapSigned(at - wrap(phase));
+            phase += shift;
+            prevPhase += shift;
+            phaseTarget = Float.NaN;
+        } else {
+            phaseTarget = at;
+        }
+    }
+
+    private static float cycle(float flapRate) {
+        return Math.max(4f, 20f / Math.max(0.1f, flapRate));
     }
 
     public void setCharge(float charge) {
@@ -167,26 +191,47 @@ public final class WingAnimator {
             prevHoverPhase -= TWO_PI * 64;
         }
 
-        prevStrokeProgress = strokeProgress;
-        if (strokeProgress >= 0) {
-            strokeProgress += 1f / strokeDuration;
-            if (strokeProgress >= 1f && loopTicks > 0) {
-                strokeDuration = Math.max(4f, 20f / Math.max(0.1f, loopRate));
-                strokeProgress -= 1f;
-                prevStrokeProgress = 0;
-            } else if (strokeProgress >= 1f) {
-                strokeProgress = -1;
-                prevStrokeProgress = -1;
-            }
-        }
-        if (loopTicks > 0) {
-            loopTicks--;
-        }
+        tickBeat();
         this.hoverRate = hoverRate;
         net.minecraft.world.phys.Vec3 motion = player.position().subtract(player.xo, player.yo, player.zo);
         speed = (float) motion.length() * 20f;
         climb = (float) motion.y * 20f;
         tickWeights(mode, grounded, pitch, stall, tuck);
+    }
+
+    private void tickBeat() {
+        prevPhase = phase;
+        prevAmp = amp;
+        boolean active = activeTicks > 0;
+        if (active) {
+            activeTicks--;
+        }
+        if (loopTicks > 0) {
+            loopTicks--;
+        }
+        float step = 1f / cycleTicks;
+        float advance = step * (active ? 1f : 0.35f + 0.65f * amp);
+        if (!active) {
+            phaseTarget = Float.NaN;
+        }
+        if (!Float.isNaN(phaseTarget)) {
+            float error = wrapSigned(phaseTarget - phase);
+            float fix = Mth.clamp(error * 0.4f, -0.6f * step, 1.5f * step);
+            advance += fix;
+            phaseTarget = Math.abs(error - fix) < 0.005f ? Float.NaN : wrap(phaseTarget + step);
+        }
+        phase += advance;
+        if (phase > 4096f) {
+            phase -= 4096f;
+            prevPhase -= 4096f;
+        }
+        float target = active ? 1f : 0f;
+        ampVelocity = (ampVelocity + (target - amp) * (active ? 0.45f : 0.28f)) * (active ? 0.55f : 0.6f);
+        amp = Mth.clamp(amp + ampVelocity, 0f, 1.08f);
+        if (!active && amp < 0.002f) {
+            amp = 0f;
+            ampVelocity = 0f;
+        }
     }
 
     private void tickWeights(FlightMode mode, boolean grounded, float pitch, boolean stall, boolean tuck) {
@@ -282,9 +327,9 @@ public final class WingAnimator {
         if (forcedBeat >= 0f) {
             out.beat = forcedBeat;
             out.beatWeight = 1f;
-        } else if (!forced && strokeProgress >= 0 && prevStrokeProgress >= 0) {
-            out.beat = wrap(Mth.lerp(partialTick, prevStrokeProgress, strokeProgress));
-            out.beatWeight = 1f - hoverRaw;
+        } else if (!forced && (amp > 0f || prevAmp > 0f)) {
+            out.beat = wrap(Mth.lerp(partialTick, prevPhase, phase));
+            out.beatWeight = Mth.lerp(partialTick, prevAmp, amp) * (1f - hoverRaw);
         } else {
             out.beat = -1f;
             out.beatWeight = 0f;
@@ -352,13 +397,14 @@ public final class WingAnimator {
                     0.4f * a * Mth.sin(ph - 1.5f), 0.12f * Mth.cos(ph));
             out.addScaled(scratch, hw);
         }
-        if (strokeProgress >= 0 && prevStrokeProgress >= 0) {
-            float t = wrap(Mth.lerp(partialTick, prevStrokeProgress, strokeProgress) + slot.phase() / TWO_PI);
-            float a = style.strokeAmplitude() * slot.amplitude() * (1f - hoverRaw);
+        if (amp > 0f || prevAmp > 0f) {
+            float t = wrap(Mth.lerp(partialTick, prevPhase, phase) + slot.phase() / TWO_PI);
+            float envelope = Mth.lerp(partialTick, prevAmp, amp) * (1f - hoverRaw);
+            float a = style.strokeAmplitude() * slot.amplitude() * envelope;
             out.stroke += a * style.stroke(t);
             out.elbow += 0.6f * a * style.stroke(wrap(t - 0.07f));
             out.tip += 0.45f * a * style.stroke(wrap(t - 0.14f));
-            out.curl += 0.45f * style.curl(t) * slot.amplitude() * (1f - hoverRaw);
+            out.curl += 0.45f * style.curl(t) * slot.amplitude() * envelope;
         }
         float sw = Mth.lerp(partialTick, prevStallWeight, stallWeight) * slot.amplitude();
         if (sw > 0.001f) {
@@ -393,5 +439,9 @@ public final class WingAnimator {
 
     private static float wrap(float t) {
         return t - (float) Math.floor(t);
+    }
+
+    private static float wrapSigned(float t) {
+        return t - (float) Math.floor(t + 0.5f);
     }
 }
