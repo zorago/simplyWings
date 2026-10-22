@@ -825,11 +825,16 @@
   "jei.simplywings.essence": "%s Cloud Essence",
   "jei.simplywings.winged_energy": "Winged Energy",
   "jei.simplywings.winged_energy.info": "Place any item in the Winged Energy tab of the Assembly Table to imbue it, or to take the energy back. Imbued tools, weapons and fishing rods collect winged drops.",
-  "jei.simplywings.winged_drops": "Winged Drops",
   "jei.simplywings.drop.mob": "Slay with a winged weapon: %s",
   "jei.simplywings.drop.block": "Break with a winged tool: %s",
   "jei.simplywings.drop.fish": "Fish with a winged rod%s",
   "jei.simplywings.info.assembly_table": "The Assembly Table stands in the Wing Forge, which appears far out in the End when a dragon dies for the second time (and is repaired at every later death). Follow the Forge Compass. The table assembles wings, crafts components on a 5x5 grid without corners, imbues items with winged energy, and stores up to 1000 Cloud Essence.",
   "jei.simplywings.info.forge_compass": "Given to every player on the central End island when a dragon dies, from the second dragon on. It points to the Wing Forge.",
-  "jei.simplywings.info.cloud_essence": "Keep a Cloud Absorber in your inventory and fly through the Overworld cloud layer: empty Cloud Flasks fill up, 100 Cloud Essence each. Drop full flasks in the Assembly Table to fill its tank."
+  "jei.simplywings.info.cloud_essence": "Keep a Cloud Absorber in your inventory and fly through the Overworld cloud layer: empty Cloud Flasks fill up, 100 Cloud Essence each. Drop full flasks in the Assembly Table to fill its tank.",
+  "jei.simplywings.drops.mob": "Winged Mob Drops",
+  "jei.simplywings.drops.block": "Winged Block Drops",
+  "jei.simplywings.drops.fish": "Winged Fishing",
+  "jei.simplywings.chance": "Chance: %s%%",
+  "jei.simplywings.quantity": "Quantity: %s",
+  "jei.simplywings.quantity_range": "Quantity: %s to %s"
 }

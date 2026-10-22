@@ -31,24 +31,38 @@ import net.minecraft.world.level.block.Block;
 
 public class DropCategory implements IRecipeCategory<LootSource> {
     private static final int TEXT = 0x404040;
+    private final LootSource.Kind kind;
     private final IDrawable icon;
     private final IDrawableStatic arrow;
 
-    public DropCategory(IGuiHelper gui) {
-        ItemStack sample = new ItemStack(Items.IRON_PICKAXE);
-        WingedEnergy.toggle(sample);
-        this.icon = gui.createDrawableItemStack(sample);
+    public DropCategory(IGuiHelper gui, LootSource.Kind kind) {
+        this.kind = kind;
+        this.icon = gui.createDrawableItemStack(tool(kind));
         this.arrow = gui.getRecipeArrow();
+    }
+
+    static ItemStack tool(LootSource.Kind kind) {
+        ItemStack stack = new ItemStack(switch (kind) {
+            case MOB -> Items.IRON_SWORD;
+            case BLOCK -> Items.IRON_PICKAXE;
+            case FISH -> Items.FISHING_ROD;
+        });
+        WingedEnergy.toggle(stack);
+        return stack;
     }
 
     @Override
     public RecipeType<LootSource> getRecipeType() {
-        return SimplyWingsJeiPlugin.DROPS;
+        return switch (kind) {
+            case MOB -> SimplyWingsJeiPlugin.MOB_DROPS;
+            case BLOCK -> SimplyWingsJeiPlugin.BLOCK_DROPS;
+            case FISH -> SimplyWingsJeiPlugin.FISHING;
+        };
     }
 
     @Override
     public Component getTitle() {
-        return Component.translatable("jei.simplywings.winged_drops");
+        return Component.translatable("jei.simplywings.drops." + kind.getSerializedName());
     }
 
     @Override
@@ -69,16 +83,19 @@ public class DropCategory implements IRecipeCategory<LootSource> {
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, LootSource source, IFocusGroup focuses) {
         builder.addSlot(RecipeIngredientRole.INPUT, 1, 1).setStandardSlotBackground().addItemStacks(sources(source));
-        ItemStack drop = new ItemStack(source.item(), source.max());
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 61, 1).setStandardSlotBackground().addItemStack(drop);
+        builder.addSlot(RecipeIngredientRole.CATALYST, 23, 1).setStandardSlotBackground().addItemStack(tool(source.kind()));
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 73, 1).setStandardSlotBackground().addItemStack(new ItemStack(source.item(), source.max()));
     }
 
     @Override
     public void draw(LootSource source, IRecipeSlotsView slots, GuiGraphics graphics, double mouseX, double mouseY) {
         Font font = Minecraft.getInstance().font;
-        arrow.draw(graphics, 26, 1);
-        String chance = Math.round(source.chance() * 100) + " %";
-        graphics.drawString(font, chance, 84, 6, TEXT, false);
+        arrow.draw(graphics, 46, 1);
+        graphics.drawString(font, Component.translatable("jei.simplywings.chance", Math.round(source.chance() * 100)), 96, 1, TEXT, false);
+        Component quantity = source.min() == source.max()
+                ? Component.translatable("jei.simplywings.quantity", source.min())
+                : Component.translatable("jei.simplywings.quantity_range", source.min(), source.max());
+        graphics.drawString(font, quantity, 96, 11, TEXT, false);
         int y = 24;
         y = JeiText.wrapped(graphics, font, Component.translatable("jei.simplywings.drop." + source.kind().getSerializedName(),
                 targets(source)), 0, y, 160, TEXT);

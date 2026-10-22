@@ -38,7 +38,9 @@ public class SimplyWingsJeiPlugin implements IModPlugin {
     static final RecipeType<RecipeHolder<AssemblyRecipe>> ASSEMBLY = RecipeType.createRecipeHolderType(SimplyWings.id("assembly"));
     static final RecipeType<RecipeHolder<ComponentRecipe>> COMPONENTS = RecipeType.createRecipeHolderType(SimplyWings.id("components"));
     static final RecipeType<ItemStack> ENERGY = RecipeType.create(SimplyWings.MOD_ID, "winged_energy", ItemStack.class);
-    static final RecipeType<LootSource> DROPS = RecipeType.create(SimplyWings.MOD_ID, "winged_drops", LootSource.class);
+    static final RecipeType<LootSource> MOB_DROPS = RecipeType.create(SimplyWings.MOD_ID, "winged_mob_drops", LootSource.class);
+    static final RecipeType<LootSource> BLOCK_DROPS = RecipeType.create(SimplyWings.MOD_ID, "winged_block_drops", LootSource.class);
+    static final RecipeType<LootSource> FISHING = RecipeType.create(SimplyWings.MOD_ID, "winged_fishing", LootSource.class);
     private static final int FIRST_ASSEMBLY_SLOT = 1;
     private static final int FIRST_GRID_SLOT = 7;
     private static final int GRID_SLOTS = 21;
@@ -54,7 +56,8 @@ public class SimplyWingsJeiPlugin implements IModPlugin {
     public void registerCategories(IRecipeCategoryRegistration registration) {
         IGuiHelper gui = registration.getJeiHelpers().getGuiHelper();
         registration.addRecipeCategories(new AssemblyCategory(gui), new ComponentCategory(gui), new EnergyCategory(gui),
-                new DropCategory(gui));
+                new DropCategory(gui, LootSource.Kind.MOB), new DropCategory(gui, LootSource.Kind.BLOCK),
+                new DropCategory(gui, LootSource.Kind.FISH));
     }
 
     @Override
@@ -71,7 +74,9 @@ public class SimplyWingsJeiPlugin implements IModPlugin {
                 new ItemStack(Items.BOW)));
         List<LootSource> drops = new ArrayList<>();
         LootSource.registry(level.registryAccess()).ifPresent(r -> r.forEach(drops::add));
-        registration.addRecipes(DROPS, drops);
+        registration.addRecipes(MOB_DROPS, drops.stream().filter(d -> d.kind() == LootSource.Kind.MOB).toList());
+        registration.addRecipes(BLOCK_DROPS, drops.stream().filter(d -> d.kind() == LootSource.Kind.BLOCK).toList());
+        registration.addRecipes(FISHING, drops.stream().filter(d -> d.kind() == LootSource.Kind.FISH).toList());
         registration.addItemStackInfo(new ItemStack(ModBlocks.ASSEMBLY_TABLE_ITEM.get()),
                 Component.translatable("jei.simplywings.info.assembly_table"));
         registration.addItemStackInfo(new ItemStack(ModItems.FORGE_COMPASS.get()),
@@ -83,6 +88,9 @@ public class SimplyWingsJeiPlugin implements IModPlugin {
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
         registration.addRecipeCatalyst(ModBlocks.ASSEMBLY_TABLE_ITEM.get(), ASSEMBLY, COMPONENTS, ENERGY);
+        registration.addRecipeCatalyst(DropCategory.tool(LootSource.Kind.MOB), MOB_DROPS);
+        registration.addRecipeCatalyst(DropCategory.tool(LootSource.Kind.BLOCK), BLOCK_DROPS);
+        registration.addRecipeCatalyst(DropCategory.tool(LootSource.Kind.FISH), FISHING);
     }
 
     @Override
