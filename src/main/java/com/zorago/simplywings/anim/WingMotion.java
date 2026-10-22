@@ -25,6 +25,7 @@ public final class WingMotion {
     public float diveDepth;
     public float rouse;
     public float rouseProgress;
+    public int rouseVariant;
     public float speed;
     public float climb;
     public float flapRate;

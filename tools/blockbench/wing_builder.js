@@ -3,7 +3,7 @@ window.swb.root = 'D:\\Bureau\\General\\SimplyWings';
 window.swb.load = function (model) {
   const fs = require('fs');
   const dir = window.swb.root + '\\art\\wings\\lib\\';
-  const lib = ['rig_pack.js', 'bird.js'].map(f => fs.readFileSync(dir + f, 'utf8')).join('\n');
+  const lib = ['rig_pack.js', 'bird.js', 'rig_geom.js'].map(f => fs.readFileSync(dir + f, 'utf8')).join('\n');
   const code = lib + '\n' + fs.readFileSync(window.swb.root + '\\art\\wings\\' + model + '.rig.js', 'utf8');
   window.swb.rig = new Function(code + '\nreturn RIG;')();
   return window.swb.rig;

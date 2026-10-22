@@ -21,6 +21,8 @@ public abstract class WingRig {
         EMISSIVE
     }
 
+    private static final int[] DEFAULT_IDLE = {26};
+
     private final String name;
     private final ResourceLocation texture;
     private Bones bones;
@@ -64,6 +66,10 @@ public abstract class WingRig {
     }
 
     protected abstract void onBind(Bones bones);
+
+    public int[] idleLengths() {
+        return DEFAULT_IDLE;
+    }
 
     public void tick(WingMotion motion, RigMemory memory) {
     }

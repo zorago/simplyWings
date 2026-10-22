@@ -63,6 +63,10 @@ public final class WingAnimator {
     private int landingTicks;
     private int rouseTicks;
     private int nextRouse = 300;
+    private int rouseVariant;
+    private int rouseLength = ROUSE_TICKS;
+    private int[] idleLengths = {ROUSE_TICKS};
+    private int forcedVariant = -1;
 
     public void flap(float flapRate) {
         start(flapRate, 0f);
@@ -248,7 +252,9 @@ public final class WingAnimator {
         }
         if (idle && charge <= 0f && landingTicks == 0 && forcedState < 0) {
             if (--nextRouse <= 0) {
-                rouseTicks = ROUSE_TICKS;
+                rouseVariant = random.nextInt(60);
+                rouseLength = idleLengths[rouseVariant % idleLengths.length];
+                rouseTicks = rouseLength;
                 nextRouse = 400 + random.nextInt(700);
             }
         } else if (forcedState < 0) {
@@ -339,8 +345,9 @@ public final class WingAnimator {
         out.bank = forced ? 0f : bank(partialTick) * Mth.DEG_TO_RAD;
         out.rouse = 0f;
         out.rouseProgress = 0f;
+        out.rouseVariant = forcedVariant >= 0 ? forcedVariant : rouseVariant;
         if (rouseTicks > 0) {
-            out.rouseProgress = Mth.clamp(1f - (rouseTicks - partialTick) / ROUSE_TICKS, 0f, 1f);
+            out.rouseProgress = Mth.clamp(1f - (rouseTicks - partialTick) / rouseLength, 0f, 1f);
             out.rouse = Mth.sin((float) Math.PI * out.rouseProgress);
         }
         out.speed = forced ? 0f : speed;
@@ -373,7 +380,17 @@ public final class WingAnimator {
     }
 
     public void forceRouse(float progress) {
-        rouseTicks = Math.max(1, Math.round(ROUSE_TICKS * (1f - progress)));
+        int variant = forcedVariant >= 0 ? forcedVariant : rouseVariant;
+        rouseLength = idleLengths[variant % idleLengths.length];
+        rouseTicks = Math.max(1, Math.round(rouseLength * (1f - progress)));
+    }
+
+    public void setIdleLengths(int[] lengths) {
+        idleLengths = lengths.length == 0 ? new int[]{ROUSE_TICKS} : lengths;
+    }
+
+    public void forceVariant(int variant) {
+        forcedVariant = variant;
     }
 
     public void release() {
@@ -382,6 +399,7 @@ public final class WingAnimator {
         forcedBeat = -1f;
         forcedHover = Float.NaN;
         forcedTime = Float.NaN;
+        forcedVariant = -1;
         rouseTicks = 0;
     }
 

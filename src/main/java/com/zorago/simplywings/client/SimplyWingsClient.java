@@ -130,8 +130,9 @@ public class SimplyWingsClient {
         if (player == Minecraft.getInstance().player) {
             visual.animator.setCharge(ClientFlight.takeoffProgress());
         }
-        visual.animator.tick(player, visual.mode, visual.flags, style, hoverRate);
         WingRig rig = WingRigs.get(model);
+        visual.animator.setIdleLengths(rig != null ? rig.idleLengths() : new int[0]);
+        visual.animator.tick(player, visual.mode, visual.flags, style, hoverRate);
         if (rig != null) {
             visual.rig.claim(rig.name());
             visual.rig.begin();
