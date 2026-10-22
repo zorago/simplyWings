@@ -13,7 +13,8 @@ Règles, légende et objets partagés : [`CRAFTING.md`](../CRAFTING.md). Derniè
 | Profondeur | 5 niveaux de craft avant les pièces (max 5 en mythique) |
 | Crafts | 39 en `GRID` + 1 assemblage |
 | Cloud Essence | 1735 (pièces) + 1000 (assemblage) = **2735** |
-| Drops du mod | Dragon Scale (MOB · Ender Dragon), Polar Glimmer (BLOCK · Ice, Packed Ice, Blue Ice) |
+| Matières premières | 14 types du mod (93 objets) · 17 types vanilla (91 objets) |
+| Drops du mod | Dragon Scale (MOB · Ender Dragon), Ancient Ember (BLOCK · Ancient Debris), Prism Shard (BLOCK · Diamond Ore, Deepslate Diamond Ore), Gilded Vein (BLOCK · Gold Ore, Deepslate Gold Ore, Nether Gold Ore), Glimmer Spore (BLOCK · Glow Lichen), Void Grit (BLOCK · End Stone), Glimmering Scale (FISH · Pêche), Supple Hide (MOB · Cow, Mooshroom, Horse, Donkey, Llama), Silk Thread (MOB · Spider, Cave Spider), Sky Iron Fleck (BLOCK · Iron Ore, Deepslate Iron Ore), Ghast Wisp (MOB · Ghast), Pale Quartz (BLOCK · Nether Quartz Ore), Ember Wisp (MOB · Blaze), Polar Glimmer (BLOCK · Ice, Packed Ice, Blue Ice) |
 
 ## Matières premières
 
@@ -21,30 +22,36 @@ Tout ce que la route consomme (niveau 0), pour une paire complète. Les drops du
 
 | Objet | Qté | Où | Source | Condition | Chance |
 | --- | --- | --- | --- | --- | --- |
+| Ancient Ember `simplywings:ancient_ember` | 8 | `BLOCK` | Ancient Debris | — | 60 % |
 | Dragon Scale `simplywings:dragon_scale` | 34 | `MOB` | Ender Dragon | — | 100 % ×12 |
+| Ember Wisp `simplywings:ember_wisp` | 3 | `MOB` | Blaze | — | 30 % |
+| Ghast Wisp `simplywings:ghast_wisp` | 2 | `MOB` | Ghast | — | 50 % |
+| Gilded Vein `simplywings:gilded_vein` | 4 | `BLOCK` | Gold Ore, Deepslate Gold Ore, Nether Gold Ore | — | 30 % |
+| Glimmer Spore `simplywings:glimmer_spore` | 8 | `BLOCK` | Glow Lichen | — | 30 % |
+| Glimmering Scale `simplywings:glimmering_scale` | 10 | `FISH` | Pêche | Partout | 10 % |
+| Pale Quartz `simplywings:pale_quartz` | 6 | `BLOCK` | Nether Quartz Ore | — | 25 % |
 | Polar Glimmer `simplywings:polar_glimmer` | 10 | `BLOCK` | Ice, Packed Ice, Blue Ice | De nuit, biomes `#c:is_snowy` | 15 % |
+| Prism Shard `simplywings:prism_shard` | 1 | `BLOCK` | Diamond Ore, Deepslate Diamond Ore | — | 50 % |
+| Silk Thread `simplywings:silk_thread` | 1 | `MOB` | Spider, Cave Spider | — | 40 % |
+| Sky Iron Fleck `simplywings:sky_iron` | 1 | `BLOCK` | Iron Ore, Deepslate Iron Ore | — | 25 % |
+| Supple Hide `simplywings:supple_hide` | 2 | `MOB` | Cow, Mooshroom, Horse, Donkey, Llama | — | 35 % |
+| Void Grit `simplywings:void_grit` | 3 | `BLOCK` | End Stone | — | 8 % |
 | Beacon `minecraft:beacon` | 1 | `VANILLA` | Établi : étoile du Nether + obsidienne + verre | — | — |
-| Blaze Powder `minecraft:blaze_powder` | 8 | `VANILLA` | Établi : bâton de blaze | — | — |
+| Blaze Powder `minecraft:blaze_powder` | 5 | `VANILLA` | Établi : bâton de blaze | — | — |
 | Breeze Rod `minecraft:breeze_rod` | 1 | `VANILLA` | Breezes (chambres d'épreuves) | — | — |
 | Diamond `minecraft:diamond` | 10 | `VANILLA` | Minage du diamant | — | — |
 | Dragon's Breath `minecraft:dragon_breath` | 4 | `VANILLA` | Fiole dans le souffle du dragon | — | — |
 | End Rod `minecraft:end_rod` | 6 | `VANILLA` | Établi : bâton de blaze + chorus éclaté | — | — |
-| Ghast Tear `minecraft:ghast_tear` | 2 | `VANILLA` | Ghasts | — | — |
-| Glow Ink Sac `minecraft:glow_ink_sac` | 8 | `VANILLA` | Poulpes luisants | — | — |
 | Gold Ingot `minecraft:gold_ingot` | 16 | `VANILLA` | Minage de l'or, piglins, fonte | — | — |
-| Iron Ingot `minecraft:iron_ingot` | 6 | `VANILLA` | Minage du fer, fonte | — | — |
-| Leather `minecraft:leather` | 12 | `VANILLA` | Vaches, chevaux, tonneaux de la forge | — | — |
+| Iron Ingot `minecraft:iron_ingot` | 2 | `VANILLA` | Minage du fer, fonte | — | — |
+| Leather `minecraft:leather` | 10 | `VANILLA` | Vaches, chevaux, tonneaux de la forge | — | — |
 | Lime Dye `minecraft:lime_dye` | 5 | `VANILLA` | Fonte du cornichon de mer, établi | — | — |
-| Nether Quartz `minecraft:quartz` | 6 | `VANILLA` | Minage du quartz dans le Nether | — | — |
 | Netherite Ingot `minecraft:netherite_ingot` | 4 | `VANILLA` | Débris antiques du Nether + or | — | — |
-| Netherite Scrap `minecraft:netherite_scrap` | 6 | `VANILLA` | Fonte des débris antiques | — | — |
 | Phantom Membrane `minecraft:phantom_membrane` | 12 | `VANILLA` | Phantoms | — | — |
 | Pitcher Plant `minecraft:pitcher_plant` | 1 | `VANILLA` | Gousse déterrée par un renifleur, puis plantée | — | — |
-| Prismarine Crystals `minecraft:prismarine_crystals` | 10 | `VANILLA` | Gardiens | — | — |
 | Purple Dye `minecraft:purple_dye` | 5 | `VANILLA` | Établi : rouge + bleu | — | — |
 | Saddle `minecraft:saddle` | 1 | `VANILLA` | Ravageurs (raids), pêche (trésor) | — | — |
 | Shulker Shell `minecraft:shulker_shell` | 2 | `VANILLA` | Shulkers (cités de l'End) | — | — |
-| String `minecraft:string` | 1 | `VANILLA` | Araignées, toiles | — | — |
 | White Dye `minecraft:white_dye` | 6 | `VANILLA` | Établi : poudre d'os ou muguet | — | — |
 
 ## Route
@@ -53,19 +60,19 @@ Niv. = niveau de craft (0 = matière première). Crafts = nombre de fois que la 
 
 | # | Produit | Où | Niv. | Crafts | Entrées par craft | Essence | Cumul |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | Iron-Buckled Harness `simplywings:iron_harness` ×1 | `GRID` | 1 | 1 | Leather ×8, Iron Ingot ×3, String ×1 | 10 | 10 |
-| 2 | Fury Plasma `simplywings:fury_plasma` ×2 | `GRID` | 1 | 2 | Dragon's Breath ×2, Blaze Powder ×1, Ghast Tear ×1 | 2 × 30 | 70 |
-| 3 | Light Scale `simplywings:light_scale` ×24 | `GRID` | 1 | 6 | Dragon Scale ×4, Nether Quartz ×1, White Dye ×1 | 6 × 40 | 310 |
-| 4 | Gilded Frame `simplywings:gilded_frame` ×3 | `GRID` | 1 | 3 | Gold Ingot ×4, Blaze Powder ×2, Iron Ingot ×1 | 3 × 15 | 355 |
-| 5 | Aurora Veil `simplywings:aurora_veil` ×5 | `GRID` | 1 | 5 | Polar Glimmer ×2, Glow Ink Sac ×1, Lime Dye ×1, Purple Dye ×1 | 5 × 15 | 430 |
-| 6 | Gilded Harness `simplywings:gilded_harness` ×1 | `GRID` | 2 | 1 | Gold Ingot ×4, Leather ×2, Iron-Buckled Harness ×1 → #1 | 25 | 455 |
-| 7 | Light Plating `simplywings:light_plating` ×3 | `GRID` | 2 | 3 | Light Scale ×4 → #3, Netherite Scrap ×1, Glow Ink Sac ×1 | 3 × 50 | 605 |
-| 8 | Celestial Frame `simplywings:celestial_frame` ×3 | `GRID` | 2 | 3 | End Rod ×2, Diamond ×2, Gilded Frame ×1 → #4 | 3 × 35 | 710 |
-| 9 | Shimmer Membrane `simplywings:shimmer_membrane` ×5 | `GRID` | 2 | 5 | Phantom Membrane ×2, Aurora Veil ×1 → #5, Prismarine Crystals ×2, Light Scale ×1 → #3 | 5 × 50 | 960 |
-| 10 | Radiant Harness `simplywings:radiant_harness` ×1 | `GRID` | 3 | 1 | Diamond ×4, Phantom Membrane ×2, Gilded Harness ×1 → #6 | 50 | 1010 |
+| 1 | Iron-Buckled Harness `simplywings:iron_harness` ×1 | `GRID` | 1 | 1 | Leather ×6, Supple Hide ×2, Iron Ingot ×2, Silk Thread ×1, Sky Iron Fleck ×1 | 10 | 10 |
+| 2 | Fury Plasma `simplywings:fury_plasma` ×2 | `GRID` | 1 | 2 | Dragon's Breath ×2, Blaze Powder ×1, Ghast Wisp ×1 | 2 × 30 | 70 |
+| 3 | Light Scale `simplywings:light_scale` ×24 | `GRID` | 1 | 6 | Dragon Scale ×4, Pale Quartz ×1, White Dye ×1 | 6 × 40 | 310 |
+| 4 | Gilded Frame `simplywings:gilded_frame` ×3 | `GRID` | 1 | 3 | Gold Ingot ×4, Blaze Powder ×1, Gilded Vein ×1, Ember Wisp ×1 | 3 × 15 | 355 |
+| 5 | Aurora Veil `simplywings:aurora_veil` ×5 | `GRID` | 1 | 5 | Polar Glimmer ×2, Glimmer Spore ×1, Lime Dye ×1, Purple Dye ×1 | 5 × 15 | 430 |
+| 6 | Gilded Harness `simplywings:gilded_harness` ×1 | `GRID` | 2 | 1 | Gold Ingot ×4, Leather ×2, Iron-Buckled Harness ×1 → #1, Gilded Vein ×1 | 25 | 455 |
+| 7 | Light Plating `simplywings:light_plating` ×3 | `GRID` | 2 | 3 | Light Scale ×4 → #3, Ancient Ember ×1, Glimmer Spore ×1 | 3 × 50 | 605 |
+| 8 | Celestial Frame `simplywings:celestial_frame` ×3 | `GRID` | 2 | 3 | End Rod ×2, Void Grit ×1, Diamond ×2, Gilded Frame ×1 → #4 | 3 × 35 | 710 |
+| 9 | Shimmer Membrane `simplywings:shimmer_membrane` ×5 | `GRID` | 2 | 5 | Phantom Membrane ×2, Aurora Veil ×1 → #5, Glimmering Scale ×2, Light Scale ×1 → #3 | 5 × 50 | 960 |
+| 10 | Radiant Harness `simplywings:radiant_harness` ×1 | `GRID` | 3 | 1 | Diamond ×4, Phantom Membrane ×2, Gilded Harness ×1 → #6, Prism Shard ×1 | 50 | 1010 |
 | 11 | Blast Chamber `simplywings:blast_chamber` ×1 | `GRID` | 3 | 1 | Fury Plasma ×2 → #2, Beacon ×1, Light Plating ×1 → #7, Netherite Ingot ×1 | 75 | 1085 |
-| 12 | Dragonbone Spar `simplywings:dragonbone_spar` ×3 | `GRID` | 3 | 3 | Dragon Scale ×2, Celestial Frame ×1 → #8, Netherite Scrap ×1 | 3 × 60 | 1265 |
-| 13 | Fury Saddle `simplywings:fury_saddle` ×1 | `GRID` | 4 | 1 | Dragon Scale ×4, Leather ×2, Radiant Harness ×1 → #10, Saddle ×1, Netherite Ingot ×1 | 80 | 1345 |
+| 12 | Dragonbone Spar `simplywings:dragonbone_spar` ×3 | `GRID` | 3 | 3 | Dragon Scale ×2, Celestial Frame ×1 → #8, Ancient Ember ×1 | 3 × 60 | 1265 |
+| 13 | Fury Saddle `simplywings:fury_saddle` ×1 | `GRID` | 4 | 1 | Dragon Scale ×4, Leather ×2, Radiant Harness ×1 → #10, Saddle ×1, Netherite Ingot ×1, Ancient Ember ×2 | 80 | 1345 |
 | 14 | Light Fury Tail `simplywings:light_tail` ×1 | `GRID` | 4 | 1 | Dragonbone Spar ×1 → #12, Light Plating ×2 → #7, Shimmer Membrane ×1 → #9, Breeze Rod ×1 | 90 | 1435 |
 | 15 | Light Fury Wing `simplywings:light_wing` ×2 | `GRID` | 4 | 2 | Shimmer Membrane ×2 → #9, Dragonbone Spar ×1 → #12, Light Scale ×2 → #3 | 2 × 100 | 1635 |
 | 16 | Light Fury Core `simplywings:light_core` ×1 | `GRID` | 5 | 1 | Netherite Ingot ×2, Blast Chamber ×1 → #11, Shulker Shell ×2, Pitcher Plant ×1, Light Fury Tail ×1 → #14 | 100 | 1735 |
@@ -81,17 +88,19 @@ Grille 5×5 sans les coins : `.` = coin absent, `_` = case vide.
 
 ```
 . L _ L .
-_ L _ L _
-_ I S I _
-_ L I L _
+_ H _ H _
+_ I T I _
+_ L K L _
 . L _ L .
 ```
 
 | Lettre | Ingrédient | Qté | Niv. |
 | --- | --- | --- | --- |
-| `L` | Leather `minecraft:leather` | 8 | 0 |
-| `I` | Iron Ingot `minecraft:iron_ingot` | 3 | 0 |
-| `S` | String `minecraft:string` | 1 | 0 |
+| `L` | Leather `minecraft:leather` | 6 | 0 |
+| `H` | Supple Hide `simplywings:supple_hide` | 2 | 0 |
+| `I` | Iron Ingot `minecraft:iron_ingot` | 2 | 0 |
+| `T` | Silk Thread `simplywings:silk_thread` | 1 | 0 |
+| `K` | Sky Iron Fleck `simplywings:sky_iron` | 1 | 0 |
 
 ### #2 · Fury Plasma · `simplywings:fury_plasma` · partagé
 
@@ -109,7 +118,7 @@ _ _ _ _ _
 | --- | --- | --- | --- |
 | `B` | Dragon's Breath `minecraft:dragon_breath` | 2 | 0 |
 | `P` | Blaze Powder `minecraft:blaze_powder` | 1 | 0 |
-| `T` | Ghast Tear `minecraft:ghast_tear` | 1 | 0 |
+| `T` | Ghast Wisp `simplywings:ghast_wisp` | 1 | 0 |
 
 ### #3 · Light Scale · `simplywings:light_scale`
 
@@ -126,7 +135,7 @@ _ _ _ _ _
 | Lettre | Ingrédient | Qté | Niv. |
 | --- | --- | --- | --- |
 | `S` | Dragon Scale `simplywings:dragon_scale` | 4 | 0 |
-| `Q` | Nether Quartz `minecraft:quartz` | 1 | 0 |
+| `Q` | Pale Quartz `simplywings:pale_quartz` | 1 | 0 |
 | `W` | White Dye `minecraft:white_dye` | 1 | 0 |
 
 ### #4 · Gilded Frame · `simplywings:gilded_frame` · partagé
@@ -136,16 +145,17 @@ _ _ _ _ _
 ```
 . _ _ _ .
 _ G P G _
-_ _ I _ _
-_ G P G _
+_ _ V _ _
+_ G E G _
 . _ _ _ .
 ```
 
 | Lettre | Ingrédient | Qté | Niv. |
 | --- | --- | --- | --- |
 | `G` | Gold Ingot `minecraft:gold_ingot` | 4 | 0 |
-| `P` | Blaze Powder `minecraft:blaze_powder` | 2 | 0 |
-| `I` | Iron Ingot `minecraft:iron_ingot` | 1 | 0 |
+| `P` | Blaze Powder `minecraft:blaze_powder` | 1 | 0 |
+| `V` | Gilded Vein `simplywings:gilded_vein` | 1 | 0 |
+| `E` | Ember Wisp `simplywings:ember_wisp` | 1 | 0 |
 
 ### #5 · Aurora Veil · `simplywings:aurora_veil` · partagé
 
@@ -162,7 +172,7 @@ _ _ _ _ _
 | Lettre | Ingrédient | Qté | Niv. |
 | --- | --- | --- | --- |
 | `P` | Polar Glimmer `simplywings:polar_glimmer` | 2 | 0 |
-| `G` | Glow Ink Sac `minecraft:glow_ink_sac` | 1 | 0 |
+| `G` | Glimmer Spore `simplywings:glimmer_spore` | 1 | 0 |
 | `L` | Lime Dye `minecraft:lime_dye` | 1 | 0 |
 | `U` | Purple Dye `minecraft:purple_dye` | 1 | 0 |
 
@@ -173,7 +183,7 @@ _ _ _ _ _
 ```
 . G _ G .
 _ L H L _
-_ G _ G _
+_ G V G _
 _ _ _ _ _
 . _ _ _ .
 ```
@@ -183,6 +193,7 @@ _ _ _ _ _
 | `G` | Gold Ingot `minecraft:gold_ingot` | 4 | 0 |
 | `L` | Leather `minecraft:leather` | 2 | 0 |
 | `H` | Iron-Buckled Harness `simplywings:iron_harness` | 1 | 1 |
+| `V` | Gilded Vein `simplywings:gilded_vein` | 1 | 0 |
 
 ### #7 · Light Plating · `simplywings:light_plating`
 
@@ -199,8 +210,8 @@ _ _ G _ _
 | Lettre | Ingrédient | Qté | Niv. |
 | --- | --- | --- | --- |
 | `S` | Light Scale `simplywings:light_scale` | 4 | 1 |
-| `N` | Netherite Scrap `minecraft:netherite_scrap` | 1 | 0 |
-| `G` | Glow Ink Sac `minecraft:glow_ink_sac` | 1 | 0 |
+| `N` | Ancient Ember `simplywings:ancient_ember` | 1 | 0 |
+| `G` | Glimmer Spore `simplywings:glimmer_spore` | 1 | 0 |
 
 ### #8 · Celestial Frame · `simplywings:celestial_frame` · partagé
 
@@ -208,7 +219,7 @@ _ _ G _ _
 
 ```
 . _ _ _ .
-_ E _ E _
+_ E V E _
 _ D F D _
 _ _ _ _ _
 . _ _ _ .
@@ -217,6 +228,7 @@ _ _ _ _ _
 | Lettre | Ingrédient | Qté | Niv. |
 | --- | --- | --- | --- |
 | `E` | End Rod `minecraft:end_rod` | 2 | 0 |
+| `V` | Void Grit `simplywings:void_grit` | 1 | 0 |
 | `D` | Diamond `minecraft:diamond` | 2 | 0 |
 | `F` | Gilded Frame `simplywings:gilded_frame` | 1 | 1 |
 
@@ -236,7 +248,7 @@ _ _ _ _ _
 | --- | --- | --- | --- |
 | `M` | Phantom Membrane `minecraft:phantom_membrane` | 2 | 0 |
 | `A` | Aurora Veil `simplywings:aurora_veil` | 1 | 1 |
-| `C` | Prismarine Crystals `minecraft:prismarine_crystals` | 2 | 0 |
+| `C` | Glimmering Scale `simplywings:glimmering_scale` | 2 | 0 |
 | `S` | Light Scale `simplywings:light_scale` | 1 | 1 |
 
 ### #10 · Radiant Harness · `simplywings:radiant_harness` · partagé
@@ -246,7 +258,7 @@ _ _ _ _ _
 ```
 . D _ D .
 _ P H P _
-_ D _ D _
+_ D Q D _
 _ _ _ _ _
 . _ _ _ .
 ```
@@ -256,6 +268,7 @@ _ _ _ _ _
 | `D` | Diamond `minecraft:diamond` | 4 | 0 |
 | `P` | Phantom Membrane `minecraft:phantom_membrane` | 2 | 0 |
 | `H` | Gilded Harness `simplywings:gilded_harness` | 1 | 2 |
+| `Q` | Prism Shard `simplywings:prism_shard` | 1 | 0 |
 
 ### #11 · Blast Chamber · `simplywings:blast_chamber`
 
@@ -292,7 +305,7 @@ _ _ _ _ _
 | --- | --- | --- | --- |
 | `S` | Dragon Scale `simplywings:dragon_scale` | 2 | 0 |
 | `C` | Celestial Frame `simplywings:celestial_frame` | 1 | 2 |
-| `N` | Netherite Scrap `minecraft:netherite_scrap` | 1 | 0 |
+| `N` | Ancient Ember `simplywings:ancient_ember` | 1 | 0 |
 
 ### #13 · Fury Saddle · `simplywings:fury_saddle` · partagé
 
@@ -302,7 +315,7 @@ _ _ _ _ _
 . S _ S .
 _ L H L _
 _ S A S _
-_ _ N _ _
+_ E N E _
 . _ _ _ .
 ```
 
@@ -313,6 +326,7 @@ _ _ N _ _
 | `H` | Radiant Harness `simplywings:radiant_harness` | 1 | 3 |
 | `A` | Saddle `minecraft:saddle` | 1 | 0 |
 | `N` | Netherite Ingot `minecraft:netherite_ingot` | 1 | 0 |
+| `E` | Ancient Ember `simplywings:ancient_ember` | 2 | 0 |
 
 ### #14 · Light Fury Tail · `simplywings:light_tail`
 
@@ -374,7 +388,7 @@ _ _ T _ _
 ## Pourquoi ces ingrédients
 
 - **Dragon Scale** : sur l'Ender Dragon, 12 par mort, partagées avec Night.
-- **Light Scale** (intermédiaire) : l'écaille blanchie au quartz. **Shimmer Membrane** : la membrane irisée qui permet le camouflage, avec l'**Aurora Veil** (des ailes d'aurore) et la prismarine des monuments.
-- **Blast Chamber** : le tir de plasma, avec la **Fury Plasma** et une **Beacon**, le faisceau de lumière.
+- **Light Scale** (intermédiaire) : l'écaille blanchie à la **Pale Quartz**. **Shimmer Membrane** : la membrane irisée qui permet le camouflage, avec l'**Aurora Veil** (des ailes d'aurore) et la **Glimmering Scale** pêchée.
+- **Blast Chamber** : le tir de plasma, avec la **Fury Plasma** et une **Beacon**, le faisceau de lumière. **Light Plating** : écailles, **Ancient Ember** et **Glimmer Spore**.
 - **Light Fury Tail** : la queue, avec un bâton de breeze pour la vitesse. **Pitcher Plant** au cœur : l'herbe à dragon, déterrée par le renifleur. **Shulker Shell** : l'invisibilité, la Furie Éclair qui disparaît.
 - **Fury Saddle** : la même selle que Night.

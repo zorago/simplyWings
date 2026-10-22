@@ -13,7 +13,8 @@ Règles, légende et objets partagés : [`CRAFTING.md`](../CRAFTING.md). Derniè
 | Profondeur | 3 niveaux de craft avant les pièces (max 3 en légendaire) |
 | Crafts | 17 en `GRID` + 1 assemblage |
 | Cloud Essence | 560 (pièces) + 800 (assemblage) = **1360** |
-| Drops du mod | Heavenly Down (MOB · Chicken) |
+| Matières premières | 9 types du mod (36 objets) · 11 types vanilla (72 objets) |
+| Drops du mod | Prism Shard (BLOCK · Diamond Ore, Deepslate Diamond Ore), Gilded Vein (BLOCK · Gold Ore, Deepslate Gold Ore, Nether Gold Ore), Void Grit (BLOCK · End Stone), Supple Hide (MOB · Cow, Mooshroom, Horse, Donkey, Llama), Silk Thread (MOB · Spider, Cave Spider), Sky Iron Fleck (BLOCK · Iron Ore, Deepslate Iron Ore), Heavenly Down (MOB · Chicken), Pristine Feather (MOB · Chicken), Ember Wisp (MOB · Blaze) |
 
 ## Matières premières
 
@@ -21,17 +22,24 @@ Tout ce que la route consomme (niveau 0), pour une paire complète. Les drops du
 
 | Objet | Qté | Où | Source | Condition | Chance |
 | --- | --- | --- | --- | --- | --- |
+| Ember Wisp `simplywings:ember_wisp` | 2 | `MOB` | Blaze | — | 30 % |
+| Gilded Vein `simplywings:gilded_vein` | 3 | `BLOCK` | Gold Ore, Deepslate Gold Ore, Nether Gold Ore | — | 30 % |
 | Heavenly Down `simplywings:heavenly_down` | 12 | `MOB` | Chicken | Tué dans la couche de nuages (bande Y de la config Cloud Essence) | 60 % |
-| Blaze Powder `minecraft:blaze_powder` | 4 | `VANILLA` | Établi : bâton de blaze | — | — |
+| Prism Shard `simplywings:prism_shard` | 1 | `BLOCK` | Diamond Ore, Deepslate Diamond Ore | — | 50 % |
+| Pristine Feather `simplywings:pristine_feather` | 12 | `MOB` | Chicken | — | 25 % |
+| Silk Thread `simplywings:silk_thread` | 1 | `MOB` | Spider, Cave Spider | — | 40 % |
+| Sky Iron Fleck `simplywings:sky_iron` | 1 | `BLOCK` | Iron Ore, Deepslate Iron Ore | — | 25 % |
+| Supple Hide `simplywings:supple_hide` | 2 | `MOB` | Cow, Mooshroom, Horse, Donkey, Llama | — | 35 % |
+| Void Grit `simplywings:void_grit` | 2 | `BLOCK` | End Stone | — | 8 % |
+| Blaze Powder `minecraft:blaze_powder` | 2 | `VANILLA` | Établi : bâton de blaze | — | — |
 | Diamond `minecraft:diamond` | 15 | `VANILLA` | Minage du diamant | — | — |
 | End Rod `minecraft:end_rod` | 4 | `VANILLA` | Établi : bâton de blaze + chorus éclaté | — | — |
-| Feather `minecraft:feather` | 24 | `VANILLA` | Poulets, tonneaux de la forge | — | — |
+| Feather `minecraft:feather` | 12 | `VANILLA` | Poulets, tonneaux de la forge | — | — |
 | Glowstone Dust `minecraft:glowstone_dust` | 4 | `VANILLA` | Pierre lumineuse du Nether, sorcières | — | — |
 | Gold Ingot `minecraft:gold_ingot` | 16 | `VANILLA` | Minage de l'or, piglins, fonte | — | — |
-| Iron Ingot `minecraft:iron_ingot` | 5 | `VANILLA` | Minage du fer, fonte | — | — |
-| Leather `minecraft:leather` | 10 | `VANILLA` | Vaches, chevaux, tonneaux de la forge | — | — |
+| Iron Ingot `minecraft:iron_ingot` | 2 | `VANILLA` | Minage du fer, fonte | — | — |
+| Leather `minecraft:leather` | 8 | `VANILLA` | Vaches, chevaux, tonneaux de la forge | — | — |
 | Phantom Membrane `minecraft:phantom_membrane` | 2 | `VANILLA` | Phantoms | — | — |
-| String `minecraft:string` | 1 | `VANILLA` | Araignées, toiles | — | — |
 | Totem of Undying `minecraft:totem_of_undying` | 1 | `VANILLA` | Évocateurs (raids, manoirs) | — | — |
 | White Dye `minecraft:white_dye` | 6 | `VANILLA` | Établi : poudre d'os ou muguet | — | — |
 
@@ -41,14 +49,14 @@ Niv. = niveau de craft (0 = matière première). Crafts = nombre de fois que la 
 
 | # | Produit | Où | Niv. | Crafts | Entrées par craft | Essence | Cumul |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | Iron-Buckled Harness `simplywings:iron_harness` ×1 | `GRID` | 1 | 1 | Leather ×8, Iron Ingot ×3, String ×1 | 10 | 10 |
-| 2 | Blessed Plume `simplywings:blessed_plume` ×12 | `GRID` | 1 | 6 | Feather ×4, Heavenly Down ×2, White Dye ×1 | 6 × 15 | 100 |
+| 1 | Iron-Buckled Harness `simplywings:iron_harness` ×1 | `GRID` | 1 | 1 | Leather ×6, Supple Hide ×2, Iron Ingot ×2, Silk Thread ×1, Sky Iron Fleck ×1 | 10 | 10 |
+| 2 | Blessed Plume `simplywings:blessed_plume` ×12 | `GRID` | 1 | 6 | Feather ×2, Heavenly Down ×2, Pristine Feather ×2, White Dye ×1 | 6 × 15 | 100 |
 | 3 | Halo `simplywings:halo` ×1 | `GRID` | 1 | 1 | Gold Ingot ×4, Glowstone Dust ×4, Diamond ×1 | 25 | 125 |
-| 4 | Gilded Frame `simplywings:gilded_frame` ×2 | `GRID` | 1 | 2 | Gold Ingot ×4, Blaze Powder ×2, Iron Ingot ×1 | 2 × 15 | 155 |
-| 5 | Gilded Harness `simplywings:gilded_harness` ×1 | `GRID` | 2 | 1 | Gold Ingot ×4, Leather ×2, Iron-Buckled Harness ×1 → #1 | 25 | 180 |
+| 4 | Gilded Frame `simplywings:gilded_frame` ×2 | `GRID` | 1 | 2 | Gold Ingot ×4, Blaze Powder ×1, Gilded Vein ×1, Ember Wisp ×1 | 2 × 15 | 155 |
+| 5 | Gilded Harness `simplywings:gilded_harness` ×1 | `GRID` | 2 | 1 | Gold Ingot ×4, Leather ×2, Iron-Buckled Harness ×1 → #1, Gilded Vein ×1 | 25 | 180 |
 | 6 | Angel Core `simplywings:angel_core` ×1 | `GRID` | 2 | 1 | Blessed Plume ×2 → #2, Halo ×1 → #3, Diamond ×4, Totem of Undying ×1 | 100 | 280 |
-| 7 | Celestial Frame `simplywings:celestial_frame` ×2 | `GRID` | 2 | 2 | End Rod ×2, Diamond ×2, Gilded Frame ×1 → #4 | 2 × 35 | 350 |
-| 8 | Radiant Harness `simplywings:radiant_harness` ×1 | `GRID` | 3 | 1 | Diamond ×4, Phantom Membrane ×2, Gilded Harness ×1 → #5 | 50 | 400 |
+| 7 | Celestial Frame `simplywings:celestial_frame` ×2 | `GRID` | 2 | 2 | End Rod ×2, Void Grit ×1, Diamond ×2, Gilded Frame ×1 → #4 | 2 × 35 | 350 |
+| 8 | Radiant Harness `simplywings:radiant_harness` ×1 | `GRID` | 3 | 1 | Diamond ×4, Phantom Membrane ×2, Gilded Harness ×1 → #5, Prism Shard ×1 | 50 | 400 |
 | 9 | Angel Wing `simplywings:angel_wing` ×2 | `GRID` | 3 | 2 | Blessed Plume ×5 → #2, Celestial Frame ×1 → #7, Diamond ×1 | 2 × 80 | 560 |
 | 10 | Angel Wings `simplywings:angel_wings` | `ASM` | — | 1 | Harnais : Radiant Harness → #8 · Cœur : Angel Core → #6 · Aile G : Angel Wing → #9 · Aile D : Angel Wing → #9 | 800 | **1360** |
 
@@ -62,17 +70,19 @@ Grille 5×5 sans les coins : `.` = coin absent, `_` = case vide.
 
 ```
 . L _ L .
-_ L _ L _
-_ I S I _
-_ L I L _
+_ H _ H _
+_ I T I _
+_ L K L _
 . L _ L .
 ```
 
 | Lettre | Ingrédient | Qté | Niv. |
 | --- | --- | --- | --- |
-| `L` | Leather `minecraft:leather` | 8 | 0 |
-| `I` | Iron Ingot `minecraft:iron_ingot` | 3 | 0 |
-| `S` | String `minecraft:string` | 1 | 0 |
+| `L` | Leather `minecraft:leather` | 6 | 0 |
+| `H` | Supple Hide `simplywings:supple_hide` | 2 | 0 |
+| `I` | Iron Ingot `minecraft:iron_ingot` | 2 | 0 |
+| `T` | Silk Thread `simplywings:silk_thread` | 1 | 0 |
+| `K` | Sky Iron Fleck `simplywings:sky_iron` | 1 | 0 |
 
 ### #2 · Blessed Plume · `simplywings:blessed_plume` · partagé
 
@@ -81,15 +91,16 @@ _ L I L _
 ```
 . _ _ _ .
 _ F H F _
-_ F W F _
+_ P W P _
 _ _ H _ _
 . _ _ _ .
 ```
 
 | Lettre | Ingrédient | Qté | Niv. |
 | --- | --- | --- | --- |
-| `F` | Feather `minecraft:feather` | 4 | 0 |
+| `F` | Feather `minecraft:feather` | 2 | 0 |
 | `H` | Heavenly Down `simplywings:heavenly_down` | 2 | 0 |
+| `P` | Pristine Feather `simplywings:pristine_feather` | 2 | 0 |
 | `W` | White Dye `minecraft:white_dye` | 1 | 0 |
 
 ### #3 · Halo · `simplywings:halo`
@@ -117,16 +128,17 @@ _ G W G _
 ```
 . _ _ _ .
 _ G P G _
-_ _ I _ _
-_ G P G _
+_ _ V _ _
+_ G E G _
 . _ _ _ .
 ```
 
 | Lettre | Ingrédient | Qté | Niv. |
 | --- | --- | --- | --- |
 | `G` | Gold Ingot `minecraft:gold_ingot` | 4 | 0 |
-| `P` | Blaze Powder `minecraft:blaze_powder` | 2 | 0 |
-| `I` | Iron Ingot `minecraft:iron_ingot` | 1 | 0 |
+| `P` | Blaze Powder `minecraft:blaze_powder` | 1 | 0 |
+| `V` | Gilded Vein `simplywings:gilded_vein` | 1 | 0 |
+| `E` | Ember Wisp `simplywings:ember_wisp` | 1 | 0 |
 
 ### #5 · Gilded Harness · `simplywings:gilded_harness` · partagé
 
@@ -135,7 +147,7 @@ _ G P G _
 ```
 . G _ G .
 _ L H L _
-_ G _ G _
+_ G V G _
 _ _ _ _ _
 . _ _ _ .
 ```
@@ -145,6 +157,7 @@ _ _ _ _ _
 | `G` | Gold Ingot `minecraft:gold_ingot` | 4 | 0 |
 | `L` | Leather `minecraft:leather` | 2 | 0 |
 | `H` | Iron-Buckled Harness `simplywings:iron_harness` | 1 | 1 |
+| `V` | Gilded Vein `simplywings:gilded_vein` | 1 | 0 |
 
 ### #6 · Angel Core · `simplywings:angel_core`
 
@@ -171,7 +184,7 @@ _ D _ D _
 
 ```
 . _ _ _ .
-_ E _ E _
+_ E V E _
 _ D F D _
 _ _ _ _ _
 . _ _ _ .
@@ -180,6 +193,7 @@ _ _ _ _ _
 | Lettre | Ingrédient | Qté | Niv. |
 | --- | --- | --- | --- |
 | `E` | End Rod `minecraft:end_rod` | 2 | 0 |
+| `V` | Void Grit `simplywings:void_grit` | 1 | 0 |
 | `D` | Diamond `minecraft:diamond` | 2 | 0 |
 | `F` | Gilded Frame `simplywings:gilded_frame` | 1 | 1 |
 
@@ -190,7 +204,7 @@ _ _ _ _ _
 ```
 . D _ D .
 _ P H P _
-_ D _ D _
+_ D Q D _
 _ _ _ _ _
 . _ _ _ .
 ```
@@ -200,6 +214,7 @@ _ _ _ _ _
 | `D` | Diamond `minecraft:diamond` | 4 | 0 |
 | `P` | Phantom Membrane `minecraft:phantom_membrane` | 2 | 0 |
 | `H` | Gilded Harness `simplywings:gilded_harness` | 1 | 2 |
+| `Q` | Prism Shard `simplywings:prism_shard` | 1 | 0 |
 
 ### #9 · Angel Wing · `simplywings:angel_wing`
 

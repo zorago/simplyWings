@@ -13,7 +13,8 @@ Règles, légende et objets partagés : [`CRAFTING.md`](../CRAFTING.md). Derniè
 | Profondeur | 1 niveau de craft avant les pièces (max 1 en rare) |
 | Crafts | 4 en `GRID` + 1 assemblage |
 | Cloud Essence | 50 (pièces) + 100 (assemblage) = **150** |
-| Drops du mod | Updraft Shard (BLOCK · `#minecraft:base_stone_overworld`) |
+| Matières premières | 4 types du mod (11 objets) · 5 types vanilla (25 objets) |
+| Drops du mod | Supple Hide (MOB · Cow, Mooshroom, Horse, Donkey, Llama), Silk Thread (MOB · Spider, Cave Spider), Sky Iron Fleck (BLOCK · Iron Ore, Deepslate Iron Ore), Updraft Shard (BLOCK · `#minecraft:base_stone_overworld`) |
 
 ## Matières premières
 
@@ -21,13 +22,15 @@ Tout ce que la route consomme (niveau 0), pour une paire complète. Les drops du
 
 | Objet | Qté | Où | Source | Condition | Chance |
 | --- | --- | --- | --- | --- | --- |
+| Silk Thread `simplywings:silk_thread` | 7 | `MOB` | Spider, Cave Spider | — | 40 % |
+| Sky Iron Fleck `simplywings:sky_iron` | 1 | `BLOCK` | Iron Ore, Deepslate Iron Ore | — | 25 % |
+| Supple Hide `simplywings:supple_hide` | 2 | `MOB` | Cow, Mooshroom, Horse, Donkey, Llama | — | 35 % |
 | Updraft Shard `simplywings:updraft_shard` | 1 | `BLOCK` | `#minecraft:base_stone_overworld` | Y ≥ 150 | 8 % |
 | Bamboo `minecraft:bamboo` | 8 | `VANILLA` | Jungles de bambous | — | — |
-| Iron Ingot `minecraft:iron_ingot` | 4 | `VANILLA` | Minage du fer, fonte | — | — |
-| Leather `minecraft:leather` | 8 | `VANILLA` | Vaches, chevaux, tonneaux de la forge | — | — |
+| Iron Ingot `minecraft:iron_ingot` | 3 | `VANILLA` | Minage du fer, fonte | — | — |
+| Leather `minecraft:leather` | 6 | `VANILLA` | Vaches, chevaux, tonneaux de la forge | — | — |
 | Paper `minecraft:paper` | 6 | `VANILLA` | Établi : canne à sucre | — | — |
 | Red Dye `minecraft:red_dye` | 2 | `VANILLA` | Établi : coquelicot, betterave | — | — |
-| String `minecraft:string` | 7 | `VANILLA` | Araignées, toiles | — | — |
 
 ## Route
 
@@ -35,9 +38,9 @@ Niv. = niveau de craft (0 = matière première). Crafts = nombre de fois que la 
 
 | # | Produit | Où | Niv. | Crafts | Entrées par craft | Essence | Cumul |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | Iron-Buckled Harness `simplywings:iron_harness` ×1 | `GRID` | 1 | 1 | Leather ×8, Iron Ingot ×3, String ×1 | 10 | 10 |
-| 2 | Kite Core `simplywings:kite_core` ×1 | `GRID` | 1 | 1 | String ×4, Iron Ingot ×1, Bamboo ×2, Updraft Shard ×1 | 20 | 30 |
-| 3 | Kite Wing `simplywings:kite_wing` ×2 | `GRID` | 1 | 2 | Bamboo ×3, Paper ×3, Red Dye ×1, String ×1 | 2 × 10 | 50 |
+| 1 | Iron-Buckled Harness `simplywings:iron_harness` ×1 | `GRID` | 1 | 1 | Leather ×6, Supple Hide ×2, Iron Ingot ×2, Silk Thread ×1, Sky Iron Fleck ×1 | 10 | 10 |
+| 2 | Kite Core `simplywings:kite_core` ×1 | `GRID` | 1 | 1 | Silk Thread ×4, Iron Ingot ×1, Bamboo ×2, Updraft Shard ×1 | 20 | 30 |
+| 3 | Kite Wing `simplywings:kite_wing` ×2 | `GRID` | 1 | 2 | Bamboo ×3, Paper ×3, Red Dye ×1, Silk Thread ×1 | 2 × 10 | 50 |
 | 4 | Kite Wings `simplywings:kite_wings` | `ASM` | — | 1 | Harnais : Iron-Buckled Harness → #1 · Cœur : Kite Core → #2 · Aile G : Kite Wing → #3 · Aile D : Kite Wing → #3 | 100 | **150** |
 
 ## Recettes
@@ -50,17 +53,19 @@ Grille 5×5 sans les coins : `.` = coin absent, `_` = case vide.
 
 ```
 . L _ L .
-_ L _ L _
-_ I S I _
-_ L I L _
+_ H _ H _
+_ I T I _
+_ L K L _
 . L _ L .
 ```
 
 | Lettre | Ingrédient | Qté | Niv. |
 | --- | --- | --- | --- |
-| `L` | Leather `minecraft:leather` | 8 | 0 |
-| `I` | Iron Ingot `minecraft:iron_ingot` | 3 | 0 |
-| `S` | String `minecraft:string` | 1 | 0 |
+| `L` | Leather `minecraft:leather` | 6 | 0 |
+| `H` | Supple Hide `simplywings:supple_hide` | 2 | 0 |
+| `I` | Iron Ingot `minecraft:iron_ingot` | 2 | 0 |
+| `T` | Silk Thread `simplywings:silk_thread` | 1 | 0 |
+| `K` | Sky Iron Fleck `simplywings:sky_iron` | 1 | 0 |
 
 ### #2 · Kite Core · `simplywings:kite_core`
 
@@ -76,7 +81,7 @@ _ T _ T _
 
 | Lettre | Ingrédient | Qté | Niv. |
 | --- | --- | --- | --- |
-| `T` | String `minecraft:string` | 4 | 0 |
+| `T` | Silk Thread `simplywings:silk_thread` | 4 | 0 |
 | `I` | Iron Ingot `minecraft:iron_ingot` | 1 | 0 |
 | `B` | Bamboo `minecraft:bamboo` | 2 | 0 |
 | `U` | Updraft Shard `simplywings:updraft_shard` | 1 | 0 |
@@ -98,11 +103,11 @@ _ _ S _ _
 | `B` | Bamboo `minecraft:bamboo` | 3 | 0 |
 | `P` | Paper `minecraft:paper` | 3 | 0 |
 | `R` | Red Dye `minecraft:red_dye` | 1 | 0 |
-| `S` | String `minecraft:string` | 1 | 0 |
+| `S` | Silk Thread `simplywings:silk_thread` | 1 | 0 |
 
 ## Pourquoi ces ingrédients
 
 - **Paper** et **Bamboo** : la voile et les longerons, exactement comme un vrai cerf-volant.
-- **Red Dye** : les rayures rouges ; **String** : la ligature et la ligne.
+- **Red Dye** : les rayures rouges ; **Silk Thread** : la ligature et la ligne.
 - **Updraft Shard** : un cerf-volant ne vole qu'avec du vent ; il faut monter le chercher en altitude.
 - Coûts réduits (cœur 20, ailes 10) : c'est l'aile la plus légère des rares.

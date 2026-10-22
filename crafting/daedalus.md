@@ -13,7 +13,8 @@ Règles, légende et objets partagés : [`CRAFTING.md`](../CRAFTING.md). Derniè
 | Profondeur | 3 niveaux de craft avant les pièces (max 3 en légendaire) |
 | Crafts | 25 en `GRID` + 1 assemblage |
 | Cloud Essence | 665 (pièces) + 800 (assemblage) = **1465** |
-| Drops du mod | Aucun : uniquement des ressources vanilla |
+| Matières premières | 9 types du mod (43 objets) · 10 types vanilla (55 objets) |
+| Drops du mod | Prism Shard (BLOCK · Diamond Ore, Deepslate Diamond Ore), Gilded Vein (BLOCK · Gold Ore, Deepslate Gold Ore, Nether Gold Ore), Gust Mote (MOB · Breeze), Supple Hide (MOB · Cow, Mooshroom, Horse, Donkey, Llama), Silk Thread (MOB · Spider, Cave Spider), Sky Iron Fleck (BLOCK · Iron Ore, Deepslate Iron Ore), Copper Spark (BLOCK · Copper Ore, Deepslate Copper Ore), Soot Flake (BLOCK · Coal Ore, Deepslate Coal Ore), Pristine Feather (MOB · Chicken) |
 
 ## Matières premières
 
@@ -21,21 +22,25 @@ Tout ce que la route consomme (niveau 0), pour une paire complète. Les drops du
 
 | Objet | Qté | Où | Source | Condition | Chance |
 | --- | --- | --- | --- | --- | --- |
+| Copper Spark `simplywings:copper_spark` | 18 | `BLOCK` | Copper Ore, Deepslate Copper Ore | — | 25 % |
+| Gilded Vein `simplywings:gilded_vein` | 7 | `BLOCK` | Gold Ore, Deepslate Gold Ore, Nether Gold Ore | — | 30 % |
+| Gust Mote `simplywings:gust_mote` | 2 | `MOB` | Breeze | — | 40 % |
+| Prism Shard `simplywings:prism_shard` | 1 | `BLOCK` | Diamond Ore, Deepslate Diamond Ore | — | 50 % |
+| Pristine Feather `simplywings:pristine_feather` | 4 | `MOB` | Chicken | — | 25 % |
+| Silk Thread `simplywings:silk_thread` | 1 | `MOB` | Spider, Cave Spider | — | 40 % |
+| Sky Iron Fleck `simplywings:sky_iron` | 1 | `BLOCK` | Iron Ore, Deepslate Iron Ore | — | 25 % |
+| Soot Flake `simplywings:soot_flake` | 7 | `BLOCK` | Coal Ore, Deepslate Coal Ore | — | 20 % |
+| Supple Hide `simplywings:supple_hide` | 2 | `MOB` | Cow, Mooshroom, Horse, Donkey, Llama | — | 35 % |
 | Breeze Rod `minecraft:breeze_rod` | 2 | `VANILLA` | Breezes (chambres d'épreuves) | — | — |
-| Coal `minecraft:coal` | 7 | `VANILLA` | Minage du charbon | — | — |
-| Copper Ingot `minecraft:copper_ingot` | 18 | `VANILLA` | Minage du cuivre, fonte | — | — |
 | Crafter `minecraft:crafter` | 1 | `VANILLA` | Établi | — | — |
 | Diamond `minecraft:diamond` | 10 | `VANILLA` | Minage du diamant | — | — |
-| Feather `minecraft:feather` | 4 | `VANILLA` | Poulets, tonneaux de la forge | — | — |
-| Gold Ingot `minecraft:gold_ingot` | 10 | `VANILLA` | Minage de l'or, piglins, fonte | — | — |
+| Gold Ingot `minecraft:gold_ingot` | 4 | `VANILLA` | Minage de l'or, piglins, fonte | — | — |
 | Honeycomb `minecraft:honeycomb` | 2 | `VANILLA` | Cisailles sur une ruche pleine | — | — |
-| Iron Ingot `minecraft:iron_ingot` | 24 | `VANILLA` | Minage du fer, fonte | — | — |
-| Leather `minecraft:leather` | 10 | `VANILLA` | Vaches, chevaux, tonneaux de la forge | — | — |
+| Iron Ingot `minecraft:iron_ingot` | 23 | `VANILLA` | Minage du fer, fonte | — | — |
+| Leather `minecraft:leather` | 8 | `VANILLA` | Vaches, chevaux, tonneaux de la forge | — | — |
 | Observer `minecraft:observer` | 2 | `VANILLA` | Établi | — | — |
 | Ominous Trial Key `minecraft:ominous_trial_key` | 1 | `VANILLA` | Générateur d'épreuves sinistre (Mauvais présage d'épreuve) | — | — |
 | Phantom Membrane `minecraft:phantom_membrane` | 2 | `VANILLA` | Phantoms | — | — |
-| String `minecraft:string` | 1 | `VANILLA` | Araignées, toiles | — | — |
-| Wind Charge `minecraft:wind_charge` | 2 | `VANILLA` | Établi : bâton de breeze | — | — |
 
 ## Route
 
@@ -43,14 +48,14 @@ Niv. = niveau de craft (0 = matière première). Crafts = nombre de fois que la 
 
 | # | Produit | Où | Niv. | Crafts | Entrées par craft | Essence | Cumul |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | Iron-Buckled Harness `simplywings:iron_harness` ×1 | `GRID` | 1 | 1 | Leather ×8, Iron Ingot ×3, String ×1 | 10 | 10 |
-| 2 | Brass Ingot `simplywings:brass_ingot` ×12 | `GRID` | 1 | 6 | Copper Ingot ×3, Gold Ingot ×1 | 6 × 10 | 70 |
-| 3 | Steel Plate `simplywings:steel_plate` ×14 | `GRID` | 1 | 7 | Iron Ingot ×3, Coal ×1 | 7 × 10 | 140 |
-| 4 | Icarus Feather `simplywings:icarus_feather` ×4 | `GRID` | 1 | 2 | Feather ×2, Honeycomb ×1 | 2 × 15 | 170 |
-| 5 | Gilded Harness `simplywings:gilded_harness` ×1 | `GRID` | 2 | 1 | Gold Ingot ×4, Leather ×2, Iron-Buckled Harness ×1 → #1 | 25 | 195 |
-| 6 | Wind Thruster `simplywings:wind_thruster` ×2 | `GRID` | 2 | 2 | Brass Ingot ×2 → #2, Wind Charge ×1, Steel Plate ×2 → #3, Breeze Rod ×1, Observer ×1 | 2 × 40 | 275 |
+| 1 | Iron-Buckled Harness `simplywings:iron_harness` ×1 | `GRID` | 1 | 1 | Leather ×6, Supple Hide ×2, Iron Ingot ×2, Silk Thread ×1, Sky Iron Fleck ×1 | 10 | 10 |
+| 2 | Brass Ingot `simplywings:brass_ingot` ×12 | `GRID` | 1 | 6 | Copper Spark ×3, Gilded Vein ×1 | 6 × 10 | 70 |
+| 3 | Steel Plate `simplywings:steel_plate` ×14 | `GRID` | 1 | 7 | Iron Ingot ×3, Soot Flake ×1 | 7 × 10 | 140 |
+| 4 | Icarus Feather `simplywings:icarus_feather` ×4 | `GRID` | 1 | 2 | Pristine Feather ×2, Honeycomb ×1 | 2 × 15 | 170 |
+| 5 | Gilded Harness `simplywings:gilded_harness` ×1 | `GRID` | 2 | 1 | Gold Ingot ×4, Leather ×2, Iron-Buckled Harness ×1 → #1, Gilded Vein ×1 | 25 | 195 |
+| 6 | Wind Thruster `simplywings:wind_thruster` ×2 | `GRID` | 2 | 2 | Brass Ingot ×2 → #2, Gust Mote ×1, Steel Plate ×2 → #3, Breeze Rod ×1, Observer ×1 | 2 × 40 | 275 |
 | 7 | Brass Armature `simplywings:brass_armature` ×2 | `GRID` | 2 | 2 | Brass Ingot ×4 → #2, Diamond ×1 | 2 × 40 | 355 |
-| 8 | Radiant Harness `simplywings:radiant_harness` ×1 | `GRID` | 3 | 1 | Diamond ×4, Phantom Membrane ×2, Gilded Harness ×1 → #5 | 50 | 405 |
+| 8 | Radiant Harness `simplywings:radiant_harness` ×1 | `GRID` | 3 | 1 | Diamond ×4, Phantom Membrane ×2, Gilded Harness ×1 → #5, Prism Shard ×1 | 50 | 405 |
 | 9 | Daedalus Core `simplywings:daedalus_core` ×1 | `GRID` | 3 | 1 | Wind Thruster ×2 → #6, Ominous Trial Key ×1, Diamond ×4, Crafter ×1 | 100 | 505 |
 | 10 | Daedalus Wing `simplywings:daedalus_wing` ×2 | `GRID` | 3 | 2 | Steel Plate ×5 → #3, Brass Armature ×1 → #7, Icarus Feather ×2 → #4 | 2 × 80 | 665 |
 | 11 | Wings of Daedalus `simplywings:daedalus_wings` | `ASM` | — | 1 | Harnais : Radiant Harness → #8 · Cœur : Daedalus Core → #9 · Aile G : Daedalus Wing → #10 · Aile D : Daedalus Wing → #10 | 800 | **1465** |
@@ -65,17 +70,19 @@ Grille 5×5 sans les coins : `.` = coin absent, `_` = case vide.
 
 ```
 . L _ L .
-_ L _ L _
-_ I S I _
-_ L I L _
+_ H _ H _
+_ I T I _
+_ L K L _
 . L _ L .
 ```
 
 | Lettre | Ingrédient | Qté | Niv. |
 | --- | --- | --- | --- |
-| `L` | Leather `minecraft:leather` | 8 | 0 |
-| `I` | Iron Ingot `minecraft:iron_ingot` | 3 | 0 |
-| `S` | String `minecraft:string` | 1 | 0 |
+| `L` | Leather `minecraft:leather` | 6 | 0 |
+| `H` | Supple Hide `simplywings:supple_hide` | 2 | 0 |
+| `I` | Iron Ingot `minecraft:iron_ingot` | 2 | 0 |
+| `T` | Silk Thread `simplywings:silk_thread` | 1 | 0 |
+| `K` | Sky Iron Fleck `simplywings:sky_iron` | 1 | 0 |
 
 ### #2 · Brass Ingot · `simplywings:brass_ingot`
 
@@ -91,8 +98,8 @@ _ _ _ _ _
 
 | Lettre | Ingrédient | Qté | Niv. |
 | --- | --- | --- | --- |
-| `C` | Copper Ingot `minecraft:copper_ingot` | 3 | 0 |
-| `G` | Gold Ingot `minecraft:gold_ingot` | 1 | 0 |
+| `C` | Copper Spark `simplywings:copper_spark` | 3 | 0 |
+| `G` | Gilded Vein `simplywings:gilded_vein` | 1 | 0 |
 
 ### #3 · Steel Plate · `simplywings:steel_plate`
 
@@ -109,7 +116,7 @@ _ _ _ _ _
 | Lettre | Ingrédient | Qté | Niv. |
 | --- | --- | --- | --- |
 | `I` | Iron Ingot `minecraft:iron_ingot` | 3 | 0 |
-| `C` | Coal `minecraft:coal` | 1 | 0 |
+| `C` | Soot Flake `simplywings:soot_flake` | 1 | 0 |
 
 ### #4 · Icarus Feather · `simplywings:icarus_feather`
 
@@ -125,7 +132,7 @@ _ _ _ _ _
 
 | Lettre | Ingrédient | Qté | Niv. |
 | --- | --- | --- | --- |
-| `F` | Feather `minecraft:feather` | 2 | 0 |
+| `F` | Pristine Feather `simplywings:pristine_feather` | 2 | 0 |
 | `H` | Honeycomb `minecraft:honeycomb` | 1 | 0 |
 
 ### #5 · Gilded Harness · `simplywings:gilded_harness` · partagé
@@ -135,7 +142,7 @@ _ _ _ _ _
 ```
 . G _ G .
 _ L H L _
-_ G _ G _
+_ G V G _
 _ _ _ _ _
 . _ _ _ .
 ```
@@ -145,6 +152,7 @@ _ _ _ _ _
 | `G` | Gold Ingot `minecraft:gold_ingot` | 4 | 0 |
 | `L` | Leather `minecraft:leather` | 2 | 0 |
 | `H` | Iron-Buckled Harness `simplywings:iron_harness` | 1 | 1 |
+| `V` | Gilded Vein `simplywings:gilded_vein` | 1 | 0 |
 
 ### #6 · Wind Thruster · `simplywings:wind_thruster`
 
@@ -161,7 +169,7 @@ _ _ O _ _
 | Lettre | Ingrédient | Qté | Niv. |
 | --- | --- | --- | --- |
 | `B` | Brass Ingot `simplywings:brass_ingot` | 2 | 1 |
-| `W` | Wind Charge `minecraft:wind_charge` | 1 | 0 |
+| `W` | Gust Mote `simplywings:gust_mote` | 1 | 0 |
 | `P` | Steel Plate `simplywings:steel_plate` | 2 | 1 |
 | `X` | Breeze Rod `minecraft:breeze_rod` | 1 | 0 |
 | `O` | Observer `minecraft:observer` | 1 | 0 |
@@ -190,7 +198,7 @@ _ _ _ _ _
 ```
 . D _ D .
 _ P H P _
-_ D _ D _
+_ D Q D _
 _ _ _ _ _
 . _ _ _ .
 ```
@@ -200,6 +208,7 @@ _ _ _ _ _
 | `D` | Diamond `minecraft:diamond` | 4 | 0 |
 | `P` | Phantom Membrane `minecraft:phantom_membrane` | 2 | 0 |
 | `H` | Gilded Harness `simplywings:gilded_harness` | 1 | 2 |
+| `Q` | Prism Shard `simplywings:prism_shard` | 1 | 0 |
 
 ### #9 · Daedalus Core · `simplywings:daedalus_core`
 
@@ -241,6 +250,6 @@ _ _ _ _ _
 ## Pourquoi ces ingrédients
 
 - **Ominous Trial Key** : la clé du labyrinthe, gagnée dans une chambre d'épreuves sinistre. On s'évade du labyrinthe comme Dédale.
-- **Wind Thruster** (intermédiaire) : bâton et charge de breeze, laiton, acier et observateur, les réacteurs vectorisés qui donnent la maniabilité maxée.
-- **Brass Ingot** et **Steel Plate** : le laiton de l'armature et l'acier des panneaux rivetés. **Crafter** : la machine qui fabrique.
-- **Icarus Feather** : des plumes collées à la cire de rayon de miel, les ailes d'Icare. Un rappel : ne pas voler trop près du soleil.
+- **Wind Thruster** (intermédiaire) : bâton de breeze, **Gust Mote**, laiton, acier et observateur, les réacteurs vectorisés qui donnent la maniabilité maxée.
+- **Brass Ingot** (Copper Spark + Gilded Vein) et **Steel Plate** (fer + Soot Flake, le carbone) : le laiton de l'armature et l'acier des panneaux rivetés. **Crafter** : la machine qui fabrique.
+- **Icarus Feather** : des **Pristine Feathers** collées à la cire de rayon de miel, les ailes d'Icare. Un rappel : ne pas voler trop près du soleil.

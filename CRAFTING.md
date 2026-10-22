@@ -23,6 +23,8 @@ Fixées par zorago le 22 octobre 2026, par ordre d'importance.
 
 **2. Important** : les ressources sont cohérentes avec l'aile, et se récupèrent par un gameplay qui la rappelle (la chouette chasse de nuit, le goéland pêche sur la plage, le Dédale passe par le labyrinthe des chambres d'épreuves…). Un métal pilier par palier : **fer** (rare), **or** (épique), **diamant** (légendaire), **netherite** (mythique). Plumes, cuir, bâtons, ficelle, verre et teintures reviennent dans beaucoup de recettes.
 
+**Équilibre vanilla / mod** (22 octobre) : dans chaque route, à peu près autant de **types** de matières premières du mod que de types vanilla. Les quantités restent plus généreuses côté vanilla (par exemple 6 cuirs pour 2 Supple Hide dans le harnais). Une famille de drops communs rend l'item imprégné utile partout : minerais bruts en grotte (Sky Iron Fleck, Copper Spark, Gilded Vein, Redstone Pulse, Lapis Glint, Emerald Sliver, Soot Flake, Prism Shard, Pale Quartz, Ancient Ember), mobs courants (Supple Hide, Silk Thread, Hollow Bone, Elastic Gel, Pristine Feather, Fleece Tuft, Abyssal Ink, Ghast Wisp), blocs (Void Grit, Glimmer Spore) et pêche (Glimmering Scale).
+
 **3. Information** : une ressource peut venir de n'importe où (bloc cassé, mob tué, craft, pêche), **sauf des coffres de loot et de l'élevage**. Les drops du mod exigent que l'outil, l'arme ou la canne à pêche porte l'énergie ailée.
 
 ## Niveaux de craft
@@ -94,9 +96,9 @@ Proposition pour le point ouvert « nom des essences de blocs » : il n'y a plus
 | Crow Feather | `simplywings:crow_feather` | `BLOCK` | Wheat mûr (`age=7`) | — | 10 % | `crow` |
 | Hushed Down | `simplywings:hushed_down` | `MOB` | Rabbit | De nuit, tueur accroupi | 50 % | `owl` |
 | Gull Feather | `simplywings:gull_feather` | `FISH` | Pêche | Biomes `beach`, `snowy_beach`, `stony_shore` | 20 % | `gull` |
-| Nectar Drop | `simplywings:nectar_drop` | `BLOCK` | `#minecraft:small_flowers` | — | 15 % | `hummingbird` |
+| Nectar Drop | `simplywings:nectar_drop` | `BLOCK` | `#minecraft:small_flowers` | — | 15 % | `hummingbird`, `bee` |
 | Raptor Talon | `simplywings:raptor_talon` | `MOB` | Goat | Tuée à Y ≥ 120 | 35 % | `eagle` |
-| Updraft Shard | `simplywings:updraft_shard` | `BLOCK` | `#minecraft:base_stone_overworld` | Y ≥ 150 | 8 % | `eagle`, `swift`, `kite`, `air`, `storm` |
+| Updraft Shard | `simplywings:updraft_shard` | `BLOCK` | `#minecraft:base_stone_overworld` | Y ≥ 150 | 8 % | `eagle`, `swift`, `ornithopter`, `kite`, `air`, `storm` |
 | Swift Quill | `simplywings:swift_quill` | `MOB` | Chicken | Tueur en sprint | 30 % | `swift` |
 | Homing Feather | `simplywings:homing_feather` | `MOB` | Chicken | Dans un village (structure `#minecraft:village`) | 35 % | `pigeon` |
 | Peacock Plume | `simplywings:peacock_plume` | `MOB` | Chicken | Biomes `#minecraft:is_jungle` | 35 % | `peacock` |
@@ -111,10 +113,10 @@ Proposition pour le point ouvert « nom des essences de blocs » : il n'y a plus
 | Verdigris Flake | `simplywings:verdigris_flake` | `BLOCK` | Blocs de cuivre `weathered_*` et `oxidized_*` (tag `simplywings:aged_copper`) | — | 25 % | `copper` |
 | Fossil Fragment | `simplywings:fossil_fragment` | `BLOCK` | Bone Block | Y ≤ 40 | 25 % | `ancient`, `ptero` |
 | Raw Resin | `simplywings:raw_resin` | `BLOCK` | Spruce Log | Biomes `old_growth_pine_taiga`, `old_growth_spruce_taiga` | 12 % | `ancient` |
-| Ember Wisp | `simplywings:ember_wisp` | `MOB` | Blaze | — | 30 % | `fire` |
+| Ember Wisp | `simplywings:ember_wisp` | `MOB` | Blaze | — | 30 % | `ancient`, `ptero`, `fire`, `water`, `earth`, `air`, `storm`, `aurora`, `shadow`, `nebula`, `angel`, `demon`, `seraph`, `psyche`, `yin_yang`, `night`, `light` |
 | Tide Pearl | `simplywings:tide_pearl` | `MOB` | Guardian / Elder Guardian | — | 20 % / 100 % ×3 | `water` |
 | Living Rock | `simplywings:living_rock` | `BLOCK` | Deepslate, Tuff | Y ≤ 0 | 5 % | `earth` |
-| Gust Mote | `simplywings:gust_mote` | `MOB` | Breeze | — | 40 % | `air`, `storm`, `seraph` |
+| Gust Mote | `simplywings:gust_mote` | `MOB` | Breeze | — | 40 % | `air`, `storm`, `seraph`, `daedalus` |
 | Thunder Spark | `simplywings:thunder_spark` | `MOB` | Creeper | Pendant un orage (creeper chargé : 100 % ×2) | 50 % | `storm` |
 | Polar Glimmer | `simplywings:polar_glimmer` | `BLOCK` | Ice, Packed Ice, Blue Ice | De nuit, biomes `#c:is_snowy` | 15 % | `aurora`, `light` |
 | Shade Wisp | `simplywings:shade_wisp` | `MOB` | Enderman | Lumière ≤ 7 à l'endroit du kill | 25 % | `shadow` |
@@ -125,6 +127,27 @@ Proposition pour le point ouvert « nom des essences de blocs » : il n'y a plus
 | Soul Wisp | `simplywings:soul_wisp` | `BLOCK` | Soul Sand, Soul Soil | Biome `soul_sand_valley` | 8 % | `psyche` |
 | Echo Resonance | `simplywings:echo_resonance` | `BLOCK` | Sculk Shrieker | — | 50 % | `yin_yang`, `night` |
 | Dragon Scale | `simplywings:dragon_scale` | `MOB` | Ender Dragon | — | 100 % ×12 | `night`, `light` |
+| Supple Hide | `simplywings:supple_hide` | `MOB` | Cow, Mooshroom, Horse, Donkey, Llama | — | 35 % | `bat`, `crow`, `owl`, `gull`, `hummingbird`, `eagle`, `swift`, `pigeon`, `peacock`, `parrot`, `bee`, `moth`, `beetle`, `squirrel`, `flying_fish`, `phantom`, `amethyst`, `ornithopter`, `kite`, `copper`, `patchwork`, `ancient`, `ptero`, `fire`, `water`, `earth`, `air`, `storm`, `aurora`, `shadow`, `nebula`, `forest`, `angel`, `demon`, `seraph`, `psyche`, `daedalus`, `yin_yang`, `night`, `light` |
+| Silk Thread | `simplywings:silk_thread` | `MOB` | Spider, Cave Spider | — | 40 % | `bat`, `crow`, `owl`, `gull`, `hummingbird`, `eagle`, `swift`, `pigeon`, `peacock`, `parrot`, `bee`, `moth`, `beetle`, `squirrel`, `flying_fish`, `phantom`, `amethyst`, `ornithopter`, `kite`, `copper`, `patchwork`, `ancient`, `ptero`, `fire`, `water`, `earth`, `air`, `storm`, `aurora`, `shadow`, `nebula`, `forest`, `angel`, `demon`, `seraph`, `psyche`, `daedalus`, `yin_yang`, `night`, `light` |
+| Hollow Bone | `simplywings:hollow_bone` | `MOB` | Skeleton, Stray, Bogged | — | 35 % | `bat`, `phantom`, `ptero` |
+| Elastic Gel | `simplywings:elastic_gel` | `MOB` | Slime, Magma Cube | — | 40 % | `bat`, `ptero`, `demon`, `night` |
+| Pristine Feather | `simplywings:pristine_feather` | `MOB` | Chicken | — | 25 % | `pigeon`, `parrot`, `patchwork`, `angel`, `seraph`, `daedalus`, `yin_yang` |
+| Fleece Tuft | `simplywings:fleece_tuft` | `MOB` | Sheep | — | 40 % | `owl`, `moth`, `ornithopter`, `patchwork` |
+| Abyssal Ink | `simplywings:abyssal_ink` | `MOB` | Squid, Glow Squid | — | 40 % | `gull`, `pigeon`, `shadow`, `yin_yang` |
+| Ghast Wisp | `simplywings:ghast_wisp` | `MOB` | Ghast | — | 50 % | `fire`, `water`, `earth`, `air`, `storm`, `aurora`, `shadow`, `nebula`, `forest`, `demon`, `night`, `light` |
+| Sky Iron Fleck | `simplywings:sky_iron` | `BLOCK` | Iron Ore, Deepslate Iron Ore | — | 25 % | `bat`, `crow`, `owl`, `gull`, `hummingbird`, `eagle`, `swift`, `pigeon`, `peacock`, `parrot`, `bee`, `moth`, `beetle`, `squirrel`, `flying_fish`, `phantom`, `amethyst`, `ornithopter`, `kite`, `copper`, `patchwork`, `ancient`, `ptero`, `fire`, `water`, `earth`, `air`, `storm`, `aurora`, `shadow`, `nebula`, `forest`, `angel`, `demon`, `seraph`, `psyche`, `daedalus`, `yin_yang`, `night`, `light` |
+| Copper Spark | `simplywings:copper_spark` | `BLOCK` | Copper Ore, Deepslate Copper Ore | — | 25 % | `ornithopter`, `copper`, `storm`, `daedalus` |
+| Gilded Vein | `simplywings:gilded_vein` | `BLOCK` | Gold Ore, Deepslate Gold Ore, Nether Gold Ore | — | 30 % | `eagle`, `ancient`, `ptero`, `fire`, `water`, `earth`, `air`, `storm`, `aurora`, `shadow`, `nebula`, `forest`, `angel`, `demon`, `seraph`, `psyche`, `daedalus`, `yin_yang`, `night`, `light` |
+| Redstone Pulse | `simplywings:redstone_pulse` | `BLOCK` | Redstone Ore, Deepslate Redstone Ore | — | 30 % | `copper`, `storm` |
+| Lapis Glint | `simplywings:lapis_glint` | `BLOCK` | Lapis Ore, Deepslate Lapis Ore | — | 30 % | `peacock`, `parrot` |
+| Emerald Sliver | `simplywings:emerald_sliver` | `BLOCK` | Emerald Ore, Deepslate Emerald Ore | — | 60 % | `crow`, `hummingbird`, `peacock`, `beetle` |
+| Soot Flake | `simplywings:soot_flake` | `BLOCK` | Coal Ore, Deepslate Coal Ore | — | 20 % | `demon`, `daedalus`, `night` |
+| Prism Shard | `simplywings:prism_shard` | `BLOCK` | Diamond Ore, Deepslate Diamond Ore | — | 50 % | `angel`, `demon`, `seraph`, `psyche`, `daedalus`, `yin_yang`, `night`, `light` |
+| Pale Quartz | `simplywings:pale_quartz` | `BLOCK` | Nether Quartz Ore | — | 25 % | `yin_yang`, `light` |
+| Ancient Ember | `simplywings:ancient_ember` | `BLOCK` | Ancient Debris | — | 60 % | `night`, `light` |
+| Void Grit | `simplywings:void_grit` | `BLOCK` | End Stone | — | 8 % | `nebula`, `angel`, `seraph`, `psyche`, `yin_yang`, `night`, `light` |
+| Glimmer Spore | `simplywings:glimmer_spore` | `BLOCK` | Glow Lichen | — | 30 % | `aurora`, `forest`, `psyche`, `light` |
+| Glimmering Scale | `simplywings:glimmering_scale` | `FISH` | Pêche | Partout | 10 % | `flying_fish`, `water`, `light` |
 
 ## Objets partagés
 
@@ -132,18 +155,18 @@ Les intermédiaires utilisés par plusieurs paires. Leur recette dessinée est r
 
 | Objet | Id | Niv. | Entrées | Essence | Donne | Paires |
 | --- | --- | --- | --- | --- | --- | --- |
-| Aurora Veil | `simplywings:aurora_veil` | 1 | Polar Glimmer ×2, Glow Ink Sac ×1, Lime Dye ×1, Purple Dye ×1 | 15 | ×1 | `aurora`, `light` |
-| Blessed Plume | `simplywings:blessed_plume` | 1 | Feather ×4, Heavenly Down ×2, White Dye ×1 | 15 | ×2 | `angel`, `seraph` |
+| Aurora Veil | `simplywings:aurora_veil` | 1 | Polar Glimmer ×2, Glimmer Spore ×1, Lime Dye ×1, Purple Dye ×1 | 15 | ×1 | `aurora`, `light` |
+| Blessed Plume | `simplywings:blessed_plume` | 1 | Feather ×2, Heavenly Down ×2, Pristine Feather ×2, White Dye ×1 | 15 | ×2 | `angel`, `seraph` |
 | Bottled Gale | `simplywings:bottled_gale` | 1 | Gust Mote ×2, Wind Charge ×1, Glass Bottle ×1 | 15 | ×1 | `air`, `storm`, `seraph` |
-| Fury Plasma | `simplywings:fury_plasma` | 1 | Dragon's Breath ×2, Blaze Powder ×1, Ghast Tear ×1 | 30 | ×1 | `night`, `light` |
-| Gilded Frame | `simplywings:gilded_frame` | 1 | Gold Ingot ×4, Blaze Powder ×2, Iron Ingot ×1 | 15 | ×1 | `ancient`, `ptero`, `fire`, `water`, `earth`, `air`, `storm`, `aurora`, `shadow`, `nebula`, `angel`, `demon`, `seraph`, `psyche`, `yin_yang`, `night`, `light` |
-| Iron-Buckled Harness | `simplywings:iron_harness` | 1 | Leather ×8, Iron Ingot ×3, String ×1 | 10 | ×1 | toutes sauf la commune |
-| Spirit Vessel | `simplywings:spirit_vessel` | 1 | Gold Ingot ×4, Glass ×4, Ghast Tear ×1 | 20 | ×1 | `fire`, `water`, `earth`, `air`, `storm`, `aurora`, `shadow`, `nebula`, `forest` |
-| Celestial Frame | `simplywings:celestial_frame` | 2 | End Rod ×2, Diamond ×2, Gilded Frame ×1 | 35 | ×1 | `angel`, `seraph`, `psyche`, `yin_yang`, `night`, `light` |
-| Gilded Harness | `simplywings:gilded_harness` | 2 | Gold Ingot ×4, Leather ×2, Iron-Buckled Harness ×1 | 25 | ×1 | épiques, légendaires, mythiques |
-| Dragonbone Spar | `simplywings:dragonbone_spar` | 3 | Dragon Scale ×2, Celestial Frame ×1, Netherite Scrap ×1 | 60 | ×1 | `night`, `light` |
-| Radiant Harness | `simplywings:radiant_harness` | 3 | Diamond ×4, Phantom Membrane ×2, Gilded Harness ×1 | 50 | ×1 | légendaires, mythiques |
-| Fury Saddle | `simplywings:fury_saddle` | 4 | Dragon Scale ×4, Leather ×2, Radiant Harness ×1, Saddle ×1, Netherite Ingot ×1 | 80 | ×1 | `night`, `light` |
+| Fury Plasma | `simplywings:fury_plasma` | 1 | Dragon's Breath ×2, Blaze Powder ×1, Ghast Wisp ×1 | 30 | ×1 | `night`, `light` |
+| Gilded Frame | `simplywings:gilded_frame` | 1 | Gold Ingot ×4, Blaze Powder ×1, Gilded Vein ×1, Ember Wisp ×1 | 15 | ×1 | `ancient`, `ptero`, `fire`, `water`, `earth`, `air`, `storm`, `aurora`, `shadow`, `nebula`, `angel`, `demon`, `seraph`, `psyche`, `yin_yang`, `night`, `light` |
+| Iron-Buckled Harness | `simplywings:iron_harness` | 1 | Leather ×6, Supple Hide ×2, Iron Ingot ×2, Silk Thread ×1, Sky Iron Fleck ×1 | 10 | ×1 | toutes sauf la commune |
+| Spirit Vessel | `simplywings:spirit_vessel` | 1 | Gold Ingot ×4, Glass ×4, Ghast Wisp ×1 | 20 | ×1 | `fire`, `water`, `earth`, `air`, `storm`, `aurora`, `shadow`, `nebula`, `forest` |
+| Celestial Frame | `simplywings:celestial_frame` | 2 | End Rod ×2, Void Grit ×1, Diamond ×2, Gilded Frame ×1 | 35 | ×1 | `angel`, `seraph`, `psyche`, `yin_yang`, `night`, `light` |
+| Gilded Harness | `simplywings:gilded_harness` | 2 | Gold Ingot ×4, Leather ×2, Iron-Buckled Harness ×1, Gilded Vein ×1 | 25 | ×1 | épiques, légendaires, mythiques |
+| Dragonbone Spar | `simplywings:dragonbone_spar` | 3 | Dragon Scale ×2, Celestial Frame ×1, Ancient Ember ×1 | 60 | ×1 | `night`, `light` |
+| Radiant Harness | `simplywings:radiant_harness` | 3 | Diamond ×4, Phantom Membrane ×2, Gilded Harness ×1, Prism Shard ×1 | 50 | ×1 | légendaires, mythiques |
+| Fury Saddle | `simplywings:fury_saddle` | 4 | Dragon Scale ×4, Leather ×2, Radiant Harness ×1, Saddle ×1, Netherite Ingot ×1, Ancient Ember ×2 | 80 | ×1 | `night`, `light` |
 
 ## Objets de base
 

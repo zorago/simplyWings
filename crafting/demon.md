@@ -13,7 +13,8 @@ Règles, légende et objets partagés : [`CRAFTING.md`](../CRAFTING.md). Derniè
 | Profondeur | 3 niveaux de craft avant les pièces (max 3 en légendaire) |
 | Crafts | 16 en `GRID` + 1 assemblage |
 | Cloud Essence | 595 (pièces) + 800 (assemblage) = **1395** |
-| Drops du mod | Vex Wing (MOB · Vex) |
+| Matières premières | 10 types du mod (33 objets) · 11 types vanilla (58 objets) |
+| Drops du mod | Prism Shard (BLOCK · Diamond Ore, Deepslate Diamond Ore), Gilded Vein (BLOCK · Gold Ore, Deepslate Gold Ore, Nether Gold Ore), Ghast Wisp (MOB · Ghast), Ember Wisp (MOB · Blaze), Supple Hide (MOB · Cow, Mooshroom, Horse, Donkey, Llama), Silk Thread (MOB · Spider, Cave Spider), Sky Iron Fleck (BLOCK · Iron Ore, Deepslate Iron Ore), Soot Flake (BLOCK · Coal Ore, Deepslate Coal Ore), Vex Wing (MOB · Vex), Elastic Gel (MOB · Slime, Magma Cube) |
 
 ## Matières premières
 
@@ -21,20 +22,26 @@ Tout ce que la route consomme (niveau 0), pour une paire complète. Les drops du
 
 | Objet | Qté | Où | Source | Condition | Chance |
 | --- | --- | --- | --- | --- | --- |
+| Elastic Gel `simplywings:elastic_gel` | 8 | `MOB` | Slime, Magma Cube | — | 40 % |
+| Ember Wisp `simplywings:ember_wisp` | 6 | `MOB` | Blaze | — | 30 % |
+| Ghast Wisp `simplywings:ghast_wisp` | 1 | `MOB` | Ghast | — | 50 % |
+| Gilded Vein `simplywings:gilded_vein` | 3 | `BLOCK` | Gold Ore, Deepslate Gold Ore, Nether Gold Ore | — | 30 % |
+| Prism Shard `simplywings:prism_shard` | 1 | `BLOCK` | Diamond Ore, Deepslate Diamond Ore | — | 50 % |
+| Silk Thread `simplywings:silk_thread` | 1 | `MOB` | Spider, Cave Spider | — | 40 % |
+| Sky Iron Fleck `simplywings:sky_iron` | 1 | `BLOCK` | Iron Ore, Deepslate Iron Ore | — | 25 % |
+| Soot Flake `simplywings:soot_flake` | 2 | `BLOCK` | Coal Ore, Deepslate Coal Ore | — | 20 % |
+| Supple Hide `simplywings:supple_hide` | 2 | `MOB` | Cow, Mooshroom, Horse, Donkey, Llama | — | 35 % |
 | Vex Wing `simplywings:vex_wing` | 8 | `MOB` | Vex | — | 40 % |
-| Blaze Powder `minecraft:blaze_powder` | 6 | `VANILLA` | Établi : bâton de blaze | — | — |
-| Blaze Rod `minecraft:blaze_rod` | 4 | `VANILLA` | Blazes (forteresses du Nether) | — | — |
+| Blaze Powder `minecraft:blaze_powder` | 4 | `VANILLA` | Établi : bâton de blaze | — | — |
 | Crying Obsidian `minecraft:crying_obsidian` | 1 | `VANILLA` | Ruines de portails, troc avec les piglins | — | — |
 | Diamond `minecraft:diamond` | 12 | `VANILLA` | Minage du diamant | — | — |
-| Ghast Tear `minecraft:ghast_tear` | 1 | `VANILLA` | Ghasts | — | — |
 | Gold Ingot `minecraft:gold_ingot` | 12 | `VANILLA` | Minage de l'or, piglins, fonte | — | — |
 | Gunpowder `minecraft:gunpowder` | 4 | `VANILLA` | Creepers, ghasts, sorcières | — | — |
-| Iron Ingot `minecraft:iron_ingot` | 5 | `VANILLA` | Minage du fer, fonte | — | — |
-| Leather `minecraft:leather` | 18 | `VANILLA` | Vaches, chevaux, tonneaux de la forge | — | — |
-| Magma Cream `minecraft:magma_cream` | 6 | `VANILLA` | Cubes de magma | — | — |
+| Iron Ingot `minecraft:iron_ingot` | 2 | `VANILLA` | Minage du fer, fonte | — | — |
+| Leather `minecraft:leather` | 8 | `VANILLA` | Vaches, chevaux, tonneaux de la forge | — | — |
+| Magma Cream `minecraft:magma_cream` | 4 | `VANILLA` | Cubes de magma | — | — |
 | Nether Wart `minecraft:nether_wart` | 8 | `VANILLA` | Forteresses du Nether, culture | — | — |
 | Phantom Membrane `minecraft:phantom_membrane` | 2 | `VANILLA` | Phantoms | — | — |
-| String `minecraft:string` | 1 | `VANILLA` | Araignées, toiles | — | — |
 | Wither Skeleton Skull `minecraft:wither_skeleton_skull` | 1 | `VANILLA` | Wither squelettes | — | — |
 
 ## Route
@@ -43,14 +50,14 @@ Niv. = niveau de craft (0 = matière première). Crafts = nombre de fois que la 
 
 | # | Produit | Où | Niv. | Crafts | Entrées par craft | Essence | Cumul |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | Iron-Buckled Harness `simplywings:iron_harness` ×1 | `GRID` | 1 | 1 | Leather ×8, Iron Ingot ×3, String ×1 | 10 | 10 |
-| 2 | Brimstone `simplywings:brimstone` ×4 | `GRID` | 1 | 2 | Gunpowder ×2, Blaze Powder ×1, Magma Cream ×1 | 2 × 20 | 50 |
-| 3 | Infernal Membrane `simplywings:infernal_membrane` ×4 | `GRID` | 1 | 4 | Vex Wing ×2, Leather ×2, Nether Wart ×2, Magma Cream ×1 | 4 × 25 | 150 |
-| 4 | Gilded Frame `simplywings:gilded_frame` ×2 | `GRID` | 1 | 2 | Gold Ingot ×4, Blaze Powder ×2, Iron Ingot ×1 | 2 × 15 | 180 |
-| 5 | Gilded Harness `simplywings:gilded_harness` ×1 | `GRID` | 2 | 1 | Gold Ingot ×4, Leather ×2, Iron-Buckled Harness ×1 → #1 | 25 | 205 |
-| 6 | Demon Core `simplywings:demon_core` ×1 | `GRID` | 2 | 1 | Brimstone ×2 → #2, Wither Skeleton Skull ×1, Diamond ×4, Crying Obsidian ×1, Ghast Tear ×1 | 100 | 305 |
-| 7 | Infernal Frame `simplywings:infernal_frame` ×2 | `GRID` | 2 | 2 | Blaze Rod ×2, Gilded Frame ×1 → #4, Diamond ×2 | 2 × 40 | 385 |
-| 8 | Radiant Harness `simplywings:radiant_harness` ×1 | `GRID` | 3 | 1 | Diamond ×4, Phantom Membrane ×2, Gilded Harness ×1 → #5 | 50 | 435 |
+| 1 | Iron-Buckled Harness `simplywings:iron_harness` ×1 | `GRID` | 1 | 1 | Leather ×6, Supple Hide ×2, Iron Ingot ×2, Silk Thread ×1, Sky Iron Fleck ×1 | 10 | 10 |
+| 2 | Brimstone `simplywings:brimstone` ×4 | `GRID` | 1 | 2 | Gunpowder ×2, Blaze Powder ×1, Soot Flake ×1 | 2 × 20 | 50 |
+| 3 | Infernal Membrane `simplywings:infernal_membrane` ×4 | `GRID` | 1 | 4 | Vex Wing ×2, Elastic Gel ×2, Nether Wart ×2, Magma Cream ×1 | 4 × 25 | 150 |
+| 4 | Gilded Frame `simplywings:gilded_frame` ×2 | `GRID` | 1 | 2 | Gold Ingot ×4, Blaze Powder ×1, Gilded Vein ×1, Ember Wisp ×1 | 2 × 15 | 180 |
+| 5 | Gilded Harness `simplywings:gilded_harness` ×1 | `GRID` | 2 | 1 | Gold Ingot ×4, Leather ×2, Iron-Buckled Harness ×1 → #1, Gilded Vein ×1 | 25 | 205 |
+| 6 | Demon Core `simplywings:demon_core` ×1 | `GRID` | 2 | 1 | Brimstone ×2 → #2, Wither Skeleton Skull ×1, Diamond ×4, Crying Obsidian ×1, Ghast Wisp ×1 | 100 | 305 |
+| 7 | Infernal Frame `simplywings:infernal_frame` ×2 | `GRID` | 2 | 2 | Ember Wisp ×2, Gilded Frame ×1 → #4, Diamond ×2 | 2 × 40 | 385 |
+| 8 | Radiant Harness `simplywings:radiant_harness` ×1 | `GRID` | 3 | 1 | Diamond ×4, Phantom Membrane ×2, Gilded Harness ×1 → #5, Prism Shard ×1 | 50 | 435 |
 | 9 | Demon Wing `simplywings:demon_wing` ×2 | `GRID` | 3 | 2 | Infernal Membrane ×2 → #3, Infernal Frame ×1 → #7, Brimstone ×1 → #2 | 2 × 80 | 595 |
 | 10 | Demon Wings `simplywings:demon_wings` | `ASM` | — | 1 | Harnais : Radiant Harness → #8 · Cœur : Demon Core → #6 · Aile G : Demon Wing → #9 · Aile D : Demon Wing → #9 | 800 | **1395** |
 
@@ -64,17 +71,19 @@ Grille 5×5 sans les coins : `.` = coin absent, `_` = case vide.
 
 ```
 . L _ L .
-_ L _ L _
-_ I S I _
-_ L I L _
+_ H _ H _
+_ I T I _
+_ L K L _
 . L _ L .
 ```
 
 | Lettre | Ingrédient | Qté | Niv. |
 | --- | --- | --- | --- |
-| `L` | Leather `minecraft:leather` | 8 | 0 |
-| `I` | Iron Ingot `minecraft:iron_ingot` | 3 | 0 |
-| `S` | String `minecraft:string` | 1 | 0 |
+| `L` | Leather `minecraft:leather` | 6 | 0 |
+| `H` | Supple Hide `simplywings:supple_hide` | 2 | 0 |
+| `I` | Iron Ingot `minecraft:iron_ingot` | 2 | 0 |
+| `T` | Silk Thread `simplywings:silk_thread` | 1 | 0 |
+| `K` | Sky Iron Fleck `simplywings:sky_iron` | 1 | 0 |
 
 ### #2 · Brimstone · `simplywings:brimstone`
 
@@ -92,7 +101,7 @@ _ _ _ _ _
 | --- | --- | --- | --- |
 | `G` | Gunpowder `minecraft:gunpowder` | 2 | 0 |
 | `P` | Blaze Powder `minecraft:blaze_powder` | 1 | 0 |
-| `M` | Magma Cream `minecraft:magma_cream` | 1 | 0 |
+| `M` | Soot Flake `simplywings:soot_flake` | 1 | 0 |
 
 ### #3 · Infernal Membrane · `simplywings:infernal_membrane`
 
@@ -109,7 +118,7 @@ _ _ L _ _
 | Lettre | Ingrédient | Qté | Niv. |
 | --- | --- | --- | --- |
 | `V` | Vex Wing `simplywings:vex_wing` | 2 | 0 |
-| `L` | Leather `minecraft:leather` | 2 | 0 |
+| `L` | Elastic Gel `simplywings:elastic_gel` | 2 | 0 |
 | `N` | Nether Wart `minecraft:nether_wart` | 2 | 0 |
 | `M` | Magma Cream `minecraft:magma_cream` | 1 | 0 |
 
@@ -120,16 +129,17 @@ _ _ L _ _
 ```
 . _ _ _ .
 _ G P G _
-_ _ I _ _
-_ G P G _
+_ _ V _ _
+_ G E G _
 . _ _ _ .
 ```
 
 | Lettre | Ingrédient | Qté | Niv. |
 | --- | --- | --- | --- |
 | `G` | Gold Ingot `minecraft:gold_ingot` | 4 | 0 |
-| `P` | Blaze Powder `minecraft:blaze_powder` | 2 | 0 |
-| `I` | Iron Ingot `minecraft:iron_ingot` | 1 | 0 |
+| `P` | Blaze Powder `minecraft:blaze_powder` | 1 | 0 |
+| `V` | Gilded Vein `simplywings:gilded_vein` | 1 | 0 |
+| `E` | Ember Wisp `simplywings:ember_wisp` | 1 | 0 |
 
 ### #5 · Gilded Harness · `simplywings:gilded_harness` · partagé
 
@@ -138,7 +148,7 @@ _ G P G _
 ```
 . G _ G .
 _ L H L _
-_ G _ G _
+_ G V G _
 _ _ _ _ _
 . _ _ _ .
 ```
@@ -148,6 +158,7 @@ _ _ _ _ _
 | `G` | Gold Ingot `minecraft:gold_ingot` | 4 | 0 |
 | `L` | Leather `minecraft:leather` | 2 | 0 |
 | `H` | Iron-Buckled Harness `simplywings:iron_harness` | 1 | 1 |
+| `V` | Gilded Vein `simplywings:gilded_vein` | 1 | 0 |
 
 ### #6 · Demon Core · `simplywings:demon_core`
 
@@ -167,7 +178,7 @@ _ D T D _
 | `W` | Wither Skeleton Skull `minecraft:wither_skeleton_skull` | 1 | 0 |
 | `D` | Diamond `minecraft:diamond` | 4 | 0 |
 | `C` | Crying Obsidian `minecraft:crying_obsidian` | 1 | 0 |
-| `T` | Ghast Tear `minecraft:ghast_tear` | 1 | 0 |
+| `T` | Ghast Wisp `simplywings:ghast_wisp` | 1 | 0 |
 
 ### #7 · Infernal Frame · `simplywings:infernal_frame`
 
@@ -183,7 +194,7 @@ _ _ _ _ _
 
 | Lettre | Ingrédient | Qté | Niv. |
 | --- | --- | --- | --- |
-| `B` | Blaze Rod `minecraft:blaze_rod` | 2 | 0 |
+| `B` | Ember Wisp `simplywings:ember_wisp` | 2 | 0 |
 | `F` | Gilded Frame `simplywings:gilded_frame` | 1 | 1 |
 | `D` | Diamond `minecraft:diamond` | 2 | 0 |
 
@@ -194,7 +205,7 @@ _ _ _ _ _
 ```
 . D _ D .
 _ P H P _
-_ D _ D _
+_ D Q D _
 _ _ _ _ _
 . _ _ _ .
 ```
@@ -204,6 +215,7 @@ _ _ _ _ _
 | `D` | Diamond `minecraft:diamond` | 4 | 0 |
 | `P` | Phantom Membrane `minecraft:phantom_membrane` | 2 | 0 |
 | `H` | Gilded Harness `simplywings:gilded_harness` | 1 | 2 |
+| `Q` | Prism Shard `simplywings:prism_shard` | 1 | 0 |
 
 ### #9 · Demon Wing · `simplywings:demon_wing`
 
@@ -226,6 +238,6 @@ _ _ _ _ _
 ## Pourquoi ces ingrédients
 
 - **Vex Wing** : sur les vexs, les petits démons ailés invoqués par les évocateurs (raids, manoirs).
-- **Infernal Membrane** (intermédiaire) : ailes de vex, cuir, verrues du Nether et crème de magma, une membrane rouge veinée de noir.
-- **Brimstone** (intermédiaire) : le soufre, poudre à canon et blaze, les coups explosifs de l'accélération maxée.
-- **Infernal Frame** : la Gilded Frame renforcée de bâtons de blaze et de diamant. **Wither Skeleton Skull**, **Crying Obsidian** et **Ghast Tear** au cœur : le Nether dans ce qu'il a de plus sombre.
+- **Infernal Membrane** (intermédiaire) : ailes de vex, **Elastic Gel** des cubes de magma, verrues du Nether et crème de magma, une membrane rouge veinée de noir.
+- **Brimstone** (intermédiaire) : le soufre, poudre à canon, blaze et **Soot Flake** des filons de charbon, les coups explosifs de l'accélération maxée.
+- **Infernal Frame** : la Gilded Frame renforcée d'**Ember Wisp** et de diamant. **Wither Skeleton Skull**, **Crying Obsidian** et **Ghast Wisp** au cœur : le Nether dans ce qu'il a de plus sombre.

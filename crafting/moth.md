@@ -13,7 +13,8 @@ Règles, légende et objets partagés : [`CRAFTING.md`](../CRAFTING.md). Derniè
 | Profondeur | 1 niveau de craft avant les pièces (max 1 en rare) |
 | Crafts | 4 en `GRID` + 1 assemblage |
 | Cloud Essence | 70 (pièces) + 100 (assemblage) = **170** |
-| Drops du mod | Moth Dust (BLOCK · Torch, Wall Torch, Lantern) |
+| Matières premières | 5 types du mod (18 objets) · 6 types vanilla (21 objets) |
+| Drops du mod | Supple Hide (MOB · Cow, Mooshroom, Horse, Donkey, Llama), Silk Thread (MOB · Spider, Cave Spider), Sky Iron Fleck (BLOCK · Iron Ore, Deepslate Iron Ore), Moth Dust (BLOCK · Torch, Wall Torch, Lantern), Fleece Tuft (MOB · Sheep) |
 
 ## Matières premières
 
@@ -21,14 +22,17 @@ Tout ce que la route consomme (niveau 0), pour une paire complète. Les drops du
 
 | Objet | Qté | Où | Source | Condition | Chance |
 | --- | --- | --- | --- | --- | --- |
+| Fleece Tuft `simplywings:fleece_tuft` | 4 | `MOB` | Sheep | — | 40 % |
 | Moth Dust `simplywings:moth_dust` | 8 | `BLOCK` | Torch, Wall Torch, Lantern | De nuit | 25 % |
+| Silk Thread `simplywings:silk_thread` | 3 | `MOB` | Spider, Cave Spider | — | 40 % |
+| Sky Iron Fleck `simplywings:sky_iron` | 1 | `BLOCK` | Iron Ore, Deepslate Iron Ore | — | 25 % |
+| Supple Hide `simplywings:supple_hide` | 2 | `MOB` | Cow, Mooshroom, Horse, Donkey, Llama | — | 35 % |
 | Brown Dye `minecraft:brown_dye` | 4 | `VANILLA` | Établi : fèves de cacao | — | — |
-| Iron Ingot `minecraft:iron_ingot` | 7 | `VANILLA` | Minage du fer, fonte | — | — |
+| Iron Ingot `minecraft:iron_ingot` | 6 | `VANILLA` | Minage du fer, fonte | — | — |
 | Lantern `minecraft:lantern` | 1 | `VANILLA` | Établi : torche + pépites de fer | — | — |
-| Leather `minecraft:leather` | 8 | `VANILLA` | Vaches, chevaux, tonneaux de la forge | — | — |
+| Leather `minecraft:leather` | 6 | `VANILLA` | Vaches, chevaux, tonneaux de la forge | — | — |
 | Pink Dye `minecraft:pink_dye` | 2 | `VANILLA` | Établi : pivoine, tulipe rose | — | — |
-| String `minecraft:string` | 3 | `VANILLA` | Araignées, toiles | — | — |
-| White Wool `minecraft:white_wool` | 6 | `VANILLA` | Moutons | — | — |
+| White Wool `minecraft:white_wool` | 2 | `VANILLA` | Moutons | — | — |
 
 ## Route
 
@@ -36,9 +40,9 @@ Niv. = niveau de craft (0 = matière première). Crafts = nombre de fois que la 
 
 | # | Produit | Où | Niv. | Crafts | Entrées par craft | Essence | Cumul |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | Iron-Buckled Harness `simplywings:iron_harness` ×1 | `GRID` | 1 | 1 | Leather ×8, Iron Ingot ×3, String ×1 | 10 | 10 |
+| 1 | Iron-Buckled Harness `simplywings:iron_harness` ×1 | `GRID` | 1 | 1 | Leather ×6, Supple Hide ×2, Iron Ingot ×2, Silk Thread ×1, Sky Iron Fleck ×1 | 10 | 10 |
 | 2 | Moth Core `simplywings:moth_core` ×1 | `GRID` | 1 | 1 | Iron Ingot ×4, Moth Dust ×2, White Wool ×2, Lantern ×1 | 30 | 40 |
-| 3 | Moth Wing `simplywings:moth_wing` ×2 | `GRID` | 1 | 2 | White Wool ×2, Moth Dust ×3, Pink Dye ×1, Brown Dye ×2, String ×1 | 2 × 15 | 70 |
+| 3 | Moth Wing `simplywings:moth_wing` ×2 | `GRID` | 1 | 2 | Fleece Tuft ×2, Moth Dust ×3, Pink Dye ×1, Brown Dye ×2, Silk Thread ×1 | 2 × 15 | 70 |
 | 4 | Moth Wings `simplywings:moth_wings` | `ASM` | — | 1 | Harnais : Iron-Buckled Harness → #1 · Cœur : Moth Core → #2 · Aile G : Moth Wing → #3 · Aile D : Moth Wing → #3 | 100 | **170** |
 
 ## Recettes
@@ -51,17 +55,19 @@ Grille 5×5 sans les coins : `.` = coin absent, `_` = case vide.
 
 ```
 . L _ L .
-_ L _ L _
-_ I S I _
-_ L I L _
+_ H _ H _
+_ I T I _
+_ L K L _
 . L _ L .
 ```
 
 | Lettre | Ingrédient | Qté | Niv. |
 | --- | --- | --- | --- |
-| `L` | Leather `minecraft:leather` | 8 | 0 |
-| `I` | Iron Ingot `minecraft:iron_ingot` | 3 | 0 |
-| `S` | String `minecraft:string` | 1 | 0 |
+| `L` | Leather `minecraft:leather` | 6 | 0 |
+| `H` | Supple Hide `simplywings:supple_hide` | 2 | 0 |
+| `I` | Iron Ingot `minecraft:iron_ingot` | 2 | 0 |
+| `T` | Silk Thread `simplywings:silk_thread` | 1 | 0 |
+| `K` | Sky Iron Fleck `simplywings:sky_iron` | 1 | 0 |
 
 ### #2 · Moth Core · `simplywings:moth_core`
 
@@ -96,15 +102,15 @@ _ _ _ _ _
 
 | Lettre | Ingrédient | Qté | Niv. |
 | --- | --- | --- | --- |
-| `W` | White Wool `minecraft:white_wool` | 2 | 0 |
+| `W` | Fleece Tuft `simplywings:fleece_tuft` | 2 | 0 |
 | `D` | Moth Dust `simplywings:moth_dust` | 3 | 0 |
 | `P` | Pink Dye `minecraft:pink_dye` | 1 | 0 |
 | `B` | Brown Dye `minecraft:brown_dye` | 2 | 0 |
-| `S` | String `minecraft:string` | 1 | 0 |
+| `S` | Silk Thread `simplywings:silk_thread` | 1 | 0 |
 
 ## Pourquoi ces ingrédients
 
 - **Moth Dust** : en cassant torches et lanternes **de nuit**. Les papillons de nuit tournent autour des lumières.
 - **Lantern** dans le cœur : la lumière qui les attire.
-- **White Wool** : la touffe de fourrure crème entre les épaules (et la mite qui mange la laine).
-- **Pink Dye** et **Brown Dye** : la bordure rose et les zigzags bruns.
+- **White Wool** et **Fleece Tuft** : la touffe de fourrure crème entre les épaules, et la mite qui mange la laine.
+- **Pink Dye** et **Brown Dye** : la bordure rose et les zigzags bruns ; **Silk Thread** : le cocon.

@@ -13,7 +13,8 @@ Règles, légende et objets partagés : [`CRAFTING.md`](../CRAFTING.md). Derniè
 | Profondeur | 1 niveau de craft avant les pièces (max 1 en rare) |
 | Crafts | 4 en `GRID` + 1 assemblage |
 | Cloud Essence | 70 (pièces) + 100 (assemblage) = **170** |
-| Drops du mod | Acorn (BLOCK · Oak Leaves, Dark Oak Leaves) |
+| Matières premières | 4 types du mod (11 objets) · 4 types vanilla (30 objets) |
+| Drops du mod | Supple Hide (MOB · Cow, Mooshroom, Horse, Donkey, Llama), Silk Thread (MOB · Spider, Cave Spider), Sky Iron Fleck (BLOCK · Iron Ore, Deepslate Iron Ore), Acorn (BLOCK · Oak Leaves, Dark Oak Leaves) |
 
 ## Matières premières
 
@@ -22,11 +23,13 @@ Tout ce que la route consomme (niveau 0), pour une paire complète. Les drops du
 | Objet | Qté | Où | Source | Condition | Chance |
 | --- | --- | --- | --- | --- | --- |
 | Acorn `simplywings:acorn` | 3 | `BLOCK` | Oak Leaves, Dark Oak Leaves | — | 5 % |
-| Iron Ingot `minecraft:iron_ingot` | 7 | `VANILLA` | Minage du fer, fonte | — | — |
-| Leather `minecraft:leather` | 10 | `VANILLA` | Vaches, chevaux, tonneaux de la forge | — | — |
+| Silk Thread `simplywings:silk_thread` | 5 | `MOB` | Spider, Cave Spider | — | 40 % |
+| Sky Iron Fleck `simplywings:sky_iron` | 1 | `BLOCK` | Iron Ore, Deepslate Iron Ore | — | 25 % |
+| Supple Hide `simplywings:supple_hide` | 2 | `MOB` | Cow, Mooshroom, Horse, Donkey, Llama | — | 35 % |
+| Iron Ingot `minecraft:iron_ingot` | 6 | `VANILLA` | Minage du fer, fonte | — | — |
+| Leather `minecraft:leather` | 8 | `VANILLA` | Vaches, chevaux, tonneaux de la forge | — | — |
 | Rabbit Hide `minecraft:rabbit_hide` | 12 | `VANILLA` | Lapins | — | — |
 | Stick `minecraft:stick` | 4 | `VANILLA` | Établi : planches | — | — |
-| String `minecraft:string` | 5 | `VANILLA` | Araignées, toiles | — | — |
 
 ## Route
 
@@ -34,9 +37,9 @@ Niv. = niveau de craft (0 = matière première). Crafts = nombre de fois que la 
 
 | # | Produit | Où | Niv. | Crafts | Entrées par craft | Essence | Cumul |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | Iron-Buckled Harness `simplywings:iron_harness` ×1 | `GRID` | 1 | 1 | Leather ×8, Iron Ingot ×3, String ×1 | 10 | 10 |
+| 1 | Iron-Buckled Harness `simplywings:iron_harness` ×1 | `GRID` | 1 | 1 | Leather ×6, Supple Hide ×2, Iron Ingot ×2, Silk Thread ×1, Sky Iron Fleck ×1 | 10 | 10 |
 | 2 | Flying Squirrel Core `simplywings:squirrel_core` ×1 | `GRID` | 1 | 1 | Iron Ingot ×4, Acorn ×3, Rabbit Hide ×2 | 30 | 40 |
-| 3 | Flying Squirrel Wing `simplywings:squirrel_wing` ×2 | `GRID` | 1 | 2 | Stick ×2, Rabbit Hide ×5, Leather ×1, String ×2 | 2 × 15 | 70 |
+| 3 | Flying Squirrel Wing `simplywings:squirrel_wing` ×2 | `GRID` | 1 | 2 | Stick ×2, Rabbit Hide ×5, Leather ×1, Silk Thread ×2 | 2 × 15 | 70 |
 | 4 | Flying Squirrel Wings `simplywings:squirrel_wings` | `ASM` | — | 1 | Harnais : Iron-Buckled Harness → #1 · Cœur : Flying Squirrel Core → #2 · Aile G : Flying Squirrel Wing → #3 · Aile D : Flying Squirrel Wing → #3 | 100 | **170** |
 
 ## Recettes
@@ -49,17 +52,19 @@ Grille 5×5 sans les coins : `.` = coin absent, `_` = case vide.
 
 ```
 . L _ L .
-_ L _ L _
-_ I S I _
-_ L I L _
+_ H _ H _
+_ I T I _
+_ L K L _
 . L _ L .
 ```
 
 | Lettre | Ingrédient | Qté | Niv. |
 | --- | --- | --- | --- |
-| `L` | Leather `minecraft:leather` | 8 | 0 |
-| `I` | Iron Ingot `minecraft:iron_ingot` | 3 | 0 |
-| `S` | String `minecraft:string` | 1 | 0 |
+| `L` | Leather `minecraft:leather` | 6 | 0 |
+| `H` | Supple Hide `simplywings:supple_hide` | 2 | 0 |
+| `I` | Iron Ingot `minecraft:iron_ingot` | 2 | 0 |
+| `T` | Silk Thread `simplywings:silk_thread` | 1 | 0 |
+| `K` | Sky Iron Fleck `simplywings:sky_iron` | 1 | 0 |
 
 ### #2 · Flying Squirrel Core · `simplywings:squirrel_core`
 
@@ -96,11 +101,11 @@ _ T _ T _
 | `S` | Stick `minecraft:stick` | 2 | 0 |
 | `H` | Rabbit Hide `minecraft:rabbit_hide` | 5 | 0 |
 | `L` | Leather `minecraft:leather` | 1 | 0 |
-| `T` | String `minecraft:string` | 2 | 0 |
+| `T` | Silk Thread `simplywings:silk_thread` | 2 | 0 |
 
 ## Pourquoi ces ingrédients
 
 - **Acorn** : en cassant des feuilles de chêne et de chêne noir. L'écureuil fait ses réserves. Objet partagé avec l'esprit sylvestre.
 - **Rabbit Hide** : la fourrure de la membrane, gris-brun dessus, crème dessous.
-- **Stick** : l'éperon cartilagineux du poignet ; **String** : les attaches à la cheville.
+- **Stick** : l'éperon cartilagineux du poignet ; **Silk Thread** : les attaches à la cheville.
 - **Leather** : le cœur de la membrane.
