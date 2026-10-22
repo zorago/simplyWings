@@ -201,22 +201,23 @@ Rien n'est codé : le plan est dans `docs/WIKI_PLAN.md`.
 
 ## 9. Ailes de Yin et Yang
 
-- [ ] `/simplywings unlock simplywings:yin_yang` : la paire est dans le menu (J), rareté Légendaire, stats 9/10 partout.
-- [ ] Rendu : aile gauche noire à reflets bleu nuit, aile droite blanc nacré (texture 128×64, une moitié par côté). Vérifier qu'elles ne sont pas inversées.
+- [x] `/simplywings unlock simplywings:yin_yang` : la paire est dans le menu (J), rareté Légendaire, stats 9/10 partout (9,1 à 9,4 avec ses propres bonus de collection).
+- [x] Rendu : aile gauche noire à reflets bleu nuit, aile droite blanc nacré, pas inversées (nouveau modèle Blockbench, texture 256×128 avec une zone par aile).
 - [ ] Effets : deux sphères noire et blanche en orbite dans le dos, plus lentes et plus serrées en stationnaire ; à chaque battement, un anneau moitié noir, moitié blanc, et deux tintements (grave et aigu).
 - [ ] Vol : 1 battement par seconde (+9,2 m/s), stationnaire à 0,5 Hz et 19 m/s, presque immobile.
 - [ ] Transmog (Light) : l'apparence Yin et Yang se pose sur une autre paire.
-- [ ] Recette d'assemblage : Radiant Harness, Taiji Core, Yin Wing à gauche, Yang Wing à droite (l'ordre gauche et droite compte).
+- [x] Recette d'assemblage : Radiant Harness, Taiji Core, Yin Wing à gauche, Yang Wing à droite (fabriquée par le balayage des recettes).
 
 ## 10. Bonus de collection
 
 - [ ] Les bonus des 6 légendaires ont changé (une sixième légendaire) : vérifier l'affichage des stats globales dans le menu.
-- [ ] Collection complète hors mythiques : toutes les stats à 10/10.
+- [x] Collection complète : toutes les stats à 10/10 (vérifié avec `unlock all`, mythiques compris).
 
 ## 11. Régressions et correctifs déjà connus
 
 À revérifier après ces ajouts, puis à traiter (liste de `HANDOFF.md`, « Prochaine session ») :
 - [ ] Vol : stabilisé, déplacement, envol chargé, dive, frein, crash, sauts de secours, stamina, aucun kick sur le serveur dédié.
+  - 22/10, solo (touches simulées par le studio) : double saut → stationnaire, Alt maintenu → envol chargé en déplacement, sprint → battements et stamina qui baisse, frein → retour au stationnaire à basse vitesse, ZQSD en stationnaire, Alt → déplacement, stamina qui remonte en plané, 2 sauts de secours puis plus rien et recharge au sol, crash contre un mur à environ 16 m/s : vol coupé et 3,5 points de vie. Piqué et serveur dédié : à faire.
 - [ ] Night : stamina infinie, cri du piqué, charge et dash avec invisibilité.
 - [ ] Correctif 1 : saut au reset du cycle de battement (toutes les ailes).
   - 22/10 : codé dans `WingAnimator` (phase continue qui ne revient jamais à zéro, amplitude par ressort, recalage progressif sur le coup ; simulé sans saut). Reste à le sentir en vol réel.
