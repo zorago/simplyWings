@@ -49,7 +49,7 @@ public class EnergyCategory implements IRecipeCategory<ItemStack> {
 
     @Override
     public int getHeight() {
-        return 56;
+        return 24 + 10 * JeiText.lines(Minecraft.getInstance().font, Component.translatable("jei.simplywings.winged_energy.info"), 150) + 2;
     }
 
     @Override

@@ -143,6 +143,10 @@ final class StudioTest {
                     log.accept("jei error " + e);
                 }
             }
+            case "respawn" -> {
+                player.respawn();
+                mc.setScreen(null);
+            }
             case "select" -> player.getInventory().selected = Integer.parseInt(a[1]);
             case "attack" -> {
                 double range = a.length > 1 ? Double.parseDouble(a[1]) : 6.0;

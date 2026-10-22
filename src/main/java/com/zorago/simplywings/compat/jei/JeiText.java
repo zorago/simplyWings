@@ -9,10 +9,21 @@ import net.minecraft.util.FormattedCharSequence;
 final class JeiText {
     private static final int COLOR = 0x404040;
 
-    static void essence(GuiGraphics graphics, Font font, int essence, int x, int y) {
+    static void essence(GuiGraphics graphics, Font font, int essence, int right, int y) {
         if (essence > 0) {
-            graphics.drawString(font, Component.translatable("jei.simplywings.essence", essence), x, y, COLOR, false);
+            Component text = Component.translatable("jei.simplywings.essence", essence);
+            graphics.drawString(font, text, right - font.width(text), y, COLOR, false);
         }
+    }
+
+    static void essenceBlock(GuiGraphics graphics, Font font, int essence, int x, int y, int width) {
+        if (essence > 0) {
+            wrapped(graphics, font, Component.translatable("jei.simplywings.essence", essence), x, y, width, COLOR);
+        }
+    }
+
+    static int lines(Font font, Component text, int width) {
+        return font.split(text, width).size();
     }
 
     static int wrapped(GuiGraphics graphics, Font font, Component text, int x, int y, int width, int color) {

@@ -64,6 +64,6 @@ public class AssemblyCategory implements IRecipeCategory<RecipeHolder<AssemblyRe
     @Override
     public void draw(RecipeHolder<AssemblyRecipe> holder, IRecipeSlotsView slots, GuiGraphics graphics, double mouseX, double mouseY) {
         arrow.draw(graphics, 80, 25);
-        JeiText.essence(graphics, Minecraft.getInstance().font, holder.value().essence(), 76, 50);
+        JeiText.essence(graphics, Minecraft.getInstance().font, holder.value().essence(), 132, 50);
     }
 }

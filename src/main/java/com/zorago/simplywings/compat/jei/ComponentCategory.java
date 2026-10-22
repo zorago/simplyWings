@@ -85,6 +85,6 @@ public class ComponentCategory implements IRecipeCategory<RecipeHolder<Component
     @Override
     public void draw(RecipeHolder<ComponentRecipe> holder, IRecipeSlotsView slots, GuiGraphics graphics, double mouseX, double mouseY) {
         arrow.draw(graphics, 96, 37);
-        JeiText.essence(graphics, Minecraft.getInstance().font, holder.value().essence(), 100, 62);
+        JeiText.essenceBlock(graphics, Minecraft.getInstance().font, holder.value().essence(), 94, 58, 56);
     }
 }
