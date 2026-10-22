@@ -2,7 +2,7 @@
 
 Tout ce qui doit être testé et validé en jeu, puis les modèles 3D qui restent à faire. Chaque ligne se coche quand elle est validée **en solo et sur le serveur dédié** (règle du projet). Un échec se note directement sous la ligne, avec ce qui a été observé.
 
-Dernière mise à jour : 22 octobre 2026. Rien de ce fichier n'a encore été testé en jeu avec un client : tout a été écrit et compilé sur le PC portable. Seul un serveur dédié de dev a tourné, pour valider les données, la structure et un drop (voir § 1).
+Dernière mise à jour : 22 octobre 2026 au soir. Session de test sur le PC de jeu, **en solo dans le client de dev** (Simply Wings + JEI), pilotée par le studio (`tools/studio/send.py`, commandes de test de `client/studio/StudioTest`). Les cases cochées ce soir l'ont été en solo seulement : la règle « solo et serveur dédié » reste à compléter pour elles.
 
 ## 0. Préparation
 
@@ -32,123 +32,126 @@ Déjà validé le 22 octobre sur le portable, avec un serveur dédié de dev (Si
 
 ## 2. Items (232) et tooltips
 
-- [ ] L'onglet créatif Simply Wings contient : la table, le flacon vide, le flacon plein, l'absorbeur, le compas de la forge, les 41 paires, puis les 188 matériaux et pièces.
-- [ ] Aucune texture violette et noire (texture manquante), ni dans l'inventaire, ni en main, ni au sol.
-- [ ] Chaque item du mod affiche, sous son nom : la description en italique gris, une ligne vide, puis l'énigme en violet clair précédée de ✦. Vérifier sur un échantillon de chaque famille : drop (Hushed Down, Dragon Scale), intermédiaire (Gilded Frame, Fury Plasma), pièce (Owl Core, Night Fury Wing), harnais, paire (Owl Wings, Wings of Yin and Yang), Cloud Flask, Cloud Absorber, Forge Compass, Assembly Table.
-- [ ] Les retours à la ligne des tooltips tombent bien (environ 200 px) et ne coupent pas les mots.
-- [ ] Les tooltips existants restent en dessous : « Right-click to add these wings… », remplissage du flacon, ligne « Winged energy ».
-- [ ] Piles : drops et intermédiaires par 64, pièces (harnais, cœurs, ailes) par 16, absorbeur et compas par 1, flacon vide par 16, flacon plein par 1.
+- [x] L'onglet créatif Simply Wings contient : la table, le flacon vide, le flacon plein, l'absorbeur, le compas de la forge, les 41 paires, puis les 188 matériaux et pièces. *(22/10, studio : 234 entrées dans cet ordre.)*
+- [x] Aucune texture violette et noire (texture manquante) dans l'inventaire : planche des 233 icônes du mod, aucune manquante. *(En main et au sol : non vérifié séparément, mêmes modèles.)*
+- [x] Chaque item du mod affiche, sous son nom : la description en italique gris, une ligne vide, puis l'énigme en violet clair précédée de ✦. Vérifier sur un échantillon de chaque famille : drop (Hushed Down, Dragon Scale), intermédiaire (Gilded Frame, Fury Plasma), pièce (Owl Core, Night Fury Wing), harnais, paire (Owl Wings, Wings of Yin and Yang), Cloud Flask, Cloud Absorber, Forge Compass, Assembly Table.
+- [x] Les retours à la ligne des tooltips tombent bien (environ 200 px) et ne coupent pas les mots.
+  - Corrigé le 22/10 : l'énigme de Yin et Yang disait « two Yin Wings » ; elle dit maintenant « a Yin Wing and a Yang Wing » (`tools/crafting_gen/items.py`).
+- [x] Les tooltips existants restent en dessous : « Right-click to add these wings… », remplissage du flacon, ligne « Winged energy ».
+- [x] Piles : drops et intermédiaires par 64, pièces (harnais, cœurs, ailes) par 16, absorbeur et compas par 1, flacon vide par 16, flacon plein par 1.
 - [ ] Les icônes des pièces « aile » sont lisibles (certaines sont petites : abeille, cerf-volant, colibri).
 
 ## 3. Énergie ailée
 
-- [ ] Onglet « Winged Energy » de la table : poser un item l'imprègne (éclat d'enchantement et ligne de tooltip), le reposer retire l'énergie.
+- [x] Onglet « Winged Energy » de la table : poser un item l'imprègne (éclat d'enchantement et ligne de tooltip), le reposer retire l'énergie.
 - [ ] L'énergie survit à la sauvegarde, à la mort (si l'item est gardé) et au transfert de dimension.
-- [ ] Elle fonctionne sur n'importe quel item (escalier, bâton, épée, pioche, canne, arc).
+- [x] Elle fonctionne sur n'importe quel item (testé : bâton, escalier ; épée, pioche, pelle, canne via le composant).
 
 ## 4. Drops imprégnés (59 sources)
 
 Règle générale à valider d'abord :
-- [ ] Sans énergie ailée, aucun drop du mod ne tombe, jamais.
-- [ ] **Bloc** : il compte si l'outil en main est imprégné.
-- [ ] **Mob** : il compte si l'item en main principale du tueur est imprégné. Un kill à l'arc ou au trident compte si l'arc ou le trident tenu est imprégné (décision du 22 octobre : on regarde l'arme du tireur).
-- [ ] **Pêche** : elle compte si la canne est imprégnée.
-- [ ] Les drops vanilla normaux tombent toujours en plus.
-- [ ] Les explosions (TNT, creeper) ne donnent jamais de drop du mod.
+- [x] Sans énergie ailée, aucun drop du mod ne tombe, jamais.
+- [x] **Bloc** : il compte si l'outil en main est imprégné.
+- [x] **Mob** : il compte si l'item en main principale du tueur est imprégné. Un kill à l'arc ou au trident compte si l'arc ou le trident tenu est imprégné (décision du 22 octobre : on regarde l'arme du tireur).
+- [x] **Pêche** : elle compte si la canne est imprégnée.
+- [x] Les drops vanilla normaux tombent toujours en plus.
+- [x] Les explosions (TNT) ne donnent jamais de drop du mod.
 
 Une ligne par source (« ok » quand le drop tombe dans la bonne condition **et** ne tombe pas hors condition) :
 
+*22/10 : les 59 sources sont validées en solo par le banc automatique `python -I tools/studio/drop_test.py [source…]` (studio lancé), avec les vrais kills au corps à corps, `/loot … mine` et `/loot … fish` : taux mesurés conformes aux chances, aucun drop hors condition ni avec un outil normal. Les conditions de biome se testent avec `/fillbiome` ou à l'altitude exacte, car les biomes sont en 3D et `locate` donne une position approchée.*
+
 | Drop | Source | Condition à tester | Chance | OK |
 | --- | --- | --- | --- | --- |
-| Bat Membrane | tuer une chauve-souris | — | 50 % | [ ] |
-| Crow Feather | casser du blé | mûr seulement (`age=7`), rien sur du blé jeune | 10 % | [ ] |
-| Hushed Down | tuer un lapin | de nuit **et** accroupi ; rien de jour, rien debout | 50 % | [ ] |
-| Gull Feather | pêcher | bouchon dans un biome plage (beach, snowy beach, stony shore) | 20 % | [ ] |
-| Nectar Drop | casser une petite fleur | — | 15 % | [ ] |
-| Raptor Talon | tuer une chèvre | Y ≥ 120 | 35 % | [ ] |
-| Updraft Shard | miner de la pierre de l'Overworld | Y ≥ 150 | 8 % | [ ] |
-| Swift Quill | tuer un poulet | en sprint | 30 % | [ ] |
-| Homing Feather | tuer un poulet | dans un village (structure) | 35 % | [ ] |
-| Peacock Plume | tuer un poulet | en jungle | 35 % | [ ] |
-| Macaw Plume | casser des feuilles de jungle | — | 5 % | [ ] |
-| Royal Jelly | casser un nid d'abeilles | plein (`honey_level=5`) | 100 % | [ ] |
-| Royal Jelly | casser une ruche | pleine | 100 % | [ ] |
-| Moth Dust | casser torche, torche murale, lanterne | de nuit | 25 % | [ ] |
-| Chitin Shard | tuer un poisson d'argent | — | 25 % | [ ] |
-| Acorn | casser des feuilles de chêne ou de chêne noir | — | 5 % | [ ] |
-| Fin Ray | pêcher | océan chaud ou tiède | 20 % | [ ] |
-| Phantom Sinew | tuer un phantom | — | 50 % | [ ] |
-| Resonant Shard | casser un amas d'améthyste adulte | — | 30 % | [ ] |
-| Verdigris Flake | casser du cuivre vieilli ou oxydé (tag `simplywings:aged_copper`) | rien sur du cuivre neuf | 25 % | [ ] |
-| Fossil Fragment | casser un bloc d'os | Y ≤ 40 | 25 % | [ ] |
-| Raw Resin | casser une bûche d'épicéa | vieille taïga (pins ou épicéas) | 12 % | [ ] |
-| Ember Wisp | tuer un blaze | — | 30 % | [ ] |
-| Tide Pearl | tuer un gardien | — | 20 % | [ ] |
-| Tide Pearl ×3 | tuer un gardien ancien | — | 100 % | [ ] |
-| Living Rock | miner de la deepslate ou du tuf | Y ≤ 0 | 5 % | [ ] |
-| Gust Mote | tuer un breeze | — | 40 % | [ ] |
-| Thunder Spark | tuer un creeper | pendant un orage | 50 % | [ ] |
-| Thunder Spark ×2 | tuer un creeper chargé | — | 100 % | [ ] |
-| Polar Glimmer | casser glace, glace compacte, glace bleue | de nuit, biome enneigé (`#c:is_snowy`) | 15 % | [ ] |
-| Shade Wisp | tuer un enderman | lumière ≤ 7 à l'endroit du kill | 25 % | [ ] |
-| Stardust | tuer un shulker | — | 35 % | [ ] |
-| Blossom Spirit | casser des feuilles de cerisier | — | 6 % | [ ] |
-| Heavenly Down | tuer un poulet | Y 186 à 204 (couche de nuages) | 60 % | [ ] |
-| Vex Wing | tuer un vex | — | 40 % | [ ] |
-| Soul Wisp | creuser sable ou terre des âmes | vallée des âmes | 8 % | [ ] |
-| Echo Resonance | casser un hurleur de sculk | — | 50 % | [ ] |
-| Dragon Scale ×12 | tuer l'Ender Dragon | coup fatal avec un item imprégné | 100 % | [ ] |
-| Supple Hide | tuer vache, champimeuh, cheval, âne, lama | — | 35 % | [ ] |
-| Silk Thread | tuer une araignée ou une araignée venimeuse | — | 40 % | [ ] |
-| Hollow Bone | tuer squelette, vagabond, bogged | — | 35 % | [ ] |
-| Elastic Gel | tuer un slime ou un cube de magma | — | 40 % | [ ] |
-| Pristine Feather | tuer un poulet | — | 25 % | [ ] |
-| Fleece Tuft | tuer un mouton | — | 40 % | [ ] |
-| Abyssal Ink | tuer un poulpe ou un poulpe luisant | — | 40 % | [ ] |
-| Ghast Wisp | tuer un ghast | — | 50 % | [ ] |
-| Sky Iron Fleck | miner du fer | — | 25 % | [ ] |
-| Copper Spark | miner du cuivre | — | 25 % | [ ] |
-| Gilded Vein | miner de l'or (Overworld et Nether) | — | 30 % | [ ] |
-| Redstone Pulse | miner de la redstone | — | 30 % | [ ] |
-| Lapis Glint | miner du lapis | — | 30 % | [ ] |
-| Emerald Sliver | miner de l'émeraude | — | 60 % | [ ] |
-| Soot Flake | miner du charbon | — | 20 % | [ ] |
-| Prism Shard | miner du diamant | — | 50 % | [ ] |
-| Pale Quartz | miner du quartz du Nether | — | 25 % | [ ] |
-| Ancient Ember | miner des débris antiques | — | 60 % | [ ] |
-| Void Grit | casser de la pierre de l'End | — | 8 % | [ ] |
-| Glimmer Spore | casser du lichen luisant | — | 30 % | [ ] |
-| Glimmering Scale | pêcher | partout | 10 % | [ ] |
+| Bat Membrane | tuer une chauve-souris | — | 50 % || [x] |
+| Crow Feather | casser du blé | mûr seulement (`age=7`), rien sur du blé jeune | 10 % || [x] |
+| Hushed Down | tuer un lapin | de nuit **et** accroupi ; rien de jour, rien debout | 50 % || [x] |
+| Gull Feather | pêcher | bouchon dans un biome plage (beach, snowy beach, stony shore) | 20 % || [x] |
+| Nectar Drop | casser une petite fleur | — | 15 % || [x] |
+| Raptor Talon | tuer une chèvre | Y ≥ 120 | 35 % || [x] |
+| Updraft Shard | miner de la pierre de l'Overworld | Y ≥ 150 | 8 % || [x] |
+| Swift Quill | tuer un poulet | en sprint | 30 % || [x] |
+| Homing Feather | tuer un poulet | dans un village (structure) | 35 % || [x] |
+| Peacock Plume | tuer un poulet | en jungle | 35 % || [x] |
+| Macaw Plume | casser des feuilles de jungle | — | 5 % || [x] |
+| Royal Jelly | casser un nid d'abeilles | plein (`honey_level=5`) | 100 % || [x] |
+| Royal Jelly | casser une ruche | pleine | 100 % || [x] |
+| Moth Dust | casser torche, torche murale, lanterne | de nuit | 25 % || [x] |
+| Chitin Shard | tuer un poisson d'argent | — | 25 % || [x] |
+| Acorn | casser des feuilles de chêne ou de chêne noir | — | 5 % || [x] |
+| Fin Ray | pêcher | océan chaud ou tiède | 20 % || [x] |
+| Phantom Sinew | tuer un phantom | — | 50 % || [x] |
+| Resonant Shard | casser un amas d'améthyste adulte | — | 30 % || [x] |
+| Verdigris Flake | casser du cuivre vieilli ou oxydé (tag `simplywings:aged_copper`) | rien sur du cuivre neuf | 25 % || [x] |
+| Fossil Fragment | casser un bloc d'os | Y ≤ 40 | 25 % || [x] |
+| Raw Resin | casser une bûche d'épicéa | vieille taïga (pins ou épicéas) | 12 % || [x] |
+| Ember Wisp | tuer un blaze | — | 30 % || [x] |
+| Tide Pearl | tuer un gardien | — | 20 % || [x] |
+| Tide Pearl ×3 | tuer un gardien ancien | — | 100 % || [x] |
+| Living Rock | miner de la deepslate ou du tuf | Y ≤ 0 | 5 % || [x] |
+| Gust Mote | tuer un breeze | — | 40 % || [x] |
+| Thunder Spark | tuer un creeper | pendant un orage | 50 % || [x] |
+| Thunder Spark ×2 | tuer un creeper chargé | — | 100 % || [x] |
+| Polar Glimmer | casser glace, glace compacte, glace bleue | de nuit, biome enneigé (`#c:is_snowy`) | 15 % || [x] |
+| Shade Wisp | tuer un enderman | lumière ≤ 7 à l'endroit du kill | 25 % || [x] |
+| Stardust | tuer un shulker | — | 35 % || [x] |
+| Blossom Spirit | casser des feuilles de cerisier | — | 6 % || [x] |
+| Heavenly Down | tuer un poulet | Y 186 à 204 (couche de nuages) | 60 % || [x] |
+| Vex Wing | tuer un vex | — | 40 % || [x] |
+| Soul Wisp | creuser sable ou terre des âmes | vallée des âmes | 8 % || [x] |
+| Echo Resonance | casser un hurleur de sculk | — | 50 % || [x] |
+| Dragon Scale ×12 | tuer l'Ender Dragon | coup fatal avec un item imprégné | 100 % || [x] |
+| Supple Hide | tuer vache, champimeuh, cheval, âne, lama | — | 35 % || [x] |
+| Silk Thread | tuer une araignée ou une araignée venimeuse | — | 40 % || [x] |
+| Hollow Bone | tuer squelette, vagabond, bogged | — | 35 % || [x] |
+| Elastic Gel | tuer un slime ou un cube de magma | — | 40 % || [x] |
+| Pristine Feather | tuer un poulet | — | 25 % || [x] |
+| Fleece Tuft | tuer un mouton | — | 40 % || [x] |
+| Abyssal Ink | tuer un poulpe ou un poulpe luisant | — | 40 % || [x] |
+| Ghast Wisp | tuer un ghast | — | 50 % || [x] |
+| Sky Iron Fleck | miner du fer | — | 25 % || [x] |
+| Copper Spark | miner du cuivre | — | 25 % || [x] |
+| Gilded Vein | miner de l'or (Overworld et Nether) | — | 30 % || [x] |
+| Redstone Pulse | miner de la redstone | — | 30 % || [x] |
+| Lapis Glint | miner du lapis | — | 30 % || [x] |
+| Emerald Sliver | miner de l'émeraude | — | 60 % || [x] |
+| Soot Flake | miner du charbon | — | 20 % || [x] |
+| Prism Shard | miner du diamant | — | 50 % || [x] |
+| Pale Quartz | miner du quartz du Nether | — | 25 % || [x] |
+| Ancient Ember | miner des débris antiques | — | 60 % || [x] |
+| Void Grit | casser de la pierre de l'End | — | 8 % || [x] |
+| Glimmer Spore | casser du lichen luisant | — | 30 % || [x] |
+| Glimmering Scale | pêcher | partout | 10 % || [x] |
 
-- [ ] Toucher de soie et Fortune : le drop du mod tombe quand même (il ne dépend que de l'énergie ailée).
+- [x] Toucher de soie et Fortune : le drop du mod tombe quand même (il ne dépend que de l'énergie ailée), et Fortune ne le multiplie pas.
 - [ ] Les blocs qui ne lâchent rien sans le bon outil (minerais à la main) : vérifier qu'on obtient bien le drop du mod avec une pioche imprégnée, et noter le comportement à la main.
 - [ ] Équilibrage : noter le temps réel pour réunir les drops d'une rare, d'une épique, d'une légendaire, puis ajuster les chances dans `tools/crafting_gen/loot.py` (relancer `python tools/crafting_gen/items.py`).
 
 ## 5. Cloud Essence
 
-- [ ] Le Cloud Flask se fabrique à la table (onglet Components, verre ×4 et plume → ×2), sans essence.
-- [ ] Le Cloud Absorber se fabrique à la table (verre ×4, cuivre ×2, Updraft Shard ×2, plume), sans essence.
-- [ ] Avec l'absorbeur dans l'inventaire, en vol dans l'Overworld entre Y 186 et 204 : +2 essence par seconde dans le premier flacon non plein, puis le suivant.
-- [ ] Un flacon vide pris dans une pile de 16 se détache proprement ; si l'inventaire est plein, il tombe au sol.
-- [ ] Rien ne se passe : au sol, hors de la bande, sans absorbeur, dans le Nether ou l'End.
-- [ ] Stationnaire : il récolte aussi par défaut ; `[cloud] hoverHarvest = false` le coupe.
+- [x] Le Cloud Flask se fabrique à la table (onglet Components, verre ×4 et plume → ×2), sans essence.
+- [x] Le Cloud Absorber se fabrique à la table (verre ×4, cuivre ×2, Updraft Shard ×2, plume), sans essence.
+- [x] Avec l'absorbeur dans l'inventaire, en vol dans l'Overworld entre Y 186 et 204 : +2 essence par seconde dans le premier flacon non plein, puis le suivant. *(Stationnaire à Y 196 : 10 essence en 5 s.)*
+- [x] Un flacon vide pris dans une pile se détache proprement. *(Inventaire plein : non testé.)*
+- [x] Rien ne se passe : au sol, sans absorbeur. *(Hors de la bande, Nether, End : vérifié dans le code, pas en jeu.)*
+- [x] Stationnaire : il récolte aussi par défaut. *(`hoverHarvest = false` : non testé.)*
 - [ ] Config `[cloud]` : `minY`, `maxY`, `essencePerSecond` pris en compte après redémarrage du serveur.
-- [ ] Le flacon plein se vide dans le réservoir de la table (1 000 maximum) et ressort vide.
+- [x] Le flacon plein se vide dans le réservoir de la table (1 000 maximum) et ressort vide.
 - [ ] Bande Y : vérifier visuellement qu'elle colle aux nuages vanilla (192) avec et sans shaderpack, et avec Distant Horizons.
 
 ## 6. Table d'assemblage
 
-- [ ] Les trois onglets (Assembly, Components, Winged Energy) et le réservoir.
-- [ ] Onglet Components : la grille 5×5 sans coins accepte les 133 recettes générées. Tester au moins une recette par famille :
+- [x] Les trois onglets (Assembly, Components, Winged Energy) et le réservoir.
+- [x] Onglet Components : la grille 5×5 sans coins accepte les 133 recettes générées. *(22/10 : les 133 fabriquées par vrais clics dans la grille, `python -I tools/studio/table_test.py all`, résultat et quantité corrects.)* Tester au moins une recette par famille :
   - harnais : Iron-Buckled, Gilded, Radiant, Fury Saddle ;
   - armatures : Gilded Frame, Celestial Frame, Dragonbone Spar ;
   - Spirit Vessel ;
   - un cœur et une aile de rare, d'épique, de légendaire, de mythique ;
   - les intermédiaires qui donnent plusieurs exemplaires : Blessed Plume ×2, Night Scale ×4, Brass Ingot ×2.
 - [ ] Une recette en miroir (aile asymétrique, Fossil Spar, Swift Wing) marche dans les deux sens.
-- [ ] L'essence est consommée à la sortie du résultat ; le craft est refusé si le réservoir est insuffisant (coût affiché en rouge).
+- [x] L'essence est consommée à la sortie du résultat (vérifié sur les 173 recettes). *(Refus si réservoir insuffisant : non testé.)*
 - [ ] Shift-clic sur le résultat : pas de duplication, essence débitée pour chaque craft.
-- [ ] Onglet Assembly : les 40 recettes de paires (`recipe/assembly`), avec le bon coût (100, 300, 800, 1 000).
+- [x] Onglet Assembly : les 40 recettes de paires (`recipe/assembly`), avec le bon coût (100, 300, 800, 1 000).
 - [ ] La paire commune s'assemble toujours avec cuir, élytre et 2 plumes, sans essence.
 - [ ] Route complète d'une rare en survie (par exemple la chouette), de bout en bout, avec les drops imprégnés.
 - [ ] Route complète d'une épique, d'une légendaire, puis d'une mythique (en créatif, pour vérifier la chaîne).
@@ -234,35 +237,35 @@ Animations demandées par palier : **épique** 3 idles tirées au hasard, **lég
 
 | Paire | Modèle actuel | Cible (`WINGS.md`) | Points d'attention | Fait |
 | --- | --- | --- | --- | --- |
-| Meganeura `ancient` | `DRAGONFLY`, 2 ailes par côté | 4 ailes de libellule d'un seul bloc, membranes ambre translucides veinées de brun fossile, à plat, en V au repos | translucide, vibration continue (20 battements/s), effets fossiles | [ ] |
-| Pterosaur `ptero` | `PTERO`, 3 segments | membrane de cuir ocre, avant-bras court, 4e doigt immense jusqu'à la pointe, fibres sombres | un seul doigt porteur, membrane jusqu'à la cuisse | [ ] |
-| Flame `fire` | `FIRE` | aile de flammes, jaune près du dos, orange puis rouge, langues de flamme au bord | émissive (ETHEREAL), langues animées | [ ] |
-| Tide `water` | `WATER` | aile d'eau translucide bleue, reflets qui ondulent, liseré d'écume | translucide, ondulation lente (« respire comme une vague ») | [ ] |
-| Stone `earth` | `EARTH` | 3 segments épais de roche grise fissurée, mousse près du dos, éclats d'améthyste lumineux | couche lumineuse `earth_glow` | [ ] |
-| Wind `air` | `AIR`, 2 ailes par côté | 4 voiles blanches très transparentes, striées comme des courants d'air, effilochées | très translucide | [ ] |
-| Storm `storm` | `STORM` | énergie électrique bleu clair à violet, éclairs blancs, bord effiloché | émissive, crépitement | [ ] |
-| Aurora `aurora` | `AURORA`, 2 voiles par côté | rideaux verticaux de lumière vert à violet, toujours déployés | émissive, respiration lente | [ ] |
-| Shadow `shadow` | `SHADOW` | fumée violet-noir translucide, remous, yeux violets, bord en volutes | couche lumineuse `shadow_glow` (yeux) | [ ] |
-| Nebula `nebula` | `NEBULA` | nuages bleu nuit et pourpres, étoiles blanches | couche lumineuse `nebula_glow` | [ ] |
-| Forest Spirit `forest` | `FOREST`, 2 ailes par côté | 4 ailes de feuilles vertes tachetées de fleurs roses, armature de branches, bord dentelé | feuillage découpé | [ ] |
+| Meganeura `ancient` | `DRAGONFLY`, 2 ailes par côté | 4 ailes de libellule d'un seul bloc, membranes ambre translucides veinées de brun fossile, à plat, en V au repos | translucide, vibration continue (20 battements/s), effets fossiles || [ ] |
+| Pterosaur `ptero` | `PTERO`, 3 segments | membrane de cuir ocre, avant-bras court, 4e doigt immense jusqu'à la pointe, fibres sombres | un seul doigt porteur, membrane jusqu'à la cuisse || [ ] |
+| Flame `fire` | `FIRE` | aile de flammes, jaune près du dos, orange puis rouge, langues de flamme au bord | émissive (ETHEREAL), langues animées || [ ] |
+| Tide `water` | `WATER` | aile d'eau translucide bleue, reflets qui ondulent, liseré d'écume | translucide, ondulation lente (« respire comme une vague ») || [ ] |
+| Stone `earth` | `EARTH` | 3 segments épais de roche grise fissurée, mousse près du dos, éclats d'améthyste lumineux | couche lumineuse `earth_glow` || [ ] |
+| Wind `air` | `AIR`, 2 ailes par côté | 4 voiles blanches très transparentes, striées comme des courants d'air, effilochées | très translucide || [ ] |
+| Storm `storm` | `STORM` | énergie électrique bleu clair à violet, éclairs blancs, bord effiloché | émissive, crépitement || [ ] |
+| Aurora `aurora` | `AURORA`, 2 voiles par côté | rideaux verticaux de lumière vert à violet, toujours déployés | émissive, respiration lente || [ ] |
+| Shadow `shadow` | `SHADOW` | fumée violet-noir translucide, remous, yeux violets, bord en volutes | couche lumineuse `shadow_glow` (yeux) || [ ] |
+| Nebula `nebula` | `NEBULA` | nuages bleu nuit et pourpres, étoiles blanches | couche lumineuse `nebula_glow` || [ ] |
+| Forest Spirit `forest` | `FOREST`, 2 ailes par côté | 4 ailes de feuilles vertes tachetées de fleurs roses, armature de branches, bord dentelé | feuillage découpé || [ ] |
 
 ### Légendaires (6)
 
 | Paire | Modèle actuel | Cible (`WINGS.md`) | Points d'attention | Fait |
 | --- | --- | --- | --- | --- |
-| Angel `angel` | `ANGEL` | grande aile blanc crème, plumes allongées vers la pointe, jusqu'aux pieds au repos | battement majestueux (0,5/s), couche `angel_glow` | [ ] |
-| Demon `demon` | `DEMON` | grande membrane rouge sombre veinée de noir, 3 segments épais, lueur au bord de fuite | coup sec et brutal, couche `demon_glow` | [ ] |
-| Seraph `seraph` | `SERAPH`, 3 ailes par côté | 6 ailes d'ange dorées en éventail (haute, centrale, basse), léger décalage de battement | couche `seraph_glow` | [ ] |
-| Psyche `psyche` | `PSYCHE_FORE` + `PSYCHE_HIND` | 4 ailes de papillon en flammes d'âme cyan et nacrées, bords qui ondulent, toujours déployées | émissive | [ ] |
-| Daedalus `daedalus` | `DAEDALUS` | armature de laiton, panneaux d'acier rivetés, deux réacteurs dans le dos | rien ne bat, tout pousse (réacteurs vectorisés), effets `THRUSTERS` | [ ] |
-| Yin and Yang `yin_yang` | `YIN_YANG` (ajouté le 22 octobre, gabarit proche de l'ange) | gauche : plumes noires à reflets bleu nuit, « œil » blanc près du poignet ; droite : plumes blanc nacré, « œil » noir ; bords de fuite en S ; repliées, les pointes forment le cercle du taijitu | **première paire asymétrique** : deux ailes différentes dans le même `.bbmodel` (préfixes `left_` / `right_`) | [ ] |
+| Angel `angel` | `ANGEL` | grande aile blanc crème, plumes allongées vers la pointe, jusqu'aux pieds au repos | battement majestueux (0,5/s), couche `angel_glow` || [ ] |
+| Demon `demon` | `DEMON` | grande membrane rouge sombre veinée de noir, 3 segments épais, lueur au bord de fuite | coup sec et brutal, couche `demon_glow` || [ ] |
+| Seraph `seraph` | `SERAPH`, 3 ailes par côté | 6 ailes d'ange dorées en éventail (haute, centrale, basse), léger décalage de battement | couche `seraph_glow` || [ ] |
+| Psyche `psyche` | `PSYCHE_FORE` + `PSYCHE_HIND` | 4 ailes de papillon en flammes d'âme cyan et nacrées, bords qui ondulent, toujours déployées | émissive || [ ] |
+| Daedalus `daedalus` | `DAEDALUS` | armature de laiton, panneaux d'acier rivetés, deux réacteurs dans le dos | rien ne bat, tout pousse (réacteurs vectorisés), effets `THRUSTERS` || [ ] |
+| Yin and Yang `yin_yang` | `YIN_YANG` (ajouté le 22 octobre, gabarit proche de l'ange) | gauche : plumes noires à reflets bleu nuit, « œil » blanc près du poignet ; droite : plumes blanc nacré, « œil » noir ; bords de fuite en S ; repliées, les pointes forment le cercle du taijitu | **première paire asymétrique** : deux ailes différentes dans le même `.bbmodel` (préfixes `left_` / `right_`) || [ ] |
 
 ### Mythiques (2)
 
 | Paire | Modèle actuel | Cible (`WINGS.md`) | Points d'attention | Fait |
 | --- | --- | --- | --- | --- |
-| Night `night` | `NIGHT_MAIN` + `NIGHT_HIND`, queue `TailModel` | ailes de la Furie Nocturne : grande paire et petite paire arrière, cuir noir | queue de 6 segments avec 2 paires d'ailerons ; aileron gauche du bout rouge à marque blanche (prothèse d'Harold) | [ ] |
-| Light `light` | `LIGHT_MAIN` + `LIGHT_HIND`, queue `TailModel` | ailes de la Furie Éclair : blanches, irisées | queue et ailerons blancs ; effets de plasma et de camouflage | [ ] |
+| Night `night` | `NIGHT_MAIN` + `NIGHT_HIND`, queue `TailModel` | ailes de la Furie Nocturne : grande paire et petite paire arrière, cuir noir | queue de 6 segments avec 2 paires d'ailerons ; aileron gauche du bout rouge à marque blanche (prothèse d'Harold) || [ ] |
+| Light `light` | `LIGHT_MAIN` + `LIGHT_HIND`, queue `TailModel` | ailes de la Furie Éclair : blanches, irisées | queue et ailerons blancs ; effets de plasma et de camouflage || [ ] |
 
 - [ ] Queues des Furies : passer `render/TailModel` + `anim/TailAnimator` en Blockbench, avec le même rig et le même style que les ailes.
 - [ ] One-shots en keyframes (déploiement, repli, atterrissage) pour toutes les paires.

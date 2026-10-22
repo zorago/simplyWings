@@ -40,11 +40,27 @@ def locate(kind, what, dim=None):
 CENTER = ["minecraft:overworld", 0, 140, 0]
 
 
+def surface(x, z, dim="minecraft:overworld"):
+    lines = send(f"cmd execute in {dim} run forceload add {x - 16} {z - 16} {x + 16} {z + 16}", "wait 60",
+                 f"cmd execute in {dim} positioned {x} 0 {z} positioned over motion_blocking_no_leaves run tp @s ~ ~ ~ 0 0",
+                 "wait 10", "status")
+    for line in lines:
+        m = re.search(r"status pos=(-?[\d.]+),(-?[\d.]+),(-?[\d.]+)", line)
+        if m:
+            return int(float(m.group(2)))
+    raise RuntimeError(f"surface {x} {z} failed: {lines}")
+
+
+def biome_ok(x, y, z, biome):
+    lines = send(f"cmd execute if biome {x} {y} {z} {biome}", "wait 10")
+    return any("Test passed" in l for l in lines)
+
+
 def arena(x, y, z, dim="minecraft:overworld"):
     CENTER[:] = [dim, x, y, z]
     send(f"cmd execute in {dim} run forceload add {x - 16} {z - 16} {x + 16} {z + 16}", "wait 10",
-         f"cmd execute in {dim} run fill {x - 4} {y - 1} {z - 4} {x + 4} {y - 1} {z + 4} minecraft:glass",
-         f"cmd execute in {dim} run fill {x - 4} {y} {z - 4} {x + 4} {y + 4} {z + 4} minecraft:air",
+         f"cmd execute in {dim} run fill {x - 9} {y - 1} {z - 9} {x + 9} {y - 1} {z + 9} minecraft:glass",
+         f"cmd execute in {dim} run fill {x - 9} {y} {z - 9} {x + 9} {y + 5} {z + 9} minecraft:air",
          f"cmd execute in {dim} run tp @s {x} {y} {z} 0 0", "wait 20")
 
 
@@ -137,7 +153,7 @@ def main(only):
         check(name + " (plain sword)", item, mob_trials(entity, 8, False, nbt), 8, chance, expect=False)
 
     if want("tide_pearl_elder"):
-        check("tide_pearl_elder", "simplywings:tide_pearl", mob_trials("minecraft:elder_guardian", 3, True), 3, 1, per=3)
+        check("tide_pearl_elder", "simplywings:tide_pearl", mob_trials("minecraft:elder_guardian", 8, True), 8, 1, per=3)
     if want("thunder_spark"):
         send("cmd weather clear")
         check("thunder_spark (clear)", "simplywings:thunder_spark", mob_trials("minecraft:creeper", 10, True), 10, 0.5, expect=False)
@@ -176,14 +192,14 @@ def main(only):
         arena(*sky)
     if want("peacock_plume"):
         x, y, z = locate("biome", "#minecraft:is_jungle")
-        arena(x, 80, z)
+        arena(x, surface(x, z) + 1, z)
+        print("jungle biome at arena:", biome_ok(x, CENTER[2], z, "#minecraft:is_jungle"))
         check("peacock_plume (jungle)", "simplywings:peacock_plume", mob_trials("minecraft:chicken", N, True), N, 0.35)
         arena(*sky)
         check("peacock_plume (elsewhere)", "simplywings:peacock_plume", mob_trials("minecraft:chicken", 10, True), 10, 0.35, expect=False)
     if want("homing_feather"):
         x, _, z = locate("structure", "#minecraft:village")
-        send(f"cmd forceload add {x - 32} {z - 32} {x + 32} {z + 32}", "wait 40",
-             f"cmd execute positioned {x} 0 {z} positioned over motion_blocking_no_leaves run tp @s ~ ~1 ~ 0 0", "wait 20")
+        arena(x, surface(x, z) + 1, z)
         check("homing_feather (village)", "simplywings:homing_feather", mob_trials("minecraft:chicken", N, True), N, 0.35)
         arena(*sky)
         check("homing_feather (elsewhere)", "simplywings:homing_feather", mob_trials("minecraft:chicken", 10, True), 10, 0.35, expect=False)
@@ -246,13 +262,15 @@ def main(only):
         check("raw_resin (old growth)", "simplywings:raw_resin", block_trials("minecraft:spruce_log", 150, True, (x, 80, z)), 150, 0.12)
         check("raw_resin (elsewhere)", "simplywings:raw_resin", block_trials("minecraft:spruce_log", 40, True, B), 40, 0.12, expect=False)
     if want("polar_glimmer"):
-        x, y, z = locate("biome", "minecraft:snowy_plains")
-        send(f"cmd forceload add {x} {z}", "wait 80")
+        x, y, z = 40, 140, 40
+        send(f"cmd forceload add {x - 8} {z - 8} {x + 8} {z + 8}", "wait 20",
+             f"cmd fillbiome {x - 4} {y - 4} {z - 4} {x + 4} {y + 4} {z + 4} minecraft:snowy_plains", "wait 5")
+        print("snowy biome at test pos:", biome_ok(x, y, z, "#c:is_snowy"))
         send("cmd time set 18000")
-        check("polar_glimmer (night snowy)", "simplywings:polar_glimmer", block_trials("minecraft:ice", NB, True, (x, 80, z)), NB, 0.15)
+        check("polar_glimmer (night snowy)", "simplywings:polar_glimmer", block_trials("minecraft:ice", NB, True, (x, y, z)), NB, 0.15)
         check("polar_glimmer (night elsewhere)", "simplywings:polar_glimmer", block_trials("minecraft:ice", 20, True, B), 20, 0.15, expect=False)
         send("cmd time set 6000")
-        check("polar_glimmer (day snowy)", "simplywings:polar_glimmer", block_trials("minecraft:ice", 20, True, (x, 80, z)), 20, 0.15, expect=False)
+        check("polar_glimmer (day snowy)", "simplywings:polar_glimmer", block_trials("minecraft:ice", 20, True, (x, y, z)), 20, 0.15, expect=False)
     if want("soul_wisp"):
         x, y, z = locate("biome", "minecraft:soul_sand_valley", "minecraft:the_nether")
         send(f"cmd execute in minecraft:the_nether run forceload add {x} {z}", "wait 20")
