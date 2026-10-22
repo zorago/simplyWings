@@ -3,7 +3,7 @@
 Collectible magic wings for Minecraft **1.21.1** on **NeoForge**. Wings are made only for flight: a stabilized hover for building, and a keyboard-steered travel flight with wing beats, dives, stalls and stamina. Every pair has its own identity and stats, and the collection rewards exploring the whole vanilla game.
 
 - Mod id: `simplywings` · Version: `0.1.0` (pre-release) · NeoForge `21.1.257` · License: All Rights Reserved
-- Standalone: no dependency besides NeoForge. JEI support will be optional.
+- Standalone: no dependency besides NeoForge. JEI support is optional (a JEI plugin, also read by EMI).
 - Built for the *PleasePlayWithMe* modpack (195 mods: Iris, Sodium, Distant Horizons, Create Aeronautics + Sable, YUNG's Better End Island…), with **zero mixins and zero access transformers** to avoid conflicts.
 - Developed largely with AI assistance (code, textures, animations).
 
@@ -16,14 +16,14 @@ Collectible magic wings for Minecraft **1.21.1** on **NeoForge**. Wings are made
 | Flight physics (hover, travel, dive, stall, crash, stamina, rescue jumps) | Done |
 | Camera (detached orbit, "left behind" and "into the head" transitions) and mouse decoupling | Done |
 | Wing rendering and procedural animation, remote players, particles | Done, art is placeholder (see TODO) |
-| 40 wing pairs with stats, collection bonuses and identity parameters (datapack JSON) | Done |
+| 41 wing pairs with stats, collection bonuses and identity parameters (datapack JSON) | Done |
 | Mythic wings Night and Light: tail, dive shriek, charged dash with invisibility, set bonuses | Done |
 | Transmog (Light bonus) with the "Equip appearance" button | Done |
 | Wings menu (J), inventory button, stamina HUD | First version |
-| Assembly Table, Cloud Essence, components, crafting routes | Designed, not implemented |
-| Winged energy, mob and block drops | Designed, not implemented |
-| End forge structure and forge compass | Designed, not implemented |
-| JEI integration | Designed, not implemented |
+| Assembly Table, Cloud Essence (flask, absorber, cloud harvest), 188 components, 173 route recipes | Done, to play-test |
+| Winged energy, mob, block and fishing drops (59 sources) | Done, to play-test |
+| End forge structure and forge compass | Done, to play-test |
+| JEI integration | Done, to play-test |
 
 ## Gameplay
 
@@ -146,13 +146,15 @@ Written in French.
 ### Gameplay
 - [ ] Assembly Table: block, block entity, menu, the two tabs, the Cloud Essence tank, the two recipe types.
 - [x] Cloud Essence: Cloud Flask and Cloud Absorber items, server-side harvest in the cloud layer (config `[cloud]`; values to tune in game).
-- [ ] Winged energy data component, `simplywings:loot_source` registry, Global Loot Modifiers and the custom loot condition.
+- [x] Winged energy data component, `simplywings:loot_source` registry (59 sources) and the winged drops Global Loot Modifier.
+- [x] End Wing Forge: placed on the second dragon death, repaired on every later death, Forge Compass given to the central island.
+- [x] Optional JEI plugin: assembly, 5x5 components, winged energy and winged drops categories, recipe transfer, info pages (EMI reads JEI plugins).
+- [ ] Play-test everything listed in `ToDoTesting.md`.
 - [x] Component items (harnesses, cores, wings, 56 imbued drops, intermediates), textures, and lore plus riddle tooltips.
 - [x] Crafting routes of the 40 non-common pairs (`crafting/`), generated as recipe JSON.
 - [x] Mythic recipes for Night and Light.
-- [ ] Forge Compass: given on dragon death once the End forge exists (the item and its needle are ready).
 - [ ] Remove `/simplywings unlock` from normal play once wings can be crafted (keep it for operators).
-- [ ] Open questions in the specification: ranged kills with an imbued bow or trident, name of the block essences.
+- [ ] Open question in the specification: name of the block drops category.
 
 ### Structure
 - [ ] Wing Forge NBT template: platform, Assembly Table, supply barrels.
@@ -164,7 +166,7 @@ Written in French.
 ### Interface
 - [ ] Tutorial panels of the Wings screen (flight modes, keys, stamina, collection and stats).
 - [ ] Final layout of the Wings screen, check the inventory button against the other mods' buttons.
-- [ ] JEI plugin: assembly, components, winged energy, mob drops, block drops, info pages.
+- [x] JEI plugin: assembly, components, winged energy, winged drops, info pages.
 
 ### Art overhaul
 - [x] **Tooling**: Blockbench with its MCP plugin and a live builder (`tools/blockbench/wing_builder.js`), plus the in-game studio (`tools/studio`) that poses the wings and captures review sheets.

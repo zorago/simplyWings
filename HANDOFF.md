@@ -61,6 +61,8 @@ Pour chaque mod : la technique retenue, ce qu'on fera différemment et pourquoi.
 
 ## Prochaine session
 
+**Session de test du 22 octobre au soir** : suivre `ToDoTesting.md` dans l'ordre (chargement, items, drops imprégnés, Cloud Essence, table, forge, JEI, Yin et Yang), puis les correctifs ci-dessous.
+
 Ordre fixé par zorago (21/10/2026) : **1. correctifs ci-dessous** (rares + commune) → **2. épiques** → **3. légendaires** → **4. mythiques** → **5. gameplay** réfléchi et bien intégré à Minecraft, avec des lignes de craft de plus en plus complexes en montant les paliers.
 
 Avant tout, quand zorago laisse le PC : passe studio sur les 21 rares (`tools/studio/start.sh`, puis `python -I tools/studio/review.py <modèle>`), jamais pendant qu'il joue (le studio partage le GPU avec son jeu).
