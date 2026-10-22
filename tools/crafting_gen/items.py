@@ -11,6 +11,7 @@ from art import GEMS, ITEMS, METALS, palette, px_js, ramp
 from data import C, D, V
 from lore import CRAFT_LORE, DROP_LORE, EXTRA, PAIR_LORE
 from pairs import PAIRS
+import loot
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
@@ -269,6 +270,9 @@ def main():
     write_models([f"{p['id']}_wings" for p in PAIRS if not (ASSETS / f"models/item/{p['id']}_wings.json").exists()])
     write_recipes(crafts)
     write_java(drops, crafts)
+    unsourced = loot.write(drops)
+    if unsourced:
+        print("drops without loot source:", unsourced)
     missing = textures(drops, crafts)
     print(f"{len(drops)} drops, {len(crafts)} crafted, missing textures: {missing}")
 

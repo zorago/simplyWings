@@ -1,0 +1,21 @@
+{
+  "kind": "mob",
+  "item": "simplywings:shade_wisp",
+  "chance": 0.25,
+  "targets": [
+    "minecraft:enderman"
+  ],
+  "conditions": [
+    {
+      "condition": "minecraft:location_check",
+      "predicate": {
+        "light": {
+          "light": {
+            "max": 7
+          }
+        }
+      }
+    }
+  ],
+  "note": "loot.simplywings.shade_wisp"
+}

@@ -1,0 +1,20 @@
+{
+  "kind": "block",
+  "item": "simplywings:raw_resin",
+  "chance": 0.12,
+  "targets": [
+    "minecraft:spruce_log"
+  ],
+  "conditions": [
+    {
+      "condition": "minecraft:location_check",
+      "predicate": {
+        "biomes": [
+          "minecraft:old_growth_pine_taiga",
+          "minecraft:old_growth_spruce_taiga"
+        ]
+      }
+    }
+  ],
+  "note": "loot.simplywings.raw_resin"
+}

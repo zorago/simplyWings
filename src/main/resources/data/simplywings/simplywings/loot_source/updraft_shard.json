@@ -1,0 +1,21 @@
+{
+  "kind": "block",
+  "item": "simplywings:updraft_shard",
+  "chance": 0.08,
+  "targets": [
+    "#minecraft:base_stone_overworld"
+  ],
+  "conditions": [
+    {
+      "condition": "minecraft:location_check",
+      "predicate": {
+        "position": {
+          "y": {
+            "min": 150
+          }
+        }
+      }
+    }
+  ],
+  "note": "loot.simplywings.updraft_shard"
+}

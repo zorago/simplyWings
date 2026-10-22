@@ -1,0 +1,17 @@
+{
+  "kind": "mob",
+  "item": "simplywings:peacock_plume",
+  "chance": 0.35,
+  "targets": [
+    "minecraft:chicken"
+  ],
+  "conditions": [
+    {
+      "condition": "minecraft:location_check",
+      "predicate": {
+        "biomes": "#minecraft:is_jungle"
+      }
+    }
+  ],
+  "note": "loot.simplywings.peacock_plume"
+}

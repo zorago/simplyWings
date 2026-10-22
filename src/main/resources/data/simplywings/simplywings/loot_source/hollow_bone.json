@@ -1,0 +1,10 @@
+{
+  "kind": "mob",
+  "item": "simplywings:hollow_bone",
+  "chance": 0.35,
+  "targets": [
+    "minecraft:skeleton",
+    "minecraft:stray",
+    "minecraft:bogged"
+  ]
+}

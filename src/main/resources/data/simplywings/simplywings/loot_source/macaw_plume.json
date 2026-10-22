@@ -1,0 +1,8 @@
+{
+  "kind": "block",
+  "item": "simplywings:macaw_plume",
+  "chance": 0.05,
+  "targets": [
+    "minecraft:jungle_leaves"
+  ]
+}

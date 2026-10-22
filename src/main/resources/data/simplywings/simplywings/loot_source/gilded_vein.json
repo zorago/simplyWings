@@ -1,0 +1,8 @@
+{
+  "kind": "block",
+  "item": "simplywings:gilded_vein",
+  "chance": 0.3,
+  "targets": [
+    "#minecraft:gold_ores"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "kind": "block",
+  "item": "simplywings:copper_spark",
+  "chance": 0.25,
+  "targets": [
+    "#minecraft:copper_ores"
+  ]
+}

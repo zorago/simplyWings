@@ -1,0 +1,21 @@
+{
+  "kind": "block",
+  "item": "simplywings:fossil_fragment",
+  "chance": 0.25,
+  "targets": [
+    "minecraft:bone_block"
+  ],
+  "conditions": [
+    {
+      "condition": "minecraft:location_check",
+      "predicate": {
+        "position": {
+          "y": {
+            "max": 40
+          }
+        }
+      }
+    }
+  ],
+  "note": "loot.simplywings.fossil_fragment"
+}

@@ -8,6 +8,8 @@ import com.mojang.brigadier.exceptions.DynamicCommandExceptionType;
 import com.mojang.brigadier.suggestion.SuggestionProvider;
 import com.zorago.simplywings.data.WingRegistries;
 import com.zorago.simplywings.flight.ServerFlight;
+import com.zorago.simplywings.item.WingedEnergy;
+import com.zorago.simplywings.structure.WingForge;
 import com.zorago.simplywings.player.ModAttachments;
 import java.util.Optional;
 import net.minecraft.commands.CommandSourceStack;
@@ -16,7 +18,11 @@ import net.minecraft.commands.SharedSuggestionProvider;
 import net.minecraft.commands.arguments.ResourceLocationArgument;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 
 public final class WingsCommand {
@@ -43,7 +49,9 @@ public final class WingsCommand {
                         .then(Commands.argument("value", FloatArgumentType.floatArg(0))
                                 .executes(WingsCommand::stamina)))
                 .then(Commands.literal("reset").executes(WingsCommand::reset))
-                .then(Commands.literal("info").executes(WingsCommand::info)));
+                .then(Commands.literal("info").executes(WingsCommand::info))
+                .then(Commands.literal("forge").executes(WingsCommand::forge))
+                .then(Commands.literal("energy").executes(WingsCommand::energy)));
     }
 
     private static ResourceLocation wing(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
@@ -96,6 +104,33 @@ public final class WingsCommand {
     private static int reset(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
         ServerFlight.clear(ctx.getSource().getPlayerOrException());
         ctx.getSource().sendSuccess(() -> Component.translatable("commands.simplywings.reset"), false);
+        return 1;
+    }
+
+    private static int forge(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
+        ServerPlayer player = ctx.getSource().getPlayerOrException();
+        ServerLevel end = ctx.getSource().getServer().getLevel(Level.END);
+        BlockPos center = end == null ? null : WingForge.place(end);
+        if (center == null) {
+            ctx.getSource().sendFailure(Component.translatable("commands.simplywings.forge_failed"));
+            return 0;
+        }
+        WingForge.give(player, end, center);
+        ctx.getSource().sendSuccess(() -> Component.translatable("commands.simplywings.forge", center.toShortString()), true);
+        return 1;
+    }
+
+    private static int energy(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
+        ServerPlayer player = ctx.getSource().getPlayerOrException();
+        ItemStack stack = player.getMainHandItem();
+        if (stack.isEmpty()) {
+            ctx.getSource().sendFailure(Component.translatable("commands.simplywings.no_item"));
+            return 0;
+        }
+        WingedEnergy.toggle(stack);
+        boolean on = WingedEnergy.has(stack);
+        ctx.getSource().sendSuccess(() -> Component.translatable(on ? "commands.simplywings.energy_on" : "commands.simplywings.energy_off",
+                stack.getHoverName()), false);
         return 1;
     }
 

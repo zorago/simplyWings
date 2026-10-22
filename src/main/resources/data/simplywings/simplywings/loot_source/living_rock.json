@@ -1,0 +1,22 @@
+{
+  "kind": "block",
+  "item": "simplywings:living_rock",
+  "chance": 0.05,
+  "targets": [
+    "minecraft:deepslate",
+    "minecraft:tuff"
+  ],
+  "conditions": [
+    {
+      "condition": "minecraft:location_check",
+      "predicate": {
+        "position": {
+          "y": {
+            "max": 0
+          }
+        }
+      }
+    }
+  ],
+  "note": "loot.simplywings.living_rock"
+}

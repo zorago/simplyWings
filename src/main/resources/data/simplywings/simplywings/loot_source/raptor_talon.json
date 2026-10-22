@@ -1,0 +1,21 @@
+{
+  "kind": "mob",
+  "item": "simplywings:raptor_talon",
+  "chance": 0.35,
+  "targets": [
+    "minecraft:goat"
+  ],
+  "conditions": [
+    {
+      "condition": "minecraft:location_check",
+      "predicate": {
+        "position": {
+          "y": {
+            "min": 120
+          }
+        }
+      }
+    }
+  ],
+  "note": "loot.simplywings.raptor_talon"
+}

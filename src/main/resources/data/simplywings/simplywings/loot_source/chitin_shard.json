@@ -1,0 +1,8 @@
+{
+  "kind": "mob",
+  "item": "simplywings:chitin_shard",
+  "chance": 0.25,
+  "targets": [
+    "minecraft:silverfish"
+  ]
+}

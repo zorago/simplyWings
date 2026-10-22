@@ -1,0 +1,8 @@
+{
+  "kind": "mob",
+  "item": "simplywings:bat_membrane",
+  "chance": 0.5,
+  "targets": [
+    "minecraft:bat"
+  ]
+}

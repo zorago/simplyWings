@@ -1,0 +1,8 @@
+{
+  "kind": "mob",
+  "item": "simplywings:stardust",
+  "chance": 0.35,
+  "targets": [
+    "minecraft:shulker"
+  ]
+}

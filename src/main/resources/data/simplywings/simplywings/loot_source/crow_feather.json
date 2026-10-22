@@ -1,0 +1,18 @@
+{
+  "kind": "block",
+  "item": "simplywings:crow_feather",
+  "chance": 0.1,
+  "targets": [
+    "minecraft:wheat"
+  ],
+  "conditions": [
+    {
+      "condition": "minecraft:block_state_property",
+      "block": "minecraft:wheat",
+      "properties": {
+        "age": "7"
+      }
+    }
+  ],
+  "note": "loot.simplywings.crow_feather"
+}

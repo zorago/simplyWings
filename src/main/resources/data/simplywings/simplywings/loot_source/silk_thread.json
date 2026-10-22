@@ -1,0 +1,9 @@
+{
+  "kind": "mob",
+  "item": "simplywings:silk_thread",
+  "chance": 0.4,
+  "targets": [
+    "minecraft:spider",
+    "minecraft:cave_spider"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "kind": "block",
+  "item": "simplywings:verdigris_flake",
+  "chance": 0.25,
+  "targets": [
+    "#simplywings:aged_copper"
+  ],
+  "note": "loot.simplywings.verdigris_flake"
+}

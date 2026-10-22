@@ -1,0 +1,12 @@
+{
+  "kind": "mob",
+  "item": "simplywings:supple_hide",
+  "chance": 0.35,
+  "targets": [
+    "minecraft:cow",
+    "minecraft:mooshroom",
+    "minecraft:horse",
+    "minecraft:donkey",
+    "minecraft:llama"
+  ]
+}

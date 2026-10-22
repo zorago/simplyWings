@@ -37,6 +37,9 @@ public final class ServerConfig {
     public static final ModConfigSpec.DoubleValue CLOUD_MAX_Y;
     public static final ModConfigSpec.IntValue CLOUD_ESSENCE_PER_SECOND;
     public static final ModConfigSpec.BooleanValue CLOUD_HOVER_HARVEST;
+    public static final ModConfigSpec.IntValue FORGE_RADIUS;
+    public static final ModConfigSpec.IntValue FORGE_Y;
+    public static final ModConfigSpec.DoubleValue FORGE_ISLAND_RADIUS;
     public static final ModConfigSpec.IntValue RESCUE_JUMPS;
     public static final ModConfigSpec.DoubleValue AIR_JUMP_COST;
 
@@ -141,6 +144,15 @@ public final class ServerConfig {
                 .defineInRange("essencePerSecond", 2, 0, 100);
         CLOUD_HOVER_HARVEST = b.comment("Whether hovering (stabilized mode) also harvests, not only travel flight.")
                 .define("hoverHarvest", true);
+        b.pop();
+
+        b.push("forge");
+        FORGE_RADIUS = b.comment("Horizontal distance from (0, 0) where the Wing Forge appears in the End, in blocks. Read once, at the first placement.")
+                .defineInRange("radius", 512, 64, 100000);
+        FORGE_Y = b.comment("Height of the Wing Forge platform in the End. Read once, at the first placement.")
+                .defineInRange("y", 80, 0, 250);
+        FORGE_ISLAND_RADIUS = b.comment("Players within this horizontal distance of (0, 0) receive a Forge Compass when the forge appears or is repaired.")
+                .defineInRange("islandRadius", 192.0, 0.0, 10000.0);
         b.pop();
 
         b.push("damage");

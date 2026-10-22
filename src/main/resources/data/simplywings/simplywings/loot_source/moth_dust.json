@@ -1,0 +1,21 @@
+{
+  "kind": "block",
+  "item": "simplywings:moth_dust",
+  "chance": 0.25,
+  "targets": [
+    "minecraft:torch",
+    "minecraft:wall_torch",
+    "minecraft:lantern"
+  ],
+  "conditions": [
+    {
+      "condition": "minecraft:time_check",
+      "value": {
+        "min": 13000,
+        "max": 23000
+      },
+      "period": 24000
+    }
+  ],
+  "note": "loot.simplywings.moth_dust"
+}

@@ -1,0 +1,28 @@
+{
+  "kind": "mob",
+  "item": "simplywings:hushed_down",
+  "chance": 0.5,
+  "targets": [
+    "minecraft:rabbit"
+  ],
+  "conditions": [
+    {
+      "condition": "minecraft:time_check",
+      "value": {
+        "min": 13000,
+        "max": 23000
+      },
+      "period": 24000
+    },
+    {
+      "condition": "minecraft:entity_properties",
+      "entity": "attacker",
+      "predicate": {
+        "flags": {
+          "is_sneaking": true
+        }
+      }
+    }
+  ],
+  "note": "loot.simplywings.hushed_down"
+}

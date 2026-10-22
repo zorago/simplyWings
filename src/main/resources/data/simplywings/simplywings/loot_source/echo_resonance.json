@@ -1,0 +1,8 @@
+{
+  "kind": "block",
+  "item": "simplywings:echo_resonance",
+  "chance": 0.5,
+  "targets": [
+    "minecraft:sculk_shrieker"
+  ]
+}

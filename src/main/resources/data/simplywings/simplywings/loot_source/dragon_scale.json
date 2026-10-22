@@ -1,0 +1,10 @@
+{
+  "kind": "mob",
+  "item": "simplywings:dragon_scale",
+  "chance": 1.0,
+  "targets": [
+    "minecraft:ender_dragon"
+  ],
+  "min": 12,
+  "max": 12
+}

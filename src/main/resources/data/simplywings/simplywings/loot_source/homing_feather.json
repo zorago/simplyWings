@@ -1,0 +1,17 @@
+{
+  "kind": "mob",
+  "item": "simplywings:homing_feather",
+  "chance": 0.35,
+  "targets": [
+    "minecraft:chicken"
+  ],
+  "conditions": [
+    {
+      "condition": "minecraft:location_check",
+      "predicate": {
+        "structures": "#minecraft:village"
+      }
+    }
+  ],
+  "note": "loot.simplywings.homing_feather"
+}

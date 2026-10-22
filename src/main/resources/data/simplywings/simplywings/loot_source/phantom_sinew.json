@@ -1,0 +1,8 @@
+{
+  "kind": "mob",
+  "item": "simplywings:phantom_sinew",
+  "chance": 0.5,
+  "targets": [
+    "minecraft:phantom"
+  ]
+}

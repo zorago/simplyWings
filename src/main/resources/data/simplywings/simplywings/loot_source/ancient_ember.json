@@ -1,0 +1,8 @@
+{
+  "kind": "block",
+  "item": "simplywings:ancient_ember",
+  "chance": 0.6,
+  "targets": [
+    "minecraft:ancient_debris"
+  ]
+}

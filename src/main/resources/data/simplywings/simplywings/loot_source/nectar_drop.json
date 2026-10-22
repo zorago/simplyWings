@@ -1,0 +1,8 @@
+{
+  "kind": "block",
+  "item": "simplywings:nectar_drop",
+  "chance": 0.15,
+  "targets": [
+    "#minecraft:small_flowers"
+  ]
+}

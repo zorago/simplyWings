@@ -1,0 +1,22 @@
+{
+  "kind": "mob",
+  "item": "simplywings:heavenly_down",
+  "chance": 0.6,
+  "targets": [
+    "minecraft:chicken"
+  ],
+  "conditions": [
+    {
+      "condition": "minecraft:location_check",
+      "predicate": {
+        "position": {
+          "y": {
+            "min": 186,
+            "max": 204
+          }
+        }
+      }
+    }
+  ],
+  "note": "loot.simplywings.heavenly_down"
+}

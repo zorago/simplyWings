@@ -1,0 +1,9 @@
+{
+  "kind": "mob",
+  "item": "simplywings:abyssal_ink",
+  "chance": 0.4,
+  "targets": [
+    "minecraft:squid",
+    "minecraft:glow_squid"
+  ]
+}

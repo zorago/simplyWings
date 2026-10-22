@@ -1,0 +1,8 @@
+{
+  "kind": "mob",
+  "item": "simplywings:fleece_tuft",
+  "chance": 0.4,
+  "targets": [
+    "minecraft:sheep"
+  ]
+}

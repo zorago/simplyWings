@@ -1,0 +1,10 @@
+{
+  "kind": "mob",
+  "item": "simplywings:tide_pearl",
+  "chance": 1.0,
+  "targets": [
+    "minecraft:elder_guardian"
+  ],
+  "min": 3,
+  "max": 3
+}

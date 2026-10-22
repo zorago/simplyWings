@@ -1,0 +1,20 @@
+{
+  "kind": "mob",
+  "item": "simplywings:swift_quill",
+  "chance": 0.3,
+  "targets": [
+    "minecraft:chicken"
+  ],
+  "conditions": [
+    {
+      "condition": "minecraft:entity_properties",
+      "entity": "attacker",
+      "predicate": {
+        "flags": {
+          "is_sprinting": true
+        }
+      }
+    }
+  ],
+  "note": "loot.simplywings.swift_quill"
+}

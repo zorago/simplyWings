@@ -1,0 +1,27 @@
+{
+  "kind": "block",
+  "item": "simplywings:polar_glimmer",
+  "chance": 0.15,
+  "targets": [
+    "minecraft:ice",
+    "minecraft:packed_ice",
+    "minecraft:blue_ice"
+  ],
+  "conditions": [
+    {
+      "condition": "minecraft:time_check",
+      "value": {
+        "min": 13000,
+        "max": 23000
+      },
+      "period": 24000
+    },
+    {
+      "condition": "minecraft:location_check",
+      "predicate": {
+        "biomes": "#c:is_snowy"
+      }
+    }
+  ],
+  "note": "loot.simplywings.polar_glimmer"
+}

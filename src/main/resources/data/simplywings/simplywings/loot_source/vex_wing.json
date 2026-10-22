@@ -1,0 +1,8 @@
+{
+  "kind": "mob",
+  "item": "simplywings:vex_wing",
+  "chance": 0.4,
+  "targets": [
+    "minecraft:vex"
+  ]
+}

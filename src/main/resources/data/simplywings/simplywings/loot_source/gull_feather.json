@@ -1,0 +1,18 @@
+{
+  "kind": "fish",
+  "item": "simplywings:gull_feather",
+  "chance": 0.2,
+  "conditions": [
+    {
+      "condition": "minecraft:location_check",
+      "predicate": {
+        "biomes": [
+          "minecraft:beach",
+          "minecraft:snowy_beach",
+          "minecraft:stony_shore"
+        ]
+      }
+    }
+  ],
+  "note": "loot.simplywings.gull_feather"
+}

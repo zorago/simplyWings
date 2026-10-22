@@ -1,0 +1,8 @@
+{
+  "kind": "mob",
+  "item": "simplywings:ember_wisp",
+  "chance": 0.3,
+  "targets": [
+    "minecraft:blaze"
+  ]
+}

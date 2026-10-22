@@ -1,0 +1,8 @@
+{
+  "kind": "mob",
+  "item": "simplywings:gust_mote",
+  "chance": 0.4,
+  "targets": [
+    "minecraft:breeze"
+  ]
+}

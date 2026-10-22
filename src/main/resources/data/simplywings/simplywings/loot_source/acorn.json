@@ -1,0 +1,9 @@
+{
+  "kind": "block",
+  "item": "simplywings:acorn",
+  "chance": 0.05,
+  "targets": [
+    "minecraft:oak_leaves",
+    "minecraft:dark_oak_leaves"
+  ]
+}

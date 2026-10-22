@@ -1,0 +1,8 @@
+{
+  "kind": "block",
+  "item": "simplywings:blossom_spirit",
+  "chance": 0.06,
+  "targets": [
+    "minecraft:cherry_leaves"
+  ]
+}

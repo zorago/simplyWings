@@ -1,0 +1,9 @@
+{
+  "kind": "mob",
+  "item": "simplywings:elastic_gel",
+  "chance": 0.4,
+  "targets": [
+    "minecraft:slime",
+    "minecraft:magma_cube"
+  ]
+}

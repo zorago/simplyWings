@@ -1,6 +1,7 @@
 package com.zorago.simplywings.data;
 
 import com.zorago.simplywings.SimplyWings;
+import com.zorago.simplywings.loot.LootSource;
 import java.util.Optional;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
@@ -13,6 +14,7 @@ public final class WingRegistries {
 
     public static void onNewRegistry(DataPackRegistryEvent.NewRegistry event) {
         event.dataPackRegistry(WING, WingDefinition.CODEC, WingDefinition.CODEC);
+        event.dataPackRegistry(LootSource.KEY, LootSource.CODEC, LootSource.NETWORK_CODEC);
     }
 
     public static Optional<WingDefinition> get(RegistryAccess access, ResourceLocation id) {

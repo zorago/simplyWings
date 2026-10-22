@@ -1,0 +1,8 @@
+{
+  "kind": "mob",
+  "item": "simplywings:pristine_feather",
+  "chance": 0.25,
+  "targets": [
+    "minecraft:chicken"
+  ]
+}

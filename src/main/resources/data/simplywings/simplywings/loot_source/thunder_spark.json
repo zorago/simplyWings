@@ -1,0 +1,15 @@
+{
+  "kind": "mob",
+  "item": "simplywings:thunder_spark",
+  "chance": 0.5,
+  "targets": [
+    "minecraft:creeper"
+  ],
+  "conditions": [
+    {
+      "condition": "minecraft:weather_check",
+      "thundering": true
+    }
+  ],
+  "note": "loot.simplywings.thunder_spark"
+}

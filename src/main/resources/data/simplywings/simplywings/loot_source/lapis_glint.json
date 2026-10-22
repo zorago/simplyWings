@@ -1,0 +1,8 @@
+{
+  "kind": "block",
+  "item": "simplywings:lapis_glint",
+  "chance": 0.3,
+  "targets": [
+    "#minecraft:lapis_ores"
+  ]
+}
