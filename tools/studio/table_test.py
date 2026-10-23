@@ -8,17 +8,26 @@ sys.stdout.reconfigure(encoding="utf-8")
 root = Path(__file__).resolve().parents[2]
 RECIPES = root / "src" / "main" / "resources" / "data" / "simplywings" / "recipe"
 SEND = [sys.executable, "-I", str(root / "tools" / "studio" / "send.py")]
-TABLE = (0, 140, 2)
-FLASK, HARNESS, CORE, LEFT, RIGHT, OUTPUT, ENERGY, GRID, RESULT, INV = 0, 1, 2, 3, 4, 5, 6, 7, 28, 29
-FULL = "simplywings:cloud_flask[simplywings:cloud_essence=100,max_stack_size=1]"
+FORGE = (0, 140, 2)
+TABLE = (4, 140, 2)
+KINDS = ["cloud", "steam", "ethereal", "intensified"]
+FLASK = 0
+HARNESS, CORE, LEFT, RIGHT, OUTPUT = 1, 2, 3, 4, 5
+GRID, RESULT = 2, 23
+INV = {"forge": 24, "table": 6}
+
+
+def flask(kind):
+    return f'simplywings:cloud_flask[simplywings:essence={{type:"{kind}",amount:100}},max_stack_size=1]'
 
 
 def send(*cmds):
     return subprocess.run(SEND + [";".join(cmds)], capture_output=True, text=True, encoding="utf-8").stdout.splitlines()
 
 
-def menu_slot(index):
-    return INV + 27 + index if index < 9 else INV + index - 9
+def menu_slot(bench, index):
+    base = INV[bench]
+    return base + 27 + index if index < 9 else base + index - 9
 
 
 def inventory():
@@ -28,20 +37,28 @@ def inventory():
     return {}
 
 
-def menu(limit=29):
+def menu(limit=24):
     for line in send(f"menu {limit}"):
         if line.startswith("menu "):
             return line
     return ""
 
 
-def tank():
-    x, y, z = TABLE
-    for line in send(f"cmd data get block {x} {y} {z} Tank", "wait 3"):
+def cost(data):
+    e = data.get("essence", 0)
+    if isinstance(e, int):
+        return {"cloud": e} if e else {}
+    return {k: v for k, v in e.items() if v}
+
+
+def gauges(bench):
+    x, y, z = FORGE if bench == "forge" else TABLE
+    out = {}
+    for line in send(*[f"cmd data get block {x} {y} {z} Essence_{k}" for k in KINDS], "wait 3"):
         m = re.search(r"has the following block data: (\d+)", line)
         if m:
-            return int(m.group(1))
-    return None
+            out[KINDS[len(out)]] = int(m.group(1))
+    return out
 
 
 def item_id(key):
@@ -58,31 +75,43 @@ def cells(pattern):
     cell = 0
     for y in range(5):
         for x in range(5):
-            corner = (x in (0, 4)) and (y in (0, 4))
-            if corner:
+            if (x in (0, 4)) and (y in (0, 4)):
                 continue
-            ch = pattern[y][x]
-            if ch != " ":
-                out.append((GRID + cell, ch))
+            if pattern[y][x] != " ":
+                out.append((GRID + cell, pattern[y][x]))
             cell += 1
     return out
 
 
-def open_table(essence_flasks=0):
-    x, y, z = TABLE
-    cmds = ["screen close", "cmd gamemode creative", f"cmd setblock {x} {y - 1} {z} minecraft:stone",
-            f"cmd setblock {x} {y} {z} minecraft:air", f"cmd setblock {x} {y} {z} simplywings:assembly_table",
-            f"cmd tp @s {x} {y} {z - 2} 0 0", "cmd clear @s", "select 8", "wait 5", f"useon {x} {y} {z}", "wait 8"]
-    send(*cmds)
-    for _ in range(essence_flasks):
-        send(f"cmd give @s {FULL}", "wait 3")
-        inv = inventory()
-        idx = next(i for i, (k, n) in inv.items() if k == "simplywings:cloud_flask")
-        send(f"slot {menu_slot(idx)} 0 pickup", f"slot {FLASK} 0 pickup", "wait 10", f"slot {FLASK} 0 quick_move", "wait 3")
-    send("cmd clear @s simplywings:cloud_flask")
+def open_bench(bench):
+    x, y, z = FORGE if bench == "forge" else TABLE
+    block = "simplywings:forge_bench" if bench == "forge" else "simplywings:assembly_table"
+    send("screen close", "cmd gamemode creative", f"cmd setblock {x} {y - 1} {z} minecraft:stone",
+         f"cmd tp @s {x} {y} {z - 2} 0 0", "cmd clear @s", "select 8", "wait 5", f"useon {x} {y} {z}", "wait 8")
+    if bench == "forge" and not menu().startswith("menu ForgeBench") or bench == "table" and not menu().startswith("menu AssemblyTable"):
+        send(f"cmd setblock {x} {y} {z} {block}", "wait 3", f"useon {x} {y} {z}", "wait 8")
 
 
-def place(items):
+def reset(bench):
+    x, y, z = FORGE if bench == "forge" else TABLE
+    block = "simplywings:forge_bench" if bench == "forge" else "simplywings:assembly_table"
+    send("screen close", f"cmd setblock {x} {y} {z} minecraft:air", f"cmd setblock {x} {y} {z} {block}", "wait 3")
+    open_bench(bench)
+
+
+def refill(bench, needed):
+    level = gauges(bench)
+    for kind, amount in needed.items():
+        while level.get(kind, 0) < amount:
+            send(f"cmd give @s {flask(kind)}", "wait 2")
+            inv = inventory()
+            idx = next(i for i, (k, n) in inv.items() if k == "simplywings:cloud_flask")
+            send(f"slot {menu_slot(bench, idx)} 0 pickup", f"slot {FLASK} 0 pickup", "wait 6", f"slot {FLASK} 0 quick_move", "wait 2",
+                 "cmd clear @s simplywings:cloud_flask")
+            level = gauges(bench)
+
+
+def place(bench, items):
     need = {}
     for _, item in items:
         need[item] = need.get(item, 0) + 1
@@ -93,58 +122,13 @@ def place(items):
         where.setdefault(k, i)
     clicks = []
     for slot, item in items:
-        src = menu_slot(where[item])
+        src = menu_slot(bench, where[item])
         clicks += [f"slot {src} 0 pickup", f"slot {slot} 1 pickup", f"slot {src} 0 pickup"]
     send(*clicks, "wait 3")
 
 
-def refill(needed):
-    level = tank() or 0
-    while level < needed:
-        send(f"cmd give @s {FULL}", "wait 2")
-        inv = inventory()
-        idx = next(i for i, (k, n) in inv.items() if k == "simplywings:cloud_flask")
-        send(f"slot {menu_slot(idx)} 0 pickup", f"slot {FLASK} 0 pickup", "wait 6", f"slot {FLASK} 0 quick_move", "wait 2",
-             "cmd clear @s simplywings:cloud_flask")
-        level = tank() or 0
-
-
-def sweep():
-    bad = []
-    names = sorted(p.stem for p in (RECIPES / "component").glob("*.json"))
-    for name in names:
-        data = json.loads((RECIPES / "component" / f"{name}.json").read_text(encoding="utf-8"))
-        clear_grid()
-        refill(data["essence"])
-        t0 = tank()
-        _, before, after = craft_component(name)
-        rid, count = data["result"]["id"], data["result"].get("count", 1)
-        inv = inventory()
-        got = sum(n for k, n in inv.values() if k == rid)
-        t1 = tank()
-        ok = f"28={rid}x{count}" in before and got == count and (t0 - t1) == data["essence"] and "| 7=" not in after.replace("| 28", "")
-        line = f"{'OK ' if ok else 'BAD'} component {name}: result {got}/{count}, essence {t0}->{t1} (cost {data['essence']})"
-        print(line, flush=True)
-        if not ok:
-            bad.append(line + " | " + before[:300])
-    for p in sorted((RECIPES / "assembly").glob("*.json")):
-        data = json.loads(p.read_text(encoding="utf-8"))
-        send("cmd clear @s")
-        refill(data["essence"])
-        t0 = tank()
-        _, out = craft_assembly(p.stem)
-        rid = data["result"]["id"]
-        inv = inventory()
-        got = sum(n for k, n in inv.values() if k == rid)
-        t1 = tank()
-        ok = got == 1 and (t0 - t1) == data["essence"]
-        line = f"{'OK ' if ok else 'BAD'} assembly {p.stem}: result {got}, essence {t0}->{t1} (cost {data['essence']})"
-        print(line, flush=True)
-        if not ok:
-            bad.append(line + " | " + out[:300])
-    print(f"{len(bad)} failures")
-    for b in bad:
-        print(b)
+def spent(before, after):
+    return {k: before.get(k, 0) - after.get(k, 0) for k in KINDS if before.get(k, 0) != after.get(k, 0)}
 
 
 def clear_grid():
@@ -156,51 +140,83 @@ def craft_component(name, shift=False):
     if not path.exists():
         path = RECIPES / f"{name}.json"
     data = json.loads(path.read_text(encoding="utf-8"))
-    send("button 1", "wait 3")
-    items = [(slot, item_id(data["key"][ch])) for slot, ch in cells(data["pattern"])]
-    place(items)
+    send("button 0", "wait 3")
+    place("forge", [(slot, item_id(data["key"][ch])) for slot, ch in cells(data["pattern"])])
     before = menu()
     send(f"slot {RESULT} 0 {'quick_move' if shift else 'pickup'}", "wait 4")
     if not shift:
         inv = inventory()
         free = next(i for i in range(9, 36) if i not in inv)
-        send(f"slot {menu_slot(free)} 0 pickup", "wait 2")
-    after = menu()
-    return data, before, after
+        send(f"slot {menu_slot('forge', free)} 0 pickup", "wait 2")
+    return data, before, menu()
 
 
 def craft_assembly(name):
-    data = json.loads((RECIPES / "assembly" / f"{name}.json").read_text(encoding="utf-8"))
-    send("button 0", "wait 3")
-    place([(HARNESS, item_id(data["harness"])), (CORE, item_id(data["core"])),
-           (LEFT, item_id(data["left_wing"])), (RIGHT, item_id(data["right_wing"]))])
-    send("button 2", "wait 100")
+    path = RECIPES / "assembly" / f"{name}.json"
+    data = json.loads((path if path.exists() else RECIPES / f"{name}.json").read_text(encoding="utf-8"))
+    place("table", [(HARNESS, item_id(data["harness"])), (CORE, item_id(data["core"])),
+                    (LEFT, item_id(data["left_wing"])), (RIGHT, item_id(data["right_wing"]))])
+    send("button 0", "wait 100")
     out = menu()
     send(f"slot {OUTPUT} 0 quick_move", "wait 3")
     return data, out
 
 
+def sweep():
+    bad = []
+    reset("forge")
+    for path in sorted((RECIPES / "component").glob("*.json")) + [RECIPES / "cloud_flask.json"]:
+        name = path.stem
+        data = json.loads(path.read_text(encoding="utf-8"))
+        clear_grid()
+        refill("forge", cost(data))
+        g0 = gauges("forge")
+        _, before, after = craft_component(name)
+        rid, count = data["result"]["id"], data["result"].get("count", 1)
+        got = sum(n for k, n in inventory().values() if k == rid)
+        used = spent(g0, gauges("forge"))
+        ok = f"{RESULT}={rid}x{count}" in before and got == count and used == cost(data)
+        line = f"{'OK ' if ok else 'BAD'} component {name}: result {got}/{count}, spent {used} (cost {cost(data)})"
+        print(line, flush=True)
+        if not ok:
+            bad.append(line + " | " + before[:300])
+    reset("table")
+    for path in sorted((RECIPES / "assembly").glob("*.json")) + [RECIPES / "common_wings.json"]:
+        data = json.loads(path.read_text(encoding="utf-8"))
+        send("cmd clear @s")
+        refill("table", cost(data))
+        g0 = gauges("table")
+        _, out = craft_assembly(path.stem)
+        rid = data["result"]["id"]
+        got = sum(n for k, n in inventory().values() if k == rid)
+        used = spent(g0, gauges("table"))
+        ok = got == 1 and used == cost(data)
+        line = f"{'OK ' if ok else 'BAD'} assembly {path.stem}: result {got}, spent {used} (cost {cost(data)})"
+        print(line, flush=True)
+        if not ok:
+            bad.append(line + " | " + out[:300])
+    print(f"{len(bad)} failures")
+    for b in bad:
+        print(b)
+
+
 if __name__ == "__main__":
     mode = sys.argv[1]
-    if mode == "open":
-        open_table(int(sys.argv[2]) if len(sys.argv) > 2 else 0)
-        print("tank:", tank())
+    if mode == "all":
+        sweep()
     elif mode == "one":
-        clear_grid()
+        reset("forge")
         data = json.loads((RECIPES / "component" / f"{sys.argv[2]}.json").read_text(encoding="utf-8"))
-        refill(data["essence"])
+        refill("forge", cost(data))
+        g0 = gauges("forge")
         data, before, after = craft_component(sys.argv[2])
         print("before:", before)
-        print("after:", after, "tank:", tank())
-    elif mode == "all":
-        open_table()
-        sweep()
-    elif mode == "component":
-        for name in sys.argv[2:]:
-            data, before, after = craft_component(name)
-            print(name, "| before:", before, "| after:", after, "| tank:", tank())
+        print("after:", after, "spent:", spent(g0, gauges("forge")))
     elif mode == "assembly":
+        reset("table")
         for name in sys.argv[2:]:
+            data = json.loads((RECIPES / "assembly" / f"{name}.json").read_text(encoding="utf-8"))
+            refill("table", cost(data))
             data, out = craft_assembly(name)
-            print(name, "| out:", out, "| tank:", tank())
+            print(name, "| out:", out, "| gauges:", gauges("table"))
     print("inventory:", inventory())

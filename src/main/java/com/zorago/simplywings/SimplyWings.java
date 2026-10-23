@@ -10,7 +10,7 @@ import com.zorago.simplywings.item.ModComponents;
 import com.zorago.simplywings.item.ModItems;
 import com.zorago.simplywings.loot.ModLoot;
 import com.zorago.simplywings.sound.ModSounds;
-import com.zorago.simplywings.structure.WingForge;
+import com.zorago.simplywings.structure.EndSanctums;
 import com.zorago.simplywings.network.ModNetwork;
 import com.zorago.simplywings.player.ModAttachments;
 import net.minecraft.resources.ResourceLocation;
@@ -37,7 +37,7 @@ public class SimplyWings {
         modBus.addListener(ModNetwork::register);
         container.registerConfig(ModConfig.Type.SERVER, ServerConfig.SPEC);
         ServerFlight.register(NeoForge.EVENT_BUS);
-        WingForge.register(NeoForge.EVENT_BUS);
+        EndSanctums.register(NeoForge.EVENT_BUS);
         NeoForge.EVENT_BUS.addListener(WingsCommand::register);
     }
 

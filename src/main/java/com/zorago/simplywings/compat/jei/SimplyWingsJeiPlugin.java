@@ -86,6 +86,8 @@ public class SimplyWingsJeiPlugin implements IModPlugin {
                 Component.translatable("jei.simplywings.info.assembly_table"));
         registration.addItemStackInfo(new ItemStack(ModBlocks.FORGE_BENCH_ITEM.get()),
                 Component.translatable("jei.simplywings.info.forge_bench"));
+        registration.addItemStackInfo(new ItemStack(ModBlocks.CLOUD_COMPRESSOR_ITEM.get()),
+                Component.translatable("jei.simplywings.info.cloud_compressor"));
         ModItems.COMPASSES.forEach(compass -> registration.addItemStackInfo(new ItemStack(compass.get()),
                 Component.translatable("jei.simplywings.info." + compass.getId().getPath())));
         List<ItemStack> essence = new ArrayList<>();

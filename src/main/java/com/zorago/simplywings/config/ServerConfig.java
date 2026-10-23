@@ -162,11 +162,11 @@ public final class ServerConfig {
         b.pop();
 
         b.push("forge");
-        FORGE_RADIUS = b.comment("Horizontal distance from (0, 0) where the Wing Forge appears in the End, in blocks. Read once, at the first placement.")
+        FORGE_RADIUS = b.comment("Horizontal distance from (0, 0) of the three End sanctums (Sky Sanctum, Wing Forge, Cloud Refinery), set 120 degrees apart, in blocks. Read once, at the first placement.")
                 .defineInRange("radius", 512, 64, 100000);
-        FORGE_Y = b.comment("Height of the Wing Forge platform in the End. Read once, at the first placement.")
+        FORGE_Y = b.comment("Height of the top of the sanctum islands in the End. Read once, at the first placement.")
                 .defineInRange("y", 80, 0, 250);
-        FORGE_ISLAND_RADIUS = b.comment("Players within this horizontal distance of (0, 0) receive a Forge Compass when the forge appears or is repaired.")
+        FORGE_ISLAND_RADIUS = b.comment("Players within this horizontal distance of (0, 0) receive the compass of each unlocked sanctum when a dragon dies.")
                 .defineInRange("islandRadius", 192.0, 0.0, 10000.0);
         b.pop();
 

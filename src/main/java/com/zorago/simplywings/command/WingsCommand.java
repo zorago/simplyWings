@@ -9,7 +9,8 @@ import com.mojang.brigadier.suggestion.SuggestionProvider;
 import com.zorago.simplywings.data.WingRegistries;
 import com.zorago.simplywings.flight.ServerFlight;
 import com.zorago.simplywings.item.WingedEnergy;
-import com.zorago.simplywings.structure.WingForge;
+import com.zorago.simplywings.structure.EndSanctums;
+import com.mojang.brigadier.arguments.StringArgumentType;
 import com.zorago.simplywings.player.ModAttachments;
 import java.util.Optional;
 import net.minecraft.commands.CommandSourceStack;
@@ -50,7 +51,13 @@ public final class WingsCommand {
                                 .executes(WingsCommand::stamina)))
                 .then(Commands.literal("reset").executes(WingsCommand::reset))
                 .then(Commands.literal("info").executes(WingsCommand::info))
-                .then(Commands.literal("forge").executes(WingsCommand::forge))
+                .then(Commands.literal("forge").executes(ctx -> sanctum(ctx, EndSanctums.Sanctum.WING_FORGE)))
+                .then(Commands.literal("sanctum")
+                        .then(Commands.argument("name", StringArgumentType.word())
+                                .suggests((ctx, builder) -> SharedSuggestionProvider.suggest(
+                                        java.util.Arrays.stream(EndSanctums.Sanctum.values()).map(EndSanctums.Sanctum::id), builder))
+                                .executes(ctx -> sanctum(ctx, EndSanctums.Sanctum.byId(StringArgumentType.getString(ctx, "name")).orElse(null)))))
+                .then(Commands.literal("dragon").executes(WingsCommand::dragon))
                 .then(Commands.literal("energy").executes(WingsCommand::energy)));
     }
 
@@ -107,17 +114,27 @@ public final class WingsCommand {
         return 1;
     }
 
-    private static int forge(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
+    private static int sanctum(CommandContext<CommandSourceStack> ctx, EndSanctums.Sanctum sanctum) throws CommandSyntaxException {
         ServerPlayer player = ctx.getSource().getPlayerOrException();
         ServerLevel end = ctx.getSource().getServer().getLevel(Level.END);
-        BlockPos center = end == null ? null : WingForge.place(end);
+        BlockPos center = end == null || sanctum == null ? null : EndSanctums.place(end, sanctum);
         if (center == null) {
             ctx.getSource().sendFailure(Component.translatable("commands.simplywings.forge_failed"));
             return 0;
         }
-        WingForge.give(player, end, center);
+        EndSanctums.give(player, end, sanctum, center);
         ctx.getSource().sendSuccess(() -> Component.translatable("commands.simplywings.forge", center.toShortString()), true);
         return 1;
+    }
+
+    private static int dragon(CommandContext<CommandSourceStack> ctx) {
+        ServerLevel end = ctx.getSource().getServer().getLevel(Level.END);
+        if (end == null) {
+            return 0;
+        }
+        int kills = EndSanctums.dragonKilled(end);
+        ctx.getSource().sendSuccess(() -> Component.translatable("commands.simplywings.dragon", kills), true);
+        return kills;
     }
 
     private static int energy(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {

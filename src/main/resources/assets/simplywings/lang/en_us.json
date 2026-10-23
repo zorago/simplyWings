@@ -812,9 +812,8 @@
   "loot.simplywings.shade_wisp": "In the dark (light 7 or less)",
   "loot.simplywings.heavenly_down": "In the cloud layer (Y 186 to 204)",
   "loot.simplywings.soul_wisp": "In a soul sand valley",
-  "message.simplywings.forge_compass": "A Forge Compass appears in your bag. It points to the Wing Forge, far out in the End.",
-  "commands.simplywings.forge": "Wing Forge placed or repaired, centered at %s",
-  "commands.simplywings.forge_failed": "Could not place the Wing Forge (no End dimension or missing structure)",
+  "commands.simplywings.forge": "Sanctum placed or repaired, centered at %s",
+  "commands.simplywings.forge_failed": "Could not place the sanctum (unknown name, no End dimension or missing structure)",
   "commands.simplywings.no_item": "Hold an item in your main hand",
   "commands.simplywings.energy_on": "Winged energy added to %s",
   "commands.simplywings.energy_off": "Winged energy removed from %s",
@@ -872,5 +871,9 @@
   "container.simplywings.cloud_compressor": "Cloud Compressor",
   "tooltip.simplywings.compressor_slot": "Holds a container of %s",
   "jei.simplywings.compressor": "Cloud Compression",
-  "jei.simplywings.info.cloud_compressor": "The Cloud Compressor stands in the Cloud Refinery, which appears far out in the End when a dragon dies for the fourth time. Follow the Refinery Compass. Put a flask or tank of Cloud, Steam and Ethereal Essence in its three inputs, and an empty or intensified container in its output: one unit of each becomes three units of Intensified Cloud Essence. It stops when an input runs dry or the output is full."
+  "jei.simplywings.info.cloud_compressor": "The Cloud Compressor stands in the Cloud Refinery, which appears far out in the End when a dragon dies for the fourth time. Follow the Refinery Compass. Put a flask or tank of Cloud, Steam and Ethereal Essence in its three inputs, and an empty or intensified container in its output: one unit of each becomes three units of Intensified Cloud Essence. It stops when an input runs dry or the output is full.",
+  "message.simplywings.sky_sanctum": "A Sanctum Compass appears in your bag. It points to the Sky Sanctum, far out in the End.",
+  "message.simplywings.wing_forge": "A Forge Compass appears in your bag. It points to the Wing Forge, far out in the End.",
+  "message.simplywings.cloud_refinery": "A Refinery Compass appears in your bag. It points to the Cloud Refinery, far out in the End.",
+  "commands.simplywings.dragon": "Dragon death counted: %s so far"
 }
