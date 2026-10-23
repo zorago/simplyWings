@@ -20,6 +20,15 @@ BG = (35, 38, 46, 255)
 LABEL = (64, 64, 64, 255)
 MUTED = (100, 100, 100, 255)
 WHITE = (255, 255, 255, 255)
+KINDS = [("nuage", (221, 242, 255)), ("vapeur", (255, 156, 90)), ("éthérée", (201, 168, 240)), ("intensifiée", (255, 230, 138))]
+GAUGE_CAP = 1000
+
+
+def essences(text):
+    out = {k: 0 for k, _ in KINDS}
+    for n, k in re.findall(r"(\d+) (nuage|vapeur|éthérée|intensifiée)", text):
+        out[k] += int(n)
+    return out
 EDGE_COLORS = [(244, 196, 48), (93, 202, 255), (255, 120, 160), (140, 230, 120), (200, 150, 255),
                (255, 160, 80), (90, 230, 210), (240, 240, 240)]
 RARITY_BAND = {"Rare": "band_rare", "Épique": "band_epic", "Légendaire": "band_legendary", "Mythique": "band_mythic"}
@@ -352,7 +361,7 @@ def parse(path):
     d["name"] = re.search(r"^# Route de craft · (.+)$", t, re.M).group(1)
     m = re.search(r"^`simplywings:(\w+)` · \*\*(.+?)\*\* · item `(\w+)`", t, re.M)
     d["id"], d["rarity"], d["item"] = m.group(1), m.group(2), m.group(3)
-    for key, label in [("depth", "Profondeur"), ("crafts", "Crafts"), ("essence", "Cloud Essence")]:
+    for key, label in [("depth", "Profondeur"), ("crafts", "Crafts"), ("essence", "Essences")]:
         mm = re.search(rf"^\| {label} \| (.+?) \|$", t, re.M)
         d[key] = mm.group(1) if mm else ""
     sec = lambda name: t.split(f"## {name}", 1)[1].split("\n## ", 1)[0] if f"## {name}" in t else ""
@@ -374,11 +383,11 @@ def parse(path):
         mm = re.match(r"#(\d+) · (.+?) · `(\w+:\w+)`", block)
         if not mm:
             continue
-        info = re.search(r"niveau (\d+) · (\d+) Cloud Essence · donne ×(\d+)", block)
+        info = re.search(r"niveau (\d+) · essence : (.+?) · donne ×(\d+)", block)
         shape = re.search(r"```\n(.*?)\n```", block, re.S).group(1).splitlines()
         key = {k: rid for k, rid in re.findall(r"^\| `(.)` \| .+? `(\w+:\w+)` \|", block, re.M)}
         d["recipes"][mm.group(3)] = dict(num=int(mm.group(1)), name=mm.group(2), id=mm.group(3), level=int(info.group(1)),
-                                         cost=int(info.group(2)), out=int(info.group(3)),
+                                         cost=essences(info.group(2)), out=int(info.group(3)),
                                          rows=[r.split(" ") for r in shape], key=key)
     asm = next(r for r in d["route"] if r["where"] == "ASM")
     by_num = {r["num"]: r["id"] for r in d["route"]}
@@ -386,7 +395,7 @@ def parse(path):
     for label, k in [("Harnais", "harness"), ("Cœur", "core"), ("Aile G", "left"), ("Aile D", "right")]:
         mm = re.search(rf"{label} : .+? → #(\d+)", asm["inputs"])
         slots[k] = by_num[int(mm.group(1))]
-    d["asm"] = dict(slots=slots, id=asm["id"], cost=int(asm["essence"]), total=asm["cum"].strip("*"))
+    d["asm"] = dict(slots=slots, id=asm["id"], cost=essences(asm["essence"]), total=asm["cum"].strip("*"))
     return d
 
 
@@ -407,25 +416,41 @@ class Board:
         out.alpha_composite(src.crop((0, 202, 176, 206)), (0, 112))
         return out
 
-    def tank(self, img, fraction):
-        fill = round(70 * max(0.0, min(1.0, fraction)))
-        if fill:
-            img.alpha_composite(self.gui["tank_fill"].crop((0, 70 - fill, 12, 70)), (10, 18 + 70 - fill))
-        img.alpha_composite(self.gui["tank_ticks"], (10, 18))
+    def tinted(self, name, color):
+        im = self.gui[name].copy()
+        px = im.load()
+        for yy in range(im.height):
+            for xx in range(im.width):
+                r, g, b, a = px[xx, yy]
+                if a:
+                    px[xx, yy] = (r * color[0] // 255, g * color[1] // 255, b * color[2] // 255, a)
+        return im
+
+    def tank(self, img, cost):
+        for i, (k, color) in enumerate(KINDS):
+            fill = round(70 * max(0.0, min(1.0, cost[k] / GAUGE_CAP)))
+            x = 9 + i * 6
+            if fill:
+                img.alpha_composite(self.tinted("gauge_fill", color).crop((0, 70 - fill, 5, 70)), (x, 18 + 70 - fill))
+            img.alpha_composite(self.gui["gauge_ticks"], (x, 18))
         img.alpha_composite(self.icons.get("simplywings:cloud_flask"), (8, 92))
 
     def cost(self, img, cost, y):
-        s = str(cost)
-        w = self.font.width(s) + 11
-        x = 158 - w // 2
-        img.alpha_composite(self.gui["cost_icon"], (x, y))
-        self.font.draw(img, x + 11, y, s, LABEL)
+        line = 0
+        for k, color in KINDS:
+            if cost[k] <= 0:
+                continue
+            yy = y + line * 9
+            img.alpha_composite(self.tinted("cost_icon", color), (140, yy))
+            self.font.draw(img, 151, yy, str(cost[k]), LABEL)
+            line += 1
+        return line
 
     def centered(self, img, s, cx, y, color=LABEL):
         self.font.draw(img, cx - self.font.width(s) // 2, y, s, color)
 
     def craft_node(self, r, step):
-        img = self.panel("assembly_table_components")
+        img = self.panel("forge_bench_components")
         self.font.draw(img, 8, 6, self.font.fit(f"#{r['num']} {r['name']}", 162), LABEL)
         cell = 0
         for y, row in enumerate(r["rows"]):
@@ -436,10 +461,10 @@ class Board:
                     self.icon(img, r["key"][ch], 34 + x * 18, 18 + y * 18)
                 cell += 1
         self.icon(img, r["id"], 150, 54, r["out"])
-        self.tank(img, r["cost"] / 100)
-        self.cost(img, r["cost"], 80)
-        self.centered(img, f"x{step['crafts']}", 158, 92)
-        self.centered(img, f"niv. {r['level']}", 158, 102, MUTED)
+        self.tank(img, r["cost"])
+        lines = self.cost(img, r["cost"], 76)
+        self.font.draw(img, 140 if lines < 3 else 100, 76 + 9 * min(lines, 2) if lines < 3 else 94, f"x{step['crafts']}", LABEL)
+        self.font.draw(img, 140 if lines < 3 else 100, 86 + 9 * min(lines, 2) if lines < 3 else 104, f"niv. {r['level']}", MUTED)
         return img
 
     def asm_node(self, d):
@@ -452,8 +477,8 @@ class Board:
         self.icon(img, s["right"], 104, 44)
         img.alpha_composite(self.gui["arrow_progress"], (125, 45))
         self.icon(img, d["asm"]["id"], 150, 44)
-        self.tank(img, d["asm"]["cost"] / 1000)
-        self.cost(img, d["asm"]["cost"], 70)
+        self.tank(img, d["asm"]["cost"])
+        self.cost(img, d["asm"]["cost"], 66)
         return img
 
     def title_node(self, d):
@@ -470,7 +495,7 @@ class Board:
         dd.line((75, 21, 75, 87), fill=WHITE)
         img.alpha_composite(big, (10, 22))
         lines = [(f"{d['rarity']} · simplywings:{d['id']}", LABEL),
-                 (f"Total : {d['asm']['total']} Cloud Essence", LABEL),
+                 (f"Total : {d['asm']['total']}", LABEL),
                  (f"Crafts : {d['crafts'].replace('`', '')}", MUTED),
                  (d["depth"].split(" avant")[0].replace("niveaux de craft", "niveaux").replace("niveau de craft", "niveau")
                   + " avant les pièces", MUTED)]
