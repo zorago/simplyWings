@@ -53,6 +53,22 @@ public final class ModBlocks {
     public static final DeferredHolder<MenuType<?>, MenuType<ForgeBenchMenu>> FORGE_BENCH_MENU =
             MENUS.register("forge_bench", () -> IMenuTypeExtension.create(ForgeBenchMenu::new));
 
+    public static final DeferredBlock<CloudCompressorBlock> CLOUD_COMPRESSOR = BLOCKS.register("cloud_compressor",
+            () -> new CloudCompressorBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_ORANGE)
+                    .strength(5.0F, 12.0F)
+                    .requiresCorrectToolForDrops()
+                    .sound(SoundType.COPPER)
+                    .noOcclusion()
+                    .dynamicShape()));
+    public static final DeferredItem<BlockItem> CLOUD_COMPRESSOR_ITEM = ITEMS.register("cloud_compressor",
+            () -> new BlockItem(CLOUD_COMPRESSOR.get(), new Item.Properties().stacksTo(1)));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<CloudCompressorBlockEntity>> CLOUD_COMPRESSOR_ENTITY =
+            BLOCK_ENTITIES.register("cloud_compressor",
+                    () -> BlockEntityType.Builder.of(CloudCompressorBlockEntity::new, CLOUD_COMPRESSOR.get()).build(null));
+    public static final DeferredHolder<MenuType<?>, MenuType<CloudCompressorMenu>> CLOUD_COMPRESSOR_MENU =
+            MENUS.register("cloud_compressor", () -> IMenuTypeExtension.create(CloudCompressorMenu::new));
+
     public static void register(IEventBus modBus) {
         BLOCKS.register(modBus);
         ITEMS.register(modBus);

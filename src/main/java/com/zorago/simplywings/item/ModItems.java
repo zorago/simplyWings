@@ -122,6 +122,7 @@ public final class ModItems {
                     .displayItems((parameters, output) -> {
                         output.accept(ModBlocks.ASSEMBLY_TABLE_ITEM.get());
                         output.accept(ModBlocks.FORGE_BENCH_ITEM.get());
+                        output.accept(ModBlocks.CLOUD_COMPRESSOR_ITEM.get());
                         CONTAINERS.forEach(container -> {
                             output.accept(container.get());
                             for (EssenceType type : EssenceType.values()) {

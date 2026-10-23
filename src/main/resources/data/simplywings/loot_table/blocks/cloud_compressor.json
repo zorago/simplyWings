@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "simplywings:cloud_compressor"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        },
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "simplywings:cloud_compressor",
+          "properties": {
+            "x": "1",
+            "y": "0",
+            "z": "1"
+          }
+        }
+      ]
+    }
+  ]
+}

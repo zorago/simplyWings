@@ -1,6 +1,7 @@
 {
   "values": [
     "simplywings:assembly_table",
-    "simplywings:forge_bench"
+    "simplywings:forge_bench",
+    "simplywings:cloud_compressor"
   ]
 }

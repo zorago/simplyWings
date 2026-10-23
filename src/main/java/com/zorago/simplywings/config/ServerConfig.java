@@ -37,6 +37,8 @@ public final class ServerConfig {
     public static final ModConfigSpec.DoubleValue CLOUD_MAX_Y;
     public static final ModConfigSpec.IntValue CLOUD_ESSENCE_PER_SECOND;
     public static final ModConfigSpec.IntValue STEAM_HEIGHT;
+    public static final ModConfigSpec.IntValue COMPRESSOR_CYCLE_TICKS;
+    public static final ModConfigSpec.IntValue COMPRESSOR_UNITS;
     public static final ModConfigSpec.DoubleValue ETHEREAL_MIN_DISTANCE;
     public static final ModConfigSpec.BooleanValue CLOUD_HOVER_HARVEST;
     public static final ModConfigSpec.IntValue FORGE_RADIUS;
@@ -150,6 +152,13 @@ public final class ServerConfig {
                 .defineInRange("essencePerSecond", 2, 0, 100);
         CLOUD_HOVER_HARVEST = b.comment("Whether hovering (stabilized mode) also harvests, not only travel flight.")
                 .define("hoverHarvest", true);
+        b.pop();
+
+        b.push("compressor");
+        COMPRESSOR_CYCLE_TICKS = b.comment("Ticks per Cloud Compressor cycle.")
+                .defineInRange("cycleTicks", 2, 1, 1200);
+        COMPRESSOR_UNITS = b.comment("Units taken from each of the three inputs per cycle. The output gains three times as much Intensified Cloud Essence.")
+                .defineInRange("unitsPerCycle", 1, 1, 1000);
         b.pop();
 
         b.push("forge");
