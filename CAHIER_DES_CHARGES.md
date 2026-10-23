@@ -192,76 +192,94 @@ Ici v impact est la composante de vitesse perpendiculaire au sol, et c et v seui
 - **Sauts de secours** : quand la stamina est sous le coût d'un saut ailé, 2 sauts gratuits (`rescueJumps`) restent disponibles. Chacun remet la vitesse verticale à 0 et annule **totalement** les dégâts de chute accumulés. Ils ne se rechargent qu'au contact du sol. Le premier part souvent par réflexe, le second sert à se sauver vraiment.
 - **Autorité** : la stamina est calculée sur le serveur. Le client en affiche une prédiction, corrigée par synchronisation quand ça change de façon significative, et non à chaque tick.
 
-## Craft : table d'assemblage
+## Craft : table d'assemblage et établi de la forge
 
-Toutes les paires se craftent dans la table d'assemblage de la forge de l'End (`simplywings:assembly_table`, « Assembly Table »). Les routes de chaque paire (étapes, origine des pièces, coût en Cloud Essence par étape et au total) sont tenues dans `CRAFTING.md`.
+Décision du 23 octobre 2026 : le craft est réparti entre deux blocs, chacun dans sa propre structure de l'End (voir « Les trois sanctuaires de l'End »). Les routes de chaque paire (étapes, origine des pièces, coût en essences par étape et au total) sont tenues dans `CRAFTING.md`.
 
-**Onglet 1 « Assembly »**
+**Table d'assemblage** (`simplywings:assembly_table`, « Assembly Table », dans le Sanctuaire céleste, débloqué au 2e dragon)
 
-- 4 emplacements : un harnais, un cœur, une aile gauche et une aile droite → la paire. Ces pièces sont des items du mod, sauf pour la paire commune de départ, dont les 4 emplacements prennent directement des items vanilla (plume, plume, élytre, cuir).
-- Pose et retrait de l'énergie ailée sur un item.
+- 4 emplacements : un harnais, un cœur, une aile gauche et une aile droite → la paire. Ces pièces sont des items du mod, sauf pour la paire commune de départ, dont les 4 emplacements prennent directement des items vanilla (cuir, élytre, deux plumes), sans essence.
+- Entre le 2e et le 3e dragon, seule la paire commune peut donc être assemblée : toutes les autres pièces sortent de l'établi de la forge.
+- Le wiki du mod viendra s'ajouter à cette table (plan dans `docs/WIKI_PLAN.md`, questions encore ouvertes).
 
-**Onglet 2 « Components »**
+**Établi de la forge** (`simplywings:forge_bench`, « Forge Bench », dans la Forge rustique, débloquée au 3e dragon)
 
-- Une grille de craft 5×5 sans les quatre coins, soit 21 cases : 3 cases centrées sur la première et la dernière ligne, 5 sur les trois lignes du milieu. Elle sert à fabriquer les pièces (harnais, cœurs, ailes) et leurs intermédiaires.
-- Recettes avec forme, sur un `RecipeType` du mod, plus le coût en Cloud Essence de la recette.
+- **Onglet « Components »** : la grille 5×5 sans les quatre coins (21 cases : 3 cases centrées sur la première et la dernière ligne, 5 sur les trois lignes du milieu). Elle fabrique les pièces (harnais, cœurs, ailes), leurs intermédiaires, le flacon, l'absorbeur et les réservoirs. Recettes avec forme sur un `RecipeType` du mod.
+- **Onglet « Winged Energy »** : pose et retrait de l'énergie ailée sur un item.
 
-**Réservoir de Cloud Essence**
+**Quatre jauges d'essence**
 
-- Les deux onglets partagent le même réservoir, qui contient au plus **1 000 unités**, soit 10 flacons. Un craft ne se lance que si le réservoir contient assez d'essence, et la consomme à la sortie du résultat.
-- Coût d'un assemblage (onglet 1) selon la rareté :
-
-| Rareté | Cloud Essence | Flacons |
-| --- | --- | --- |
-| Commune | 0 | 0 |
-| Rare | 100 | 1 |
-| Épique | 300 | 3 |
-| Légendaire | 800 | 8 |
-| Mythique | 1 000 | 10, le réservoir plein |
-
-- Craft d'une pièce (onglet 2) : de 1 à 100 unités, selon sa complexité et ses ingrédients. La valeur vit dans le JSON de la recette.
+- La table et l'établi ont chacun 4 jauges, une par essence (nuage, vapeur, éthérée, intensifiée), de **1 000 unités** chacune. Un flacon ou un réservoir déposé dans l'emplacement d'essence se vide dans la jauge de son type.
+- Une recette demande de 1 à 4 essences selon sa complexité et son palier : rare → nuage ; épique → nuage + vapeur ; légendaire → nuage + vapeur + éthérée ; mythique, sous-produits finaux et réservoirs → les quatre, dont l'intensifiée. Les essences des paliers précédents restent demandées dans les gros crafts des paliers élevés : il faut voler beaucoup, dans les trois dimensions.
+- Un craft ne se lance que si chaque jauge contient assez d'essence, et la consomme à la sortie du résultat.
+- Coût d'un assemblage selon la rareté (total réparti entre les essences du palier, détail dans `CRAFTING.md`) : commune 0, rare 100, épique 300, légendaire 800, mythique 1 000.
 
 **Pièces**
 
-- **Craft** : à partir d'items vanilla et/ou moddés, dans l'onglet 2 (ou à l'établi vanilla pour les intermédiaires simples). Les ingrédients moddés passent par les tags communs `c:`, ce qui permet de fonctionner avec tout mod qui les fournit, sans dépendance.
+- **Craft** : à partir d'items vanilla et/ou moddés, dans l'établi de la forge. Les ingrédients moddés passent par les tags communs `c:`, ce qui permet de fonctionner avec tout mod qui les fournit, sans dépendance.
 - **Drops de mobs** : sur une liste de mobs définie, seulement si le coup fatal est porté avec un item imprégné d'« énergie ailée ».
-- **Essences de blocs** : sur une liste de blocs vanilla définie, seulement si le bloc est cassé avec un item imprégné. Les essences servent aux différentes paires.
+- **Essences de blocs** : sur une liste de blocs vanilla définie, seulement si le bloc est cassé avec un item imprégné.
 - **Liberté totale** : l'énergie ailée se pose sur n'importe quel item. Le joueur peut tuer un mob avec un escalier ou miner avec une épée s'il le veut.
 
 **Énergie ailée**
 
-C'est un Data Component custom, posé ou retiré sur n'importe quel item à la table d'assemblage. On l'a préféré à un vrai enchantement, qui interagirait avec l'enchanteur, la meule, l'enclume et les mods d'enchantement. Il affiche quand même l'éclat d'enchantement et une ligne de tooltip.
+C'est un Data Component custom, posé ou retiré sur n'importe quel item à l'établi de la forge. On l'a préféré à un vrai enchantement, qui interagirait avec l'enchanteur, la meule, l'enclume et les mods d'enchantement. Il affiche quand même l'éclat d'enchantement et une ligne de tooltip.
 
 **Sources de loot** : la liste « mob ou bloc → pièce ou essence, avec chance » vit dans un registre datapack du mod, `simplywings:loot_source`, synchronisé au client. Les Global Loot Modifiers ne sont pas envoyés au client, alors que JEI a besoin de ces données (voir « Intégration JEI »).
 
 Les loots passent par des Global Loot Modifiers NeoForge (data-driven, sans mixin) avec une condition maison, qui lisent ce registre. Elle exige deux choses : que l'item tenu porte l'énergie ailée, et que le mob ou le bloc figure dans la liste de la pièce. Sans ces deux conditions, les loot tables restent intactes. Pour les mobs, la condition lit l'item en main principale du tueur au moment du kill.
 
-## Cloud Essence
+## Essences
 
-Ressource propre au mod, consommée par la table d'assemblage. Elle se récolte en planant dans les nuages.
+Quatre essences, des liquides du mod, toutes stockées de la même façon. Un conteneur ne contient qu'une essence à la fois ; vide, il accepte n'importe laquelle.
 
-- **Cloud Flask** (`simplywings:cloud_flask`) : le contenant. Il contient de 0 à 100 unités, stockées dans un Data Component du mod et affichées dans le tooltip et en barre sur l'item.
-- **Cloud Absorber** (`simplywings:cloud_absorber`) : il suffit qu'il soit dans l'inventaire. Pendant que le joueur vole dans la couche de nuages, il remplit les flacons de l'inventaire l'un après l'autre : le premier flacon non plein jusqu'à 100, puis le suivant. Un seul absorbeur suffit pour tout l'inventaire ; en avoir plusieurs ne remplit pas plus vite.
-- **Couche de nuages** : dans l'Overworld, une bande de Y autour de la hauteur des nuages vanilla (192, à vérifier dans `DimensionSpecialEffects` du jar du pack). Le serveur ne connaît pas le rendu des nuages : la bande est en config serveur, et Distant Horizons ou un shaderpack qui déplace les nuages visibles ne changent rien.
-- **Calcul serveur** : le serveur vérifie la position et le mode de vol à intervalle fixe (par exemple 1 fois par seconde), pas à chaque tick, et ajoute l'essence. Le client ne voit que l'item mis à jour, sans paquet dédié.
-- **Remplissage de la table** : un flacon déposé dans la table vide son contenu dans le réservoir, dans la limite des 1 000 unités, et ressort vide.
+| Essence | Origine | Sert à |
+| --- | --- | --- |
+| **Cloud Essence** (nuage) | Overworld, couche de nuages | tous les crafts dès le palier rare |
+| **Steam Essence** (vapeur) | Nether, au-dessus des mers de lave | crafts épiques et au-delà |
+| **Ethereal Essence** (éthérée) | End, au-dessus du vide | crafts légendaires et au-delà |
+| **Intensified Cloud Essence** (intensifiée) | compresseur de nuage (1 + 1 + 1 → 3) | crafts mythiques, sous-produits finaux, réservoirs ; **substitut de stamina** |
 
-## Forge d'ailes dans l'End
+**Conteneurs**
 
-La forge est la seule structure du mod. Elle n'est pas générée par le worldgen. Elle apparaît à la mort du **deuxième** dragon, puis se répare à chaque mort suivante, toujours au même endroit.
+- **Flacon** (`simplywings:cloud_flask`, « Essence Flask ») : de 0 à 100 unités d'une essence, dans un Data Component du mod (type + quantité), affichées dans le tooltip et en barre colorée selon l'essence.
+- **Réservoirs** (« Essence Tank ») : quatre paliers, chacun fabriqué à l'établi avec le harnais du palier et de l'essence intensifiée. Capacités : fer 5 000, doré 20 000, radiant 50 000, selle des Furies 100 000 (100 fois une jauge de table).
+- Un conteneur qui contient de l'essence intensifiée brille comme une pomme dorée enchantée (éclat d'enchantement, effet visuel seulement).
 
-- **Déclencheur** : `LivingDeathEvent` d'un `EnderDragon` dans l'End, côté serveur. La forge apparaît seulement si `EndDragonFight.hasPreviouslyKilledDragon()` est déjà vrai à ce moment-là, c'est-à-dire si un dragon a déjà été tué avant celui-ci. Le premier dragon ne fait donc rien, et la forge apparaît après le premier respawn avec les 4 cristaux. Ça fonctionne aussi sur les anciens mondes, et avec YUNG's Better End Island, qui met ce flag à jour lui aussi.
-- **Placement** : une structure NBT faite main (StructureTemplate vanilla), posée **dans le vide, hors de l'île centrale**, à mi-parcours entre l'île centrale et les îles extérieures. Rayon par défaut ≈ 512 blocs (config serveur), angle dérivé de la seed du monde. Elle est hors de portée de tout ce que les mods d'End modifient autour de l'île centrale (YUNG's Better End Island, BetterEnd, Nullscape…).
-- **Hauteur** : un Y fixe (config serveur). La structure flotte et apporte sa propre plateforme : on ne lit pas de heightmap et on ne pose pas de fondation. Position et hauteur sont mémorisées dans les SavedData du monde à la première pose, pour que les réparations retombent exactement au même endroit, même si la config change ensuite.
-- **Chargement** : les quelques chunks de l'emprise sont chargés (et générés si besoin) au moment de la pose. C'est un coût unique et ponctuel.
-- **Réparation** : seuls les blocs non-air du template sont reposés et écrasent ce que le joueur y a mis. Les positions air du template ne touchent jamais aux blocs des joueurs, ni au terrain qu'un mod d'End aurait généré à cet endroit.
-- La structure contient la table d'assemblage et **de nombreux tonneaux de plumes et de cuir**. Ils utilisent une loot table du mod (`simplywings:chests/forge_supplies`) avec de grosses quantités, de quoi assembler la paire commune de départ. À chaque réparation, les tonneaux sont reposés avec leur loot table : ce sont des ressources sans valeur, le farm n'est pas un problème.
-- **Accès** : en élytre. Le joueur passe par une passerelle de l'End, récupère une élytre dans une cité, puis revole vers la forge grâce au compas. Cette élytre sert aussi de cœur à la paire de départ.
+**Récolte** : avec un **Cloud Absorber** dans l'inventaire, pendant le vol (déplacement ou stationnaire), le serveur remplit les conteneurs non pleins de l'inventaire une fois par seconde (+2 par défaut), avec l'essence de la zone :
 
-**Compas de la forge**
+- Overworld : bande de Y autour des nuages vanilla (186 à 204 par défaut) → nuage ;
+- Nether : à moins de 16 blocs au-dessus d'une surface de lave → vapeur ;
+- End : au-dessus du vide (aucun bloc sous le joueur sur toute la hauteur), à plus de 200 blocs du centre → éthérée.
 
-- À chaque mort de dragon qui pose ou répare la forge, **tous les joueurs présents sur l'île centrale** reçoivent un item `simplywings:forge_compass`. « Sur l'île centrale » = dans l'End, à moins de 192 blocs horizontaux de (0, 0), le même rayon que la barre de boss vanilla, réglable en config serveur.
-- Il pointe vers la forge grâce au Data Component vanilla `lodestone_tracker` (GlobalPos de l'End, non lié à une magnétite). L'aiguille passe par `ItemProperties.register` et `CompassItemPropertyFunction` côté client, sans mixin. Hors de l'End, il tourne dans le vide comme un compas vanilla.
+Les bandes et les quantités sont en config serveur (`[cloud]`). Le calcul est serveur, à intervalle fixe ; le client ne voit que l'item mis à jour, sans paquet dédié.
+
+**Stamina** : quand la stamina est vide, l'essence intensifiée des conteneurs de l'inventaire la remplace, au taux de **1 essence = 1 stamina**. Le serveur recharge la stamina par petits paquets en vidant d'abord les flacons puis les réservoirs ; le client prédit la recharge avec le même calcul. Sans effet en créatif et avec Night (stamina déjà infinie).
+
+**Compresseur de nuage** (`simplywings:cloud_compressor`, dans la Raffinerie céleste, débloquée au 4e dragon)
+
+- Un gros bloc multiple de 3 × 3 × 5 (une cuve cylindrique pleine d'engrenages et de tuyaux, modèle Blockbench rendu par un BlockEntityRenderer), comme un four ou un alambic : 3 emplacements d'entrée (nuage, vapeur, éthérée) et 1 de sortie. Chaque emplacement accepte un flacon ou un réservoir, quel que soit son contenu tant qu'il convient.
+- Un cycle prend 1 unité de chaque entrée et ajoute 3 unités d'essence intensifiée au conteneur de sortie. Il s'arrête si une entrée est vide ou si la sortie est pleine (ou contient une autre essence).
+- Les engrenages tournent et la cuve bouillonne pendant la compression.
+
+## Les trois sanctuaires de l'End
+
+Trois structures flottantes, posées dans le vide de l'End à la même distance du centre (512 blocs par défaut), aux trois sommets d'un triangle équilatéral (angles séparés de 120°, angle de départ dérivé de la seed). Aucune n'est générée par le worldgen : elles apparaissent aux morts de dragons.
+
+| Mort du dragon | Structure | Bloc | Compas |
+| --- | --- | --- | --- |
+| 2e | **Sanctuaire céleste** (`sky_sanctum`) : île éthérée, « assemblage divin », entourée d'un nuage de barres de l'End, de vitres et de piliers, fermée sauf l'entrée avant | table d'assemblage | `sanctum_compass` |
+| 3e | **Forge rustique** (`wing_forge`) : forge de pierre et de bois, fumante, cheminées, enclumes, tonneaux | établi de la forge | `forge_compass` |
+| 4e | **Raffinerie céleste** (`cloud_refinery`) : chantier de cuivre et de verre autour du compresseur | compresseur de nuage | `refinery_compass` |
+
+- **Forme** : chacune est une île flottante irrégulière, en croix d'environ 25 blocs par branche, avec son bâtiment, un peu de nature et un aspect en partie en ruine. Elles sont assemblées à partir de plusieurs templates NBT si besoin.
+- **Déclencheur** : `LivingDeathEvent` d'un `EnderDragon` dans l'End, côté serveur. Le mod compte les morts dans ses SavedData (le premier dragon déjà tué d'un ancien monde est rattrapé grâce à `EndDragonFight.hasPreviouslyKilledDragon()`). À la 2e, 3e et 4e mort, la structure correspondante apparaît ; ensuite, chaque mort répare les structures déjà débloquées. Jamais de hook interne de `EndDragonFight`, que YUNG's Better End Island annule et réécrit.
+- **Hauteur** : un Y fixe (config serveur). Positions et hauteur sont mémorisées à la première pose, pour que les réparations retombent au même endroit même si la config change.
+- **Réparation** : seuls les blocs non-air du template sont reposés. Les positions air ne touchent jamais aux blocs des joueurs, ni au terrain d'un mod d'End.
+- **Tonneaux** : la forge rustique garde des tonneaux de plumes, de cuir et de ficelle (`simplywings:chests/forge_supplies`), reposés à chaque réparation.
+- **Accès** : en élytre. Le joueur récupère une élytre dans une cité de l'End, puis revole vers les sanctuaires grâce aux compas. Cette élytre sert aussi de cœur à la paire de départ.
+
+**Compas** : à la mort qui fait apparaître une structure (et à chaque réparation), tous les joueurs présents sur l'île centrale (à moins de 192 blocs horizontaux de (0, 0), réglable) reçoivent le compas de cette structure. Il pointe vers elle grâce au Data Component vanilla `lodestone_tracker` (GlobalPos de l'End, non lié à une magnétite). Hors de l'End, il tourne dans le vide comme un compas vanilla.
 
 ## Intégration JEI
 
