@@ -15,5 +15,8 @@
   "result": {
     "id": "simplywings:nebula_wings"
   },
-  "essence": 300
+  "essence": {
+    "cloud": 150,
+    "steam": 150
+  }
 }

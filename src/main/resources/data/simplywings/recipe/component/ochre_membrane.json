@@ -22,5 +22,7 @@
     "id": "simplywings:ochre_membrane",
     "count": 1
   },
-  "essence": 15
+  "essence": {
+    "steam": 15
+  }
 }

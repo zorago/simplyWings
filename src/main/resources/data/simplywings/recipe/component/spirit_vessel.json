@@ -22,5 +22,7 @@
     "id": "simplywings:spirit_vessel",
     "count": 1
   },
-  "essence": 20
+  "essence": {
+    "steam": 20
+  }
 }

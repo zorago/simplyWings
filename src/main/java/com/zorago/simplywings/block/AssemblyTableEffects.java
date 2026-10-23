@@ -16,7 +16,6 @@ import net.minecraft.world.phys.Vec3;
 import org.joml.Vector3f;
 
 public final class AssemblyTableEffects {
-    private static final int COMPONENT_LENGTH = 24;
     private static final int CLIMAX = AssemblyTableBlockEntity.ASSEMBLY_TICKS;
     private static final int WINGS_LENGTH = CLIMAX + 60;
     private static final Vector3f CLOUD = new Vector3f(0.85F, 0.95F, 1.0F);
@@ -26,11 +25,9 @@ public final class AssemblyTableEffects {
     public static void tick(Level level, BlockPos pos, BlockState state, AssemblyTableBlockEntity table) {
         Frame frame = new Frame(level, pos, state.getValue(AssemblyTableBlock.FACING));
         long time = level.getGameTime();
-        idle(frame, time, table.tank() / (float) AssemblyTableBlockEntity.TANK_CAPACITY);
+        idle(frame, time, table.fill());
         int t = (int) (time - table.animationStart());
-        if (table.animation() == AssemblyTableBlockEntity.EVENT_COMPONENT && t <= COMPONENT_LENGTH) {
-            component(frame, t);
-        } else if (table.animation() == AssemblyTableBlockEntity.EVENT_WINGS && t <= WINGS_LENGTH) {
+        if (table.animation() == AssemblyTableBlockEntity.EVENT_WINGS && t <= WINGS_LENGTH) {
             wings(frame, t);
         }
     }
@@ -59,38 +56,6 @@ public final class AssemblyTableEffects {
             double angle = random.nextDouble() * Mth.TWO_PI;
             f.particle(ParticleTypes.ENCHANT, emblem.x, emblem.y, emblem.z,
                     Math.cos(angle) * 1.5, random.nextDouble() * 0.6 - 0.8, Math.sin(angle) * 1.5);
-        }
-    }
-
-    private static void component(Frame f, int t) {
-        RandomSource random = f.level.random;
-        Vec3 top = f.at(8, 13, 8);
-        if (t == 0) {
-            f.sound(top, SoundEvents.SMITHING_TABLE_USE, 0.8F, 1.2F);
-            f.sound(top, SoundEvents.AMETHYST_BLOCK_CHIME, 1.0F, 1.4F);
-        }
-        if (t < 12) {
-            float p = t / 12.0F;
-            for (int i = 0; i < 6; i++) {
-                double angle = random.nextDouble() * Mth.TWO_PI;
-                f.particle(ParticleTypes.ENCHANT, top.x, top.y + 0.1, top.z,
-                        Math.cos(angle) * 1.2, random.nextDouble() * 0.8, Math.sin(angle) * 1.2);
-            }
-            for (int k = 0; k < 4; k++) {
-                double angle = t * 0.6 + k * Mth.HALF_PI;
-                double radius = 0.9 * (1 - p);
-                f.particle(dust(GOLD, 0.8F), top.x + Math.cos(angle) * radius, top.y + 0.1 + 0.4 * (1 - p), top.z + Math.sin(angle) * radius, 0, 0, 0);
-            }
-        } else if (t == 12) {
-            f.sound(top, SoundEvents.AMETHYST_BLOCK_RESONATE, 1.0F, 1.6F);
-            for (int i = 0; i < 14; i++) {
-                Vec3 dir = randomDirection(random);
-                f.particle(ParticleTypes.END_ROD, top.x, top.y + 0.15, top.z, dir.x * 0.06, Math.abs(dir.y) * 0.08, dir.z * 0.06);
-            }
-            ring(f, top.add(0, 0.05, 0), 0.7, 16, dust(CLOUD, 0.9F));
-        } else {
-            f.particle(ParticleTypes.WAX_ON, top.x + (random.nextDouble() - 0.5) * 0.8, top.y + 0.2 + random.nextDouble() * 0.3,
-                    top.z + (random.nextDouble() - 0.5) * 0.8, 0, 0.02, 0);
         }
     }
 
@@ -223,10 +188,6 @@ public final class AssemblyTableEffects {
             double angle = i * Mth.TWO_PI / count;
             f.particle(options, center.x + Math.cos(angle) * radius, center.y, center.z + Math.sin(angle) * radius, 0, 0, 0);
         }
-    }
-
-    private static Vec3 randomDirection(RandomSource random) {
-        return new Vec3(random.nextGaussian(), random.nextGaussian(), random.nextGaussian()).normalize();
     }
 
     private static DustParticleOptions dust(Vector3f color, float scale) {

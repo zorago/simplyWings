@@ -4,7 +4,7 @@
 
 Le roi du surplace, de toutes petites ailes floues. Une petite paire, donc une petite route.
 
-Règles, légende et objets partagés : [`CRAFTING.md`](../CRAFTING.md). Dernière mise à jour : 22 octobre 2026.
+Règles, légende et objets partagés : [`CRAFTING.md`](../CRAFTING.md). Dernière mise à jour : 23 octobre 2026.
 
 ## En bref
 
@@ -12,7 +12,7 @@ Règles, légende et objets partagés : [`CRAFTING.md`](../CRAFTING.md). Derniè
 | --- | --- |
 | Profondeur | 1 niveau de craft avant les pièces (max 1 en rare) |
 | Crafts | 4 en `GRID` + 1 assemblage |
-| Cloud Essence | 60 (pièces) + 100 (assemblage) = **160** |
+| Essences | 60 nuage (pièces) + 100 nuage (assemblage) = **160 nuage** |
 | Matières premières | 5 types du mod (14 objets) · 5 types vanilla (21 objets) |
 | Drops du mod | Supple Hide (MOB · Cow, Mooshroom, Horse, Donkey, Llama), Silk Thread (MOB · Spider, Cave Spider), Sky Iron Fleck (BLOCK · Iron Ore, Deepslate Iron Ore), Nectar Drop (BLOCK · `#minecraft:small_flowers`), Emerald Sliver (BLOCK · Emerald Ore, Deepslate Emerald Ore) |
 
@@ -39,10 +39,10 @@ Niv. = niveau de craft (0 = matière première). Crafts = nombre de fois que la 
 
 | # | Produit | Où | Niv. | Crafts | Entrées par craft | Essence | Cumul |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | Iron-Buckled Harness `simplywings:iron_harness` ×1 | `GRID` | 1 | 1 | Leather ×6, Supple Hide ×2, Iron Ingot ×2, Silk Thread ×1, Sky Iron Fleck ×1 | 10 | 10 |
-| 2 | Hummingbird Core `simplywings:hummingbird_core` ×1 | `GRID` | 1 | 1 | Iron Ingot ×4, Nectar Drop ×2, Sugar ×2, Clock ×1 | 30 | 40 |
-| 3 | Hummingbird Wing `simplywings:hummingbird_wing` ×2 | `GRID` | 1 | 2 | Emerald Sliver ×1, Sky Iron Fleck ×2, Feather ×3, Nectar Drop ×1 | 2 × 10 | 60 |
-| 4 | Hummingbird Wings `simplywings:hummingbird_wings` | `ASM` | — | 1 | Harnais : Iron-Buckled Harness → #1 · Cœur : Hummingbird Core → #2 · Aile G : Hummingbird Wing → #3 · Aile D : Hummingbird Wing → #3 | 100 | **160** |
+| 1 | Iron-Buckled Harness `simplywings:iron_harness` ×1 | `GRID` | 1 | 1 | Leather ×6, Supple Hide ×2, Iron Ingot ×2, Silk Thread ×1, Sky Iron Fleck ×1 | 10 nuage | 10 nuage |
+| 2 | Hummingbird Core `simplywings:hummingbird_core` ×1 | `GRID` | 1 | 1 | Iron Ingot ×4, Nectar Drop ×2, Sugar ×2, Clock ×1 | 30 nuage | 40 nuage |
+| 3 | Hummingbird Wing `simplywings:hummingbird_wing` ×2 | `GRID` | 1 | 2 | Emerald Sliver ×1, Sky Iron Fleck ×2, Feather ×3, Nectar Drop ×1 | 2 × (10 nuage) | 60 nuage |
+| 4 | Hummingbird Wings `simplywings:hummingbird_wings` | `ASM` | — | 1 | Harnais : Iron-Buckled Harness → #1 · Cœur : Hummingbird Core → #2 · Aile G : Hummingbird Wing → #3 · Aile D : Hummingbird Wing → #3 | 100 nuage | **160 nuage** |
 
 ## Recettes
 
@@ -50,7 +50,7 @@ Grille 5×5 sans les coins : `.` = coin absent, `_` = case vide.
 
 ### #1 · Iron-Buckled Harness · `simplywings:iron_harness` · partagé
 
-`GRID` · niveau 1 · 10 Cloud Essence · donne ×1
+`GRID` · niveau 1 · essence : 10 nuage · donne ×1
 
 ```
 . L _ L .
@@ -70,7 +70,7 @@ _ L K L _
 
 ### #2 · Hummingbird Core · `simplywings:hummingbird_core`
 
-`GRID` · niveau 1 · 30 Cloud Essence · donne ×1
+`GRID` · niveau 1 · essence : 30 nuage · donne ×1
 
 ```
 . _ _ _ .
@@ -89,7 +89,7 @@ _ I N I _
 
 ### #3 · Hummingbird Wing · `simplywings:hummingbird_wing`
 
-`GRID` · niveau 1 · 10 Cloud Essence · donne ×1
+`GRID` · niveau 1 · essence : 10 nuage · donne ×1
 
 ```
 . _ _ _ .

@@ -1,7 +1,8 @@
 pal({
   k: "#000000", w: "#ffffff", f: "#c6c6c6", s: "#555555", S: "#373737", m: "#8b8b8b", t: "#a0a0a0",
   n: "#1b1028", N: "#2a1a3d", g: "#e3a12f", G: "#fde27a", o: "#8a4f12",
-  c: "#bfe6f7", C: "#e8f8ff", q: "#9fd0ea", Q: "#6fa9c9", x: "#7a7a7a", y: "#b0b0b0"
+  c: "#bfe6f7", C: "#e8f8ff", q: "#9fd0ea", Q: "#6fa9c9", x: "#7a7a7a", y: "#b0b0b0",
+  W: "#ffffff", V: "#e6e6e6", U: "#cccccc", T: "#a8a8a8"
 })
 
 const W = 176, H = 206
@@ -43,10 +44,13 @@ const flaskGhost = (x, y) => (c) => {
   c.rect(x + 4, y + 13, 8, 2, "y")
 }
 
-const tank = (c) => {
-  c.rect(10, 18, 12, 70, "n")
-  c.hline(9, 17, 14, "S"); c.vline(9, 17, 72, "S")
-  c.hline(10, 88, 13, "w"); c.vline(22, 18, 71, "w")
+const gauges = (c) => {
+  for (let i = 0; i < 4; i++) {
+    const x = 9 + i * 6
+    c.rect(x, 18, 5, 70, "n")
+    c.hline(x - 1, 17, 6, "S"); c.vline(x - 1, 17, 72, "S")
+    c.hline(x, 88, 6, "w"); c.vline(x + 5, 18, 71, "w")
+  }
 }
 
 const arrow = (x, y, k) => (c) => {
@@ -54,9 +58,9 @@ const arrow = (x, y, k) => (c) => {
   for (let i = 0; i < 8; i++) c.vline(x + 12 + i, y + i, 15 - 2 * i, k)
 }
 
-const common = [panel, inventory, tank, slot(8, 92), flaskGhost(8, 92)]
+const common = [panel, inventory, gauges, slot(8, 92), flaskGhost(8, 92)]
 
-sprite("assembly_table_components", { w: 256, h: 256 },
+sprite("forge_bench_components", { w: 256, h: 256 },
   ...common,
   (c) => {
     for (let r = 0; r < 5; r++) for (let i = 0; i < 5; i++) {
@@ -77,7 +81,7 @@ sprite("assembly_table_assembly", { w: 256, h: 256 },
   arrow(125, 45, "m"),
   bigSlot(150, 44))
 
-sprite("assembly_table_energy", { w: 256, h: 256 },
+sprite("forge_bench_energy", { w: 256, h: 256 },
   ...common,
   (c) => {
     c.rect(66, 30, 44, 44, "m")
@@ -108,21 +112,22 @@ sprite("tab_off", { w: 28, h: 28 },
 sprite("arrow_progress", { w: 20, h: 15 }, arrow(0, 0, "g"),
   (c) => { c.hline(0, 5, 12, "G"); for (let i = 0; i < 4; i++) c.px(12 + i, i, "G") })
 
-sprite("tank_fill", { w: 12, h: 70 },
-  grad(0, 0, 12, 70, "CcqQ", "v", 0.5),
+sprite("gauge_fill", { w: 5, h: 70 },
   (c) => {
-    for (let y = 3; y < 70; y += 9) { c.hline(2, y, 4, "C"); c.hline(7, y + 4, 3, "w") }
-    c.vline(1, 0, 70, "C")
+    for (let y = 0; y < 70; y++) {
+      c.px(0, y, "W"); c.px(1, y, "V"); c.px(2, y, "U"); c.px(3, y, "U"); c.px(4, y, "T")
+    }
+    for (let y = 3; y < 70; y += 9) { c.px(1, y, "W"); c.px(2, y + 4, "W") }
   })
 
-sprite("tank_ticks", { w: 12, h: 70 },
-  (c) => { for (let i = 1; i < 10; i++) { c.hline(8, i * 7, 4, "N"); c.hline(10, i * 7 - 1, 2, "Q") } })
+sprite("gauge_ticks", { w: 5, h: 70 },
+  (c) => { for (let i = 1; i < 10; i++) { c.hline(3, i * 7, 2, "N"); c.px(4, i * 7 - 1, "x") } })
 
 sprite("cost_icon", { w: 9, h: 7 }, `
-  ...ww....
-  .wwCCw.w.
-  wCCCCCwCw
-  wCcccCCCw
-  wccccccQw
-  .wQQQQQw.
-  ..wwwww..`)
+  ...WW....
+  .WWWWW.W.
+  WWWWWWWVW
+  WWVVVWWVW
+  WVVUUVVTW
+  .VTTTTTV.
+  ..VVVVV..`)

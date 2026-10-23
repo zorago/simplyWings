@@ -22,5 +22,7 @@
     "id": "simplywings:condensed_shadow",
     "count": 1
   },
-  "essence": 15
+  "essence": {
+    "steam": 15
+  }
 }

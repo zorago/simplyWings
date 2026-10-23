@@ -31,5 +31,9 @@
     "id": "simplywings:fury_saddle",
     "count": 1
   },
-  "essence": 80
+  "essence": {
+    "steam": 25,
+    "ethereal": 25,
+    "intensified": 30
+  }
 }

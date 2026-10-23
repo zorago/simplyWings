@@ -22,5 +22,8 @@
     "id": "simplywings:weightless_pearl",
     "count": 1
   },
-  "essence": 25
+  "essence": {
+    "steam": 10,
+    "ethereal": 15
+  }
 }

@@ -15,5 +15,9 @@
   "result": {
     "id": "simplywings:yin_yang_wings"
   },
-  "essence": 800
+  "essence": {
+    "cloud": 250,
+    "steam": 250,
+    "ethereal": 300
+  }
 }

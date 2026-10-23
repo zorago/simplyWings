@@ -4,7 +4,7 @@
 
 L'équilibre, première paire asymétrique : une aile noire et une aile blanche.
 
-Règles, légende et objets partagés : [`CRAFTING.md`](../CRAFTING.md). Dernière mise à jour : 22 octobre 2026.
+Règles, légende et objets partagés : [`CRAFTING.md`](../CRAFTING.md). Dernière mise à jour : 23 octobre 2026.
 
 ## En bref
 
@@ -12,7 +12,7 @@ Règles, légende et objets partagés : [`CRAFTING.md`](../CRAFTING.md). Derniè
 | --- | --- |
 | Profondeur | 3 niveaux de craft avant les pièces (max 3 en légendaire) |
 | Crafts | 18 en `GRID` + 1 assemblage |
-| Cloud Essence | 645 (pièces) + 800 (assemblage) = **1445** |
+| Essences | 100 nuage + 220 vapeur + 325 éthérée (pièces) + 250 nuage + 250 vapeur + 300 éthérée (assemblage) = **350 nuage + 470 vapeur + 625 éthérée** |
 | Matières premières | 12 types du mod (35 objets) · 12 types vanilla (63 objets) |
 | Drops du mod | Prism Shard (BLOCK · Diamond Ore, Deepslate Diamond Ore), Gilded Vein (BLOCK · Gold Ore, Deepslate Gold Ore, Nether Gold Ore), Pale Quartz (BLOCK · Nether Quartz Ore), Void Grit (BLOCK · End Stone), Supple Hide (MOB · Cow, Mooshroom, Horse, Donkey, Llama), Silk Thread (MOB · Spider, Cave Spider), Sky Iron Fleck (BLOCK · Iron Ore, Deepslate Iron Ore), Abyssal Ink (MOB · Squid, Glow Squid), Echo Resonance (BLOCK · Sculk Shrieker), Pristine Feather (MOB · Chicken), Heavenly Down (MOB · Chicken), Ember Wisp (MOB · Blaze) |
 
@@ -53,19 +53,19 @@ Niv. = niveau de craft (0 = matière première). Crafts = nombre de fois que la 
 
 | # | Produit | Où | Niv. | Crafts | Entrées par craft | Essence | Cumul |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | Iron-Buckled Harness `simplywings:iron_harness` ×1 | `GRID` | 1 | 1 | Leather ×6, Supple Hide ×2, Iron Ingot ×2, Silk Thread ×1, Sky Iron Fleck ×1 | 10 | 10 |
-| 2 | Umbral Plume `simplywings:umbral_plume` ×6 | `GRID` | 1 | 3 | Feather ×4, Abyssal Ink ×1, Echo Resonance ×1 | 3 × 20 | 70 |
-| 3 | Lucent Plume `simplywings:lucent_plume` ×6 | `GRID` | 1 | 3 | Pristine Feather ×4, Bone Meal ×1, Heavenly Down ×1 | 3 × 20 | 130 |
-| 4 | Gilded Frame `simplywings:gilded_frame` ×2 | `GRID` | 1 | 2 | Gold Ingot ×4, Blaze Powder ×1, Gilded Vein ×1, Ember Wisp ×1 | 2 × 15 | 160 |
-| 5 | Gilded Harness `simplywings:gilded_harness` ×1 | `GRID` | 2 | 1 | Gold Ingot ×4, Leather ×2, Iron-Buckled Harness ×1 → #1, Gilded Vein ×1 | 25 | 185 |
-| 6 | Yin Sphere `simplywings:yin_sphere` ×1 | `GRID` | 2 | 1 | Obsidian ×2, Umbral Plume ×1 → #2, Diamond ×1 | 40 | 225 |
-| 7 | Yang Sphere `simplywings:yang_sphere` ×1 | `GRID` | 2 | 1 | Pale Quartz ×2, Lucent Plume ×1 → #3, Diamond ×1 | 40 | 265 |
-| 8 | Celestial Frame `simplywings:celestial_frame` ×2 | `GRID` | 2 | 2 | End Rod ×2, Void Grit ×1, Diamond ×2, Gilded Frame ×1 → #4 | 2 × 35 | 335 |
-| 9 | Radiant Harness `simplywings:radiant_harness` ×1 | `GRID` | 3 | 1 | Diamond ×4, Phantom Membrane ×2, Gilded Harness ×1 → #5, Prism Shard ×1 | 50 | 385 |
-| 10 | Taiji Core `simplywings:yin_yang_core` ×1 | `GRID` | 3 | 1 | Diamond ×4, Yin Sphere ×1 → #6, Yang Sphere ×1 → #7 | 100 | 485 |
-| 11 | Yin Wing `simplywings:yin_wing` ×1 | `GRID` | 3 | 1 | Umbral Plume ×5 → #2, Celestial Frame ×1 → #8, Black Dye ×1 | 80 | 565 |
-| 12 | Yang Wing `simplywings:yang_wing` ×1 | `GRID` | 3 | 1 | Lucent Plume ×5 → #3, Celestial Frame ×1 → #8, White Dye ×1 | 80 | 645 |
-| 13 | Wings of Yin and Yang `simplywings:yin_yang_wings` | `ASM` | — | 1 | Harnais : Radiant Harness → #9 · Cœur : Taiji Core → #10 · Aile G : Yin Wing → #11 · Aile D : Yang Wing → #12 | 800 | **1445** |
+| 1 | Iron-Buckled Harness `simplywings:iron_harness` ×1 | `GRID` | 1 | 1 | Leather ×6, Supple Hide ×2, Iron Ingot ×2, Silk Thread ×1, Sky Iron Fleck ×1 | 10 nuage | 10 nuage |
+| 2 | Umbral Plume `simplywings:umbral_plume` ×6 | `GRID` | 1 | 3 | Feather ×4, Abyssal Ink ×1, Echo Resonance ×1 | 3 × (20 éthérée) | 10 nuage + 60 éthérée |
+| 3 | Lucent Plume `simplywings:lucent_plume` ×6 | `GRID` | 1 | 3 | Pristine Feather ×4, Bone Meal ×1, Heavenly Down ×1 | 3 × (20 éthérée) | 10 nuage + 120 éthérée |
+| 4 | Gilded Frame `simplywings:gilded_frame` ×2 | `GRID` | 1 | 2 | Gold Ingot ×4, Blaze Powder ×1, Gilded Vein ×1, Ember Wisp ×1 | 2 × (15 vapeur) | 10 nuage + 30 vapeur + 120 éthérée |
+| 5 | Gilded Harness `simplywings:gilded_harness` ×1 | `GRID` | 2 | 1 | Gold Ingot ×4, Leather ×2, Iron-Buckled Harness ×1 → #1, Gilded Vein ×1 | 10 nuage + 15 vapeur | 20 nuage + 45 vapeur + 120 éthérée |
+| 6 | Yin Sphere `simplywings:yin_sphere` ×1 | `GRID` | 2 | 1 | Obsidian ×2, Umbral Plume ×1 → #2, Diamond ×1 | 20 vapeur + 20 éthérée | 20 nuage + 65 vapeur + 140 éthérée |
+| 7 | Yang Sphere `simplywings:yang_sphere` ×1 | `GRID` | 2 | 1 | Pale Quartz ×2, Lucent Plume ×1 → #3, Diamond ×1 | 20 vapeur + 20 éthérée | 20 nuage + 85 vapeur + 160 éthérée |
+| 8 | Celestial Frame `simplywings:celestial_frame` ×2 | `GRID` | 2 | 2 | End Rod ×2, Void Grit ×1, Diamond ×2, Gilded Frame ×1 → #4 | 2 × (15 vapeur + 20 éthérée) | 20 nuage + 115 vapeur + 200 éthérée |
+| 9 | Radiant Harness `simplywings:radiant_harness` ×1 | `GRID` | 3 | 1 | Diamond ×4, Phantom Membrane ×2, Gilded Harness ×1 → #5, Prism Shard ×1 | 25 vapeur + 25 éthérée | 20 nuage + 140 vapeur + 225 éthérée |
+| 10 | Taiji Core `simplywings:yin_yang_core` ×1 | `GRID` | 3 | 1 | Diamond ×4, Yin Sphere ×1 → #6, Yang Sphere ×1 → #7 | 30 nuage + 30 vapeur + 40 éthérée | 50 nuage + 170 vapeur + 265 éthérée |
+| 11 | Yin Wing `simplywings:yin_wing` ×1 | `GRID` | 3 | 1 | Umbral Plume ×5 → #2, Celestial Frame ×1 → #8, Black Dye ×1 | 25 nuage + 25 vapeur + 30 éthérée | 75 nuage + 195 vapeur + 295 éthérée |
+| 12 | Yang Wing `simplywings:yang_wing` ×1 | `GRID` | 3 | 1 | Lucent Plume ×5 → #3, Celestial Frame ×1 → #8, White Dye ×1 | 25 nuage + 25 vapeur + 30 éthérée | 100 nuage + 220 vapeur + 325 éthérée |
+| 13 | Wings of Yin and Yang `simplywings:yin_yang_wings` | `ASM` | — | 1 | Harnais : Radiant Harness → #9 · Cœur : Taiji Core → #10 · Aile G : Yin Wing → #11 · Aile D : Yang Wing → #12 | 250 nuage + 250 vapeur + 300 éthérée | **350 nuage + 470 vapeur + 625 éthérée** |
 
 ## Recettes
 
@@ -73,7 +73,7 @@ Grille 5×5 sans les coins : `.` = coin absent, `_` = case vide.
 
 ### #1 · Iron-Buckled Harness · `simplywings:iron_harness` · partagé
 
-`GRID` · niveau 1 · 10 Cloud Essence · donne ×1
+`GRID` · niveau 1 · essence : 10 nuage · donne ×1
 
 ```
 . L _ L .
@@ -93,7 +93,7 @@ _ L K L _
 
 ### #2 · Umbral Plume · `simplywings:umbral_plume`
 
-`GRID` · niveau 1 · 20 Cloud Essence · donne ×2
+`GRID` · niveau 1 · essence : 20 éthérée · donne ×2
 
 ```
 . _ _ _ .
@@ -111,7 +111,7 @@ _ _ _ _ _
 
 ### #3 · Lucent Plume · `simplywings:lucent_plume`
 
-`GRID` · niveau 1 · 20 Cloud Essence · donne ×2
+`GRID` · niveau 1 · essence : 20 éthérée · donne ×2
 
 ```
 . _ _ _ .
@@ -129,7 +129,7 @@ _ _ _ _ _
 
 ### #4 · Gilded Frame · `simplywings:gilded_frame` · partagé
 
-`GRID` · niveau 1 · 15 Cloud Essence · donne ×1
+`GRID` · niveau 1 · essence : 15 vapeur · donne ×1
 
 ```
 . _ _ _ .
@@ -148,7 +148,7 @@ _ G E G _
 
 ### #5 · Gilded Harness · `simplywings:gilded_harness` · partagé
 
-`GRID` · niveau 2 · 25 Cloud Essence · donne ×1
+`GRID` · niveau 2 · essence : 10 nuage + 15 vapeur · donne ×1
 
 ```
 . G _ G .
@@ -167,7 +167,7 @@ _ _ _ _ _
 
 ### #6 · Yin Sphere · `simplywings:yin_sphere`
 
-`GRID` · niveau 2 · 40 Cloud Essence · donne ×1
+`GRID` · niveau 2 · essence : 20 vapeur + 20 éthérée · donne ×1
 
 ```
 . _ _ _ .
@@ -185,7 +185,7 @@ _ _ _ _ _
 
 ### #7 · Yang Sphere · `simplywings:yang_sphere`
 
-`GRID` · niveau 2 · 40 Cloud Essence · donne ×1
+`GRID` · niveau 2 · essence : 20 vapeur + 20 éthérée · donne ×1
 
 ```
 . _ _ _ .
@@ -203,7 +203,7 @@ _ _ _ _ _
 
 ### #8 · Celestial Frame · `simplywings:celestial_frame` · partagé
 
-`GRID` · niveau 2 · 35 Cloud Essence · donne ×1
+`GRID` · niveau 2 · essence : 15 vapeur + 20 éthérée · donne ×1
 
 ```
 . _ _ _ .
@@ -222,7 +222,7 @@ _ _ _ _ _
 
 ### #9 · Radiant Harness · `simplywings:radiant_harness` · partagé
 
-`GRID` · niveau 3 · 50 Cloud Essence · donne ×1
+`GRID` · niveau 3 · essence : 25 vapeur + 25 éthérée · donne ×1
 
 ```
 . D _ D .
@@ -241,7 +241,7 @@ _ _ _ _ _
 
 ### #10 · Taiji Core · `simplywings:yin_yang_core`
 
-`GRID` · niveau 3 · 100 Cloud Essence · donne ×1
+`GRID` · niveau 3 · essence : 30 nuage + 30 vapeur + 40 éthérée · donne ×1
 
 ```
 . _ _ _ .
@@ -259,7 +259,7 @@ _ D _ D _
 
 ### #11 · Yin Wing · `simplywings:yin_wing`
 
-`GRID` · niveau 3 · 80 Cloud Essence · donne ×1
+`GRID` · niveau 3 · essence : 25 nuage + 25 vapeur + 30 éthérée · donne ×1
 
 ```
 . P P P .
@@ -277,7 +277,7 @@ _ _ _ _ _
 
 ### #12 · Yang Wing · `simplywings:yang_wing`
 
-`GRID` · niveau 3 · 80 Cloud Essence · donne ×1
+`GRID` · niveau 3 · essence : 25 nuage + 25 vapeur + 30 éthérée · donne ×1
 
 ```
 . P P P .

@@ -4,7 +4,7 @@
 
 La vitesse céleste : six ailes d'ange dorées. Le séraphin est l'ange le plus élevé : sa route reprend celle de l'ange et la dore.
 
-Règles, légende et objets partagés : [`CRAFTING.md`](../CRAFTING.md). Dernière mise à jour : 22 octobre 2026.
+Règles, légende et objets partagés : [`CRAFTING.md`](../CRAFTING.md). Dernière mise à jour : 23 octobre 2026.
 
 ## En bref
 
@@ -12,7 +12,7 @@ Règles, légende et objets partagés : [`CRAFTING.md`](../CRAFTING.md). Derniè
 | --- | --- |
 | Profondeur | 3 niveaux de craft avant les pièces (max 3 en légendaire) |
 | Crafts | 24 en `GRID` + 1 assemblage |
-| Cloud Essence | 755 (pièces) + 800 (assemblage) = **1555** |
+| Essences | 100 nuage + 315 vapeur + 340 éthérée (pièces) + 250 nuage + 250 vapeur + 300 éthérée (assemblage) = **350 nuage + 565 vapeur + 640 éthérée** |
 | Matières premières | 10 types du mod (51 objets) · 12 types vanilla (76 objets) |
 | Drops du mod | Prism Shard (BLOCK · Diamond Ore, Deepslate Diamond Ore), Gilded Vein (BLOCK · Gold Ore, Deepslate Gold Ore, Nether Gold Ore), Void Grit (BLOCK · End Stone), Supple Hide (MOB · Cow, Mooshroom, Horse, Donkey, Llama), Silk Thread (MOB · Spider, Cave Spider), Sky Iron Fleck (BLOCK · Iron Ore, Deepslate Iron Ore), Gust Mote (MOB · Breeze), Heavenly Down (MOB · Chicken), Pristine Feather (MOB · Chicken), Ember Wisp (MOB · Blaze) |
 
@@ -51,17 +51,17 @@ Niv. = niveau de craft (0 = matière première). Crafts = nombre de fois que la 
 
 | # | Produit | Où | Niv. | Crafts | Entrées par craft | Essence | Cumul |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | Iron-Buckled Harness `simplywings:iron_harness` ×1 | `GRID` | 1 | 1 | Leather ×6, Supple Hide ×2, Iron Ingot ×2, Silk Thread ×1, Sky Iron Fleck ×1 | 10 | 10 |
-| 2 | Bottled Gale `simplywings:bottled_gale` ×4 | `GRID` | 1 | 4 | Gust Mote ×2, Wind Charge ×1, Glass Bottle ×1 | 4 × 15 | 70 |
-| 3 | Blessed Plume `simplywings:blessed_plume` ×10 | `GRID` | 1 | 5 | Feather ×2, Heavenly Down ×2, Pristine Feather ×2, White Dye ×1 | 5 × 15 | 145 |
-| 4 | Gilded Frame `simplywings:gilded_frame` ×2 | `GRID` | 1 | 2 | Gold Ingot ×4, Blaze Powder ×1, Gilded Vein ×1, Ember Wisp ×1 | 2 × 15 | 175 |
-| 5 | Gilded Harness `simplywings:gilded_harness` ×1 | `GRID` | 2 | 1 | Gold Ingot ×4, Leather ×2, Iron-Buckled Harness ×1 → #1, Gilded Vein ×1 | 25 | 200 |
-| 6 | Seraph Core `simplywings:seraph_core` ×1 | `GRID` | 2 | 1 | Bottled Gale ×2 → #2, Nether Star ×1, Diamond ×4, Gilded Vein ×1 | 100 | 300 |
-| 7 | Golden Plume `simplywings:golden_plume` ×10 | `GRID` | 2 | 5 | Gold Ingot ×2, Blessed Plume ×2 → #3, Gilded Vein ×2 | 5 × 35 | 475 |
-| 8 | Celestial Frame `simplywings:celestial_frame` ×2 | `GRID` | 2 | 2 | End Rod ×2, Void Grit ×1, Diamond ×2, Gilded Frame ×1 → #4 | 2 × 35 | 545 |
-| 9 | Radiant Harness `simplywings:radiant_harness` ×1 | `GRID` | 3 | 1 | Diamond ×4, Phantom Membrane ×2, Gilded Harness ×1 → #5, Prism Shard ×1 | 50 | 595 |
-| 10 | Seraph Wing `simplywings:seraph_wing` ×2 | `GRID` | 3 | 2 | Golden Plume ×5 → #7, Celestial Frame ×1 → #8, Bottled Gale ×1 → #2 | 2 × 80 | 755 |
-| 11 | Seraph Wings `simplywings:seraph_wings` | `ASM` | — | 1 | Harnais : Radiant Harness → #9 · Cœur : Seraph Core → #6 · Aile G : Seraph Wing → #10 · Aile D : Seraph Wing → #10 | 800 | **1555** |
+| 1 | Iron-Buckled Harness `simplywings:iron_harness` ×1 | `GRID` | 1 | 1 | Leather ×6, Supple Hide ×2, Iron Ingot ×2, Silk Thread ×1, Sky Iron Fleck ×1 | 10 nuage | 10 nuage |
+| 2 | Bottled Gale `simplywings:bottled_gale` ×4 | `GRID` | 1 | 4 | Gust Mote ×2, Wind Charge ×1, Glass Bottle ×1 | 4 × (15 vapeur) | 10 nuage + 60 vapeur |
+| 3 | Blessed Plume `simplywings:blessed_plume` ×10 | `GRID` | 1 | 5 | Feather ×2, Heavenly Down ×2, Pristine Feather ×2, White Dye ×1 | 5 × (15 éthérée) | 10 nuage + 60 vapeur + 75 éthérée |
+| 4 | Gilded Frame `simplywings:gilded_frame` ×2 | `GRID` | 1 | 2 | Gold Ingot ×4, Blaze Powder ×1, Gilded Vein ×1, Ember Wisp ×1 | 2 × (15 vapeur) | 10 nuage + 90 vapeur + 75 éthérée |
+| 5 | Gilded Harness `simplywings:gilded_harness` ×1 | `GRID` | 2 | 1 | Gold Ingot ×4, Leather ×2, Iron-Buckled Harness ×1 → #1, Gilded Vein ×1 | 10 nuage + 15 vapeur | 20 nuage + 105 vapeur + 75 éthérée |
+| 6 | Seraph Core `simplywings:seraph_core` ×1 | `GRID` | 2 | 1 | Bottled Gale ×2 → #2, Nether Star ×1, Diamond ×4, Gilded Vein ×1 | 30 nuage + 30 vapeur + 40 éthérée | 50 nuage + 135 vapeur + 115 éthérée |
+| 7 | Golden Plume `simplywings:golden_plume` ×10 | `GRID` | 2 | 5 | Gold Ingot ×2, Blessed Plume ×2 → #3, Gilded Vein ×2 | 5 × (15 vapeur + 20 éthérée) | 50 nuage + 210 vapeur + 215 éthérée |
+| 8 | Celestial Frame `simplywings:celestial_frame` ×2 | `GRID` | 2 | 2 | End Rod ×2, Void Grit ×1, Diamond ×2, Gilded Frame ×1 → #4 | 2 × (15 vapeur + 20 éthérée) | 50 nuage + 240 vapeur + 255 éthérée |
+| 9 | Radiant Harness `simplywings:radiant_harness` ×1 | `GRID` | 3 | 1 | Diamond ×4, Phantom Membrane ×2, Gilded Harness ×1 → #5, Prism Shard ×1 | 25 vapeur + 25 éthérée | 50 nuage + 265 vapeur + 280 éthérée |
+| 10 | Seraph Wing `simplywings:seraph_wing` ×2 | `GRID` | 3 | 2 | Golden Plume ×5 → #7, Celestial Frame ×1 → #8, Bottled Gale ×1 → #2 | 2 × (25 nuage + 25 vapeur + 30 éthérée) | 100 nuage + 315 vapeur + 340 éthérée |
+| 11 | Seraph Wings `simplywings:seraph_wings` | `ASM` | — | 1 | Harnais : Radiant Harness → #9 · Cœur : Seraph Core → #6 · Aile G : Seraph Wing → #10 · Aile D : Seraph Wing → #10 | 250 nuage + 250 vapeur + 300 éthérée | **350 nuage + 565 vapeur + 640 éthérée** |
 
 ## Recettes
 
@@ -69,7 +69,7 @@ Grille 5×5 sans les coins : `.` = coin absent, `_` = case vide.
 
 ### #1 · Iron-Buckled Harness · `simplywings:iron_harness` · partagé
 
-`GRID` · niveau 1 · 10 Cloud Essence · donne ×1
+`GRID` · niveau 1 · essence : 10 nuage · donne ×1
 
 ```
 . L _ L .
@@ -89,7 +89,7 @@ _ L K L _
 
 ### #2 · Bottled Gale · `simplywings:bottled_gale` · partagé
 
-`GRID` · niveau 1 · 15 Cloud Essence · donne ×1
+`GRID` · niveau 1 · essence : 15 vapeur · donne ×1
 
 ```
 . _ _ _ .
@@ -107,7 +107,7 @@ _ _ _ _ _
 
 ### #3 · Blessed Plume · `simplywings:blessed_plume` · partagé
 
-`GRID` · niveau 1 · 15 Cloud Essence · donne ×2
+`GRID` · niveau 1 · essence : 15 éthérée · donne ×2
 
 ```
 . _ _ _ .
@@ -126,7 +126,7 @@ _ _ H _ _
 
 ### #4 · Gilded Frame · `simplywings:gilded_frame` · partagé
 
-`GRID` · niveau 1 · 15 Cloud Essence · donne ×1
+`GRID` · niveau 1 · essence : 15 vapeur · donne ×1
 
 ```
 . _ _ _ .
@@ -145,7 +145,7 @@ _ G E G _
 
 ### #5 · Gilded Harness · `simplywings:gilded_harness` · partagé
 
-`GRID` · niveau 2 · 25 Cloud Essence · donne ×1
+`GRID` · niveau 2 · essence : 10 nuage + 15 vapeur · donne ×1
 
 ```
 . G _ G .
@@ -164,7 +164,7 @@ _ _ _ _ _
 
 ### #6 · Seraph Core · `simplywings:seraph_core`
 
-`GRID` · niveau 2 · 100 Cloud Essence · donne ×1
+`GRID` · niveau 2 · essence : 30 nuage + 30 vapeur + 40 éthérée · donne ×1
 
 ```
 . _ _ _ .
@@ -183,7 +183,7 @@ _ D _ D _
 
 ### #7 · Golden Plume · `simplywings:golden_plume`
 
-`GRID` · niveau 2 · 35 Cloud Essence · donne ×2
+`GRID` · niveau 2 · essence : 15 vapeur + 20 éthérée · donne ×2
 
 ```
 . _ _ _ .
@@ -201,7 +201,7 @@ _ _ _ _ _
 
 ### #8 · Celestial Frame · `simplywings:celestial_frame` · partagé
 
-`GRID` · niveau 2 · 35 Cloud Essence · donne ×1
+`GRID` · niveau 2 · essence : 15 vapeur + 20 éthérée · donne ×1
 
 ```
 . _ _ _ .
@@ -220,7 +220,7 @@ _ _ _ _ _
 
 ### #9 · Radiant Harness · `simplywings:radiant_harness` · partagé
 
-`GRID` · niveau 3 · 50 Cloud Essence · donne ×1
+`GRID` · niveau 3 · essence : 25 vapeur + 25 éthérée · donne ×1
 
 ```
 . D _ D .
@@ -239,7 +239,7 @@ _ _ _ _ _
 
 ### #10 · Seraph Wing · `simplywings:seraph_wing`
 
-`GRID` · niveau 3 · 80 Cloud Essence · donne ×1
+`GRID` · niveau 3 · essence : 25 nuage + 25 vapeur + 30 éthérée · donne ×1
 
 ```
 . P P P .

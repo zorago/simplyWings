@@ -22,5 +22,7 @@
     "id": "simplywings:umbral_plume",
     "count": 2
   },
-  "essence": 20
+  "essence": {
+    "ethereal": 20
+  }
 }

@@ -22,5 +22,8 @@
     "id": "simplywings:halo",
     "count": 1
   },
-  "essence": 25
+  "essence": {
+    "steam": 10,
+    "ethereal": 15
+  }
 }

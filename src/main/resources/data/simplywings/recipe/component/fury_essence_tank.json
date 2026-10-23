@@ -1,0 +1,34 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " STS ",
+    " NHN ",
+    " S S ",
+    "     "
+  ],
+  "key": {
+    "S": {
+      "item": "simplywings:dragon_scale"
+    },
+    "T": {
+      "item": "simplywings:radiant_essence_tank"
+    },
+    "N": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "H": {
+      "item": "simplywings:fury_saddle"
+    }
+  },
+  "result": {
+    "id": "simplywings:fury_essence_tank",
+    "count": 1
+  },
+  "essence": {
+    "cloud": 200,
+    "steam": 200,
+    "ethereal": 200,
+    "intensified": 200
+  }
+}

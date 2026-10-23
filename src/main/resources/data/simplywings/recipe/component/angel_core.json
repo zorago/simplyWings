@@ -25,5 +25,9 @@
     "id": "simplywings:angel_core",
     "count": 1
   },
-  "essence": 100
+  "essence": {
+    "cloud": 30,
+    "steam": 30,
+    "ethereal": 40
+  }
 }

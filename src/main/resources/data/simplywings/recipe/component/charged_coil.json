@@ -25,5 +25,7 @@
     "id": "simplywings:charged_coil",
     "count": 1
   },
-  "essence": 15
+  "essence": {
+    "steam": 15
+  }
 }

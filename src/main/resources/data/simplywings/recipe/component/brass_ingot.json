@@ -19,5 +19,7 @@
     "id": "simplywings:brass_ingot",
     "count": 2
   },
-  "essence": 10
+  "essence": {
+    "ethereal": 10
+  }
 }

@@ -8,7 +8,8 @@ from pathlib import Path
 from PIL import Image, ImageDraw
 
 from art import GEMS, ITEMS, METALS, palette, px_js, ramp
-from data import C, D, V
+from data import C, D, TANKS, V
+from essence import ASM, KINDS, LABEL, cost, json_cost
 from lore import CRAFT_LORE, DROP_LORE, EXTRA, PAIR_LORE
 from pairs import PAIRS
 import loot
@@ -19,15 +20,19 @@ ASSETS = ROOT / "src/main/resources/assets/simplywings"
 JAVA = ROOT / "src/main/java/com/zorago/simplywings/item/MaterialIds.java"
 PXL = ROOT / ".claude/skills/pxl-pixel-art/src/node/cli.ts"
 SKIP_PAIRS = set()
-STANDALONE = ["cloud_absorber"]
+STANDALONE = ["cloud_absorber"] + TANKS
 RECIPES = ROOT / "src/main/resources/data/simplywings/recipe"
-ASM_COST = {"Rare": 100, "Épique": 300, "Légendaire": 800, "Mythique": 1000}
 TEMPLATES = [
-    "Of {list}, it is shaped at the Assembly Table.",
-    "Bring {list} to the Assembly Table, and it will take form.",
-    "The Assembly Table weaves it from {list}.",
-    "Born at the Assembly Table, from {list}.",
+    "Of {list}, it is hammered out at the Forge Bench.",
+    "Bring {list} to the Forge Bench, and it will take form.",
+    "The Forge Bench welds it from {list}.",
+    "Born at the Forge Bench, from {list}.",
 ]
+
+
+def essence_text(c):
+    parts = [f"{c[k]} {LABEL[k]}" for k in KINDS if k in c]
+    return (parts[0] if len(parts) == 1 else ", ".join(parts[:-1]) + " and " + parts[-1]) + " Essence"
 
 
 def name(i):
@@ -103,25 +108,34 @@ def lang(drops, crafts):
                  else f", a {name(p['left'])} and a {name(p['right'])}")
         out[f"item.simplywings.{p['id']}_wings.riddle"] = (
             f"At the Assembly Table, join the {name(p['harness'])}, the {name(p['core'])}{'' if wings[0] == ',' else ' '}{wings}, "
-            f"for {ASM_COST[p['rarity']]} Cloud Essence.")
+            f"for {essence_text(ASM[p['rarity']])}.")
     out["item.simplywings.common_wings.lore"] = PAIR_LORE["common"][0]
     out["item.simplywings.common_wings.riddle"] = "At the Assembly Table, join leather, an elytra and two feathers. No Cloud Essence needed."
     out["item.simplywings.cloud_flask.lore"] = EXTRA["cloud_flask"][0]
-    out["item.simplywings.cloud_flask.riddle"] = "At the Assembly Table, wrap a feather in glass. Then fly through the clouds with a Cloud Absorber to fill it."
+    out["item.simplywings.cloud_flask.riddle"] = "At the Forge Bench, wrap a feather in glass. Then fly with a Cloud Absorber through the clouds, above the Nether's lava or over the End's void to fill it."
     for i in STANDALONE:
         out[f"item.simplywings.{i}"] = C[i]["name"]
         out[f"item.simplywings.{i}.lore"] = CRAFT_LORE[i]
     out["item.simplywings.cloud_absorber.riddle"] = (
-        "Of Glass, Copper Ingot, Updraft Shard and a Feather, it is shaped at the Assembly Table. "
-        "Keep it in your bag and fly through the clouds: it fills your Cloud Flasks.")
-    out["item.simplywings.forge_compass"] = "Forge Compass"
-    out["item.simplywings.forge_compass.lore"] = CRAFT_LORE["forge_compass"]
-    out["item.simplywings.forge_compass.riddle"] = (
-        "Stand on the central End island when a dragon falls, from the second one on. It points to the Wing Forge.")
+        "Of Glass, Copper Ingot, Updraft Shard and a Feather, it is hammered out at the Forge Bench. "
+        "Keep it in your bag and fly: it fills your flasks and tanks with the essence of the sky around you.")
+    for t in TANKS:
+        r = C[t]
+        out[f"item.simplywings.{t}.riddle"] = (
+            f"Of {listing([name(x) for x in inputs(t)])}, it is welded at the Forge Bench, for {essence_text(cost(t))}. "
+            "When your stamina runs dry, its Intensified Essence keeps your wings beating.")
+    for c, title, nth, place in [("sanctum_compass", "Sanctum Compass", "second", "Sky Sanctum"),
+                                 ("forge_compass", "Forge Compass", "third", "Wing Forge"),
+                                 ("refinery_compass", "Refinery Compass", "fourth", "Cloud Refinery")]:
+        out[f"item.simplywings.{c}"] = title
+        out[f"item.simplywings.{c}.lore"] = CRAFT_LORE[c]
+        out[f"item.simplywings.{c}.riddle"] = (
+            f"Stand on the central End island when the {nth} dragon falls, or any one after. It points to the {place}.")
     out["item.simplywings.yin_yang_wings"] = "Wings of Yin and Yang"
     out["wing.simplywings.yin_yang"] = "Wings of Yin and Yang"
-    out["block.simplywings.assembly_table.lore"] = EXTRA["assembly_table"][0]
-    out["block.simplywings.assembly_table.riddle"] = EXTRA["assembly_table"][1]
+    for b in ("assembly_table", "forge_bench"):
+        out[f"block.simplywings.{b}.lore"] = EXTRA[b][0]
+        out[f"block.simplywings.{b}.riddle"] = EXTRA[b][1]
     return out
 
 
@@ -201,39 +215,163 @@ def textures(drops, crafts):
             out.alpha_composite(half, ((16 - half.width) // 2, (16 - half.height) // 2))
             out.save(tex / f"{i}.png")
     compass(tex)
-    missing = [i for i in drops + crafts + STANDALONE + ["forge_compass"] if not (tex / f"{i}.png").exists()]
+    containers(tex)
+    missing = [i for i in drops + crafts + STANDALONE + list(COMPASSES) if not (tex / f"{i}.png").exists()]
     return missing
 
 
+COMPASSES = {
+    "sanctum_compass": ((34, 30, 58, 255), (150, 120, 220, 255), (236, 232, 250, 255), (120, 220, 255, 255)),
+    "forge_compass": ((40, 24, 18, 255), (150, 80, 40, 255), (230, 214, 170, 255), (240, 110, 40, 255)),
+    "refinery_compass": ((30, 34, 30, 255), (190, 120, 70, 255), (220, 236, 230, 255), (244, 197, 66, 255)),
+}
+
+
 def compass(tex):
-    rim, ring, face, pin = (34, 22, 48, 255), (110, 60, 140, 255), (222, 220, 160, 255), (60, 40, 70, 255)
-    base = Image.new("RGBA", (16, 16))
-    for y in range(16):
-        for x in range(16):
-            d = math.hypot(x - 7.5, y - 7.5)
-            if d <= 7.6:
-                base.putpixel((x, y), rim if d > 6.6 else ring if d > 5.6 else face)
-    for k in range(32):
-        frame = base.copy()
-        draw = ImageDraw.Draw(frame)
-        a = k / 32 * 2 * math.pi
-        dx, dy = math.sin(a), -math.cos(a)
-        draw.line([(7.5, 7.5), (7.5 + dx * 5, 7.5 + dy * 5)], fill=(200, 60, 230, 255))
-        draw.line([(7.5, 7.5), (7.5 - dx * 3, 7.5 - dy * 3)], fill=(90, 90, 100, 255))
-        frame.putpixel((7, 7), pin)
-        frame.save(tex / f"forge_compass_{k:02d}.png")
-    shutil.copy(tex / "forge_compass_00.png", tex / "forge_compass.png")
     models = ASSETS / "models/item"
-    for k in range(32):
-        (models / f"forge_compass_{k:02d}.json").write_text(json.dumps(
-            {"parent": "minecraft:item/generated", "textures": {"layer0": f"simplywings:item/forge_compass_{k:02d}"}},
+    for cid, (rim, ring, face, needle) in COMPASSES.items():
+        base = Image.new("RGBA", (16, 16))
+        for y in range(16):
+            for x in range(16):
+                d = math.hypot(x - 7.5, y - 7.5)
+                if d <= 7.6:
+                    base.putpixel((x, y), rim if d > 6.6 else ring if d > 5.6 else face)
+        for k in range(32):
+            frame = base.copy()
+            draw = ImageDraw.Draw(frame)
+            a = k / 32 * 2 * math.pi
+            dx, dy = math.sin(a), -math.cos(a)
+            draw.line([(7.5, 7.5), (7.5 + dx * 5, 7.5 + dy * 5)], fill=needle)
+            draw.line([(7.5, 7.5), (7.5 - dx * 3, 7.5 - dy * 3)], fill=(90, 90, 100, 255))
+            frame.putpixel((7, 7), rim)
+            frame.save(tex / f"{cid}_{k:02d}.png")
+            (models / f"{cid}_{k:02d}.json").write_text(json.dumps(
+                {"parent": "minecraft:item/generated", "textures": {"layer0": f"simplywings:item/{cid}_{k:02d}"}},
+                indent=2) + "\n", encoding="utf-8", newline="\n")
+        shutil.copy(tex / f"{cid}_00.png", tex / f"{cid}.png")
+        overrides = [{"predicate": {"simplywings:angle": (k - 0.5) / 32}, "model": f"simplywings:item/{cid}_{k:02d}"}
+                     for k in range(1, 32)]
+        overrides.append({"predicate": {"simplywings:angle": 31.5 / 32}, "model": f"simplywings:item/{cid}_00"})
+        (models / f"{cid}.json").write_text(json.dumps(
+            {"parent": "minecraft:item/generated", "textures": {"layer0": f"simplywings:item/{cid}_00"},
+             "overrides": overrides}, indent=2) + "\n", encoding="utf-8", newline="\n")
+
+
+FLASK = [
+    "................",
+    "......aaaa......",
+    "......abba......",
+    "......acda......",
+    ".....aaaaaa.....",
+    "......aefa......",
+    "......aefa......",
+    ".....ae..fa.....",
+    "....ae....fa....",
+    "...aeg.....fa...",
+    "...aeg.....fa...",
+    "...af......ha...",
+    "...af......ha...",
+    "....af....ha....",
+    ".....ahhhha.....",
+    "......aaaa......",
+]
+FLASK_PAL = {"a": (43, 34, 56), "b": (194, 124, 30), "c": (138, 79, 18), "d": (227, 161, 47),
+             "e": (216, 240, 255), "f": (159, 208, 234), "g": (255, 255, 255), "h": (95, 134, 163)}
+TANK_METALS = {
+    "iron_essence_tank": ((52, 52, 60), (120, 122, 132), (176, 178, 186), (222, 224, 230), (140, 90, 50)),
+    "gilded_essence_tank": ((70, 44, 16), (170, 110, 30), (226, 170, 52), (253, 226, 122), (120, 70, 30)),
+    "radiant_essence_tank": ((24, 60, 70), (60, 160, 170), (120, 220, 220), (210, 250, 250), (40, 90, 110)),
+    "fury_essence_tank": ((18, 14, 26), (52, 40, 70), (96, 76, 120), (160, 130, 190), (200, 60, 200)),
+}
+
+
+def gray(v):
+    return (v, v, v, 255)
+
+
+def save_layers(tex, models, iid, frame, liquid_at, levels):
+    frame.save(tex / f"{iid}.png")
+    overrides = []
+    for n in range(1, levels + 1):
+        liquid = Image.new("RGBA", (16, 16))
+        for (x, y), v in liquid_at(n).items():
+            liquid.putpixel((x, y), gray(v))
+        liquid.save(tex / f"{iid}_liquid_{n}.png")
+        (models / f"{iid}_{n}.json").write_text(json.dumps(
+            {"parent": "minecraft:item/generated",
+             "textures": {"layer0": f"simplywings:item/{iid}", "layer1": f"simplywings:item/{iid}_liquid_{n}"}},
             indent=2) + "\n", encoding="utf-8", newline="\n")
-    overrides = [{"predicate": {"simplywings:angle": (k - 0.5) / 32}, "model": f"simplywings:item/forge_compass_{k:02d}"}
-                 for k in range(1, 32)]
-    overrides.append({"predicate": {"simplywings:angle": 31.5 / 32}, "model": "simplywings:item/forge_compass_00"})
-    (models / "forge_compass.json").write_text(json.dumps(
-        {"parent": "minecraft:item/generated", "textures": {"layer0": "simplywings:item/forge_compass_00"},
+        overrides.append({"predicate": {"simplywings:fill": round((n - 1) / levels + 0.01, 2)},
+                          "model": f"simplywings:item/{iid}_{n}"})
+    (models / f"{iid}.json").write_text(json.dumps(
+        {"parent": "minecraft:item/generated", "textures": {"layer0": f"simplywings:item/{iid}"},
          "overrides": overrides}, indent=2) + "\n", encoding="utf-8", newline="\n")
+
+
+def containers(tex):
+    models = ASSETS / "models/item"
+    frame = Image.new("RGBA", (16, 16))
+    for y, row in enumerate(FLASK):
+        for x, ch in enumerate(row):
+            if ch != ".":
+                frame.putpixel((x, y), FLASK_PAL[ch] + (255,))
+    inside = {}
+    for y in range(7, 15):
+        row = FLASK[y]
+        xs = [x for x, ch in enumerate(row) if ch != "."]
+        for x in range(xs[0] + 1, xs[-1]):
+            if row[x] == ".":
+                inside[(x, y)] = True
+    bottom = 14
+
+    def flask_liquid(n):
+        top = {1: 12, 2: 10, 3: 8}[n]
+        out = {}
+        for (x, y) in inside:
+            if y >= top:
+                v = 255 if y == top else 230 if (x + y) % 5 else 250
+                if y >= bottom - 1:
+                    v = 196
+                out[(x, y)] = v
+        return out
+
+    save_layers(tex, models, "cloud_flask", frame, flask_liquid, 3)
+    for iid, (k, d, m, l, accent) in TANK_METALS.items():
+        img = Image.new("RGBA", (16, 16))
+        put = lambda x, y, c: img.putpixel((x, y), c + (255,))
+        for x in range(6, 10):
+            put(x, 1, k)
+        put(7, 0, k); put(8, 0, k)
+        for x in range(4, 12):
+            put(x, 2, k)
+        for y in range(3, 15):
+            put(3, y, k); put(12, y, k)
+        for x in range(4, 12):
+            put(x, 15, k)
+        for y in range(3, 15):
+            for x in range(4, 12):
+                shade = l if x == 4 else m if x < 7 else d if x > 9 else m
+                put(x, y, shade)
+        for x in range(6, 10):
+            put(x, 2, l if x < 8 else m)
+        for y in (3, 14):
+            for x in range(4, 12):
+                put(x, y, k)
+        for y in (4, 13):
+            for x in range(4, 12):
+                put(x, y, accent if x in (4, 11) else l if x < 7 else m)
+        for y in range(5, 13):
+            put(5, y, k); put(10, y, k)
+            for x in range(6, 10):
+                put(x, y, k if y in (5, 12) else (24, 22, 30) if x < 8 else (34, 32, 42))
+        put(6, 6, (70, 70, 84))
+        window = [(x, y) for y in range(6, 12) for x in range(6, 10)]
+
+        def tank_liquid(n, window=window):
+            top = 12 - round(6 * n / 4)
+            return {(x, y): (255 if y == top or x == 6 else 196 if x == 9 else 232) for (x, y) in window if y >= top}
+
+        save_layers(tex, models, iid, img, tank_liquid, 4)
 
 
 def rid(i):
@@ -253,7 +391,7 @@ def write_recipes(crafts):
                   "pattern": ["".join(" " if ch in "._" else ch for ch in row) for row in r["rows"]],
                   "key": {k: {"item": rid(v)} for k, v in r["key"].items()},
                   "result": {"id": f"simplywings:{i}", "count": r["out"]},
-                  "essence": r["cost"]}
+                  "essence": json_cost(cost(i))}
         (comp / f"{i}.json").write_text(json.dumps(recipe, indent=2) + "\n", encoding="utf-8", newline="\n")
     for p in PAIRS:
         if p["id"] in SKIP_PAIRS:
@@ -261,7 +399,7 @@ def write_recipes(crafts):
         recipe = {"type": "simplywings:assembly",
                   "harness": {"item": rid(p["harness"])}, "core": {"item": rid(p["core"])},
                   "left_wing": {"item": rid(p["left"])}, "right_wing": {"item": rid(p["right"])},
-                  "result": {"id": f"simplywings:{p['id']}_wings"}, "essence": ASM_COST[p["rarity"]]}
+                  "result": {"id": f"simplywings:{p['id']}_wings"}, "essence": json_cost(ASM[p["rarity"]])}
         (asm / f"{p['id']}_wings.json").write_text(json.dumps(recipe, indent=2) + "\n", encoding="utf-8", newline="\n")
 
 

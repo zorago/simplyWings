@@ -74,16 +74,16 @@ public class AssemblyTableBlock extends BaseEntityBlock {
 
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
-        if (player instanceof ServerPlayer serverPlayer && level.getBlockEntity(pos) instanceof AssemblyTableBlockEntity table) {
-            serverPlayer.openMenu(table, buf -> buf.writeBlockPos(pos));
+        if (player instanceof ServerPlayer serverPlayer && level.getBlockEntity(pos) instanceof EssenceBenchBlockEntity bench) {
+            serverPlayer.openMenu(bench, buf -> buf.writeBlockPos(pos));
         }
         return InteractionResult.sidedSuccess(level.isClientSide);
     }
 
     @Override
     protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
-        if (!state.is(newState.getBlock()) && level.getBlockEntity(pos) instanceof AssemblyTableBlockEntity table) {
-            table.dropContents();
+        if (!state.is(newState.getBlock()) && level.getBlockEntity(pos) instanceof EssenceBenchBlockEntity bench) {
+            bench.dropContents();
         }
         super.onRemove(state, level, pos, newState, movedByPiston);
     }

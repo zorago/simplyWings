@@ -25,7 +25,7 @@ public class ComponentCategory implements IRecipeCategory<RecipeHolder<Component
     private final IDrawableStatic arrow;
 
     public ComponentCategory(IGuiHelper gui) {
-        this.icon = gui.createDrawableItemStack(new ItemStack(ModBlocks.ASSEMBLY_TABLE_ITEM.get()));
+        this.icon = gui.createDrawableItemStack(new ItemStack(ModBlocks.FORGE_BENCH_ITEM.get()));
         this.arrow = gui.getRecipeArrow();
     }
 
@@ -85,6 +85,6 @@ public class ComponentCategory implements IRecipeCategory<RecipeHolder<Component
     @Override
     public void draw(RecipeHolder<ComponentRecipe> holder, IRecipeSlotsView slots, GuiGraphics graphics, double mouseX, double mouseY) {
         arrow.draw(graphics, 96, 37);
-        JeiText.essenceBlock(graphics, Minecraft.getInstance().font, holder.value().essence(), 94, 58, 56);
+        JeiText.essence(graphics, Minecraft.getInstance().font, holder.value().essence(), 96, 58, true);
     }
 }

@@ -4,7 +4,7 @@
 
 Le cauchemar des insomniaques : la membrane déchirée du phantom.
 
-Règles, légende et objets partagés : [`CRAFTING.md`](../CRAFTING.md). Dernière mise à jour : 22 octobre 2026.
+Règles, légende et objets partagés : [`CRAFTING.md`](../CRAFTING.md). Dernière mise à jour : 23 octobre 2026.
 
 ## En bref
 
@@ -12,7 +12,7 @@ Règles, légende et objets partagés : [`CRAFTING.md`](../CRAFTING.md). Derniè
 | --- | --- |
 | Profondeur | 1 niveau de craft avant les pièces (max 1 en rare) |
 | Crafts | 4 en `GRID` + 1 assemblage |
-| Cloud Essence | 70 (pièces) + 100 (assemblage) = **170** |
+| Essences | 70 nuage (pièces) + 100 nuage (assemblage) = **170 nuage** |
 | Matières premières | 5 types du mod (12 objets) · 4 types vanilla (25 objets) |
 | Drops du mod | Supple Hide (MOB · Cow, Mooshroom, Horse, Donkey, Llama), Silk Thread (MOB · Spider, Cave Spider), Sky Iron Fleck (BLOCK · Iron Ore, Deepslate Iron Ore), Phantom Sinew (MOB · Phantom), Hollow Bone (MOB · Skeleton, Stray, Bogged) |
 
@@ -38,10 +38,10 @@ Niv. = niveau de craft (0 = matière première). Crafts = nombre de fois que la 
 
 | # | Produit | Où | Niv. | Crafts | Entrées par craft | Essence | Cumul |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | Iron-Buckled Harness `simplywings:iron_harness` ×1 | `GRID` | 1 | 1 | Leather ×6, Supple Hide ×2, Iron Ingot ×2, Silk Thread ×1, Sky Iron Fleck ×1 | 10 | 10 |
-| 2 | Phantom Core `simplywings:phantom_core` ×1 | `GRID` | 1 | 1 | Iron Ingot ×4, Phantom Membrane ×2, Phantom Sinew ×2, Glow Ink Sac ×1 | 30 | 40 |
-| 3 | Phantom Wing `simplywings:phantom_wing` ×2 | `GRID` | 1 | 2 | Hollow Bone ×1, Phantom Membrane ×4, Phantom Sinew ×2, Iron Ingot ×1 | 2 × 15 | 70 |
-| 4 | Phantom Wings `simplywings:phantom_wings` | `ASM` | — | 1 | Harnais : Iron-Buckled Harness → #1 · Cœur : Phantom Core → #2 · Aile G : Phantom Wing → #3 · Aile D : Phantom Wing → #3 | 100 | **170** |
+| 1 | Iron-Buckled Harness `simplywings:iron_harness` ×1 | `GRID` | 1 | 1 | Leather ×6, Supple Hide ×2, Iron Ingot ×2, Silk Thread ×1, Sky Iron Fleck ×1 | 10 nuage | 10 nuage |
+| 2 | Phantom Core `simplywings:phantom_core` ×1 | `GRID` | 1 | 1 | Iron Ingot ×4, Phantom Membrane ×2, Phantom Sinew ×2, Glow Ink Sac ×1 | 30 nuage | 40 nuage |
+| 3 | Phantom Wing `simplywings:phantom_wing` ×2 | `GRID` | 1 | 2 | Hollow Bone ×1, Phantom Membrane ×4, Phantom Sinew ×2, Iron Ingot ×1 | 2 × (15 nuage) | 70 nuage |
+| 4 | Phantom Wings `simplywings:phantom_wings` | `ASM` | — | 1 | Harnais : Iron-Buckled Harness → #1 · Cœur : Phantom Core → #2 · Aile G : Phantom Wing → #3 · Aile D : Phantom Wing → #3 | 100 nuage | **170 nuage** |
 
 ## Recettes
 
@@ -49,7 +49,7 @@ Grille 5×5 sans les coins : `.` = coin absent, `_` = case vide.
 
 ### #1 · Iron-Buckled Harness · `simplywings:iron_harness` · partagé
 
-`GRID` · niveau 1 · 10 Cloud Essence · donne ×1
+`GRID` · niveau 1 · essence : 10 nuage · donne ×1
 
 ```
 . L _ L .
@@ -69,7 +69,7 @@ _ L K L _
 
 ### #2 · Phantom Core · `simplywings:phantom_core`
 
-`GRID` · niveau 1 · 30 Cloud Essence · donne ×1
+`GRID` · niveau 1 · essence : 30 nuage · donne ×1
 
 ```
 . _ _ _ .
@@ -88,7 +88,7 @@ _ I M I _
 
 ### #3 · Phantom Wing · `simplywings:phantom_wing`
 
-`GRID` · niveau 1 · 15 Cloud Essence · donne ×1
+`GRID` · niveau 1 · essence : 15 nuage · donne ×1
 
 ```
 . B M M .

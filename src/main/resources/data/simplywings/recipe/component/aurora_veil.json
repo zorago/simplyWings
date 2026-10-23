@@ -25,5 +25,7 @@
     "id": "simplywings:aurora_veil",
     "count": 1
   },
-  "essence": 15
+  "essence": {
+    "steam": 15
+  }
 }

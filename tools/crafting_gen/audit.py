@@ -12,6 +12,7 @@ def registered():
     java = (SRC / "java/com/zorago/simplywings/item/ModItems.java").read_text(encoding="utf-8")
     ids = [f"{w}_wings" for w in re.findall(r'wing\("(\w+)", Rarity', java)]
     ids += re.findall(r'ITEMS\.register\("(\w+)"', java)
+    ids += re.findall(r'tank\("(\w+)"', java)
     mats = (SRC / "java/com/zorago/simplywings/item/MaterialIds.java").read_text(encoding="utf-8")
     ids += re.findall(r'"(\w+)"', mats)
     blocks = (SRC / "java/com/zorago/simplywings/block/ModBlocks.java").read_text(encoding="utf-8")
@@ -36,7 +37,7 @@ def main():
         key = f"item.simplywings.{i}"
         checks = {
             "model": (ASSETS / f"models/item/{i}.json").exists(),
-            "texture": (ASSETS / f"textures/item/{i}.png").exists() or i == "forge_compass",
+            "texture": (ASSETS / f"textures/item/{i}.png").exists() or i.endswith("_compass"),
             "name": key in lang,
             "lore": f"{key}.lore" in lang,
             "riddle": f"{key}.riddle" in lang,
@@ -46,7 +47,7 @@ def main():
             checks["wing json"] = pair in wings
             checks["wing name"] = f"wing.simplywings.{pair}" in lang
             checks["obtainable"] = i in produced
-        elif i not in ("forge_compass", "cloud_absorber", "cloud_flask"):
+        elif not i.endswith("_compass") and i not in ("cloud_absorber", "cloud_flask", "fury_essence_tank"):
             checks["used"] = i in consumed
         for name, ok in checks.items():
             if not ok:

@@ -1,12 +1,11 @@
 package com.zorago.simplywings.block.recipe;
 
-import com.mojang.serialization.Codec;
+import com.zorago.simplywings.essence.EssenceCost;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -16,14 +15,14 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 
 public record AssemblyRecipe(Ingredient harness, Ingredient core, Ingredient leftWing, Ingredient rightWing,
-                             ItemStack result, int essence) implements Recipe<AssemblyInput> {
+                             ItemStack result, EssenceCost essence) implements Recipe<AssemblyInput> {
     public static final MapCodec<AssemblyRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             Ingredient.CODEC_NONEMPTY.fieldOf("harness").forGetter(AssemblyRecipe::harness),
             Ingredient.CODEC_NONEMPTY.fieldOf("core").forGetter(AssemblyRecipe::core),
             Ingredient.CODEC_NONEMPTY.fieldOf("left_wing").forGetter(AssemblyRecipe::leftWing),
             Ingredient.CODEC_NONEMPTY.fieldOf("right_wing").forGetter(AssemblyRecipe::rightWing),
             ItemStack.STRICT_CODEC.fieldOf("result").forGetter(AssemblyRecipe::result),
-            Codec.intRange(0, 1000).optionalFieldOf("essence", 0).forGetter(AssemblyRecipe::essence)
+            EssenceCost.CODEC.optionalFieldOf("essence", EssenceCost.NONE).forGetter(AssemblyRecipe::essence)
     ).apply(instance, AssemblyRecipe::new));
     public static final StreamCodec<RegistryFriendlyByteBuf, AssemblyRecipe> STREAM_CODEC = StreamCodec.composite(
             Ingredient.CONTENTS_STREAM_CODEC, AssemblyRecipe::harness,
@@ -31,7 +30,7 @@ public record AssemblyRecipe(Ingredient harness, Ingredient core, Ingredient lef
             Ingredient.CONTENTS_STREAM_CODEC, AssemblyRecipe::leftWing,
             Ingredient.CONTENTS_STREAM_CODEC, AssemblyRecipe::rightWing,
             ItemStack.STREAM_CODEC, AssemblyRecipe::result,
-            ByteBufCodecs.VAR_INT, AssemblyRecipe::essence,
+            EssenceCost.STREAM_CODEC.cast(), AssemblyRecipe::essence,
             AssemblyRecipe::new);
 
     @Override

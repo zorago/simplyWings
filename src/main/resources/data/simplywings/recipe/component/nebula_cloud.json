@@ -22,5 +22,7 @@
     "id": "simplywings:nebula_cloud",
     "count": 1
   },
-  "essence": 15
+  "essence": {
+    "steam": 15
+  }
 }

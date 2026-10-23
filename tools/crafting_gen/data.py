@@ -398,3 +398,8 @@ C.update({
 })
 
 C["cloud_absorber"] = R("Cloud Absorber", 0, [".___.", "_GCG_", "_UFU_", "_GCG_", ".___."], dict(G="glass", C="copper_ingot", U="updraft_shard", F="feather"))
+C["iron_essence_tank"] = R("Iron Essence Tank", 100, [".___.", "_IGI_", "_GHG_", "_IGI_", ".___."], dict(I="iron_ingot", G="glass", H="iron_harness"))
+C["gilded_essence_tank"] = R("Gilded Essence Tank", 200, [".___.", "_GTG_", "_AHA_", "_G_G_", ".___."], dict(G="gold_ingot", T="iron_essence_tank", A="amethyst_shard", H="gilded_harness"))
+C["radiant_essence_tank"] = R("Radiant Essence Tank", 400, [".___.", "_DTD_", "_QHQ_", "_D_D_", ".___."], dict(D="diamond", T="gilded_essence_tank", Q="prism_shard", H="radiant_harness"))
+C["fury_essence_tank"] = R("Fury Essence Tank", 800, [".___.", "_STS_", "_NHN_", "_S_S_", ".___."], dict(S="dragon_scale", T="radiant_essence_tank", N="netherite_ingot", H="fury_saddle"))
+TANKS = ["iron_essence_tank", "gilded_essence_tank", "radiant_essence_tank", "fury_essence_tank"]

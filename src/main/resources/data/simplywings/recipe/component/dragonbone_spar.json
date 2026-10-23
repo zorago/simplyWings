@@ -22,5 +22,9 @@
     "id": "simplywings:dragonbone_spar",
     "count": 1
   },
-  "essence": 60
+  "essence": {
+    "steam": 20,
+    "ethereal": 20,
+    "intensified": 20
+  }
 }

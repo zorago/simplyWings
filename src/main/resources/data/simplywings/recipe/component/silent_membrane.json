@@ -25,5 +25,8 @@
     "id": "simplywings:silent_membrane",
     "count": 1
   },
-  "essence": 50
+  "essence": {
+    "ethereal": 25,
+    "intensified": 25
+  }
 }

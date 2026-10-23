@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=south": {
+      "model": "simplywings:block/forge_bench"
+    },
+    "facing=west": {
+      "model": "simplywings:block/forge_bench",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "simplywings:block/forge_bench",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "simplywings:block/forge_bench",
+      "y": 270
+    }
+  }
+}

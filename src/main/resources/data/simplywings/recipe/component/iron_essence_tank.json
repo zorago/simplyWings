@@ -1,0 +1,31 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " IGI ",
+    " GHG ",
+    " IGI ",
+    "     "
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "H": {
+      "item": "simplywings:iron_harness"
+    }
+  },
+  "result": {
+    "id": "simplywings:iron_essence_tank",
+    "count": 1
+  },
+  "essence": {
+    "cloud": 25,
+    "steam": 25,
+    "ethereal": 25,
+    "intensified": 25
+  }
+}

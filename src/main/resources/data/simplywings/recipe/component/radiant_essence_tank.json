@@ -1,0 +1,34 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " DTD ",
+    " QHQ ",
+    " D D ",
+    "     "
+  ],
+  "key": {
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "T": {
+      "item": "simplywings:gilded_essence_tank"
+    },
+    "Q": {
+      "item": "simplywings:prism_shard"
+    },
+    "H": {
+      "item": "simplywings:radiant_harness"
+    }
+  },
+  "result": {
+    "id": "simplywings:radiant_essence_tank",
+    "count": 1
+  },
+  "essence": {
+    "cloud": 100,
+    "steam": 100,
+    "ethereal": 100,
+    "intensified": 100
+  }
+}

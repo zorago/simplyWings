@@ -1,5 +1,6 @@
 package com.zorago.simplywings.block.recipe;
 
+import com.zorago.simplywings.essence.EssenceCost;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.MapCodec;
@@ -19,7 +20,7 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 
-public record ComponentRecipe(List<String> pattern, Map<String, Ingredient> key, ItemStack result, int essence)
+public record ComponentRecipe(List<String> pattern, Map<String, Ingredient> key, ItemStack result, EssenceCost essence)
         implements Recipe<ComponentInput> {
     private static final Codec<List<String>> PATTERN_CODEC = Codec.STRING.listOf().validate(rows -> {
         if (rows.isEmpty() || rows.size() > ComponentInput.SIDE) {
@@ -39,13 +40,13 @@ public record ComponentRecipe(List<String> pattern, Map<String, Ingredient> key,
             PATTERN_CODEC.fieldOf("pattern").forGetter(ComponentRecipe::pattern),
             Codec.unboundedMap(KEY_CODEC, Ingredient.CODEC_NONEMPTY).fieldOf("key").forGetter(ComponentRecipe::key),
             ItemStack.STRICT_CODEC.fieldOf("result").forGetter(ComponentRecipe::result),
-            Codec.intRange(0, 100).optionalFieldOf("essence", 0).forGetter(ComponentRecipe::essence)
+            EssenceCost.CODEC.optionalFieldOf("essence", EssenceCost.NONE).forGetter(ComponentRecipe::essence)
     ).apply(instance, ComponentRecipe::new));
     public static final StreamCodec<RegistryFriendlyByteBuf, ComponentRecipe> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.STRING_UTF8.apply(ByteBufCodecs.list()), ComponentRecipe::pattern,
             ByteBufCodecs.map(HashMap::new, ByteBufCodecs.STRING_UTF8, Ingredient.CONTENTS_STREAM_CODEC), ComponentRecipe::key,
             ItemStack.STREAM_CODEC, ComponentRecipe::result,
-            ByteBufCodecs.VAR_INT, ComponentRecipe::essence,
+            EssenceCost.STREAM_CODEC.cast(), ComponentRecipe::essence,
             ComponentRecipe::new);
 
     @Override

@@ -19,5 +19,7 @@
     "id": "simplywings:icarus_feather",
     "count": 2
   },
-  "essence": 15
+  "essence": {
+    "ethereal": 15
+  }
 }

@@ -1,8 +1,8 @@
 # Routes de craft des ailes
 
-Les règles communes à toutes les routes, les objets partagés, le registre des drops du mod et le récapitulatif des coûts. **Chaque paire a sa route complète dans son propre fichier**, `crafting/<id>.md` (matières premières, étapes, recettes dessinées, justification des ingrédients). Seule la paire commune reste décrite ici. Le cadre général (table d'assemblage, Cloud Essence, énergie ailée) est dans `CAHIER_DES_CHARGES.md`, section « Craft : table d'assemblage ».
+Les règles communes à toutes les routes, les objets partagés, le registre des drops du mod et le récapitulatif des coûts. **Chaque paire a sa route complète dans son propre fichier**, `crafting/<id>.md` (matières premières, étapes, recettes dessinées, justification des ingrédients). Seule la paire commune reste décrite ici. Le cadre général (table d'assemblage, établi de la forge, essences, énergie ailée) est dans `CAHIER_DES_CHARGES.md`, sections « Craft : table d'assemblage et établi de la forge » et « Essences ».
 
-Dernière mise à jour : 22 octobre 2026.
+Dernière mise à jour : 23 octobre 2026.
 
 ## Règles des routes
 
@@ -46,20 +46,20 @@ Fixées par zorago le 22 octobre 2026, par ordre d'importance.
 | Niv. | Niveau de craft du produit |
 | Crafts | Nombre de fois que la recette est lancée pour une paire |
 | Entrées par craft | Ce qu'un craft consomme. Un produit d'une étape précédente est noté `→ #n` |
-| Essence | Cloud Essence consommée (crafts × coût) |
+| Essence | Essences consommées (crafts × coût), par type : nuage, vapeur, éthérée, intensifiée |
 | Cumul | Essence consommée depuis le début de la route |
 
 **Légende de « Où »**
 
 | Code | Signification |
 | --- | --- |
-| `ASM` | Table d'assemblage, onglet 1 « Assembly » : harnais + cœur + aile gauche + aile droite → paire |
-| `GRID` | Table d'assemblage, onglet 2 « Components » : grille 5×5 sans les coins (21 cases) |
+| `ASM` | Table d'assemblage (Sanctuaire céleste, 2e dragon) : harnais + cœur + aile gauche + aile droite → paire |
+| `GRID` | Établi de la forge (Forge rustique, 3e dragon), onglet « Components » : grille 5×5 sans les coins (21 cases) |
 | `MOB` | Drop d'un mob, coup fatal porté avec un item imprégné d'énergie ailée |
 | `BLOCK` | Drop d'un bloc, cassé avec un item imprégné |
 | `FISH` | Prise supplémentaire à la pêche, avec une canne imprégnée |
 | `VANILLA` | Ressource vanilla obtenue normalement (minage, mob, établi, four, pêche, commerce, brosse) |
-| `CLOUD` | Récolte de Cloud Essence en planant dans les nuages |
+| `CLOUD` | Récolte d'essence en vol avec un Cloud Absorber : nuage (Overworld), vapeur (Nether), éthérée (End) |
 
 **Grille `GRID`** (`.` = coin absent, `_` = case vide) :
 
@@ -71,24 +71,29 @@ Fixées par zorago le 22 octobre 2026, par ordre d'importance.
 . # # # .
 ```
 
-## Budget de Cloud Essence
+## Budget d'essences
 
-| Rareté | Assemblage (`ASM`) | Flacons | Pièces (`GRID`) | Total d'une paire |
-| --- | --- | --- | --- | --- |
-| Commune | 0 | 0 | 0 | 0 |
-| Rare | 100 | 1 | harnais 10, cœur 30, aile 15 (moins pour les ailes simples) | 130 à 170 |
-| Épique | 300 | 3 | intermédiaire 15 à 20, harnais 25, cœur 60, aile 40 | 540 à 615 |
-| Légendaire | 800 | 8 | intermédiaire 10 à 40, harnais 50, cœur 100, aile 80 | 1 360 à 1 645 |
-| Mythique | 1 000 | 10 (réservoir plein) | intermédiaire 30 à 90, selle 80, cœur 100, aile 100 | 2 690 à 2 735 |
+Quatre essences, quatre jauges de 1 000 par établi. Le générateur répartit le coût de chaque recette selon deux règles (`tools/crafting_gen/essence.py`) :
 
-- 1 flacon (`simplywings:cloud_flask`) = 100 unités. La table contient au plus 1 000 unités (10 flacons).
-- Un craft `GRID` coûte de 5 à 100 unités. Le total d'une paire = assemblage + tous les crafts de sa route, harnais compris.
+- **Palier** d'un objet = la rareté la plus basse des paires qui l'utilisent (un objet partagé reste au prix du palier le plus bas). Rare → nuage ; épique → + vapeur ; légendaire → + éthérée ; mythique et réservoirs → + intensifiée.
+- **Complexité** = nombre d'essences demandées, d'après le coût total : jusqu'à 20 → 1, jusqu'à 50 → 2, jusqu'à 90 → 3, au-delà → 4 (sans dépasser le palier). Ce sont les essences les plus récentes du palier qui sont demandées : un petit craft mythique ne prend que de l'intensifiée, un gros prend les quatre.
+
+| Rareté | Assemblage (`ASM`) | Pièces (`GRID`, coût total par craft) |
+| --- | --- | --- |
+| Commune | 0 | — |
+| Rare | 100 nuage | harnais 10, cœur 30, aile 15 |
+| Épique | 150 nuage + 150 vapeur | intermédiaire 15 à 20, harnais 25, cœur 60, aile 40 |
+| Légendaire | 250 nuage + 250 vapeur + 300 éthérée | intermédiaire 10 à 40, harnais 50, cœur 100, aile 80 |
+| Mythique | 250 de chaque | intermédiaire 30 à 90, selle 80, cœur 100, aile 100 |
+
+- 1 flacon (`simplywings:cloud_flask`) = 100 unités d'une essence. Les réservoirs (`iron`, `gilded`, `radiant`, `fury_essence_tank`) contiennent 5 000, 20 000, 50 000 et 100 000 unités.
+- Réservoirs : harnais du palier + réservoir précédent, 100 / 200 / 400 / 800 unités réparties sur les quatre essences.
 
 ## Drops du mod
 
 Le registre `simplywings:loot_source` (synchronisé au client pour JEI). Chaque entrée : la source (mob, bloc ou pêche), des **conditions vanilla facultatives** (biome, heure, météo, hauteur, structure, état du bloc, tueur accroupi ou en sprint, lumière) et une chance. Ces conditions sont des `LootItemCondition` vanilla (`location_check`, `time_check`, `weather_check`, `entity_properties`, `block_state_property`), lues par le Global Loot Modifier : aucun code spécial par paire. Les chances sont des valeurs de départ, à régler en jeu.
 
-Proposition pour le point ouvert « nom des essences de blocs » : il n'y a plus de catégorie générique. Chaque drop porte un nom concret (Acorn, Resonant Shard, Living Rock…), et le mot « Essence » reste réservé à la Cloud Essence.
+Proposition pour le point ouvert « nom des essences de blocs » : il n'y a plus de catégorie générique. Chaque drop porte un nom concret (Acorn, Resonant Shard, Living Rock…), et le mot « Essence » reste réservé aux quatre essences du ciel.
 
 | Drop | Id | Où | Source | Condition | Chance | Paires |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -155,18 +160,18 @@ Les intermédiaires utilisés par plusieurs paires. Leur recette dessinée est r
 
 | Objet | Id | Niv. | Entrées | Essence | Donne | Paires |
 | --- | --- | --- | --- | --- | --- | --- |
-| Aurora Veil | `simplywings:aurora_veil` | 1 | Polar Glimmer ×2, Glimmer Spore ×1, Lime Dye ×1, Purple Dye ×1 | 15 | ×1 | `aurora`, `light` |
-| Blessed Plume | `simplywings:blessed_plume` | 1 | Feather ×2, Heavenly Down ×2, Pristine Feather ×2, White Dye ×1 | 15 | ×2 | `angel`, `seraph` |
-| Bottled Gale | `simplywings:bottled_gale` | 1 | Gust Mote ×2, Wind Charge ×1, Glass Bottle ×1 | 15 | ×1 | `air`, `storm`, `seraph` |
-| Fury Plasma | `simplywings:fury_plasma` | 1 | Dragon's Breath ×2, Blaze Powder ×1, Ghast Wisp ×1 | 30 | ×1 | `night`, `light` |
-| Gilded Frame | `simplywings:gilded_frame` | 1 | Gold Ingot ×4, Blaze Powder ×1, Gilded Vein ×1, Ember Wisp ×1 | 15 | ×1 | `ancient`, `ptero`, `fire`, `water`, `earth`, `air`, `storm`, `aurora`, `shadow`, `nebula`, `angel`, `demon`, `seraph`, `psyche`, `yin_yang`, `night`, `light` |
-| Iron-Buckled Harness | `simplywings:iron_harness` | 1 | Leather ×6, Supple Hide ×2, Iron Ingot ×2, Silk Thread ×1, Sky Iron Fleck ×1 | 10 | ×1 | toutes sauf la commune |
-| Spirit Vessel | `simplywings:spirit_vessel` | 1 | Gold Ingot ×4, Glass ×4, Ghast Wisp ×1 | 20 | ×1 | `fire`, `water`, `earth`, `air`, `storm`, `aurora`, `shadow`, `nebula`, `forest` |
-| Celestial Frame | `simplywings:celestial_frame` | 2 | End Rod ×2, Void Grit ×1, Diamond ×2, Gilded Frame ×1 | 35 | ×1 | `angel`, `seraph`, `psyche`, `yin_yang`, `night`, `light` |
-| Gilded Harness | `simplywings:gilded_harness` | 2 | Gold Ingot ×4, Leather ×2, Iron-Buckled Harness ×1, Gilded Vein ×1 | 25 | ×1 | épiques, légendaires, mythiques |
-| Dragonbone Spar | `simplywings:dragonbone_spar` | 3 | Dragon Scale ×2, Celestial Frame ×1, Ancient Ember ×1 | 60 | ×1 | `night`, `light` |
-| Radiant Harness | `simplywings:radiant_harness` | 3 | Diamond ×4, Phantom Membrane ×2, Gilded Harness ×1, Prism Shard ×1 | 50 | ×1 | légendaires, mythiques |
-| Fury Saddle | `simplywings:fury_saddle` | 4 | Dragon Scale ×4, Leather ×2, Radiant Harness ×1, Saddle ×1, Netherite Ingot ×1, Ancient Ember ×2 | 80 | ×1 | `night`, `light` |
+| Aurora Veil | `simplywings:aurora_veil` | 1 | Polar Glimmer ×2, Glimmer Spore ×1, Lime Dye ×1, Purple Dye ×1 | 15 vapeur | ×1 | `aurora`, `light` |
+| Blessed Plume | `simplywings:blessed_plume` | 1 | Feather ×2, Heavenly Down ×2, Pristine Feather ×2, White Dye ×1 | 15 éthérée | ×2 | `angel`, `seraph` |
+| Bottled Gale | `simplywings:bottled_gale` | 1 | Gust Mote ×2, Wind Charge ×1, Glass Bottle ×1 | 15 vapeur | ×1 | `air`, `storm`, `seraph` |
+| Fury Plasma | `simplywings:fury_plasma` | 1 | Dragon's Breath ×2, Blaze Powder ×1, Ghast Wisp ×1 | 15 éthérée + 15 intensifiée | ×1 | `night`, `light` |
+| Gilded Frame | `simplywings:gilded_frame` | 1 | Gold Ingot ×4, Blaze Powder ×1, Gilded Vein ×1, Ember Wisp ×1 | 15 vapeur | ×1 | `ancient`, `ptero`, `fire`, `water`, `earth`, `air`, `storm`, `aurora`, `shadow`, `nebula`, `angel`, `demon`, `seraph`, `psyche`, `yin_yang`, `night`, `light` |
+| Iron-Buckled Harness | `simplywings:iron_harness` | 1 | Leather ×6, Supple Hide ×2, Iron Ingot ×2, Silk Thread ×1, Sky Iron Fleck ×1 | 10 nuage | ×1 | toutes sauf la commune |
+| Spirit Vessel | `simplywings:spirit_vessel` | 1 | Gold Ingot ×4, Glass ×4, Ghast Wisp ×1 | 20 vapeur | ×1 | `fire`, `water`, `earth`, `air`, `storm`, `aurora`, `shadow`, `nebula`, `forest` |
+| Celestial Frame | `simplywings:celestial_frame` | 2 | End Rod ×2, Void Grit ×1, Diamond ×2, Gilded Frame ×1 | 15 vapeur + 20 éthérée | ×1 | `angel`, `seraph`, `psyche`, `yin_yang`, `night`, `light` |
+| Gilded Harness | `simplywings:gilded_harness` | 2 | Gold Ingot ×4, Leather ×2, Iron-Buckled Harness ×1, Gilded Vein ×1 | 10 nuage + 15 vapeur | ×1 | épiques, légendaires, mythiques |
+| Dragonbone Spar | `simplywings:dragonbone_spar` | 3 | Dragon Scale ×2, Celestial Frame ×1, Ancient Ember ×1 | 20 vapeur + 20 éthérée + 20 intensifiée | ×1 | `night`, `light` |
+| Radiant Harness | `simplywings:radiant_harness` | 3 | Diamond ×4, Phantom Membrane ×2, Gilded Harness ×1, Prism Shard ×1 | 25 vapeur + 25 éthérée | ×1 | légendaires, mythiques |
+| Fury Saddle | `simplywings:fury_saddle` | 4 | Dragon Scale ×4, Leather ×2, Radiant Harness ×1, Saddle ×1, Netherite Ingot ×1, Ancient Ember ×2 | 25 vapeur + 25 éthérée + 30 intensifiée | ×1 | `night`, `light` |
 
 ## Objets de base
 
@@ -183,46 +188,46 @@ Les intermédiaires utilisés par plusieurs paires. Leur recette dessinée est r
 | Paire | Id | Rareté | Profondeur | Crafts `GRID` | Pièces | Assemblage | Total | Route |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Common Wings | `common` | Commune | 0 | 0 | 0 | 0 | **0** | ci-dessous |
-| Bat Wings | `bat` | Rare | 1 / 1 | 4 | 70 | 100 | **170** | [`crafting/bat.md`](crafting/bat.md) |
-| Crow Wings | `crow` | Rare | 1 / 1 | 4 | 70 | 100 | **170** | [`crafting/crow.md`](crafting/crow.md) |
-| Owl Wings | `owl` | Rare | 1 / 1 | 4 | 70 | 100 | **170** | [`crafting/owl.md`](crafting/owl.md) |
-| Gull Wings | `gull` | Rare | 1 / 1 | 4 | 70 | 100 | **170** | [`crafting/gull.md`](crafting/gull.md) |
-| Hummingbird Wings | `hummingbird` | Rare | 1 / 1 | 4 | 60 | 100 | **160** | [`crafting/hummingbird.md`](crafting/hummingbird.md) |
-| Eagle Wings | `eagle` | Rare | 1 / 1 | 4 | 70 | 100 | **170** | [`crafting/eagle.md`](crafting/eagle.md) |
-| Swift Wings | `swift` | Rare | 1 / 1 | 4 | 70 | 100 | **170** | [`crafting/swift.md`](crafting/swift.md) |
-| Homing Pigeon Wings | `pigeon` | Rare | 1 / 1 | 4 | 70 | 100 | **170** | [`crafting/pigeon.md`](crafting/pigeon.md) |
-| Peacock Wings | `peacock` | Rare | 1 / 1 | 4 | 70 | 100 | **170** | [`crafting/peacock.md`](crafting/peacock.md) |
-| Parrot Wings | `parrot` | Rare | 1 / 1 | 4 | 70 | 100 | **170** | [`crafting/parrot.md`](crafting/parrot.md) |
-| Bee Wings | `bee` | Rare | 1 / 1 | 4 | 60 | 100 | **160** | [`crafting/bee.md`](crafting/bee.md) |
-| Moth Wings | `moth` | Rare | 1 / 1 | 4 | 70 | 100 | **170** | [`crafting/moth.md`](crafting/moth.md) |
-| Beetle Wings | `beetle` | Rare | 1 / 1 | 4 | 70 | 100 | **170** | [`crafting/beetle.md`](crafting/beetle.md) |
-| Flying Squirrel Wings | `squirrel` | Rare | 1 / 1 | 4 | 70 | 100 | **170** | [`crafting/squirrel.md`](crafting/squirrel.md) |
-| Flying Fish Wings | `flying_fish` | Rare | 1 / 1 | 4 | 70 | 100 | **170** | [`crafting/flying_fish.md`](crafting/flying_fish.md) |
-| Phantom Wings | `phantom` | Rare | 1 / 1 | 4 | 70 | 100 | **170** | [`crafting/phantom.md`](crafting/phantom.md) |
-| Amethyst Wings | `amethyst` | Rare | 1 / 1 | 4 | 70 | 100 | **170** | [`crafting/amethyst.md`](crafting/amethyst.md) |
-| Ornithopter Wings | `ornithopter` | Rare | 1 / 1 | 4 | 70 | 100 | **170** | [`crafting/ornithopter.md`](crafting/ornithopter.md) |
-| Kite Wings | `kite` | Rare | 1 / 1 | 4 | 50 | 100 | **150** | [`crafting/kite.md`](crafting/kite.md) |
-| Copper Wings | `copper` | Rare | 1 / 1 | 4 | 70 | 100 | **170** | [`crafting/copper.md`](crafting/copper.md) |
-| Patchwork Wings | `patchwork` | Rare | 1 / 1 | 4 | 30 | 100 | **130** | [`crafting/patchwork.md`](crafting/patchwork.md) |
-| Meganeura Wings | `ancient` | Épique | 2 / 2 | 11 | 265 | 300 | **565** | [`crafting/ancient.md`](crafting/ancient.md) |
-| Pterosaur Wings | `ptero` | Épique | 2 / 2 | 14 | 310 | 300 | **610** | [`crafting/ptero.md`](crafting/ptero.md) |
-| Wings of Flame | `fire` | Épique | 2 / 2 | 14 | 315 | 300 | **615** | [`crafting/fire.md`](crafting/fire.md) |
-| Wings of the Tide | `water` | Épique | 2 / 2 | 14 | 315 | 300 | **615** | [`crafting/water.md`](crafting/water.md) |
-| Wings of Stone | `earth` | Épique | 2 / 2 | 14 | 315 | 300 | **615** | [`crafting/earth.md`](crafting/earth.md) |
-| Wings of the Wind | `air` | Épique | 2 / 2 | 12 | 285 | 300 | **585** | [`crafting/air.md`](crafting/air.md) |
-| Wings of the Storm | `storm` | Épique | 2 / 2 | 13 | 300 | 300 | **600** | [`crafting/storm.md`](crafting/storm.md) |
-| Aurora Wings | `aurora` | Épique | 2 / 2 | 12 | 285 | 300 | **585** | [`crafting/aurora.md`](crafting/aurora.md) |
-| Wings of Shadow | `shadow` | Épique | 2 / 2 | 14 | 315 | 300 | **615** | [`crafting/shadow.md`](crafting/shadow.md) |
-| Nebula Wings | `nebula` | Épique | 2 / 2 | 14 | 315 | 300 | **615** | [`crafting/nebula.md`](crafting/nebula.md) |
-| Wings of the Forest Spirit | `forest` | Épique | 2 / 2 | 9 | 240 | 300 | **540** | [`crafting/forest.md`](crafting/forest.md) |
-| Angel Wings | `angel` | Légendaire | 3 / 3 | 17 | 560 | 800 | **1360** | [`crafting/angel.md`](crafting/angel.md) |
-| Demon Wings | `demon` | Légendaire | 3 / 3 | 16 | 595 | 800 | **1395** | [`crafting/demon.md`](crafting/demon.md) |
-| Seraph Wings | `seraph` | Légendaire | 3 / 3 | 24 | 755 | 800 | **1555** | [`crafting/seraph.md`](crafting/seraph.md) |
-| Wings of Psyche | `psyche` | Légendaire | 3 / 3 | 24 | 845 | 800 | **1645** | [`crafting/psyche.md`](crafting/psyche.md) |
-| Wings of Daedalus | `daedalus` | Légendaire | 3 / 3 | 25 | 665 | 800 | **1465** | [`crafting/daedalus.md`](crafting/daedalus.md) |
-| Wings of Yin and Yang | `yin_yang` | Légendaire | 3 / 3 | 18 | 645 | 800 | **1445** | [`crafting/yin_yang.md`](crafting/yin_yang.md) |
-| Night Wings | `night` | Mythique | 5 / 5 | 35 | 1690 | 1000 | **2690** | [`crafting/night.md`](crafting/night.md) |
-| Light Wings | `light` | Mythique | 5 / 5 | 39 | 1735 | 1000 | **2735** | [`crafting/light.md`](crafting/light.md) |
+| Bat Wings | `bat` | Rare | 1 / 1 | 4 | 70 nuage | 100 nuage | **170 nuage** | [`crafting/bat.md`](crafting/bat.md) |
+| Crow Wings | `crow` | Rare | 1 / 1 | 4 | 70 nuage | 100 nuage | **170 nuage** | [`crafting/crow.md`](crafting/crow.md) |
+| Owl Wings | `owl` | Rare | 1 / 1 | 4 | 70 nuage | 100 nuage | **170 nuage** | [`crafting/owl.md`](crafting/owl.md) |
+| Gull Wings | `gull` | Rare | 1 / 1 | 4 | 70 nuage | 100 nuage | **170 nuage** | [`crafting/gull.md`](crafting/gull.md) |
+| Hummingbird Wings | `hummingbird` | Rare | 1 / 1 | 4 | 60 nuage | 100 nuage | **160 nuage** | [`crafting/hummingbird.md`](crafting/hummingbird.md) |
+| Eagle Wings | `eagle` | Rare | 1 / 1 | 4 | 70 nuage | 100 nuage | **170 nuage** | [`crafting/eagle.md`](crafting/eagle.md) |
+| Swift Wings | `swift` | Rare | 1 / 1 | 4 | 70 nuage | 100 nuage | **170 nuage** | [`crafting/swift.md`](crafting/swift.md) |
+| Homing Pigeon Wings | `pigeon` | Rare | 1 / 1 | 4 | 70 nuage | 100 nuage | **170 nuage** | [`crafting/pigeon.md`](crafting/pigeon.md) |
+| Peacock Wings | `peacock` | Rare | 1 / 1 | 4 | 70 nuage | 100 nuage | **170 nuage** | [`crafting/peacock.md`](crafting/peacock.md) |
+| Parrot Wings | `parrot` | Rare | 1 / 1 | 4 | 70 nuage | 100 nuage | **170 nuage** | [`crafting/parrot.md`](crafting/parrot.md) |
+| Bee Wings | `bee` | Rare | 1 / 1 | 4 | 60 nuage | 100 nuage | **160 nuage** | [`crafting/bee.md`](crafting/bee.md) |
+| Moth Wings | `moth` | Rare | 1 / 1 | 4 | 70 nuage | 100 nuage | **170 nuage** | [`crafting/moth.md`](crafting/moth.md) |
+| Beetle Wings | `beetle` | Rare | 1 / 1 | 4 | 70 nuage | 100 nuage | **170 nuage** | [`crafting/beetle.md`](crafting/beetle.md) |
+| Flying Squirrel Wings | `squirrel` | Rare | 1 / 1 | 4 | 70 nuage | 100 nuage | **170 nuage** | [`crafting/squirrel.md`](crafting/squirrel.md) |
+| Flying Fish Wings | `flying_fish` | Rare | 1 / 1 | 4 | 70 nuage | 100 nuage | **170 nuage** | [`crafting/flying_fish.md`](crafting/flying_fish.md) |
+| Phantom Wings | `phantom` | Rare | 1 / 1 | 4 | 70 nuage | 100 nuage | **170 nuage** | [`crafting/phantom.md`](crafting/phantom.md) |
+| Amethyst Wings | `amethyst` | Rare | 1 / 1 | 4 | 70 nuage | 100 nuage | **170 nuage** | [`crafting/amethyst.md`](crafting/amethyst.md) |
+| Ornithopter Wings | `ornithopter` | Rare | 1 / 1 | 4 | 70 nuage | 100 nuage | **170 nuage** | [`crafting/ornithopter.md`](crafting/ornithopter.md) |
+| Kite Wings | `kite` | Rare | 1 / 1 | 4 | 50 nuage | 100 nuage | **150 nuage** | [`crafting/kite.md`](crafting/kite.md) |
+| Copper Wings | `copper` | Rare | 1 / 1 | 4 | 70 nuage | 100 nuage | **170 nuage** | [`crafting/copper.md`](crafting/copper.md) |
+| Patchwork Wings | `patchwork` | Rare | 1 / 1 | 4 | 30 nuage | 100 nuage | **130 nuage** | [`crafting/patchwork.md`](crafting/patchwork.md) |
+| Meganeura Wings | `ancient` | Épique | 2 / 2 | 11 | 90 nuage + 175 vapeur | 150 nuage + 150 vapeur | **240 nuage + 325 vapeur** | [`crafting/ancient.md`](crafting/ancient.md) |
+| Pterosaur Wings | `ptero` | Épique | 2 / 2 | 14 | 90 nuage + 220 vapeur | 150 nuage + 150 vapeur | **240 nuage + 370 vapeur** | [`crafting/ptero.md`](crafting/ptero.md) |
+| Wings of Flame | `fire` | Épique | 2 / 2 | 14 | 90 nuage + 225 vapeur | 150 nuage + 150 vapeur | **240 nuage + 375 vapeur** | [`crafting/fire.md`](crafting/fire.md) |
+| Wings of the Tide | `water` | Épique | 2 / 2 | 14 | 90 nuage + 225 vapeur | 150 nuage + 150 vapeur | **240 nuage + 375 vapeur** | [`crafting/water.md`](crafting/water.md) |
+| Wings of Stone | `earth` | Épique | 2 / 2 | 14 | 90 nuage + 225 vapeur | 150 nuage + 150 vapeur | **240 nuage + 375 vapeur** | [`crafting/earth.md`](crafting/earth.md) |
+| Wings of the Wind | `air` | Épique | 2 / 2 | 12 | 90 nuage + 195 vapeur | 150 nuage + 150 vapeur | **240 nuage + 345 vapeur** | [`crafting/air.md`](crafting/air.md) |
+| Wings of the Storm | `storm` | Épique | 2 / 2 | 13 | 90 nuage + 210 vapeur | 150 nuage + 150 vapeur | **240 nuage + 360 vapeur** | [`crafting/storm.md`](crafting/storm.md) |
+| Aurora Wings | `aurora` | Épique | 2 / 2 | 12 | 90 nuage + 195 vapeur | 150 nuage + 150 vapeur | **240 nuage + 345 vapeur** | [`crafting/aurora.md`](crafting/aurora.md) |
+| Wings of Shadow | `shadow` | Épique | 2 / 2 | 14 | 90 nuage + 225 vapeur | 150 nuage + 150 vapeur | **240 nuage + 375 vapeur** | [`crafting/shadow.md`](crafting/shadow.md) |
+| Nebula Wings | `nebula` | Épique | 2 / 2 | 14 | 90 nuage + 225 vapeur | 150 nuage + 150 vapeur | **240 nuage + 375 vapeur** | [`crafting/nebula.md`](crafting/nebula.md) |
+| Wings of the Forest Spirit | `forest` | Épique | 2 / 2 | 9 | 90 nuage + 150 vapeur | 150 nuage + 150 vapeur | **240 nuage + 300 vapeur** | [`crafting/forest.md`](crafting/forest.md) |
+| Angel Wings | `angel` | Légendaire | 3 / 3 | 17 | 100 nuage + 190 vapeur + 270 éthérée | 250 nuage + 250 vapeur + 300 éthérée | **350 nuage + 440 vapeur + 570 éthérée** | [`crafting/angel.md`](crafting/angel.md) |
+| Demon Wings | `demon` | Légendaire | 3 / 3 | 16 | 100 nuage + 230 vapeur + 265 éthérée | 250 nuage + 250 vapeur + 300 éthérée | **350 nuage + 480 vapeur + 565 éthérée** | [`crafting/demon.md`](crafting/demon.md) |
+| Seraph Wings | `seraph` | Légendaire | 3 / 3 | 24 | 100 nuage + 315 vapeur + 340 éthérée | 250 nuage + 250 vapeur + 300 éthérée | **350 nuage + 565 vapeur + 640 éthérée** | [`crafting/seraph.md`](crafting/seraph.md) |
+| Wings of Psyche | `psyche` | Légendaire | 3 / 3 | 24 | 100 nuage + 320 vapeur + 425 éthérée | 250 nuage + 250 vapeur + 300 éthérée | **350 nuage + 570 vapeur + 725 éthérée** | [`crafting/psyche.md`](crafting/psyche.md) |
+| Wings of Daedalus | `daedalus` | Légendaire | 3 / 3 | 25 | 100 nuage + 200 vapeur + 365 éthérée | 250 nuage + 250 vapeur + 300 éthérée | **350 nuage + 450 vapeur + 665 éthérée** | [`crafting/daedalus.md`](crafting/daedalus.md) |
+| Wings of Yin and Yang | `yin_yang` | Légendaire | 3 / 3 | 18 | 100 nuage + 220 vapeur + 325 éthérée | 250 nuage + 250 vapeur + 300 éthérée | **350 nuage + 470 vapeur + 625 éthérée** | [`crafting/yin_yang.md`](crafting/yin_yang.md) |
+| Night Wings | `night` | Mythique | 5 / 5 | 35 | 95 nuage + 345 vapeur + 665 éthérée + 585 intensifiée | 250 nuage + 250 vapeur + 250 éthérée + 250 intensifiée | **345 nuage + 595 vapeur + 915 éthérée + 835 intensifiée** | [`crafting/night.md`](crafting/night.md) |
+| Light Wings | `light` | Mythique | 5 / 5 | 39 | 95 nuage + 420 vapeur + 650 éthérée + 570 intensifiée | 250 nuage + 250 vapeur + 250 éthérée + 250 intensifiée | **345 nuage + 670 vapeur + 900 éthérée + 820 intensifiée** | [`crafting/light.md`](crafting/light.md) |
 
 ## Common Wings · `simplywings:common` · Commune
 

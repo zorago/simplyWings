@@ -25,5 +25,8 @@
     "id": "simplywings:celestial_frame",
     "count": 1
   },
-  "essence": 35
+  "essence": {
+    "steam": 15,
+    "ethereal": 20
+  }
 }

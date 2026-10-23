@@ -25,5 +25,9 @@
     "id": "simplywings:light_tail",
     "count": 1
   },
-  "essence": 90
+  "essence": {
+    "steam": 30,
+    "ethereal": 30,
+    "intensified": 30
+  }
 }

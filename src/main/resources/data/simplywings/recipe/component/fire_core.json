@@ -25,5 +25,8 @@
     "id": "simplywings:fire_core",
     "count": 1
   },
-  "essence": 60
+  "essence": {
+    "cloud": 30,
+    "steam": 30
+  }
 }

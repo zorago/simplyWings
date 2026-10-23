@@ -4,7 +4,7 @@
 
 Papier et baguettes : la paire la moins chère, faite main, qui porte au moindre souffle.
 
-Règles, légende et objets partagés : [`CRAFTING.md`](../CRAFTING.md). Dernière mise à jour : 22 octobre 2026.
+Règles, légende et objets partagés : [`CRAFTING.md`](../CRAFTING.md). Dernière mise à jour : 23 octobre 2026.
 
 ## En bref
 
@@ -12,7 +12,7 @@ Règles, légende et objets partagés : [`CRAFTING.md`](../CRAFTING.md). Derniè
 | --- | --- |
 | Profondeur | 1 niveau de craft avant les pièces (max 1 en rare) |
 | Crafts | 4 en `GRID` + 1 assemblage |
-| Cloud Essence | 50 (pièces) + 100 (assemblage) = **150** |
+| Essences | 50 nuage (pièces) + 100 nuage (assemblage) = **150 nuage** |
 | Matières premières | 4 types du mod (11 objets) · 5 types vanilla (25 objets) |
 | Drops du mod | Supple Hide (MOB · Cow, Mooshroom, Horse, Donkey, Llama), Silk Thread (MOB · Spider, Cave Spider), Sky Iron Fleck (BLOCK · Iron Ore, Deepslate Iron Ore), Updraft Shard (BLOCK · `#minecraft:base_stone_overworld`) |
 
@@ -38,10 +38,10 @@ Niv. = niveau de craft (0 = matière première). Crafts = nombre de fois que la 
 
 | # | Produit | Où | Niv. | Crafts | Entrées par craft | Essence | Cumul |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | Iron-Buckled Harness `simplywings:iron_harness` ×1 | `GRID` | 1 | 1 | Leather ×6, Supple Hide ×2, Iron Ingot ×2, Silk Thread ×1, Sky Iron Fleck ×1 | 10 | 10 |
-| 2 | Kite Core `simplywings:kite_core` ×1 | `GRID` | 1 | 1 | Silk Thread ×4, Iron Ingot ×1, Bamboo ×2, Updraft Shard ×1 | 20 | 30 |
-| 3 | Kite Wing `simplywings:kite_wing` ×2 | `GRID` | 1 | 2 | Bamboo ×3, Paper ×3, Red Dye ×1, Silk Thread ×1 | 2 × 10 | 50 |
-| 4 | Kite Wings `simplywings:kite_wings` | `ASM` | — | 1 | Harnais : Iron-Buckled Harness → #1 · Cœur : Kite Core → #2 · Aile G : Kite Wing → #3 · Aile D : Kite Wing → #3 | 100 | **150** |
+| 1 | Iron-Buckled Harness `simplywings:iron_harness` ×1 | `GRID` | 1 | 1 | Leather ×6, Supple Hide ×2, Iron Ingot ×2, Silk Thread ×1, Sky Iron Fleck ×1 | 10 nuage | 10 nuage |
+| 2 | Kite Core `simplywings:kite_core` ×1 | `GRID` | 1 | 1 | Silk Thread ×4, Iron Ingot ×1, Bamboo ×2, Updraft Shard ×1 | 20 nuage | 30 nuage |
+| 3 | Kite Wing `simplywings:kite_wing` ×2 | `GRID` | 1 | 2 | Bamboo ×3, Paper ×3, Red Dye ×1, Silk Thread ×1 | 2 × (10 nuage) | 50 nuage |
+| 4 | Kite Wings `simplywings:kite_wings` | `ASM` | — | 1 | Harnais : Iron-Buckled Harness → #1 · Cœur : Kite Core → #2 · Aile G : Kite Wing → #3 · Aile D : Kite Wing → #3 | 100 nuage | **150 nuage** |
 
 ## Recettes
 
@@ -49,7 +49,7 @@ Grille 5×5 sans les coins : `.` = coin absent, `_` = case vide.
 
 ### #1 · Iron-Buckled Harness · `simplywings:iron_harness` · partagé
 
-`GRID` · niveau 1 · 10 Cloud Essence · donne ×1
+`GRID` · niveau 1 · essence : 10 nuage · donne ×1
 
 ```
 . L _ L .
@@ -69,7 +69,7 @@ _ L K L _
 
 ### #2 · Kite Core · `simplywings:kite_core`
 
-`GRID` · niveau 1 · 20 Cloud Essence · donne ×1
+`GRID` · niveau 1 · essence : 20 nuage · donne ×1
 
 ```
 . _ _ _ .
@@ -88,7 +88,7 @@ _ T _ T _
 
 ### #3 · Kite Wing · `simplywings:kite_wing`
 
-`GRID` · niveau 1 · 10 Cloud Essence · donne ×1
+`GRID` · niveau 1 · essence : 10 nuage · donne ×1
 
 ```
 . _ B _ .

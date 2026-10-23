@@ -4,7 +4,7 @@
 
 Les ailes de la Furie Éclair. Le grand craft d'exploration : End, Nether, Wither, océan, glace polaire, chambres d'épreuves, raids et renifleur.
 
-Règles, légende et objets partagés : [`CRAFTING.md`](../CRAFTING.md). Dernière mise à jour : 22 octobre 2026.
+Règles, légende et objets partagés : [`CRAFTING.md`](../CRAFTING.md). Dernière mise à jour : 23 octobre 2026.
 
 ## En bref
 
@@ -12,7 +12,7 @@ Règles, légende et objets partagés : [`CRAFTING.md`](../CRAFTING.md). Derniè
 | --- | --- |
 | Profondeur | 5 niveaux de craft avant les pièces (max 5 en mythique) |
 | Crafts | 39 en `GRID` + 1 assemblage |
-| Cloud Essence | 1735 (pièces) + 1000 (assemblage) = **2735** |
+| Essences | 95 nuage + 420 vapeur + 650 éthérée + 570 intensifiée (pièces) + 250 nuage + 250 vapeur + 250 éthérée + 250 intensifiée (assemblage) = **345 nuage + 670 vapeur + 900 éthérée + 820 intensifiée** |
 | Matières premières | 14 types du mod (93 objets) · 17 types vanilla (91 objets) |
 | Drops du mod | Dragon Scale (MOB · Ender Dragon), Ancient Ember (BLOCK · Ancient Debris), Prism Shard (BLOCK · Diamond Ore, Deepslate Diamond Ore), Gilded Vein (BLOCK · Gold Ore, Deepslate Gold Ore, Nether Gold Ore), Glimmer Spore (BLOCK · Glow Lichen), Void Grit (BLOCK · End Stone), Glimmering Scale (FISH · Pêche), Supple Hide (MOB · Cow, Mooshroom, Horse, Donkey, Llama), Silk Thread (MOB · Spider, Cave Spider), Sky Iron Fleck (BLOCK · Iron Ore, Deepslate Iron Ore), Ghast Wisp (MOB · Ghast), Pale Quartz (BLOCK · Nether Quartz Ore), Ember Wisp (MOB · Blaze), Polar Glimmer (BLOCK · Ice, Packed Ice, Blue Ice) |
 
@@ -60,23 +60,23 @@ Niv. = niveau de craft (0 = matière première). Crafts = nombre de fois que la 
 
 | # | Produit | Où | Niv. | Crafts | Entrées par craft | Essence | Cumul |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | Iron-Buckled Harness `simplywings:iron_harness` ×1 | `GRID` | 1 | 1 | Leather ×6, Supple Hide ×2, Iron Ingot ×2, Silk Thread ×1, Sky Iron Fleck ×1 | 10 | 10 |
-| 2 | Fury Plasma `simplywings:fury_plasma` ×2 | `GRID` | 1 | 2 | Dragon's Breath ×2, Blaze Powder ×1, Ghast Wisp ×1 | 2 × 30 | 70 |
-| 3 | Light Scale `simplywings:light_scale` ×24 | `GRID` | 1 | 6 | Dragon Scale ×4, Pale Quartz ×1, White Dye ×1 | 6 × 40 | 310 |
-| 4 | Gilded Frame `simplywings:gilded_frame` ×3 | `GRID` | 1 | 3 | Gold Ingot ×4, Blaze Powder ×1, Gilded Vein ×1, Ember Wisp ×1 | 3 × 15 | 355 |
-| 5 | Aurora Veil `simplywings:aurora_veil` ×5 | `GRID` | 1 | 5 | Polar Glimmer ×2, Glimmer Spore ×1, Lime Dye ×1, Purple Dye ×1 | 5 × 15 | 430 |
-| 6 | Gilded Harness `simplywings:gilded_harness` ×1 | `GRID` | 2 | 1 | Gold Ingot ×4, Leather ×2, Iron-Buckled Harness ×1 → #1, Gilded Vein ×1 | 25 | 455 |
-| 7 | Light Plating `simplywings:light_plating` ×3 | `GRID` | 2 | 3 | Light Scale ×4 → #3, Ancient Ember ×1, Glimmer Spore ×1 | 3 × 50 | 605 |
-| 8 | Celestial Frame `simplywings:celestial_frame` ×3 | `GRID` | 2 | 3 | End Rod ×2, Void Grit ×1, Diamond ×2, Gilded Frame ×1 → #4 | 3 × 35 | 710 |
-| 9 | Shimmer Membrane `simplywings:shimmer_membrane` ×5 | `GRID` | 2 | 5 | Phantom Membrane ×2, Aurora Veil ×1 → #5, Glimmering Scale ×2, Light Scale ×1 → #3 | 5 × 50 | 960 |
-| 10 | Radiant Harness `simplywings:radiant_harness` ×1 | `GRID` | 3 | 1 | Diamond ×4, Phantom Membrane ×2, Gilded Harness ×1 → #6, Prism Shard ×1 | 50 | 1010 |
-| 11 | Blast Chamber `simplywings:blast_chamber` ×1 | `GRID` | 3 | 1 | Fury Plasma ×2 → #2, Beacon ×1, Light Plating ×1 → #7, Netherite Ingot ×1 | 75 | 1085 |
-| 12 | Dragonbone Spar `simplywings:dragonbone_spar` ×3 | `GRID` | 3 | 3 | Dragon Scale ×2, Celestial Frame ×1 → #8, Ancient Ember ×1 | 3 × 60 | 1265 |
-| 13 | Fury Saddle `simplywings:fury_saddle` ×1 | `GRID` | 4 | 1 | Dragon Scale ×4, Leather ×2, Radiant Harness ×1 → #10, Saddle ×1, Netherite Ingot ×1, Ancient Ember ×2 | 80 | 1345 |
-| 14 | Light Fury Tail `simplywings:light_tail` ×1 | `GRID` | 4 | 1 | Dragonbone Spar ×1 → #12, Light Plating ×2 → #7, Shimmer Membrane ×1 → #9, Breeze Rod ×1 | 90 | 1435 |
-| 15 | Light Fury Wing `simplywings:light_wing` ×2 | `GRID` | 4 | 2 | Shimmer Membrane ×2 → #9, Dragonbone Spar ×1 → #12, Light Scale ×2 → #3 | 2 × 100 | 1635 |
-| 16 | Light Fury Core `simplywings:light_core` ×1 | `GRID` | 5 | 1 | Netherite Ingot ×2, Blast Chamber ×1 → #11, Shulker Shell ×2, Pitcher Plant ×1, Light Fury Tail ×1 → #14 | 100 | 1735 |
-| 17 | Light Wings `simplywings:light_wings` | `ASM` | — | 1 | Harnais : Fury Saddle → #13 · Cœur : Light Fury Core → #16 · Aile G : Light Fury Wing → #15 · Aile D : Light Fury Wing → #15 | 1000 | **2735** |
+| 1 | Iron-Buckled Harness `simplywings:iron_harness` ×1 | `GRID` | 1 | 1 | Leather ×6, Supple Hide ×2, Iron Ingot ×2, Silk Thread ×1, Sky Iron Fleck ×1 | 10 nuage | 10 nuage |
+| 2 | Fury Plasma `simplywings:fury_plasma` ×2 | `GRID` | 1 | 2 | Dragon's Breath ×2, Blaze Powder ×1, Ghast Wisp ×1 | 2 × (15 éthérée + 15 intensifiée) | 10 nuage + 30 éthérée + 30 intensifiée |
+| 3 | Light Scale `simplywings:light_scale` ×24 | `GRID` | 1 | 6 | Dragon Scale ×4, Pale Quartz ×1, White Dye ×1 | 6 × (20 éthérée + 20 intensifiée) | 10 nuage + 150 éthérée + 150 intensifiée |
+| 4 | Gilded Frame `simplywings:gilded_frame` ×3 | `GRID` | 1 | 3 | Gold Ingot ×4, Blaze Powder ×1, Gilded Vein ×1, Ember Wisp ×1 | 3 × (15 vapeur) | 10 nuage + 45 vapeur + 150 éthérée + 150 intensifiée |
+| 5 | Aurora Veil `simplywings:aurora_veil` ×5 | `GRID` | 1 | 5 | Polar Glimmer ×2, Glimmer Spore ×1, Lime Dye ×1, Purple Dye ×1 | 5 × (15 vapeur) | 10 nuage + 120 vapeur + 150 éthérée + 150 intensifiée |
+| 6 | Gilded Harness `simplywings:gilded_harness` ×1 | `GRID` | 2 | 1 | Gold Ingot ×4, Leather ×2, Iron-Buckled Harness ×1 → #1, Gilded Vein ×1 | 10 nuage + 15 vapeur | 20 nuage + 135 vapeur + 150 éthérée + 150 intensifiée |
+| 7 | Light Plating `simplywings:light_plating` ×3 | `GRID` | 2 | 3 | Light Scale ×4 → #3, Ancient Ember ×1, Glimmer Spore ×1 | 3 × (25 éthérée + 25 intensifiée) | 20 nuage + 135 vapeur + 225 éthérée + 225 intensifiée |
+| 8 | Celestial Frame `simplywings:celestial_frame` ×3 | `GRID` | 2 | 3 | End Rod ×2, Void Grit ×1, Diamond ×2, Gilded Frame ×1 → #4 | 3 × (15 vapeur + 20 éthérée) | 20 nuage + 180 vapeur + 285 éthérée + 225 intensifiée |
+| 9 | Shimmer Membrane `simplywings:shimmer_membrane` ×5 | `GRID` | 2 | 5 | Phantom Membrane ×2, Aurora Veil ×1 → #5, Glimmering Scale ×2, Light Scale ×1 → #3 | 5 × (25 éthérée + 25 intensifiée) | 20 nuage + 180 vapeur + 410 éthérée + 350 intensifiée |
+| 10 | Radiant Harness `simplywings:radiant_harness` ×1 | `GRID` | 3 | 1 | Diamond ×4, Phantom Membrane ×2, Gilded Harness ×1 → #6, Prism Shard ×1 | 25 vapeur + 25 éthérée | 20 nuage + 205 vapeur + 435 éthérée + 350 intensifiée |
+| 11 | Blast Chamber `simplywings:blast_chamber` ×1 | `GRID` | 3 | 1 | Fury Plasma ×2 → #2, Beacon ×1, Light Plating ×1 → #7, Netherite Ingot ×1 | 25 vapeur + 25 éthérée + 25 intensifiée | 20 nuage + 230 vapeur + 460 éthérée + 375 intensifiée |
+| 12 | Dragonbone Spar `simplywings:dragonbone_spar` ×3 | `GRID` | 3 | 3 | Dragon Scale ×2, Celestial Frame ×1 → #8, Ancient Ember ×1 | 3 × (20 vapeur + 20 éthérée + 20 intensifiée) | 20 nuage + 290 vapeur + 520 éthérée + 435 intensifiée |
+| 13 | Fury Saddle `simplywings:fury_saddle` ×1 | `GRID` | 4 | 1 | Dragon Scale ×4, Leather ×2, Radiant Harness ×1 → #10, Saddle ×1, Netherite Ingot ×1, Ancient Ember ×2 | 25 vapeur + 25 éthérée + 30 intensifiée | 20 nuage + 315 vapeur + 545 éthérée + 465 intensifiée |
+| 14 | Light Fury Tail `simplywings:light_tail` ×1 | `GRID` | 4 | 1 | Dragonbone Spar ×1 → #12, Light Plating ×2 → #7, Shimmer Membrane ×1 → #9, Breeze Rod ×1 | 30 vapeur + 30 éthérée + 30 intensifiée | 20 nuage + 345 vapeur + 575 éthérée + 495 intensifiée |
+| 15 | Light Fury Wing `simplywings:light_wing` ×2 | `GRID` | 4 | 2 | Shimmer Membrane ×2 → #9, Dragonbone Spar ×1 → #12, Light Scale ×2 → #3 | 2 × (25 nuage + 25 vapeur + 25 éthérée + 25 intensifiée) | 70 nuage + 395 vapeur + 625 éthérée + 545 intensifiée |
+| 16 | Light Fury Core `simplywings:light_core` ×1 | `GRID` | 5 | 1 | Netherite Ingot ×2, Blast Chamber ×1 → #11, Shulker Shell ×2, Pitcher Plant ×1, Light Fury Tail ×1 → #14 | 25 nuage + 25 vapeur + 25 éthérée + 25 intensifiée | 95 nuage + 420 vapeur + 650 éthérée + 570 intensifiée |
+| 17 | Light Wings `simplywings:light_wings` | `ASM` | — | 1 | Harnais : Fury Saddle → #13 · Cœur : Light Fury Core → #16 · Aile G : Light Fury Wing → #15 · Aile D : Light Fury Wing → #15 | 250 nuage + 250 vapeur + 250 éthérée + 250 intensifiée | **345 nuage + 670 vapeur + 900 éthérée + 820 intensifiée** |
 
 ## Recettes
 
@@ -84,7 +84,7 @@ Grille 5×5 sans les coins : `.` = coin absent, `_` = case vide.
 
 ### #1 · Iron-Buckled Harness · `simplywings:iron_harness` · partagé
 
-`GRID` · niveau 1 · 10 Cloud Essence · donne ×1
+`GRID` · niveau 1 · essence : 10 nuage · donne ×1
 
 ```
 . L _ L .
@@ -104,7 +104,7 @@ _ L K L _
 
 ### #2 · Fury Plasma · `simplywings:fury_plasma` · partagé
 
-`GRID` · niveau 1 · 30 Cloud Essence · donne ×1
+`GRID` · niveau 1 · essence : 15 éthérée + 15 intensifiée · donne ×1
 
 ```
 . _ _ _ .
@@ -122,7 +122,7 @@ _ _ _ _ _
 
 ### #3 · Light Scale · `simplywings:light_scale`
 
-`GRID` · niveau 1 · 40 Cloud Essence · donne ×4
+`GRID` · niveau 1 · essence : 20 éthérée + 20 intensifiée · donne ×4
 
 ```
 . _ _ _ .
@@ -140,7 +140,7 @@ _ _ _ _ _
 
 ### #4 · Gilded Frame · `simplywings:gilded_frame` · partagé
 
-`GRID` · niveau 1 · 15 Cloud Essence · donne ×1
+`GRID` · niveau 1 · essence : 15 vapeur · donne ×1
 
 ```
 . _ _ _ .
@@ -159,7 +159,7 @@ _ G E G _
 
 ### #5 · Aurora Veil · `simplywings:aurora_veil` · partagé
 
-`GRID` · niveau 1 · 15 Cloud Essence · donne ×1
+`GRID` · niveau 1 · essence : 15 vapeur · donne ×1
 
 ```
 . _ _ _ .
@@ -178,7 +178,7 @@ _ _ _ _ _
 
 ### #6 · Gilded Harness · `simplywings:gilded_harness` · partagé
 
-`GRID` · niveau 2 · 25 Cloud Essence · donne ×1
+`GRID` · niveau 2 · essence : 10 nuage + 15 vapeur · donne ×1
 
 ```
 . G _ G .
@@ -197,7 +197,7 @@ _ _ _ _ _
 
 ### #7 · Light Plating · `simplywings:light_plating`
 
-`GRID` · niveau 2 · 50 Cloud Essence · donne ×1
+`GRID` · niveau 2 · essence : 25 éthérée + 25 intensifiée · donne ×1
 
 ```
 . _ _ _ .
@@ -215,7 +215,7 @@ _ _ G _ _
 
 ### #8 · Celestial Frame · `simplywings:celestial_frame` · partagé
 
-`GRID` · niveau 2 · 35 Cloud Essence · donne ×1
+`GRID` · niveau 2 · essence : 15 vapeur + 20 éthérée · donne ×1
 
 ```
 . _ _ _ .
@@ -234,7 +234,7 @@ _ _ _ _ _
 
 ### #9 · Shimmer Membrane · `simplywings:shimmer_membrane`
 
-`GRID` · niveau 2 · 50 Cloud Essence · donne ×1
+`GRID` · niveau 2 · essence : 25 éthérée + 25 intensifiée · donne ×1
 
 ```
 . _ _ _ .
@@ -253,7 +253,7 @@ _ _ _ _ _
 
 ### #10 · Radiant Harness · `simplywings:radiant_harness` · partagé
 
-`GRID` · niveau 3 · 50 Cloud Essence · donne ×1
+`GRID` · niveau 3 · essence : 25 vapeur + 25 éthérée · donne ×1
 
 ```
 . D _ D .
@@ -272,7 +272,7 @@ _ _ _ _ _
 
 ### #11 · Blast Chamber · `simplywings:blast_chamber`
 
-`GRID` · niveau 3 · 75 Cloud Essence · donne ×1
+`GRID` · niveau 3 · essence : 25 vapeur + 25 éthérée + 25 intensifiée · donne ×1
 
 ```
 . _ _ _ .
@@ -291,7 +291,7 @@ _ _ N _ _
 
 ### #12 · Dragonbone Spar · `simplywings:dragonbone_spar` · partagé
 
-`GRID` · niveau 3 · 60 Cloud Essence · donne ×1
+`GRID` · niveau 3 · essence : 20 vapeur + 20 éthérée + 20 intensifiée · donne ×1
 
 ```
 . _ _ _ .
@@ -309,7 +309,7 @@ _ _ _ _ _
 
 ### #13 · Fury Saddle · `simplywings:fury_saddle` · partagé
 
-`GRID` · niveau 4 · 80 Cloud Essence · donne ×1
+`GRID` · niveau 4 · essence : 25 vapeur + 25 éthérée + 30 intensifiée · donne ×1
 
 ```
 . S _ S .
@@ -330,7 +330,7 @@ _ E N E _
 
 ### #14 · Light Fury Tail · `simplywings:light_tail`
 
-`GRID` · niveau 4 · 90 Cloud Essence · donne ×1
+`GRID` · niveau 4 · essence : 30 vapeur + 30 éthérée + 30 intensifiée · donne ×1
 
 ```
 . _ _ _ .
@@ -349,7 +349,7 @@ _ _ R _ _
 
 ### #15 · Light Fury Wing · `simplywings:light_wing`
 
-`GRID` · niveau 4 · 100 Cloud Essence · donne ×1
+`GRID` · niveau 4 · essence : 25 nuage + 25 vapeur + 25 éthérée + 25 intensifiée · donne ×1
 
 ```
 . _ _ _ .
@@ -367,7 +367,7 @@ _ _ _ _ _
 
 ### #16 · Light Fury Core · `simplywings:light_core`
 
-`GRID` · niveau 5 · 100 Cloud Essence · donne ×1
+`GRID` · niveau 5 · essence : 25 nuage + 25 vapeur + 25 éthérée + 25 intensifiée · donne ×1
 
 ```
 . _ _ _ .

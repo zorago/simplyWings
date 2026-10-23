@@ -4,8 +4,23 @@
     "layer0": "simplywings:item/cloud_flask"
   },
   "overrides": [
-    { "predicate": { "simplywings:fill": 0.01 }, "model": "simplywings:item/cloud_flask_1" },
-    { "predicate": { "simplywings:fill": 0.34 }, "model": "simplywings:item/cloud_flask_2" },
-    { "predicate": { "simplywings:fill": 0.67 }, "model": "simplywings:item/cloud_flask_3" }
+    {
+      "predicate": {
+        "simplywings:fill": 0.01
+      },
+      "model": "simplywings:item/cloud_flask_1"
+    },
+    {
+      "predicate": {
+        "simplywings:fill": 0.34
+      },
+      "model": "simplywings:item/cloud_flask_2"
+    },
+    {
+      "predicate": {
+        "simplywings:fill": 0.68
+      },
+      "model": "simplywings:item/cloud_flask_3"
+    }
   ]
 }

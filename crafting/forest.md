@@ -4,7 +4,7 @@
 
 Un esprit de la forêt, comme un kodama : feuilles, fleurs et branches.
 
-Règles, légende et objets partagés : [`CRAFTING.md`](../CRAFTING.md). Dernière mise à jour : 22 octobre 2026.
+Règles, légende et objets partagés : [`CRAFTING.md`](../CRAFTING.md). Dernière mise à jour : 23 octobre 2026.
 
 ## En bref
 
@@ -12,7 +12,7 @@ Règles, légende et objets partagés : [`CRAFTING.md`](../CRAFTING.md). Derniè
 | --- | --- |
 | Profondeur | 2 niveaux de craft avant les pièces (max 2 en épique) |
 | Crafts | 9 en `GRID` + 1 assemblage |
-| Cloud Essence | 240 (pièces) + 300 (assemblage) = **540** |
+| Essences | 90 nuage + 150 vapeur (pièces) + 150 nuage + 150 vapeur (assemblage) = **240 nuage + 300 vapeur** |
 | Matières premières | 8 types du mod (19 objets) · 8 types vanilla (38 objets) |
 | Drops du mod | Gilded Vein (BLOCK · Gold Ore, Deepslate Gold Ore, Nether Gold Ore), Blossom Spirit (BLOCK · Cherry Leaves), Supple Hide (MOB · Cow, Mooshroom, Horse, Donkey, Llama), Silk Thread (MOB · Spider, Cave Spider), Sky Iron Fleck (BLOCK · Iron Ore, Deepslate Iron Ore), Ghast Wisp (MOB · Ghast), Acorn (BLOCK · Oak Leaves, Dark Oak Leaves), Glimmer Spore (BLOCK · Glow Lichen) |
 
@@ -45,13 +45,13 @@ Niv. = niveau de craft (0 = matière première). Crafts = nombre de fois que la 
 
 | # | Produit | Où | Niv. | Crafts | Entrées par craft | Essence | Cumul |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | Iron-Buckled Harness `simplywings:iron_harness` ×1 | `GRID` | 1 | 1 | Leather ×6, Supple Hide ×2, Iron Ingot ×2, Silk Thread ×1, Sky Iron Fleck ×1 | 10 | 10 |
-| 2 | Spirit Vessel `simplywings:spirit_vessel` ×1 | `GRID` | 1 | 1 | Gold Ingot ×4, Glass ×4, Ghast Wisp ×1 | 20 | 30 |
-| 3 | Living Bough `simplywings:living_bough` ×3 | `GRID` | 1 | 3 | Acorn ×2, Oak Log ×1, Glimmer Spore ×1 | 3 × 15 | 75 |
-| 4 | Gilded Harness `simplywings:gilded_harness` ×1 | `GRID` | 2 | 1 | Gold Ingot ×4, Leather ×2, Iron-Buckled Harness ×1 → #1, Gilded Vein ×1 | 25 | 100 |
-| 5 | Forest Spirit Core `simplywings:forest_core` ×1 | `GRID` | 2 | 1 | Blossom Spirit ×2, Gold Ingot ×2, Spore Blossom ×1, Spirit Vessel ×1 → #2, Living Bough ×1 → #3 | 60 | 160 |
-| 6 | Forest Spirit Wing `simplywings:forest_wing` ×2 | `GRID` | 2 | 2 | Oak Leaves ×2, Blossom Spirit ×1, Pink Petals ×2, Living Bough ×1 → #3, Gold Ingot ×1 | 2 × 40 | 240 |
-| 7 | Wings of the Forest Spirit `simplywings:forest_wings` | `ASM` | — | 1 | Harnais : Gilded Harness → #4 · Cœur : Forest Spirit Core → #5 · Aile G : Forest Spirit Wing → #6 · Aile D : Forest Spirit Wing → #6 | 300 | **540** |
+| 1 | Iron-Buckled Harness `simplywings:iron_harness` ×1 | `GRID` | 1 | 1 | Leather ×6, Supple Hide ×2, Iron Ingot ×2, Silk Thread ×1, Sky Iron Fleck ×1 | 10 nuage | 10 nuage |
+| 2 | Spirit Vessel `simplywings:spirit_vessel` ×1 | `GRID` | 1 | 1 | Gold Ingot ×4, Glass ×4, Ghast Wisp ×1 | 20 vapeur | 10 nuage + 20 vapeur |
+| 3 | Living Bough `simplywings:living_bough` ×3 | `GRID` | 1 | 3 | Acorn ×2, Oak Log ×1, Glimmer Spore ×1 | 3 × (15 vapeur) | 10 nuage + 65 vapeur |
+| 4 | Gilded Harness `simplywings:gilded_harness` ×1 | `GRID` | 2 | 1 | Gold Ingot ×4, Leather ×2, Iron-Buckled Harness ×1 → #1, Gilded Vein ×1 | 10 nuage + 15 vapeur | 20 nuage + 80 vapeur |
+| 5 | Forest Spirit Core `simplywings:forest_core` ×1 | `GRID` | 2 | 1 | Blossom Spirit ×2, Gold Ingot ×2, Spore Blossom ×1, Spirit Vessel ×1 → #2, Living Bough ×1 → #3 | 30 nuage + 30 vapeur | 50 nuage + 110 vapeur |
+| 6 | Forest Spirit Wing `simplywings:forest_wing` ×2 | `GRID` | 2 | 2 | Oak Leaves ×2, Blossom Spirit ×1, Pink Petals ×2, Living Bough ×1 → #3, Gold Ingot ×1 | 2 × (20 nuage + 20 vapeur) | 90 nuage + 150 vapeur |
+| 7 | Wings of the Forest Spirit `simplywings:forest_wings` | `ASM` | — | 1 | Harnais : Gilded Harness → #4 · Cœur : Forest Spirit Core → #5 · Aile G : Forest Spirit Wing → #6 · Aile D : Forest Spirit Wing → #6 | 150 nuage + 150 vapeur | **240 nuage + 300 vapeur** |
 
 ## Recettes
 
@@ -59,7 +59,7 @@ Grille 5×5 sans les coins : `.` = coin absent, `_` = case vide.
 
 ### #1 · Iron-Buckled Harness · `simplywings:iron_harness` · partagé
 
-`GRID` · niveau 1 · 10 Cloud Essence · donne ×1
+`GRID` · niveau 1 · essence : 10 nuage · donne ×1
 
 ```
 . L _ L .
@@ -79,7 +79,7 @@ _ L K L _
 
 ### #2 · Spirit Vessel · `simplywings:spirit_vessel` · partagé
 
-`GRID` · niveau 1 · 20 Cloud Essence · donne ×1
+`GRID` · niveau 1 · essence : 20 vapeur · donne ×1
 
 ```
 . _ _ _ .
@@ -97,7 +97,7 @@ _ G A G _
 
 ### #3 · Living Bough · `simplywings:living_bough`
 
-`GRID` · niveau 1 · 15 Cloud Essence · donne ×1
+`GRID` · niveau 1 · essence : 15 vapeur · donne ×1
 
 ```
 . _ _ _ .
@@ -115,7 +115,7 @@ _ _ _ _ _
 
 ### #4 · Gilded Harness · `simplywings:gilded_harness` · partagé
 
-`GRID` · niveau 2 · 25 Cloud Essence · donne ×1
+`GRID` · niveau 2 · essence : 10 nuage + 15 vapeur · donne ×1
 
 ```
 . G _ G .
@@ -134,7 +134,7 @@ _ _ _ _ _
 
 ### #5 · Forest Spirit Core · `simplywings:forest_core`
 
-`GRID` · niveau 2 · 60 Cloud Essence · donne ×1
+`GRID` · niveau 2 · essence : 30 nuage + 30 vapeur · donne ×1
 
 ```
 . _ _ _ .
@@ -154,7 +154,7 @@ _ _ G _ _
 
 ### #6 · Forest Spirit Wing · `simplywings:forest_wing`
 
-`GRID` · niveau 2 · 40 Cloud Essence · donne ×1
+`GRID` · niveau 2 · essence : 20 nuage + 20 vapeur · donne ×1
 
 ```
 . _ _ _ .

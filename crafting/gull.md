@@ -4,7 +4,7 @@
 
 Le voyageur des côtes : de longues ailes fines qui planent des heures.
 
-Règles, légende et objets partagés : [`CRAFTING.md`](../CRAFTING.md). Dernière mise à jour : 22 octobre 2026.
+Règles, légende et objets partagés : [`CRAFTING.md`](../CRAFTING.md). Dernière mise à jour : 23 octobre 2026.
 
 ## En bref
 
@@ -12,7 +12,7 @@ Règles, légende et objets partagés : [`CRAFTING.md`](../CRAFTING.md). Derniè
 | --- | --- |
 | Profondeur | 1 niveau de craft avant les pièces (max 1 en rare) |
 | Crafts | 4 en `GRID` + 1 assemblage |
-| Cloud Essence | 70 (pièces) + 100 (assemblage) = **170** |
+| Essences | 70 nuage (pièces) + 100 nuage (assemblage) = **170 nuage** |
 | Matières premières | 5 types du mod (14 objets) · 5 types vanilla (25 objets) |
 | Drops du mod | Supple Hide (MOB · Cow, Mooshroom, Horse, Donkey, Llama), Silk Thread (MOB · Spider, Cave Spider), Sky Iron Fleck (BLOCK · Iron Ore, Deepslate Iron Ore), Gull Feather (FISH · Pêche), Abyssal Ink (MOB · Squid, Glow Squid) |
 
@@ -39,10 +39,10 @@ Niv. = niveau de craft (0 = matière première). Crafts = nombre de fois que la 
 
 | # | Produit | Où | Niv. | Crafts | Entrées par craft | Essence | Cumul |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | Iron-Buckled Harness `simplywings:iron_harness` ×1 | `GRID` | 1 | 1 | Leather ×6, Supple Hide ×2, Iron Ingot ×2, Silk Thread ×1, Sky Iron Fleck ×1 | 10 | 10 |
-| 2 | Gull Core `simplywings:gull_core` ×1 | `GRID` | 1 | 1 | Gull Feather ×2, Iron Ingot ×4, Raw Cod ×2, Nautilus Shell ×1 | 30 | 40 |
-| 3 | Gull Wing `simplywings:gull_wing` ×2 | `GRID` | 1 | 2 | Feather ×4, Gull Feather ×3, Abyssal Ink ×1, Iron Ingot ×1 | 2 × 15 | 70 |
-| 4 | Gull Wings `simplywings:gull_wings` | `ASM` | — | 1 | Harnais : Iron-Buckled Harness → #1 · Cœur : Gull Core → #2 · Aile G : Gull Wing → #3 · Aile D : Gull Wing → #3 | 100 | **170** |
+| 1 | Iron-Buckled Harness `simplywings:iron_harness` ×1 | `GRID` | 1 | 1 | Leather ×6, Supple Hide ×2, Iron Ingot ×2, Silk Thread ×1, Sky Iron Fleck ×1 | 10 nuage | 10 nuage |
+| 2 | Gull Core `simplywings:gull_core` ×1 | `GRID` | 1 | 1 | Gull Feather ×2, Iron Ingot ×4, Raw Cod ×2, Nautilus Shell ×1 | 30 nuage | 40 nuage |
+| 3 | Gull Wing `simplywings:gull_wing` ×2 | `GRID` | 1 | 2 | Feather ×4, Gull Feather ×3, Abyssal Ink ×1, Iron Ingot ×1 | 2 × (15 nuage) | 70 nuage |
+| 4 | Gull Wings `simplywings:gull_wings` | `ASM` | — | 1 | Harnais : Iron-Buckled Harness → #1 · Cœur : Gull Core → #2 · Aile G : Gull Wing → #3 · Aile D : Gull Wing → #3 | 100 nuage | **170 nuage** |
 
 ## Recettes
 
@@ -50,7 +50,7 @@ Grille 5×5 sans les coins : `.` = coin absent, `_` = case vide.
 
 ### #1 · Iron-Buckled Harness · `simplywings:iron_harness` · partagé
 
-`GRID` · niveau 1 · 10 Cloud Essence · donne ×1
+`GRID` · niveau 1 · essence : 10 nuage · donne ×1
 
 ```
 . L _ L .
@@ -70,7 +70,7 @@ _ L K L _
 
 ### #2 · Gull Core · `simplywings:gull_core`
 
-`GRID` · niveau 1 · 30 Cloud Essence · donne ×1
+`GRID` · niveau 1 · essence : 30 nuage · donne ×1
 
 ```
 . _ G _ .
@@ -89,7 +89,7 @@ _ _ C _ _
 
 ### #3 · Gull Wing · `simplywings:gull_wing`
 
-`GRID` · niveau 1 · 15 Cloud Essence · donne ×1
+`GRID` · niveau 1 · essence : 15 nuage · donne ×1
 
 ```
 . _ _ _ .

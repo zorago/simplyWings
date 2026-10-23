@@ -38,6 +38,21 @@ public final class ModBlocks {
     public static final DeferredHolder<MenuType<?>, MenuType<AssemblyTableMenu>> ASSEMBLY_TABLE_MENU =
             MENUS.register("assembly_table", () -> IMenuTypeExtension.create(AssemblyTableMenu::new));
 
+    public static final DeferredBlock<ForgeBenchBlock> FORGE_BENCH = BLOCKS.register("forge_bench",
+            () -> new ForgeBenchBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.METAL)
+                    .strength(4.0F, 12.0F)
+                    .requiresCorrectToolForDrops()
+                    .sound(SoundType.ANVIL)
+                    .noOcclusion()));
+    public static final DeferredItem<BlockItem> FORGE_BENCH_ITEM = ITEMS.register("forge_bench",
+            () -> new BlockItem(FORGE_BENCH.get(), new Item.Properties()));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ForgeBenchBlockEntity>> FORGE_BENCH_ENTITY =
+            BLOCK_ENTITIES.register("forge_bench",
+                    () -> BlockEntityType.Builder.of(ForgeBenchBlockEntity::new, FORGE_BENCH.get()).build(null));
+    public static final DeferredHolder<MenuType<?>, MenuType<ForgeBenchMenu>> FORGE_BENCH_MENU =
+            MENUS.register("forge_bench", () -> IMenuTypeExtension.create(ForgeBenchMenu::new));
+
     public static void register(IEventBus modBus) {
         BLOCKS.register(modBus);
         ITEMS.register(modBus);

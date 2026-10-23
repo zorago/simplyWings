@@ -170,6 +170,12 @@ CRAFT_LORE = {
     "yang_wing": "The Yang wing: pearl-white feathers, bright as noon.",
     "cloud_absorber": "A copper funnel that drinks the clouds as you fly through them.",
     "forge_compass": "Its needle trembles toward the Wing Forge, somewhere out in the End.",
+    "sanctum_compass": "Its needle drifts like a feather toward the Sky Sanctum, adrift in the End.",
+    "refinery_compass": "Its needle hums toward the Cloud Refinery, where the skies are pressed into gold.",
+    "iron_essence_tank": "An iron belly for the essences, buckled like a harness.",
+    "gilded_essence_tank": "Gold keeps the essences warm and the flight long.",
+    "radiant_essence_tank": "Diamond walls hold a whole storm of essence.",
+    "fury_essence_tank": "Scaled like a Fury, it carries a hundred skies.",
 }
 
 PAIR_LORE = {
@@ -300,6 +306,8 @@ PAIR_LORE = {
 EXTRA = {
     "cloud_flask": ("A flask to bottle the clouds themselves.",
                     "Shape it from glass at the crafting table, then fly through the clouds to fill it."),
-    "assembly_table": ("The Wing Forge's table, where wings are born.",
-                       "It waits in the Wing Forge, far out in the End, past the second dragon."),
+    "assembly_table": ("The table of the Sky Sanctum, where wings are born.",
+                       "It waits in the Sky Sanctum, far out in the End, past the second dragon."),
+    "forge_bench": ("The anvil of the Wing Forge, where every piece of a wing is hammered out.",
+                    "It waits in the Wing Forge, far out in the End, past the third dragon."),
 }

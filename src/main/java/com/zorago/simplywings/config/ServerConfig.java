@@ -36,6 +36,8 @@ public final class ServerConfig {
     public static final ModConfigSpec.DoubleValue CLOUD_MIN_Y;
     public static final ModConfigSpec.DoubleValue CLOUD_MAX_Y;
     public static final ModConfigSpec.IntValue CLOUD_ESSENCE_PER_SECOND;
+    public static final ModConfigSpec.IntValue STEAM_HEIGHT;
+    public static final ModConfigSpec.DoubleValue ETHEREAL_MIN_DISTANCE;
     public static final ModConfigSpec.BooleanValue CLOUD_HOVER_HARVEST;
     public static final ModConfigSpec.IntValue FORGE_RADIUS;
     public static final ModConfigSpec.IntValue FORGE_Y;
@@ -136,11 +138,15 @@ public final class ServerConfig {
         b.pop();
 
         b.push("cloud");
-        CLOUD_MIN_Y = b.comment("Bottom of the Overworld cloud layer where a Cloud Absorber fills Cloud Flasks.")
+        CLOUD_MIN_Y = b.comment("Bottom of the Overworld cloud layer where a Cloud Absorber harvests Cloud Essence.")
                 .defineInRange("minY", 186.0, -64.0, 512.0);
         CLOUD_MAX_Y = b.comment("Top of the Overworld cloud layer.")
                 .defineInRange("maxY", 204.0, -64.0, 512.0);
-        CLOUD_ESSENCE_PER_SECOND = b.comment("Cloud Essence added to the flasks each second of flight inside the cloud layer.")
+        STEAM_HEIGHT = b.comment("In the Nether, Steam Essence is harvested when flying at most this many blocks above lava.")
+                .defineInRange("steamHeight", 16, 1, 128);
+        ETHEREAL_MIN_DISTANCE = b.comment("In the End, Ethereal Essence is harvested over the void, at least this far from (0, 0).")
+                .defineInRange("etherealMinDistance", 200.0, 0.0, 100000.0);
+        CLOUD_ESSENCE_PER_SECOND = b.comment("Essence added to the containers each second of flight inside a harvest zone.")
                 .defineInRange("essencePerSecond", 2, 0, 100);
         CLOUD_HOVER_HARVEST = b.comment("Whether hovering (stabilized mode) also harvests, not only travel flight.")
                 .define("hoverHarvest", true);

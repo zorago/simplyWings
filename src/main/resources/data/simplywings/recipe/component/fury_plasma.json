@@ -22,5 +22,8 @@
     "id": "simplywings:fury_plasma",
     "count": 1
   },
-  "essence": 30
+  "essence": {
+    "ethereal": 15,
+    "intensified": 15
+  }
 }

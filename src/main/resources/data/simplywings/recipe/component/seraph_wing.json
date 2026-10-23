@@ -22,5 +22,9 @@
     "id": "simplywings:seraph_wing",
     "count": 1
   },
-  "essence": 80
+  "essence": {
+    "cloud": 25,
+    "steam": 25,
+    "ethereal": 30
+  }
 }

@@ -4,7 +4,7 @@
 
 La puissance brute : une membrane rouge sombre qui frappe fort. La route passe par les raids et le Nether.
 
-Règles, légende et objets partagés : [`CRAFTING.md`](../CRAFTING.md). Dernière mise à jour : 22 octobre 2026.
+Règles, légende et objets partagés : [`CRAFTING.md`](../CRAFTING.md). Dernière mise à jour : 23 octobre 2026.
 
 ## En bref
 
@@ -12,7 +12,7 @@ Règles, légende et objets partagés : [`CRAFTING.md`](../CRAFTING.md). Derniè
 | --- | --- |
 | Profondeur | 3 niveaux de craft avant les pièces (max 3 en légendaire) |
 | Crafts | 16 en `GRID` + 1 assemblage |
-| Cloud Essence | 595 (pièces) + 800 (assemblage) = **1395** |
+| Essences | 100 nuage + 230 vapeur + 265 éthérée (pièces) + 250 nuage + 250 vapeur + 300 éthérée (assemblage) = **350 nuage + 480 vapeur + 565 éthérée** |
 | Matières premières | 10 types du mod (33 objets) · 11 types vanilla (58 objets) |
 | Drops du mod | Prism Shard (BLOCK · Diamond Ore, Deepslate Diamond Ore), Gilded Vein (BLOCK · Gold Ore, Deepslate Gold Ore, Nether Gold Ore), Ghast Wisp (MOB · Ghast), Ember Wisp (MOB · Blaze), Supple Hide (MOB · Cow, Mooshroom, Horse, Donkey, Llama), Silk Thread (MOB · Spider, Cave Spider), Sky Iron Fleck (BLOCK · Iron Ore, Deepslate Iron Ore), Soot Flake (BLOCK · Coal Ore, Deepslate Coal Ore), Vex Wing (MOB · Vex), Elastic Gel (MOB · Slime, Magma Cube) |
 
@@ -50,16 +50,16 @@ Niv. = niveau de craft (0 = matière première). Crafts = nombre de fois que la 
 
 | # | Produit | Où | Niv. | Crafts | Entrées par craft | Essence | Cumul |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | Iron-Buckled Harness `simplywings:iron_harness` ×1 | `GRID` | 1 | 1 | Leather ×6, Supple Hide ×2, Iron Ingot ×2, Silk Thread ×1, Sky Iron Fleck ×1 | 10 | 10 |
-| 2 | Brimstone `simplywings:brimstone` ×4 | `GRID` | 1 | 2 | Gunpowder ×2, Blaze Powder ×1, Soot Flake ×1 | 2 × 20 | 50 |
-| 3 | Infernal Membrane `simplywings:infernal_membrane` ×4 | `GRID` | 1 | 4 | Vex Wing ×2, Elastic Gel ×2, Nether Wart ×2, Magma Cream ×1 | 4 × 25 | 150 |
-| 4 | Gilded Frame `simplywings:gilded_frame` ×2 | `GRID` | 1 | 2 | Gold Ingot ×4, Blaze Powder ×1, Gilded Vein ×1, Ember Wisp ×1 | 2 × 15 | 180 |
-| 5 | Gilded Harness `simplywings:gilded_harness` ×1 | `GRID` | 2 | 1 | Gold Ingot ×4, Leather ×2, Iron-Buckled Harness ×1 → #1, Gilded Vein ×1 | 25 | 205 |
-| 6 | Demon Core `simplywings:demon_core` ×1 | `GRID` | 2 | 1 | Brimstone ×2 → #2, Wither Skeleton Skull ×1, Diamond ×4, Crying Obsidian ×1, Ghast Wisp ×1 | 100 | 305 |
-| 7 | Infernal Frame `simplywings:infernal_frame` ×2 | `GRID` | 2 | 2 | Ember Wisp ×2, Gilded Frame ×1 → #4, Diamond ×2 | 2 × 40 | 385 |
-| 8 | Radiant Harness `simplywings:radiant_harness` ×1 | `GRID` | 3 | 1 | Diamond ×4, Phantom Membrane ×2, Gilded Harness ×1 → #5, Prism Shard ×1 | 50 | 435 |
-| 9 | Demon Wing `simplywings:demon_wing` ×2 | `GRID` | 3 | 2 | Infernal Membrane ×2 → #3, Infernal Frame ×1 → #7, Brimstone ×1 → #2 | 2 × 80 | 595 |
-| 10 | Demon Wings `simplywings:demon_wings` | `ASM` | — | 1 | Harnais : Radiant Harness → #8 · Cœur : Demon Core → #6 · Aile G : Demon Wing → #9 · Aile D : Demon Wing → #9 | 800 | **1395** |
+| 1 | Iron-Buckled Harness `simplywings:iron_harness` ×1 | `GRID` | 1 | 1 | Leather ×6, Supple Hide ×2, Iron Ingot ×2, Silk Thread ×1, Sky Iron Fleck ×1 | 10 nuage | 10 nuage |
+| 2 | Brimstone `simplywings:brimstone` ×4 | `GRID` | 1 | 2 | Gunpowder ×2, Blaze Powder ×1, Soot Flake ×1 | 2 × (20 éthérée) | 10 nuage + 40 éthérée |
+| 3 | Infernal Membrane `simplywings:infernal_membrane` ×4 | `GRID` | 1 | 4 | Vex Wing ×2, Elastic Gel ×2, Nether Wart ×2, Magma Cream ×1 | 4 × (10 vapeur + 15 éthérée) | 10 nuage + 40 vapeur + 100 éthérée |
+| 4 | Gilded Frame `simplywings:gilded_frame` ×2 | `GRID` | 1 | 2 | Gold Ingot ×4, Blaze Powder ×1, Gilded Vein ×1, Ember Wisp ×1 | 2 × (15 vapeur) | 10 nuage + 70 vapeur + 100 éthérée |
+| 5 | Gilded Harness `simplywings:gilded_harness` ×1 | `GRID` | 2 | 1 | Gold Ingot ×4, Leather ×2, Iron-Buckled Harness ×1 → #1, Gilded Vein ×1 | 10 nuage + 15 vapeur | 20 nuage + 85 vapeur + 100 éthérée |
+| 6 | Demon Core `simplywings:demon_core` ×1 | `GRID` | 2 | 1 | Brimstone ×2 → #2, Wither Skeleton Skull ×1, Diamond ×4, Crying Obsidian ×1, Ghast Wisp ×1 | 30 nuage + 30 vapeur + 40 éthérée | 50 nuage + 115 vapeur + 140 éthérée |
+| 7 | Infernal Frame `simplywings:infernal_frame` ×2 | `GRID` | 2 | 2 | Ember Wisp ×2, Gilded Frame ×1 → #4, Diamond ×2 | 2 × (20 vapeur + 20 éthérée) | 50 nuage + 155 vapeur + 180 éthérée |
+| 8 | Radiant Harness `simplywings:radiant_harness` ×1 | `GRID` | 3 | 1 | Diamond ×4, Phantom Membrane ×2, Gilded Harness ×1 → #5, Prism Shard ×1 | 25 vapeur + 25 éthérée | 50 nuage + 180 vapeur + 205 éthérée |
+| 9 | Demon Wing `simplywings:demon_wing` ×2 | `GRID` | 3 | 2 | Infernal Membrane ×2 → #3, Infernal Frame ×1 → #7, Brimstone ×1 → #2 | 2 × (25 nuage + 25 vapeur + 30 éthérée) | 100 nuage + 230 vapeur + 265 éthérée |
+| 10 | Demon Wings `simplywings:demon_wings` | `ASM` | — | 1 | Harnais : Radiant Harness → #8 · Cœur : Demon Core → #6 · Aile G : Demon Wing → #9 · Aile D : Demon Wing → #9 | 250 nuage + 250 vapeur + 300 éthérée | **350 nuage + 480 vapeur + 565 éthérée** |
 
 ## Recettes
 
@@ -67,7 +67,7 @@ Grille 5×5 sans les coins : `.` = coin absent, `_` = case vide.
 
 ### #1 · Iron-Buckled Harness · `simplywings:iron_harness` · partagé
 
-`GRID` · niveau 1 · 10 Cloud Essence · donne ×1
+`GRID` · niveau 1 · essence : 10 nuage · donne ×1
 
 ```
 . L _ L .
@@ -87,7 +87,7 @@ _ L K L _
 
 ### #2 · Brimstone · `simplywings:brimstone`
 
-`GRID` · niveau 1 · 20 Cloud Essence · donne ×2
+`GRID` · niveau 1 · essence : 20 éthérée · donne ×2
 
 ```
 . _ _ _ .
@@ -105,7 +105,7 @@ _ _ _ _ _
 
 ### #3 · Infernal Membrane · `simplywings:infernal_membrane`
 
-`GRID` · niveau 1 · 25 Cloud Essence · donne ×1
+`GRID` · niveau 1 · essence : 10 vapeur + 15 éthérée · donne ×1
 
 ```
 . _ _ _ .
@@ -124,7 +124,7 @@ _ _ L _ _
 
 ### #4 · Gilded Frame · `simplywings:gilded_frame` · partagé
 
-`GRID` · niveau 1 · 15 Cloud Essence · donne ×1
+`GRID` · niveau 1 · essence : 15 vapeur · donne ×1
 
 ```
 . _ _ _ .
@@ -143,7 +143,7 @@ _ G E G _
 
 ### #5 · Gilded Harness · `simplywings:gilded_harness` · partagé
 
-`GRID` · niveau 2 · 25 Cloud Essence · donne ×1
+`GRID` · niveau 2 · essence : 10 nuage + 15 vapeur · donne ×1
 
 ```
 . G _ G .
@@ -162,7 +162,7 @@ _ _ _ _ _
 
 ### #6 · Demon Core · `simplywings:demon_core`
 
-`GRID` · niveau 2 · 100 Cloud Essence · donne ×1
+`GRID` · niveau 2 · essence : 30 nuage + 30 vapeur + 40 éthérée · donne ×1
 
 ```
 . _ _ _ .
@@ -182,7 +182,7 @@ _ D T D _
 
 ### #7 · Infernal Frame · `simplywings:infernal_frame`
 
-`GRID` · niveau 2 · 40 Cloud Essence · donne ×1
+`GRID` · niveau 2 · essence : 20 vapeur + 20 éthérée · donne ×1
 
 ```
 . _ _ _ .
@@ -200,7 +200,7 @@ _ _ _ _ _
 
 ### #8 · Radiant Harness · `simplywings:radiant_harness` · partagé
 
-`GRID` · niveau 3 · 50 Cloud Essence · donne ×1
+`GRID` · niveau 3 · essence : 25 vapeur + 25 éthérée · donne ×1
 
 ```
 . D _ D .
@@ -219,7 +219,7 @@ _ _ _ _ _
 
 ### #9 · Demon Wing · `simplywings:demon_wing`
 
-`GRID` · niveau 3 · 80 Cloud Essence · donne ×1
+`GRID` · niveau 3 · essence : 25 nuage + 25 vapeur + 30 éthérée · donne ×1
 
 ```
 . _ _ _ .

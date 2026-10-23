@@ -25,5 +25,8 @@
     "id": "simplywings:gilded_harness",
     "count": 1
   },
-  "essence": 25
+  "essence": {
+    "cloud": 10,
+    "steam": 15
+  }
 }

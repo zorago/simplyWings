@@ -19,5 +19,7 @@
     "id": "simplywings:fossil_amber",
     "count": 2
   },
-  "essence": 15
+  "essence": {
+    "steam": 15
+  }
 }

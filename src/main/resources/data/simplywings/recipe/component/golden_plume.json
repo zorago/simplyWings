@@ -22,5 +22,8 @@
     "id": "simplywings:golden_plume",
     "count": 2
   },
-  "essence": 35
+  "essence": {
+    "steam": 15,
+    "ethereal": 20
+  }
 }

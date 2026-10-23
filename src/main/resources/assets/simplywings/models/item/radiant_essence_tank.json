@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "simplywings:item/radiant_essence_tank"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "simplywings:fill": 0.01
+      },
+      "model": "simplywings:item/radiant_essence_tank_1"
+    },
+    {
+      "predicate": {
+        "simplywings:fill": 0.26
+      },
+      "model": "simplywings:item/radiant_essence_tank_2"
+    },
+    {
+      "predicate": {
+        "simplywings:fill": 0.51
+      },
+      "model": "simplywings:item/radiant_essence_tank_3"
+    },
+    {
+      "predicate": {
+        "simplywings:fill": 0.76
+      },
+      "model": "simplywings:item/radiant_essence_tank_4"
+    }
+  ]
+}

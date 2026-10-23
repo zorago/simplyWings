@@ -22,5 +22,8 @@
     "id": "simplywings:soul_veil",
     "count": 1
   },
-  "essence": 40
+  "essence": {
+    "steam": 20,
+    "ethereal": 20
+  }
 }

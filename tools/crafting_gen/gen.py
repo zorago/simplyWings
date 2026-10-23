@@ -6,13 +6,13 @@ from pathlib import Path
 
 from data import C, D, V, SHARED
 from pairs import PAIRS
+from essence import ASM as ESS_ASM, add, cost as ess_cost, fmt
 
 REPO = Path(__file__).resolve().parents[2]
 OUT = REPO / "crafting"
 OUT.mkdir(exist_ok=True)
 
 LIMIT = {"Rare": 1, "Épique": 2, "Légendaire": 3, "Mythique": 5}
-ASM = {"Rare": 100, "Épique": 300, "Légendaire": 800, "Mythique": 1000}
 RAR_LABEL = {"Rare": "rare", "Épique": "épique", "Légendaire": "légendaire", "Mythique": "mythique"}
 
 errors = []
@@ -139,22 +139,22 @@ def build(p):
                 raw[x] += q * n
     num = {}
     rows = []
-    cum = 0
+    cum = {}
     for k, i in enumerate(order, 1):
         num[i] = k
         n = crafts[i]
-        cost = C[i]["cost"]
-        cum += n * cost
+        cost = ess_cost(i)
+        cum = add(cum, cost, n)
         made = n * C[i]["out"]
-        ess = f"{n} × {cost}" if n > 1 else f"{cost}"
-        rows.append(f"| {k} | {name(i)} `{rid(i)}` ×{made} | `GRID` | {level(i)} | {n} | {fmt_inputs(i, num)} | {ess} | {cum} |")
+        ess = f"{n} × ({fmt(cost)})" if n > 1 and cost else fmt(cost)
+        rows.append(f"| {k} | {name(i)} `{rid(i)}` ×{made} | `GRID` | {level(i)} | {n} | {fmt_inputs(i, num)} | {ess} | {fmt(cum)} |")
     pieces = cum
-    asm = ASM[rar]
-    cum += asm
+    asm = ESS_ASM[rar]
+    cum = add(cum, asm)
     pair_item = f"simplywings:{p['id']}_wings"
     asm_in = (f"Harnais : {name(p['harness'])} → #{num[p['harness']]} · Cœur : {name(p['core'])} → #{num[p['core']]} · "
               f"Aile G : {name(p['left'])} → #{num[p['left']]} · Aile D : {name(p['right'])} → #{num[p['right']]}")
-    rows.append(f"| {len(order) + 1} | {p['name']} `{pair_item}` | `ASM` | — | 1 | {asm_in} | {asm} | **{cum}** |")
+    rows.append(f"| {len(order) + 1} | {p['name']} `{pair_item}` | `ASM` | — | 1 | {asm_in} | {fmt(asm)} | **{fmt(cum)}** |")
 
     for x in raw:
         if x in D:
@@ -176,7 +176,7 @@ def build(p):
     out.append("")
     out.append(p["theme"])
     out.append("")
-    out.append("Règles, légende et objets partagés : [`CRAFTING.md`](../CRAFTING.md). Dernière mise à jour : 22 octobre 2026.")
+    out.append("Règles, légende et objets partagés : [`CRAFTING.md`](../CRAFTING.md). Dernière mise à jour : 23 octobre 2026.")
     out.append("")
     out.append("## En bref")
     out.append("")
@@ -184,7 +184,7 @@ def build(p):
     out.append("| --- | --- |")
     out.append(f"| Profondeur | {depth} niveau{'x' if depth > 1 else ''} de craft avant les pièces (max {LIMIT[rar]} en {RAR_LABEL[rar]}) |")
     out.append(f"| Crafts | {ncraft} en `GRID` + 1 assemblage |")
-    out.append(f"| Cloud Essence | {pieces} (pièces) + {asm} (assemblage) = **{cum}** |")
+    out.append(f"| Essences | {fmt(pieces)} (pièces) + {fmt(asm)} (assemblage) = **{fmt(cum)}** |")
     nv = sum(1 for x in raw if x not in D)
     out.append(f"| Matières premières | {len(drops)} types du mod ({sum(raw[x] for x in drops)} objets) · {nv} types vanilla ({sum(q for x, q in raw.items() if x not in D)} objets) |")
     if drops:
@@ -222,7 +222,7 @@ def build(p):
         tag = " · partagé" if i in SHARED else ""
         out.append(f"### #{num[i]} · {r['name']} · `{rid(i)}`{tag}")
         out.append("")
-        out.append(f"`GRID` · niveau {level(i)} · {r['cost']} Cloud Essence · donne ×{r['out']}")
+        out.append(f"`GRID` · niveau {level(i)} · essence : {fmt(ess_cost(i))} · donne ×{r['out']}")
         out.append("")
         out.append("```")
         for row in r["rows"]:
@@ -255,7 +255,7 @@ if errors:
 rec = ["| Paire | Id | Rareté | Profondeur | Crafts `GRID` | Pièces | Assemblage | Total | Route |", "| --- | --- | --- | --- | --- | --- | --- | --- | --- |",
        "| Common Wings | `common` | Commune | 0 | 0 | 0 | 0 | **0** | ci-dessous |"]
 for p, depth, nc, pieces, asm, cum in summary:
-    rec.append(f"| {p['name']} | `{p['id']}` | {p['rarity']} | {depth} / {LIMIT[p['rarity']]} | {nc} | {pieces} | {asm} | **{cum}** | [`crafting/{p['id']}.md`](crafting/{p['id']}.md) |")
+    rec.append(f"| {p['name']} | `{p['id']}` | {p['rarity']} | {depth} / {LIMIT[p['rarity']]} | {nc} | {fmt(pieces)} | {fmt(asm)} | **{fmt(cum)}** | [`crafting/{p['id']}.md`](crafting/{p['id']}.md) |")
 (Path(__file__).parent / "_recap.txt").write_text("\n".join(rec), encoding="utf-8")
 
 reg = ["| Drop | Id | Où | Source | Condition | Chance | Paires |", "| --- | --- | --- | --- | --- | --- | --- |"]
@@ -270,8 +270,8 @@ sh = ["| Objet | Id | Niv. | Entrées | Essence | Donne | Paires |", "| --- | --
 for x in sorted(SHARED, key=lambda x: (level(x), C[x]["name"])):
     ins = ", ".join(f"{name(y)} ×{n}" for y, n in inputs(x).items())
     users = ", ".join(f"`{u}`" for u in shared_users.get(x, []))
-    sh.append(f"| {C[x]['name']} | `simplywings:{x}` | {level(x)} | {ins} | {C[x]['cost']} | ×{C[x]['out']} | {users} |")
+    sh.append(f"| {C[x]['name']} | `simplywings:{x}` | {level(x)} | {ins} | {fmt(ess_cost(x))} | ×{C[x]['out']} | {users} |")
 (Path(__file__).parent / "_shared.txt").write_text("\n".join(sh), encoding="utf-8")
 for p, depth, nc, pieces, asm, cum in summary:
     c, v, cq, vq, vl = RATIO[p["id"]]
-    print(f"{p['id']:12} d{depth} crafts {nc:2} ess {cum:5} types custom {c:2} / vanilla {v:2}  qty {cq:3}/{vq:3}  {' '.join(vl)}")
+    print(f"{p['id']:12} d{depth} crafts {nc:2} ess {sum(cum.values()):5} types custom {c:2} / vanilla {v:2}  qty {cq:3}/{vq:3}  {' '.join(vl)}")

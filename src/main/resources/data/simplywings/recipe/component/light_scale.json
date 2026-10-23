@@ -22,5 +22,8 @@
     "id": "simplywings:light_scale",
     "count": 4
   },
-  "essence": 40
+  "essence": {
+    "ethereal": 20,
+    "intensified": 20
+  }
 }

@@ -25,5 +25,8 @@
     "id": "simplywings:infernal_membrane",
     "count": 1
   },
-  "essence": 25
+  "essence": {
+    "steam": 10,
+    "ethereal": 15
+  }
 }

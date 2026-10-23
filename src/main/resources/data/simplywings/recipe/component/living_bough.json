@@ -22,5 +22,7 @@
     "id": "simplywings:living_bough",
     "count": 1
   },
-  "essence": 15
+  "essence": {
+    "steam": 15
+  }
 }

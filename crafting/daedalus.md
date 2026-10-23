@@ -4,7 +4,7 @@
 
 Dédale, l'inventeur du labyrinthe, et ses ailes mécaniques. La route passe par le labyrinthe de Minecraft : les chambres d'épreuves.
 
-Règles, légende et objets partagés : [`CRAFTING.md`](../CRAFTING.md). Dernière mise à jour : 22 octobre 2026.
+Règles, légende et objets partagés : [`CRAFTING.md`](../CRAFTING.md). Dernière mise à jour : 23 octobre 2026.
 
 ## En bref
 
@@ -12,7 +12,7 @@ Règles, légende et objets partagés : [`CRAFTING.md`](../CRAFTING.md). Derniè
 | --- | --- |
 | Profondeur | 3 niveaux de craft avant les pièces (max 3 en légendaire) |
 | Crafts | 25 en `GRID` + 1 assemblage |
-| Cloud Essence | 665 (pièces) + 800 (assemblage) = **1465** |
+| Essences | 100 nuage + 200 vapeur + 365 éthérée (pièces) + 250 nuage + 250 vapeur + 300 éthérée (assemblage) = **350 nuage + 450 vapeur + 665 éthérée** |
 | Matières premières | 9 types du mod (43 objets) · 10 types vanilla (55 objets) |
 | Drops du mod | Prism Shard (BLOCK · Diamond Ore, Deepslate Diamond Ore), Gilded Vein (BLOCK · Gold Ore, Deepslate Gold Ore, Nether Gold Ore), Gust Mote (MOB · Breeze), Supple Hide (MOB · Cow, Mooshroom, Horse, Donkey, Llama), Silk Thread (MOB · Spider, Cave Spider), Sky Iron Fleck (BLOCK · Iron Ore, Deepslate Iron Ore), Copper Spark (BLOCK · Copper Ore, Deepslate Copper Ore), Soot Flake (BLOCK · Coal Ore, Deepslate Coal Ore), Pristine Feather (MOB · Chicken) |
 
@@ -48,17 +48,17 @@ Niv. = niveau de craft (0 = matière première). Crafts = nombre de fois que la 
 
 | # | Produit | Où | Niv. | Crafts | Entrées par craft | Essence | Cumul |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | Iron-Buckled Harness `simplywings:iron_harness` ×1 | `GRID` | 1 | 1 | Leather ×6, Supple Hide ×2, Iron Ingot ×2, Silk Thread ×1, Sky Iron Fleck ×1 | 10 | 10 |
-| 2 | Brass Ingot `simplywings:brass_ingot` ×12 | `GRID` | 1 | 6 | Copper Spark ×3, Gilded Vein ×1 | 6 × 10 | 70 |
-| 3 | Steel Plate `simplywings:steel_plate` ×14 | `GRID` | 1 | 7 | Iron Ingot ×3, Soot Flake ×1 | 7 × 10 | 140 |
-| 4 | Icarus Feather `simplywings:icarus_feather` ×4 | `GRID` | 1 | 2 | Pristine Feather ×2, Honeycomb ×1 | 2 × 15 | 170 |
-| 5 | Gilded Harness `simplywings:gilded_harness` ×1 | `GRID` | 2 | 1 | Gold Ingot ×4, Leather ×2, Iron-Buckled Harness ×1 → #1, Gilded Vein ×1 | 25 | 195 |
-| 6 | Wind Thruster `simplywings:wind_thruster` ×2 | `GRID` | 2 | 2 | Brass Ingot ×2 → #2, Gust Mote ×1, Steel Plate ×2 → #3, Breeze Rod ×1, Observer ×1 | 2 × 40 | 275 |
-| 7 | Brass Armature `simplywings:brass_armature` ×2 | `GRID` | 2 | 2 | Brass Ingot ×4 → #2, Diamond ×1 | 2 × 40 | 355 |
-| 8 | Radiant Harness `simplywings:radiant_harness` ×1 | `GRID` | 3 | 1 | Diamond ×4, Phantom Membrane ×2, Gilded Harness ×1 → #5, Prism Shard ×1 | 50 | 405 |
-| 9 | Daedalus Core `simplywings:daedalus_core` ×1 | `GRID` | 3 | 1 | Wind Thruster ×2 → #6, Ominous Trial Key ×1, Diamond ×4, Crafter ×1 | 100 | 505 |
-| 10 | Daedalus Wing `simplywings:daedalus_wing` ×2 | `GRID` | 3 | 2 | Steel Plate ×5 → #3, Brass Armature ×1 → #7, Icarus Feather ×2 → #4 | 2 × 80 | 665 |
-| 11 | Wings of Daedalus `simplywings:daedalus_wings` | `ASM` | — | 1 | Harnais : Radiant Harness → #8 · Cœur : Daedalus Core → #9 · Aile G : Daedalus Wing → #10 · Aile D : Daedalus Wing → #10 | 800 | **1465** |
+| 1 | Iron-Buckled Harness `simplywings:iron_harness` ×1 | `GRID` | 1 | 1 | Leather ×6, Supple Hide ×2, Iron Ingot ×2, Silk Thread ×1, Sky Iron Fleck ×1 | 10 nuage | 10 nuage |
+| 2 | Brass Ingot `simplywings:brass_ingot` ×12 | `GRID` | 1 | 6 | Copper Spark ×3, Gilded Vein ×1 | 6 × (10 éthérée) | 10 nuage + 60 éthérée |
+| 3 | Steel Plate `simplywings:steel_plate` ×14 | `GRID` | 1 | 7 | Iron Ingot ×3, Soot Flake ×1 | 7 × (10 éthérée) | 10 nuage + 130 éthérée |
+| 4 | Icarus Feather `simplywings:icarus_feather` ×4 | `GRID` | 1 | 2 | Pristine Feather ×2, Honeycomb ×1 | 2 × (15 éthérée) | 10 nuage + 160 éthérée |
+| 5 | Gilded Harness `simplywings:gilded_harness` ×1 | `GRID` | 2 | 1 | Gold Ingot ×4, Leather ×2, Iron-Buckled Harness ×1 → #1, Gilded Vein ×1 | 10 nuage + 15 vapeur | 20 nuage + 15 vapeur + 160 éthérée |
+| 6 | Wind Thruster `simplywings:wind_thruster` ×2 | `GRID` | 2 | 2 | Brass Ingot ×2 → #2, Gust Mote ×1, Steel Plate ×2 → #3, Breeze Rod ×1, Observer ×1 | 2 × (20 vapeur + 20 éthérée) | 20 nuage + 55 vapeur + 200 éthérée |
+| 7 | Brass Armature `simplywings:brass_armature` ×2 | `GRID` | 2 | 2 | Brass Ingot ×4 → #2, Diamond ×1 | 2 × (20 vapeur + 20 éthérée) | 20 nuage + 95 vapeur + 240 éthérée |
+| 8 | Radiant Harness `simplywings:radiant_harness` ×1 | `GRID` | 3 | 1 | Diamond ×4, Phantom Membrane ×2, Gilded Harness ×1 → #5, Prism Shard ×1 | 25 vapeur + 25 éthérée | 20 nuage + 120 vapeur + 265 éthérée |
+| 9 | Daedalus Core `simplywings:daedalus_core` ×1 | `GRID` | 3 | 1 | Wind Thruster ×2 → #6, Ominous Trial Key ×1, Diamond ×4, Crafter ×1 | 30 nuage + 30 vapeur + 40 éthérée | 50 nuage + 150 vapeur + 305 éthérée |
+| 10 | Daedalus Wing `simplywings:daedalus_wing` ×2 | `GRID` | 3 | 2 | Steel Plate ×5 → #3, Brass Armature ×1 → #7, Icarus Feather ×2 → #4 | 2 × (25 nuage + 25 vapeur + 30 éthérée) | 100 nuage + 200 vapeur + 365 éthérée |
+| 11 | Wings of Daedalus `simplywings:daedalus_wings` | `ASM` | — | 1 | Harnais : Radiant Harness → #8 · Cœur : Daedalus Core → #9 · Aile G : Daedalus Wing → #10 · Aile D : Daedalus Wing → #10 | 250 nuage + 250 vapeur + 300 éthérée | **350 nuage + 450 vapeur + 665 éthérée** |
 
 ## Recettes
 
@@ -66,7 +66,7 @@ Grille 5×5 sans les coins : `.` = coin absent, `_` = case vide.
 
 ### #1 · Iron-Buckled Harness · `simplywings:iron_harness` · partagé
 
-`GRID` · niveau 1 · 10 Cloud Essence · donne ×1
+`GRID` · niveau 1 · essence : 10 nuage · donne ×1
 
 ```
 . L _ L .
@@ -86,7 +86,7 @@ _ L K L _
 
 ### #2 · Brass Ingot · `simplywings:brass_ingot`
 
-`GRID` · niveau 1 · 10 Cloud Essence · donne ×2
+`GRID` · niveau 1 · essence : 10 éthérée · donne ×2
 
 ```
 . _ _ _ .
@@ -103,7 +103,7 @@ _ _ _ _ _
 
 ### #3 · Steel Plate · `simplywings:steel_plate`
 
-`GRID` · niveau 1 · 10 Cloud Essence · donne ×2
+`GRID` · niveau 1 · essence : 10 éthérée · donne ×2
 
 ```
 . _ _ _ .
@@ -120,7 +120,7 @@ _ _ _ _ _
 
 ### #4 · Icarus Feather · `simplywings:icarus_feather`
 
-`GRID` · niveau 1 · 15 Cloud Essence · donne ×2
+`GRID` · niveau 1 · essence : 15 éthérée · donne ×2
 
 ```
 . _ _ _ .
@@ -137,7 +137,7 @@ _ _ _ _ _
 
 ### #5 · Gilded Harness · `simplywings:gilded_harness` · partagé
 
-`GRID` · niveau 2 · 25 Cloud Essence · donne ×1
+`GRID` · niveau 2 · essence : 10 nuage + 15 vapeur · donne ×1
 
 ```
 . G _ G .
@@ -156,7 +156,7 @@ _ _ _ _ _
 
 ### #6 · Wind Thruster · `simplywings:wind_thruster`
 
-`GRID` · niveau 2 · 40 Cloud Essence · donne ×1
+`GRID` · niveau 2 · essence : 20 vapeur + 20 éthérée · donne ×1
 
 ```
 . _ _ _ .
@@ -176,7 +176,7 @@ _ _ O _ _
 
 ### #7 · Brass Armature · `simplywings:brass_armature`
 
-`GRID` · niveau 2 · 40 Cloud Essence · donne ×1
+`GRID` · niveau 2 · essence : 20 vapeur + 20 éthérée · donne ×1
 
 ```
 . _ _ _ .
@@ -193,7 +193,7 @@ _ _ _ _ _
 
 ### #8 · Radiant Harness · `simplywings:radiant_harness` · partagé
 
-`GRID` · niveau 3 · 50 Cloud Essence · donne ×1
+`GRID` · niveau 3 · essence : 25 vapeur + 25 éthérée · donne ×1
 
 ```
 . D _ D .
@@ -212,7 +212,7 @@ _ _ _ _ _
 
 ### #9 · Daedalus Core · `simplywings:daedalus_core`
 
-`GRID` · niveau 3 · 100 Cloud Essence · donne ×1
+`GRID` · niveau 3 · essence : 30 nuage + 30 vapeur + 40 éthérée · donne ×1
 
 ```
 . _ _ _ .
@@ -231,7 +231,7 @@ _ D _ D _
 
 ### #10 · Daedalus Wing · `simplywings:daedalus_wing`
 
-`GRID` · niveau 3 · 80 Cloud Essence · donne ×1
+`GRID` · niveau 3 · essence : 25 nuage + 25 vapeur + 30 éthérée · donne ×1
 
 ```
 . P P P .

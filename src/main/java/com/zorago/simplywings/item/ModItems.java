@@ -2,6 +2,8 @@ package com.zorago.simplywings.item;
 
 import com.zorago.simplywings.SimplyWings;
 import com.zorago.simplywings.block.ModBlocks;
+import com.zorago.simplywings.essence.EssenceContainerItem;
+import com.zorago.simplywings.essence.EssenceType;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -71,14 +73,31 @@ public final class ModItems {
     public static final DeferredItem<WingItem> NIGHT_WINGS = wing("night", Rarity.EPIC);
     public static final DeferredItem<WingItem> LIGHT_WINGS = wing("light", Rarity.EPIC);
 
-    public static final DeferredItem<CloudFlaskItem> CLOUD_FLASK = ITEMS.register("cloud_flask",
-            () -> new CloudFlaskItem(new Item.Properties().stacksTo(16)));
+    public static final int FLASK_CAPACITY = 100;
+
+    public static final DeferredItem<EssenceContainerItem> CLOUD_FLASK = ITEMS.register("cloud_flask",
+            () -> new EssenceContainerItem(new Item.Properties().stacksTo(16), FLASK_CAPACITY, true));
+    public static final DeferredItem<EssenceContainerItem> IRON_ESSENCE_TANK = tank("iron_essence_tank", 5000, Rarity.COMMON);
+    public static final DeferredItem<EssenceContainerItem> GILDED_ESSENCE_TANK = tank("gilded_essence_tank", 20000, Rarity.UNCOMMON);
+    public static final DeferredItem<EssenceContainerItem> RADIANT_ESSENCE_TANK = tank("radiant_essence_tank", 50000, Rarity.RARE);
+    public static final DeferredItem<EssenceContainerItem> FURY_ESSENCE_TANK = tank("fury_essence_tank", 100000, Rarity.EPIC);
+    public static final List<DeferredItem<EssenceContainerItem>> CONTAINERS =
+            List.of(CLOUD_FLASK, IRON_ESSENCE_TANK, GILDED_ESSENCE_TANK, RADIANT_ESSENCE_TANK, FURY_ESSENCE_TANK);
+
+    private static DeferredItem<EssenceContainerItem> tank(String name, int capacity, Rarity rarity) {
+        return ITEMS.register(name, () -> new EssenceContainerItem(new Item.Properties().stacksTo(1).rarity(rarity), capacity, false));
+    }
 
     public static final DeferredItem<Item> CLOUD_ABSORBER = ITEMS.register("cloud_absorber",
             () -> new Item(new Item.Properties().stacksTo(1)));
 
+    public static final DeferredItem<Item> SANCTUM_COMPASS = ITEMS.register("sanctum_compass",
+            () -> new Item(new Item.Properties().stacksTo(1)));
     public static final DeferredItem<Item> FORGE_COMPASS = ITEMS.register("forge_compass",
             () -> new Item(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> REFINERY_COMPASS = ITEMS.register("refinery_compass",
+            () -> new Item(new Item.Properties().stacksTo(1)));
+    public static final List<DeferredItem<Item>> COMPASSES = List.of(SANCTUM_COMPASS, FORGE_COMPASS, REFINERY_COMPASS);
 
     private static final Map<String, DeferredItem<Item>> MATERIALS = new LinkedHashMap<>();
 
@@ -102,10 +121,15 @@ public final class ModItems {
                     .icon(() -> ANGEL_WINGS.get().getDefaultInstance())
                     .displayItems((parameters, output) -> {
                         output.accept(ModBlocks.ASSEMBLY_TABLE_ITEM.get());
-                        output.accept(CLOUD_FLASK.get());
-                        output.accept(CloudFlaskItem.filled(CLOUD_FLASK.get(), CloudFlaskItem.CAPACITY));
+                        output.accept(ModBlocks.FORGE_BENCH_ITEM.get());
+                        CONTAINERS.forEach(container -> {
+                            output.accept(container.get());
+                            for (EssenceType type : EssenceType.values()) {
+                                output.accept(EssenceContainerItem.filled(container.get(), type, container.get().capacity()));
+                            }
+                        });
                         output.accept(CLOUD_ABSORBER.get());
-                        output.accept(FORGE_COMPASS.get());
+                        COMPASSES.forEach(output::accept);
                         WINGS.forEach(output::accept);
                         MATERIALS.values().forEach(output::accept);
                     })

@@ -60,7 +60,7 @@ public class EnergyCategory implements IRecipeCategory<ItemStack> {
         }
         builder.addSlot(RecipeIngredientRole.INPUT, 20, 1).setStandardSlotBackground().addItemStack(stack);
         builder.addSlot(RecipeIngredientRole.CATALYST, 64, 1).setStandardSlotBackground()
-                .addItemStack(new ItemStack(ModBlocks.ASSEMBLY_TABLE_ITEM.get()));
+                .addItemStack(new ItemStack(ModBlocks.FORGE_BENCH_ITEM.get()));
         builder.addSlot(RecipeIngredientRole.OUTPUT, 112, 1).setStandardSlotBackground().addItemStack(imbued);
     }
 

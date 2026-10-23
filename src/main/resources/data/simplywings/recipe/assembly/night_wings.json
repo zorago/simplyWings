@@ -15,5 +15,10 @@
   "result": {
     "id": "simplywings:night_wings"
   },
-  "essence": 1000
+  "essence": {
+    "cloud": 250,
+    "steam": 250,
+    "ethereal": 250,
+    "intensified": 250
+  }
 }

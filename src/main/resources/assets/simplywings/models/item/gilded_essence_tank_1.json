@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "simplywings:item/gilded_essence_tank",
+    "layer1": "simplywings:item/gilded_essence_tank_liquid_1"
+  }
+}

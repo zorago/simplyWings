@@ -25,5 +25,7 @@
     "id": "simplywings:blessed_plume",
     "count": 2
   },
-  "essence": 15
+  "essence": {
+    "ethereal": 15
+  }
 }

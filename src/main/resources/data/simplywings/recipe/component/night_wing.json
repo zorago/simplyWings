@@ -22,5 +22,10 @@
     "id": "simplywings:night_wing",
     "count": 1
   },
-  "essence": 100
+  "essence": {
+    "cloud": 25,
+    "steam": 25,
+    "ethereal": 25,
+    "intensified": 25
+  }
 }

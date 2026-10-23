@@ -4,7 +4,7 @@
 
 Le vol silencieux : de larges ailes duveteuses qui chassent de nuit.
 
-Règles, légende et objets partagés : [`CRAFTING.md`](../CRAFTING.md). Dernière mise à jour : 22 octobre 2026.
+Règles, légende et objets partagés : [`CRAFTING.md`](../CRAFTING.md). Dernière mise à jour : 23 octobre 2026.
 
 ## En bref
 
@@ -12,7 +12,7 @@ Règles, légende et objets partagés : [`CRAFTING.md`](../CRAFTING.md). Derniè
 | --- | --- |
 | Profondeur | 1 niveau de craft avant les pièces (max 1 en rare) |
 | Crafts | 4 en `GRID` + 1 assemblage |
-| Cloud Essence | 70 (pièces) + 100 (assemblage) = **170** |
+| Essences | 70 nuage (pièces) + 100 nuage (assemblage) = **170 nuage** |
 | Matières premières | 5 types du mod (16 objets) · 5 types vanilla (27 objets) |
 | Drops du mod | Supple Hide (MOB · Cow, Mooshroom, Horse, Donkey, Llama), Silk Thread (MOB · Spider, Cave Spider), Sky Iron Fleck (BLOCK · Iron Ore, Deepslate Iron Ore), Hushed Down (MOB · Rabbit), Fleece Tuft (MOB · Sheep) |
 
@@ -39,10 +39,10 @@ Niv. = niveau de craft (0 = matière première). Crafts = nombre de fois que la 
 
 | # | Produit | Où | Niv. | Crafts | Entrées par craft | Essence | Cumul |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | Iron-Buckled Harness `simplywings:iron_harness` ×1 | `GRID` | 1 | 1 | Leather ×6, Supple Hide ×2, Iron Ingot ×2, Silk Thread ×1, Sky Iron Fleck ×1 | 10 | 10 |
-| 2 | Owl Core `simplywings:owl_core` ×1 | `GRID` | 1 | 1 | Book ×1, Iron Ingot ×4, Hushed Down ×2, Golden Carrot ×2 | 30 | 40 |
-| 3 | Owl Wing `simplywings:owl_wing` ×2 | `GRID` | 1 | 2 | Feather ×5, Fleece Tuft ×2, Hushed Down ×3, Iron Ingot ×1 | 2 × 15 | 70 |
-| 4 | Owl Wings `simplywings:owl_wings` | `ASM` | — | 1 | Harnais : Iron-Buckled Harness → #1 · Cœur : Owl Core → #2 · Aile G : Owl Wing → #3 · Aile D : Owl Wing → #3 | 100 | **170** |
+| 1 | Iron-Buckled Harness `simplywings:iron_harness` ×1 | `GRID` | 1 | 1 | Leather ×6, Supple Hide ×2, Iron Ingot ×2, Silk Thread ×1, Sky Iron Fleck ×1 | 10 nuage | 10 nuage |
+| 2 | Owl Core `simplywings:owl_core` ×1 | `GRID` | 1 | 1 | Book ×1, Iron Ingot ×4, Hushed Down ×2, Golden Carrot ×2 | 30 nuage | 40 nuage |
+| 3 | Owl Wing `simplywings:owl_wing` ×2 | `GRID` | 1 | 2 | Feather ×5, Fleece Tuft ×2, Hushed Down ×3, Iron Ingot ×1 | 2 × (15 nuage) | 70 nuage |
+| 4 | Owl Wings `simplywings:owl_wings` | `ASM` | — | 1 | Harnais : Iron-Buckled Harness → #1 · Cœur : Owl Core → #2 · Aile G : Owl Wing → #3 · Aile D : Owl Wing → #3 | 100 nuage | **170 nuage** |
 
 ## Recettes
 
@@ -50,7 +50,7 @@ Grille 5×5 sans les coins : `.` = coin absent, `_` = case vide.
 
 ### #1 · Iron-Buckled Harness · `simplywings:iron_harness` · partagé
 
-`GRID` · niveau 1 · 10 Cloud Essence · donne ×1
+`GRID` · niveau 1 · essence : 10 nuage · donne ×1
 
 ```
 . L _ L .
@@ -70,7 +70,7 @@ _ L K L _
 
 ### #2 · Owl Core · `simplywings:owl_core`
 
-`GRID` · niveau 1 · 30 Cloud Essence · donne ×1
+`GRID` · niveau 1 · essence : 30 nuage · donne ×1
 
 ```
 . _ B _ .
@@ -89,7 +89,7 @@ _ I D I _
 
 ### #3 · Owl Wing · `simplywings:owl_wing`
 
-`GRID` · niveau 1 · 15 Cloud Essence · donne ×1
+`GRID` · niveau 1 · essence : 15 nuage · donne ×1
 
 ```
 . F F F .

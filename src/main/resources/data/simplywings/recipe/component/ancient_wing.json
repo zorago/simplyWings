@@ -25,5 +25,8 @@
     "id": "simplywings:ancient_wing",
     "count": 1
   },
-  "essence": 40
+  "essence": {
+    "cloud": 20,
+    "steam": 20
+  }
 }

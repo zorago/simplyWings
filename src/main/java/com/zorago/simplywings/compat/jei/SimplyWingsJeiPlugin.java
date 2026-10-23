@@ -2,16 +2,21 @@ package com.zorago.simplywings.compat.jei;
 
 import com.zorago.simplywings.SimplyWings;
 import com.zorago.simplywings.block.AssemblyTableMenu;
+import com.zorago.simplywings.block.EssenceBenchMenu;
+import com.zorago.simplywings.block.ForgeBenchBlockEntity;
+import com.zorago.simplywings.block.ForgeBenchMenu;
 import com.zorago.simplywings.block.ModBlocks;
 import com.zorago.simplywings.block.recipe.AssemblyRecipe;
 import com.zorago.simplywings.block.recipe.ComponentRecipe;
 import com.zorago.simplywings.block.recipe.ModRecipes;
 import com.zorago.simplywings.client.gui.AssemblyTableScreen;
+import com.zorago.simplywings.client.gui.ForgeBenchScreen;
 import com.zorago.simplywings.item.ModItems;
 import com.zorago.simplywings.loot.LootSource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.gui.handlers.IGuiClickableArea;
@@ -45,10 +50,6 @@ public class SimplyWingsJeiPlugin implements IModPlugin {
     static final RecipeType<LootSource> MOB_DROPS = RecipeType.create(SimplyWings.MOD_ID, "winged_mob_drops", LootSource.class);
     static final RecipeType<LootSource> BLOCK_DROPS = RecipeType.create(SimplyWings.MOD_ID, "winged_block_drops", LootSource.class);
     static final RecipeType<LootSource> FISHING = RecipeType.create(SimplyWings.MOD_ID, "winged_fishing", LootSource.class);
-    private static final int FIRST_ASSEMBLY_SLOT = 1;
-    private static final int FIRST_GRID_SLOT = 7;
-    private static final int GRID_SLOTS = 21;
-    private static final int FIRST_INVENTORY_SLOT = 29;
     private static final int INVENTORY_SLOTS = 36;
 
     @Override
@@ -83,15 +84,20 @@ public class SimplyWingsJeiPlugin implements IModPlugin {
         registration.addRecipes(FISHING, drops.stream().filter(d -> d.kind() == LootSource.Kind.FISH).toList());
         registration.addItemStackInfo(new ItemStack(ModBlocks.ASSEMBLY_TABLE_ITEM.get()),
                 Component.translatable("jei.simplywings.info.assembly_table"));
-        registration.addItemStackInfo(new ItemStack(ModItems.FORGE_COMPASS.get()),
-                Component.translatable("jei.simplywings.info.forge_compass"));
-        registration.addItemStackInfo(List.of(new ItemStack(ModItems.CLOUD_FLASK.get()), new ItemStack(ModItems.CLOUD_ABSORBER.get())),
-                Component.translatable("jei.simplywings.info.cloud_essence"));
+        registration.addItemStackInfo(new ItemStack(ModBlocks.FORGE_BENCH_ITEM.get()),
+                Component.translatable("jei.simplywings.info.forge_bench"));
+        ModItems.COMPASSES.forEach(compass -> registration.addItemStackInfo(new ItemStack(compass.get()),
+                Component.translatable("jei.simplywings.info." + compass.getId().getPath())));
+        List<ItemStack> essence = new ArrayList<>();
+        ModItems.CONTAINERS.forEach(container -> essence.add(new ItemStack(container.get())));
+        essence.add(new ItemStack(ModItems.CLOUD_ABSORBER.get()));
+        registration.addItemStackInfo(essence, Component.translatable("jei.simplywings.info.cloud_essence"));
     }
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
-        registration.addRecipeCatalyst(ModBlocks.ASSEMBLY_TABLE_ITEM.get(), ASSEMBLY, COMPONENTS, ENERGY);
+        registration.addRecipeCatalyst(ModBlocks.ASSEMBLY_TABLE_ITEM.get(), ASSEMBLY);
+        registration.addRecipeCatalyst(ModBlocks.FORGE_BENCH_ITEM.get(), COMPONENTS, ENERGY);
         registration.addRecipeCatalyst(DropCategory.tool(LootSource.Kind.MOB), MOB_DROPS);
         registration.addRecipeCatalyst(DropCategory.tool(LootSource.Kind.BLOCK), BLOCK_DROPS);
         registration.addRecipeCatalyst(DropCategory.tool(LootSource.Kind.FISH), FISHING);
@@ -102,31 +108,38 @@ public class SimplyWingsJeiPlugin implements IModPlugin {
         registration.addGuiContainerHandler(AssemblyTableScreen.class, new IGuiContainerHandler<>() {
             @Override
             public java.util.Collection<IGuiClickableArea> getGuiClickableAreas(AssemblyTableScreen screen, double mouseX, double mouseY) {
-                return switch (screen.getMenu().tab()) {
-                    case AssemblyTableMenu.TAB_ASSEMBLY -> List.of(IGuiClickableArea.createBasic(125, 45, 20, 15, ASSEMBLY));
-                    case AssemblyTableMenu.TAB_COMPONENTS -> List.of(IGuiClickableArea.createBasic(124, 55, 22, 15, COMPONENTS));
-                    default -> List.of(IGuiClickableArea.createBasic(100, 44, 20, 15, ENERGY));
-                };
+                return List.of(IGuiClickableArea.createBasic(125, 45, 20, 15, ASSEMBLY));
+            }
+        });
+        registration.addGuiContainerHandler(ForgeBenchScreen.class, new IGuiContainerHandler<>() {
+            @Override
+            public java.util.Collection<IGuiClickableArea> getGuiClickableAreas(ForgeBenchScreen screen, double mouseX, double mouseY) {
+                return screen.getMenu().tab() == ForgeBenchMenu.TAB_COMPONENTS
+                        ? List.of(IGuiClickableArea.createBasic(124, 55, 22, 15, COMPONENTS))
+                        : List.of(IGuiClickableArea.createBasic(100, 44, 20, 15, ENERGY));
             }
         });
     }
 
     @Override
     public void registerRecipeTransferHandlers(IRecipeTransferRegistration registration) {
-        registration.addRecipeTransferHandler(new TabTransfer<>(ASSEMBLY, AssemblyTableMenu.TAB_ASSEMBLY, FIRST_ASSEMBLY_SLOT, 4));
-        registration.addRecipeTransferHandler(new TabTransfer<>(COMPONENTS, AssemblyTableMenu.TAB_COMPONENTS, FIRST_GRID_SLOT, GRID_SLOTS));
+        registration.addRecipeTransferHandler(new Transfer<>(AssemblyTableMenu.class, ModBlocks.ASSEMBLY_TABLE_MENU.get(), ASSEMBLY,
+                menu -> true, AssemblyTableMenu.FIRST_INPUT_SLOT, 4));
+        registration.addRecipeTransferHandler(new Transfer<>(ForgeBenchMenu.class, ModBlocks.FORGE_BENCH_MENU.get(), COMPONENTS,
+                menu -> menu.tab() == ForgeBenchMenu.TAB_COMPONENTS, ForgeBenchMenu.FIRST_GRID_SLOT, ForgeBenchBlockEntity.GRID_CELLS));
     }
 
-    private record TabTransfer<R>(RecipeType<R> type, int tab, int first, int count)
-            implements IRecipeTransferInfo<AssemblyTableMenu, R> {
+    private record Transfer<M extends EssenceBenchMenu, R>(Class<M> menuClass, MenuType<M> menuType, RecipeType<R> type,
+                                                           Predicate<M> ready, int first, int count)
+            implements IRecipeTransferInfo<M, R> {
         @Override
-        public Class<? extends AssemblyTableMenu> getContainerClass() {
-            return AssemblyTableMenu.class;
+        public Class<? extends M> getContainerClass() {
+            return menuClass;
         }
 
         @Override
-        public Optional<MenuType<AssemblyTableMenu>> getMenuType() {
-            return Optional.of(ModBlocks.ASSEMBLY_TABLE_MENU.get());
+        public Optional<MenuType<M>> getMenuType() {
+            return Optional.of(menuType);
         }
 
         @Override
@@ -135,18 +148,19 @@ public class SimplyWingsJeiPlugin implements IModPlugin {
         }
 
         @Override
-        public boolean canHandle(AssemblyTableMenu menu, R recipe) {
-            return menu.tab() == tab;
+        public boolean canHandle(M menu, R recipe) {
+            return ready.test(menu);
         }
 
         @Override
-        public List<Slot> getRecipeSlots(AssemblyTableMenu menu, R recipe) {
+        public List<Slot> getRecipeSlots(M menu, R recipe) {
             return menu.slots.subList(first, first + count);
         }
 
         @Override
-        public List<Slot> getInventorySlots(AssemblyTableMenu menu, R recipe) {
-            return menu.slots.subList(FIRST_INVENTORY_SLOT, FIRST_INVENTORY_SLOT + INVENTORY_SLOTS);
+        public List<Slot> getInventorySlots(M menu, R recipe) {
+            int start = menu.slots.size() - INVENTORY_SLOTS;
+            return menu.slots.subList(start, start + INVENTORY_SLOTS);
         }
     }
 

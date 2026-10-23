@@ -1,8 +1,8 @@
 # Routes de craft des ailes
 
-Les règles communes à toutes les routes, les objets partagés, le registre des drops du mod et le récapitulatif des coûts. **Chaque paire a sa route complète dans son propre fichier**, `crafting/<id>.md` (matières premières, étapes, recettes dessinées, justification des ingrédients). Seule la paire commune reste décrite ici. Le cadre général (table d'assemblage, Cloud Essence, énergie ailée) est dans `CAHIER_DES_CHARGES.md`, section « Craft : table d'assemblage ».
+Les règles communes à toutes les routes, les objets partagés, le registre des drops du mod et le récapitulatif des coûts. **Chaque paire a sa route complète dans son propre fichier**, `crafting/<id>.md` (matières premières, étapes, recettes dessinées, justification des ingrédients). Seule la paire commune reste décrite ici. Le cadre général (table d'assemblage, établi de la forge, essences, énergie ailée) est dans `CAHIER_DES_CHARGES.md`, sections « Craft : table d'assemblage et établi de la forge » et « Essences ».
 
-Dernière mise à jour : 22 octobre 2026.
+Dernière mise à jour : 23 octobre 2026.
 
 ## Règles des routes
 
@@ -46,20 +46,20 @@ Fixées par zorago le 22 octobre 2026, par ordre d'importance.
 | Niv. | Niveau de craft du produit |
 | Crafts | Nombre de fois que la recette est lancée pour une paire |
 | Entrées par craft | Ce qu'un craft consomme. Un produit d'une étape précédente est noté `→ #n` |
-| Essence | Cloud Essence consommée (crafts × coût) |
+| Essence | Essences consommées (crafts × coût), par type : nuage, vapeur, éthérée, intensifiée |
 | Cumul | Essence consommée depuis le début de la route |
 
 **Légende de « Où »**
 
 | Code | Signification |
 | --- | --- |
-| `ASM` | Table d'assemblage, onglet 1 « Assembly » : harnais + cœur + aile gauche + aile droite → paire |
-| `GRID` | Table d'assemblage, onglet 2 « Components » : grille 5×5 sans les coins (21 cases) |
+| `ASM` | Table d'assemblage (Sanctuaire céleste, 2e dragon) : harnais + cœur + aile gauche + aile droite → paire |
+| `GRID` | Établi de la forge (Forge rustique, 3e dragon), onglet « Components » : grille 5×5 sans les coins (21 cases) |
 | `MOB` | Drop d'un mob, coup fatal porté avec un item imprégné d'énergie ailée |
 | `BLOCK` | Drop d'un bloc, cassé avec un item imprégné |
 | `FISH` | Prise supplémentaire à la pêche, avec une canne imprégnée |
 | `VANILLA` | Ressource vanilla obtenue normalement (minage, mob, établi, four, pêche, commerce, brosse) |
-| `CLOUD` | Récolte de Cloud Essence en planant dans les nuages |
+| `CLOUD` | Récolte d'essence en vol avec un Cloud Absorber : nuage (Overworld), vapeur (Nether), éthérée (End) |
 
 **Grille `GRID`** (`.` = coin absent, `_` = case vide) :
 
@@ -71,22 +71,27 @@ Fixées par zorago le 22 octobre 2026, par ordre d'importance.
 . # # # .
 ```
 
-## Budget de Cloud Essence
+## Budget d'essences
 
-| Rareté | Assemblage (`ASM`) | Flacons | Pièces (`GRID`) | Total d'une paire |
-| --- | --- | --- | --- | --- |
-| Commune | 0 | 0 | 0 | 0 |
-| Rare | 100 | 1 | harnais 10, cœur 30, aile 15 (moins pour les ailes simples) | 130 à 170 |
-| Épique | 300 | 3 | intermédiaire 15 à 20, harnais 25, cœur 60, aile 40 | 540 à 615 |
-| Légendaire | 800 | 8 | intermédiaire 10 à 40, harnais 50, cœur 100, aile 80 | 1 360 à 1 645 |
-| Mythique | 1 000 | 10 (réservoir plein) | intermédiaire 30 à 90, selle 80, cœur 100, aile 100 | 2 690 à 2 735 |
+Quatre essences, quatre jauges de 1 000 par établi. Le générateur répartit le coût de chaque recette selon deux règles (`tools/crafting_gen/essence.py`) :
 
-- 1 flacon (`simplywings:cloud_flask`) = 100 unités. La table contient au plus 1 000 unités (10 flacons).
-- Un craft `GRID` coûte de 5 à 100 unités. Le total d'une paire = assemblage + tous les crafts de sa route, harnais compris.
+- **Palier** d'un objet = la rareté la plus basse des paires qui l'utilisent (un objet partagé reste au prix du palier le plus bas). Rare → nuage ; épique → + vapeur ; légendaire → + éthérée ; mythique et réservoirs → + intensifiée.
+- **Complexité** = nombre d'essences demandées, d'après le coût total : jusqu'à 20 → 1, jusqu'à 50 → 2, jusqu'à 90 → 3, au-delà → 4 (sans dépasser le palier). Ce sont les essences les plus récentes du palier qui sont demandées : un petit craft mythique ne prend que de l'intensifiée, un gros prend les quatre.
+
+| Rareté | Assemblage (`ASM`) | Pièces (`GRID`, coût total par craft) |
+| --- | --- | --- |
+| Commune | 0 | — |
+| Rare | 100 nuage | harnais 10, cœur 30, aile 15 |
+| Épique | 150 nuage + 150 vapeur | intermédiaire 15 à 20, harnais 25, cœur 60, aile 40 |
+| Légendaire | 250 nuage + 250 vapeur + 300 éthérée | intermédiaire 10 à 40, harnais 50, cœur 100, aile 80 |
+| Mythique | 250 de chaque | intermédiaire 30 à 90, selle 80, cœur 100, aile 100 |
+
+- 1 flacon (`simplywings:cloud_flask`) = 100 unités d'une essence. Les réservoirs (`iron`, `gilded`, `radiant`, `fury_essence_tank`) contiennent 5 000, 20 000, 50 000 et 100 000 unités.
+- Réservoirs : harnais du palier + réservoir précédent, 100 / 200 / 400 / 800 unités réparties sur les quatre essences.
 
 ## Drops du mod
 
 Le registre `simplywings:loot_source` (synchronisé au client pour JEI). Chaque entrée : la source (mob, bloc ou pêche), des **conditions vanilla facultatives** (biome, heure, météo, hauteur, structure, état du bloc, tueur accroupi ou en sprint, lumière) et une chance. Ces conditions sont des `LootItemCondition` vanilla (`location_check`, `time_check`, `weather_check`, `entity_properties`, `block_state_property`), lues par le Global Loot Modifier : aucun code spécial par paire. Les chances sont des valeurs de départ, à régler en jeu.
 
-Proposition pour le point ouvert « nom des essences de blocs » : il n'y a plus de catégorie générique. Chaque drop porte un nom concret (Acorn, Resonant Shard, Living Rock…), et le mot « Essence » reste réservé à la Cloud Essence.
+Proposition pour le point ouvert « nom des essences de blocs » : il n'y a plus de catégorie générique. Chaque drop porte un nom concret (Acorn, Resonant Shard, Living Rock…), et le mot « Essence » reste réservé aux quatre essences du ciel.
 

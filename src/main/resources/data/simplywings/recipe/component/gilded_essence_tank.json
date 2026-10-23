@@ -1,0 +1,34 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " GTG ",
+    " AHA ",
+    " G G ",
+    "     "
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "T": {
+      "item": "simplywings:iron_essence_tank"
+    },
+    "A": {
+      "item": "minecraft:amethyst_shard"
+    },
+    "H": {
+      "item": "simplywings:gilded_harness"
+    }
+  },
+  "result": {
+    "id": "simplywings:gilded_essence_tank",
+    "count": 1
+  },
+  "essence": {
+    "cloud": 50,
+    "steam": 50,
+    "ethereal": 50,
+    "intensified": 50
+  }
+}

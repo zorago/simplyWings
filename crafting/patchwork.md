@@ -4,7 +4,7 @@
 
 Cuir, plumes et ficelle : la rare de départ, bricolée avec les restes des tonneaux de la forge.
 
-Règles, légende et objets partagés : [`CRAFTING.md`](../CRAFTING.md). Dernière mise à jour : 22 octobre 2026.
+Règles, légende et objets partagés : [`CRAFTING.md`](../CRAFTING.md). Dernière mise à jour : 23 octobre 2026.
 
 ## En bref
 
@@ -12,7 +12,7 @@ Règles, légende et objets partagés : [`CRAFTING.md`](../CRAFTING.md). Derniè
 | --- | --- |
 | Profondeur | 1 niveau de craft avant les pièces (max 1 en rare) |
 | Crafts | 4 en `GRID` + 1 assemblage |
-| Cloud Essence | 30 (pièces) + 100 (assemblage) = **130** |
+| Essences | 30 nuage (pièces) + 100 nuage (assemblage) = **130 nuage** |
 | Matières premières | 5 types du mod (12 objets) · 6 types vanilla (29 objets) |
 | Drops du mod | Supple Hide (MOB · Cow, Mooshroom, Horse, Donkey, Llama), Silk Thread (MOB · Spider, Cave Spider), Sky Iron Fleck (BLOCK · Iron Ore, Deepslate Iron Ore), Pristine Feather (MOB · Chicken), Fleece Tuft (MOB · Sheep) |
 
@@ -40,10 +40,10 @@ Niv. = niveau de craft (0 = matière première). Crafts = nombre de fois que la 
 
 | # | Produit | Où | Niv. | Crafts | Entrées par craft | Essence | Cumul |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | Iron-Buckled Harness `simplywings:iron_harness` ×1 | `GRID` | 1 | 1 | Leather ×6, Supple Hide ×2, Iron Ingot ×2, Silk Thread ×1, Sky Iron Fleck ×1 | 10 | 10 |
-| 2 | Patchwork Core `simplywings:patchwork_core` ×1 | `GRID` | 1 | 1 | Leather ×2, Silk Thread ×2, Iron Ingot ×2, Red Wool ×1, Pristine Feather ×2 | 10 | 20 |
-| 3 | Patchwork Wing `simplywings:patchwork_wing` ×2 | `GRID` | 1 | 2 | Feather ×3, Red Wool ×1, Fleece Tuft ×1, Green Wool ×1, Leather ×2, Stick ×1, Silk Thread ×1 | 2 × 5 | 30 |
-| 4 | Patchwork Wings `simplywings:patchwork_wings` | `ASM` | — | 1 | Harnais : Iron-Buckled Harness → #1 · Cœur : Patchwork Core → #2 · Aile G : Patchwork Wing → #3 · Aile D : Patchwork Wing → #3 | 100 | **130** |
+| 1 | Iron-Buckled Harness `simplywings:iron_harness` ×1 | `GRID` | 1 | 1 | Leather ×6, Supple Hide ×2, Iron Ingot ×2, Silk Thread ×1, Sky Iron Fleck ×1 | 10 nuage | 10 nuage |
+| 2 | Patchwork Core `simplywings:patchwork_core` ×1 | `GRID` | 1 | 1 | Leather ×2, Silk Thread ×2, Iron Ingot ×2, Red Wool ×1, Pristine Feather ×2 | 10 nuage | 20 nuage |
+| 3 | Patchwork Wing `simplywings:patchwork_wing` ×2 | `GRID` | 1 | 2 | Feather ×3, Red Wool ×1, Fleece Tuft ×1, Green Wool ×1, Leather ×2, Stick ×1, Silk Thread ×1 | 2 × (5 nuage) | 30 nuage |
+| 4 | Patchwork Wings `simplywings:patchwork_wings` | `ASM` | — | 1 | Harnais : Iron-Buckled Harness → #1 · Cœur : Patchwork Core → #2 · Aile G : Patchwork Wing → #3 · Aile D : Patchwork Wing → #3 | 100 nuage | **130 nuage** |
 
 ## Recettes
 
@@ -51,7 +51,7 @@ Grille 5×5 sans les coins : `.` = coin absent, `_` = case vide.
 
 ### #1 · Iron-Buckled Harness · `simplywings:iron_harness` · partagé
 
-`GRID` · niveau 1 · 10 Cloud Essence · donne ×1
+`GRID` · niveau 1 · essence : 10 nuage · donne ×1
 
 ```
 . L _ L .
@@ -71,7 +71,7 @@ _ L K L _
 
 ### #2 · Patchwork Core · `simplywings:patchwork_core`
 
-`GRID` · niveau 1 · 10 Cloud Essence · donne ×1
+`GRID` · niveau 1 · essence : 10 nuage · donne ×1
 
 ```
 . _ _ _ .
@@ -91,7 +91,7 @@ _ F T F _
 
 ### #3 · Patchwork Wing · `simplywings:patchwork_wing`
 
-`GRID` · niveau 1 · 5 Cloud Essence · donne ×1
+`GRID` · niveau 1 · essence : 5 nuage · donne ×1
 
 ```
 . F F F .
