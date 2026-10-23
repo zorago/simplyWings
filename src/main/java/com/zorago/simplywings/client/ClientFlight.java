@@ -4,6 +4,7 @@ import com.zorago.simplywings.client.gui.WingsScreen;
 import com.zorago.simplywings.anim.WingStyle;
 import com.zorago.simplywings.config.ClientConfig;
 import com.zorago.simplywings.config.ServerConfig;
+import com.zorago.simplywings.essence.EssenceReserve;
 import com.zorago.simplywings.data.EffectiveStats;
 import com.zorago.simplywings.data.FurySet;
 import com.zorago.simplywings.data.WingDefinition;
@@ -31,6 +32,8 @@ public final class ClientFlight {
 
     private static FlightMode mode = FlightMode.NONE;
     private static int flags;
+    private static int reserveSeen = -1;
+    private static int reservePredicted;
 
     private static float heading;
     private static float pitch;
@@ -106,6 +109,27 @@ public final class ClientFlight {
 
     private static float flapCost() {
         return ServerConfig.FLAP_COST.get().floatValue();
+    }
+
+    private static void refill(LocalPlayer player, EffectiveStats stats) {
+        if (creative(player)) {
+            reserveSeen = -1;
+            return;
+        }
+        int available = EssenceReserve.available(player);
+        if (available != reserveSeen) {
+            reserveSeen = available;
+            reservePredicted = 0;
+        }
+        float stamina = ClientWings.stamina();
+        float need = EssenceReserve.need(stats.definition().beatCost(flapCost()));
+        if (EssenceReserve.wants(player, stamina, stats.stamina(), need)) {
+            int got = Math.min(available - reservePredicted, EssenceReserve.packet(stamina, stats.stamina(), need));
+            if (got > 0) {
+                reservePredicted += got;
+                ClientWings.setStamina(stamina + got);
+            }
+        }
     }
 
     private static void spend(LocalPlayer player, float amount) {
@@ -207,6 +231,7 @@ public final class ClientFlight {
         if (mode.flying() && !canFly(player)) {
             setMode(player, FlightMode.NONE, true);
         }
+        refill(player, stats);
         if (jumpPressed) {
             handleJump(player, stats);
         }

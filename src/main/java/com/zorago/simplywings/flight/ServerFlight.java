@@ -2,6 +2,7 @@ package com.zorago.simplywings.flight;
 
 import com.zorago.simplywings.SimplyWings;
 import com.zorago.simplywings.config.ServerConfig;
+import com.zorago.simplywings.essence.EssenceReserve;
 import com.zorago.simplywings.data.EffectiveStats;
 import com.zorago.simplywings.data.FurySet;
 import com.zorago.simplywings.data.WingRegistries;
@@ -296,9 +297,16 @@ public final class ServerFlight {
             data.setRescueJumps(rescueMax);
             sendStamina(player, data);
         }
+        boolean refilled = false;
         if (infinite(player)) {
             stamina = max;
         } else {
+            float need = EssenceReserve.need(stats.get().definition().beatCost(ServerConfig.FLAP_COST.get().floatValue()));
+            if (EssenceReserve.wants(player, stamina, max, need)) {
+                int got = EssenceReserve.drain(player, EssenceReserve.packet(stamina, max, need));
+                stamina += got;
+                refilled = got > 0;
+            }
             switch (data.mode()) {
                 case STABILIZED -> stamina -= ServerConfig.STABILIZED_DRAIN.get().floatValue() / 20f;
                 case TRAVEL -> {
@@ -331,7 +339,7 @@ public final class ServerFlight {
         }
         float drift = Math.abs(stamina - data.lastSentStamina());
         boolean boundary = (stamina <= 0 || stamina >= max) && stamina != data.lastSentStamina();
-        if (drift >= max * ServerConfig.STAMINA_SYNC_FRACTION.get() || boundary) {
+        if (drift >= max * ServerConfig.STAMINA_SYNC_FRACTION.get() || boundary || refilled) {
             sendStamina(player, data);
         }
     }
