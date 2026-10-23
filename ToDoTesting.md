@@ -9,7 +9,7 @@ Dernière mise à jour : 22 octobre 2026 au soir. Session de test sur le PC de j
 Fait cette session : passe studio des 21 rares, correctif 1 (battement sans saut, `WingAnimator`), les 19 modèles restants, sections 2 à 6 et 9-10 validées en solo par le studio, JEI corrigé, forge testée, vol testé en solo.
 Reste, dans l'ordre :
 1. **Serveur dédié** : `run/ops.json` contient maintenant Dev (op). Lancer `./gradlew runServer`, puis `./gradlew runStudioMp` (client studio qui rejoint `localhost`, dossier `run-mp/`) et piloter avec `python -I tools/studio/send.py --dir=run-mp …`. Refaire : vol (aucun kick, `allow-flight=false`), quelques drops, table, Cloud Essence.
-2. **Pack complet** (§ 1) : `./gradlew build`, copier le jar dans le pack ; ou client de dev avec les mods du pack (`runPackStudio`, dossier `run-pack/`, sans le jar JEI du pack qui est déjà en `localRuntime`).
+2. **Pack complet** (§ 1), **en local uniquement** : le dossier CurseForge `PleasePlayWithMe` est en lecture seule, on ne le lance pas et on n'y écrit rien. On copie ses mods et sa config dans `run-pack/` (client de dev `runPackStudio`, sans le jar JEI du pack, déjà en `localRuntime`), et son `server-pack/` dans un dossier serveur local, avec notre jar.
 3. Forge : refaire le test « 2e dragon » avec un vrai respawn (4 cristaux).
 4. Questions pour zorago : valeurs de `flap_rate` (correctif 3) et les 6 questions du wiki (`docs/WIKI_PLAN.md`).
 5. Correctif 2 (z-fighting des plaques) et récupération d'atterrissage des rares.
@@ -18,7 +18,7 @@ Outils de test (studio) : `tools/studio/drop_test.py` (59 sources de drops), `to
 
 ## 0. Préparation
 
-- [ ] `./gradlew build`, puis copier `build/libs/simplywings-*.jar` dans `A:\CurseForge\Instances\PleasePlayWithMe\mods` (retirer l'ancien jar).
+- [ ] `./gradlew build`, puis tester le jar dans une **copie locale** du pack (client `run-pack/`, serveur copié de `server-pack/`). Jamais dans le dossier CurseForge, qui reste en lecture seule.
 - [ ] Pour les tests rapides : `./gradlew runClient` (JEI 19.64.0.453 est chargé en dev via `localRuntime`) et `./gradlew runServer`.
 - [ ] Monde de test en créatif, triche activée. Commandes utiles :
   - `/simplywings energy` : pose ou retire l'énergie ailée sur l'item en main (raccourci de test, sans passer par la table).
