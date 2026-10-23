@@ -2,7 +2,7 @@
 
 Tout ce qui doit être testé et validé en jeu, puis les modèles 3D qui restent à faire. Chaque ligne se coche quand elle est validée **en solo et sur le serveur dédié** (règle du projet). Un échec se note directement sous la ligne, avec ce qui a été observé.
 
-Dernière mise à jour : 22 octobre 2026 au soir. Session de test sur le PC de jeu, **en solo dans le client de dev** (Simply Wings + JEI), pilotée par le studio (`tools/studio/send.py`, commandes de test de `client/studio/StudioTest`). Les cases cochées ce soir l'ont été en solo seulement : la règle « solo et serveur dédié » reste à compléter pour elles.
+Dernière mise à jour : 23 octobre 2026 (section 13 : refonte essences et sanctuaires). Avant : 22 octobre au soir. Session de test sur le PC de jeu, **en solo dans le client de dev** (Simply Wings + JEI), pilotée par le studio (`tools/studio/send.py`, commandes de test de `client/studio/StudioTest`). Les cases cochées ce soir l'ont été en solo seulement : la règle « solo et serveur dédié » reste à compléter pour elles.
 
 ## Reprise (état au 23/10, 2 h)
 
@@ -258,3 +258,25 @@ Rien n'est codé : le plan est dans `docs/WIKI_PLAN.md`.
 - [ ] Rares : ajouter la récupération après l'atterrissage (demandée, pas encore faite).
 - [ ] One-shots en keyframes (déploiement, repli, atterrissage) pour toutes les paires.
 - [ ] Finition des textures par le designer.
+
+## 13. Refonte essences, établis, compresseur et sanctuaires (23 octobre)
+
+Vu une première fois en solo dans le studio (client de dev), le 23 octobre :
+- [x] Établi de la forge : 4 jauges, flacons de nuage et de vapeur versés dans la bonne jauge, grille 5×5, onglet énergie.
+- [x] Table d'assemblage : assemblage seul, 4 jauges, bouton « Assemble ».
+- [x] Balayage `tools/studio/table_test.py all` : **179 / 179 OK** (133 composants + 4 réservoirs + flacon + absorbeur à l'établi, 41 assemblages à la table), coût prélevé dans chaque jauge égal au coût de la recette.
+- [x] Compresseur : pose 3×3×5 par l'item, modèle et engrenages rendus, menu, 1 + 1 + 1 → 3 (flacons → réservoir de fer).
+- [x] Substitut de stamina : stamina à 0 en l'air avec un flacon d'essence intensifiée → la stamina remonte à 20, le flacon passe à 80.
+- [x] Les trois sanctuaires se posent par `/simplywings sanctum <nom>` aux sommets du triangle (512 blocs, 120°), avec leur compas.
+
+Reste à tester :
+- [ ] Récolte en vol : vapeur au-dessus de la lave du Nether, éthérée au-dessus du vide de l'End (> 200 blocs du centre), nuage dans l'Overworld ; un flacon d'une autre essence n'est pas rempli.
+- [ ] Compresseur : arrêt quand une entrée est vide ou la sortie pleine ; casser une partie casse tout et rend l'item ; place insuffisante = pose refusée ; animation (engrenages, pistons, fumée) quand il tourne, arrêt progressif.
+- [ ] Modèle du compresseur : le liquide doré derrière la vitre a été avancé (à revoir après redémarrage du client) ; texture des cuves encore un peu « planches ».
+- [ ] Éclat d'enchantement sur les flacons et réservoirs d'essence intensifiée ; teinte du liquide par essence dans l'inventaire.
+- [ ] Substitut de stamina en vol de déplacement (battements) et en stationnaire, prédiction client sans à-coups, rien en créatif ni avec Night.
+- [ ] Sanctuaires par de vraies morts du dragon : 2e → Sanctuaire céleste, 3e → Forge, 4e → Raffinerie, puis réparations sans écraser le contenu des établis ni du compresseur ; compas donné une seule fois par joueur.
+- [ ] Monde de test : le Sanctuaire céleste a été posé sur l'ancienne forge (même angle de départ), d'où des restes violets et des items au sol. Sans effet sur un monde neuf.
+- [ ] Direction artistique des trois îles (à valider par zorago) : plus de détails, raffinerie un peu vide.
+- [ ] JEI : catégorie « Cloud Compression », coûts par essence affichés dans les catégories assemblage et composants.
+- [ ] Serveur dédié pour tout ce qui précède.

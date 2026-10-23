@@ -11,6 +11,7 @@ import com.zorago.simplywings.block.recipe.ComponentRecipe;
 import com.zorago.simplywings.block.recipe.ModRecipes;
 import com.zorago.simplywings.client.gui.AssemblyTableScreen;
 import com.zorago.simplywings.client.gui.ForgeBenchScreen;
+import com.zorago.simplywings.essence.EssenceType;
 import com.zorago.simplywings.item.ModItems;
 import com.zorago.simplywings.loot.LootSource;
 import java.util.ArrayList;
@@ -46,6 +47,7 @@ public class SimplyWingsJeiPlugin implements IModPlugin {
     private static IJeiRuntime runtime;
     static final RecipeType<RecipeHolder<AssemblyRecipe>> ASSEMBLY = RecipeType.createRecipeHolderType(SimplyWings.id("assembly"));
     static final RecipeType<RecipeHolder<ComponentRecipe>> COMPONENTS = RecipeType.createRecipeHolderType(SimplyWings.id("components"));
+    static final RecipeType<EssenceType> COMPRESSOR = RecipeType.create(SimplyWings.MOD_ID, "cloud_compression", EssenceType.class);
     static final RecipeType<ItemStack> ENERGY = RecipeType.create(SimplyWings.MOD_ID, "winged_energy", ItemStack.class);
     static final RecipeType<LootSource> MOB_DROPS = RecipeType.create(SimplyWings.MOD_ID, "winged_mob_drops", LootSource.class);
     static final RecipeType<LootSource> BLOCK_DROPS = RecipeType.create(SimplyWings.MOD_ID, "winged_block_drops", LootSource.class);
@@ -60,7 +62,7 @@ public class SimplyWingsJeiPlugin implements IModPlugin {
     @Override
     public void registerCategories(IRecipeCategoryRegistration registration) {
         IGuiHelper gui = registration.getJeiHelpers().getGuiHelper();
-        registration.addRecipeCategories(new AssemblyCategory(gui), new ComponentCategory(gui), new EnergyCategory(gui),
+        registration.addRecipeCategories(new AssemblyCategory(gui), new ComponentCategory(gui), new EnergyCategory(gui), new CompressorCategory(gui),
                 new DropCategory(gui, LootSource.Kind.MOB), new DropCategory(gui, LootSource.Kind.BLOCK),
                 new DropCategory(gui, LootSource.Kind.FISH));
     }
@@ -74,6 +76,7 @@ public class SimplyWingsJeiPlugin implements IModPlugin {
         var recipes = level.getRecipeManager();
         registration.addRecipes(ASSEMBLY, recipes.getAllRecipesFor(ModRecipes.ASSEMBLY.get()));
         registration.addRecipes(COMPONENTS, recipes.getAllRecipesFor(ModRecipes.COMPONENT.get()));
+        registration.addRecipes(COMPRESSOR, List.of(EssenceType.INTENSIFIED));
         registration.addRecipes(ENERGY, List.of(new ItemStack(Items.IRON_SWORD), new ItemStack(Items.IRON_PICKAXE),
                 new ItemStack(Items.IRON_AXE), new ItemStack(Items.IRON_SHOVEL), new ItemStack(Items.FISHING_ROD),
                 new ItemStack(Items.BOW)));
@@ -100,6 +103,7 @@ public class SimplyWingsJeiPlugin implements IModPlugin {
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
         registration.addRecipeCatalyst(ModBlocks.ASSEMBLY_TABLE_ITEM.get(), ASSEMBLY);
         registration.addRecipeCatalyst(ModBlocks.FORGE_BENCH_ITEM.get(), COMPONENTS, ENERGY);
+        registration.addRecipeCatalyst(ModBlocks.CLOUD_COMPRESSOR_ITEM.get(), COMPRESSOR);
         registration.addRecipeCatalyst(DropCategory.tool(LootSource.Kind.MOB), MOB_DROPS);
         registration.addRecipeCatalyst(DropCategory.tool(LootSource.Kind.BLOCK), BLOCK_DROPS);
         registration.addRecipeCatalyst(DropCategory.tool(LootSource.Kind.FISH), FISHING);
@@ -189,6 +193,7 @@ public class SimplyWingsJeiPlugin implements IModPlugin {
             case "assembly" -> ASSEMBLY;
             case "components" -> COMPONENTS;
             case "energy" -> ENERGY;
+            case "compressor" -> COMPRESSOR;
             case "mob" -> MOB_DROPS;
             case "block" -> BLOCK_DROPS;
             case "fishing" -> FISHING;

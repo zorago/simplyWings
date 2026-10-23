@@ -875,5 +875,6 @@
   "message.simplywings.sky_sanctum": "A Sanctum Compass appears in your bag. It points to the Sky Sanctum, far out in the End.",
   "message.simplywings.wing_forge": "A Forge Compass appears in your bag. It points to the Wing Forge, far out in the End.",
   "message.simplywings.cloud_refinery": "A Refinery Compass appears in your bag. It points to the Cloud Refinery, far out in the End.",
-  "commands.simplywings.dragon": "Dragon death counted: %s so far"
+  "commands.simplywings.dragon": "Dragon death counted: %s so far",
+  "jei.simplywings.compressor.info": "One unit each of Cloud, Steam and Ethereal Essence becomes three units of Intensified Cloud Essence. Inputs and output take flasks or tanks; the compressor stops when an input runs dry or the output is full."
 }

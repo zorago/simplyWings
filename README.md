@@ -9,7 +9,7 @@ Collectible magic wings for Minecraft **1.21.1** on **NeoForge**. Wings are made
 
 ## Status
 
-**Prototype.** The flight, the wing rendering and the 40 pairs are in, all available through a debug command. The survival progression (crafting, assembly table, Cloud Essence, End forge, loot) is designed but not implemented yet: today, wings can only be obtained with `/simplywings unlock`.
+**Prototype.** The flight, the wing rendering and the 40 pairs are in, all available through a debug command. The survival progression (three End sanctums, Assembly Table, Forge Bench, four essences, Cloud Compressor, loot) is implemented and being play-tested; `/simplywings unlock` stays available to operators.
 
 | Area | State |
 | --- | --- |
@@ -20,9 +20,11 @@ Collectible magic wings for Minecraft **1.21.1** on **NeoForge**. Wings are made
 | Mythic wings Night and Light: tail, dive shriek, charged dash with invisibility, set bonuses | Done |
 | Transmog (Light bonus) with the "Equip appearance" button | Done |
 | Wings menu (J), inventory button, stamina HUD | First version |
-| Assembly Table, Cloud Essence (flask, absorber, cloud harvest), 188 components, 173 route recipes | Done, to play-test |
+| Assembly Table and Forge Bench with four essence gauges, 188 components, 179 recipes with tiered essence costs | Done, to play-test |
+| Four essences (Cloud, Steam, Ethereal, Intensified), flask, four tiered tanks, absorber harvest in the three dimensions | Done, to play-test |
+| Cloud Compressor (3x3x5 multiblock, animated model) and intensified essence as a stamina substitute | Done, to play-test |
 | Winged energy, mob, block and fishing drops (59 sources) | Done, to play-test |
-| End forge structure and forge compass | Done, to play-test |
+| Three End sanctums (Sky Sanctum, Wing Forge, Cloud Refinery) and their compasses | Done, to play-test |
 | JEI integration | Done, to play-test |
 
 ## Gameplay
@@ -78,22 +80,29 @@ The physical value of each score is set in the server config, section `[stats]`.
 
 In travel flight, the mouse only orbits the camera; WASD moves an aim point that the heading follows smoothly. When stamina is too low for an air jump, 2 free rescue jumps reset the fall and cancel fall damage, and recharge on the ground.
 
-### Progression (planned)
+### Progression
 
-1. Kill the Ender Dragon a **second** time: the **Wing Forge** appears floating in the void about 512 blocks from the main island, and every player on the main island gets a **Forge Compass**.
-2. Fly there with an elytra. The forge holds the **Assembly Table** and barrels of feathers and leather: the **Common Wings** need 2 feathers, 1 elytra and 1 leather, and no Cloud Essence.
-3. Gather **Cloud Essence** by flying through the cloud layer with a **Cloud Absorber** in the inventory: it fills the **Cloud Flasks** (100 units each) one after another.
-4. Collect components: mob drops and block drops only fall when the killing blow or the break is made with an item imbued with **winged energy** (applied at the table, on any item).
-5. Craft components on the table's grid and assemble pairs. Assembly costs 0 / 100 / 300 / 800 / 1 000 Cloud Essence from common to mythic.
+Three floating sanctums appear in the End, 512 blocks from the main island and 120 degrees apart, one per dragon death from the second on. Every player on the main island gets the matching compass. Later deaths repair the unlocked sanctums.
 
-### Assembly Table (planned)
+1. **2nd dragon: Sky Sanctum.** An ethereal temple wrapped in a cloud of end rods and glass, open only at the front. It holds the **Assembly Table**. Until the third dragon, only the **Common Wings** can be assembled: leather, an elytra and two feathers.
+2. **3rd dragon: Wing Forge.** A smoking, half-ruined rustic forge with barrels of feathers and leather. It holds the **Forge Bench**: the 5x5 components grid and the winged energy tab.
+3. **4th dragon: Cloud Refinery.** A copper and glass yard around the **Cloud Compressor**.
 
-| Tab | Content |
-| --- | --- |
-| Assembly | Harness + core + left wing + right wing → pair. Apply or remove winged energy on an item |
-| Components | 5×5 crafting grid without its four corners (21 slots: 3 on the top and bottom rows, 5 on the three middle rows) |
+Collect components: mob, block and fishing drops only fall when the killing blow, the break or the catch is made with an item imbued with **winged energy** (applied at the Forge Bench, on any item).
 
-Both tabs share a Cloud Essence tank of up to 1 000 units (10 flasks). A component craft costs 1 to 100 units depending on its complexity.
+### Essences
+
+| Essence | Harvested with a Cloud Absorber while flying | Used for |
+| --- | --- | --- |
+| Cloud | Overworld cloud layer | every craft from rare on |
+| Steam | Nether, within 16 blocks above lava | epic and higher |
+| Ethereal | End, over the void, more than 200 blocks from the centre | legendary and higher |
+| Intensified Cloud | Cloud Compressor: 1 Cloud + 1 Steam + 1 Ethereal → 3 | mythic, final by-products, tanks; also stands in for stamina |
+
+- **Containers**: the Essence Flask (100) and four tanks crafted with the harness of each tier: iron 5 000, gilded 20 000, radiant 50 000, fury 100 000. A container holds one essence at a time; with Intensified essence it glows like an enchanted golden apple.
+- **Benches**: the Assembly Table and the Forge Bench each have four gauges of 1 000. Drop a container in the essence slot to pour it into the matching gauge. A recipe asks for 1 to 4 essences depending on its tier and size; assembly costs 0 / 100 / 300 / 800 / 1 000 from common to mythic.
+- **Stamina**: when stamina runs out in flight, Intensified essence from the inventory refills it, 1 essence for 1 stamina (flasks first, then tanks).
+- **Cloud Compressor**: three inputs and one output, each a flask or a tank. It stops when an input runs dry or the output is full.
 
 ## Commands
 
@@ -107,6 +116,8 @@ Operator only (permission level 2).
 /simplywings stamina <value>
 /simplywings reset           clear the collection
 /simplywings info            effective stats, stamina and flight mode
+/simplywings sanctum <name>  place or repair sky_sanctum, wing_forge or cloud_refinery and get its compass
+/simplywings dragon          count a dragon death (places the unlocked sanctums)
 ```
 
 ## Configuration
@@ -135,7 +146,7 @@ Written in French.
 | `CAHIER_DES_CHARGES.md` | Full specification, the reference when in doubt |
 | `WINGS.md` | Catalogue of the 40 pairs: identity, look, flight feel, stats |
 | `BALANCE.md` | Stat scales, pair scores, collection bonus distribution |
-| `CRAFTING.md` | Crafting route of every pair, with Cloud Essence cost per step and in total |
+| `CRAFTING.md` | Crafting route of every pair, with the essence cost per step and in total |
 | `HANDOFF.md` | Implementation order |
 | `docs/ANALYSE_REFERENCES.md` | Analysis of the reference mods and the modpack, architecture decisions |
 | `docs/MIXINS.md` | Override budget: what replaces each would-be mixin |
@@ -144,10 +155,11 @@ Written in French.
 ## TODO before release
 
 ### Gameplay
-- [ ] Assembly Table: block, block entity, menu, the two tabs, the Cloud Essence tank, the two recipe types.
-- [x] Cloud Essence: Cloud Flask and Cloud Absorber items, server-side harvest in the cloud layer (config `[cloud]`; values to tune in game).
+- [x] Assembly Table and Forge Bench: blocks, block entities, menus, four essence gauges, the two recipe types.
+- [x] Four essences, flask and tiered tanks, harvest in the three dimensions, Cloud Compressor, stamina substitute.
+- [x] Cloud Absorber: server-side harvest (config `[cloud]`; values to tune in game).
 - [x] Winged energy data component, `simplywings:loot_source` registry (59 sources) and the winged drops Global Loot Modifier.
-- [x] End Wing Forge: placed on the second dragon death, repaired on every later death, Forge Compass given to the central island.
+- [x] Three End sanctums placed on the 2nd, 3rd and 4th dragon deaths, repaired on later deaths, one compass each.
 - [x] Optional JEI plugin: assembly, 5x5 components, winged energy and winged drops categories, recipe transfer, info pages (EMI reads JEI plugins).
 - [ ] Play-test everything listed in `ToDoTesting.md`.
 - [x] Component items (harnesses, cores, wings, 56 imbued drops, intermediates), textures, and lore plus riddle tooltips.
@@ -157,10 +169,10 @@ Written in French.
 - [ ] Open question in the specification: name of the block drops category.
 
 ### Structure
-- [ ] Wing Forge NBT template: platform, Assembly Table, supply barrels.
-- [ ] Placement on the second dragon death (`LivingDeathEvent`), repair on later deaths, position kept in `SavedData`.
-- [ ] `simplywings:chests/forge_supplies` loot table.
-- [ ] Forge Compass with the vanilla `lodestone_tracker` component.
+- [x] Sanctum NBT templates generated by `tools/crafting_gen/sanctums.py`: floating cross islands, buildings, nature, ruins.
+- [x] Placement on dragon deaths (`LivingDeathEvent` and a kill counter in `SavedData`), repairs that keep existing blocks.
+- [x] `simplywings:chests/forge_supplies` loot table and compasses with the vanilla `lodestone_tracker` component.
+- [ ] Polish pass on the sanctum builds (more detail, art direction review).
 - [ ] Check with YUNG's Better End Island, BetterEnd and the other End mods of the pack.
 
 ### Interface

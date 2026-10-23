@@ -50,7 +50,7 @@ Pour chaque mod : la technique retenue, ce qu'on fera différemment et pourquoi.
 5. Dive, freinage, décrochage, dégâts de crash, stamina à 0, sauts de secours.
 6. Écran Ailes + bouton d'inventaire + HUD stamina.
 7. Énergie ailée (Data Component) + Global Loot Modifiers + Cloud Essence (flacon, absorbeur, récolte) + table d'assemblage (onglets assemblage et composants, réservoir).
-8. Forge de l'End (template NBT, placement à la mort du dragon, SavedData).
+8. Les trois sanctuaires de l'End (templates NBT générés, placement aux 2e, 3e et 4e morts du dragon, SavedData), quatre essences, établi de la forge et compresseur de nuage (refonte du 23 octobre).
 9. Contenu : routes de `crafting/*.md` en JSON (recettes `GRID` et `ASM`, entrées du registre `simplywings:loot_source`).
 10. Refonte art, en parallèle du gameplay (détail dans `CAHIER_DES_CHARGES.md`, section « Pipeline art ») :
     1. installer Blockbench, son plugin MCP et l'outil de capture en jeu (`/simplywings pose`, `/simplywings shot`, `runClient --quickPlaySingleplayer`) ;
@@ -60,6 +60,8 @@ Pour chaque mod : la technique retenue, ce qu'on fera différemment et pourquoi.
     5. one-shots en keyframes (déploiement, repli, atterrissage), puis finition des textures par le designer.
 
 ## Prochaine session
+
+**Refonte du 23 octobre** (structures et craft) : quatre essences et leurs conteneurs, table d'assemblage et établi de la forge à 4 jauges, coûts répartis par palier, substitut de stamina, compresseur de nuage, trois sanctuaires de l'End. Tout est codé, poussé et vu une première fois en solo dans le studio ; ce qui reste à tester est dans `ToDoTesting.md`, section 13.
 
 **Session du 22-23 octobre** : 19 paires épiques, légendaires et mythiques refaites dans Blockbench, correctif 1 codé, la plupart des tests en solo faits par le studio. Le point de reprise et l'ordre des tâches restantes sont en tête de `ToDoTesting.md` (« Reprise »).
 

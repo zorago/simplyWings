@@ -64,7 +64,7 @@ public final class WingsCommand {
     private static ResourceLocation wing(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
         ResourceLocation id = ResourceLocationArgument.getId(ctx, "wing");
         if (WingRegistries.get(ctx.getSource().registryAccess(), id).isEmpty()) {
-            throw UNKNOWN_WING.create(id);
+            throw UNKNOWN_WING.create(id.toString());
         }
         return id;
     }
