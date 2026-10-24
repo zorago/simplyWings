@@ -280,3 +280,16 @@ Reste à tester :
 - [ ] Direction artistique des trois îles (à valider par zorago) : plus de détails, raffinerie un peu vide.
 - [ ] JEI : catégorie « Cloud Compression », coûts par essence affichés dans les catégories assemblage et composants.
 - [ ] Serveur dédié pour tout ce qui précède.
+
+### 13 bis. Retours de zorago du 24 octobre (corrigés, à revérifier)
+
+- [ ] Compresseur : cylindre complet sur 360° (les plaques tournaient par pas de 11,25° au lieu de 22,5°).
+- [ ] Ailes émissives (feu, orage, aurore, Psyché, Light…) : l'eau ne passe plus par-dessus (rendu translucide qui écrit la profondeur).
+- [ ] Scintillement des faces superposées : décalage de profondeur minuscule par cube dans `RigLoader` (toutes les ailes et le compresseur).
+- [ ] Bouton du menu Ailes dans l'inventaire créatif (sous les onglets du bas).
+- [ ] Sanctuaire céleste : plus de fleurs posées sur la pierre de l'End (elles cassaient au spawn), plus de pupitre. Les cuirs et plumes au sol venaient de l'ancienne forge du monde de test, posée au même endroit.
+- [ ] Pas d'endermen naturels sur les trois îles (rayon 36 blocs autour de chaque centre).
+- [ ] Compresseur : 1 + 1 + 1 → 5.
+- [ ] Cinq absorbeurs (flacon, fer, doré, radiant, Furie) : 100 s pour un flacon, 200 s pour le réservoir de fer avec l'absorbeur de fer, puis 400, 800, 1 600 s.
+- [ ] Pose du joueur en vol (mixin `PlayerModel.setupAnim`) : profilé en croisière, cabré bras écartés et jambes en avant au freinage, collé en piqué, roulis en virage, bras et jambes qui flottent en stationnaire. À vérifier avec Not Enough Animations et playerAnimator du pack.
+- [ ] Monde de construction `run/saves/SimplyWings Builds` (client de dev) : les trois îles dans des cadres rouges, à x 0, 100 et 200. Après retouche : `/simplywings sanctum export <nom>`, puis prévenir Claude, qui copie le fichier dans le mod.

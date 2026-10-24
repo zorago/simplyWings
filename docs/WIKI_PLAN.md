@@ -1,6 +1,16 @@
-# Plan du wiki : quatrième onglet de la table d'assemblage
+# Plan du wiki : onglet des trois établis
 
-Proposition à valider par zorago avant toute implémentation. Rien n'est codé.
+Rien n'est codé. La section « Décisions de zorago » fait foi ; le reste du document est la proposition d'origine, à relire à sa lumière.
+
+## Décisions de zorago (24 octobre 2026)
+
+- **Où** : un onglet « Wiki » dans les **trois** blocs, la table d'assemblage, l'établi de la forge et le compresseur de nuage.
+- **Forme** : une arborescence de pages, sous-pages, sous-sous-pages, etc., avec des **liens entre les pages**, comme dans Obsidian (un mot lié ouvre la page, retour arrière, fil d'Ariane).
+- **Contenu** : une introduction au mod, puis des chapitres. Un **chapitre par rareté** explique les crafts de chaque paire et les techniques pour récupérer chaque item (drops imprégnés, structures, essences, compresseur).
+- **Dynamique** : le wiki se construit à partir des données du jeu (registre des ailes, recettes, registre `loot_source`, essences), pour rester juste quand une paire ou une recette change.
+- **Niveau d'ambition** : « un truc bien complet et bien réalisé ».
+
+Encore ouvert (à poser à zorago quand l'étape commence) : faut-il garder le principe anti-spoil ci-dessous (pages cachées ou en teaser tant que le joueur n'a pas découvert l'item), ou tout montrer d'emblée ?
 
 ## Objectif
 
