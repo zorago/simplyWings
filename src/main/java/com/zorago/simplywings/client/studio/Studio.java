@@ -190,6 +190,10 @@ public final class Studio {
                     wait = 4;
                     frames = 0;
                 }
+                case "newworld" -> {
+                    StudioTest.run(mc, player, a, line, Studio::log);
+                    wait = 200;
+                }
                 default -> {
                     if (!StudioTest.run(mc, player, a, line, Studio::log)) {
                         throw new IllegalArgumentException("Unknown command");

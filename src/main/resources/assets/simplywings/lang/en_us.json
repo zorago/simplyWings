@@ -889,5 +889,7 @@
   "item.simplywings.gilded_cloud_absorber.riddle": "Of Gold Ingot, Glass, Updraft Shard, Iron Cloud Absorber and Gilded Harness, it is welded at the Forge Bench, for 40 Cloud, 40 Steam, 40 Ethereal and 40 Intensified Essence. Keep it in your bag while flying: it fills an Gilded Essence Tank as fast as the first absorber fills a flask, twice over.",
   "item.simplywings.radiant_cloud_absorber.riddle": "Of Diamond, Prism Shard, Updraft Shard, Gilded Cloud Absorber and Radiant Harness, it is welded at the Forge Bench, for 80 Cloud, 80 Steam, 80 Ethereal and 80 Intensified Essence. Keep it in your bag while flying: it fills an Radiant Essence Tank as fast as the first absorber fills a flask, twice over.",
   "item.simplywings.fury_cloud_absorber.riddle": "Of Dragon Scale, Netherite Ingot, Updraft Shard, Radiant Cloud Absorber and Fury Saddle, it is welded at the Forge Bench, for 160 Cloud, 160 Steam, 160 Ethereal and 160 Intensified Essence. Keep it in your bag while flying: it fills an Fury Essence Tank as fast as the first absorber fills a flask, twice over.",
-  "tooltip.simplywings.absorber": "Harvests %s essence per second while flying"
+  "tooltip.simplywings.absorber": "Harvests %s essence per second while flying",
+  "commands.simplywings.sanctum_build": "The three sanctums are placed in red frames, 100 blocks apart along X: sky_sanctum at x 0, wing_forge at x 100, cloud_refinery at x 200",
+  "commands.simplywings.sanctum_export": "Sanctum saved to %s"
 }

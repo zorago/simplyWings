@@ -143,6 +143,20 @@ final class StudioTest {
                     log.accept("jei error " + e);
                 }
             }
+            case "newworld" -> {
+                String name = line.substring(line.indexOf(' ') + 1).trim();
+                mc.level.disconnect();
+                mc.disconnect();
+                mc.createWorldOpenFlows().createFreshLevel(name,
+                        new net.minecraft.world.level.LevelSettings(name, net.minecraft.world.level.GameType.CREATIVE, false,
+                                net.minecraft.world.Difficulty.PEACEFUL, true, new net.minecraft.world.level.GameRules(),
+                                net.minecraft.world.level.WorldDataConfiguration.DEFAULT),
+                        new net.minecraft.world.level.levelgen.WorldOptions(0L, false, false),
+                        access -> access.registryOrThrow(net.minecraft.core.registries.Registries.WORLD_PRESET)
+                                .getHolderOrThrow(net.minecraft.world.level.levelgen.presets.WorldPresets.FLAT).value().createWorldDimensions(),
+                        new net.minecraft.client.gui.screens.TitleScreen());
+                log.accept("newworld " + name);
+            }
             case "respawn" -> {
                 player.respawn();
                 mc.setScreen(null);

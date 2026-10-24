@@ -9,7 +9,9 @@ import java.util.Random;
 import java.util.function.Supplier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.GlobalPos;
+import java.nio.file.Path;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.Vec3i;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
@@ -26,12 +28,15 @@ import net.minecraft.world.item.component.LodestoneTracker;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.SignBlockEntity;
 import net.minecraft.world.level.dimension.end.EndDragonFight;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import net.minecraft.world.level.saveddata.SavedData;
+import net.minecraft.world.level.storage.LevelResource;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.event.entity.living.FinalizeSpawnEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
@@ -40,6 +45,8 @@ public final class EndSanctums {
     private static final String DATA_NAME = SimplyWings.MOD_ID + "_sanctums";
     private static final BlockPos TEMPLATE_CENTER = new BlockPos(28, 18, 28);
     private static final int ISLAND_REACH = 36;
+    private static final int BUILD_SPACING = 100;
+    private static final int BUILD_Y = 0;
 
     public enum Sanctum {
         SKY_SANCTUM("sky_sanctum", 2, ModItems.SANCTUM_COMPASS::get),
@@ -165,6 +172,47 @@ public final class EndSanctums {
         StructurePlaceSettings settings = new StructurePlaceSettings().addProcessor(new KeepExisting());
         template.placeInWorld(level, origin, origin, settings, level.getRandom(), Block.UPDATE_CLIENTS);
         return center.above();
+    }
+
+    public static BlockPos buildOrigin(Sanctum sanctum) {
+        return new BlockPos(sanctum.ordinal() * BUILD_SPACING, BUILD_Y, 0);
+    }
+
+    public static void buildWorld(ServerLevel level) {
+        for (Sanctum sanctum : Sanctum.values()) {
+            StructureTemplate template = level.getStructureManager().getOrCreate(SimplyWings.id(sanctum.id()));
+            Vec3i size = template.getSize();
+            BlockPos origin = buildOrigin(sanctum);
+            template.placeInWorld(level, origin, origin, new StructurePlaceSettings(), level.getRandom(), Block.UPDATE_CLIENTS);
+            BlockPos min = origin.offset(-1, -1, -1);
+            BlockPos max = origin.offset(size.getX(), size.getY(), size.getZ());
+            for (BlockPos pos : BlockPos.betweenClosed(min, max)) {
+                int edges = (pos.getX() == min.getX() || pos.getX() == max.getX() ? 1 : 0)
+                        + (pos.getY() == min.getY() || pos.getY() == max.getY() ? 1 : 0)
+                        + (pos.getZ() == min.getZ() || pos.getZ() == max.getZ() ? 1 : 0);
+                if (edges >= 2) {
+                    level.setBlock(pos, Blocks.RED_CONCRETE.defaultBlockState(), Block.UPDATE_CLIENTS);
+                }
+            }
+            BlockPos sign = new BlockPos(origin.getX() + size.getX() / 2, min.getY() + 1, max.getZ() + 2);
+            level.setBlock(sign.below(), Blocks.RED_CONCRETE.defaultBlockState(), Block.UPDATE_CLIENTS);
+            level.setBlock(sign, Blocks.OAK_SIGN.defaultBlockState(), Block.UPDATE_CLIENTS);
+            if (level.getBlockEntity(sign) instanceof SignBlockEntity entity) {
+                entity.updateText(text -> text.setMessage(0, Component.literal(sanctum.id()))
+                        .setMessage(1, Component.literal("/simplywings sanctum"))
+                        .setMessage(2, Component.literal("export " + sanctum.id())), true);
+            }
+        }
+    }
+
+    public static Path export(ServerLevel level, Sanctum sanctum) {
+        ResourceLocation id = SimplyWings.id(sanctum.id());
+        StructureTemplate template = level.getStructureManager().getOrCreate(id);
+        Vec3i size = template.getSize();
+        template.fillFromWorld(level, buildOrigin(sanctum), size, false, Blocks.AIR);
+        level.getStructureManager().save(id);
+        return level.getServer().getWorldPath(LevelResource.GENERATED_DIR)
+                .resolve(id.getNamespace()).resolve("structures").resolve(id.getPath() + ".nbt");
     }
 
     public static void giveCompasses(ServerLevel level, Sanctum sanctum, BlockPos center) {

@@ -53,6 +53,12 @@ public final class WingsCommand {
                 .then(Commands.literal("info").executes(WingsCommand::info))
                 .then(Commands.literal("forge").executes(ctx -> sanctum(ctx, EndSanctums.Sanctum.WING_FORGE)))
                 .then(Commands.literal("sanctum")
+                        .then(Commands.literal("build").executes(WingsCommand::sanctumBuild))
+                        .then(Commands.literal("export")
+                                .then(Commands.argument("name", StringArgumentType.word())
+                                        .suggests((ctx, builder) -> SharedSuggestionProvider.suggest(
+                                                java.util.Arrays.stream(EndSanctums.Sanctum.values()).map(EndSanctums.Sanctum::id), builder))
+                                        .executes(WingsCommand::sanctumExport)))
                         .then(Commands.argument("name", StringArgumentType.word())
                                 .suggests((ctx, builder) -> SharedSuggestionProvider.suggest(
                                         java.util.Arrays.stream(EndSanctums.Sanctum.values()).map(EndSanctums.Sanctum::id), builder))
@@ -124,6 +130,23 @@ public final class WingsCommand {
         }
         EndSanctums.give(player, end, sanctum, center);
         ctx.getSource().sendSuccess(() -> Component.translatable("commands.simplywings.forge", center.toShortString()), true);
+        return 1;
+    }
+
+    private static int sanctumBuild(CommandContext<CommandSourceStack> ctx) {
+        EndSanctums.buildWorld(ctx.getSource().getLevel());
+        ctx.getSource().sendSuccess(() -> Component.translatable("commands.simplywings.sanctum_build"), true);
+        return 1;
+    }
+
+    private static int sanctumExport(CommandContext<CommandSourceStack> ctx) {
+        Optional<EndSanctums.Sanctum> sanctum = EndSanctums.Sanctum.byId(StringArgumentType.getString(ctx, "name"));
+        if (sanctum.isEmpty()) {
+            ctx.getSource().sendFailure(Component.translatable("commands.simplywings.forge_failed"));
+            return 0;
+        }
+        String path = EndSanctums.export(ctx.getSource().getLevel(), sanctum.get()).toString();
+        ctx.getSource().sendSuccess(() -> Component.translatable("commands.simplywings.sanctum_export", path), true);
         return 1;
     }
 
