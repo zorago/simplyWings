@@ -1,0 +1,37 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " DQD ",
+    " UAU ",
+    " DHD ",
+    "     "
+  ],
+  "key": {
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "Q": {
+      "item": "simplywings:prism_shard"
+    },
+    "U": {
+      "item": "simplywings:updraft_shard"
+    },
+    "A": {
+      "item": "simplywings:gilded_cloud_absorber"
+    },
+    "H": {
+      "item": "simplywings:radiant_harness"
+    }
+  },
+  "result": {
+    "id": "simplywings:radiant_cloud_absorber",
+    "count": 1
+  },
+  "essence": {
+    "cloud": 80,
+    "steam": 80,
+    "ethereal": 80,
+    "intensified": 80
+  }
+}

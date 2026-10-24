@@ -1,9 +1,9 @@
 package com.zorago.simplywings.flight;
 
 import com.zorago.simplywings.config.ServerConfig;
+import com.zorago.simplywings.essence.CloudAbsorberItem;
 import com.zorago.simplywings.essence.EssenceContainerItem;
 import com.zorago.simplywings.essence.EssenceType;
-import com.zorago.simplywings.item.ModItems;
 import com.zorago.simplywings.player.FlightMode;
 import com.zorago.simplywings.player.ModAttachments;
 import net.minecraft.core.BlockPos;
@@ -31,10 +31,11 @@ public final class CloudHarvest {
             return;
         }
         Inventory inventory = player.getInventory();
-        if (!inventory.contains(stack -> stack.is(ModItems.CLOUD_ABSORBER.get()))) {
+        int tier = CloudAbsorberItem.best(inventory);
+        if (tier == 0) {
             return;
         }
-        fill(player, inventory, type, ServerConfig.CLOUD_ESSENCE_PER_SECOND.get());
+        fill(player, inventory, type, (int) Math.round(CloudAbsorberItem.perSecond(tier) * INTERVAL_TICKS / 20.0));
     }
 
     public static EssenceType zone(ServerPlayer player) {
@@ -86,27 +87,26 @@ public final class CloudHarvest {
         if (amount <= 0) {
             return;
         }
-        for (int i = 0; i < inventory.getContainerSize(); i++) {
+        for (int i = 0; i < inventory.getContainerSize() && amount > 0; i++) {
             ItemStack stack = inventory.getItem(i);
-            if (EssenceContainerItem.type(stack) == type && EssenceContainerItem.fill(stack, type, amount) > 0) {
-                return;
+            if (EssenceContainerItem.type(stack) == type) {
+                amount -= EssenceContainerItem.fill(stack, type, amount);
             }
         }
-        for (int i = 0; i < inventory.getContainerSize(); i++) {
+        for (int i = 0; i < inventory.getContainerSize() && amount > 0; i++) {
             ItemStack stack = inventory.getItem(i);
             if (!EssenceContainerItem.isContainer(stack) || EssenceContainerItem.type(stack) != null) {
                 continue;
             }
             if (stack.getCount() == 1) {
-                EssenceContainerItem.fill(stack, type, amount);
+                amount -= EssenceContainerItem.fill(stack, type, amount);
             } else {
                 ItemStack filled = stack.split(1);
-                EssenceContainerItem.fill(filled, type, amount);
+                amount -= EssenceContainerItem.fill(filled, type, amount);
                 if (!inventory.add(filled)) {
                     player.drop(filled, false);
                 }
             }
-            return;
         }
     }
 

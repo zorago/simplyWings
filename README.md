@@ -97,8 +97,9 @@ Collect components: mob, block and fishing drops only fall when the killing blow
 | Cloud | Overworld cloud layer | every craft from rare on |
 | Steam | Nether, within 16 blocks above lava | epic and higher |
 | Ethereal | End, over the void, more than 200 blocks from the centre | legendary and higher |
-| Intensified Cloud | Cloud Compressor: 1 Cloud + 1 Steam + 1 Ethereal → 3 | mythic, final by-products, tanks; also stands in for stamina |
+| Intensified Cloud | Cloud Compressor: 1 Cloud + 1 Steam + 1 Ethereal → 5 | mythic, final by-products, tanks; also stands in for stamina |
 
+- **Absorbers**: five tiers, one per container tier. An absorber of tier n fills the container of its tier in 100 s × 2^(n-1) (flask 100 s, iron tank 200 s, then 400, 800 and 1 600 s); the best absorber in the inventory counts.
 - **Containers**: the Essence Flask (100) and four tanks crafted with the harness of each tier: iron 5 000, gilded 20 000, radiant 50 000, fury 100 000. A container holds one essence at a time; with Intensified essence it glows like an enchanted golden apple.
 - **Benches**: the Assembly Table and the Forge Bench each have four gauges of 1 000. Drop a container in the essence slot to pour it into the matching gauge. A recipe asks for 1 to 4 essences depending on its tier and size; assembly costs 0 / 100 / 300 / 800 / 1 000 from common to mythic.
 - **Stamina**: when stamina runs out in flight, Intensified essence from the inventory refills it, 1 essence for 1 stamina (flasks first, then tanks).

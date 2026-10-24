@@ -35,6 +35,7 @@ public class CloudCompressorBlockEntity extends BlockEntity implements MenuProvi
     public static final int ETHEREAL = 2;
     public static final int OUTPUT = 3;
     public static final int SIZE = 4;
+    public static final int OUTPUT_FACTOR = 5;
     public static final EssenceType[] INPUTS = {EssenceType.CLOUD, EssenceType.STEAM, EssenceType.ETHEREAL};
 
     private final Items items = new Items();
@@ -103,7 +104,7 @@ public class CloudCompressorBlockEntity extends BlockEntity implements MenuProvi
         ItemStack output = items.getItem(OUTPUT);
         return output.getCount() == 1 && EssenceContainerItem.isContainer(output)
                 && (EssenceContainerItem.type(output) == null || EssenceContainerItem.type(output) == EssenceType.INTENSIFIED)
-                && EssenceContainerItem.capacity(output) - EssenceContainerItem.amount(output) >= units * INPUTS.length;
+                && EssenceContainerItem.capacity(output) - EssenceContainerItem.amount(output) >= units * OUTPUT_FACTOR;
     }
 
     public static void serverTick(Level level, BlockPos pos, BlockState state, CloudCompressorBlockEntity compressor) {
@@ -130,7 +131,7 @@ public class CloudCompressorBlockEntity extends BlockEntity implements MenuProvi
             items.setItem(slot, input);
         }
         ItemStack output = items.getItem(OUTPUT).copy();
-        EssenceContainerItem.fill(output, EssenceType.INTENSIFIED, units * INPUTS.length);
+        EssenceContainerItem.fill(output, EssenceType.INTENSIFIED, units * OUTPUT_FACTOR);
         items.setItem(OUTPUT, output);
         setChanged();
         if (level != null && level.random.nextInt(4) == 0) {

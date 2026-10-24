@@ -1,0 +1,37 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " GLG ",
+    " UAU ",
+    " GHG ",
+    "     "
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "L": {
+      "item": "minecraft:glass"
+    },
+    "U": {
+      "item": "simplywings:updraft_shard"
+    },
+    "A": {
+      "item": "simplywings:iron_cloud_absorber"
+    },
+    "H": {
+      "item": "simplywings:gilded_harness"
+    }
+  },
+  "result": {
+    "id": "simplywings:gilded_cloud_absorber",
+    "count": 1
+  },
+  "essence": {
+    "cloud": 40,
+    "steam": 40,
+    "ethereal": 40,
+    "intensified": 40
+  }
+}

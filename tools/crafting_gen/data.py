@@ -403,3 +403,8 @@ C["gilded_essence_tank"] = R("Gilded Essence Tank", 200, [".___.", "_GTG_", "_AH
 C["radiant_essence_tank"] = R("Radiant Essence Tank", 400, [".___.", "_DTD_", "_QHQ_", "_D_D_", ".___."], dict(D="diamond", T="gilded_essence_tank", Q="prism_shard", H="radiant_harness"))
 C["fury_essence_tank"] = R("Fury Essence Tank", 800, [".___.", "_STS_", "_NHN_", "_S_S_", ".___."], dict(S="dragon_scale", T="radiant_essence_tank", N="netherite_ingot", H="fury_saddle"))
 TANKS = ["iron_essence_tank", "gilded_essence_tank", "radiant_essence_tank", "fury_essence_tank"]
+C["iron_cloud_absorber"] = R("Iron Cloud Absorber", 80, [".___.", "_IGI_", "_UAU_", "_IHI_", ".___."], dict(I="iron_ingot", G="glass", U="updraft_shard", A="cloud_absorber", H="iron_harness"))
+C["gilded_cloud_absorber"] = R("Gilded Cloud Absorber", 160, [".___.", "_GLG_", "_UAU_", "_GHG_", ".___."], dict(G="gold_ingot", L="glass", U="updraft_shard", A="iron_cloud_absorber", H="gilded_harness"))
+C["radiant_cloud_absorber"] = R("Radiant Cloud Absorber", 320, [".___.", "_DQD_", "_UAU_", "_DHD_", ".___."], dict(D="diamond", Q="prism_shard", U="updraft_shard", A="gilded_cloud_absorber", H="radiant_harness"))
+C["fury_cloud_absorber"] = R("Fury Cloud Absorber", 640, [".___.", "_SNS_", "_UAU_", "_SHS_", ".___."], dict(S="dragon_scale", N="netherite_ingot", U="updraft_shard", A="radiant_cloud_absorber", H="fury_saddle"))
+ABSORBERS = ["iron_cloud_absorber", "gilded_cloud_absorber", "radiant_cloud_absorber", "fury_cloud_absorber"]

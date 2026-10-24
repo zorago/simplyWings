@@ -1,4 +1,4 @@
-from data import C, TANKS
+from data import ABSORBERS, C, TANKS
 from pairs import PAIRS
 
 TIERS = ["Rare", "Épique", "Légendaire", "Mythique"]
@@ -11,7 +11,7 @@ ASM = {
     "Légendaire": {"cloud": 250, "steam": 250, "ethereal": 300},
     "Mythique": {"cloud": 250, "steam": 250, "ethereal": 250, "intensified": 250},
 }
-FIXED_TIER = {i: 3 for i in TANKS}
+FIXED_TIER = {i: 3 for i in TANKS + ABSORBERS}
 _tier = {}
 
 

@@ -265,7 +265,7 @@ Vu une première fois en solo dans le studio (client de dev), le 23 octobre :
 - [x] Établi de la forge : 4 jauges, flacons de nuage et de vapeur versés dans la bonne jauge, grille 5×5, onglet énergie.
 - [x] Table d'assemblage : assemblage seul, 4 jauges, bouton « Assemble ».
 - [x] Balayage `tools/studio/table_test.py all` : **179 / 179 OK** (133 composants + 4 réservoirs + flacon + absorbeur à l'établi, 41 assemblages à la table), coût prélevé dans chaque jauge égal au coût de la recette.
-- [x] Compresseur : pose 3×3×5 par l'item, modèle et engrenages rendus, menu, 1 + 1 + 1 → 3 (flacons → réservoir de fer).
+- [x] Compresseur : pose 3×3×5 par l'item, modèle et engrenages rendus, menu, 1 + 1 + 1 → 5 (flacons → réservoir de fer).
 - [x] Substitut de stamina : stamina à 0 en l'air avec un flacon d'essence intensifiée → la stamina remonte à 20, le flacon passe à 80.
 - [x] Les trois sanctuaires se posent par `/simplywings sanctum <nom>` aux sommets du triangle (512 blocs, 120°), avec leur compas.
 

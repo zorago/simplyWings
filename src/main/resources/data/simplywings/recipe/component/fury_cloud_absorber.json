@@ -1,0 +1,37 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " SNS ",
+    " UAU ",
+    " SHS ",
+    "     "
+  ],
+  "key": {
+    "S": {
+      "item": "simplywings:dragon_scale"
+    },
+    "N": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "U": {
+      "item": "simplywings:updraft_shard"
+    },
+    "A": {
+      "item": "simplywings:radiant_cloud_absorber"
+    },
+    "H": {
+      "item": "simplywings:fury_saddle"
+    }
+  },
+  "result": {
+    "id": "simplywings:fury_cloud_absorber",
+    "count": 1
+  },
+  "essence": {
+    "cloud": 160,
+    "steam": 160,
+    "ethereal": 160,
+    "intensified": 160
+  }
+}

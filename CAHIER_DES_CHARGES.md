@@ -238,7 +238,7 @@ Quatre essences, des liquides du mod, toutes stockées de la même façon. Un co
 | **Cloud Essence** (nuage) | Overworld, couche de nuages | tous les crafts dès le palier rare |
 | **Steam Essence** (vapeur) | Nether, au-dessus des mers de lave | crafts épiques et au-delà |
 | **Ethereal Essence** (éthérée) | End, au-dessus du vide | crafts légendaires et au-delà |
-| **Intensified Cloud Essence** (intensifiée) | compresseur de nuage (1 + 1 + 1 → 3) | crafts mythiques, sous-produits finaux, réservoirs ; **substitut de stamina** |
+| **Intensified Cloud Essence** (intensifiée) | compresseur de nuage (1 + 1 + 1 → 5) | crafts mythiques, sous-produits finaux, réservoirs ; **substitut de stamina** |
 
 **Conteneurs**
 
@@ -246,7 +246,7 @@ Quatre essences, des liquides du mod, toutes stockées de la même façon. Un co
 - **Réservoirs** (« Essence Tank ») : quatre paliers, chacun fabriqué à l'établi avec le harnais du palier et de l'essence intensifiée. Capacités : fer 5 000, doré 20 000, radiant 50 000, selle des Furies 100 000 (100 fois une jauge de table).
 - Un conteneur qui contient de l'essence intensifiée brille comme une pomme dorée enchantée (éclat d'enchantement, effet visuel seulement).
 
-**Récolte** : avec un **Cloud Absorber** dans l'inventaire, pendant le vol (déplacement ou stationnaire), le serveur remplit les conteneurs non pleins de l'inventaire une fois par seconde (+2 par défaut), avec l'essence de la zone :
+**Récolte** : avec un **Cloud Absorber** dans l'inventaire, pendant le vol (déplacement ou stationnaire), le serveur remplit les conteneurs non pleins de l'inventaire une fois par seconde, avec l'essence de la zone. Cinq absorbeurs, un par palier de conteneur (flacon, fer, doré, radiant, Furie) : l'absorbeur de palier n remplit le conteneur de son palier en `absorberBaseSeconds` × 2^(n−1) secondes (100 s pour le flacon, 200 s pour le réservoir de fer, 400, 800 puis 1 600 s), soit 1 ; 25 ; 50 ; 62,5 et 62,5 unités par seconde. Le meilleur absorbeur de l'inventaire fait foi. Zones :
 
 - Overworld : bande de Y autour des nuages vanilla (186 à 204 par défaut) → nuage ;
 - Nether : à moins de 16 blocs au-dessus d'une surface de lave → vapeur ;
@@ -259,7 +259,7 @@ Les bandes et les quantités sont en config serveur (`[cloud]`). Le calcul est s
 **Compresseur de nuage** (`simplywings:cloud_compressor`, dans la Raffinerie céleste, débloquée au 4e dragon)
 
 - Un gros bloc multiple de 3 × 3 × 5 (une cuve cylindrique pleine d'engrenages et de tuyaux, modèle Blockbench rendu par un BlockEntityRenderer), comme un four ou un alambic : 3 emplacements d'entrée (nuage, vapeur, éthérée) et 1 de sortie. Chaque emplacement accepte un flacon ou un réservoir, quel que soit son contenu tant qu'il convient.
-- Un cycle prend 1 unité de chaque entrée et ajoute 3 unités d'essence intensifiée au conteneur de sortie. Il s'arrête si une entrée est vide ou si la sortie est pleine (ou contient une autre essence).
+- Un cycle prend 1 unité de chaque entrée et ajoute 5 unités d'essence intensifiée au conteneur de sortie. Il s'arrête si une entrée est vide ou si la sortie est pleine (ou contient une autre essence).
 - Les engrenages tournent et la cuve bouillonne pendant la compression.
 
 ## Les trois sanctuaires de l'End

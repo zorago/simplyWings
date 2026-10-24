@@ -95,7 +95,7 @@ public class SimplyWingsJeiPlugin implements IModPlugin {
                 Component.translatable("jei.simplywings.info." + compass.getId().getPath())));
         List<ItemStack> essence = new ArrayList<>();
         ModItems.CONTAINERS.forEach(container -> essence.add(new ItemStack(container.get())));
-        essence.add(new ItemStack(ModItems.CLOUD_ABSORBER.get()));
+        ModItems.ABSORBERS.forEach(absorber -> essence.add(new ItemStack(absorber.get())));
         registration.addItemStackInfo(essence, Component.translatable("jei.simplywings.info.cloud_essence"));
     }
 

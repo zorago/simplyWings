@@ -1,5 +1,6 @@
 package com.zorago.simplywings.compat.jei;
 
+import com.zorago.simplywings.block.CloudCompressorBlockEntity;
 import com.zorago.simplywings.block.ModBlocks;
 import com.zorago.simplywings.essence.EssenceContainerItem;
 import com.zorago.simplywings.essence.EssenceType;
@@ -63,7 +64,7 @@ public class CompressorCategory implements IRecipeCategory<EssenceType> {
         builder.addSlot(RecipeIngredientRole.INPUT, 41, 1).setStandardSlotBackground().addItemStack(flask(EssenceType.ETHEREAL, 1));
         builder.addSlot(RecipeIngredientRole.CATALYST, 66, 1).setStandardSlotBackground()
                 .addItemStack(new ItemStack(ModBlocks.CLOUD_COMPRESSOR_ITEM.get()));
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 128, 1).setStandardSlotBackground().addItemStack(flask(output, 3));
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 128, 1).setStandardSlotBackground().addItemStack(flask(output, CloudCompressorBlockEntity.OUTPUT_FACTOR));
     }
 
     @Override

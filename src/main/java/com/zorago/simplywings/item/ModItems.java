@@ -2,6 +2,7 @@ package com.zorago.simplywings.item;
 
 import com.zorago.simplywings.SimplyWings;
 import com.zorago.simplywings.block.ModBlocks;
+import com.zorago.simplywings.essence.CloudAbsorberItem;
 import com.zorago.simplywings.essence.EssenceContainerItem;
 import com.zorago.simplywings.essence.EssenceType;
 import java.util.ArrayList;
@@ -88,8 +89,17 @@ public final class ModItems {
         return ITEMS.register(name, () -> new EssenceContainerItem(new Item.Properties().stacksTo(1).rarity(rarity), capacity, false));
     }
 
-    public static final DeferredItem<Item> CLOUD_ABSORBER = ITEMS.register("cloud_absorber",
-            () -> new Item(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<CloudAbsorberItem> CLOUD_ABSORBER = absorber("cloud_absorber", 1, Rarity.COMMON);
+    public static final DeferredItem<CloudAbsorberItem> IRON_CLOUD_ABSORBER = absorber("iron_cloud_absorber", 2, Rarity.COMMON);
+    public static final DeferredItem<CloudAbsorberItem> GILDED_CLOUD_ABSORBER = absorber("gilded_cloud_absorber", 3, Rarity.UNCOMMON);
+    public static final DeferredItem<CloudAbsorberItem> RADIANT_CLOUD_ABSORBER = absorber("radiant_cloud_absorber", 4, Rarity.RARE);
+    public static final DeferredItem<CloudAbsorberItem> FURY_CLOUD_ABSORBER = absorber("fury_cloud_absorber", 5, Rarity.EPIC);
+    public static final List<DeferredItem<CloudAbsorberItem>> ABSORBERS = List.of(CLOUD_ABSORBER, IRON_CLOUD_ABSORBER,
+            GILDED_CLOUD_ABSORBER, RADIANT_CLOUD_ABSORBER, FURY_CLOUD_ABSORBER);
+
+    private static DeferredItem<CloudAbsorberItem> absorber(String name, int tier, Rarity rarity) {
+        return ITEMS.register(name, () -> new CloudAbsorberItem(new Item.Properties().stacksTo(1).rarity(rarity), tier));
+    }
 
     public static final DeferredItem<Item> SANCTUM_COMPASS = ITEMS.register("sanctum_compass",
             () -> new Item(new Item.Properties().stacksTo(1)));
@@ -129,7 +139,7 @@ public final class ModItems {
                                 output.accept(EssenceContainerItem.filled(container.get(), type, container.get().capacity()));
                             }
                         });
-                        output.accept(CLOUD_ABSORBER.get());
+                        ABSORBERS.forEach(output::accept);
                         COMPASSES.forEach(output::accept);
                         WINGS.forEach(output::accept);
                         MATERIALS.values().forEach(output::accept);

@@ -8,7 +8,7 @@ from pathlib import Path
 from PIL import Image, ImageDraw
 
 from art import GEMS, ITEMS, METALS, palette, px_js, ramp
-from data import C, D, TANKS, V
+from data import ABSORBERS, C, D, TANKS, V
 from essence import ASM, KINDS, LABEL, cost, json_cost
 from lore import CRAFT_LORE, DROP_LORE, EXTRA, PAIR_LORE
 from pairs import PAIRS
@@ -20,7 +20,7 @@ ASSETS = ROOT / "src/main/resources/assets/simplywings"
 JAVA = ROOT / "src/main/java/com/zorago/simplywings/item/MaterialIds.java"
 PXL = ROOT / ".claude/skills/pxl-pixel-art/src/node/cli.ts"
 SKIP_PAIRS = set()
-STANDALONE = ["cloud_absorber"] + TANKS
+STANDALONE = ["cloud_absorber"] + TANKS + ABSORBERS
 RECIPES = ROOT / "src/main/resources/data/simplywings/recipe"
 TEMPLATES = [
     "Of {list}, it is hammered out at the Forge Bench.",
@@ -119,6 +119,10 @@ def lang(drops, crafts):
     out["item.simplywings.cloud_absorber.riddle"] = (
         "Of Glass, Copper Ingot, Updraft Shard and a Feather, it is hammered out at the Forge Bench. "
         "Keep it in your bag and fly: it fills your flasks and tanks with the essence of the sky around you.")
+    for a, tank in zip(ABSORBERS, TANKS):
+        out[f"item.simplywings.{a}.riddle"] = (
+            f"Of {listing([name(x) for x in inputs(a)])}, it is welded at the Forge Bench, for {essence_text(cost(a))}. "
+            f"Keep it in your bag while flying: it fills an {name(tank)} as fast as the first absorber fills a flask, twice over.")
     for t in TANKS:
         r = C[t]
         out[f"item.simplywings.{t}.riddle"] = (

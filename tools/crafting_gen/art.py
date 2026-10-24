@@ -580,6 +580,10 @@ ITEMS = {
     "yin_sphere": ("orb", "#24243a"),
     "yang_sphere": ("orb", "#f2f0ea"),
     "cloud_absorber": ("absorber", "#d07040", "#a8b8c8", "#f4faff"),
+    "iron_cloud_absorber": ("absorber", "#a8aab4", "#d8dce4", "#f4faff"),
+    "gilded_cloud_absorber": ("absorber", "#e0b040", "#f6d678", "#fff8d8"),
+    "radiant_cloud_absorber": ("absorber", "#50c8d0", "#b8f4f4", "#ffffff"),
+    "fury_cloud_absorber": ("absorber", "#5a4478", "#c860d8", "#f4e0ff"),
 }
 
 GEMS = {

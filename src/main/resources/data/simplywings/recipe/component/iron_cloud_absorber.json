@@ -1,0 +1,36 @@
+{
+  "type": "simplywings:component",
+  "pattern": [
+    "     ",
+    " IGI ",
+    " UAU ",
+    " IHI ",
+    "     "
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "U": {
+      "item": "simplywings:updraft_shard"
+    },
+    "A": {
+      "item": "simplywings:cloud_absorber"
+    },
+    "H": {
+      "item": "simplywings:iron_harness"
+    }
+  },
+  "result": {
+    "id": "simplywings:iron_cloud_absorber",
+    "count": 1
+  },
+  "essence": {
+    "steam": 25,
+    "ethereal": 25,
+    "intensified": 30
+  }
+}

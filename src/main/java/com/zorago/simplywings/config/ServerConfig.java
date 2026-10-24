@@ -35,7 +35,7 @@ public final class ServerConfig {
     public static final ModConfigSpec.IntValue FURY_INVISIBILITY_TICKS;
     public static final ModConfigSpec.DoubleValue CLOUD_MIN_Y;
     public static final ModConfigSpec.DoubleValue CLOUD_MAX_Y;
-    public static final ModConfigSpec.IntValue CLOUD_ESSENCE_PER_SECOND;
+    public static final ModConfigSpec.DoubleValue ABSORBER_BASE_SECONDS;
     public static final ModConfigSpec.IntValue STEAM_HEIGHT;
     public static final ModConfigSpec.IntValue COMPRESSOR_CYCLE_TICKS;
     public static final ModConfigSpec.IntValue COMPRESSOR_UNITS;
@@ -148,8 +148,8 @@ public final class ServerConfig {
                 .defineInRange("steamHeight", 16, 1, 128);
         ETHEREAL_MIN_DISTANCE = b.comment("In the End, Ethereal Essence is harvested over the void, at least this far from (0, 0).")
                 .defineInRange("etherealMinDistance", 200.0, 0.0, 100000.0);
-        CLOUD_ESSENCE_PER_SECOND = b.comment("Essence added to the containers each second of flight inside a harvest zone.")
-                .defineInRange("essencePerSecond", 2, 0, 100);
+        ABSORBER_BASE_SECONDS = b.comment("Seconds for a Cloud Absorber to fill an Essence Flask. An absorber of tier n fills the container of the same tier in this time multiplied by 2^(n-1).")
+                .defineInRange("absorberBaseSeconds", 100.0, 1.0, 100000.0);
         CLOUD_HOVER_HARVEST = b.comment("Whether hovering (stabilized mode) also harvests, not only travel flight.")
                 .define("hoverHarvest", true);
         b.pop();
@@ -157,7 +157,7 @@ public final class ServerConfig {
         b.push("compressor");
         COMPRESSOR_CYCLE_TICKS = b.comment("Ticks per Cloud Compressor cycle.")
                 .defineInRange("cycleTicks", 2, 1, 1200);
-        COMPRESSOR_UNITS = b.comment("Units taken from each of the three inputs per cycle. The output gains three times as much Intensified Cloud Essence.")
+        COMPRESSOR_UNITS = b.comment("Units taken from each of the three inputs per cycle. The output gains five times as much Intensified Cloud Essence.")
                 .defineInRange("unitsPerCycle", 1, 1, 1000);
         b.pop();
 
