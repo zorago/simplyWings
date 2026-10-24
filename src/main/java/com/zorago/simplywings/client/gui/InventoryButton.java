@@ -6,6 +6,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Tooltip;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
@@ -18,10 +21,11 @@ import net.neoforged.neoforge.client.event.ScreenEvent;
 public final class InventoryButton extends Button {
     private static final int SIZE = 20;
     private static final int GAP = 2;
+    private static final int CREATIVE_TABS = 30;
 
-    private final InventoryScreen screen;
+    private final AbstractContainerScreen<?> screen;
 
-    private InventoryButton(InventoryScreen screen) {
+    private InventoryButton(AbstractContainerScreen<?> screen) {
         super(0, 0, SIZE, SIZE, Component.empty(), b -> Minecraft.getInstance().setScreen(new WingsScreen()),
                 DEFAULT_NARRATION);
         this.screen = screen;
@@ -31,7 +35,7 @@ public final class InventoryButton extends Button {
 
     private void reposition() {
         setX(screen.getGuiLeft());
-        setY(screen.getGuiTop() + screen.getYSize() + GAP);
+        setY(screen.getGuiTop() + screen.getYSize() + GAP + (screen instanceof CreativeModeInventoryScreen ? CREATIVE_TABS : 0));
     }
 
     @Override
@@ -51,15 +55,19 @@ public final class InventoryButton extends Button {
         return new ItemStack(ModItems.COMMON_WINGS.get());
     }
 
+    private static boolean supported(Screen screen) {
+        return screen instanceof InventoryScreen || screen instanceof CreativeModeInventoryScreen;
+    }
+
     public static void onInit(ScreenEvent.Init.Post event) {
-        if (event.getScreen() instanceof InventoryScreen inventory && !ClientWings.collection().isEmpty()) {
-            event.addListener(new InventoryButton(inventory));
+        if (supported(event.getScreen()) && !ClientWings.collection().isEmpty()) {
+            event.addListener(new InventoryButton((AbstractContainerScreen<?>) event.getScreen()));
         }
     }
 
     public static void onRender(ScreenEvent.Render.Pre event) {
-        if (event.getScreen() instanceof InventoryScreen inventory) {
-            for (var child : inventory.children()) {
+        if (supported(event.getScreen())) {
+            for (var child : event.getScreen().children()) {
                 if (child instanceof InventoryButton button) {
                     button.reposition();
                 }

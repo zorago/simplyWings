@@ -86,7 +86,7 @@ public class WingsLayer extends RenderLayer<AbstractClientPlayer, PlayerModel<Ab
             RenderType type = ghost ? RenderType.entityTranslucent(texture) : switch (style.render()) {
                 case CUTOUT -> RenderType.entityCutoutNoCull(texture);
                 case TRANSLUCENT -> RenderType.entityTranslucent(texture);
-                case ETHEREAL -> RenderType.entityTranslucentEmissive(texture);
+                case ETHEREAL -> RenderType.entityTranslucent(texture);
             };
             int packedLight = style.render() == WingStyle.Render.ETHEREAL ? LightTexture.FULL_BRIGHT : light;
             model.render(poseStack, buffer.getBuffer(type), packedLight, OverlayTexture.NO_OVERLAY, ghost ? ghostColor(color) : color);

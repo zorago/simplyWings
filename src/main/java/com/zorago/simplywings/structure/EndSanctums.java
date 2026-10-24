@@ -17,7 +17,9 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
+import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.LodestoneTracker;
@@ -31,11 +33,13 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProc
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import net.minecraft.world.level.saveddata.SavedData;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.event.entity.living.FinalizeSpawnEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 
 public final class EndSanctums {
     private static final String DATA_NAME = SimplyWings.MOD_ID + "_sanctums";
     private static final BlockPos TEMPLATE_CENTER = new BlockPos(28, 18, 28);
+    private static final int ISLAND_REACH = 36;
 
     public enum Sanctum {
         SKY_SANCTUM("sky_sanctum", 2, ModItems.SANCTUM_COMPASS::get),
@@ -76,6 +80,7 @@ public final class EndSanctums {
 
     public static void register(IEventBus bus) {
         bus.addListener(EndSanctums::onDeath);
+        bus.addListener(EndSanctums::onSpawn);
     }
 
     private static void onDeath(LivingDeathEvent event) {
@@ -83,6 +88,27 @@ public final class EndSanctums {
                 && level.dimension() == Level.END) {
             dragonKilled(level);
         }
+    }
+
+    private static void onSpawn(FinalizeSpawnEvent event) {
+        if (!(event.getEntity() instanceof EnderMan) || event.getSpawnType() != MobSpawnType.NATURAL
+                && event.getSpawnType() != MobSpawnType.CHUNK_GENERATION) {
+            return;
+        }
+        if (event.getLevel().getLevel().dimension() == Level.END && near(event.getLevel().getLevel(), event.getX(), event.getY(), event.getZ())) {
+            event.setSpawnCancelled(true);
+        }
+    }
+
+    public static boolean near(ServerLevel level, double x, double y, double z) {
+        Data data = data(level);
+        for (BlockPos center : data.centers) {
+            if (center != null && Math.abs(x - center.getX()) <= ISLAND_REACH && Math.abs(z - center.getZ()) <= ISLAND_REACH
+                    && y > center.getY() - 30 && y < center.getY() + 40) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static int dragonKilled(ServerLevel level) {

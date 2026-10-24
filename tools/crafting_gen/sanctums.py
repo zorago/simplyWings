@@ -256,7 +256,6 @@ def sanctum():
         if not front_open(px, pz, 16):
             b.put(px, y + 11, pz, "minecraft:smooth_quartz_slab", {"type": "bottom", "waterlogged": "false"}, replace=False)
     b.put(C, y + 2, C, "simplywings:assembly_table", {"facing": "south"})
-    b.put(C + 2, y + 2, C, "minecraft:lectern", {"facing": "south", "has_book": "false", "powered": "false"})
     for dx, dz in ((-2, -2), (2, -2), (-2, 2), (2, 2)):
         b.put(C + dx, y + 2, C + dz, "minecraft:end_rod", {"facing": "up"})
     for z in range(C + 10, C + 24):
@@ -294,7 +293,7 @@ def sanctum():
             b.tree(x, z, "minecraft:birch_log", "minecraft:azalea_leaves", b.rnd.randint(3, 5), 2, "minecraft:flowering_azalea_leaves")
     b.scatter([("minecraft:lily_of_the_valley", None), ("minecraft:oxeye_daisy", None), ("minecraft:white_tulip", None),
                ("minecraft:moss_carpet", None), ("minecraft:azure_bluet", None), ("minecraft:short_grass", None),
-               ("minecraft:lilac", "double")], 0.16, avoid)
+               ("minecraft:lilac", "double")], 0.22, lambda x, z: avoid(x, z) or b.get(x, b.top(x, z), z) != "minecraft:moss_block")
     b.hanging("minecraft:end_rod", 0.03, (1, 1), {"facing": "down"})
     return b, {"center": [C, TOP, C]}
 
@@ -471,7 +470,8 @@ def refinery():
         if b.top(x, z) is not None and not avoid(x, z):
             b.tree(x, z, "minecraft:cherry_log", "minecraft:cherry_leaves", b.rnd.randint(3, 5), 2)
     b.scatter([("minecraft:azalea", None), ("minecraft:flowering_azalea", None), ("minecraft:moss_carpet", None),
-               ("minecraft:pink_petals", {"facing": "north", "flower_amount": "3"}), ("minecraft:short_grass", None)], 0.15, avoid)
+               ("minecraft:pink_petals", {"facing": "north", "flower_amount": "3"}), ("minecraft:short_grass", None)], 0.22,
+              lambda x, z: avoid(x, z) or b.get(x, b.top(x, z), z) != "minecraft:moss_block")
     b.hanging("minecraft:chain", 0.02, (1, 3), {"axis": "y", "waterlogged": "false"})
     return b, {"center": [C, TOP, C]}
 

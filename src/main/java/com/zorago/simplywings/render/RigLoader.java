@@ -24,6 +24,8 @@ import net.minecraft.util.Mth;
 
 public final class RigLoader {
     private static final float ROOT_Y = 24f;
+    private static final float DEPTH_STEP = 0.012f;
+    private static final int DEPTH_LAYERS = 5;
 
     public record Rig(LayerDefinition layer, Map<String, List<String>> paths) {
     }
@@ -75,6 +77,7 @@ public final class RigLoader {
             }
         }
         Map<String, Element> elements = new HashMap<>();
+        int index = 0;
         for (JsonElement e : json.getAsJsonArray("elements")) {
             JsonObject o = e.getAsJsonObject();
             if (!"cube".equals(string(o, "type", "cube"))) {
@@ -82,7 +85,7 @@ public final class RigLoader {
             }
             float[] uv = vec(o, "uv_offset", 2);
             elements.put(o.get("uuid").getAsString(), new Element(vec(o, "from", 3), vec(o, "to", 3), vec(o, "origin", 3),
-                    vec(o, "rotation", 3), (int) uv[0], (int) uv[1], number(o, "inflate", 0f),
+                    vec(o, "rotation", 3), (int) uv[0], (int) uv[1], number(o, "inflate", 0f) + DEPTH_STEP * (index++ % DEPTH_LAYERS),
                     bool(o, "mirror_uv", false), bool(o, "export", true)));
         }
         List<Group> roots = new ArrayList<>();

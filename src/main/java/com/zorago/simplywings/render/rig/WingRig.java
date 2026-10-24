@@ -88,7 +88,7 @@ public abstract class WingRig {
         return switch (material()) {
             case CUTOUT -> RenderType.entityCutoutNoCull(texture());
             case TRANSLUCENT -> RenderType.entityTranslucent(texture());
-            case EMISSIVE -> RenderType.entityTranslucentEmissive(texture());
+            case EMISSIVE -> RenderType.entityTranslucent(texture());
         };
     }
 

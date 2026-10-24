@@ -56,12 +56,16 @@ def cube(g, name, a, b, material, origin=None, rotation=(0, 0, 0), inflate=0):
     return e
 
 
+def angle(a):
+    return a - 180 if a > 90 else a
+
+
 def ring(g, name, a, y0, y1, material, sides=16, origin=(0, 0)):
     s = round(2 * a * math.tan(math.pi / sides), 1)
     s = max(1, round(s))
     for k in range(sides // 2):
         cube(g, f"{name}_{k}", (origin[0] - a, y0, origin[1] - s / 2), (origin[0] + a, y1, origin[1] + s / 2), material,
-             origin=(origin[0], y0, origin[1]), rotation=(0, k * 180 / sides, 0))
+             origin=(origin[0], y0, origin[1]), rotation=(0, angle(k * 360 / sides), 0))
 
 
 def disk_x(g, name, center, radius, thick, material, teeth=0, tooth_mat=None):
