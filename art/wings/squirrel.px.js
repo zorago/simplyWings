@@ -18,10 +18,11 @@ const lineDist = (p, pts) => {
 }
 
 const membrane = (c) => {
-  for (const cube of GEOM.plates(R)) {
-    if (cube.kind !== "membrane") continue
-    GEOM.pixels(R, cube, (x, y, p, dorsal) => {
-      if (!GEOM.inside(R.panel, p)) return
+  const sh = R.sheet
+  for (const [u0, v0, dorsal] of [[sh.ventral[0], sh.ventral[1], false], [sh.dorsal[0], sh.dorsal[1], true]]) for (let u = 0; u < sh.w; u++) for (let v = 0; v < sh.h; v++) {
+    const p = [sh.x + u + 0.5, sh.y - v - 0.5], x = u0 + u, y = v0 + v
+    {
+      if (!GEOM.inside(R.panel, p)) continue
       const ed = lineDist(p, R.edge)
       const bone = Math.abs(p[1] - 22.5) < 1.3 && p[0] <= R.W[0]
       let k
@@ -33,7 +34,7 @@ const membrane = (c) => {
         k = dorsal ? (streak ? "d" : "e") : (streak ? "W" : "w")
       }
       c.px(x, y, k)
-    })
+    }
   }
 }
 

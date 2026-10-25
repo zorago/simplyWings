@@ -309,6 +309,16 @@ Règles appliquées avant revue :
 - G1 à G5 sur les branches : parachute (branche principale levée vers l'avant, branche arrière abaissée pour ajouter de la surface, comme `seraph` et `night`) ; frein lent ; charge où les branches se lèvent et les feuilles frémissent de plus en plus, puis BLAST ; battement anatomique au-dessus de −5° (virages compris, côté par côté) avec nage avant/arrière, le fouet des segments conservé ; stationnaire à plat, battement de haut en bas ; traînées au bout de la branche.
 - Conservé : le frémissement de chaque feuille avec la vitesse, les fleurs, les 3 idles (floraison, bruissement, étirement vers le soleil).
 
+### 13. Ailes de polatouche (`squirrel`, membrane sans doigts / planeur, aspects A3, A9)
+
+Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+
+Règles appliquées avant revue :
+
+- M1 en version planeur : les deux plaques rigides (bras et avant-bras), qui s'écartaient au coude, deviennent une seule peau tendue du flanc (de l'épaule à la cheville) jusqu'au bras, à l'avant-bras et au bout de l'éperon (`rigs/squirrel.membranes.json`). Le liseré crème et la bande sombre du bord sont repeints sur une feuille d'un seul tenant. Bombée au plané, beaucoup en parachute, à plat repliée.
+- G1 à G5 : parachute, frein lent ; charge et BLAST discrets (le polatouche ne fait que pomper des bras) ; pompage au-dessus de −5° (virages compris) avec une petite nage avant/arrière ; stationnaire à plat ; traînées au bout des éperons.
+- Conservé : le bras intérieur qui se replie en virage, les éperons qui sortent au plané, la queue gouvernail et relevée à l'atterrissage.
+
 ## Plan de review
 
 Deux phases. **Phase 1** : une paire dominante par aspect, choisie pour ouvrir le plus de logique nouvelle, revue une à une avec zorago, jusqu'à ce que chaque aspect ait ses règles. **Phase 2** : toutes les autres paires, une à une aussi. On applique d'abord toutes les règles de leurs familles et de leurs aspects, puis on ne polit que ce qui leur est propre.
