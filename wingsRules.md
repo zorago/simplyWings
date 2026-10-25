@@ -391,7 +391,7 @@ Les 25 paires restantes ont reçu toutes les règles de leurs familles d'un coup
 
 ### 17. Ailes de corbeau (`crow`, plume, aspect A17)
 
-Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+Statut : **terminé**, validé par zorago (revue groupée, lot 1).
 
 Règles appliquées avant revue :
 
@@ -405,7 +405,7 @@ Signature d'espèce (A17) :
 
 ### 18. Ailes de hibou (`owl`, plume, aspect A17)
 
-Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+Statut : **terminé**, validé par zorago (revue groupée, lot 1).
 
 Règles appliquées avant revue :
 
@@ -419,7 +419,7 @@ Signature d'espèce (A17) :
 
 ### 19. Ailes de goéland (`gull`, plume, aspect A17)
 
-Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+Statut : **terminé**, validé par zorago (revue groupée, lot 1).
 
 Règles appliquées avant revue :
 
@@ -434,7 +434,7 @@ Signature d'espèce (A17) :
 
 ### 20. Ailes de martinet (`swift`, plume, aspect A17)
 
-Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+Statut : **terminé**, validé par zorago (revue groupée, lot 1).
 
 Règles appliquées avant revue :
 
@@ -449,7 +449,7 @@ Signature d'espèce (A17) :
 
 ### 21. Ailes de pigeon (`pigeon`, plume, aspect A17)
 
-Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+Statut : **terminé**, validé par zorago (revue groupée, lot 1).
 
 Règles appliquées avant revue :
 
