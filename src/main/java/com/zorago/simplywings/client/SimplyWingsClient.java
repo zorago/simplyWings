@@ -24,6 +24,9 @@ import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.client.resources.PlayerSkin;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
@@ -133,6 +136,7 @@ public class SimplyWingsClient {
         WingRig rig = WingRigs.get(model);
         visual.animator.setIdleLengths(rig != null ? rig.idleLengths() : new int[0]);
         visual.animator.tick(player, visual.mode, visual.flags, style, hoverRate);
+        takeoffEffects(player, visual);
         if (rig != null) {
             visual.rig.claim(rig.name());
             visual.rig.begin();
@@ -155,6 +159,38 @@ public class SimplyWingsClient {
         FuryEffects.ghost(player);
         if (player == Minecraft.getInstance().player) {
             GhostView.tick(player);
+        }
+    }
+
+    private static void takeoffEffects(Player player, WingVisuals.Visual visual) {
+        boolean launched = visual.animator.consumeLaunch();
+        if (launched) {
+            player.level().playLocalSound(player.getX(), player.getY(), player.getZ(), SoundEvents.ENDER_DRAGON_FLAP,
+                    SoundSource.PLAYERS, 1.2f, 1.25f, false);
+        }
+        if (!ClientConfig.PARTICLES.get()) {
+            return;
+        }
+        RandomSource random = player.getRandom();
+        float charge = visual.animator.charge();
+        if (!launched && charge > 0.4f && random.nextFloat() < charge * 0.7f) {
+            double angle = random.nextDouble() * Math.PI * 2;
+            player.level().addParticle(ParticleTypes.CLOUD, player.getX() + Math.cos(angle) * 0.5, player.getY() + 0.05,
+                    player.getZ() + Math.sin(angle) * 0.5, Math.cos(angle) * 0.08 * charge, 0.01, Math.sin(angle) * 0.08 * charge);
+        }
+        if (launched) {
+            for (int i = 0; i < 28; i++) {
+                double angle = i / 28.0 * Math.PI * 2;
+                double speed = 0.35 + random.nextDouble() * 0.15;
+                player.level().addParticle(ParticleTypes.CLOUD, player.getX(), player.getY() + 0.1, player.getZ(),
+                        Math.cos(angle) * speed, 0.02, Math.sin(angle) * speed);
+            }
+            Vec3 back = Vec3.directionFromRotation(0, player.getYRot()).scale(-1);
+            for (int i = 0; i < 12; i++) {
+                Vec3 p = player.position().add(0, 1.0 + random.nextDouble() * 0.6, 0).add(back.scale(0.6));
+                player.level().addParticle(ParticleTypes.POOF, p.x, p.y, p.z, back.x * 0.3 + (random.nextDouble() - 0.5) * 0.15,
+                        -0.15 - random.nextDouble() * 0.1, back.z * 0.3 + (random.nextDouble() - 0.5) * 0.15);
+            }
         }
     }
 

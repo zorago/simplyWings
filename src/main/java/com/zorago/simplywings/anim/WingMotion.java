@@ -17,6 +17,7 @@ public final class WingMotion {
     public float partialTick;
     public float stall;
     public float brakeBeat;
+    public float launch = -1f;
     public float beat = -1f;
     public float beatWeight;
     public float hoverPhase;

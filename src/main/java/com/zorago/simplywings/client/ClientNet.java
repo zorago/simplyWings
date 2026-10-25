@@ -59,6 +59,16 @@ public final class ClientNet {
         }
     }
 
+    public static void onTakeoffEvent(Payloads.TakeoffEvent payload) {
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.level != null && mc.level.getEntity(payload.entityId()) instanceof Player player) {
+            WingVisuals.Visual visual = WingVisuals.of(player);
+            if (visual != null) {
+                visual.animator.remoteCharge(payload.charging());
+            }
+        }
+    }
+
     public static void onFuryEvent(Payloads.FuryEvent payload) {
         Minecraft mc = Minecraft.getInstance();
         if (mc.level != null && mc.level.getEntity(payload.entityId()) instanceof Player player) {

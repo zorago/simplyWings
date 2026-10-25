@@ -36,6 +36,8 @@ La liste se précise au fil des passes ; une paire peut emprunter à deux famill
 
 - **G2 — Traînée au bout des ailes au freinage** (née sur `basic`). Chaque classe de rig déclare ses os de bout d'aile dans `tipBones()` : l'os dont le cube va le plus loin, un par côté (pour `basic` : `right_primary_1`, `left_primary_1`). Le rendu repère chaque frame le coin du cube le plus éloigné du corps, et le tick y fait naître une traînée de nuage, continue entre deux ticks : 4 particules par bout d'aile et par tick en parachute, 1 sous la vitesse minimale. Sans `tipBones()`, la traînée retombe sur une estimation à 1,6 bloc de chaque côté.
 
+- **G3 — Envol chargé : se gonfler, puis BLAST** (née sur `basic`). Pendant la charge (Alt maintenu au sol), les ailes se déploient complètement et se lèvent haut au-dessus du dos, en V, l'éventail grand ouvert, les bouts d'aile retroussés. Elles se « gonflent » avec un tremblement fin qui grandit avec la charge (au carré), et de la poussière part des pieds. À la fin de la charge : le **BLAST**, un coup d'aile unique et violent qui part de tout en haut et descend très bas (30 % du one-shot `WingMotion.launch`, 16 ticks), avec les bouts d'aile qui suivent en retard, puis un repli de récupération vers le vol. Il s'accompagne d'un anneau de nuages au sol, de bouffées sous le joueur et d'un battement de dragon. Le battement normal est effacé pendant le blast. Cette animation sert surtout aux **autres joueurs** : le début et la fin de la charge leur sont envoyés (`TakeoffCharge` → `TakeoffEvent`, un paquet à chaque bout), et chaque client détecte lui-même le départ (passage au vol de déplacement avec une charge ≥ 0,8).
+
 ## Règles de famille
 
 ### Plume
@@ -75,4 +77,6 @@ Modifications :
 
 5. Frein lent (sous la vitesse minimale) : les ailes battent derrière les bras (`STROKE` de base +0,25 au lieu de −0,35, amplitude 0,25), et les bras du joueur redescendent en pose normale (`FlightPose`, poids `brakeBeat`), pour une transition douce vers le stationnaire.
 
-Règles créées : P1, G1, G2.
+6. Envol chargé (retour de zorago) : déploiement et gonflement tremblant pendant la charge, puis BLAST au départ (voir G3). La charge est maintenant visible des autres joueurs. Animation de scène `takeoff` (remplace `takeoff_charge`), et `full_flight` passe par le blast.
+
+Règles créées : P1, G1, G2, G3.

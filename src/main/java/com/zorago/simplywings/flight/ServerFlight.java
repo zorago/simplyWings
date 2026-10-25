@@ -192,6 +192,14 @@ public final class ServerFlight {
         PacketDistributor.sendToPlayersTrackingEntity(player, new Payloads.FlapEvent(player.getId()));
     }
 
+    public static void onTakeoffCharge(ServerPlayer player, Payloads.TakeoffCharge request) {
+        WingsData data = ModAttachments.get(player);
+        if (request.charging() && (data.equipped().isEmpty() || data.mode().flying())) {
+            return;
+        }
+        PacketDistributor.sendToPlayersTrackingEntity(player, new Payloads.TakeoffEvent(player.getId(), request.charging()));
+    }
+
     public static void onAirJump(ServerPlayer player) {
         WingsData data = ModAttachments.get(player);
         float cost = ServerConfig.AIR_JUMP_COST.get().floatValue();

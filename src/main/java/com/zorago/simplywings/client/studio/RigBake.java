@@ -93,6 +93,7 @@ public final class RigBake {
         boolean beating;
         boolean stall;
         boolean slow;
+        boolean launch;
         float dive;
         float pitch;
         float bank;
@@ -112,6 +113,7 @@ public final class RigBake {
         double hoverPhase, prevHoverPhase;
         float phase, prevPhase, amp, prevAmp, ampVelocity;
         int rouseTicks, rouseLength = 1;
+        int launchTicks;
         int age;
 
         Sim() {
@@ -123,6 +125,12 @@ public final class RigBake {
                 float shift = -(phase - Mth.floor(phase));
                 phase += shift;
                 prevPhase += shift;
+            }
+            if (next.mode != step.mode) {
+                pitch = prevPitch = next.pitch;
+            }
+            if (next.launch) {
+                launchTicks = com.zorago.simplywings.anim.WingAnimator.LAUNCH_TICKS;
             }
             if (next.rouse) {
                 int[] lengths = rig.idleLengths();
@@ -187,6 +195,9 @@ public final class RigBake {
             if (rouseTicks > 0) {
                 rouseTicks--;
             }
+            if (launchTicks > 0) {
+                launchTicks--;
+            }
 
             boolean hovering = step.mode == FlightMode.STABILIZED;
             boolean thrust = step.beating;
@@ -239,6 +250,7 @@ public final class RigBake {
             }
             out.buzz = Mth.lerp(pt, prevVibration, vibration);
             out.bank = Mth.lerp(pt, prevBank, bank) * Mth.DEG_TO_RAD;
+            out.launch = launchTicks > 0 ? Mth.clamp(1f - (launchTicks - pt) / com.zorago.simplywings.anim.WingAnimator.LAUNCH_TICKS, 0f, 1f) : -1f;
             out.rouse = 0f;
             out.rouseProgress = 0f;
             out.rouseVariant = step.variant;
@@ -387,7 +399,11 @@ public final class RigBake {
             s.charge = i / 20f;
             charge.add(new Segment(1, s));
         }
-        clips.add(clip("takeoff_charge", "hold", 40, true, charge));
+        Step launch = travel(WingMotion.CRUISE, -40f);
+        launch.launch = true;
+        charge.add(new Segment(1, launch));
+        charge.add(new Segment(30, travel(WingMotion.CRUISE, -40f)));
+        clips.add(clip("takeoff", "once", 62, true, charge));
         clips.add(clip("air_jump", "loop", 40, true, List.of(new Segment(1, step(FlightMode.NONE, WingMotion.AIR)))));
         clips.add(clip("landing", "once", 40, true, List.of(new Segment(1, step(FlightMode.NONE, WingMotion.AIR)),
                 new Segment(14, step(FlightMode.NONE, WingMotion.LANDING)), new Segment(1, step(FlightMode.NONE, WingMotion.GROUND)))));
@@ -433,6 +449,8 @@ public final class RigBake {
             s.charge = i / 20f;
             sequence.add(new Segment(1, s));
         }
+        sequence.add(new Segment(1, launch));
+        sequence.add(new Segment(20, travel(WingMotion.CRUISE, -40f)));
         sequence.add(new Segment(50, seqFlap));
         sequence.add(new Segment(40, travel(WingMotion.CRUISE, 0f)));
         sequence.add(new Segment(40, seqBank));
@@ -443,7 +461,7 @@ public final class RigBake {
         sequence.add(new Segment(12, step(FlightMode.NONE, WingMotion.AIR)));
         sequence.add(new Segment(14, step(FlightMode.NONE, WingMotion.LANDING)));
         sequence.add(new Segment(1, step(FlightMode.NONE, WingMotion.GROUND)));
-        clips.add(clip("full_flight", "once", 385, false, sequence));
+        clips.add(clip("full_flight", "once", 406, false, sequence));
         return clips;
     }
 

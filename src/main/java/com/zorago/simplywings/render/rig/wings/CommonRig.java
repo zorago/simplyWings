@@ -11,6 +11,7 @@ import net.minecraft.util.Mth;
 
 public final class CommonRig extends WingRig {
     private static final int ROUSE = 0;
+    private static final float BLAST_STRIKE = 0.3f;
     private static final float BRAKE_BEAT = Mth.TWO_PI * (4f / 3f) / 20f;
     private static final float CHUTE_ARM_X = 0.679f;
     private static final float CHUTE_ARM_Y = 0.831f;
@@ -57,8 +58,8 @@ public final class CommonRig extends WingRig {
         float rouse = memory.get(ROUSE, m.partialTick);
         add(m.w(WingMotion.GROUND), state.clear().set(RigPose.FOLD, Mth.lerp(rouse, 1f, 0.72f))
                 .set(RigPose.STROKE, Mth.lerp(rouse, 0.12f, 0.3f)).set(RigPose.FAN, 0.3f * rouse));
-        add(m.w(WingMotion.CHARGE), state.clear().set(RigPose.FOLD, 0.1f).set(RigPose.STROKE, 0.85f)
-                .set(RigPose.SWEEP, 0.35f).set(RigPose.FAN, 1.25f).set(RigPose.TWIST, 0.1f));
+        add(m.w(WingMotion.CHARGE), state.clear().set(RigPose.FOLD, 0f).set(RigPose.STROKE, 0.35f)
+                .set(RigPose.SWEEP, 0.75f).set(RigPose.FAN, 1.35f).set(RigPose.TWIST, 0.1f).set(RigPose.BEND_TIPS, -0.15f));
         add(m.w(WingMotion.AIR), state.clear().set(RigPose.FOLD, 0.4f).set(RigPose.STROKE, 0.3f)
                 .set(RigPose.SWEEP, 0.15f).set(RigPose.FAN, 0.8f));
         add(m.w(WingMotion.LANDING), state.clear().set(RigPose.FOLD, 0.35f).set(RigPose.STROKE, 0.45f)
@@ -100,9 +101,32 @@ public final class CommonRig extends WingRig {
             drive.add(RigPose.BEND_WRIST, hw * a * 0.4f * (Mth.cos(ph - 0.3f) - c));
             drive.add(RigPose.BEND_TIPS, hw * a * 0.6f * (Mth.cos(ph - 0.5f) - c));
         }
+        float charge = m.w(WingMotion.CHARGE);
+        float shiver = charge * charge;
+        drive.add(RigPose.STROKE, shiver * 0.035f * Mth.sin(time * 2.9f));
+        drive.add(RigPose.SWEEP, shiver * 0.03f * Mth.sin(time * 3.7f + 1f));
+        drive.add(RigPose.BEND_TIPS, shiver * 0.07f * Mth.sin(time * 4.3f));
+        drive.add(RigPose.FAN, shiver * (0.05f * Mth.sin(time * 5.1f) + 0.1f * Mth.sin(time * 0.35f)));
+        float blast = 0f;
+        if (m.launch >= 0f) {
+            float p = m.launch;
+            float strike = Mth.clamp(p / BLAST_STRIKE, 0f, 1f);
+            strike = strike * strike * (3f - 2f * strike);
+            blast = p < BLAST_STRIKE ? 1f : 1f - smooth((p - BLAST_STRIKE) / (1f - BLAST_STRIKE));
+            float settle = p < BLAST_STRIKE ? 0f : Mth.sin((float) Math.PI * (p - BLAST_STRIKE) / (1f - BLAST_STRIKE));
+            drive.add(RigPose.STROKE, blast * Mth.lerp(strike, 1.1f, -1.15f));
+            drive.add(RigPose.SWEEP, blast * Mth.lerp(strike, 0.55f, -0.15f));
+            drive.add(RigPose.FAN, blast * 0.25f);
+            drive.add(RigPose.TWIST, blast * Mth.lerp(strike, 0.15f, -0.25f));
+            drive.add(RigPose.ELBOW, 0.45f * settle);
+            drive.add(RigPose.WRIST, 0.55f * settle);
+            drive.add(RigPose.BEND_ELBOW, blast * 0.3f * Mth.sin((float) Math.PI * strike));
+            drive.add(RigPose.BEND_WRIST, blast * 0.5f * Mth.sin((float) Math.PI * strike));
+            drive.add(RigPose.BEND_TIPS, blast * 0.75f * Mth.sin((float) Math.PI * strike));
+        }
         if (m.beating()) {
             float t = m.beat;
-            float a = m.beatWeight;
+            float a = m.beatWeight * (1f - blast);
             drive.add(RigPose.STROKE, a * STROKE.at(t));
             drive.add(RigPose.SWEEP, a * SWEEP.at(t));
             drive.add(RigPose.ELBOW, a * ELBOW.at(t));
@@ -165,6 +189,11 @@ public final class CommonRig extends WingRig {
         left.apply(drive, tips);
         right.arm.rotate(chute * CHUTE_ARM_X, chute * CHUTE_ARM_Y, chute * CHUTE_ARM_Z);
         left.arm.rotate(chute * CHUTE_ARM_X, -chute * CHUTE_ARM_Y, -chute * CHUTE_ARM_Z);
+    }
+
+    private static float smooth(float x) {
+        x = Mth.clamp(x, 0f, 1f);
+        return x * x * (3f - 2f * x);
     }
 
     private void add(float weight, RigPose pose) {

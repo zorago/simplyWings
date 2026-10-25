@@ -167,6 +167,31 @@ public final class Payloads {
         }
     }
 
+    public record TakeoffCharge(boolean charging) implements CustomPacketPayload {
+        public static final Type<TakeoffCharge> TYPE = payloadType("takeoff_charge");
+        public static final StreamCodec<RegistryFriendlyByteBuf, TakeoffCharge> CODEC = StreamCodec.composite(
+                ByteBufCodecs.BOOL, TakeoffCharge::charging,
+                TakeoffCharge::new);
+
+        @Override
+        public Type<? extends CustomPacketPayload> type() {
+            return TYPE;
+        }
+    }
+
+    public record TakeoffEvent(int entityId, boolean charging) implements CustomPacketPayload {
+        public static final Type<TakeoffEvent> TYPE = payloadType("takeoff_event");
+        public static final StreamCodec<RegistryFriendlyByteBuf, TakeoffEvent> CODEC = StreamCodec.composite(
+                ByteBufCodecs.VAR_INT, TakeoffEvent::entityId,
+                ByteBufCodecs.BOOL, TakeoffEvent::charging,
+                TakeoffEvent::new);
+
+        @Override
+        public Type<? extends CustomPacketPayload> type() {
+            return TYPE;
+        }
+    }
+
     public record FuryDash() implements CustomPacketPayload {
         public static final Type<FuryDash> TYPE = payloadType("fury_dash");
         public static final StreamCodec<RegistryFriendlyByteBuf, FuryDash> CODEC = StreamCodec.unit(new FuryDash());

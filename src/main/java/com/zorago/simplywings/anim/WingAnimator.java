@@ -8,6 +8,7 @@ public final class WingAnimator {
     private static final float TWO_PI = (float) (Math.PI * 2);
     private static final float HALF_PI = (float) (Math.PI / 2);
     private static final int ROUSE_TICKS = 26;
+    public static final int LAUNCH_TICKS = 16;
 
     private final WingPose base = new WingPose();
     private final WingPose prevBase = new WingPose();
@@ -38,6 +39,12 @@ public final class WingAnimator {
     private float bank;
     private float prevBank;
     private float charge;
+    private float lastCharge;
+    private boolean remoteCharging;
+    private int remoteChargeTicks;
+    private FlightMode lastMode = FlightMode.NONE;
+    private int launchTicks;
+    private boolean launchStarted;
     private boolean idle;
     private boolean glide;
     private boolean brake;
@@ -119,8 +126,43 @@ public final class WingAnimator {
         return Mth.lerp(partialTick, prevBank, bank);
     }
 
+    public void remoteCharge(boolean charging) {
+        remoteCharging = charging;
+        remoteChargeTicks = 0;
+    }
+
+    public float charge() {
+        return charge;
+    }
+
+    public boolean consumeLaunch() {
+        boolean started = launchStarted;
+        launchStarted = false;
+        return started;
+    }
+
     public void tick(Player player, FlightMode mode, int flags, WingStyle style, float hoverRate) {
         age++;
+        if (remoteCharging) {
+            if (mode.flying()) {
+                remoteCharging = false;
+            } else {
+                remoteChargeTicks++;
+                charge = Mth.clamp(remoteChargeTicks / (float) com.zorago.simplywings.config.ServerConfig.TAKEOFF_CHARGE_TICKS.get(), 0f, 1f);
+            }
+        } else if (player != net.minecraft.client.Minecraft.getInstance().player) {
+            charge = 0f;
+        }
+        if (launchTicks > 0) {
+            launchTicks--;
+        }
+        if (lastMode == FlightMode.NONE && mode == FlightMode.TRAVEL && Math.max(lastCharge, charge) >= 0.8f) {
+            launchTicks = LAUNCH_TICKS;
+            launchStarted = true;
+            charge = 0f;
+        }
+        lastMode = mode;
+        lastCharge = charge;
         prevBank = bank;
         float turnRate = Mth.wrapDegrees(player.yBodyRot - player.yBodyRotO) * 20f;
         float targetBank = mode == FlightMode.TRAVEL ? Mth.clamp(turnRate * 0.5f, -45f, 45f) : 0f;
@@ -348,6 +390,7 @@ public final class WingAnimator {
                 : Mth.lerp(partialTick, prevVibrationWeight, vibrationWeight);
         out.bank = forced ? 0f : bank(partialTick) * Mth.DEG_TO_RAD;
         out.brakeBeat = forced ? 0f : Mth.lerp(partialTick, prevSlowWeight, slowWeight);
+        out.launch = launchTicks > 0 ? Mth.clamp(1f - (launchTicks - partialTick) / LAUNCH_TICKS, 0f, 1f) : -1f;
         out.rouse = 0f;
         out.rouseProgress = 0f;
         out.rouseVariant = forcedVariant >= 0 ? forcedVariant : rouseVariant;

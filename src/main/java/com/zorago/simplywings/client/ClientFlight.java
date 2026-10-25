@@ -46,6 +46,7 @@ public final class ClientFlight {
     private static float yawRate;
     private static float pitchRate;
     private static int chargeTicks;
+    private static boolean chargeShared;
     private static int flapCooldown;
     private static int ticksSinceFlap;
     private static boolean stalled;
@@ -368,7 +369,20 @@ public final class ClientFlight {
         PacketDistributor.sendToServer(new Payloads.RescueJump());
     }
 
+    private static void shareCharge() {
+        boolean charging = chargeTicks > 0;
+        if (charging != chargeShared) {
+            chargeShared = charging;
+            PacketDistributor.sendToServer(new Payloads.TakeoffCharge(charging));
+        }
+    }
+
     private static void handleTravelKey(LocalPlayer player, EffectiveStats stats) {
+        handleTravelKeyInner(player, stats);
+        shareCharge();
+    }
+
+    private static void handleTravelKeyInner(LocalPlayer player, EffectiveStats stats) {
         if (travelKeyLock > 0) {
             travelKeyLock--;
             while (ModKeys.TRAVEL.consumeClick()) {
