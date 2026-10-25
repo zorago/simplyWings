@@ -463,7 +463,7 @@ Signature d'espèce (A17) :
 
 ### 22. Ailes de perroquet (`parrot`, plume, aspect A17)
 
-Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+Statut : **terminé**, validé par zorago (revue groupée, lot 2).
 
 Règles appliquées avant revue :
 
@@ -477,7 +477,7 @@ Signature d'espèce (A17) :
 
 ### 23. Ailes de paon (`peacock`, plume, aspects A8, A9)
 
-Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+Statut : **terminé**, validé par zorago (revue groupée, lot 2).
 
 Règles appliquées avant revue :
 
@@ -493,7 +493,7 @@ Retour de zorago :
 
 ### 24. Ailes d'améthyste (`amethyst`, plume de cristal, aspects A8, A10)
 
-Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+Statut : **terminé**, validé par zorago (revue groupée, lot 2).
 
 Règles appliquées avant revue :
 
@@ -503,7 +503,7 @@ Règles appliquées avant revue :
 
 ### 25. Ailes de cuivre (`copper`, plume de métal, aspects A10, A12)
 
-Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+Statut : **terminé**, validé par zorago (revue groupée, lot 2).
 
 Règles appliquées avant revue :
 
@@ -513,7 +513,7 @@ Règles appliquées avant revue :
 
 ### 26. Ailes rapiécées (`patchwork`, plume, aspects A8, A14)
 
-Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+Statut : **terminé**, validé par zorago (revue groupée, lot 2).
 
 Règles appliquées avant revue :
 
