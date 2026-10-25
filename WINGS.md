@@ -829,9 +829,9 @@ Dernière mise à jour : 22 octobre 2026.
 
 **Vibe** : un esprit du vent. Des ailes presque invisibles, légères et rapides, qui portent loin et ne décrochent presque pas. Comme le vent, elles ne tiennent pas en place.
 
-**Apparence** : **4 voiles** de vent (modèle `rigs/air.bbmodel`), deux par côté, très transparentes : chaque voile est faite de rubans superposés en 3 segments, striés de courants d'air et effilochés au bout.
+**Apparence** : une lame de vent balayée par côté (modèle `rigs/air.bbmodel`), partant d'un petit vortex à l'épaule : trois couches de courants d'air translucides superposées (dérive, brise, rafale), traversées de filets de vent blancs animés qui filent vers la pointe, bord de fuite effiloché.
 
-**Mouvement signature** : (`AirRig`) les rubans ondulent comme des bannières, de plus en plus vite avec la vitesse ; le battement fouette d'un segment à l'autre ; au sol, les voiles retombent comme une écharpe. 3 idles : rafale, tourbillon, expiration.
+**Mouvement signature** : (`AirRig`) frémissement de vent qui accélère avec la vitesse, voiles qui se gonflent par bouffées ; le battement fouette d'un segment à l'autre ; au sol, la lame retombe droit le long du dos comme une cape. 3 idles : rafale, tourbillon, respiration.
 
 **Effets** :
 - **En continu** : des filets d'air blanc partent vers l'arrière. Au-dessus de 20 m/s, des traînées partent du bout des ailes.

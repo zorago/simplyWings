@@ -10,6 +10,14 @@ import com.zorago.simplywings.render.rig.WingRig;
 import net.minecraft.util.Mth;
 
 public final class OrnithopterRig extends WingRig {
+    private static final float REST_RAISE = 35.3f * Mth.DEG_TO_RAD;
+    private static final float REST_STROKE = 0.3f;
+    private static final float REST_TWIST = 0.08f;
+    private static final float REST_DROP = 86.6f * Mth.DEG_TO_RAD;
+    private static final float REST_PITCH = 23.5f * Mth.DEG_TO_RAD;
+    private static final float REST_YAW = 3.4f * Mth.DEG_TO_RAD;
+    private static final float REST_ELBOW = 8f * Mth.DEG_TO_RAD;
+    private static final float REST_WRIST = 8f * Mth.DEG_TO_RAD;
     private static final int FOLD = 0;
     private static final float FLOOR = -5f * Mth.DEG_TO_RAD;
     private static final String[] TIPS = {"right_hand", "left_hand"};
@@ -67,7 +75,7 @@ public final class OrnithopterRig extends WingRig {
         float slowBrake = m.w(WingMotion.BRAKE) - chute;
         float warm = charge * charge;
         float stroke = 0.1f * m.w(WingMotion.CRUISE) + 0.4f * m.w(WingMotion.LANDING) + 0.3f * slowBrake
-                + 0.25f * hover + 0.35f * charge + 0.05f * fold;
+                + 0.25f * hover + 0.35f * charge;
         float sweep = 0.2f * m.w(WingMotion.LANDING) + 0.15f * slowBrake - 0.35f * m.w(WingMotion.DIVE) + 0.6f * charge
                 + 0.12f * hover;
         float twist = -0.25f * m.w(WingMotion.LANDING) + hover * FlightRules.HOVER_PLANE;
@@ -134,10 +142,11 @@ public final class OrnithopterRig extends WingRig {
         }
         for (int i = 0; i < 2; i++) {
             float s = i == 0 ? 1f : -1f;
-            shoulder[i].rotate(twist * open, s * stroke - m.bank * 0.25f * (1f - chute), s * sweep * open);
-            arm[i].rotate(0f, 0f, s * -1.25f * fold).scale(1f, Mth.lerp(fold, 1f, 0.55f), 1f);
-            forearm[i].rotate(0f, s * (hinge * 0.35f + bendElbow), s * (2.45f * fold - elbow)).scale(1f, Mth.lerp(fold, 1f, 0.7f), 1f);
-            hand[i].rotate(0f, s * hinge, s * (-2.2f * fold - wrist));
+            shoulder[i].rotate(twist * open + REST_TWIST * fold, s * (stroke + REST_STROKE * fold) - m.bank * 0.25f * (1f - chute),
+                    s * (sweep * open + REST_RAISE * fold));
+            arm[i].rotate(REST_PITCH * fold, s * -REST_YAW * fold, s * -REST_DROP * fold);
+            forearm[i].rotate(0f, s * (hinge * 0.35f + bendElbow), s * (REST_ELBOW * fold - elbow));
+            hand[i].rotate(0f, s * hinge, s * (-REST_WRIST * fold - wrist));
             FlightRules.chuteArm(arm[i], s, chute);
         }
         pulley.rotate(0f, 0f, crankAngle * 1.6f + glide * 0.1f * Mth.sin(time * 0.31f));

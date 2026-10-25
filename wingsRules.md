@@ -89,6 +89,8 @@ Chaque aspect demande sa propre logique. Le plan de review (en fin de document) 
 
 - **G9 — Plusieurs paires : superposées au calme, écartées à l'effort** (née sur `seraph`, référence : le Stormcutter de Valka dans *Dragons 2*, dont la seconde paire se plaque sous la première ou s'ouvre en X). Les paires principales identiques se plaquent l'une sur l'autre pour n'en former qu'une au repos, au plané et en piqué. Elles s'écartent en X au stationnaire, en accélération (battement), à la charge, au BLAST et dans les idles (poids lissé `SPLIT`), et battent en phase. L'écartement respecte G4 : c'est la paire arrière (la plus éloignée du dos) qui monte, celle du bas ne descend presque pas (−0,08). Pour bien marquer « deux ailes » (retour de zorago), la paire arrière monte vers le haut de la tête au stationnaire (+0,62 en hauteur) et vers le haut du dos en accélération, en vol couché (+0,52 sur `STROKE`). Ailleurs, l'écart est de +0,32. Exception voulue au parachute du frein (pose fixe) : la paire arrière monte (+0,3) et celle du dessous descend (−0,35), pour augmenter la surface de freinage.
 
+- **G10 — Repli sans froisser les peaux** (née sur `phantom`, `ornithopter` et `air`, demande de zorago). Une aile qui porte une peau, une toile ou un voile ne se replie jamais en zigzag serré (coude et poignet pliés à plus de ~30°) : la peau se froisse, se replie sur elle-même et devient moche. Au repos, les os qui tiennent la peau s'alignent vers le bas, presque droits (bras qui tombe le long du dos, avant-bras et main à peine pliés), et la peau tombe à plat comme une cape ou des élytres. On ne réduit pas non plus l'épaisseur des os au repli (l'échelle se propage à la peau accrochée dessous). Les ailes mécaniques restent rigides : elles se rabattent d'un bloc.
+
 ## Règles de famille
 
 ### Plume
@@ -679,6 +681,10 @@ Règles appliquées avant revue :
 - G1 à G5 : parachute figé qui cliquette ; charge où la manivelle se remonte en grinçant, puis BLAST d'un tour de manivelle ; course au-dessus de −5° (l'ancienne allait à −43°) ; stationnaire à plat ; traînées au bout de la main.
 - Conservé : la bielle à butées, la poulie entraînée par la manivelle, les grincements.
 
+Retour de zorago :
+
+1. Même défaut que `phantom` : au repos, la toile se pliait en zigzag. L'aile technologique reste maintenant rigide et se rabat d'un bloc, avec la même silhouette en « Λ » que `phantom` (épaule levée de 35,3°, longerons à −86,6° basculés de 23,5°, coude et poignet pliés de 8° seulement), sans écraser les longerons (G10).
+
 ### 39. Ailes anciennes (`ancient`, modèle `dragonfly`, insecte, aspects A4, A7, A8, A13, A18)
 
 Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
@@ -707,16 +713,17 @@ Règles appliquées avant revue (comme `moth`) :
 
 Avant revue, règle des queues : les queues de l'aile arrière sont inclinées vers le dos en vol (−0,8), ce qui réduit leur contact avec les jambes de 0,75 à 0,4 px. Le contact restant vient des grandes ailes elles-mêmes, qui descendent jusque dans les jambes en bas du battement (jusqu'à 1,5 px en `cruise_flap`) : à trancher avec zorago.
 
-### 41. Ailes d'air (`air`, matière non squelettique, aspects A7, A10, A11)
+### 41. Ailes d'air (`air`, matière non squelettique, aspects A10, A11)
 
-Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+Statut : en cours, refonte complète demandée par zorago (« qu'elles matchent la qualité des 3 autres éléments »), scène prête.
 
-Règles appliquées avant revue :
+Refonte, sur la structure validée de `water` :
 
-- G7 : chaque ruban (3 plaques rigides qui s'ouvraient en ondulant) devient une seule peau continue (7 panneaux, `rigs/air.membranes.json`), peinte d'un seul tenant avec son effilochage. Les rubans restent séparés (banderoles). Ils se bombent en vol, beaucoup en parachute.
-- G1 à G5 : parachute (voile principale levée vers l'avant, voile arrière plus basse), frein lent ; charge et BLAST ; battement au-dessus de −5° (l'ancien descendait à −43°) avec nage avant/arrière, voile arrière en retard ; stationnaire à plat ; traînées au bout du bord d'attaque.
-- G8 : voile principale sur les omoplates, voile arrière plus bas comme un gouvernail.
-- Conservé : ondulation des rubans qui grandit avec la vitesse, fouet en fin de battement, 3 idles, translucide.
+- Squelette : par côté, une épaule avec un petit vortex (anneau de vent et cœur blanc) et une colonne de 5 segments en lame balayée (légère montée puis pointe qui retombe), avec un fin jet d'air blanc le long du bord d'attaque. Plus de seconde paire de voiles ni de rubans séparés.
+- Trois couches de courants d'air superposées, chacune une peau continue accrochée aux mêmes segments (`rigs/air.membranes.json`) : « dérive » (la plus grande, au fond, la plus transparente), « brise » (au milieu) et « rafale » (la plus courte, devant, la plus blanche, qui dépasse en pointe). Elles donnent la profondeur d'une aile de vent vue de dos.
+- Texture animée (8 images à 8 par seconde, comme l'eau) : ciel pâle translucide, filets de vent blancs qui filent de l'épaule vers la pointe dans des couloirs, bord de fuite effiloché qui se défait en volutes, pointe déchirée.
+- Mouvement : celui de l'eau (G1 à G5, fouet segment par segment, nage du stationnaire, repli superposé), avec en plus un frémissement de vent rapide qui grandit avec la vitesse et des bouffées dans les voiles. 3 idles : rafale (frémissement et onde rapides, ailes entrouvertes), tourbillon (les segments s'enroulent et se déroulent), respiration (les ailes s'ouvrent et les voiles se gonflent).
+- G10 : repliées, les 5 segments s'alignent droit vers le bas le long du dos et les trois voiles tombent à plat comme une cape, sans pli.
 
 ## Plan de review
 
