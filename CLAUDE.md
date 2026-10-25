@@ -16,6 +16,7 @@ Mod d'ailes standalone pour **NeoForge 1.21.1** (nom de travail : SimplyWings). 
 - `wingsRules.md` : carnet de logique du polish des ailes, une paire à la fois avec zorago. Règles générales et par famille (plume, membrane, insecte…), cumulatives : une règle née sur une paire s'applique aux suivantes de sa famille. Journal des passes. À relire avant de polir une paire, à compléter après chaque modification.
 - `gatcha.md` : conception du gacha des ailes (invocations, paliers B à SSS et pitié, autel draconique, fontaine aux offrandes, les deux nouvelles structures). Fait foi pour ce chantier.
 - `GACHA_ANIMATIONS.md` : cahier des charges des animations d'invocation (3D + 2D, une par palier : B, A, S, SS, SSS, mythiques Night et Light), entrée du futur skill de motion design (format de timeline, livrables, budgets, accessibilité).
+- `SOUND_DESIGN.md` : cahier des charges du sound design (sons de vol communs, signature de chaque paire, mythiques, blocs, gacha, fontaine, interface ; sons vanilla utilisés aujourd'hui, placeholders, cibles professionnelles, mix et livrables).
 - `ToDoTesting.md` : tout ce qui reste à tester et valider en jeu, et les modèles 3D épiques, légendaires et mythiques qui restent à faire.
 - `docs/ANALYSE_REFERENCES.md` : analyse des mods de référence et du pack, avec la table d'architecture corrigée. **Elle prime sur la table du cahier des charges** là où elle la corrige (anti-kick, caméra, souris).
 
