@@ -35,7 +35,7 @@ Aucune pour l'instant.
 
 ### Plume
 
-Aucune pour l'instant.
+- **P1 — Rangées de plumes sur le bras et l'avant-bras** (née sur `basic`). Pas de plaque unique sous les deux os du centre : au moins 4 plumes séparées par os (rémiges tertiaires sur le bras, secondaires sur l'avant-bras), posées à la suite le long de l'os et qui se chevauchent un peu. Chaque plume est un os à elle, attaché à sa racine sur l'os porteur : groupes `<côté>_tertial_feather_<k>` dans `<côté>_tertials` et `<côté>_secondary_feather_<k>` dans `<côté>_secondaries` (numérotés du corps vers le bout de l'aile). `FeatherWing` les détecte : au repli, chaque plume tourne autour de sa propre racine pour pendre sous l'os, et l'éventail se referme (plumes parallèles). Déployée, l'éventail s'ouvre selon l'angle de repos de chaque plume : les tertiaires penchent vers le corps, les secondaires vers le bout de l'aile. Profondeur : chaque plume de la rangée a son propre Z, décalé de 0,025, pour éviter le scintillement. Texture : une bande par plume (face ventrale puis face dorsale), deux tons alternés, rachis clair au centre, pointe sombre arrondie.
 
 ### Membrane
 
@@ -57,10 +57,10 @@ Aucune pour l'instant.
 
 ### 1. Ailes communes (`basic`, famille plume)
 
-Statut : scène prête (`art/scenes/basic.bbmodel`), en attente des retours de zorago.
+Statut : en cours.
 
 Modifications :
 
-- (à remplir pendant la passe)
+1. Les plaques uniques du bras (tertiaires) et de l'avant-bras (secondaires) se déformaient mal au repli. Elles sont remplacées par 4 tertiaires (longueurs 8, 9, 9, 10 ; inclinaison −12° à 0°) et 5 secondaires (longueurs 11 à 12 ; inclinaison 2° à 14°), une plume par os, qui se replient sous l'os.
 
-Règles créées : (à remplir)
+Règles créées : P1.

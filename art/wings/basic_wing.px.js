@@ -43,11 +43,30 @@ const primary = (x0, y0, len, dorsal, tipAtEnd) => (c) => {
   c.px(end, y0 + 3, "_")
 }
 
+const feather = (x0, y0, len, dorsal, alt) => (c) => {
+  const vane = dorsal ? (alt ? "n" : "m") : (alt ? "L" : "l")
+  const edge = dorsal ? "T" : "L"
+  const shaft = dorsal ? "M" : "h"
+  for (let y = 0; y < len; y++) {
+    const tip = y >= len - 2
+    c.px(x0, y0 + y, tip ? (dorsal ? "d" : "M") : vane)
+    c.px(x0 + 1, y0 + y, tip ? (dorsal ? "t" : "L") : shaft)
+    c.px(x0 + 2, y0 + y, tip ? (dorsal ? "d" : "M") : edge)
+  }
+  c.px(x0, y0, dorsal ? "M" : "s")
+  c.px(x0 + 1, y0, dorsal ? "l" : "s")
+  c.px(x0 + 2, y0, dorsal ? "M" : "s")
+  c.px(x0, y0 + len - 1, "_")
+  c.px(x0 + 2, y0 + len - 1, "_")
+}
+
+const row = (u, v, lengths) => lengths.flatMap((len, k) => [feather(u + 6 * k, v, len, false, k % 2 === 1), feather(u + 6 * k + 3, v, len, true, k % 2 === 1)])
+
 const pair = (u, v, len) => [primary(u, v, len, false, false), primary(u + len, v, len, true, true)]
 
 sprite("basic_wings", { w: 128, h: 64 },
-  plate(0, 0, 8, 9, false, [0, 1, 0, 2]), plate(8, 0, 8, 9, true, [2, 0, 1, 0]),
-  plate(16, 0, 7, 12, false, [0, 1, 0, 1]), plate(23, 0, 7, 12, true, [1, 0, 1, 0]),
+  ...row(0, 13, [8, 9, 9, 10]),
+  ...row(0, 46, [11, 12, 12, 12, 12]),
   plate(30, 0, 4, 12, false, [0, 1], true), plate(34, 0, 4, 12, true, [1, 0], true),
   coverts(38, 0, false), coverts(42, 0, true),
   ...pair(48, 0, 16), ...pair(48, 5, 15), ...pair(48, 10, 14), ...pair(48, 15, 13), ...pair(48, 20, 12),

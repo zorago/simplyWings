@@ -16,6 +16,8 @@ public final class FeatherWing {
     public final Bone handCoverts;
     public final Bone primaries;
     public final List<Bone> primary = new ArrayList<>();
+    public final List<Bone> tertial = new ArrayList<>();
+    public final List<Bone> secondary = new ArrayList<>();
     private final float foldArm;
     private final float foldElbow;
     private final float foldWrist;
@@ -37,6 +39,12 @@ public final class FeatherWing {
         for (int k = 1; bones.has(prefix + "primary_" + k); k++) {
             primary.add(bones.get(prefix + "primary_" + k));
         }
+        for (int k = 1; bones.has(prefix + "tertial_feather_" + k); k++) {
+            tertial.add(bones.get(prefix + "tertial_feather_" + k));
+        }
+        for (int k = 1; bones.has(prefix + "secondary_feather_" + k); k++) {
+            secondary.add(bones.get(prefix + "secondary_feather_" + k));
+        }
     }
 
     public void stack(float fold, float secondary, float tertial, float hand) {
@@ -50,15 +58,25 @@ public final class FeatherWing {
         float weight(int index, int count);
     }
 
+    private static void row(Bone group, List<Bone> feathers, float turn, float fold) {
+        if (feathers.isEmpty()) {
+            group.rotate(0f, 0f, turn);
+            return;
+        }
+        for (Bone feather : feathers) {
+            feather.rotation(feather.rest().xRot, feather.rest().yRot, feather.rest().zRot * (1f - fold) + turn);
+        }
+    }
+
     public void apply(RigPose p, TipCurve tips) {
         float s = sign;
         float fold = p.get(RigPose.FOLD);
         float fan = p.get(RigPose.FAN) * (1f - fold);
         shoulder.rotate(p.get(RigPose.TWIST), s * p.get(RigPose.STROKE) - p.get(RigPose.ASYM), s * p.get(RigPose.SWEEP));
         arm.rotate(0f, 0f, s * -foldArm * fold);
-        tertials.rotate(0f, 0f, s * foldArm * fold * 0.85f);
+        row(tertials, tertial, s * foldArm * fold * 0.85f, fold);
         forearm.rotate(0f, s * p.get(RigPose.BEND_ELBOW), s * (foldElbow * fold - p.get(RigPose.ELBOW)));
-        secondaries.rotate(0f, 0f, s * (-(foldElbow - foldArm) * fold * 0.95f + 0.4f * p.get(RigPose.ELBOW)));
+        row(secondaries, secondary, s * (-(foldElbow - foldArm) * fold * 0.95f + 0.4f * p.get(RigPose.ELBOW)), fold);
         hand.rotate(p.get(RigPose.HAND_TWIST), s * p.get(RigPose.BEND_WRIST), s * (-foldWrist * fold - p.get(RigPose.WRIST)));
         handFeathers.rotate(0f, 0f, s * (foldArm - foldElbow + foldWrist) * 0.9f * fold);
         handCoverts.rotate(0f, 0f, s * ((foldElbow - foldArm - foldWrist) * -0.6f * fold));
