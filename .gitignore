@@ -49,3 +49,4 @@ tools/*.jar
 
 # Skill pxl : la règle Eclipse bin/ ne doit pas exclure son exécutable
 !.claude/skills/pxl-pixel-art/bin/
+__pycache__/
