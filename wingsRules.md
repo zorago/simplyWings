@@ -132,7 +132,7 @@ Les ailes d'insecte sont des plaques rigides montées sur une charnière, sans c
 
 ### Objet / machine
 
-Aucune pour l'instant.
+- **O1 — Une machine ne bat pas, elle pousse** (née sur `daedalus`). Les règles générales passent par les réacteurs et des poses fixes. Frein : ailes figées en pose parachute (comme les insectes, I3), panneaux en aérofreins, réacteurs en poussée inversée. Charge : les réacteurs montent en régime (vibration et flamme qui grandissent au carré de la charge, engrenages qui accélèrent), ailes levées. BLAST : rafale de poussée (flamme ×2,6, tuyères vers l'arrière) et ailes qui balaient vers l'arrière. Stationnaire : ailes à plat comme stabilisateurs (G5), poussée vers le sol. La limite de −5° (G4) borne aussi l'inclinaison en virage, côté par côté. Traînées au bout des longerons.
 
 ### Élémentaire / magique
 
@@ -258,6 +258,10 @@ Règles appliquées avant revue (version lente des règles insecte, sans vrombis
 - I3 / G1 : parachute figé (même pose que `basic`, postérieure un peu plus basse), puis frein lent derrière les bras.
 - I4 / G3 : le frisson d'échauffement existant grandit pendant la charge, puis BLAST unique (une paire lente ne vrombit pas).
 - G2 : traînées au bout des ailes antérieures. Conservé : les petites irrégularités du vol de papillon de nuit.
+
+### 9. Ailes de Dédale (`daedalus`, famille machine, aspects A12, A13)
+
+Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`. Règles appliquées avant revue : O1 (G1 à G5 version machine), G2, G8. Conservé : flèche variable avec la vitesse, réacteurs vectorisés, ailerons, engrenages, panneaux qui se rétractent, les 5 idles de vérification.
 
 ## Plan de review
 

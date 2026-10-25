@@ -5,6 +5,7 @@ import com.zorago.simplywings.anim.RigMemory;
 import com.zorago.simplywings.anim.WingMotion;
 import com.zorago.simplywings.render.rig.Bone;
 import com.zorago.simplywings.render.rig.Bones;
+import com.zorago.simplywings.render.rig.FlightRules;
 import com.zorago.simplywings.render.rig.WingRig;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
@@ -22,6 +23,11 @@ public final class DaedalusRig extends WingRig {
     private static final float FOLD_ROOT = -1.2f;
     private static final float FOLD_MID = 2.35f;
     private static final float FOLD_TIP = -2.25f;
+    private static final float FLOOR = -5f * Mth.DEG_TO_RAD;
+    private static final float CHUTE_STROKE = 0.31f;
+    private static final float CHUTE_RAISE = 0.85f;
+    private static final float CHUTE_PITCH = 0.48f;
+    private static final String[] TIPS = {"right_spar_tip", "left_spar_tip"};
     private static final ResourceLocation GLOW = SimplyWings.id("textures/entity/daedalus_glow.png");
 
     private final Side[] sides = new Side[2];
@@ -43,6 +49,11 @@ public final class DaedalusRig extends WingRig {
     @Override
     public int[] idleLengths() {
         return IDLES;
+    }
+
+    @Override
+    public String[] tipBones() {
+        return TIPS;
     }
 
     private static final class Side {
@@ -126,17 +137,28 @@ public final class DaedalusRig extends WingRig {
         float aileronTest = variant == 2 ? env : 0f;
         float nozzleTest = variant == 3 ? env : 0f;
         float sputter = variant == 1 ? env * Math.max(0f, Mth.sin(time * 1.7f)) : 0f;
-        float hum = thrust * 0.012f * Mth.sin(time * 9.1f) + settle * 0.06f * Mth.sin(time * 3.3f);
-        float lift = 0.15f * hover + 0.05f * cruise + 0.25f * brake + 0.5f * m.w(WingMotion.CHARGE) + 0.2f * m.w(WingMotion.AIR);
-        float sweep = -0.75f * swing + 0.25f * brake + 0.1f * hover + sweepTest + 0.15f * m.w(WingMotion.CHARGE);
-        float twist = -0.3f * brake + m.stall * 0.3f * Mth.sin(time * 1.2f);
+        float charge = m.w(WingMotion.CHARGE);
+        float chute = FlightRules.chute(m);
+        float slowBrake = brake - chute;
+        float blast = 0f;
+        if (m.launch >= 0f) {
+            float lp = m.launch;
+            blast = lp < 0.15f ? lp / 0.15f : (1f - lp) * (1f - lp) / 0.7225f;
+        }
+        float hum = thrust * 0.012f * Mth.sin(time * 9.1f) + settle * 0.06f * Mth.sin(time * 3.3f)
+                + charge * charge * 0.035f * Mth.sin(time * 7.3f) + blast * 0.03f * Mth.sin(time * 11.1f);
+        float lift = Mth.lerp(chute, 0.15f * hover + 0.05f * cruise + 0.25f * slowBrake + 0.35f * charge + 0.2f * m.w(WingMotion.AIR),
+                CHUTE_STROKE);
+        float sweep = Mth.lerp(chute, -0.75f * swing + 0.1f * hover + sweepTest + 0.6f * charge - 0.5f * blast, CHUTE_RAISE)
+                + chute * 0.02f * Mth.sin(time * 4.7f);
+        float twist = hover * FlightRules.HOVER_PLANE + chute * CHUTE_PITCH - 0.3f * slowBrake + m.stall * 0.3f * Mth.sin(time * 1.2f);
         float bank = m.bank;
 
         for (int i = 0; i < 2; i++) {
             Side sd = sides[i];
             float s = sd.s;
             float open = 1f - fold;
-            sd.shoulder.rotate(twist * open, s * (lift * open + hum) - bank * 0.15f, s * sweep * open);
+            sd.shoulder.rotate(twist * open, s * Math.max(FLOOR, lift * open + hum - s * bank * 0.15f), s * sweep * open);
             sd.root.rotate(0f, 0f, s * FOLD_ROOT * fold);
             sd.mid.rotate(0f, s * 0.04f * Mth.sin(time * 0.3f) * open, s * (FOLD_MID * fold - 0.1f * swing * open));
             sd.tip.rotate(0f, 0f, s * (FOLD_TIP * fold - 0.15f * swing * open));
@@ -159,13 +181,13 @@ public final class DaedalusRig extends WingRig {
             }
         }
 
-        float pitchVector = -0.35f * Mth.clamp(m.climb / 15f, -1f, 1f) * (1f - hover) + 1.6f * brake;
+        float pitchVector = -0.35f * Mth.clamp(m.climb / 15f, -1f, 1f) * (1f - hover) + 1.6f * brake - 0.7f * blast;
         float diff = bank * 0.5f;
         float circle = nozzleTest * 0.5f;
         thrusterRight.rotate(pitchVector + hum + circle * Mth.sin(time * 0.4f), 0f, diff + circle * Mth.cos(time * 0.4f));
         thrusterLeft.rotate(pitchVector + hum + circle * Mth.sin(time * 0.4f + 1f), 0f, -diff + circle * Mth.cos(time * 0.4f + 1f));
         float flicker = 1f + 0.12f * Mth.sin(time * 7.7f) + 0.08f * Mth.sin(time * 13.3f);
-        float jet = Math.max(0f, thrust * flicker + 0.6f * sputter);
+        float jet = Math.max(0f, thrust * flicker + 0.6f * sputter) * (1f + 1.6f * blast);
         float jetR = jet * (1f + 0.25f * Mth.clamp(-diff, 0f, 1f));
         float jetL = jet * (1f + 0.25f * Mth.clamp(diff, 0f, 1f));
         flameRight.visible(jetR > 0.04f).scale(0.7f + 0.3f * Math.min(1f, jetR), Math.max(0.05f, jetR), 0.7f + 0.3f * Math.min(1f, jetR));
