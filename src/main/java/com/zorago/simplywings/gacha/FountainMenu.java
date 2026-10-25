@@ -27,7 +27,7 @@ public class FountainMenu extends AbstractContainerMenu {
 
     private final ContainerLevelAccess access;
     private final Player player;
-    private final ContainerData data = new SimpleContainerData(2);
+    private final ContainerData data = new SimpleContainerData(3);
     private final SimpleContainer offering = new SimpleContainer(SIZE);
 
     public FountainMenu(int containerId, Inventory inventory, RegistryFriendlyByteBuf buf) {
@@ -58,11 +58,11 @@ public class FountainMenu extends AbstractContainerMenu {
     }
 
     public double offered() {
-        return data.get(0) / (double) SCALE;
+        return ((data.get(0) & 0xFFFF) | (data.get(1) & 0xFFFF) << 16) / (double) SCALE;
     }
 
     public double reserve() {
-        return data.get(1) / (double) SCALE;
+        return (data.get(2) & 0xFFFF) / (double) SCALE;
     }
 
     private void refresh() {
@@ -71,8 +71,10 @@ public class FountainMenu extends AbstractContainerMenu {
             for (int i = 0; i < SIZE; i++) {
                 total += OfferingValues.value(offering.getItem(i));
             }
-            data.set(0, (int) Math.min(Integer.MAX_VALUE, Math.round(total * SCALE)));
-            data.set(1, (int) Math.round(ModAttachments.gacha(player).reserve() * SCALE));
+            int offered = (int) Math.min(Integer.MAX_VALUE, Math.round(total * SCALE));
+            data.set(0, offered & 0xFFFF);
+            data.set(1, offered >>> 16);
+            data.set(2, (int) Math.round(ModAttachments.gacha(player).reserve() * SCALE));
         }
     }
 
