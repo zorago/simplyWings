@@ -40,11 +40,16 @@ const scaly = (o) => (x, row, dorsal, w, h) => {
   return inF === o.fw - 1 ? "g" : "h"
 }
 
+const alternate = (cube, fn) => (x, row, dorsal, w, h) => fn(x + 3 * (cube.index % 2), row, dorsal, w, h)
+
 const paint = (c) => {
   for (const cube of R.cubes) {
     if (cube.kind === "bone") { P.box(c, cube, "J", "j", "K"); continue }
     const fn = {
       primary: primary(cube.index),
+      tertial_feather: alternate(cube, scaly({ fw: 3, steps: [0] })),
+      secondary_feather: alternate(cube, scaly({ fw: 3, steps: [0] })),
+      hand_feather: alternate(cube, scaly({ fw: 3, steps: [0] })),
       tertials: scaly({ fw: 3, steps: [0, 1] }),
       secondaries: scaly({ fw: 2, steps: [0, 1, 1, 0] }),
       hand_sheet: scaly({ fw: 2, steps: [1, 0] }),

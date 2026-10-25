@@ -6,12 +6,9 @@ var RIG = (() => {
   const groups = [
     { name: 'shoulder', origin: S },
     { name: 'arm', parent: 'shoulder', origin: S },
-    { name: 'arm_membrane', parent: 'arm', origin: S },
     { name: 'forearm', parent: 'arm', origin: E },
-    { name: 'forearm_membrane', parent: 'forearm', origin: E },
     { name: 'propatagium', parent: 'forearm', origin: E },
     { name: 'hand', parent: 'forearm', origin: W },
-    { name: 'hand_membrane', parent: 'hand', origin: W },
     { name: 'claws', parent: 'hand', origin: K, rot: [0, 0, 55] }
   ]
   const cubes = []
@@ -21,7 +18,6 @@ var RIG = (() => {
   for (let i = 0; i < phal.length; i++) {
     const p = phal[i], g = 'finger_' + (i + 1)
     groups.push({ name: g, parent, origin: at.slice(), rot: [0, 0, p.rot] })
-    groups.push({ name: g + '_membrane', parent: g, origin: at.slice() })
     angle += p.rot
     const t = 0.55 - 0.08 * i
     cubes.push({ name: g + '_bone', group: g, from: [at[0], y - t, z - t], to: [at[0] + p.len, y + t, z + t], kind: 'finger', index: i })
@@ -33,37 +29,6 @@ var RIG = (() => {
   const world = (gname, q) => GEOM.world({ groups }, gname, q)
   const tipW = world('finger_4', [at[0], y])
   const edge = [tipW, ...GEOM.sag(tipW, hip, 2.2, [12, 24], 14), hip]
-  const edgeY = (x) => {
-    let best = null
-    for (let i = 0; i + 1 < edge.length; i++) {
-      const [a, b] = [edge[i], edge[i + 1]]
-      const lo = Math.min(a[0], b[0]), hi = Math.max(a[0], b[0])
-      if (x >= lo && x <= hi) {
-        const t = (x - a[0]) / ((b[0] - a[0]) || 1)
-        const yy = a[1] + t * (b[1] - a[1])
-        best = best === null ? yy : Math.min(best, yy)
-      }
-    }
-    return best === null ? y : best
-  }
-  const depth = (x0, x1, top) => {
-    let d = 0
-    for (let x = x0; x <= x1; x += 0.5) d = Math.max(d, top - edgeY(x))
-    return Math.max(1, Math.ceil(d + 1.2))
-  }
-  const plate = (name, group, x0, x1, topW, zz) => {
-    const h = depth(topW[0], topW[0] + (x1 - x0) + 2, topW[1])
-    cubes.push({ name, group, from: [x0, y - h, zz], to: [x1, y, zz + 0.02], kind: 'membrane' })
-  }
-  plate('arm_web', 'arm_membrane', S[0], E[0], [S[0], y], z - 0.08)
-  plate('forearm_web', 'forearm_membrane', E[0], W[0], [E[0], y], z + 0.08)
-  plate('hand_web', 'hand_membrane', W[0], K[0], [W[0], y], z - 0.08)
-  for (let i = 0; i < phal.length; i++) {
-    const g = 'finger_' + (i + 1), j = joints[i]
-    const top = world(g, [j[0], y])
-    plate(g + '_web', g + '_membrane', j[0], j[0] + phal[i].len, top, z + (i % 2 ? -0.08 : 0.08))
-  }
-  cubes.push({ name: 'propatagium_web', group: 'propatagium', from: [E[0] - 4.5, y, z + 0.02], to: [W[0] + 1, y + 2.5, z + 0.04], kind: 'propatagium' })
   cubes.push(
     { name: 'shoulder_fuzz', group: 'shoulder', from: [1.4, 20.6, 1.2], to: [5, 24.4, 3.6], kind: 'fuzz' },
     { name: 'arm_bone', group: 'arm', from: [S[0], y - 1.05, z - 0.8], to: [E[0], y + 1.05, z + 0.8], kind: 'bone' },
@@ -80,5 +45,40 @@ var RIG = (() => {
   )
   const rig = { model: 'ptero', texture: [128, 64], S, E, W, K, hip, phal, joints, edge, groups, cubes }
   rig.used = PACK(rig, 128)
+  const r3 = (v) => Math.round(v * 1000) / 1000
+  const pin = (g, w) => [g, r3(w[0]), r3(w[1]), z]
+  const atB = (g, x, yy) => pin(g, GEOM.world(rig, g, [x, yy]))
+  const chain = [atB('hand', W[0], y), atB('finger_1', K[0], y)]
+  for (let i = 1; i < phal.length; i++) chain.push(atB('finger_' + (i + 1), joints[i][0], y))
+  chain.push(atB('finger_4', joints[phal.length][0], y))
+  const back = edge.slice().reverse()
+  const lens = [0]
+  for (let i = 1; i < back.length; i++) lens.push(lens[i - 1] + Math.hypot(back[i][0] - back[i - 1][0], back[i][1] - back[i - 1][1]))
+  const along = (t) => {
+    const L = t * lens[lens.length - 1]
+    let i = 1
+    while (i < lens.length - 1 && lens[i] < L) i++
+    const u = (L - lens[i - 1]) / ((lens[i] - lens[i - 1]) || 1)
+    return [back[i - 1][0] + u * (back[i][0] - back[i - 1][0]), back[i - 1][1] + u * (back[i][1] - back[i - 1][1])]
+  }
+  const n = chain.length - 1
+  const marks = [[0, 'root'], [0.1, 'root'], [0.6, 'finger_3'], [0.75, 'finger_4'], [0.88, 'finger_4']]
+  const trailing = [...marks.map(([t, g]) => g === 'root' ? ['root', ...along(t).map(r3), z - 0.1] : pin(g, along(t))), chain[n]]
+  const flank = [atB('arm', S[0], y), ...[1, 2, 3].map(k => ['root', r3(S[0] + 0.25 * k), r3(y - (y - hip[1]) * k / 4), z - 0.1]), ['root', r3(hip[0]), r3(hip[1]), z - 0.1]]
+  const mid1 = (S[0] + E[0]) / 2, mid2 = (E[0] + W[0]) / 2
+  const arm = [atB('arm', S[0], y), atB('arm', mid1, y), atB('forearm', E[0], y), atB('forearm', mid2, y), atB('hand', W[0], y)]
+  const panels = [
+    { name: 'brachiopatagium_inner', rows: 3, a: flank, b: arm },
+    { name: 'brachiopatagium_outer', rows: 3, a: chain, b: trailing },
+    {
+      name: 'propatagium', rows: 1, a: arm,
+      b: [atB('propatagium', S[0], y + 0.7), atB('propatagium', mid1, y + 2), atB('propatagium', E[0], y + 2.2), atB('propatagium', mid2, y + 1.6), atB('hand', W[0], y)]
+    }
+  ]
+  const pts = panels.flatMap(q => [...q.a, ...q.b])
+  const x0 = Math.floor(Math.min(...pts.map(q => q[1])) - 1), x1 = Math.ceil(Math.max(...pts.map(q => q[1])) + 1)
+  const y0 = Math.ceil(Math.max(...pts.map(q => q[2])) + 1), y1 = Math.floor(Math.min(...pts.map(q => q[2])) - 1)
+  rig.sheet = { x: x0, y: y0, w: x1 - x0, h: y0 - y1, ventral: [0, rig.used], dorsal: [x1 - x0, rig.used] }
+  rig.membranes = { sheet: { x: x0, y: y0, ventral: rig.sheet.ventral, dorsal: rig.sheet.dorsal }, panels }
   return rig
 })()

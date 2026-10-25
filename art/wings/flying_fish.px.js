@@ -1,4 +1,5 @@
 include("lib/rig_pack.js")
+include("lib/rig_geom.js")
 include("lib/feathers.js")
 include("flying_fish.rig.js")
 
@@ -12,15 +13,38 @@ pal({
 const R = RIG
 const P = FEATHERS
 
-const ray = (band) => (x, row, dorsal, w, h) => {
-  const mid = Math.floor(h / 2) - (h % 2 ? 0 : 1)
-  if (x === w - 1 && row !== mid) return null
-  if (x >= w - 2 && (row === 0 || row === h - 1)) return null
-  if (row === mid) return x < 3 ? "r" : "R"
-  const tipBand = band && x >= w * 0.62 && x <= w * 0.8
-  if (row === 0 || row === h - 1) return tipBand ? "B" : "e"
-  if (tipBand) return "b"
-  return x < 4 ? "n" : (x + row) % 5 === 0 ? "M" : "m"
+const fin = (sh, band) => (c) => {
+  const rays = sh.rays
+  const reach = (p) => {
+    const a = Math.atan2(p[1] - sh.O[1], p[0] - sh.O[0])
+    let best = null
+    for (let i = 0; i + 1 < rays.length; i++) {
+      const a0 = Math.atan2(rays[i][1][1] - sh.O[1], rays[i][1][0] - sh.O[0])
+      const a1 = Math.atan2(rays[i + 1][1][1] - sh.O[1], rays[i + 1][1][0] - sh.O[0])
+      if (a <= a0 + 0.02 && a >= a1 - 0.02) {
+        const t = (a0 - a) / ((a0 - a1) || 1)
+        const l0 = Math.hypot(rays[i][1][0] - sh.O[0], rays[i][1][1] - sh.O[1])
+        const l1 = Math.hypot(rays[i + 1][1][0] - sh.O[0], rays[i + 1][1][1] - sh.O[1])
+        best = l0 + (l1 - l0) * t - 0.8 * Math.sin(Math.PI * t)
+      }
+    }
+    return best
+  }
+  for (const [u0, v0, dorsal] of [[sh.ventral[0], sh.ventral[1], false], [sh.dorsal[0], sh.dorsal[1], true]]) for (let u = 0; u < sh.w; u++) for (let v = 0; v < sh.h; v++) {
+    const p = [sh.x + u + 0.5, sh.y - v - 0.5], x = u0 + u, y = v0 + v
+    const L = reach(p)
+    if (L === null) continue
+    const d = Math.hypot(p[0] - sh.O[0], p[1] - sh.O[1])
+    if (d > L) continue
+    const rd = Math.min(...rays.map(([a, b]) => GEOM.segDist(p, a, b)))
+    const f = d / L
+    let k
+    if (rd < 0.5) k = d < 3 ? "r" : "R"
+    else if (L - d < 0.8) k = band && f > 0.6 ? "B" : "e"
+    else if (band && f > 0.62 && f < 0.8) k = "b"
+    else k = d < 4 ? "n" : (Math.floor(d * 1.3 + u) % 5 === 0 ? "M" : "m")
+    c.px(x, y, k)
+  }
 }
 
 const scales = (cube) => (c) => {
@@ -32,9 +56,11 @@ const scales = (cube) => (c) => {
 }
 
 const paint = (c) => {
+  fin(R.sheets.pectoral, true)(c)
+  fin(R.sheets.pelvic, false)(c)
   for (const cube of R.cubes) {
-    if (cube.kind === "root") { scales(cube)(c); continue }
-    P.plate(c, cube, ray(cube.kind === "ray"))
+    if (cube.kind === "root") scales(cube)(c)
+    else if (cube.kind === "spine") P.box(c, cube, "R", "r", "r")
   }
   c.rect(0, R.texture[1] - 16, 32, 16, "q")
   for (let x = 0; x < 32; x += 4) c.vline(x, R.texture[1] - 16, 16, "Q")

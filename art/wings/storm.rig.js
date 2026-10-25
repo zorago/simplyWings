@@ -28,9 +28,14 @@ var RIG = (() => {
   zig('forearm', [E[0], y], W[0] - E[0], [-12, 14, -8], z - 0.45, 1.1, 'bone')
   zig('hand', [W[0], y], H[0] - W[0], [10], z - 0.4, 1, 'bone')
   cubes.push({ name: 'core', group: 'shoulder', from: [1.4, 21.3, 1.4], to: [3.8, 23.7, 3.8], kind: 'core' })
-  cubes.push({ name: 'arm_veil', group: 'tertials', from: [S[0], y - 12, z + 0.7], to: [E[0], y + 0.5, z + 0.72], kind: 'veil', part: 'arm' })
-  cubes.push({ name: 'forearm_veil', group: 'secondaries', from: [E[0], y - 13, z + 0.85], to: [W[0], y + 0.5, z + 0.87], kind: 'veil', part: 'forearm' })
-  cubes.push({ name: 'hand_veil', group: 'hand_feathers', from: [W[0], y - 17, z + 1.0], to: [W[0] + 18, y + 0.5, z + 1.02], kind: 'veil', part: 'hand' })
+  const plume = (row, list, zBase, zStep, offset) => list.forEach((t, i) => {
+    const g = row + '_feather_' + (i + 1)
+    groups.push({ name: g, parent: row === 'tertial' ? 'tertials' : row === 'secondary' ? 'secondaries' : 'hand_feathers', origin: [t.x, y, z], rot: [0, 0, t.rot] })
+    cubes.push({ name: g + '_plasma', group: g, from: [t.x - 2, y - t.len, z + zBase + zStep * i], to: [t.x + 2, y + 0.5, z + zBase + zStep * i + 0.02], kind: 'plume', index: i + offset })
+  })
+  plume('tertial', [{ x: 3.6, len: 10, rot: -6 }, { x: 5.4, len: 11, rot: -9 }, { x: 7.2, len: 11, rot: -12 }, { x: 9, len: 12, rot: -15 }], 0.7, 0.04, 0)
+  plume('secondary', [{ x: 10.6, len: 12, rot: -6 }, { x: 12.6, len: 13, rot: -8 }, { x: 14.6, len: 13, rot: -11 }, { x: 16.6, len: 13, rot: -14 }, { x: 18.4, len: 12, rot: -18 }], 0.85, 0.04, 4)
+  plume('hand', [{ x: 19.2, len: 13, rot: -22 }, { x: 20.4, len: 13, rot: -28 }, { x: 21.6, len: 12, rot: -34 }, { x: 22.6, len: 11, rot: -40 }], 1.0, 0.02, 9)
   const prim = [{ angle: 6, len: 15 }, { angle: -14, len: 17 }, { angle: -34, len: 17 }, { angle: -54, len: 15 }, { angle: -74, len: 13 }]
   prim.forEach((p, i) => {
     const k = i + 1, px = H[0] - 0.8 * i, py = y - 0.4 * i

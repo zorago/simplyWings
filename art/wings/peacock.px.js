@@ -74,6 +74,8 @@ const train = (k) => (x, row, dorsal, w, h) => {
   return barb ? "y" : "G"
 }
 
+const alternate = (cube, fn) => (x, row, dorsal, w, h) => fn(x + 3 * (cube.index % 2), row, dorsal, w, h)
+
 const paint = (c) => {
   for (const cube of R.cubes) {
     if (cube.kind === "bone") { P.box(c, cube, "C", "c", "A"); continue }
@@ -86,7 +88,10 @@ const paint = (c) => {
       greater_coverts: scales({ fw: 3, shift: 1 }),
       arm_coverts: scales({ fw: 3, shift: 0, deep: true }),
       marginal: scales({ fw: 2, shift: 0, deep: true }),
-      train: train(cube.index)
+      train: train(cube.index),
+      tertial_feather: alternate(cube, sheet({ fw: 3, steps: [0], barred: true })),
+      secondary_feather: alternate(cube, sheet({ fw: 3, steps: [0] })),
+      hand_feather: alternate(cube, sheet({ fw: 3, steps: [0], barred: true }))
     }[cube.kind]
     P.plate(c, cube, fn)
   }

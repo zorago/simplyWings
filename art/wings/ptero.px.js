@@ -23,7 +23,7 @@ for (let i = 0; i < R.phal.length; i++) {
 const tip = chain[chain.length - 1]
 const body = [[R.hip[0] - 0.7, R.hip[1]], [R.S[0] - 0.7, 16], [R.S[0] - 0.7, y]]
 const poly = [...chain, ...R.edge.slice(1), ...body]
-const front = [[R.E[0] - 4.5, y], [R.E[0] - 4.5, y + 0.7], [R.E[0] - 1, y + 2.2], [R.E[0] + 3, y + 1.9], [R.W[0] + 1, y + 0.4], [R.W[0] + 1, y]]
+const front = [[R.S[0], y], [R.S[0], y + 0.7], [(R.S[0] + R.E[0]) / 2, y + 2], [R.E[0], y + 2.2], [(R.E[0] + R.W[0]) / 2, y + 1.6], [R.W[0], y]]
 
 const lineDist = (p, pts) => {
   let d = Infinity
@@ -47,17 +47,16 @@ const tone = (dorsal, p) => {
 }
 
 const membrane = (c) => {
-  for (const cube of R.cubes.filter(x => x.kind === "membrane")) {
-    GEOM.pixels(R, cube, (x, yy, p, dorsal) => {
-      if (GEOM.inside(poly, p)) c.px(x, yy, tone(dorsal, p))
-    })
-  }
-  for (const cube of R.cubes.filter(x => x.kind === "propatagium")) {
-    GEOM.pixels(R, cube, (x, yy, p, dorsal) => {
-      if (!GEOM.inside(front, p)) return
-      const ed = GEOM.edgeDist(front, p)
-      c.px(x, yy, ed < 0.8 ? (dorsal ? "e" : "E") : (dorsal ? "M" : "N"))
-    })
+  const sh = R.sheet
+  for (const [u0, v0, dorsal] of [[sh.ventral[0], sh.ventral[1], false], [sh.dorsal[0], sh.dorsal[1], true]]) {
+    for (let u = 0; u < sh.w; u++) {
+      for (let v = 0; v < sh.h; v++) {
+        const p = [sh.x + u + 0.5, sh.y - v - 0.5]
+        if (GEOM.inside(poly, p)) c.px(u0 + u, v0 + v, tone(dorsal, p))
+        else if (GEOM.inside(front, p)) c.px(u0 + u, v0 + v, GEOM.edgeDist(front, p) < 0.8 ? (dorsal ? "e" : "E") : (dorsal ? "M" : "N"))
+        else if (lineDist(p, chain) < 0.9) c.px(u0 + u, v0 + v, dorsal ? "d" : "v")
+      }
+    }
   }
 }
 

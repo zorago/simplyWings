@@ -36,12 +36,6 @@ const frontEdge = [[R.S[0], 25.3], [6, 25.1], [10, 24.6], [14, 24.1], [18, 23.6]
 const front = { poly: [[R.S[0], R.S[1]], ...frontEdge, W2], edge: frontEdge }
 const holes = [[16.5, 11.5, 1.1], [29, 9.5, 0.9], [34.5, 16, 0.8], [7.5, 10, 0.8]]
 
-const panelOf = (cube) => {
-  if (cube.name.endsWith("_front")) return front
-  if (cube.group.endsWith("membrane")) return pat
-  return panels["finger_" + /^finger_(\d)/.exec(cube.group)[1]]
-}
-
 const lineDist = (p, pts) => {
   let d = Infinity
   for (let i = 0; i + 1 < pts.length; i++) d = Math.min(d, GEOM.segDist(p, pts[i], pts[i + 1]))
@@ -78,16 +72,19 @@ const tone = (dorsal, p, panel, glow) => {
   return dorsal ? (bd > 5 ? "m" : "L") : (bd > 5 ? "V" : "n")
 }
 
+const sheetPanels = [front, pat, ...Object.values(panels)]
 const membrane = (glow) => (c) => {
-  for (const cube of GEOM.plates(R)) {
-    const panel = panelOf(cube)
-    GEOM.pixels(R, cube, (x, y, p, dorsal) => {
-      if (holes.some(([hx, hy, hr]) => Math.hypot(p[0] - hx, p[1] - hy) < hr)) return
-      const inPoly = GEOM.inside(panel.poly, p)
-      if (!inPoly && (GEOM.edgeDist(panel.poly, p) > 0.55 || boneDist(p) > 1.0)) return
-      const t = inPoly ? tone(dorsal, p, panel, glow) : (glow ? null : (dorsal ? "d" : "v"))
-      if (t) c.px(x, y, t)
-    })
+  const sh = R.sheet
+  for (const [u0, v0, dorsal] of [[sh.ventral[0], sh.ventral[1], false], [sh.dorsal[0], sh.dorsal[1], true]]) {
+    for (let u = 0; u < sh.w; u++) {
+      for (let v = 0; v < sh.h; v++) {
+        const p = [sh.x + u + 0.5, sh.y - v - 0.5]
+        if (holes.some(([hx, hy, hr]) => Math.hypot(p[0] - hx, p[1] - hy) < hr)) continue
+        const panel = sheetPanels.find(q => GEOM.inside(q.poly, p))
+        const t = panel ? tone(dorsal, p, panel, glow) : (!glow && boneDist(p) < 0.9 ? (dorsal ? "d" : "v") : null)
+        if (t) c.px(u0 + u, v0 + v, t)
+      }
+    }
   }
 }
 

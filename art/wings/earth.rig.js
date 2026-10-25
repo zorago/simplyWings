@@ -23,17 +23,14 @@ var RIG = (() => {
     { name: 'wrist_stone', group: 'hand', from: [W[0] - 1.2, y - 1.4, z - 1], to: [W[0] + 1.2, y + 1.4, z + 1.2], kind: 'rock' }
   ]
   const shard = (name, group, from, to, kind) => cubes.push({ name, group, from, to, kind })
-  shard('hand_sheet', 'hand_feathers', [W[0] - 0.5, y - 9.5, z + 0.9], [H[0] - 0.5, y - 1, z + 1.6], 'slate')
-  const tert = [{ x: 4.5, len: 9, rot: -4 }, { x: 8, len: 10, rot: -10 }]
-  tert.forEach((t, i) => {
-    groups.push({ name: 'tertial_' + (i + 1), parent: 'tertials', origin: [t.x, y - 1.5, z], rot: [0, 0, t.rot] })
-    shard('tertial_shard_' + (i + 1), 'tertial_' + (i + 1), [t.x - 1.75, y - 1.5 - t.len, z + 0.9 + 0.5 * i], [t.x + 1.75, y - 1.5, z + 1.7 + 0.5 * i], 'slate')
+  const slab = (row, parent, list, y0, zBase, zStep, width) => list.forEach((t, i) => {
+    const name = row + '_' + (i + 1)
+    groups.push({ name, parent, origin: [t.x, y0, z], rot: [0, 0, t.rot] })
+    shard(name + '_shard', name, [t.x - width / 2, y0 - t.len, z + zBase + zStep * i], [t.x + width / 2, y0, z + zBase + 0.8 + zStep * i], 'slate')
   })
-  const sec = [{ x: 11.5, len: 10, rot: -6 }, { x: 14.5, len: 11, rot: -10 }, { x: 17.5, len: 10.5, rot: -15 }]
-  sec.forEach((t, i) => {
-    groups.push({ name: 'secondary_' + (i + 1), parent: 'secondaries', origin: [t.x, y - 1, z], rot: [0, 0, t.rot] })
-    shard('secondary_shard_' + (i + 1), 'secondary_' + (i + 1), [t.x - 1.9, y - 1 - t.len, z + 1.1 + 0.45 * i], [t.x + 1.9, y - 1, z + 1.9 + 0.45 * i], 'slate')
-  })
+  slab('tertial_feather', 'tertials', [{ x: 4.2, len: 8.5, rot: -2 }, { x: 5.9, len: 9, rot: -5 }, { x: 7.6, len: 9.5, rot: -8 }, { x: 9.3, len: 10, rot: -11 }], y - 1.5, 0.9, 0.3, 3.5)
+  slab('secondary_feather', 'secondaries', [{ x: 11.6, len: 10, rot: -4 }, { x: 13.9, len: 10.5, rot: -7 }, { x: 16.2, len: 11, rot: -11 }, { x: 18.5, len: 10.5, rot: -15 }], y - 1, 1.1, 0.3, 3.8)
+  slab('hand_feather', 'hand_feathers', [{ x: W[0] + 1, len: 8.5, rot: -16 }, { x: W[0] + 3, len: 8, rot: -18 }, { x: W[0] + 5, len: 7.5, rot: -20 }], y - 1, 2.2, 0.2, 3)
   const prim = [{ angle: 2, len: 10 }, { angle: -14, len: 12 }, { angle: -30, len: 13 }, { angle: -46, len: 12 }, { angle: -62, len: 11 }]
   prim.forEach((p, i) => {
     const px = H[0] - 0.8 * i, py = y - 0.4 * i

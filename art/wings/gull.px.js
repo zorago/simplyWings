@@ -60,11 +60,16 @@ const coverts = (o) => (x, row, dorsal, w, h) => {
 
 const marginal = (x, row, dorsal) => dorsal ? (row === 0 ? "w" : x % 2 ? "N" : "n") : "w"
 
+const alternate = (cube, fn) => (x, row, dorsal, w, h) => fn(x + 3 * (cube.index % 2), row, dorsal, w, h)
+
 const paint = (c) => {
   for (const cube of R.cubes) {
     if (cube.kind === "bone") { P.box(c, cube, "N", "M", "m"); continue }
     const fn = {
       primary: primary(cube.index),
+      tertial_feather: alternate(cube, sheet({ fw: 3, steps: [0], white: 3 })),
+      secondary_feather: alternate(cube, sheet({ fw: 3, steps: [0], white: 2 })),
+      hand_feather: alternate(cube, sheet({ fw: 3, steps: [0], white: 2 })),
       tertials: sheet({ fw: 3, steps: [0, 1, 0, 1], white: 3 }),
       secondaries: sheet({ fw: 2, steps: [0, 1, 0, 1, 1, 0], white: 2 }),
       hand_sheet: sheet({ fw: 2, steps: [1, 0], white: 2 }),

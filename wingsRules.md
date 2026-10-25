@@ -385,6 +385,309 @@ Signature d'espèce (A17), conservée et adaptée :
 - Doigts qui vibrent à l'atterrissage et au frein lent (pas en parachute, figé par G1).
 - Idle : grand étirement des deux ailes au sol, moins haut qu'avant pour rester sur le dos (G8).
 
+## Phase 2 : revue groupée
+
+Les 25 paires restantes ont reçu toutes les règles de leurs familles d'un coup, puis chacune est ouverte dans un onglet Blockbench sur `full_flight` pour une revue groupée de zorago.
+
+### 17. Ailes de corbeau (`crow`, plume, aspect A17)
+
+Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+
+Règles appliquées avant revue :
+
+- P1 : rangées de plumes (`rows: true`), couvertures sur leurs propres os, tons alternés (reflets violets conservés sur les couvertures). P2 repris par `FeatherWing`.
+- G1 à G5 via `FlightRules` : parachute et bras de parachute, frein lent, charge et BLAST, battement anatomique (l'ancien descendait à −57°), stationnaire à plat, traînées au bout de `primary_1`.
+
+Signature d'espèce (A17) :
+
+- Battement en aviron : nage avant/arrière plus ample que `basic` (`SWEEP` ±0,4), aile très repliée au coude et au poignet à la remontée, puis tendue à la frappe, comme une rame.
+- Conservé : les doigts écartés (6 rémiges), l'alule levée au ralenti, les petits coups d'aile nerveux au repos, les doigts qui vibrent au frein lent et à l'atterrissage.
+
+### 18. Ailes de hibou (`owl`, plume, aspect A17)
+
+Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+
+Règles appliquées avant revue :
+
+- P1 : rangées de plumes, couvertures sur leurs propres os, tons alternés, barres conservées (texture passée à 128×128). P2 repris par `FeatherWing`.
+- G1 à G5 via `FlightRules` (l'ancien battement descendait à −60°), traînées au bout de `primary_1`.
+
+Signature d'espèce (A17) :
+
+- Grands coups doux et silencieux : amplitude un peu réduite (+47° en haut), peu de repli à la remontée, flexions moins en retard que `basic`. Aile large et ronde, éventail très ouvert en plané (1,18).
+- Conservé : l'étirement d'une aile à la fois au sol, en alternant, mais vers le haut et l'arrière du dos (il partait sous l'épaule) ; l'alule au ralenti.
+
+### 19. Ailes de goéland (`gull`, plume, aspect A17)
+
+Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+
+Règles appliquées avant revue :
+
+- P1 : rangées de plumes, couvertures sur leurs propres os, tons alternés. P2 repris par `FeatherWing`.
+- G1 à G5 via `FlightRules` (l'ancien battement descendait à −40°), stationnaire à plat, traînées au bout de `primary_1`.
+
+Signature d'espèce (A17) :
+
+- Plané en M conservé : coude abaissé, poignet levé, main pliée vers le bas, avec des rafales qui font jouer le poignet.
+- Battement peu ample (+38° en haut) : le goéland rame à peine et plane beaucoup.
+- Idle : le grand étirement des deux ailes reste, moins haut, pour rester sur le dos (G8).
+
+### 20. Ailes de martinet (`swift`, plume, aspect A17)
+
+Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+
+Règles appliquées avant revue :
+
+- P1 : rangées de plumes (4 par os, serrées : bras et avant-bras très courts), tons alternés. P2 repris par `FeatherWing`.
+- G1 à G5 via `FlightRules` (l'ancien battement descendait à −34°), stationnaire à plat, traînées au bout de `primary_1`.
+
+Signature d'espèce (A17) :
+
+- Faucille verrouillée : coude bloqué en vol, aile balayée vers l'arrière au plané (`SWEEP` −0,35).
+- Petits coups rapides et peu amples (+30° en haut).
+- Les rafales de petits coups au plané restent, mais toujours au-dessus de l'épaule (elles pouvaient passer à −14°).
+
+### 21. Ailes de pigeon (`pigeon`, plume, aspect A17)
+
+Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+
+Règles appliquées avant revue :
+
+- P1 : rangées de plumes, couvertures sur leurs propres os, tons alternés, barres alaires conservées. P2 repris par `FeatherWing`.
+- G1 à G5 via `FlightRules` (l'ancien battement descendait à −54°), stationnaire à plat, traînées au bout de `primary_1`.
+
+Signature d'espèce (A17) :
+
+- Claquement en haut du coup : à basse vitesse, à la charge et au saut, les ailes se rejoignent au-dessus du dos à la fin de la remontée, puis repartent. Il reste en stationnaire, au sommet de chaque coup.
+- Plané ailes relevées en V. Alule au frein lent et à l'atterrissage.
+
+### 22. Ailes de perroquet (`parrot`, plume, aspect A17)
+
+Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+
+Règles appliquées avant revue :
+
+- P1 : rangées de plumes peintes dans les couleurs de chaque rangée (jaune-vert sur les tertiaires, bleu sur les secondaires et la main), tons alternés. P2 repris par `FeatherWing`.
+- G1 à G5 via `FlightRules` (l'ancien battement descendait à −54°), stationnaire à plat, traînées au bout de `primary_1`.
+
+Signature d'espèce (A17) :
+
+- Battement nerveux : en vol, petits frémissements irréguliers des bouts d'aile, de l'éventail et de l'incidence, plus forts quand il bat.
+- Conservé : l'aile intérieure qui se replie en virage, la danse au sol (sans passer sous l'épaule), l'alule.
+
+### 23. Ailes de paon (`peacock`, plume, aspects A8, A9)
+
+Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+
+Règles appliquées avant revue :
+
+- P1 : rangées de plumes, couvertures sur leurs propres os ; tertiaires et main barrées crème, secondaires bleu-vert, tons alternés (texture passée à 128×128). P2 repris par `FeatherWing`.
+- G1 à G5 via `FlightRules` : parachute et bras de parachute, frein lent, charge et BLAST, battement au-dessus de −5° (l'ancien descendait à −49°), stationnaire à plat, traînées au bout de `primary_1`.
+- Conservé : la traîne (4 plumes ocellées) qui se déploie en roue au sol pendant l'ébrouement et au stationnaire (à moitié au frein) ; en vol, elle traîne derrière, ondule et se balance dans les virages.
+
+### 24. Ailes d'améthyste (`amethyst`, plume de cristal, aspects A8, A10)
+
+Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+
+Règles appliquées avant revue :
+
+- P1 adapté au cristal : chaque éclat suspendu sous le bras et l'avant-bras est un os à lui (4 tertiaires au lieu de 3, 4 secondaires), qui se replie un à un sous l'os.
+- G1 à G5 via `FlightRules` : parachute, frein lent, charge et BLAST, battement au-dessus de −5° (l'ancien descendait à −34°), coude et poignet presque raides (cristal), stationnaire à plat, traînées au bout de `primary_2`.
+- Conservé : le tintement des éclats à chaque coup, la dérive des éclats des primaires, les druses de l'épaule, du poignet et du coude, le calque lumineux.
+
+### 25. Ailes de cuivre (`copper`, plume de métal, aspects A10, A12)
+
+Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+
+Règles appliquées avant revue :
+
+- P1 : rangées de plumes de métal, tons alternés, vert-de-gris différent à gauche et à droite (texture 128×128). P2 repris par `FeatherWing`.
+- G1 à G5 via `FlightRules` : parachute, frein lent, charge et BLAST, battement au-dessus de −5° (l'ancien descendait à −46°), plis du coude et du poignet raides (mécanique), stationnaire à plat, traînées au bout de `primary_1`.
+- Conservé : le cliquetis des plumes en haut du coup et à la frappe, le plané par crans, l'ampoule, le piston et l'engrenage du coude, le calque lumineux.
+
+### 26. Ailes rapiécées (`patchwork`, plume, aspects A8, A14)
+
+Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+
+Règles appliquées avant revue :
+
+- P1 : rangées de plumes ; le patchwork (pièces de tissu, coutures) est peint sur chaque plume, différent à gauche et à droite (texture 128×128).
+- G1 à G5 via `FlightRules` : parachute, frein lent, charge et BLAST, battement au-dessus de −5° (l'ancien descendait à −46°), stationnaire à plat, traînées au bout de `primary_1`.
+- Asymétrie (A14, comme `yin_yang`) : l'aile gauche, la plus abîmée, bat avec un léger retard (3,5 % du cycle) et 8 % moins ample ; le hoquet du battement reste ; au repos et au plané, les deux ailes ne respirent pas en même temps.
+- Conservé : l'attelle et les bandages de l'aile droite, la ficelle de l'aile gauche, le rabat qui claque au vent, la plume rapportée.
+
+### 27. Ailes de terre (`earth`, plume de pierre, aspects A8, A10, A15)
+
+Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+
+Règles appliquées avant revue :
+
+- P1 adapté à la pierre : les ardoises sont des plumes, une par os (4 tertiaires au lieu de 2, 4 secondaires au lieu de 3, 3 sur la main à la place de la plaque unique), qui se replient une à une.
+- G1 à G5 via `FlightRules` : parachute, frein lent, charge et BLAST, battement lent et lourd au-dessus de −5° (l'ancien descendait à −34°), plis raides, stationnaire à plat, traînées au bout de `primary_3`. L'atterrissage tassé reste, moins bas.
+- Conservé : le claquement des ardoises à chaque frappe, les 3 idles, les rochers moussus, les cristaux et leur calque lumineux.
+
+### 28. Ailes de nébuleuse (`nebula`, plume, aspects A8, A10, A15)
+
+Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+
+Règles appliquées avant revue :
+
+- G7 : le voile de nuage (trois plaques qui s'ouvraient aux articulations) devient un seul voile continu (`rigs/nebula.membranes.json`) : le haut accroché aux os, le bas aux racines des lobes, donc il se replie avec eux. Peint d'un seul tenant dans les deux textures, il se gonfle un peu en vol, plus en parachute.
+- P1 : les lobes de nuage sont des plumes, 4 tertiaires et 4 secondaires (au lieu de 2 et 3). P2 repris par `FeatherWing`.
+- G1 à G5 via `FlightRules` : parachute, frein lent, charge et BLAST, battement au-dessus de −5° (l'ancien descendait à −40°), stationnaire à plat, traînées au bout de `primary_2`.
+- Conservé : la galaxie qui tourne au poignet, les étoiles qui scintillent, la dérive des lobes, les 3 idles, translucide et calque lumineux.
+
+### 29. Ailes d'ombre (`shadow`, plume, aspects A8, A10)
+
+Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+
+Règles appliquées avant revue :
+
+- P1 / G7 : les trois plaques de fumée sous le bras, l'avant-bras et la main (qui s'ouvraient aux articulations) disparaissent. Les volutes deviennent des rangées : 4 tertiaires, 5 secondaires et 4 plumes de main, pleines en haut et effilochées en bas. P2 repris par `FeatherWing`.
+- G1 à G5 via `FlightRules` : parachute et bras de parachute, frein lent, charge et BLAST, battement anatomique (l'ancien cycle descendait à −50°), stationnaire à plat, traînées au bout de `primary_1`.
+- G6 : rien à faire (la fumée en particules est déjà dans `WingEffects`).
+- Conservé : les 5 yeux qui clignent et regardent autour, le cœur, la volute qui se tord de chaque plume, les 3 idles, translucide et calque lumineux.
+
+### 30. Ailes d'orage (`storm`, plume, aspects A8, A10)
+
+Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+
+Règles appliquées avant revue :
+
+- P1 / G7 : les trois voiles de plasma (plaques rigides à cheval sur les articulations) deviennent 13 plumes de plasma (4 tertiaires, 5 secondaires, 4 de main), veinées d'éclairs, qui grésillent. P2 repris par `FeatherWing`.
+- G1 à G5 via `FlightRules` : parachute et bras de parachute, frein lent, charge et BLAST, battement anatomique (l'ancien cycle descendait à −55°), stationnaire à plat, traînées au bout de l'éclair `primary_2`.
+- G6 : les arcs électriques restent des pièces du modèle accrochées aux os, les étincelles restent des particules.
+- Conservé : os et rémiges en zigzag, arcs qui sautent au hasard, décharge au coup, 3 idles, émissif.
+
+### 31. Ailes d'ange (`angel`, plume, aspects A7, A8, A10, A15)
+
+Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+
+Règles appliquées avant revue :
+
+- P1 : rangées de plumes, couvertures sur leurs propres os, tons alternés, aussi sur le calque lumineux. P2 repris par `FeatherWing`.
+- G1 à G5 via `FlightRules` : parachute, frein lent, charge et BLAST, battement anatomique très lent (montée 0,62, frappe 0,1 ; l'ancien cycle descendait à −60°), stationnaire à plat, traînées au bout de `primary_1`.
+- G8 : deux idles corrigés pour rester compacts sur le dos (l'aile-enveloppe ne passe plus devant le corps, la gloire ne monte plus au-dessus de la tête).
+- G9 sans objet : une seule paire (les scapulaires sont un manteau sur l'épaule). À trancher avec zorago.
+- Conservé : auréole qui tourne et respire, scapulaires, alule levée au ralenti, frisson des pointes au plané et à l'atterrissage, 5 idles.
+
+### 32. Ailes de démon (`demon`, membrane à doigts, aspects A10, A15)
+
+Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+
+Règles appliquées avant revue :
+
+- M1 : les 20 plaques de membrane deviennent une peau sans trou (`rigs/demon.membranes.json`) : plagiopatagium du flanc jusqu'à la cuisse, trois dactylopatagiums, propatagium. Peinte d'un seul tenant par face, trous de membrane déchirée et nervures conservés, calque `glow` sur la même feuille.
+- M2 : peau bombée en vol (0,6 au plané, membrane lourde), gonflée en parachute, claquement de la peau au coup et à l'envol.
+- M3 : éventail des doigts au battement.
+- G1 à G5 via `FlightRules` : parachute, frein lent, charge puis BLAST, battement au-dessus de −5° (l'ancien descendait à −60°) avec le rythme lourd de la paire (montée 0,55, frappe 0,08), stationnaire à plat, traînées au bout du doigt 1.
+- G8 : l'idle « enveloppe » ne s'enroule plus devant le corps.
+- Conservé : l'étirement d'une aile puis de l'autre, le grand déploiement, les braises, le pouce qui tapote, les épines et les griffes.
+
+### 33. Ailes de ptérosaure (`ptero`, membrane à doigts, aspect A2)
+
+Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+
+Règles appliquées avant revue :
+
+- M1 en une seule pièce : les 9 plaques deviennent une peau continue (`rigs/ptero.membranes.json`) : brachiopatagium intérieur (flanc et hanche jusqu'au bras, à l'avant-bras et au poignet), brachiopatagium extérieur (main et quatre phalanges du doigt jusqu'au bord de fuite), propatagium (ptéroïde au poignet). Fibres d'actinofibrilles conservées.
+- M2 : peau bombée au plané (0,55), frémissement avec les rafales, gonflée en parachute.
+- G1 à G5 via `FlightRules` : parachute, frein lent, charge et BLAST, battement anatomique (l'ancien descendait à −57°), stationnaire à plat, traînées au bout du doigt.
+- Conservé : le doigt unique qui se replie au métacarpe, les griffes, les 3 idles, l'atterrissage en deux temps.
+
+### 34. Furie éclatante (`light`, membrane à doigts, aspects A7, A9, A16)
+
+Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+
+Règles appliquées avant revue (mise à niveau sur `night`) :
+
+- M1 : peau sans trou sur la grande paire et la paire arrière (`fury.js` `skin: true`, 9 panneaux), aux couleurs nacrées de `light`. M4 (plaque dorsale) déjà présente.
+- M2 / M3 : peau bombée au plané (0,55), doigts en éventail au battement.
+- G1 à G5 via `FlightRules` : parachute (paire arrière abaissée comme `night`), frein lent, charge et BLAST, battement anatomique (l'ancien descendait à −55°), stationnaire à plat, traînées au bout du doigt 1. La paire arrière suit la grande avec un léger retard.
+- Conservé : la queue et ses ailerons, les 7 idles, le chatoiement. Le transmog n'est pas touché.
+
+### 35. Ailes de phantom (`phantom`, membrane sans doigts / planeur, aspects A3, A10)
+
+Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+
+Règles appliquées avant revue :
+
+- M1 / G7 : les trois plaques (bras, avant-bras, main) deviennent une seule peau : bord d'attaque accroché aux os, bord de fuite déchiré à chaque os, de l'aisselle à la pointe (`rigs/phantom.membranes.json`), veines lumineuses comprises. Les déchirures sont maintenant symétriques (une seule feuille pour les deux côtés dans `Membrane`).
+- M2 : peau bombée au plané, gonflée en parachute, qui suit la frappe.
+- S1 sans objet : le phantom a son propre squelette d'aile.
+- G1 à G5 via `FlightRules` : parachute, frein lent, charge et BLAST, battement anatomique (l'ancien descendait à −43°), stationnaire à plat, traînées au bout de la main.
+- Conservé : l'onde de mort-vivant qui court du bras à la pointe au plané, le repli compact.
+
+### 36. Ailes de poisson volant (`flying_fish`, planeur, aspects A3, A10)
+
+Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+
+Règles appliquées avant revue :
+
+- M1 / G7 : les 7 rayons pectoraux et les 4 pelviens (plaques larges qui se chevauchaient ou s'ouvraient) deviennent des tiges fines avec une membrane translucide continue entre deux rayons voisins (9 panneaux). L'éventail se ferme sans trou.
+- M2 : membrane bombée au plané, gonflée en parachute et à la frappe.
+- G1 à G5 : parachute figé à charnière comme les insectes, frémissement des rayons ; frein lent derrière les bras ; charge et BLAST ; battement au-dessus de −5° avec nage avant/arrière ; stationnaire à plat ; traînées au bout de `ray_1`.
+- Conservé : le frémissement rapide des rayons au plané en léger décalage, les sauts de poisson au sol.
+
+### 37. Ailes de cerf-volant (`kite`, planeur + machine, aspects A3, A9, A12, A15)
+
+Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+
+Règles appliquées avant revue :
+
+- M1 / G7 : les deux pans de voile rigides (qui se séparaient à la jointure) deviennent une seule toile tendue du longeron à la pointe, à la jambette, puis au pied de la voile sur le corps (`rigs/kite.membranes.json`). Rayures et ourlet d'un seul tenant.
+- M2 : voile gonflée par le vent selon la vitesse, beaucoup en parachute, qui claque avec les rafales et tire à chaque coup.
+- G1 à G5 : parachute figé, voile gonflée, queue relevée ; frein lent ; charge et grand coup de BLAST ; tirage lent au-dessus de −5° (descendait à −16°) ; stationnaire à plat ; traînées au bout de la partie extérieure.
+- Conservé : la queue à rubans et nœuds, le balancement du cerf-volant, le claquement de la toile.
+
+### 38. Ailes d'ornithoptère (`ornithopter`, machine, aspect A12)
+
+Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+
+Règles appliquées avant revue :
+
+- G7 / O2 : les trois toiles posées chacune sur un longeron (qui s'ouvraient aux charnières) deviennent une seule toile continue, accrochée au longeron d'attaque et au bout de chaque côte (`rigs/ornithopter.membranes.json`). Texture 128×128.
+- M2 : toile gonflée au plané, en parachute et pendant la frappe.
+- G1 à G5 : parachute figé qui cliquette ; charge où la manivelle se remonte en grinçant, puis BLAST d'un tour de manivelle ; course au-dessus de −5° (l'ancienne allait à −43°) ; stationnaire à plat ; traînées au bout de la main.
+- Conservé : la bielle à butées, la poulie entraînée par la manivelle, les grincements.
+
+### 39. Ailes anciennes (`ancient`, modèle `dragonfly`, insecte, aspects A4, A7, A8, A13, A18)
+
+Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+
+Règles appliquées avant revue :
+
+- I1 / G4 : le vrombissement oscille autour d'un centre qui garde le point le plus bas à −5° sous l'épaule (amplitude : plané 0,38, stationnaire 0,62, frein lent 0,25), virages compris. Les plans fantômes suivent la même limite.
+- I2 / A18 : stationnaire à plat (`HOVER_PLANE`), battement d'avant en arrière avec inversion d'incidence à chaque demi-coup.
+- I3 / G1 : parachute figé (incidence 0,48, levée 0,85 pour l'aile avant et environ la moitié pour l'arrière, en absolu malgré les angles de repos de −18° et −40°), tremblement fin, plus de vrombissement ni de fantômes ; frein lent derrière les bras.
+- I4 / G3 : à la charge, les quatre ailes se lèvent et le vrombissement grandit (au carré), puis rafale à l'envol.
+- G2 : traînées au bout de l'aile avant (os `fore_ghost_a`, qui se confond avec l'aile hors vrombissement).
+- Conservé : les quatre ailes indépendantes, avant et arrière en quadrature, le scintillement et le dièdre au plané, la broche d'ambre, les 3 idles.
+
+### 40. Ailes de Psyché (`psyche`, insecte lent, aspects A5, A8, A9, A10, A15)
+
+Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+
+Règles appliquées avant revue (comme `moth`) :
+
+- I1 / G4 : battement ample et lent (l'ancien descendait à −57°), jamais sous −5°, virages compris ; remontée vers l'avant, frappe vers l'arrière, l'aile arrière en léger retard.
+- I2 / G5 : stationnaire à plat, battement de haut en bas, inversion d'incidence et léger huit.
+- I3 / G1 : parachute figé (pose de `basic`, aile arrière plus basse), tremblement fin ; frein lent derrière les bras.
+- I4 / G3 : frisson qui grandit pendant la charge, ailes levées, puis BLAST unique.
+- G2 : traînées au bout de l'aile avant (flamme d'âme `fore_flame_3`).
+- Conservé : ailes refermées au-dessus du dos au repos, flammes d'âme qui vacillent et traînent avec la vitesse, queues de l'aile arrière, lampe qui se balance, 5 idles, émissif.
+
+### 41. Ailes d'air (`air`, matière non squelettique, aspects A7, A10, A11)
+
+Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+
+Règles appliquées avant revue :
+
+- G7 : chaque ruban (3 plaques rigides qui s'ouvraient en ondulant) devient une seule peau continue (7 panneaux, `rigs/air.membranes.json`), peinte d'un seul tenant avec son effilochage. Les rubans restent séparés (banderoles). Ils se bombent en vol, beaucoup en parachute.
+- G1 à G5 : parachute (voile principale levée vers l'avant, voile arrière plus basse), frein lent ; charge et BLAST ; battement au-dessus de −5° (l'ancien descendait à −43°) avec nage avant/arrière, voile arrière en retard ; stationnaire à plat ; traînées au bout du bord d'attaque.
+- G8 : voile principale sur les omoplates, voile arrière plus bas comme un gouvernail.
+- Conservé : ondulation des rubans qui grandit avec la vitesse, fouet en fin de battement, 3 idles, translucide.
+
 ## Plan de review
 
 Deux phases. **Phase 1** : une paire dominante par aspect, choisie pour ouvrir le plus de logique nouvelle, revue une à une avec zorago, jusqu'à ce que chaque aspect ait ses règles. **Phase 2** : toutes les autres paires, une à une aussi. On applique d'abord toutes les règles de leurs familles et de leurs aspects, puis on ne polit que ce qui leur est propre.

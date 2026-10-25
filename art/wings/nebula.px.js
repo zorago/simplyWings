@@ -43,6 +43,28 @@ const cloud = (cube, glow) => (x, row, dorsal, w, h) => {
   return nebula(x + cube.part * 9, row, row / Math.max(1, bottom), dorsal, glow)
 }
 
+const railAt = (x) => {
+  const r = R.cloudRail
+  if (x <= r[0][0]) return r[0][1]
+  for (let i = 0; i + 1 < r.length; i++) if (x <= r[i + 1][0]) {
+    const t = (x - r[i][0]) / Math.max(1e-6, r[i + 1][0] - r[i][0])
+    return r[i][1] + (r[i + 1][1] - r[i][1]) * t
+  }
+  return r[r.length - 1][1]
+}
+
+const veil = (glow) => (c) => {
+  const sh = R.sheet
+  for (const [u0, v0, dorsal] of [[sh.ventral[0], sh.ventral[1], false], [sh.dorsal[0], sh.dorsal[1], true]]) for (let u = 0; u < sh.w; u++) for (let v = 0; v < sh.h; v++) {
+    const px = sh.x + u + 0.5, py = sh.y - v - 0.5
+    const bottom = railAt(px) - 1.5 - 1.2 * Math.abs(Math.sin(px * 0.55)) - fbm(px, 0, 2)
+    if (py > R.cloudTop - 0.2 || py < bottom) continue
+    if (py > R.cloudTop - 1.2 && hash(Math.floor(px), 0, 4) > 0.6) continue
+    const k = nebula(Math.floor(px), Math.floor(R.cloudTop - py), (R.cloudTop - py) / (R.cloudTop - bottom), dorsal, glow)
+    if (k) c.px(u0 + u, v0 + v, k)
+  }
+}
+
 const lobeShape = (along, across, L, Wd) => {
   const t = along / L
   const r = Wd / 2 * (t < 0.75 ? 1 : Math.sqrt(Math.max(0, 1 - ((t - 0.75) / 0.25) ** 2))) + 0.2
@@ -75,6 +97,7 @@ const star = (glow) => (x, row, dorsal, w, h) => {
 }
 
 const base = (c) => {
+  veil(false)(c)
   for (const cube of R.cubes) {
     switch (cube.kind) {
       case "cloud": P.plate(c, cube, cloud(cube, false)); break
@@ -90,6 +113,7 @@ const base = (c) => {
 }
 
 const glowLayer = (c) => {
+  veil(true)(c)
   for (const cube of R.cubes) {
     switch (cube.kind) {
       case "cloud": P.plate(c, cube, cloud(cube, true)); break

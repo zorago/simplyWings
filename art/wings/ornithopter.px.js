@@ -13,9 +13,8 @@ pal({
 const R = RIG
 const P = FEATHERS
 
-const tip = GEOM.world(R, "hand", [R.W[0] + 11, 22.5])
-const ribEnd = ([g, x, b, t]) => GEOM.world(R, g, GEOM.rotate([x, b], [x, 22.5], t))
-const ribPts = R.ribs.map(ribEnd)
+const tip = R.tip
+const ribPts = R.ribEnds
 const trail = [[tip[0], tip[1] - 0.2], ...ribPts.slice().reverse(), [R.S[0], 8.4]]
 const curved = []
 for (let i = 0; i + 1 < trail.length; i++) {
@@ -23,22 +22,22 @@ for (let i = 0; i + 1 < trail.length; i++) {
 }
 curved.push(trail[trail.length - 1])
 const panel = [[R.S[0], 22.6], [tip[0], tip[1] + 0.1], ...curved]
-const ribLines = R.ribs.map((r) => [GEOM.world(R, r[0], [r[1], 22.5]), ribEnd(r)])
+const ribLines = R.ribs.map((r, i) => [GEOM.world(R, r[0], [r[1], 22.5]), ribPts[i]])
 const nearRib = (p) => Math.min(...ribLines.map(([a, b]) => GEOM.segDist(p, a, b)))
 
 const canvas = (c) => {
-  for (const cube of R.cubes.filter(c => c.kind === "canvas")) {
-    GEOM.pixels(R, cube, (x, y, p, dorsal) => {
-      if (!GEOM.inside(panel, p)) return
-      const ed = GEOM.edgeDist(panel, p)
-      const rd = nearRib(p)
-      let k
-      if (ed < 0.8 && p[1] < 22) k = dorsal ? "k" : "K"
-      else if (rd < 0.9) k = (Math.round(p[1]) % 2 === 0) ? (dorsal ? "k" : "K") : (dorsal ? "K" : "l")
-      else if (ed < 1.8 && p[1] < 22) k = dorsal ? "K" : "L"
-      else k = dorsal ? (Math.floor(p[1]) % 3 === 0 ? "l" : "L") : (Math.floor(p[1]) % 3 === 0 ? "L" : "m")
-      c.px(x, y, k)
-    })
+  const sh = R.sheet
+  for (const [u0, v0, dorsal] of [[sh.ventral[0], sh.ventral[1], false], [sh.dorsal[0], sh.dorsal[1], true]]) for (let u = 0; u < sh.w; u++) for (let v = 0; v < sh.h; v++) {
+    const p = [sh.x + u + 0.5, sh.y - v - 0.5], x = u0 + u, y = v0 + v
+    if (!GEOM.inside(panel, p)) continue
+    const ed = GEOM.edgeDist(panel, p)
+    const rd = nearRib(p)
+    let k
+    if (ed < 0.8 && p[1] < 22) k = dorsal ? "k" : "K"
+    else if (rd < 0.9) k = (Math.round(p[1]) % 2 === 0) ? (dorsal ? "k" : "K") : (dorsal ? "K" : "l")
+    else if (ed < 1.8 && p[1] < 22) k = dorsal ? "K" : "L"
+    else k = dorsal ? (Math.floor(p[1]) % 3 === 0 ? "l" : "L") : (Math.floor(p[1]) % 3 === 0 ? "L" : "m")
+    c.px(x, y, k)
   }
 }
 

@@ -6,6 +6,7 @@ var RIG = (() => {
   ]
   const groups = []
   const cubes = []
+  const ribbons = []
   for (const sail of sails) {
     const [ox, oy] = sail.origin
     groups.push({ name: sail.name, origin: sail.origin, rot: [0, 0, sail.rot] })
@@ -14,18 +15,41 @@ var RIG = (() => {
     let top = oy
     sail.ribbons.forEach((r, i) => {
       let x = ox, parent = sail.name
+      const joints = []
       r.len.forEach((L, j) => {
         const g = sail.name + '_ribbon_' + (i + 1) + '_' + (j + 1)
         groups.push({ name: g, parent, origin: [x, top - r.h / 2, z] })
-        const zz = z + sail.z + 0.02 * ((i + j) % 2)
-        cubes.push({ name: g + '_plate', group: g, from: [x, top - r.h, zz], to: [x + L + 0.4, top, zz + 0.02], kind: 'ribbon', ribbon: i, seg: j, last: j === r.len.length - 1, sail: sail.name })
+        joints.push({ bone: g, x })
         x += L
         parent = g
       })
+      joints.push({ bone: parent, x })
+      ribbons.push({ sail: sail.name, index: i, ox, top, h: r.h, len: r.len, total: x - ox, z: z + sail.z + 0.02 * (i % 2), joints })
       top -= r.h
     })
   }
-  const rig = { model: 'air', texture: [128, 64], sails, groups, cubes }
+  const rig = { model: 'air', texture: [128, 64], sails, groups, cubes, ribbons }
   rig.used = PACK(rig, 128)
+  const panels = []
+  let u = 0, v = rig.used
+  for (const rb of ribbons) {
+    const w = Math.ceil(rb.total) + 1, h = Math.ceil(rb.h)
+    if (u + 2 * w > 128) {
+      u = 0
+      v += 4
+    }
+    rb.ventral = [u, v]
+    rb.dorsal = [u + w, v]
+    rb.w = w
+    u += 2 * w
+    const point = (bone, px, py, pu, pv) => {
+      const p = GEOM.world(rig, bone, [px, py])
+      return [bone, Math.round(p[0] * 1000) / 1000, Math.round(p[1] * 1000) / 1000, rb.z, pu, pv]
+    }
+    const a = rb.joints.map(j => point(j.bone, j.x, rb.top, j.x - rb.ox, 0))
+    const b = rb.joints.map(j => point(j.bone, j.x, rb.top - rb.h, j.x - rb.ox, rb.h))
+    panels.push({ name: rb.sail + '_ribbon_' + (rb.index + 1), rows: 1, a, b, sheet: { x: 0, y: 0, ventral: rb.ventral, dorsal: rb.dorsal } })
+  }
+  rig.membranes = { sheet: panels[0].sheet, panels }
   return rig
 })()

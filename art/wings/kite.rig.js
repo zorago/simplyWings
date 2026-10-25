@@ -5,9 +5,7 @@ var RIG = (() => {
   const groups = [
     { name: 'shoulder', origin: S },
     { name: 'spar', parent: 'shoulder', origin: S, rot: [0, 0, 6] },
-    { name: 'sail_inner', parent: 'spar', origin: S },
     { name: 'outer', parent: 'spar', origin: J },
-    { name: 'sail_outer', parent: 'outer', origin: J },
     { name: 'strut', parent: 'shoulder', origin: S, rot: [0, 0, -52] },
     { name: 'tail_1', origin: T, single: true }
   ]
@@ -15,9 +13,7 @@ var RIG = (() => {
     { name: 'spar_inner', group: 'spar', from: [S[0], S[1] - 0.35, S[2] - 0.35], to: [J[0], S[1] + 0.35, S[2] + 0.35], kind: 'stick' },
     { name: 'spar_outer', group: 'outer', from: [J[0], J[1] - 0.3, J[2] - 0.3], to: [J[0] + 9, J[1] + 0.3, J[2] + 0.3], kind: 'stick' },
     { name: 'strut_stick', group: 'strut', from: [S[0], S[1] - 0.3, S[2] - 0.3], to: [S[0] + 17, S[1] + 0.3, S[2] + 0.3], kind: 'stick' },
-    { name: 'binding', group: 'shoulder', from: [S[0] - 0.7, S[1] - 0.7, S[2] - 0.7], to: [S[0] + 0.7, S[1] + 0.7, S[2] + 0.7], kind: 'string' },
-    { name: 'sail_inner_plate', group: 'sail_inner', from: [S[0], 6, S[2] + 0.1], to: [J[0], 23, S[2] + 0.12], kind: 'sail' },
-    { name: 'sail_outer_plate', group: 'sail_outer', from: [J[0], 11, S[2] + 0.14], to: [J[0] + 9, 23, S[2] + 0.16], kind: 'sail' }
+    { name: 'binding', group: 'shoulder', from: [S[0] - 0.7, S[1] - 0.7, S[2] - 0.7], to: [S[0] + 0.7, S[1] + 0.7, S[2] + 0.7], kind: 'string' }
   ]
   let parent = 'tail_1', top = T[1]
   for (let k = 1; k <= 5; k++) {
@@ -30,5 +26,24 @@ var RIG = (() => {
   }
   const rig = { model: 'kite', texture: [64, 64], S, J, T, groups, cubes }
   rig.used = PACK(rig, 64)
+  const r3 = (v) => Math.round(v * 1000) / 1000
+  const z = S[2] + 0.12
+  const at = (bone, p) => { const w = GEOM.world(rig, bone, p); return [bone, r3(w[0]), r3(w[1]), z] }
+  const tip = GEOM.world(rig, 'outer', [J[0] + 9, 22.5])
+  const strutEnd = GEOM.world(rig, 'strut', [S[0] + 17, 22.5])
+  const foot = [S[0], 6.5]
+  const a = [at('spar', [S[0], 22.9]), at('spar', [(S[0] + J[0]) / 2, 22.9]), at('outer', [J[0], 22.9]), at('outer', [J[0] + 4.5, 22.9]), at('outer', [J[0] + 9.3, 22.8])]
+  const low = [1 / 3, 2 / 3].map(t => [foot[0] + (strutEnd[0] - foot[0]) * t, foot[1] + (strutEnd[1] - foot[1]) * t])
+  const b = [['root', foot[0], foot[1], z], at('strut', low[0]), at('strut', low[1]), at('strut', [S[0] + 17, 22.5]), at('outer', [J[0] + 9.3, 22.2])]
+  b[1] = ['strut', r3(low[0][0]), r3(low[0][1]), z]
+  b[2] = ['strut', r3(low[1][0]), r3(low[1][1]), z]
+  b[3] = ['strut', r3(strutEnd[0]), r3(strutEnd[1]), z]
+  rig.tip = tip
+  rig.strutEnd = strutEnd
+  const pts = [...a, ...b]
+  const x0 = Math.floor(Math.min(...pts.map(q => q[1])) - 1), x1 = Math.ceil(Math.max(...pts.map(q => q[1])) + 1)
+  const y0 = Math.ceil(Math.max(...pts.map(q => q[2])) + 1), y1 = Math.floor(Math.min(...pts.map(q => q[2])) - 1)
+  rig.sheet = { x: x0, y: y0, w: x1 - x0, h: y0 - y1, ventral: [0, rig.used], dorsal: [x1 - x0, rig.used] }
+  rig.membranes = { sheet: { x: x0, y: y0, ventral: rig.sheet.ventral, dorsal: rig.sheet.dorsal }, panels: [{ name: 'sail', rows: 4, a, b }] }
   return rig
 })()

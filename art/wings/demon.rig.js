@@ -9,35 +9,17 @@ var RIG = (() => {
   const groups = [
     { name: 'shoulder', origin: S },
     { name: 'arm', parent: 'shoulder', origin: S },
-    { name: 'arm_membrane', parent: 'arm', origin: S },
     { name: 'forearm', parent: 'arm', origin: E },
-    { name: 'forearm_membrane', parent: 'forearm', origin: E },
     { name: 'hand', parent: 'forearm', origin: W },
     { name: 'thumb', parent: 'hand', origin: W, rot: [0, 0, 48] }
   ]
-  const cubes = [
-    { name: 'arm_web', group: 'arm_membrane', from: [2.5, 6.5, 2.35], to: [11, 22.5, 2.37], kind: 'web' },
-    { name: 'forearm_web', group: 'forearm_membrane', from: [11, 6.5, 2.42], to: [23.5, 22.5, 2.44], kind: 'web' },
-    { name: 'arm_front', group: 'arm_membrane', from: [2.5, 22.5, 2.35], to: [11, 25.5, 2.37], kind: 'web' },
-    { name: 'forearm_front', group: 'forearm_membrane', from: [11, 22.5, 2.42], to: [23.5, 24.5, 2.44], kind: 'web' }
-  ]
-  const rad = Math.PI / 180
+  const cubes = []
   for (let i = 0; i < fingers.length; i++) {
-    const f = fingers[i], n = fingers[i + 1]
+    const f = fingers[i]
     const g = 'finger_' + f.k, t = g + '_tip'
     const j = [W[0] + f.p, W[1], W[2]]
     groups.push({ name: g, parent: 'hand', origin: W, rot: [0, 0, f.angle] })
     groups.push({ name: t, parent: g, origin: j, rot: [0, 0, f.droop] })
-    if (n) {
-      const delta = (f.angle - n.angle) * rad
-      const reach = (n.p + n.d) * Math.sin(delta)
-      const h1 = Math.ceil(Math.min(f.p * Math.tan(Math.min(delta, 1.3)), reach) + 1)
-      const h2 = Math.ceil(reach + 2)
-      groups.push({ name: g + '_web', parent: g, origin: W })
-      groups.push({ name: t + '_web', parent: t, origin: j })
-      cubes.push({ name: g + '_membrane', group: g + '_web', from: [W[0], W[1] - h1, f.z], to: [j[0], W[1], f.z + 0.02], kind: 'web' })
-      cubes.push({ name: t + '_membrane', group: t + '_web', from: [j[0], W[1] - h2, f.z], to: [j[0] + f.d, W[1], f.z + 0.02], kind: 'web' })
-    }
   }
   cubes.push(
     { name: 'shoulder_plate', group: 'shoulder', from: [1.2, 20.5, 1.2], to: [5.2, 24.5, 3.8], kind: 'carapace' },
@@ -64,5 +46,31 @@ var RIG = (() => {
   }
   const rig = { model: 'demon', texture: [128, 128], S, E, W, fingers, groups, cubes }
   rig.used = PACK(rig, 128)
+  const z = 2.4
+  const r3 = (v) => Math.round(v * 1000) / 1000
+  const at = (g, x, y) => {
+    const w = GEOM.world(rig, g, [x, y])
+    return [g, r3(w[0]), r3(w[1]), z]
+  }
+  const finger = (f) => {
+    const g = 'finger_' + f.k, jx = W[0] + f.p
+    return [at('hand', W[0], W[1]), at(g, W[0] + f.p / 2, W[1]), at(g + '_tip', jx, W[1]), at(g + '_tip', jx + f.d / 2, W[1]), at(g + '_tip', jx + f.d, W[1])]
+  }
+  const rails = fingers.map(finger)
+  const flank = [at('arm', S[0], S[1]), ...[0, 1 / 3, 2 / 3, 1].map(t => ['root', r3(3 + 1.2 * t), r3(19.5 - 12.3 * t), 2.25])]
+  const rail = [at('arm', S[0], S[1]), at('forearm', E[0], E[1]), at('hand', W[0], W[1]), rails[3][2], rails[3][4]]
+  const panels = [{ name: 'plagiopatagium', rows: 3, a: flank, b: rail }]
+  for (let i = 0; i + 1 < rails.length; i++) panels.push({ name: 'dactylopatagium_' + (i + 1), rows: 2, a: rails[i], b: rails[i + 1] })
+  const m1 = (S[0] + E[0]) / 2, m2 = (E[0] + W[0]) / 2
+  panels.push({
+    name: 'propatagium', rows: 1,
+    a: [at('arm', S[0], S[1]), at('arm', m1, S[1]), at('forearm', E[0], E[1]), at('forearm', m2, E[1]), at('hand', W[0], W[1])],
+    b: [at('shoulder', S[0], 25.3), at('arm', m1, 25.1), at('forearm', E[0], 24.6), at('forearm', m2, 23.7), at('hand', W[0], W[1])]
+  })
+  const pts = panels.flatMap(q => [...q.a, ...q.b])
+  const x0 = Math.floor(Math.min(...pts.map(q => q[1])) - 1), x1 = Math.ceil(Math.max(...pts.map(q => q[1])) + 1)
+  const y0 = Math.ceil(Math.max(...pts.map(q => q[2])) + 1), y1 = Math.floor(Math.min(...pts.map(q => q[2])) - 1)
+  rig.sheet = { x: x0, y: y0, w: x1 - x0, h: y0 - y1, ventral: [0, rig.used], dorsal: [x1 - x0, rig.used] }
+  rig.membranes = { sheet: { x: x0, y: y0, ventral: rig.sheet.ventral, dorsal: rig.sheet.dorsal }, panels }
   return rig
 })()

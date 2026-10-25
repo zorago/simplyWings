@@ -13,9 +13,6 @@ var RIG = (() => {
     { name: 'primaries', parent: 'hand', origin: W }
   ]
   const cubes = [
-    { name: 'arm_cloud', group: 'tertials', from: [S[0] - 0.5, y - 11, z + 0.6], to: [E[0] + 0.5, y + 2, z + 0.62], kind: 'cloud', part: 0 },
-    { name: 'forearm_cloud', group: 'secondaries', from: [E[0], y - 12, z + 0.75], to: [W[0] + 0.5, y + 2, z + 0.77], kind: 'cloud', part: 1 },
-    { name: 'hand_cloud', group: 'hand_feathers', from: [W[0], y - 11, z + 0.9], to: [H[0] + 2, y + 2, z + 0.92], kind: 'cloud', part: 2 },
     { name: 'arm_ridge', group: 'arm', from: [S[0], y - 0.7, z - 0.5], to: [E[0], y + 0.7, z + 0.6], kind: 'ridge' },
     { name: 'forearm_ridge', group: 'forearm', from: [E[0], y - 0.6, z - 0.45], to: [W[0], y + 0.6, z + 0.55], kind: 'ridge' },
     { name: 'hand_ridge', group: 'hand', from: [W[0], y - 0.5, z - 0.4], to: [H[0], y + 0.5, z + 0.5], kind: 'ridge' }
@@ -24,10 +21,10 @@ var RIG = (() => {
     groups.push({ name, parent, origin, rot: [0, 0, rot] })
     cubes.push({ name: name + '_lobe', group: name, from, to, kind, index })
   }
-  const tert = [{ x: 4.5, len: 7, rot: -5 }, { x: 8.5, len: 8, rot: -12 }]
-  tert.forEach((t, i) => lobe('tertial_' + (i + 1), 'tertials', [t.x, y - 9, z], t.rot, [t.x - 3, y - 9 - t.len, z + 0.68 + 0.04 * i], [t.x + 3, y - 9, z + 0.7 + 0.04 * i], 'lobe_v', i))
-  const sec = [{ x: 12.5, len: 8, rot: -5 }, { x: 16, len: 9, rot: -10 }, { x: 19.5, len: 8, rot: -16 }]
-  sec.forEach((t, i) => lobe('secondary_' + (i + 1), 'secondaries', [t.x, y - 10, z], t.rot, [t.x - 3, y - 10 - t.len, z + 0.83 + 0.04 * i], [t.x + 3, y - 10, z + 0.85 + 0.04 * i], 'lobe_v', i + 2))
+  const tert = [{ x: 3.8, len: 7, rot: -3 }, { x: 5.9, len: 7.5, rot: -6 }, { x: 8, len: 8, rot: -9 }, { x: 10.1, len: 8, rot: -12 }]
+  tert.forEach((t, i) => lobe('tertial_feather_' + (i + 1), 'tertials', [t.x, y - 9, z], t.rot, [t.x - 2, y - 9 - t.len, z + 0.68 + 0.025 * i], [t.x + 2, y - 9, z + 0.7 + 0.025 * i], 'lobe_v', i))
+  const sec = [{ x: 12, len: 8, rot: -4 }, { x: 14.8, len: 9, rot: -8 }, { x: 17.6, len: 9, rot: -12 }, { x: 20.4, len: 8, rot: -16 }]
+  sec.forEach((t, i) => lobe('secondary_feather_' + (i + 1), 'secondaries', [t.x, y - 10, z], t.rot, [t.x - 2.25, y - 10 - t.len, z + 0.83 + 0.025 * i], [t.x + 2.25, y - 10, z + 0.85 + 0.025 * i], 'lobe_v', i + 4))
   const prim = [{ angle: 4, len: 14 }, { angle: -12, len: 16 }, { angle: -28, len: 16 }, { angle: -44, len: 15 }, { angle: -60, len: 13 }]
   prim.forEach((p, i) => {
     const px = H[0] - 0.7 * i, py = y - 0.35 * i
@@ -47,5 +44,15 @@ var RIG = (() => {
   rig.used = PACK(rig, 128)
   const sparks = cubes.filter(c => c.kind === 'star')
   for (const c of sparks) c.uv = sparks[0].uv.slice()
+  const top = y + 2
+  const a = [['arm', 2, top, z + 0.6], ['arm', 10.1, top, z + 0.6], ['forearm', 12, top, z + 0.75], ['forearm', 20.4, top, z + 0.75], ['hand', 22.5, top, z + 0.9], ['hand', H[0] + 2, top, z + 0.9]]
+  const b = [['tertial_feather_1', 3.8, y - 9, z + 0.6], ['tertial_feather_4', 10.1, y - 9, z + 0.6], ['secondary_feather_1', 12, y - 10, z + 0.75], ['secondary_feather_4', 20.4, y - 10, z + 0.75], ['hand', 22.5, y - 11, z + 0.9], ['hand', H[0] + 2, y - 11, z + 0.9]]
+  const pts = [...a, ...b]
+  const x0 = Math.floor(Math.min(...pts.map(q => q[1])) - 1), x1 = Math.ceil(Math.max(...pts.map(q => q[1])) + 1)
+  const y0 = Math.ceil(Math.max(...pts.map(q => q[2])) + 1), y1 = Math.floor(Math.min(...pts.map(q => q[2])) - 1)
+  rig.sheet = { x: x0, y: y0, w: x1 - x0, h: y0 - y1, ventral: [0, rig.used], dorsal: [x1 - x0, rig.used] }
+  rig.cloudTop = top
+  rig.cloudRail = b.map(q => [q[1], q[2]])
+  rig.membranes = { sheet: { x: x0, y: y0, ventral: rig.sheet.ventral, dorsal: rig.sheet.dorsal }, panels: [{ name: 'veil', rows: 2, a, b }] }
   return rig
 })()

@@ -5,6 +5,7 @@ import com.zorago.simplywings.anim.RigMemory;
 import com.zorago.simplywings.anim.WingMotion;
 import com.zorago.simplywings.render.rig.Bone;
 import com.zorago.simplywings.render.rig.Bones;
+import com.zorago.simplywings.render.rig.FlightRules;
 import com.zorago.simplywings.render.rig.WingRig;
 import net.minecraft.util.Mth;
 
@@ -18,9 +19,15 @@ public final class PsycheRig extends WingRig {
     private static final int HIND_FLAMES = 4;
     private static final float CLOSE = 1.42f;
     private static final float[] KEYS = Cycle.beat(0.5f, 0.3f);
-    private static final Cycle STROKE = Cycle.of(KEYS, -0.85f, 0.1f, 1.25f, 1.3f, -0.2f, -1f);
-    private static final Cycle SWEEP = Cycle.of(KEYS, 0.12f, -0.08f, -0.15f, -0.02f, 0.18f, 0.2f);
-    private static final Cycle TWIST = Cycle.of(KEYS, 0f, 0.3f, 0.12f, 0f, -0.28f, -0.1f);
+    private static final Cycle STROKE = Cycle.of(KEYS, 0.05f, 0.62f, 1.15f, 1.12f, 0.4f, -0.05f);
+    private static final Cycle SWEEP = Cycle.of(KEYS, -0.2f, 0.05f, 0.22f, 0.2f, 0f, -0.22f);
+    private static final Cycle TWIST = Cycle.of(KEYS, 0f, 0.32f, 0.14f, 0f, -0.28f, -0.1f);
+    private static final float FLOOR = -5f * Mth.DEG_TO_RAD;
+    private static final float HIND_LAG = 0.06f;
+    private static final float CHUTE_STROKE = 0.31f;
+    private static final float CHUTE_RAISE = 0.85f;
+    private static final float CHUTE_PITCH = 0.48f;
+    private static final String[] TIPS = {"right_fore_flame_3", "left_fore_flame_3"};
 
     private final Bone[] fore = new Bone[2];
     private final Bone[] hind = new Bone[2];
@@ -37,6 +44,11 @@ public final class PsycheRig extends WingRig {
     @Override
     public Material material() {
         return Material.EMISSIVE;
+    }
+
+    @Override
+    public String[] tipBones() {
+        return TIPS;
     }
 
     @Override
@@ -111,16 +123,30 @@ public final class PsycheRig extends WingRig {
             }
         }
         float shut = closed * (1f - open);
-        float base = CLOSE * shut + 0.28f * cruise + 0.15f * hover + 0.35f * brake + 0.85f * m.w(WingMotion.CHARGE)
-                + 0.3f * m.w(WingMotion.AIR) + 0.12f * dive;
-        float sweep = 0.08f * hover + 0.35f * brake - 0.45f * dive - 0.6f * tuck - 0.04f * cruise + 0.05f * shut;
+        float charge = m.w(WingMotion.CHARGE);
+        float chute = FlightRules.chute(m);
+        float slowBrake = brake - chute;
+        float warm = charge * charge;
+        float base = CLOSE * shut + 0.28f * cruise + 0.25f * hover + 0.3f * slowBrake + 0.35f * charge
+                + 0.3f * m.w(WingMotion.AIR) + 0.3f * m.w(WingMotion.LANDING) + 0.12f * dive;
+        float sweep = 0.12f * hover + 0.6f * charge - 0.45f * dive - 0.6f * tuck - 0.04f * cruise + 0.05f * shut
+                + 0.1f * m.w(WingMotion.LANDING);
         float hindSweep = sweep * 0.8f - 0.1f * tuck;
-        float twist = -0.45f * brake + 0.06f * shut;
+        float twist = hover * FlightRules.HOVER_PLANE + 0.06f * shut - 0.2f * m.w(WingMotion.LANDING);
         float beatA = m.beating() ? m.beatWeight : 0f;
         float hw = m.hoverBeat;
-        float flick = shiver * 0.18f * Mth.sin(time * 3.7f);
+        float flick = shiver * 0.18f * Mth.sin(time * 3.7f) + warm * 0.06f * Mth.sin(time * 3.6f);
         float breath = (1f - closed) * 0.03f * Mth.sin(time * 0.3f) + closed * (1f - open) * 0.02f * Mth.sin(time * 0.05f);
         float wobble = settle * 0.2f * Mth.sin(time * 1.3f);
+        float blast = 0f;
+        float strike = 0f;
+        if (m.launch >= 0f) {
+            float lp = m.launch;
+            strike = smooth(Mth.clamp(lp / 0.3f, 0f, 1f));
+            blast = lp < 0.3f ? 1f : 1f - (lp - 0.3f) / 0.7f;
+        }
+        float tremble = chute * 0.02f * Mth.sin(time * 4.7f);
+        float push = time * Mth.TWO_PI * (4f / 3f) / 20f;
 
         for (int i = 0; i < 2; i++) {
             float s = i == 0 ? 1f : -1f;
@@ -130,29 +156,48 @@ public final class PsycheRig extends WingRig {
             float hTwist = twist;
             float fSweep = sweep;
             float hSweep = hindSweep;
+            if (blast > 0f) {
+                fStroke += blast * Mth.lerp(strike, 1.1f, -0.05f - base);
+                hStroke += blast * Mth.lerp(strike, 1f, -0.05f - base);
+                fSweep += blast * Mth.lerp(strike, 0.3f, -0.25f);
+                hSweep += blast * Mth.lerp(strike, 0.25f, -0.2f);
+            }
             if (beatA > 0f) {
                 float t = m.beat;
-                fStroke += beatA * STROKE.at(t);
-                hStroke += beatA * 0.95f * STROKE.at(t - 0.04f);
-                fTwist += beatA * TWIST.at(t);
-                hTwist += beatA * TWIST.at(t - 0.04f);
-                fSweep += beatA * SWEEP.at(t);
-                hSweep += beatA * 0.8f * SWEEP.at(t - 0.04f);
+                float a = beatA * (1f - blast);
+                fStroke += a * STROKE.at(t);
+                hStroke += a * 0.95f * STROKE.at(t - HIND_LAG);
+                fTwist += a * TWIST.at(t);
+                hTwist += a * TWIST.at(t - HIND_LAG);
+                fSweep += a * SWEEP.at(t);
+                hSweep += a * 0.8f * SWEEP.at(t - HIND_LAG);
             }
             if (hw > 0.001f) {
                 float ph = m.hoverPhase;
-                fStroke += hw * 0.65f * Mth.cos(ph);
-                hStroke += hw * 0.6f * Mth.cos(ph - 0.35f);
-                fTwist += hw * 0.35f * Mth.sin(ph);
-                hTwist += hw * 0.3f * Mth.sin(ph - 0.35f);
+                fSweep += hw * (0.2f + 0.42f * Mth.cos(ph));
+                hSweep += hw * (0.2f + 0.4f * Mth.cos(ph - 0.5f));
+                fStroke += hw * 0.12f * Mth.sin(2f * ph);
+                hStroke += hw * 0.12f * Mth.sin(2f * ph - 1f);
+                fTwist += hw * 0.5f * Mth.sin(ph);
+                hTwist += hw * 0.45f * Mth.sin(ph - 0.5f);
             }
             if (m.stall > 0.001f) {
-                fStroke += m.stall * 0.4f * Mth.sin(time * 1.1f);
-                hStroke += m.stall * 0.4f * Mth.sin(time * 1.1f - 0.5f);
+                fStroke += m.stall * (0.25f + 0.3f * Mth.sin(time * 1.1f));
+                hStroke += m.stall * (0.25f + 0.3f * Mth.sin(time * 1.1f - 0.5f));
             }
+            if (slowBrake > 0.001f) {
+                fStroke += slowBrake * 0.22f * Mth.cos(push);
+                hStroke += slowBrake * 0.2f * Mth.cos(push - 0.4f);
+            }
+            fStroke = Mth.lerp(chute, fStroke, CHUTE_STROKE);
+            hStroke = Mth.lerp(chute, hStroke, CHUTE_STROKE * 0.9f);
+            fSweep = Mth.lerp(chute, fSweep, CHUTE_RAISE + tremble);
+            hSweep = Mth.lerp(chute, hSweep, CHUTE_RAISE * 0.55f + tremble);
+            fTwist = Mth.lerp(chute, fTwist, CHUTE_PITCH);
+            hTwist = Mth.lerp(chute, hTwist, CHUTE_PITCH);
             float bank = m.bank * 0.25f;
-            fore[i].rotate(fTwist, s * fStroke - bank, s * fSweep);
-            hind[i].rotate(hTwist, s * hStroke - bank, s * hSweep);
+            fore[i].rotate(fTwist, s * Math.max(FLOOR, fStroke - s * bank), s * fSweep);
+            hind[i].rotate(hTwist, s * Math.max(FLOOR, hStroke - s * bank), s * hSweep);
             float trail = 0.25f * cruise + 0.3f * dive + 0.15f * Mth.clamp(m.speed / 30f, 0f, 1f);
             tail[i].rotate(trail * 0.5f + 0.1f * Mth.sin(time * 0.5f + i), s * 0.08f * Mth.sin(time * 0.7f), s * 0.06f * Mth.sin(time * 0.43f));
             tailTip[i].rotate(trail * 0.4f + 0.15f * Mth.sin(time * 0.8f + i + 1f), 0f, s * 0.1f * Mth.sin(time * 0.6f + 1f));

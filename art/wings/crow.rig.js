@@ -1,6 +1,6 @@
 var RIG = (() => {
   const b = BIRD({
-    arm: 8, forearm: 10, hand: 4,
+    rows: true, arm: 8, forearm: 10, hand: 4,
     tertials: 12, secondaries: 15, handSheet: 15, handCoverts: 6, coverts: 6, marginal: 3,
     alula: { angle: 18, length: 5 },
     primaries: [

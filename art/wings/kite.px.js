@@ -11,24 +11,24 @@ pal({
 
 const R = RIG
 const P = FEATHERS
-const tip = GEOM.world(R, "outer", [R.J[0] + 9, 22.5])
-const strutEnd = GEOM.world(R, "strut", [R.S[0] + 17, 22.5])
+const tip = R.tip
+const strutEnd = R.strutEnd
 const lead = [[R.S[0], 22.9], [tip[0], tip[1] + 0.3]]
 const trail = [tip, ...GEOM.sag(tip, strutEnd, 1.2, [12, 20], 6), strutEnd, ...GEOM.sag(strutEnd, [R.S[0], 6.5], 1.5, [12, 20], 6), [R.S[0], 6.5]]
 const sail = [...lead, ...trail]
 
 const paintSail = (c) => {
-  for (const cube of R.cubes.filter(c => c.kind === "sail")) {
-    GEOM.pixels(R, cube, (x, y, p, dorsal) => {
-      if (!GEOM.inside(sail, p)) return
-      const ed = GEOM.edgeDist(sail, p)
-      const stripe = Math.floor((p[0] - R.S[0]) / 3) % 2 === 0
-      let k
-      if (ed < 0.7) k = "t"
-      else k = stripe ? (dorsal ? "r" : "R") : (dorsal ? "w" : "W")
-      if (ed >= 0.7 && ed < 1.4 && !stripe) k = "v"
-      c.px(x, y, k)
-    })
+  const sh = R.sheet
+  for (const [u0, v0, dorsal] of [[sh.ventral[0], sh.ventral[1], false], [sh.dorsal[0], sh.dorsal[1], true]]) for (let u = 0; u < sh.w; u++) for (let v = 0; v < sh.h; v++) {
+    const p = [sh.x + u + 0.5, sh.y - v - 0.5], x = u0 + u, y = v0 + v
+    if (!GEOM.inside(sail, p)) continue
+    const ed = GEOM.edgeDist(sail, p)
+    const stripe = Math.floor((p[0] - R.S[0]) / 3) % 2 === 0
+    let k
+    if (ed < 0.7) k = "t"
+    else k = stripe ? (dorsal ? "r" : "R") : (dorsal ? "w" : "W")
+    if (ed >= 0.7 && ed < 1.4 && !stripe) k = "v"
+    c.px(x, y, k)
   }
 }
 

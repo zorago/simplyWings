@@ -14,12 +14,11 @@ pal({
 
 const R = RIG
 const P = FEATHERS
-const W2 = (p) => [p[0], p[1]]
-const tip = GEOM.world(R, "hand", [R.M[0] + 14, 23.5])
+const tip = R.tip
 const lead = [[R.S[0], 24.5], [R.E[0], 24.5], [R.M[0], 24.3], [tip[0], tip[1] + 0.6]]
 
 const trailing = (seed) => {
-  const base = [[tip[0] + 0.3, tip[1] - 0.6], [28, 19.2], [24.5, 17.4], [21, 16], [18, 14.8], [14.5, 13.9], [11, 13.2], [7.5, 12.6], [4.5, 12.3], [R.S[0], 12.6]]
+  const base = R.trail
   const out = []
   let r = seed
   const rnd = () => { r = (r * 9301 + 49297) % 233280; return r / 233280 }
@@ -37,36 +36,31 @@ const trailing = (seed) => {
   return out
 }
 
-const panels = {
-  right: { poly: [...lead, ...trailing(7)] },
-  left: { poly: [...lead, ...trailing(31)] }
-}
-const holes = { right: [[16, 17.5, 0.9]], left: [[9, 15.5, 1.1], [25, 19.6, 0.7]] }
+const poly = [...lead, ...trailing(7)]
+const holes = [[16, 17.5, 0.9], [25, 19.6, 0.7]]
 const veins = [
-  [[4, 23.4], [9.5, 13.2]], [[11, 23.4], [16.5, 14.2]], [[19, 23.4], [24, 17.2]], [W2(GEOM.world(R, "hand", [R.M[0] + 7, 23.4])), [29, 19.2]]
+  [[4, 23.4], [9.5, 13.2]], [[11, 23.4], [16.5, 14.2]], [[19, 23.4], [24, 17.2]], [GEOM.world(R, "hand", [R.M[0] + 7, 23.4]), [29, 19.2]]
 ]
 const veinDist = (p) => Math.min(...veins.map(([a, b]) => GEOM.segDist(p, a, b)))
 
-const paintSide = (side, glow) => (c) => {
-  const panel = panels[side]
-  for (const cube of R.cubes.filter(c => c.asym)) {
-    const uv = side === "right" ? cube.uv : cube.leftUv
-    GEOM.pixels(R, { ...cube, uv }, (x, y, p, dorsal) => {
-      if (!GEOM.inside(panel.poly, p)) return
-      if (holes[side].some(([hx, hy, hr]) => Math.hypot(p[0] - hx, p[1] - hy) < hr)) return
-      const vd = veinDist(p)
-      const ed = GEOM.edgeDist(panel.poly, p)
-      if (glow) {
-        if (vd < 0.45) c.px(x, y, dorsal ? "l" : "L")
-        return
-      }
-      let k
-      if (vd < 0.45) k = dorsal ? "g" : "G"
-      else if (ed < 0.8 && p[1] < 23) k = dorsal ? "h" : "H"
-      else if (ed < 1.8 && p[1] < 23) k = dorsal ? "e" : "E"
-      else k = dorsal ? (p[1] > 21 ? "M" : (Math.floor(p[0] * 0.5 + p[1]) % 4 === 0 ? "D" : "m")) : (p[1] > 21 ? "n" : "v")
-      c.px(x, y, k)
-    })
+const web = (glow) => (c) => {
+  const sh = R.sheet
+  for (const [u0, v0, dorsal] of [[sh.ventral[0], sh.ventral[1], false], [sh.dorsal[0], sh.dorsal[1], true]]) for (let u = 0; u < sh.w; u++) for (let v = 0; v < sh.h; v++) {
+    const p = [sh.x + u + 0.5, sh.y - v - 0.5], x = u0 + u, y = v0 + v
+    if (!GEOM.inside(poly, p)) continue
+    if (holes.some(([hx, hy, hr]) => Math.hypot(p[0] - hx, p[1] - hy) < hr)) continue
+    const vd = veinDist(p)
+    const ed = GEOM.edgeDist(poly, p)
+    if (glow) {
+      if (vd < 0.45) c.px(x, y, dorsal ? "l" : "L")
+      continue
+    }
+    let k
+    if (vd < 0.45) k = dorsal ? "g" : "G"
+    else if (ed < 0.8 && p[1] < 23) k = dorsal ? "h" : "H"
+    else if (ed < 1.8 && p[1] < 23) k = dorsal ? "e" : "E"
+    else k = dorsal ? (p[1] > 21 ? "M" : (Math.floor(p[0] * 0.5 + p[1]) % 4 === 0 ? "D" : "m")) : (p[1] > 21 ? "n" : "v")
+    c.px(x, y, k)
   }
 }
 
@@ -79,5 +73,5 @@ const bones = (c) => {
   for (let x = 0; x < 32; x += 4) c.vline(x, R.texture[1] - 16, 16, "Q")
 }
 
-sprite("phantom_wings", { w: R.texture[0], h: R.texture[1] }, paintSide("right", false), paintSide("left", false), bones)
-sprite("phantom_glow", { w: R.texture[0], h: R.texture[1] }, paintSide("right", true), paintSide("left", true))
+sprite("phantom_wings", { w: R.texture[0], h: R.texture[1] }, web(false), bones)
+sprite("phantom_glow", { w: R.texture[0], h: R.texture[1] }, web(true))

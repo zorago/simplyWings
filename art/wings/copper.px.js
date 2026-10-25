@@ -29,12 +29,14 @@ const patina = (seed) => {
 }
 
 const metal = (cube, spot) => (x, row, dorsal, w, h) => {
+  const feather = cube.kind.endsWith("_feather")
+  if (feather) x += 3 * (cube.index % 2)
   const primary = cube.kind === "primary"
   if (primary) {
     if (x === w - 1 && (row === 0 || row === h - 1)) return null
     if (x === w - 2 && row === h - 1) return null
   } else {
-    const fw = cube.kind === "secondaries" || cube.kind === "hand_sheet" ? 3 : 4
+    const fw = feather || cube.kind === "secondaries" || cube.kind === "hand_sheet" ? 3 : 4
     const f = Math.floor(x / fw)
     const len = h - (f % 2)
     if (row >= len) return null

@@ -49,7 +49,7 @@ const paintSide = (side) => (c) => {
   const near = quilt(side === "right" ? 5 : 77)
   for (const cube of R.cubes.filter(c => c.leftUv && c.kind !== "primary")) {
     const uv = side === "right" ? cube.uv : cube.leftUv
-    const sheet = cube.kind === "secondaries" || cube.kind === "tertials" || cube.kind === "hand_sheet"
+    const sheet = cube.kind === "secondaries" || cube.kind === "tertials" || cube.kind === "hand_sheet" || cube.kind.endsWith("_feather")
     GEOM.pixels(R, { ...cube, uv }, (x, y, p, dorsal, col, row) => {
       const h = Math.round(cube.to[1] - cube.from[1])
       if (sheet) {

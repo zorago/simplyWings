@@ -8,6 +8,7 @@ import com.zorago.simplywings.anim.WingMotion;
 import com.zorago.simplywings.render.rig.Bone;
 import com.zorago.simplywings.render.rig.Bones;
 import com.zorago.simplywings.render.rig.FeatherWing;
+import com.zorago.simplywings.render.rig.FlightRules;
 import com.zorago.simplywings.render.rig.WingRig;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
@@ -17,17 +18,24 @@ public final class EarthRig extends WingRig {
     private static final int SETTLE = 1;
     private static final int CLACK = 2;
     private static final int[] IDLES = {36, 70, 56};
-    private static final int TERTIALS = 2;
-    private static final int SECONDARIES = 3;
+    private static final int TERTIALS = 4;
+    private static final int SECONDARIES = 4;
     private static final int CRYSTALS = 5;
     private static final float UP = 0.6f;
     private static final float DOWN = 0.2f;
     private static final float[] KEYS = Cycle.beat(UP, DOWN);
-    private static final Cycle STROKE = Cycle.of(KEYS, -0.6f, 0.05f, 0.85f, 0.9f, -0.35f, -0.8f);
-    private static final Cycle SWEEP = Cycle.of(KEYS, 0.15f, -0.1f, -0.15f, -0.05f, 0.2f, 0.25f);
-    private static final Cycle ELBOW = Cycle.of(KEYS, 0.08f, 0.35f, 0.18f, 0f, 0f, 0f);
-    private static final Cycle WRIST = Cycle.of(KEYS, 0.08f, 0.45f, 0.22f, -0.05f, -0.05f, 0f);
+    private static final Cycle STROKE = Cycle.of(KEYS, 0.09f, 0.45f, 0.74f, 0.72f, 0.3f, -0.12f);
+    private static final Cycle BEND_ELBOW = Cycle.of(KEYS, -0.25f, 0f, 0.12f, 0.12f, 0.04f, -0.38f);
+    private static final Cycle BEND_WRIST = Cycle.of(KEYS, -0.38f, -0.1f, 0.12f, 0.14f, 0.06f, -0.45f);
+    private static final Cycle SWEEP = Cycle.of(KEYS, -0.2f, 0.05f, 0.24f, 0.22f, 0f, -0.24f);
+    private static final Cycle ELBOW = Cycle.of(KEYS, 0.12f, 0.35f, 0.18f, 0f, 0f, 0.03f);
+    private static final Cycle WRIST = Cycle.of(KEYS, 0.18f, 0.45f, 0.22f, -0.05f, -0.05f, 0.05f);
     private static final Cycle TWIST = Cycle.of(KEYS, 0f, 0.2f, 0.08f, -0.04f, -0.18f, -0.06f);
+    private static final Cycle FAN = Cycle.of(KEYS, 0.05f, -0.15f, 0.05f, 0.12f, 0.1f, 0.05f);
+    private static final Cycle HAND_TWIST = Cycle.of(KEYS, 0f, -0.3f, -0.12f, 0f, 0.1f, 0f);
+    private static final FlightRules.Beat BEAT = new FlightRules.Beat(STROKE, SWEEP, ELBOW, WRIST, TWIST, FAN, HAND_TWIST,
+            BEND_ELBOW, BEND_WRIST);
+    private static final String[] TIPS = {"right_primary_3", "left_primary_3"};
     private static final ResourceLocation GLOW = SimplyWings.id("textures/entity/earth_glow.png");
 
     private final RigPose drive = new RigPose();
@@ -42,6 +50,11 @@ public final class EarthRig extends WingRig {
     @Override
     public ResourceLocation glow() {
         return GLOW;
+    }
+
+    @Override
+    public String[] tipBones() {
+        return TIPS;
     }
 
     @Override
@@ -60,10 +73,10 @@ public final class EarthRig extends WingRig {
             this.s = s;
             wing = new FeatherWing(b, p, s, 1.2f, 2.7f, 2.8f);
             for (int k = 0; k < TERTIALS; k++) {
-                tertial[k] = b.get(p + "tertial_" + (k + 1));
+                tertial[k] = b.get(p + "tertial_feather_" + (k + 1));
             }
             for (int k = 0; k < SECONDARIES; k++) {
-                secondary[k] = b.get(p + "secondary_" + (k + 1));
+                secondary[k] = b.get(p + "secondary_feather_" + (k + 1));
             }
             for (int k = 0; k < CRYSTALS; k++) {
                 crystal[k] = b.get(p + "crystal_" + (k + 1));
@@ -122,55 +135,27 @@ public final class EarthRig extends WingRig {
         }
         add(ground, state.clear().set(RigPose.FOLD, groundFold).set(RigPose.STROKE, groundStroke)
                 .set(RigPose.SWEEP, groundSweep).set(RigPose.FAN, groundFan));
-        add(m.w(WingMotion.CHARGE), state.clear().set(RigPose.FOLD, 0.15f).set(RigPose.STROKE, 0.7f)
-                .set(RigPose.SWEEP, 0.25f).set(RigPose.FAN, 1f));
+        add(m.w(WingMotion.CHARGE), state.clear().set(RigPose.FOLD, 0.05f).set(RigPose.STROKE, 0.35f)
+                .set(RigPose.SWEEP, 0.7f).set(RigPose.FAN, 1.05f).set(RigPose.TWIST, 0.1f).set(RigPose.BEND_TIPS, -0.1f));
         add(m.w(WingMotion.AIR), state.clear().set(RigPose.FOLD, 0.45f).set(RigPose.STROKE, 0.25f)
                 .set(RigPose.SWEEP, 0.1f).set(RigPose.FAN, 0.7f));
         add(m.w(WingMotion.LANDING), state.clear().set(RigPose.FOLD, 0.55f).set(RigPose.STROKE, 0.05f)
                 .set(RigPose.SWEEP, 0.1f).set(RigPose.FAN, 0.6f));
-        add(m.w(WingMotion.HOVER), state.clear().set(RigPose.FOLD, 0.05f).set(RigPose.STROKE, 0.2f)
-                .set(RigPose.SWEEP, 0.1f).set(RigPose.FAN, 0.95f));
+        add(m.w(WingMotion.HOVER), state.clear().set(RigPose.FOLD, 0.05f).set(RigPose.STROKE, 0.25f)
+                .set(RigPose.SWEEP, 0.12f).set(RigPose.FAN, 0.95f).set(RigPose.TWIST, FlightRules.HOVER_PLANE));
         add(m.w(WingMotion.CRUISE), state.clear().set(RigPose.FOLD, 0.05f).set(RigPose.STROKE, 0.02f)
                 .set(RigPose.SWEEP, -0.02f).set(RigPose.FAN, 0.85f).set(RigPose.ASYM, m.bank * 0.2f));
         float dd = m.diveDepth;
         add(m.w(WingMotion.DIVE), state.clear().set(RigPose.FOLD, Mth.lerp(dd, 0.3f, 0.75f))
                 .set(RigPose.SWEEP, Mth.lerp(dd, -0.15f, -0.45f)).set(RigPose.FAN, Mth.lerp(dd, 0.5f, 0.05f)));
-        add(m.w(WingMotion.BRAKE), state.clear().set(RigPose.FOLD, 0.05f).set(RigPose.STROKE, 0.3f)
-                .set(RigPose.SWEEP, 0.45f).set(RigPose.TWIST, -0.6f).set(RigPose.FAN, 1.15f));
+        add(m.w(WingMotion.BRAKE), state.clear().set(RigPose.FOLD, 0.02f).set(RigPose.STROKE, -0.35f)
+                .set(RigPose.SWEEP, 0.6f).set(RigPose.TWIST, -0.2f).set(RigPose.FAN, 1.15f).set(RigPose.BEND_TIPS, 0.05f));
         add(m.w(WingMotion.TUCK), state.clear().set(RigPose.FOLD, 0.9f).set(RigPose.SWEEP, -0.5f)
                 .set(RigPose.STROKE, 0.05f).set(RigPose.FAN, 0f));
 
-        if (m.stall > 0.001f) {
-            drive.set(RigPose.FOLD, Mth.lerp(m.stall, drive.get(RigPose.FOLD), 0.2f));
-            drive.add(RigPose.STROKE, m.stall * 0.35f * Mth.sin(time * 0.9f));
-            drive.add(RigPose.ASYM, m.stall * 0.25f * Mth.sin(time * 0.6f));
-        }
-        float hw = m.hoverBeat;
-        if (hw > 0.001f) {
-            float ph = m.hoverPhase;
-            float sn = Mth.sin(ph);
-            float cs = Mth.cos(ph);
-            float back = Math.max(0f, -sn);
-            drive.add(RigPose.STROKE, hw * 0.55f * cs);
-            drive.add(RigPose.SWEEP, hw * 0.12f * Mth.sin(2f * ph));
-            drive.add(RigPose.TWIST, hw * 0.35f * sn);
-            drive.add(RigPose.ELBOW, hw * 0.25f * back);
-            drive.add(RigPose.WRIST, hw * 0.35f * back);
-        }
-        if (m.beating()) {
-            float t = m.beat;
-            float a = m.beatWeight;
-            drive.add(RigPose.STROKE, a * STROKE.at(t));
-            drive.add(RigPose.SWEEP, a * SWEEP.at(t));
-            drive.add(RigPose.ELBOW, a * ELBOW.at(t));
-            drive.add(RigPose.WRIST, a * WRIST.at(t));
-            drive.add(RigPose.TWIST, a * TWIST.at(t));
-            drive.add(RigPose.BEND_ELBOW, a * 0.08f * STROKE.lagged(t, 0.06f));
-            drive.add(RigPose.BEND_WRIST, a * 0.14f * STROKE.lagged(t, 0.1f));
-            drive.add(RigPose.BEND_TIPS, a * 0.18f * STROKE.lagged(t, 0.14f));
-        }
+        FlightRules.apply(m, drive, BEAT);
         if (settle > 0.001f) {
-            drive.add(RigPose.STROKE, settle * -0.2f * (0.6f + 0.4f * Mth.cos(time * 2.4f)));
+            drive.add(RigPose.STROKE, settle * -0.08f * (0.6f + 0.4f * Mth.cos(time * 2.4f)));
             drive.add(RigPose.FAN, settle * 0.1f * Mth.sin(time * 3f));
         }
         drive.add(RigPose.STROKE, ground * (1f - idle) * 0.012f * Mth.sin(time * 0.05f));
@@ -184,7 +169,7 @@ public final class EarthRig extends WingRig {
         FeatherWing.TipCurve tips = (k, n) -> 0.6f;
         for (Side side : new Side[]{right, left}) {
             side.wing.apply(drive, tips);
-            side.wing.stack(fold, 0.5f, 0.45f, 0.35f);
+            FlightRules.chuteArm(side.wing.arm, side.s, FlightRules.chute(m));
             float s = side.s;
             for (int k = 0; k < side.wing.primary.size(); k++) {
                 float j = rattle * Mth.sin(time * 6.1f + k * 2.3f + (s > 0 ? 0f : 1.3f));

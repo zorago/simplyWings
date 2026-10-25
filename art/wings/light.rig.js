@@ -1,6 +1,7 @@
 var RIG = (() => {
   const f = FURY({
     backPlate: true,
+    skin: true,
     main: {
       prefix: '', S: [2.4, 22.6, 2.5], arm: 8, forearm: 12, bone: 1.15, armDepth: 15, front: 3, rot: 6,
       fingers: [

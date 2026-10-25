@@ -41,23 +41,15 @@ const curl = (along, across, L, Wd, seed, dorsal) => {
   return smoke(Math.min(1, t * 0.8 + d / hw * 0.35), along, across, seed, dorsal)
 }
 
-const tendril = (along, across, L, Wd, seed, dorsal) => {
-  const t = along / L
-  const c = Wd / 2 + 1.6 * Math.sin(t * Math.PI * 1.6 + seed) * Math.min(1, t * 1.6)
-  const hw = 1.5 * Math.pow(Math.max(0, 1 - t), 0.7) + 0.45 + (t < 0.15 ? (0.15 - t) * 10 : 0)
-  const d = Math.abs(across + 0.5 - c)
-  if (d > hw) return null
-  if (t > 0.7 && hash(Math.floor(along), Math.floor(across), seed) < (t - 0.7) * 1.5) return null
-  return smoke(Math.min(1, t * 0.85 + d / hw * 0.3), along, across, seed, dorsal)
-}
-
-const sheet = (cube) => (x, row, dorsal, w, h) => {
-  const bottom = h - 1.5 - 2.5 * Math.abs(Math.sin(x * 0.75 + cube.part * 2)) - hash(x, 0, cube.part) * 1.5
-  if (row > bottom) return null
-  const top = 1 + Math.round(Math.abs(Math.sin(x * 0.9 + cube.part)))
-  if (row < top - 1 && hash(x, row, 5) > 0.5) return null
-  if (row > 2 && swirl(x + cube.part * 9, row, cube.part + 4.1) < -0.88 && hash(x, row, 2) > 0.3) return null
-  return smoke(row / Math.max(1, bottom) * 0.9, x + cube.part * 9, row, cube.part + 1.3, dorsal)
+const plume = (cube) => (x, row, dorsal, w, h) => {
+  const seed = cube.index * 1.7 + 0.4
+  const t = (row + 0.5) / h
+  const sway = 0.8 * Math.sin(t * Math.PI * 1.3 + seed) * t
+  const half = w / 2 * (t < 0.55 ? 1 : Math.max(0.15, 1 - (t - 0.55) * 1.9)) + 0.2
+  const d = Math.abs(x + 0.5 - w / 2 - sway)
+  if (d > half) return null
+  if (t > 0.65 && hash(x, row, seed) < (t - 0.65) * 1.4) return null
+  return smoke(Math.min(1, t * 0.75 + d / half * 0.3), x + cube.index * 5, row, seed, dorsal)
 }
 
 const eye = (glow) => (x, row, dorsal, w, h) => {
@@ -69,9 +61,8 @@ const eye = (glow) => (x, row, dorsal, w, h) => {
 const base = (c) => {
   for (const cube of R.cubes) {
     switch (cube.kind) {
-      case "sheet": P.plate(c, cube, sheet(cube)); break
       case "curl_h": P.plate(c, cube, (x, row, dorsal, w, h) => curl(x + 0.5, row, w, h, cube.index * 1.9, dorsal)); break
-      case "curl_v": P.plate(c, cube, (x, row, dorsal, w, h) => tendril(row + 0.5, x, h, w, cube.index * 2.7 + 1, dorsal)); break
+      case "plume": P.plate(c, cube, plume(cube)); break
       case "eye": P.plate(c, cube, eye(false)); break
       case "heart": P.box(c, cube, "c", "b", "a"); break
     }

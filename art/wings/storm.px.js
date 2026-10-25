@@ -40,42 +40,25 @@ const plasma = (row, x, depth, edge, seed, veins) => {
   return t < 0.12 ? "a" : t < 0.32 ? "b" : t < 0.55 ? "d" : t < 0.78 ? "e" : "f"
 }
 
-const veil = (cube, seed) => {
+const plume = (cube) => {
   const w = Math.round(cube.to[0] - cube.from[0]), h = Math.round(cube.to[1] - cube.from[1])
-  const veins = cube.part === "arm" ? new Set() : bolts(w, h, seed, 1)
+  const seed = 1.3 + cube.index * 2.1
+  const veins = cube.index < 4 ? new Set() : bolts(w, h, seed, 1)
   return (x, row, dorsal) => {
-    const tendril = hash(x, 0, seed) > 0.7 ? 2.5 + 2 * hash(x, 1, seed) : 0
-    const bottom = h - 2.5 - 3.2 * Math.abs(Math.sin(x * 0.9 + seed)) + tendril - (cube.part === "arm" ? Math.max(0, 4 - x) * 0.8 : 0)
+    const t = row / h
+    const half = w / 2 * (t < 0.7 ? 1 : Math.max(0.2, 1 - (t - 0.7) * 2.6))
+    if (Math.abs(x + 0.5 - w / 2) > half) return null
+    const bottom = h - 1 - 1.5 * hash(x, 0, seed)
     if (row > bottom) return null
     if (row === 0) return "a"
-    return plasma(row, x, row / Math.max(1, bottom), bottom - row, seed, veins)
+    return plasma(row, x, t, Math.min(bottom - row, half - Math.abs(x + 0.5 - w / 2) + 1), seed, veins)
   }
-}
-
-const W0 = R.W[0], Y0 = R.W[1]
-const fan = [[W0 - 0.5, Y0 + 0.5]]
-R.prim.forEach((p, i) => {
-  const px = R.H[0] - 0.8 * i, py = R.W[1] - 0.4 * i
-  const a = p.angle * Math.PI / 180
-  fan.push([px + p.len * Math.cos(a), py + p.len * Math.sin(a)])
-})
-fan.push([W0 - 0.5, Y0 - 12])
-
-const handVeins = bolts(18, 18, 4.4, 2)
-const handVeil = (cube) => (x, row, dorsal, w, h) => {
-  const pt = [W0 + x + 0.5, cube.to[1] - row - 0.5]
-  if (!GEOM.inside(fan, pt)) return null
-  const edge = GEOM.edgeDist(fan, pt)
-  const jag = 1.2 + 1.4 * hash(x, row, 3)
-  if (edge < jag && hash(x, row, 7) > 0.5) return null
-  const depth = Math.min(1, Math.hypot(pt[0] - W0, pt[1] - Y0) / 19)
-  return plasma(row, x, depth, edge, 2.2, handVeins)
 }
 
 const paint = (c) => {
   for (const cube of R.cubes) {
     switch (cube.kind) {
-      case "veil": P.plate(c, cube, cube.part === "hand" ? handVeil(cube) : veil(cube, cube.part === "arm" ? 0.7 : 1.9)); break
+      case "plume": P.plate(c, cube, plume(cube)); break
       case "bone": P.box(c, cube, "w", "W", "c"); break
       case "bolt": P.box(c, cube, "w", "W", "C"); break
       case "arc": P.box(c, cube, "w", "w", "W"); break

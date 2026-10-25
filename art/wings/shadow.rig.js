@@ -13,19 +13,18 @@ var RIG = (() => {
     { name: 'primaries', parent: 'hand', origin: W }
   ]
   const cubes = [
-    { name: 'arm_smoke', group: 'tertials', from: [S[0] - 0.5, y - 9, z + 0.6], to: [E[0] + 0.5, y + 1.5, z + 0.62], kind: 'sheet', part: 0 },
-    { name: 'forearm_smoke', group: 'secondaries', from: [E[0], y - 10, z + 0.75], to: [W[0] + 0.5, y + 1.5, z + 0.77], kind: 'sheet', part: 1 },
-    { name: 'hand_smoke', group: 'hand_feathers', from: [W[0], y - 9, z + 0.9], to: [H[0] + 2, y + 1.5, z + 0.92], kind: 'sheet', part: 2 },
     { name: 'heart', group: 'shoulder', from: [1.3, 21.2, 1.5], to: [4, 23.9, 3.7], kind: 'heart' }
   ]
   const wisp = (name, parent, origin, rot, from, to, kind, index) => {
     groups.push({ name, parent, origin, rot: [0, 0, rot] })
     cubes.push({ name: name + '_wisp', group: name, from, to, kind, index })
   }
-  const tert = [{ x: 4, len: 8, rot: -4 }, { x: 7.5, len: 9, rot: -12 }]
-  tert.forEach((t, i) => wisp('tertial_' + (i + 1), 'tertials', [t.x, y - 7, z], t.rot, [t.x - 3, y - 7 - t.len, z + 0.68 + 0.04 * i], [t.x + 3, y - 7, z + 0.7 + 0.04 * i], 'curl_v', i))
-  const sec = [{ x: 11.5, len: 9, rot: -5 }, { x: 14.5, len: 10, rot: -9 }, { x: 17.5, len: 9, rot: -15 }]
-  sec.forEach((t, i) => wisp('secondary_' + (i + 1), 'secondaries', [t.x, y - 8, z], t.rot, [t.x - 3, y - 8 - t.len, z + 0.83 + 0.04 * i], [t.x + 3, y - 8, z + 0.85 + 0.04 * i], 'curl_v', i + 2))
+  const row = (name, parent, list, zBase, zStep, offset) => list.forEach((t, i) => {
+    wisp(name + '_feather_' + (i + 1), parent, [t.x, y, z], t.rot, [t.x - 2.5, y - t.len, z + zBase + zStep * i], [t.x + 2.5, y + 0.5, z + zBase + zStep * i + 0.02], 'plume', i + offset)
+  })
+  row('tertial', 'tertials', [{ x: 3.6, len: 12, rot: -4 }, { x: 5.6, len: 13, rot: -7 }, { x: 7.6, len: 13, rot: -10 }, { x: 9.4, len: 14, rot: -13 }], 0.68, 0.04, 0)
+  row('secondary', 'secondaries', [{ x: 11.2, len: 15, rot: -5 }, { x: 13.2, len: 16, rot: -7 }, { x: 15.2, len: 16, rot: -10 }, { x: 17.2, len: 15, rot: -13 }, { x: 19, len: 15, rot: -16 }], 0.83, 0.04, 4)
+  row('hand', 'hand_feathers', [{ x: 20.2, len: 15, rot: -19 }, { x: 21.4, len: 14, rot: -23 }, { x: 22.6, len: 14, rot: -27 }, { x: 23.6, len: 13, rot: -31 }], 0.98, 0.02, 9)
   const prim = [{ angle: 6, len: 13 }, { angle: -8, len: 15 }, { angle: -23, len: 16 }, { angle: -38, len: 16 }, { angle: -53, len: 15 }, { angle: -68, len: 13 }]
   prim.forEach((p, i) => {
     const px = H[0] - 0.6 * i, py = y - 0.3 * i

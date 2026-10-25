@@ -1,4 +1,5 @@
 include("lib/rig_pack.js")
+include("lib/rig_geom.js")
 include("lib/feathers.js")
 include("air.rig.js")
 
@@ -15,18 +16,19 @@ const hash = (x, y, s) => {
   return v - Math.floor(v)
 }
 
-const ribbon = (cube) => (x, row, dorsal, w, h) => {
-  const gx = x + cube.seg * 8
-  const fray = cube.last ? x / w : 0
-  const thread = (row + Math.floor(gx / 3)) % 2
-  if (cube.last && fray > 0.35 && hash(x, row, cube.ribbon) < (fray - 0.35) * 1.5 + (thread ? 0.25 : 0)) return null
-  if (cube.last && x === w - 1 && row % 2 === 0) return null
-  const streak = Math.sin(gx * 0.45 + row * 2.1 + cube.ribbon * 1.7)
-  if (row === 0 && cube.ribbon === 0) return "d"
+const ribbon = (rb) => (x, row, dorsal) => {
+  const lastLen = rb.len[rb.len.length - 1]
+  const start = rb.total - lastLen
+  const fray = x >= start ? (x - start) / lastLen : 0
+  const thread = (row + Math.floor(x / 3)) % 2
+  if (fray > 0.35 && hash(x, row, rb.index + (rb.sail === "sail" ? 0 : 7)) < (fray - 0.35) * 1.5 + (thread ? 0.25 : 0)) return null
+  if (x >= rb.total - 1 && row % 2 === 0) return null
+  const streak = Math.sin(x * 0.45 + row * 2.1 + rb.index * 1.7)
+  if (row === 0 && rb.index === 0) return "d"
   if (streak > 0.86) return "e"
   if (streak > 0.55) return "d"
   if (streak < -0.7) return "f"
-  return (gx + row) % 3 === 0 ? "c" : (dorsal ? "a" : "b")
+  return (x + row) % 3 === 0 ? "c" : (dorsal ? "a" : "b")
 }
 
 const edge = (x, row, dorsal, w, h) => {
@@ -35,9 +37,17 @@ const edge = (x, row, dorsal, w, h) => {
 }
 
 const paint = (c) => {
+  for (const rb of R.ribbons) {
+    const fn = ribbon(rb)
+    for (const [u0, v0, dorsal] of [[rb.ventral[0], rb.ventral[1], false], [rb.dorsal[0], rb.dorsal[1], true]]) {
+      for (let x = 0; x < rb.w; x++) for (let row = 0; row < Math.ceil(rb.h); row++) {
+        const col = fn(x, row, dorsal)
+        if (col) c.px(u0 + x, v0 + row, col)
+      }
+    }
+  }
   for (const cube of R.cubes) {
-    if (cube.kind === "ribbon") P.plate(c, cube, ribbon(cube))
-    else if (cube.kind === "edge") P.plate(c, cube, edge)
+    if (cube.kind === "edge") P.plate(c, cube, edge)
     else if (cube.kind === "root") {
       P.box(c, cube, "r", "R", "s")
       const [u, v] = cube.uv
