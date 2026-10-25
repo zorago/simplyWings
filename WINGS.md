@@ -739,7 +739,7 @@ Dernière mise à jour : 22 octobre 2026.
 
 **Vibe** : un esprit du feu. Les ailes sont faites de flammes vives : elles brûlent fort et vite, avec des coups secs et explosifs. Elles s'épuisent vite et tiennent mal en place.
 
-**Apparence** : une aile de feu par côté (modèle `rigs/fire.bbmodel`), émissive : squelette d'oiseau dont chaque plume est une langue de feu indépendante (7 primaires, 4 secondaires, 3 tertiaires), un cœur blanc-jaune en peau sous les langues (accroché aux os et aux flammes, sans trou), une crête de petites flammes en peau sur le bord d'attaque ; braises et étincelles en vraies particules.
+**Apparence** : une aile de feu par côté (modèle `rigs/fire.bbmodel`), émissive : squelette d'oiseau dont chaque plume est une langue de feu indépendante (7 primaires, 4 flammes de main, 4 secondaires, 4 tertiaires), un cœur blanc-jaune en peau sous les langues (accroché aux os et aux flammes, sans trou), une crête de petites flammes en peau sur le bord d'attaque ; braises et étincelles en vraies particules.
 
 **Mouvement signature** : (`FireRig`) chaque langue vacille avec sa propre phase et s'allonge ; au coup, les flammes s'embrasent, et elles traînent vers l'arrière avec la vitesse ; 3 idles : embrasement, braises qui couvent puis se rallument, secousse d'étincelles ; à l'atterrissage, les flammes vacillent puis reprennent.
 
