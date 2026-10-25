@@ -35,6 +35,8 @@ public final class SeraphRig extends WingRig {
     private static final float SPLIT_UPPER = 0.32f;
     private static final float SPLIT_HOVER = 0.62f;
     private static final float SPLIT_LEVEL = 0.52f;
+    private static final float CHUTE_UPPER = 0.3f;
+    private static final float CHUTE_LOWER = -0.35f;
     private static final float SPLIT_LOWER = -0.08f;
     private static final String[] TIPS = {"right_primary_1", "left_primary_1"};
     private static final ResourceLocation GLOW = SimplyWings.id("textures/entity/seraph_glow.png");
@@ -148,7 +150,7 @@ public final class SeraphRig extends WingRig {
             float hover = Mth.clamp(m.hoverBeat, 0f, 1f) * (1f - level);
             float upper = Mth.lerp(hover, SPLIT_UPPER, SPLIT_HOVER);
             float offset = split * (t == 0 ? upper : SPLIT_LOWER) * (1f - fold * 0.6f);
-            float raise = offset * (1f - level);
+            float raise = offset * (1f - level) + chute * (t == 0 ? CHUTE_UPPER : CHUTE_LOWER);
             float stroke = t == 0 ? split * SPLIT_LEVEL * (1f - fold * 0.6f) * level : 0f;
             drive.add(RigPose.SWEEP, raise);
             drive.add(RigPose.STROKE, stroke);
