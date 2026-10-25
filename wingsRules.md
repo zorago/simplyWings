@@ -528,7 +528,7 @@ Retour de zorago :
 
 ### 27. Ailes de terre (`earth`, plume de pierre, aspects A8, A10, A15)
 
-Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+Statut : **terminé**, validé par zorago (revue groupée, lot 3).
 
 Règles appliquées avant revue :
 
@@ -538,7 +538,7 @@ Règles appliquées avant revue :
 
 ### 28. Ailes de nébuleuse (`nebula`, plume, aspects A8, A10, A15)
 
-Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+Statut : **terminé**, validé par zorago (revue groupée, lot 3).
 
 Règles appliquées avant revue :
 
@@ -549,7 +549,7 @@ Règles appliquées avant revue :
 
 ### 29. Ailes d'ombre (`shadow`, plume, aspects A8, A10)
 
-Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+Statut : **terminé**, validé par zorago (revue groupée, lot 3).
 
 Règles appliquées avant revue :
 
@@ -565,7 +565,7 @@ Retour de zorago :
 
 ### 30. Ailes d'orage (`storm`, plume, aspects A8, A10)
 
-Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+Statut : **terminé**, validé par zorago (revue groupée, lot 3).
 
 Règles appliquées avant revue :
 
@@ -576,14 +576,14 @@ Règles appliquées avant revue :
 
 ### 31. Ailes d'ange (`angel`, plume, aspects A7, A8, A10, A15)
 
-Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+Statut : **terminé**, validé par zorago (revue groupée, lot 3).
 
 Règles appliquées avant revue :
 
 - P1 : rangées de plumes, couvertures sur leurs propres os, tons alternés, aussi sur le calque lumineux. P2 repris par `FeatherWing`.
 - G1 à G5 via `FlightRules` : parachute, frein lent, charge et BLAST, battement anatomique très lent (montée 0,62, frappe 0,1 ; l'ancien cycle descendait à −60°), stationnaire à plat, traînées au bout de `primary_1`.
 - G8 : deux idles corrigés pour rester compacts sur le dos (l'aile-enveloppe ne passe plus devant le corps, la gloire ne monte plus au-dessus de la tête).
-- G9 sans objet : une seule paire (les scapulaires sont un manteau sur l'épaule). À trancher avec zorago.
+- G9 sans objet : une seule paire (les scapulaires sont un manteau sur l'épaule), validé par zorago.
 - Conservé : auréole qui tourne et respire, scapulaires, alule levée au ralenti, frisson des pointes au plané et à l'atterrissage, 5 idles.
 
 ### 32. Ailes de démon (`demon`, membrane à doigts, aspects A10, A15)
@@ -620,6 +620,8 @@ Règles appliquées avant revue (mise à niveau sur `night`) :
 - M2 / M3 : peau bombée au plané (0,55), doigts en éventail au battement.
 - G1 à G5 via `FlightRules` : parachute (paire arrière abaissée comme `night`), frein lent, charge et BLAST, battement anatomique (l'ancien descendait à −55°), stationnaire à plat, traînées au bout du doigt 1. La paire arrière suit la grande avec un léger retard.
 - Conservé : la queue et ses ailerons, les 7 idles, le chatoiement. Le transmog n'est pas touché.
+
+Avant revue, règle des queues (test de collision sur toutes les animations) : la queue des Furies était centrée à 2,6 px du dos pour 3 px d'épaisseur, donc enfoncée dans le corps et jusqu'à 1,9 px dans les jambes en vol et au frein. Elle est reculée contre le dos (z 3,65), sa base se lève au stationnaire, en vol (+0,35 et +0,18), au frein (+0,35 au lieu de −0,4, qui la rabattait vers les jambes) et à l'envol (+0,45). Même correction sur `night` (épines de la queue reculées avec elle). Vérifié sur toutes les animations des deux paires : aucune collision avec le corps ni les jambes.
 
 ### 35. Ailes de phantom (`phantom`, membrane sans doigts / planeur, aspects A3, A10)
 

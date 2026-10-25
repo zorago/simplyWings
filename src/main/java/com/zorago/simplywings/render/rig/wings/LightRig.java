@@ -38,7 +38,7 @@ public final class LightRig extends WingRig {
     private static final String[] TIPS = {"right_finger_1_tip", "left_finger_1_tip"};
     private static final float[] TAIL_GROUND = {0.6f, 0.45f, 0.4f, 0.12f, 0.06f, 0.04f};
     private static final float[] TAIL_CURL = {0f, 0.05f, 0.15f, 0.22f, 0.26f, 0.28f};
-    private static final float[] TAIL_HANG = {0.14f, 0.08f, 0.08f, 0.07f, 0.05f, 0.05f};
+    private static final float[] TAIL_HANG = {0.35f, 0.08f, 0.08f, 0.07f, 0.05f, 0.05f};
     private static final ResourceLocation GLOW = SimplyWings.id("textures/entity/light_glow.png");
 
     private final RigPose drive = new RigPose();
@@ -97,8 +97,8 @@ public final class LightRig extends WingRig {
         boolean coil = m.rouse > 0f && m.rouseVariant % 7 == 2;
         for (int k = 0; k < 6; k++) {
             float wave = Mth.sin(time * 0.2f - k * 0.7f);
-            tailPitch[k] = ground * TAIL_GROUND[k] + hang * TAIL_HANG[k] + travel * (k == 0 ? 0.05f : 0.02f + 0.04f * wave)
-                    + brake * (k == 0 ? -0.4f : -0.06f) + charge * (k == 0 ? 0.75f : k < 3 ? 0.25f : 0.05f)
+            tailPitch[k] = ground * TAIL_GROUND[k] + hang * TAIL_HANG[k] + travel * (k == 0 ? 0.18f : 0.02f + 0.04f * wave)
+                    + brake * (k == 0 ? 0.35f : 0f) + (m.launch >= 0f ? (k == 0 ? 0.45f : 0.12f) : 0f) + charge * (k == 0 ? 0.75f : k < 3 ? 0.25f : 0.05f)
                     + (coil ? m.rouse * (k == 0 ? -0.2f : 0.25f) : 0f);
             tailYaw[k] = ground * (TAIL_CURL[k] + 0.14f * walk * Mth.sin(time * 0.5f - k * 0.5f) + 0.05f * Mth.sin(time * 0.04f - k * 0.5f))
                     + hang * 0.12f * Mth.sin(time * 0.08f - k * 0.45f)

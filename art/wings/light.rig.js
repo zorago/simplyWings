@@ -16,7 +16,7 @@ var RIG = (() => {
       ]
     },
     tail: {
-      origin: [0, 13.5, 2.6], mid: 2, tip: 5, midFin: [3, 3.5], tipFin: [5.5, 5], red: false,
+      origin: [0, 13.5, 3.65], mid: 2, tip: 5, midFin: [3, 3.5], tipFin: [5.5, 5], red: false,
       segs: [{ len: 5.5, w: 3.4, d: 3 }, { len: 5, w: 2.9, d: 2.6 }, { len: 4.5, w: 2.4, d: 2.2 }, { len: 4.5, w: 2, d: 1.8 }, { len: 4, w: 1.6, d: 1.5 }, { len: 3.5, w: 1.3, d: 1.2 }]
     },
     spines: [],

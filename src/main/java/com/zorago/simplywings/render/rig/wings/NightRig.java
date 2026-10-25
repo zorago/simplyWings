@@ -43,7 +43,7 @@ public final class NightRig extends WingRig {
     private static final String[] TIPS = {"right_finger_1_tip", "left_finger_1_tip"};
     private static final float[] TAIL_GROUND = {0.55f, 0.5f, 0.42f, 0.08f, 0.04f, 0.04f};
     private static final float[] TAIL_CURL = {0f, 0.02f, 0.1f, 0.24f, 0.3f, 0.34f};
-    private static final float[] TAIL_HANG = {0.18f, 0.1f, 0.1f, 0.08f, 0.06f, 0.05f};
+    private static final float[] TAIL_HANG = {0.35f, 0.1f, 0.1f, 0.08f, 0.06f, 0.05f};
     private static final ResourceLocation GLOW = SimplyWings.id("textures/entity/night_glow.png");
 
     private final RigPose drive = new RigPose();
@@ -124,8 +124,8 @@ public final class NightRig extends WingRig {
         float time = m.time;
         for (int k = 0; k < 6; k++) {
             float wave = Mth.sin(time * 0.25f - k * 0.8f);
-            tailPitch[k] = ground * TAIL_GROUND[k] + hang * TAIL_HANG[k] + travel * (k == 0 ? 0.06f : 0.02f + 0.03f * wave)
-                    + brake * (k == 0 ? -0.45f : -0.08f) + charge * (k == 0 ? 0.9f : k < 3 ? 0.3f : 0.05f);
+            tailPitch[k] = ground * TAIL_GROUND[k] + hang * TAIL_HANG[k] + travel * (k == 0 ? 0.18f : 0.02f + 0.03f * wave)
+                    + brake * (k == 0 ? 0.35f : 0f) + (m.launch >= 0f ? (k == 0 ? 0.45f : 0.12f) : 0f) + charge * (k == 0 ? 0.9f : k < 3 ? 0.3f : 0.05f);
             tailYaw[k] = ground * (TAIL_CURL[k] + 0.18f * walk * Mth.sin(time * 0.62f - k * 0.55f) + 0.04f * Mth.sin(time * 0.05f - k * 0.6f))
                     + hang * 0.1f * Mth.sin(time * 0.1f - k * 0.5f)
                     + travel * (-m.bank * 0.28f * (1f + 0.3f * k) + 0.05f * wave)
