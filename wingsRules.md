@@ -11,15 +11,49 @@ Carnet de logique du polish, paire par paire, avec zorago. Chaque correction fai
 
 ## Familles
 
-| Famille | Paires |
-| --- | --- |
-| Plume (oiseau, rig `FeatherWing`) | common, crow, owl, gull, hummingbird, eagle, swift, pigeon, peacock, parrot, angel, seraph, … |
-| Membrane (doigts + peau) | bat, ptero, demon, … |
-| Insecte (ailes rigides, élytres) | bee, moth, beetle, dragonfly, psyche, … |
-| Objet / machine | ornithopter, kite, copper, daedalus, patchwork, … |
-| Élémentaire / magique | fire, water, earth, air, storm, aurora, shadow, nebula, forest, amethyst, … |
+Classement établi le 25 octobre 2026 à partir des modèles (`rigs/*.bbmodel`) et des classes de rig. Les noms sont ceux des JSON d'aile (le modèle est entre parenthèses quand il diffère). Une paire peut emprunter à plusieurs familles et cumuler plusieurs aspects (voir le catalogue).
 
-La liste se précise au fil des passes ; une paire peut emprunter à deux familles (noter lesquelles dans son entrée).
+| Famille | Paires | Squelette |
+| --- | --- | --- |
+| **Plume** (oiseau, `FeatherWing`) | common (`basic`), crow, owl, gull, eagle, swift, pigeon, parrot, hummingbird, peacock, amethyst, copper, patchwork, fire, earth, nebula, shadow, storm, angel, seraph, yin_yang | épaule > bras > avant-bras > main > primaires, rangées de plumes |
+| **Membrane à doigts** | bat, demon, ptero, night, light | bras, avant-bras, main, 4 doigts à 2 phalanges, peau entre les os (night et light : `DragonWing`) |
+| **Membrane sans doigts / planeur** | squirrel, flying_fish, phantom, kite | os longs ou rayons, peau ou voile tendue, peu ou pas de battement |
+| **Insecte** | bee, ancient (`dragonfly`), beetle, moth, psyche | ailes rigides avant et arrière, sans coude. Vrombissantes (bee, ancient, beetle) ou lentes (moth, psyche). Élytres (beetle) |
+| **Machine** | ornithopter, daedalus, kite | longerons, engrenages, liaisons, propulseurs ; mouvement mécanique, pas organique |
+| **Matière non squelettique** | aurora, air, water, forest | voiles, rubans, segments de fluide, branches : la forme vient de la matière, pas d'os d'oiseau |
+
+## Catalogue des aspects
+
+Chaque aspect demande sa propre logique. Le plan de review (en fin de document) choisit une paire dominante par aspect, pour qu'au bout de la phase 1, chaque aspect ait ses règles.
+
+| Code | Aspect | Paires concernées |
+| --- | --- | --- |
+| A1 | Aile de plumes battante (base) | toute la famille plume |
+| A2 | Membrane tendue entre des doigts, qui se replie en éventail | bat, demon, ptero, night, light |
+| A3 | Planeur : membrane ou voile sans doigts, peu de battement | squirrel, flying_fish, phantom, kite |
+| A4 | Vrombissement (≥ 8 battements/s, flou par plans fantômes `ghost`) | bee, ancient, beetle, hummingbird |
+| A5 | Insecte lent : ailes avant et arrière rigides couplées, sans coude | moth, psyche |
+| A6 | Élytres : carapace qui s'ouvre avant que l'aile se déplie | beetle |
+| A7 | Plusieurs paires d'ailes à coordonner | seraph (3 paires) ; avant + arrière : bee, ancient, moth, psyche, air, aurora, forest, night, light |
+| A8 | Pièces attachées ou ornements qui ne sont pas l'aile | fire (braises), earth (cristaux), nebula (étoiles, galaxie), shadow (yeux), storm (arcs), angel (auréole, scapulaires), yin_yang (taiji), peacock (traîne), psyche (lampe, flammes), daedalus (sac, engrenages, propulseurs, flammes), patchwork (rabats), forest (fleurs, feuilles), water (gouttes), ancient (broche) |
+| A9 | Queue ou traîne | night, light, peacock, kite, squirrel, psyche |
+| A10 | Matériau : émissif, translucide, calque lumineux | émissif : fire, aurora, psyche, storm ; translucide : air, ancient, bee, beetle, flying_fish, hummingbird, nebula, shadow, water ; calque `glow` : amethyst, angel, copper, daedalus, demon, earth, light, nebula, night, phantom, seraph, shadow |
+| A11 | Matière souple ou sans os (tissu, ruban, fluide, végétal) | aurora (voiles), air (voiles et rubans), water (segments et gouttes), forest (branches) |
+| A12 | Mécanique : articulations rigides, liaisons, pièces qui tournent | ornithopter, daedalus, kite, copper (plumes de métal) |
+| A13 | Poussée continue (pas de coup par coup, `FLAG_THRUST`) | bee (25/s), hummingbird (30/s), ancient (20/s), daedalus (20/s), beetle (12/s) |
+| A14 | Asymétrie voulue (gauche ≠ droite) | yin_yang, patchwork |
+| A15 | Battement lent et majestueux (≤ 0,8/s) | angel (0,5), psyche (0,6), aurora (0,7), demon (0,7), earth, nebula, kite (0,8) |
+| A16 | Mythique : pouvoirs des Furies (charge, dash, invisibilité, transmog) | night, light |
+| A17 | Signature d'espèce d'oiseau (alula, doigts écartés, aile en M, faucille…) | crow, owl, gull, eagle, swift, pigeon, parrot, hummingbird |
+| A18 | Stationnaire spécial, qui contredit G5 (vol sur place en huit horizontal) | hummingbird, bee, ancient |
+
+## Check-list pour polir une paire
+
+1. Lire sa ligne dans les familles et ses aspects dans le catalogue, puis toutes les règles générales et celles de ses familles.
+2. Générer sa scène (`python -I tools/blockbench/scene.py <modèle>`) et l'ouvrir dans Blockbench, en mode Animate.
+3. Pour chaque règle, noter dans son entrée du journal : appliquée, adaptée (comment) ou sans objet (pourquoi).
+4. Corriger avec zorago point par point. Chaque correction qui vaut pour d'autres paires devient une règle ici.
+5. Fin de passe : `WINGS.md` à jour, jar reconstruit, commit et push. Noter ce qui reste à vérifier en jeu.
 
 ## Outil : la scène Blockbench
 
@@ -104,3 +138,62 @@ Modifications :
 11. Stationnaire (retour de zorago : l'air partait vers l'avant) : même animation, mais le plan de l'aile pivote de 80° et le battement passe de haut en bas, pour pousser l'air au sol (G5).
 
 Règles créées : P1, P2, G1, G2, G3, G4, G5.
+
+## Plan de review
+
+Deux phases. **Phase 1** : une paire dominante par aspect, choisie pour ouvrir le plus de logique nouvelle, revue une à une avec zorago, jusqu'à ce que chaque aspect ait ses règles. **Phase 2** : toutes les autres paires, une à une aussi. On applique d'abord toutes les règles de leurs familles et de leurs aspects, puis on ne polit que ce qui leur est propre.
+
+### Phase 1 : paires dominantes
+
+| # | Paire | Aspects ouverts | Pourquoi elle | Prépare |
+| --- | --- | --- | --- | --- |
+| 1 | common (`basic`) | A1 | Base de la famille plume. **Terminé.** | toute la famille plume |
+| 2 | **bat** | A2 | Anatomie la plus éloignée de l'oiseau : doigts, peau qui se tend et se plisse. Le repli en éventail des doigts et le plan de la membrane sont à inventer. | demon, ptero, night, light, phantom |
+| 3 | fire | A8, A10 (émissif) | Plume + pièces attachées (braises) + émissif + particules. La plus grosse famille dérivée. | earth, nebula, shadow, storm, amethyst, copper, angel, peacock, psyche |
+| 4 | bee | A4, A7, A13, A18, A10 (translucide) | Vrombissement, flou par plans fantômes, deux paires couplées, poussée continue, stationnaire d'insecte. | ancient, beetle, hummingbird |
+| 5 | seraph | A7 (plumes) | Trois paires de plumes à coordonner : déphasage, repli emboîté, frein et BLAST à six ailes. | angel, et les ailes arrière de night, light, air, aurora, forest |
+| 6 | night | A9, A16 | Aile de dragon (`DragonWing`), paire arrière, queue (`DragonTail`), pouvoirs des Furies. | light, et les queues de peacock, kite, squirrel, psyche |
+| 7 | beetle | A6 | Élytres qui s'ouvrent, puis aile qui se déplie : séquence en deux temps à l'envol et au repli. | — |
+| 8 | moth | A5 | Insecte lent : ailes avant et arrière couplées, sans articulation, battement souple. | psyche |
+| 9 | daedalus | A12, A13 | Machine : engrenages, longerons, propulseurs orientables, flammes, poussée continue. | ornithopter, kite, copper |
+| 10 | aurora | A11 (tissu), A15 | Voiles sans os qui ondulent et retombent, battement lent. | air, psyche |
+| 11 | water | A11 (fluide) | Segments et gouttes : une aile qui coule plutôt qu'elle ne se plie. | — |
+| 12 | forest | A11 (végétal), A8 | Branches rigides, feuilles et fleurs qui réagissent au vent, paire arrière. | — |
+| 13 | squirrel | A3, A9 | Planeur : membrane sans doigts tendue entre les membres, queue de stabilisation. | flying_fish, phantom, kite |
+| 14 | yin_yang | A14 | Asymétrie voulue : deux ailes qui ne font pas la même chose, avec le taiji. | patchwork |
+| 15 | hummingbird | A4 + A1, A17, A18 | Hybride plume et vrombissement, stationnaire en huit horizontal (exception à G5). | — |
+| 16 | eagle | A17 | Premier oiseau d'espèce : doigts écartés, alula, battement lent et ample. Ouvre la méthode des signatures d'espèce. | crow, owl, gull, swift, pigeon, parrot |
+
+### Phase 2 : toutes les autres paires
+
+| Paire | Familles et aspects à appliquer | Propre à elle |
+| --- | --- | --- |
+| crow | P, A17 | battements en aviron |
+| owl | P, A17 | grands coups doux et silencieux |
+| gull | P, A17 | plané en M |
+| swift | P, A17 | faucille verrouillée, petits coups |
+| pigeon | P, A17 | claquement d'ailes en haut |
+| parrot | P, A17 | couleurs, battement nerveux |
+| peacock | P, A8, A9 | traîne |
+| amethyst | P, A10 (calque) | plumes de cristal |
+| copper | P, A10, A12 | plumes de métal, vert-de-gris |
+| patchwork | P, A8, A14 | rabats rapiécés |
+| earth | P, A8, A10, A15 | cristaux, battement lourd |
+| nebula | P, A8, A10, A15 | étoiles et galaxie |
+| shadow | P, A8, A10 | yeux |
+| storm | P, A8, A10 | arcs électriques |
+| angel | P, A7, A8, A10, A15 | auréole, scapulaires, battement très lent |
+| demon | M, A10, A15 | membrane lourde |
+| ptero | M | propatagium, griffes, membrane d'un seul tenant |
+| light | M, A7, A9, A16 | transmog |
+| phantom | A3, A10 | membrane de mort-vivant |
+| flying_fish | A3, A10 | nageoires à rayons |
+| kite | A3, A9, A12, A15 | longerons, voile, queue |
+| ornithopter | A12 | bielles et poulies |
+| ancient (`dragonfly`) | I, A4, A7, A8, A13, A18 | quatre ailes indépendantes, broche |
+| psyche | I, A5, A8, A9, A10, A15 | flammes d'âme, lampe |
+| air | A7, A10, A11 | voiles et rubans |
+
+P = famille plume (P1, P2), M = membrane à doigts, I = insecte. Les règles générales (G1 à G5) s'appliquent toujours, adaptées à l'anatomie.
+
+**Prochaine paire : bat** (phase 1, n° 2).
