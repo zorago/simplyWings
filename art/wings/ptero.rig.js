@@ -68,8 +68,7 @@ var RIG = (() => {
   const mid1 = (S[0] + E[0]) / 2, mid2 = (E[0] + W[0]) / 2
   const arm = [atB('arm', S[0], y), atB('arm', mid1, y), atB('forearm', E[0], y), atB('forearm', mid2, y), atB('hand', W[0], y)]
   const panels = [
-    { name: 'brachiopatagium_inner', rows: 3, a: flank, b: arm },
-    { name: 'brachiopatagium_outer', rows: 3, a: chain, b: trailing },
+    { name: 'brachiopatagium', rows: 3, a: [...flank, ...trailing.slice(1)], b: [...arm, ...chain.slice(1)] },
     {
       name: 'propatagium', rows: 1, a: arm,
       b: [atB('propatagium', S[0], y + 0.7), atB('propatagium', mid1, y + 2), atB('propatagium', E[0], y + 2.2), atB('propatagium', mid2, y + 1.6), atB('hand', W[0], y)]

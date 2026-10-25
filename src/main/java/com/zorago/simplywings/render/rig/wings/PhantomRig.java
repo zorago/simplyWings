@@ -19,6 +19,7 @@ public final class PhantomRig extends WingRig {
     private static final float FOLD_ARM = 1.2f;
     private static final float FOLD_ELBOW = 2.55f;
     private static final float FOLD_WRIST = 2.35f;
+    private static final float REST_FOLD = 0.78f;
     private static final float GLIDE_BILLOW = 0.45f;
     private static final String[] TIPS = {"right_hand", "left_hand"};
     private static final float[] KEYS = Cycle.beat(0.5f, 0.2f);
@@ -77,7 +78,7 @@ public final class PhantomRig extends WingRig {
         drive.zero();
         float time = m.time;
         float rouse = memory.get(ROUSE, m.partialTick);
-        drive.blendIn(m.w(WingMotion.GROUND), state.clear().set(RigPose.FOLD, Mth.lerp(rouse, 1f, 0.5f))
+        drive.blendIn(m.w(WingMotion.GROUND), state.clear().set(RigPose.FOLD, Mth.lerp(rouse, REST_FOLD, 0.5f))
                 .set(RigPose.STROKE, Mth.lerp(rouse, 0.08f, 0.3f)).set(RigPose.SWEEP, 0.15f * rouse));
         drive.blendIn(m.w(WingMotion.CHARGE), state.clear().set(RigPose.FOLD, 0f).set(RigPose.STROKE, 0.35f)
                 .set(RigPose.SWEEP, 0.75f).set(RigPose.TWIST, 0.1f).set(RigPose.BEND_TIPS, -0.15f));

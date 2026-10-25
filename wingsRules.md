@@ -610,6 +610,10 @@ Règles appliquées avant revue :
 - G1 à G5 via `FlightRules` : parachute, frein lent, charge et BLAST, battement anatomique (l'ancien descendait à −57°), stationnaire à plat, traînées au bout du doigt.
 - Conservé : le doigt unique qui se replie au métacarpe, les griffes, les 3 idles, l'atterrissage en deux temps.
 
+Retour de zorago :
+
+1. La peau était en deux panneaux (intérieur flanc-bras, extérieur main-doigt) qui ne partageaient qu'une couture au milieu : chacun se bombait de son côté et un trou s'ouvrait entre eux. C'est maintenant un seul brachiopatagium continu, du flanc et de la hanche jusqu'au bord de fuite, et du bras jusqu'au bout du doigt. Règle M1 précisée : une membrane d'un seul tenant est un seul panneau, jamais deux panneaux cousus.
+
 ### 34. Furie éclatante (`light`, membrane à doigts, aspects A7, A9, A16)
 
 Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
@@ -634,6 +638,10 @@ Règles appliquées avant revue :
 - S1 sans objet : le phantom a son propre squelette d'aile.
 - G1 à G5 via `FlightRules` : parachute, frein lent, charge et BLAST, battement anatomique (l'ancien descendait à −43°), stationnaire à plat, traînées au bout de la main.
 - Conservé : l'onde de mort-vivant qui court du bras à la pointe au plané, le repli compact.
+
+Retour de zorago :
+
+1. Au repos, les ailes étaient trop repliées et la peau se froissait : repli de repos ramené à 78 % (au lieu de 100 %).
 
 ### 36. Ailes de poisson volant (`flying_fish`, planeur, aspects A3, A10)
 
