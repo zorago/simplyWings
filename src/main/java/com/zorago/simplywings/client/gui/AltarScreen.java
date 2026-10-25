@@ -265,7 +265,11 @@ public class AltarScreen extends AbstractContainerScreen<AltarMenu> {
         int y = 60;
         String[] keys = {"rates_b", "rates_a", "rates_s", "rates_ss", "rates_sss", "rates_mythic", "rates_pity_s", "rates_pity_ss",
                 "rates_pity_sss", "rates_reset", "rates_no_5050"};
-        g.fill(x - 6, y - 6, x + 330, y + 18 + keys.length * 11, 0xCC0C0614);
+        int w = 0;
+        for (String key : keys) {
+            w = Math.max(w, font.width(Component.translatable("screen.simplywings.altar." + key)));
+        }
+        g.fill(x - 6, y - 6, x + w + 8, y + 18 + keys.length * 11, 0xCC0C0614);
         g.drawString(font, Component.translatable("screen.simplywings.altar.rates_title"), x, y, 0xFFE8DDFF, true);
         for (int i = 0; i < keys.length; i++) {
             g.drawString(font, Component.translatable("screen.simplywings.altar." + keys[i]), x, y + 14 + i * 11, 0xFFCFC6DE, false);

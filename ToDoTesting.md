@@ -291,11 +291,14 @@ Reste à tester :
 
 Codé sans lancer Minecraft (zorago utilisait le PC). Conception et choix par défaut dans `gatcha.md`.
 - [ ] Monde de construction `run/saves/SimplyWings Builds` : `/simplywings sanctum build` pose maintenant les cinq structures (x 0 à 400), dont le sanctuaire d'invocation (x 300) et l'île de la fontaine (x 400), pour la retouche à la main.
-- [ ] Coffres : `/loot spawn ~ ~ ~ loot minecraft:chests/simple_dungeon` plusieurs fois (environ 4 % avec des plumes), `minecraft:chests/end_city_treasure` (3 à 7 plumes) ; avec Lootr dans le pack.
+- [ ] Coffres : `/loot spawn ~ ~ ~ loot minecraft:chests/simple_dungeon` une centaine de fois dans l'Overworld (environ 5 % avec 1 à 3 plumes), puis dans le Nether (10 %) et dans l'End avec `minecraft:chests/end_city_treasure` (20 %) ; jamais plus de 3 plumes, même avec Chance ; avec Lootr dans le pack.
+- [ ] Gacha corrigé : un tirage B ou A donne **un seul** objet (plus de piles) ; onglet Taux à jour (valeurs de revente).
 - [ ] Autel : `/setblock ~ ~ ~ simplywings:draconic_altar`, clic droit : fenêtre, illustration, tracker, onglets Historique et Taux ; `/simplywings gacha feathers 64` ; ×1 et ×10 ; plumes retirées ; objets donnés (ou jetés si l'inventaire est plein) ; animation (comète, flash, cartes, rayons S et plus, récapitulatif), clic et Échap pour passer.
 - [ ] Garanties : `/simplywings gacha pity 99 0 0` puis ×1 → S garanti ; `pity 0 499 0` → SS ; `pity 0 0 999` → SSS ; compteurs remis à zéro dans le tracker ; `gacha info`.
 - [ ] Le tirage est refusé sans la fenêtre ouverte et sans assez de plumes (message) ; en créatif, pas de coût.
-- [ ] Fontaine : `/setblock ~ ~ ~ simplywings:offering_fountain`, poser des items du mod, valeur affichée, « Offer » → plumes + réserve ; les objets sans valeur restent et reviennent à la fermeture.
+- [ ] Fontaine : `/setblock ~ ~ ~ simplywings:offering_fountain`, 100 objets B → 1 plume, 10 objets A → 1, une paire rare → 1, épique → 10, légendaire → 100 ; réserve des fractions ; les objets sans valeur restent et reviennent à la fermeture.
+- [ ] Autel et fontaine se cassent à la pioche (pas à la main), tombent en item, se reposent ailleurs et fonctionnent.
+- [ ] Régénération : casser l'autel, la fontaine, l'établi de la forge et le compresseur, puis `/simplywings dragon` (mort simulée) → ils reviennent, le reste des structures n'est pas touché ; à partir de la 6e mort, un trou creusé dans une île et un bloc posé à la place d'un bloc du template sont réparés, une construction dans le vide reste.
 - [ ] Structures par de vraies morts du dragon : 1re → sanctuaire d'invocation sous l'île (voile noir, autel au centre), 5e → île de la fontaine en carré avec les trois autres, compas de l'autel et de la fontaine.
 - [ ] Monde ancien (îles en triangle) : la fontaine se pose dans le plus grand écart.
 - [ ] Serveur dédié pour tout ce qui précède.

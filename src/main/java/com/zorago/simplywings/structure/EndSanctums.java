@@ -12,6 +12,7 @@ import net.minecraft.core.GlobalPos;
 import java.nio.file.Path;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.Vec3i;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
@@ -147,9 +148,10 @@ public final class EndSanctums {
         }
         data.kills++;
         data.setDirty();
+        boolean rebuild = data.kills >= ServerConfig.REBUILD_DRAGON.get();
         for (Sanctum sanctum : Sanctum.values()) {
             if (data.kills >= sanctum.dragon()) {
-                BlockPos center = place(level, sanctum);
+                BlockPos center = place(level, sanctum, rebuild);
                 if (center != null && data.kills >= sanctum.compassDragon()) {
                     giveCompasses(level, sanctum, center);
                 }
@@ -217,15 +219,20 @@ public final class EndSanctums {
     }
 
     public static BlockPos place(ServerLevel level, Sanctum sanctum) {
+        return place(level, sanctum, true);
+    }
+
+    public static BlockPos place(ServerLevel level, Sanctum sanctum, boolean rebuild) {
         ResourceLocation id = SimplyWings.id(sanctum.id());
         StructureTemplate template = level.getStructureManager().getOrCreate(id);
         if (template.getSize().getX() == 0) {
             SimplyWings.LOGGER.error("Missing structure template {}", id);
             return null;
         }
+        boolean first = data(level).centers[sanctum.ordinal()] == null;
         BlockPos center = center(level, sanctum);
         BlockPos origin = center.subtract(sanctum.templateCenter);
-        StructurePlaceSettings settings = new StructurePlaceSettings().addProcessor(new KeepExisting());
+        StructurePlaceSettings settings = new StructurePlaceSettings().addProcessor(new Repair(rebuild || first));
         template.placeInWorld(level, origin, origin, settings, level.getRandom(), Block.UPDATE_CLIENTS);
         return center.above();
     }
@@ -290,12 +297,21 @@ public final class EndSanctums {
         player.displayClientMessage(Component.translatable("message.simplywings." + sanctum.id()), false);
     }
 
-    private static final class KeepExisting extends StructureProcessor {
+    private static final class Repair extends StructureProcessor {
+        private final boolean everything;
+
+        private Repair(boolean everything) {
+            this.everything = everything;
+        }
+
         @Override
         public StructureTemplate.StructureBlockInfo processBlock(LevelReader level, BlockPos offset, BlockPos pos,
                                                                  StructureTemplate.StructureBlockInfo blockInfo,
                                                                  StructureTemplate.StructureBlockInfo relative,
                                                                  StructurePlaceSettings settings) {
+            if (!everything && !SimplyWings.MOD_ID.equals(BuiltInRegistries.BLOCK.getKey(relative.state().getBlock()).getNamespace())) {
+                return null;
+            }
             return level.getBlockState(relative.pos()).is(relative.state().getBlock()) ? null : relative;
         }
 

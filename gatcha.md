@@ -4,11 +4,13 @@ Dernier morceau de gameplay du mod, imaginé par zorago le 25 octobre 2026. Ce d
 
 **État (25 octobre 2026, soir)** : tout est implémenté, avec des animations provisoires ; rien n'est encore testé en jeu (voir `ToDoTesting.md` § 14). Les points « à valider » ont reçu une valeur par défaut, notée **[défaut]**, à confirmer par zorago.
 
+**Correction de zorago (25 octobre, nuit)** : un seul exemplaire par tirage B et A (plus de piles), économie **exponentielle** à la fontaine (B 100 pour 1, A 10 pour 1, S 1 pour 1, SS 1 pour 10, SSS 1 pour 100), coffres à 5 % / 10 % / 20 % selon la dimension avec toujours 1 à 3 invocations, autel et fontaine **cassables et récupérables**, blocs du mod régénérés à chaque dragon et structures entièrement reconstruites à partir du sixième. Le présent document est à jour de cette correction ; les animations finales sont spécifiées dans `GACHA_ANIMATIONS.md`.
+
 ## Pourquoi un gacha, et pourquoi il ne casse pas le jeu
 
 Le gacha est une **voie bonus** pour obtenir des ailes et des ressources, à côté des routes de craft (qui restent la voie principale et sûre). Trois garde-fous :
 
-- **Pas d'achat, pas de farm infini** : une invocation ne s'obtient que par l'exploration (coffres du monde) ou le recyclage d'items du mod (fontaine aux offrandes), avec un rendement volontairement faible (voir § Économie).
+- **Pas d'achat, pas de farm infini** : une invocation ne s'obtient que par l'exploration (coffres du monde) ou le recyclage d'items du mod (fontaine aux offrandes), avec un rendement maîtrisé (voir § Économie).
 - **Garanties transparentes** : chaque palier a une garantie dure, une garantie douce visible, et un compteur de pitié affiché dans l'interface. **Pas de 50/50** : ce qui tombe est tiré dans le palier entier, il n'y a pas de bannière « vedette ».
 - **Un but dès le début de partie** : l'item d'invocation est le seul du mod qui apparaît **sans la condition « imprégné »** (énergie ailée). Le joueur en trouve dans les coffres avant même de connaître le mod : c'est un indice de son existence et une promesse (« il y a quelque chose à faire avec ça »).
 
@@ -21,8 +23,8 @@ Le gacha est une **voie bonus** pour obtenir des ailes et des ressources, à cô
 ### Où on la trouve
 
 1. **Coffres de loot du monde** : un Global Loot Modifier ajoute des invocations à **toutes les loot tables de coffres vanilla** (`minecraft:chests/*`), au rang des trésors. Compatible Lootr (Lootr régénère chaque coffre par joueur à partir des mêmes loot tables, donc le modificateur s'applique à chaque joueur). Les tables de coffres des autres mods (`*:chests/*`) sont incluses par défaut, désactivables en config.
-   - Hors de l'End : chance par coffre **4 %**, **+2 % par niveau de chance** (attribut `luck`), 1 à 2 invocations. Soit environ **0,06 invocation par coffre** en moyenne.
-   - **Dans l'End** (tables `end_city_treasure` et toutes les tables de coffres générées dans l'End, y compris celles des mods de structures de l'End) : **5 invocations en moyenne par coffre** (3 à 7, +1 par niveau de chance). Une petite cité de l'End rapporte ainsi une dizaine d'invocations : ça redonne envie d'explorer l'End vanilla, souvent délaissé une fois les élytres trouvées.
+   - Chance par coffre selon la dimension où le coffre est ouvert : **5 %** dans l'Overworld (et toute autre dimension), **10 %** dans le Nether (et les tables `bastion` et `nether_bridge`), **20 %** dans l'End (et les tables `end_city`). **+2 % par niveau de chance** (attribut `luck`).
+   - Contenu : **toujours 1 à 3 invocations, jamais plus**, quelle que soit la chance ou la dimension. Soit en moyenne 0,10 invocation par coffre dans l'Overworld, 0,20 dans le Nether, 0,40 dans l'End.
 2. **Fontaine aux offrandes** (cinquième structure, voir plus bas) : elle transforme les items du mod en invocations.
 
 ## Les paliers de loot
@@ -31,8 +33,8 @@ Cinq paliers, du plus commun au plus rare. Chaque tirage donne exactement un pal
 
 | Palier | Contenu | Taux de base |
 | --- | --- | --- |
-| **B** | Une pile de **ressources primaires** du mod : tout ce qui n'est pas craftable (drops imprégnés, essences en flacon, matières de base des routes). La taille de la pile dépend de la valeur de la ressource (beaucoup de communes, peu de rares). | le reste (≈ 86 %) |
-| **A** | Un **objet craftable** du mod : intermédiaires, harnais, cœurs, pièces d'aile (tout ce qui sort d'une table ou d'un établi, hors paires d'ailes). | 12 % |
+| **B** | **Une** ressource primaire du mod (un seul exemplaire) : un drop non craftable des routes (56 objets, tous équiprobables). | le reste (≈ 86 %) |
+| **A** | **Un** objet craftable du mod : intermédiaires, harnais, cœurs, pièces d'aile (132 objets, tous équiprobables, hors paires d'ailes). | 12 % |
 | **S** | Une **paire d'ailes rare** (21 paires). | 0,6 % |
 | **SS** | Une **paire d'ailes épique** (11 paires). | 0,1 % |
 | **SSS** | Une **paire d'ailes légendaire** (6 paires). Puis **1 chance sur 100** que ce SSS devienne une **paire mythique** (Night ou Light, au hasard parmi les deux, de préférence celle que le joueur n'a pas encore), avec une animation spéciale. | 0,03 % |
@@ -71,28 +73,22 @@ Les garanties dures ne sont presque jamais atteintes : la garantie douce les fai
 
 ## Économie : la fontaine aux offrandes
 
-La fontaine recycle **n'importe quel item du mod** en invocations. Chaque item a une **valeur** calculée à partir de sa route de craft :
+La fontaine rachète **ce que donne l'autel**, avec une **économie exponentielle** : chaque palier vaut dix fois le précédent.
 
-- valeur d'une ressource primaire = sa difficulté d'obtention (rareté de la source, condition « imprégné », dimension, danger du mob ou du bloc) ;
-- valeur d'un objet craftable = somme des valeurs de ses ingrédients (ingrédients vanilla compris, chacun avec sa propre valeur) + le coût en essences de la recette + une petite prime de travail ;
-- invocations rendues = valeur ÷ coût d'une invocation, la partie décimale étant gardée en réserve dans la fontaine pour le joueur (rien ne se perd).
+| Ce qu'on offre | Invocations rendues | Valeur d'un exemplaire |
+| --- | --- | --- |
+| 100 objets **B** (ressources primaires) | 1 | 0,01 |
+| 10 objets **A** (objets craftables) | 1 | 0,1 |
+| 1 paire **S** (rare) | 1 | 1 |
+| 1 paire **SS** (épique) | 10 | 10 |
+| 1 paire **SSS** (légendaire) | 100 | 100 |
+| 1 paire **mythique** | 100 **[défaut]** (même valeur que SSS, puisque c'est un SSS transformé) | 100 |
 
-Repères voulus par zorago :
+La partie décimale est gardée en réserve dans la fontaine pour le joueur (rien ne se perd). Les autres items du mod (essences, conteneurs, compas, blocs) n'ont pas de valeur et restent dans la fontaine, rendus à la fermeture.
 
-- il faut environ **200 ressources primaires de bas niveau** (celles qu'on récupère sur du bois, par exemple) pour **1 invocation** ;
-- un **cœur de dernier palier** donne environ **20 invocations**.
+Les valeurs ne sont pas tapées à la main : `python -I tools/crafting_gen/values.py` lit les listes `DROPS`, `INTERMEDIATES` et `PARTS` de `item/MaterialIds` et la rareté de chaque paire, et écrit `data/simplywings/simplywings_offering/values.json` (rechargé par `/reload`, réglable par les packs).
 
-**Rendement d'un tirage : environ 10 pour 1.** La valeur moyenne de ce que rapporte un tirage, mesurée avec ces mêmes valeurs de fontaine, vaut environ **10 % du coût d'une invocation**. Conséquences :
-
-- on ne peut pas boucler (tirer, recycler ce qu'on a tiré, retirer) : chaque tour perd environ 90 % ;
-- la répartition de ces 10 % entre les paliers fixe la valeur de fontaine des paires d'ailes. Exemple d'équilibre (à recalculer par l'outil) : paire rare ≈ 3 invocations, épique ≈ 8, légendaire ≈ 20, objet A ≈ 0,1, pile B ≈ 0,003 ; un doublon d'aile n'est donc pas perdu, il se recycle.
-
-Les valeurs ne sont pas tapées à la main : `python -I tools/crafting_gen/values.py` les calcule depuis les sources de drops (`loot_source`) et les recettes générées (composants et assemblages), et écrit `data/simplywings/simplywings_offering/values.json` (rechargé par `/reload`, réglable par les packs). Méthode :
-
-- valeur brute d'un drop = 0,5 × multiplicateur de difficulté (dimension, mob ou bloc dangereux, condition) ÷ chance^0,6 ; valeurs brutes fixes pour les ingrédients vanilla (fer 1, diamant 8, étoile du Nether 150…) ;
-- valeur brute d'un objet craftable = somme des ingrédients × 1,1 + coût en essences × 0,012 ;
-- courbe finale `valeur = a × brut^b`, calée sur les deux repères : un gland (drop de bois) = 0,005 invocation (200 pour une), le cœur de dernier palier (cœur de Night) = 20 invocations. Résultat : b ≈ 1,45, donc un objet fabriqué vaut un peu plus que ses ingrédients (fabriquer avant d'offrir est récompensé) ;
-- rendement : le tirage A pondère chaque objet craftable par 1 / sa valeur (moyenne ≈ 0,03 invocation) ; les paires valent en moyenne 0,28 (rare), 1,5 (épique), 6 (légendaire), 47 (mythique) ; la valeur d'une pile B (config `gacha.bStackValue` = 0,094) est réglée pour que la valeur moyenne d'un tirage fasse exactement **0,10 invocation**.
+**Rendement d'un tirage** (simulateur, garanties comprises) : si l'on revendait tout ce qu'on tire, un tirage rapporterait en moyenne **0,19 invocation**, dont seulement 0,02 pour B et A ; le reste vient des paires (la part des SSS domine : 0,14). En pratique, la première copie d'une paire sert à la débloquer : seuls les doublons se revendent, donc le rendement réel est plus bas, et il augmente quand la collection se remplit (c'est voulu : les doublons de fin de partie financent les dernières paires). On ne peut pas boucler : chaque tour perd au moins 80 %.
 
 ## Les deux nouvelles structures
 
@@ -102,8 +98,8 @@ Le mod a aujourd'hui trois sanctuaires de l'End (2e, 3e et 4e morts du dragon). 
 
 - Apparaît après la **première** mort du dragon, **sous l'île principale de l'End**, caché par un **voile de blocs noirs** (blackstone, obsidienne, béton noir) qui le fait passer pour le vide ou la roche. On peut le trouver par hasard en creusant, mais rien ne le signale.
 - Son **compas** n'est donné qu'à la **cinquième** mort du dragon, en même temps que l'apparition de la fontaine.
-- Au centre : l'**autel draconique** (« Draconic Altar »), un bloc unique dans la vibe ange, démon et dragon : socle en os de dragon et obsidienne, ailes de plumes blanches d'un côté et de membrane rouge de l'autre, cristaux de l'End en suspension, flammes violettes. Clic droit : ouvre l'interface d'invocation. Il n'est pas craftable et il est **incassable en survie** **[défaut]**, comme la bedrock ; s'il disparaît quand même, il est réparé à la mort suivante du dragon, comme les autres sanctuaires. Un autel en jeu suffit (il n'y a pas d'autel portatif).
-- Placement : comme les autres sanctuaires (template généré par script, réparation sans écraser les blocs posés par les joueurs), jamais via un hook interne d'`EndDragonFight`.
+- Au centre : l'**autel draconique** (« Draconic Altar »), un bloc unique dans la vibe ange, démon et dragon : socle en os de dragon et obsidienne, ailes de plumes blanches d'un côté et de membrane rouge de l'autre, cristaux de l'End en suspension, flammes violettes. Clic droit : ouvre l'interface d'invocation. Il n'est pas craftable, mais il est **cassable à la pioche et récupérable** (il se pose ailleurs, par exemple dans la base du joueur). La mort suivante du dragon en fait repousser un dans le sanctuaire (voir § Régénération).
+- Placement : comme les autres sanctuaires (template généré par script), jamais via un hook interne d'`EndDragonFight`.
 
 ### 2. La fontaine aux offrandes (quatrième île)
 
@@ -113,6 +109,13 @@ Le mod a aujourd'hui trois sanctuaires de l'End (2e, 3e et 4e morts du dragon). 
   - Monde existant (trois îles déjà posées en triangle) : on ne déplace rien ; la fontaine se pose dans le plus grand écart entre deux îles **[défaut]**.
 - Au centre : la **fontaine aux offrandes**, un bassin d'essence où l'on jette (ou dépose dans une interface) des items du mod ; elle affiche leur valeur et rend les invocations.
 - Compas de la fontaine donné à la cinquième mort, avec celui du sanctuaire d'invocation.
+
+### Régénération des cinq structures
+
+- **Tous les blocs du mod** (autel, fontaine, établi de la forge, table d'assemblage, compresseur) sont cassables à la pioche et se récupèrent.
+- **À chaque nouvelle mort du dragon**, chaque structure déjà apparue remet en place **les blocs du mod qui manquent** à leur emplacement ; le reste de la structure n'est pas touché.
+- **À partir de la sixième mort** (config `gacha.rebuildDragon`), chaque mort **reconstruit entièrement** les cinq structures : chaque bloc du template est reposé là où le monde diffère, **sans les blocs d'air** (les templates n'en contiennent pas : ce que les joueurs ont construit dans les vides reste). Interprétation **[défaut]** : la reconstruction se fait à chaque mort à partir de la sixième, pas une seule fois.
+- La toute première pose d'une structure est toujours complète.
 
 Les cinq structures seront ensuite **polies à la main par zorago** (générées par script d'abord, comme les trois sanctuaires actuels).
 
@@ -128,7 +131,7 @@ Les cinq structures seront ensuite **polies à la main par zorago** (générées
 
 1. **Lancement** : l'autel s'embrase, une plume (ou une comète) traverse un ciel étoilé. Sa couleur annonce le meilleur palier du tirage : B blanc, A bleu, S violet, SS or, SSS rouge sang irisé ; mythique noir et blanc entrelacés (Night et Light).
 2. **Révélation** : un objet à la fois en ×1 ; en ×10, révélation une par une puis récapitulatif en grille. Bouton « passer ».
-3. **Paliers S, SS et SSS** : chacun a sa propre animation d'apparition, **à créer ensemble** ; le mythique a son animation à lui.
+3. **Chaque palier** (B, A, S, SS, SSS, mythique Night, mythique Light) a sa propre animation 3D + 2D : cahier des charges complet dans **`GACHA_ANIMATIONS.md`**.
 
 Direction artistique des animations : motion design **low poly**, ombres et lumières travaillées, **sound design complet** (sfx par étape) et musique. Les originaux sont montés et exportés en **MP4** (vitrine et bande-annonce du mod).
 
@@ -140,7 +143,7 @@ Contrainte technique : Minecraft ne lit pas les vidéos et le mod n'a **aucune d
 - Réseau : `GachaPull` (client → serveur, ×1 ou ×10, refusé si la fenêtre de l'autel n'est pas ouverte), `GachaState` et `GachaResults` (serveur → client, à l'ouverture et après un tirage, jamais par tick).
 - Client : `ClientGacha`, `AltarScreen` (illustration, tracker de pitié, historique, taux ; animation provisoire : comète colorée par le meilleur palier, d'abord bleue puis qui bascule pour S et plus, flash, cartes révélées une à une avec des rayons pour S et plus, récapitulatif ×10, sons vanilla provisoires), `FountainScreen`.
 - Structures : `EndSanctums` (îles en carré, sanctuaire d'invocation sous l'île à y = `gacha.summoningY`, compas au 5e dragon), templates générés par `tools/crafting_gen/sanctums.py` (`summoning_sanctum`, `offering_fountain`). Modèles et textures de l'autel, de la fontaine, de la plume et de l'illustration : `tools/crafting_gen/gacha_blocks.py` (provisoires, à refaire avec zorago).
-- Config serveur `[gacha]` : taux, garanties, valeur des piles B, coffres, hauteur du sanctuaire, dragons de la fontaine et du compas.
+- Config serveur `[gacha]` : taux, garanties, coffres (chances par dimension, 1 à 3), hauteur du sanctuaire, dragons de la fontaine, du compas et de la reconstruction.
 - Commandes : `/simplywings gacha feathers <n>`, `gacha pity <s> <ss> <sss>`, `gacha reset`, `gacha info`, et `/simplywings sanctum summoning_sanctum|offering_fountain` (pose et compas).
 
 ## Ordre d'implémentation proposé (fait, sauf l'étape 7 en provisoire et l'étape 8 reportée)

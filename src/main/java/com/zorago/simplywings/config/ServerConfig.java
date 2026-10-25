@@ -58,16 +58,17 @@ public final class ServerConfig {
     public static final ModConfigSpec.DoubleValue STEP_S;
     public static final ModConfigSpec.DoubleValue STEP_SS;
     public static final ModConfigSpec.DoubleValue STEP_SSS;
-    public static final ModConfigSpec.DoubleValue B_STACK_VALUE;
     public static final ModConfigSpec.DoubleValue CHEST_CHANCE;
+    public static final ModConfigSpec.DoubleValue NETHER_CHEST_CHANCE;
+    public static final ModConfigSpec.DoubleValue END_CHEST_CHANCE;
     public static final ModConfigSpec.DoubleValue CHEST_LUCK_BONUS;
+    public static final ModConfigSpec.IntValue CHEST_MIN;
     public static final ModConfigSpec.IntValue CHEST_MAX;
-    public static final ModConfigSpec.IntValue END_CHEST_MIN;
-    public static final ModConfigSpec.IntValue END_CHEST_MAX;
     public static final ModConfigSpec.BooleanValue MODDED_CHESTS;
     public static final ModConfigSpec.IntValue SUMMONING_Y;
     public static final ModConfigSpec.IntValue FOUNTAIN_DRAGON;
     public static final ModConfigSpec.IntValue SUMMONING_COMPASS_DRAGON;
+    public static final ModConfigSpec.IntValue REBUILD_DRAGON;
 
     public static final ModConfigSpec.DoubleValue CRASH_THRESHOLD;
     public static final ModConfigSpec.DoubleValue CRASH_DAMAGE_PER_SPEED;
@@ -205,18 +206,20 @@ public final class ServerConfig {
         STEP_S = b.defineInRange("stepS", 0.05, 0.0, 1.0);
         STEP_SS = b.defineInRange("stepSS", 0.01, 0.0, 1.0);
         STEP_SSS = b.defineInRange("stepSSS", 0.005, 0.0, 1.0);
-        B_STACK_VALUE = b.comment("Offering value (in summons) of a B pull: the stack size of the drawn resource is this value divided by the resource value.")
-                .defineInRange("bStackValue", 0.094, 0.0, 10.0);
-        CHEST_CHANCE = b.comment("Chance that a loot chest outside the End holds Summoning Feathers.").defineInRange("chestChance", 0.04, 0.0, 1.0);
+        CHEST_CHANCE = b.comment("Chance that a loot chest of the Overworld (or of any other dimension) holds Summoning Feathers.")
+                .defineInRange("chestChance", 0.05, 0.0, 1.0);
+        NETHER_CHEST_CHANCE = b.comment("Same chance for a loot chest of the Nether.").defineInRange("netherChestChance", 0.10, 0.0, 1.0);
+        END_CHEST_CHANCE = b.comment("Same chance for a loot chest of the End.").defineInRange("endChestChance", 0.20, 0.0, 1.0);
         CHEST_LUCK_BONUS = b.comment("Added chance per point of luck.").defineInRange("chestLuckBonus", 0.02, 0.0, 1.0);
-        CHEST_MAX = b.comment("Feathers in such a chest: 1 to this value.").defineInRange("chestMax", 2, 1, 64);
-        END_CHEST_MIN = b.comment("Feathers in every loot chest of the End: min to max, plus one per point of luck.").defineInRange("endChestMin", 3, 0, 64);
-        END_CHEST_MAX = b.defineInRange("endChestMax", 7, 0, 64);
+        CHEST_MIN = b.comment("Feathers in such a chest: chestMin to chestMax, never more, whatever the luck.").defineInRange("chestMin", 1, 1, 64);
+        CHEST_MAX = b.defineInRange("chestMax", 3, 1, 64);
         MODDED_CHESTS = b.comment("Also add feathers to the chest loot tables of other mods (any loot table under chests/).").define("moddedChests", true);
         SUMMONING_Y = b.comment("Floor height of the Summoning Sanctum, hidden under the central End island. Read once, at placement.")
                 .defineInRange("summoningY", 22, -60, 250);
         SUMMONING_COMPASS_DRAGON = b.comment("Dragon death that gives the Summoning Compass.").defineInRange("summoningCompassDragon", 5, 1, 1000);
         FOUNTAIN_DRAGON = b.comment("Dragon death that raises the Offering Fountain island.").defineInRange("fountainDragon", 5, 1, 1000);
+        REBUILD_DRAGON = b.comment("Every dragon death puts back the missing blocks of the mod in the five structures. From this dragon death on, every death also rebuilds the five structures entirely (the air of the templates is not placed).")
+                .defineInRange("rebuildDragon", 6, 1, 1000);
         b.pop();
 
         b.push("damage");

@@ -77,8 +77,8 @@ public final class ModBlocks {
     public static final DeferredBlock<DraconicAltarBlock> DRACONIC_ALTAR = BLOCKS.register("draconic_altar",
             () -> new DraconicAltarBlock(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_BLACK)
-                    .strength(-1.0F, 3600000.0F)
-                    .noLootTable()
+                    .strength(6.0F, 1200.0F)
+                    .requiresCorrectToolForDrops()
                     .lightLevel(state -> 11)
                     .sound(SoundType.DEEPSLATE_BRICKS)
                     .noOcclusion()));
@@ -90,8 +90,8 @@ public final class ModBlocks {
     public static final DeferredBlock<OfferingFountainBlock> OFFERING_FOUNTAIN = BLOCKS.register("offering_fountain",
             () -> new OfferingFountainBlock(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.QUARTZ)
-                    .strength(-1.0F, 3600000.0F)
-                    .noLootTable()
+                    .strength(6.0F, 1200.0F)
+                    .requiresCorrectToolForDrops()
                     .lightLevel(state -> 13)
                     .sound(SoundType.AMETHYST)
                     .noOcclusion()));

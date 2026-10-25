@@ -7,6 +7,7 @@ SOFT = {"S": (80, 0.05), "SS": (400, 0.01), "SSS": (800, 0.005)}
 MYTHIC = 0.01
 ORDER = ["SSS", "SS", "S"]
 RANK = {"B": 0, "A": 1, "S": 2, "SS": 3, "SSS": 4}
+VALUE = {"B": 0.01, "A": 0.1, "S": 1.0, "SS": 10.0, "SSS": 100.0}
 
 
 def rate(tier, pulls):
@@ -51,6 +52,8 @@ def main():
     for k, v in counts.items():
         print(f"{k:>3}: {v / n * 100:.3f} %")
     print(f"mythic: one in {n / max(1, mythic):.0f} pulls")
+    ev = sum(VALUE[k] * v for k, v in counts.items()) / n
+    print(f"offering value of one pull: {ev:.3f} summons, of which B+A {(VALUE['B'] * counts['B'] + VALUE['A'] * counts['A']) / n:.3f}")
     for t, g in gaps.items():
         print(f"{t:>3} or better: every {statistics.mean(g):.1f} pulls, worst {max(g)}")
 

@@ -2,6 +2,8 @@
   "values": [
     "simplywings:assembly_table",
     "simplywings:forge_bench",
-    "simplywings:cloud_compressor"
+    "simplywings:cloud_compressor",
+    "simplywings:draconic_altar",
+    "simplywings:offering_fountain"
   ]
 }

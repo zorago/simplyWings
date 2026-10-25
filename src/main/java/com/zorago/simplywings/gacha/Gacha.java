@@ -16,7 +16,6 @@ import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -127,15 +126,12 @@ public final class Gacha {
         return switch (tier) {
             case B -> {
                 List<Item> pool = ModItems.materials(MaterialIds.DROPS);
-                Item item = pool.get(random.nextInt(pool.size()));
-                double value = OfferingValues.value(item);
-                int count = value <= 0 ? 1 : Mth.clamp((int) Math.round(ServerConfig.B_STACK_VALUE.get() / value), 1, 64);
-                yield new ItemStack(item, count);
+                yield new ItemStack(pool.get(random.nextInt(pool.size())));
             }
             case A -> {
                 List<Item> pool = new ArrayList<>(ModItems.materials(MaterialIds.INTERMEDIATES));
                 pool.addAll(ModItems.materials(MaterialIds.PARTS));
-                yield new ItemStack(weighted(pool, random));
+                yield new ItemStack(pool.get(random.nextInt(pool.size())));
             }
             default -> {
                 List<WingItem> pool = wings(player.registryAccess()).get(rarity(tier));
@@ -152,24 +148,6 @@ public final class Gacha {
                 yield new ItemStack(pool.get(random.nextInt(pool.size())));
             }
         };
-    }
-
-    private static Item weighted(List<Item> pool, RandomSource random) {
-        double total = 0;
-        double[] weights = new double[pool.size()];
-        for (int i = 0; i < pool.size(); i++) {
-            double value = OfferingValues.value(pool.get(i));
-            weights[i] = value > 0 ? 1.0 / value : 1.0;
-            total += weights[i];
-        }
-        double r = random.nextDouble() * total;
-        for (int i = 0; i < pool.size(); i++) {
-            r -= weights[i];
-            if (r <= 0) {
-                return pool.get(i);
-            }
-        }
-        return pool.get(pool.size() - 1);
     }
 
     private static WingRarity rarity(GachaTier tier) {
