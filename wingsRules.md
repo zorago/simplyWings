@@ -353,6 +353,7 @@ Asymétrie (A14), proposée à zorago :
 Retour de zorago :
 
 1. Tout est validé. Les deux points du taiji passent de 2 px à 1 px (le pixel collé à la bordure est retiré).
+2. Les « yeux » des ailes (cercle blanc sur le Yin, noir sur le Yang), qui formaient un yin-yang vu de dos, étaient à moitié cachés sous les rangées de plumes. Ils passent sur les grandes couvertures de l'avant-bras, plus haut sur la plaque, et les couvertures remontent au-dessus des plumes (comme sur un vrai oiseau) : le cercle entier se voit de dos en vol.
 
 ## Plan de review
 

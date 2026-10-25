@@ -10,6 +10,10 @@ var RIG = (() => {
       { angle: -84, length: 20 }
     ]
   })
+  for (const c of b.cubes) {
+    if (c.kind === 'greater_coverts') { c.from[2] += 0.35; c.to[2] += 0.35 }
+    if (c.kind === 'arm_coverts') { c.from[2] += 0.1; c.to[2] += 0.1 }
+  }
   b.groups.push({ name: 'taiji', origin: [0, 19.5, 5.4], single: true })
   b.cubes.push({ name: 'taiji_disc', group: 'taiji', from: [-4.5, 15, 5.4], to: [4.5, 24, 5.42], kind: 'taiji' })
   b.cubes.push({ name: 'taiji_rim', group: 'taiji', from: [-0.6, 23.8, 5.2], to: [0.6, 24.6, 5.7], kind: 'rim' })

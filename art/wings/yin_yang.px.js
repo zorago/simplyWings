@@ -102,8 +102,8 @@ const fns = (T, cube) => ({
   tertials: sheet(T, { fw: 3, steps: [0, 1, 0, 2], light: 4 }),
   secondaries: sheet(T, { fw: 3, curve: true, light: 2 }),
   hand_sheet: sheet(T, { fw: 2, steps: [1, 0], light: 0 }),
-  hand_coverts: coverts(T, { fw: 3, shift: 0, eye: [2.6, 3.4] }),
-  greater_coverts: coverts(T, { fw: 3, shift: 1 }),
+  hand_coverts: coverts(T, { fw: 3, shift: 0 }),
+  greater_coverts: coverts(T, { fw: 3, shift: 1, eye: [6, 2.4] }),
   arm_coverts: coverts(T, { fw: 4, shift: 0 }),
   marginal: marginal(T),
   alula: primary(T, 10)

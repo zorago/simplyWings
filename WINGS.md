@@ -1161,7 +1161,7 @@ Dernière mise à jour : 22 octobre 2026.
 
 **Vibe** : l'équilibre et la stabilité. Aucune stat maxée, aucune faiblesse : c'est la seule légendaire qui fait exception à la règle « une stat maxée ». Le vol est posé, régulier et sûr, ni le plus rapide ni le plus endurant, mais rien ne le prend en défaut.
 
-**Apparence** : la première paire **asymétrique** du mod (modèle `rigs/yin_yang.bbmodel`, texture 256×128 avec une zone par aile). Aile gauche (Yin) : plumes noires à reflets bleu nuit, « œil » blanc près du poignet. Aile droite (Yang) : plumes blanc nacré, « œil » noir. Bord de fuite des secondaires en S. Un médaillon du taijitu tourne lentement entre les épaules ; repliées, les pointes se croisent derrière lui.
+**Apparence** : la première paire **asymétrique** du mod (modèle `rigs/yin_yang.bbmodel`, texture 256×128 avec une zone par aile). Aile gauche (Yin) : plumes noires à reflets bleu nuit, « œil » blanc sur les couvertures de l'avant-bras, visible de dos. Aile droite (Yang) : plumes blanc nacré, « œil » noir. Bord de fuite des secondaires en S. Un médaillon du taijitu tourne lentement entre les épaules ; repliées, les pointes se croisent derrière lui.
 
 **Mouvement signature** : (`YinYangRig`) calme et équilibré, plumes en rangées ; le Yin suit le Yang avec un léger retard à chaque battement, et au plané les bouts d'aile ondulent en opposition comme une balance ; le médaillon tourne plus lentement en stationnaire. 5 idles : balance (les ailes oscillent en sens opposés), cercle des pointes, respiration, échange (une aile s'ouvre pendant que l'autre se ferme), méditation.
 
