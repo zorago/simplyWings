@@ -74,7 +74,30 @@ const marginal = (T) => (x, row, dorsal) => {
   return (Math.floor(x / 2) + row) % 2 ? T.light : T.sheen
 }
 
+const rowCount = (kind) => R.cubes.filter(c => c.kind === kind).length
+
+const feather = (T, cube, o) => (x, row, dorsal, w, h) => {
+  const n = rowCount(cube.kind)
+  const t = n > 1 ? cube.index / (n - 1) : 0
+  const len = h - (o.curve ? sCurve(t) : (cube.index % 2))
+  if (row >= len) return null
+  if (row === len - 1 && (x === 0 || x === w - 1)) return null
+  const odd = cube.index % 2
+  if (dorsal) {
+    if (row >= len - 2) return T.tip
+    if (x === w - 1) return T.dark
+    if (x === 1 && row > 1 && row % 3 === 0) return T.hi
+    if (row < o.light) return odd ? T.light : T.sheen
+    return odd ? T.mid : T.light
+  }
+  if (row >= len - 2) return T.v3
+  return x === w - 1 ? T.v1 : (odd ? T.v2 : T.v3)
+}
+
 const fns = (T, cube) => ({
+  tertial_feather: feather(T, cube, { light: 4 }),
+  secondary_feather: feather(T, cube, { curve: true, light: 2 }),
+  hand_feather: feather(T, cube, { light: 0 }),
   primary: primary(T, cube.index),
   tertials: sheet(T, { fw: 3, steps: [0, 1, 0, 2], light: 4 }),
   secondaries: sheet(T, { fw: 3, curve: true, light: 2 }),

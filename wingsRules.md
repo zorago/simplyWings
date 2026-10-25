@@ -316,7 +316,7 @@ Règles appliquées avant revue :
 
 ### 13. Ailes de polatouche (`squirrel`, membrane sans doigts / planeur, aspects A3, A9)
 
-Statut : en cours, scène régénérée après le retour 5 (squelette simplifié), prête pour le jugement de zorago sur `full_flight`.
+Statut : **terminé**, validé par zorago.
 
 Règles appliquées avant revue :
 
@@ -333,6 +333,22 @@ Retour de zorago :
 5. Squelette simplifié à la demande de zorago : un seul os par aile qui suit le bras du joueur, et le tissu du bout du bras au bas du torse. L'IK, l'avant-bras et l'éperon disparaissent.
 6. Le point d'attache du haut du torse ne suivait pas le joueur et déchirait le tissu : le plugin de scène ancrait le torse sur `right_shoulder` (absent du nouveau squelette), il prend maintenant `scene_roll`. En plus, la peau passe dans le plan de l'axe de l'épaule et son coin du haut est fixé au torse.
 7. L'ancienne membrane restait affichée (deux instances du plugin après un rechargement) : le plugin efface maintenant toute membrane déjà présente avant d'en construire une. La queue était trop haute et décollée du joueur : elle part du bas du dos, collée, et ne se relève presque plus en vol.
+
+### 14. Ailes Yin et Yang (`yin_yang`, plume, aspect A14)
+
+Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+
+Règles appliquées avant revue :
+
+- P1 : rangées de plumes (`rows: true`) sur le bras, l'avant-bras et la main, couvertures sur leurs propres os. Peintes dans les deux palettes (Yin bleu nuit, Yang nacré), tons alternés. Le bord de fuite en S des secondaires est gardé, porté par la longueur de chaque plume.
+- G1 à G5 et P2 via `FlightRules` : parachute et bras de parachute, charge et BLAST, battement anatomique (l'ancien cycle descendait à −43°), stationnaire à plat (`HOVER_PLANE`), traînées au bout des primaires (`tipBones`).
+- Conservé : le médaillon taiji qui tourne (plus lentement en stationnaire, il grossit un peu quand on bat sur place) et les 5 idles (balance, cercle, respiration, échange, méditation).
+
+Asymétrie (A14), proposée à zorago :
+
+- Le Yin suit le Yang : l'aile gauche bat avec un léger retard (6 % du cycle, 0,35 rad en stationnaire), comme les deux moitiés du taiji qui se poursuivent.
+- Équilibre au plané : les bouts d'aile ondulent lentement en opposition (l'un monte quand l'autre descend), comme une balance.
+- Au repos et à l'atterrissage, les deux ailes respirent en décalé.
 
 ## Plan de review
 
@@ -354,8 +370,8 @@ Deux phases. **Phase 1** : une paire dominante par aspect, choisie pour ouvrir l
 | 10 | aurora | A11 (tissu), A15 | Voiles sans os qui ondulent et retombent, battement lent. | air, psyche |
 | 11 | water | A11 (fluide) | Segments et gouttes : une aile qui coule plutôt qu'elle ne se plie. | — |
 | 12 | forest | A11 (végétal), A8 | Branches rigides, feuilles et fleurs qui réagissent au vent, paire arrière. | — |
-| 13 | **squirrel** | A3, A9 | Planeur : membrane sans doigts tendue entre les membres, queue de stabilisation. | flying_fish, phantom, kite |
-| 14 | yin_yang | A14 | Asymétrie voulue : deux ailes qui ne font pas la même chose, avec le taiji. | patchwork |
+| 13 | squirrel | A3, A9 | Planeur : membrane sans doigts tendue entre les membres, queue de stabilisation. | flying_fish, phantom, kite |
+| 14 | **yin_yang** | A14 | Asymétrie voulue : deux ailes qui ne font pas la même chose, avec le taiji. | patchwork |
 | 15 | hummingbird | A4 + A1, A17, A18 | Hybride plume et vrombissement, stationnaire en huit horizontal (exception à G5). | — |
 | 16 | eagle | A17 | Premier oiseau d'espèce : doigts écartés, alula, battement lent et ample. Ouvre la méthode des signatures d'espèce. | crow, owl, gull, swift, pigeon, parrot |
 
@@ -391,4 +407,4 @@ Deux phases. **Phase 1** : une paire dominante par aspect, choisie pour ouvrir l
 
 P = famille plume (P1, P2), M = membrane à doigts, I = insecte. Les règles générales (G1 à G5) s'appliquent toujours, adaptées à l'anatomie.
 
-**Prochaine paire : squirrel** (phase 1, n° 13).
+**Prochaine paire : yin_yang** (phase 1, n° 14).

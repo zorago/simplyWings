@@ -1163,7 +1163,7 @@ Dernière mise à jour : 22 octobre 2026.
 
 **Apparence** : la première paire **asymétrique** du mod (modèle `rigs/yin_yang.bbmodel`, texture 256×128 avec une zone par aile). Aile gauche (Yin) : plumes noires à reflets bleu nuit, « œil » blanc près du poignet. Aile droite (Yang) : plumes blanc nacré, « œil » noir. Bord de fuite des secondaires en S. Un médaillon du taijitu tourne lentement entre les épaules ; repliées, les pointes se croisent derrière lui.
 
-**Mouvement signature** : (`YinYangRig`) symétrie parfaite et calme, le médaillon tourne plus lentement en stationnaire. 5 idles : balance (les ailes oscillent en sens opposés), cercle des pointes, respiration, échange (une aile s'ouvre pendant que l'autre se ferme), méditation.
+**Mouvement signature** : (`YinYangRig`) calme et équilibré, plumes en rangées ; le Yin suit le Yang avec un léger retard à chaque battement, et au plané les bouts d'aile ondulent en opposition comme une balance ; le médaillon tourne plus lentement en stationnaire. 5 idles : balance (les ailes oscillent en sens opposés), cercle des pointes, respiration, échange (une aile s'ouvre pendant que l'autre se ferme), méditation.
 
 **Effets** :
 - **En continu** : deux petites sphères, une noire et une blanche, orbitent lentement l'une autour de l'autre derrière le dos.
