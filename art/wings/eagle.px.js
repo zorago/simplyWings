@@ -71,6 +71,8 @@ const marginal = (x, row, dorsal) => {
   return (Math.floor(x / 2) + row) % 2 ? "y" : "T"
 }
 
+const alternate = (cube, fn) => (x, row, dorsal, w, h) => fn(x + 3 * (cube.index % 2), row, dorsal, w, h)
+
 const paint = (c) => {
   for (const cube of R.cubes) {
     if (cube.kind === "bone") { P.box(c, cube, "T", "t", "J"); continue }
@@ -83,6 +85,9 @@ const paint = (c) => {
       greater_coverts: coverts({ fw: 3, shift: 1, top: "T", mid: "t" }),
       arm_coverts: coverts({ fw: 4, shift: 0, top: "y", mid: "T" }),
       marginal,
+      tertial_feather: alternate(cube, sheet({ fw: 3, steps: [0], light: 4 })),
+      secondary_feather: alternate(cube, sheet({ fw: 3, steps: [0], light: 2 })),
+      hand_feather: alternate(cube, sheet({ fw: 3, steps: [0], light: 0 })),
       alula: primary(10)
     }[cube.kind]
     P.plate(c, cube, fn)

@@ -1,6 +1,6 @@
 var RIG = (() => {
   const b = BIRD({
-    arm: 9, forearm: 12, hand: 5, bone: 1.25,
+    rows: true, arm: 9, forearm: 12, hand: 5, bone: 1.25,
     tertials: 13, secondaries: 17, handSheet: 17, handCoverts: 7, coverts: 7, marginal: 4,
     alula: { angle: 20, length: 6 },
     primaryWidth: 5, primaryStep: [0.6, 0.4],
@@ -10,7 +10,7 @@ var RIG = (() => {
       { angle: -77, length: 16 }
     ]
   })
-  const rig = { model: 'eagle', texture: [128, 64], ...b }
+  const rig = { model: 'eagle', texture: [128, 128], ...b }
   rig.used = PACK(rig, 128)
   return rig
 })()

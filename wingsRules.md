@@ -357,7 +357,7 @@ Retour de zorago :
 
 ### 15. Ailes de colibri (`hummingbird`, plume + vrombissement, aspects A4, A17, A18)
 
-Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+Statut : **terminé**, validé par zorago sans modification.
 
 Règles appliquées avant revue (aile de plumes, mais règles insecte pour le vrombissement) :
 
@@ -368,6 +368,22 @@ Règles appliquées avant revue (aile de plumes, mais règles insecte pour le vr
 - G2 : traînées au bout de `primary_1`.
 - P1 sans objet : le bras (2 px) et l'avant-bras (3 px) sont trop courts pour porter des rangées de plumes ; l'aile du colibri est presque toute en main, et ses primaires sont déjà des plumes séparées.
 - Conservé : coude et poignet verrouillés, battement visuel sur l'horloge de rendu (~10 Hz apparents), courte rafale de bourdonnement au repos.
+
+### 16. Ailes d'aigle (`eagle`, plume, aspect A17)
+
+Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+
+Règles appliquées avant revue :
+
+- P1 : rangées de plumes (`rows: true`), couvertures sur leurs propres os, tons alternés (texture passée à 128×128 pour la place). P2 repris par `FeatherWing`.
+- G1 à G5 via `FlightRules` : parachute et bras de parachute, frein lent, charge et BLAST, battement anatomique (l'ancien cycle descendait à −60°), stationnaire à plat, traînées au bout de `primary_1`. Le cycle suit le rythme physique de la paire (montée 0,45, frappe 0,22) : remontée lente avec la pause en haut, puis coup de descente sec.
+
+Signature d'espèce (A17), conservée et adaptée :
+
+- Doigts écartés : les 6 rémiges échancrées gardent un fort relèvement (courbe des pointes 1,35 → 0,75), relevés en plané (+0,5) et frémissants au vent ; les 3 dernières restent plates.
+- Alule levée au frein lent, à l'atterrissage, au décrochage et en stationnaire.
+- Doigts qui vibrent à l'atterrissage et au frein lent (pas en parachute, figé par G1).
+- Idle : grand étirement des deux ailes au sol, moins haut qu'avant pour rester sur le dos (G8).
 
 ## Plan de review
 
@@ -391,8 +407,8 @@ Deux phases. **Phase 1** : une paire dominante par aspect, choisie pour ouvrir l
 | 12 | forest | A11 (végétal), A8 | Branches rigides, feuilles et fleurs qui réagissent au vent, paire arrière. | — |
 | 13 | squirrel | A3, A9 | Planeur : membrane sans doigts tendue entre les membres, queue de stabilisation. | flying_fish, phantom, kite |
 | 14 | yin_yang | A14 | Asymétrie voulue : deux ailes qui ne font pas la même chose, avec le taiji. | patchwork |
-| 15 | **hummingbird** | A4 + A1, A17, A18 | Hybride plume et vrombissement, stationnaire en huit horizontal (exception à G5). | — |
-| 16 | eagle | A17 | Premier oiseau d'espèce : doigts écartés, alula, battement lent et ample. Ouvre la méthode des signatures d'espèce. | crow, owl, gull, swift, pigeon, parrot |
+| 15 | hummingbird | A4 + A1, A17, A18 | Hybride plume et vrombissement, stationnaire en huit horizontal (exception à G5). | — |
+| 16 | **eagle** | A17 | Premier oiseau d'espèce : doigts écartés, alula, battement lent et ample. Ouvre la méthode des signatures d'espèce. | crow, owl, gull, swift, pigeon, parrot |
 
 ### Phase 2 : toutes les autres paires
 
@@ -426,4 +442,4 @@ Deux phases. **Phase 1** : une paire dominante par aspect, choisie pour ouvrir l
 
 P = famille plume (P1, P2), M = membrane à doigts, I = insecte. Les règles générales (G1 à G5) s'appliquent toujours, adaptées à l'anatomie.
 
-**Prochaine paire : hummingbird** (phase 1, n° 15).
+**Prochaine paire : eagle** (phase 1, n° 16).
