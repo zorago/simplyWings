@@ -24,6 +24,10 @@ public class WingItem extends Item {
         this.wing = wing;
     }
 
+    public ResourceLocation wing() {
+        return wing;
+    }
+
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);

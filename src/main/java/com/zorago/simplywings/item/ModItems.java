@@ -107,7 +107,15 @@ public final class ModItems {
             () -> new Item(new Item.Properties().stacksTo(1)));
     public static final DeferredItem<Item> REFINERY_COMPASS = ITEMS.register("refinery_compass",
             () -> new Item(new Item.Properties().stacksTo(1)));
-    public static final List<DeferredItem<Item>> COMPASSES = List.of(SANCTUM_COMPASS, FORGE_COMPASS, REFINERY_COMPASS);
+    public static final DeferredItem<Item> SUMMONING_COMPASS = ITEMS.register("summoning_compass",
+            () -> new Item(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> FOUNTAIN_COMPASS = ITEMS.register("fountain_compass",
+            () -> new Item(new Item.Properties().stacksTo(1)));
+    public static final List<DeferredItem<Item>> COMPASSES = List.of(SANCTUM_COMPASS, FORGE_COMPASS, REFINERY_COMPASS,
+            SUMMONING_COMPASS, FOUNTAIN_COMPASS);
+
+    public static final DeferredItem<Item> SUMMONING_FEATHER = ITEMS.register("summoning_feather",
+            () -> new Item(new Item.Properties().stacksTo(64).rarity(Rarity.EPIC)));
 
     private static final Map<String, DeferredItem<Item>> MATERIALS = new LinkedHashMap<>();
 
@@ -119,6 +127,14 @@ public final class ModItems {
 
     private static void material(String id, int stackSize) {
         MATERIALS.put(id, ITEMS.register(id, () -> new Item(new Item.Properties().stacksTo(stackSize))));
+    }
+
+    public static List<DeferredItem<WingItem>> wings() {
+        return WINGS;
+    }
+
+    public static List<Item> materials(List<String> ids) {
+        return ids.stream().map(ModItems::material).toList();
     }
 
     public static Item material(String id) {
@@ -133,6 +149,9 @@ public final class ModItems {
                         output.accept(ModBlocks.ASSEMBLY_TABLE_ITEM.get());
                         output.accept(ModBlocks.FORGE_BENCH_ITEM.get());
                         output.accept(ModBlocks.CLOUD_COMPRESSOR_ITEM.get());
+                        output.accept(ModBlocks.DRACONIC_ALTAR_ITEM.get());
+                        output.accept(ModBlocks.OFFERING_FOUNTAIN_ITEM.get());
+                        output.accept(SUMMONING_FEATHER.get());
                         CONTAINERS.forEach(container -> {
                             output.accept(container.get());
                             for (EssenceType type : EssenceType.values()) {

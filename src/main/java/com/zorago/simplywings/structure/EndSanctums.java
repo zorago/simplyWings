@@ -43,24 +43,36 @@ import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 
 public final class EndSanctums {
     private static final String DATA_NAME = SimplyWings.MOD_ID + "_sanctums";
-    private static final BlockPos TEMPLATE_CENTER = new BlockPos(28, 18, 28);
+    private static final BlockPos ISLAND_CENTER = new BlockPos(28, 18, 28);
+    private static final BlockPos UNDER_CENTER = new BlockPos(20, 2, 20);
     private static final int ISLAND_REACH = 36;
     private static final int BUILD_SPACING = 100;
     private static final int BUILD_Y = 0;
 
     public enum Sanctum {
-        SKY_SANCTUM("sky_sanctum", 2, ModItems.SANCTUM_COMPASS::get),
-        WING_FORGE("wing_forge", 3, ModItems.FORGE_COMPASS::get),
-        CLOUD_REFINERY("cloud_refinery", 4, ModItems.REFINERY_COMPASS::get);
+        SKY_SANCTUM("sky_sanctum", 0, () -> 2, () -> 2, ModItems.SANCTUM_COMPASS::get, ISLAND_CENTER),
+        WING_FORGE("wing_forge", 1, () -> 3, () -> 3, ModItems.FORGE_COMPASS::get, ISLAND_CENTER),
+        CLOUD_REFINERY("cloud_refinery", 2, () -> 4, () -> 4, ModItems.REFINERY_COMPASS::get, ISLAND_CENTER),
+        SUMMONING_SANCTUM("summoning_sanctum", -1, () -> 1, ServerConfig.SUMMONING_COMPASS_DRAGON::get,
+                ModItems.SUMMONING_COMPASS::get, UNDER_CENTER),
+        OFFERING_FOUNTAIN("offering_fountain", 3, ServerConfig.FOUNTAIN_DRAGON::get, ServerConfig.FOUNTAIN_DRAGON::get,
+                ModItems.FOUNTAIN_COMPASS::get, ISLAND_CENTER);
 
         private final String id;
-        private final int dragon;
+        private final int corner;
+        private final Supplier<Integer> dragon;
+        private final Supplier<Integer> compassDragon;
         private final Supplier<Item> compass;
+        private final BlockPos templateCenter;
 
-        Sanctum(String id, int dragon, Supplier<Item> compass) {
+        Sanctum(String id, int corner, Supplier<Integer> dragon, Supplier<Integer> compassDragon, Supplier<Item> compass,
+                BlockPos templateCenter) {
             this.id = id;
+            this.corner = corner;
             this.dragon = dragon;
+            this.compassDragon = compassDragon;
             this.compass = compass;
+            this.templateCenter = templateCenter;
         }
 
         public String id() {
@@ -68,7 +80,15 @@ public final class EndSanctums {
         }
 
         public int dragon() {
-            return dragon;
+            return dragon.get();
+        }
+
+        public int compassDragon() {
+            return compassDragon.get();
+        }
+
+        public boolean island() {
+            return corner >= 0;
         }
 
         public Item compass() {
@@ -109,8 +129,9 @@ public final class EndSanctums {
 
     public static boolean near(ServerLevel level, double x, double y, double z) {
         Data data = data(level);
-        for (BlockPos center : data.centers) {
-            if (center != null && Math.abs(x - center.getX()) <= ISLAND_REACH && Math.abs(z - center.getZ()) <= ISLAND_REACH
+        for (Sanctum sanctum : Sanctum.values()) {
+            BlockPos center = data.centers[sanctum.ordinal()];
+            if (sanctum.island() && center != null && Math.abs(x - center.getX()) <= ISLAND_REACH && Math.abs(z - center.getZ()) <= ISLAND_REACH
                     && y > center.getY() - 30 && y < center.getY() + 40) {
                 return true;
             }
@@ -129,7 +150,7 @@ public final class EndSanctums {
         for (Sanctum sanctum : Sanctum.values()) {
             if (data.kills >= sanctum.dragon()) {
                 BlockPos center = place(level, sanctum);
-                if (center != null) {
+                if (center != null && data.kills >= sanctum.compassDragon()) {
                     giveCompasses(level, sanctum, center);
                 }
             }
@@ -148,16 +169,51 @@ public final class EndSanctums {
     public static BlockPos center(ServerLevel level, Sanctum sanctum) {
         Data data = data(level);
         if (data.centers[sanctum.ordinal()] == null) {
+            if (!sanctum.island()) {
+                data.centers[sanctum.ordinal()] = new BlockPos(0, ServerConfig.SUMMONING_Y.get(), 0);
+                data.setDirty();
+                return data.centers[sanctum.ordinal()];
+            }
             if (Double.isNaN(data.angle)) {
                 data.angle = new Random(level.getSeed() ^ 0x57494E47L).nextDouble() * Math.PI * 2;
+                data.square = true;
             }
-            double angle = data.angle + sanctum.ordinal() * Math.PI * 2 / 3;
+            double angle;
+            if (data.square) {
+                angle = data.angle + sanctum.corner * Math.PI / 2;
+            } else if (sanctum.corner < 3) {
+                angle = data.angle + sanctum.corner * Math.PI * 2 / 3;
+            } else {
+                angle = widestGap(level, data);
+            }
             int radius = ServerConfig.FORGE_RADIUS.get();
             data.centers[sanctum.ordinal()] = new BlockPos((int) Math.round(Math.cos(angle) * radius), ServerConfig.FORGE_Y.get(),
                     (int) Math.round(Math.sin(angle) * radius));
             data.setDirty();
         }
         return data.centers[sanctum.ordinal()];
+    }
+
+    private static double widestGap(ServerLevel level, Data data) {
+        java.util.List<Double> angles = new java.util.ArrayList<>();
+        for (Sanctum other : Sanctum.values()) {
+            if (other.island() && other.corner < 3) {
+                BlockPos c = center(level, other);
+                angles.add(Math.atan2(c.getZ(), c.getX()));
+            }
+        }
+        java.util.Collections.sort(angles);
+        double best = 0;
+        double at = data.angle;
+        for (int i = 0; i < angles.size(); i++) {
+            double a = angles.get(i);
+            double b = i + 1 < angles.size() ? angles.get(i + 1) : angles.get(0) + Math.PI * 2;
+            if (b - a > best) {
+                best = b - a;
+                at = (a + b) / 2;
+            }
+        }
+        return at;
     }
 
     public static BlockPos place(ServerLevel level, Sanctum sanctum) {
@@ -168,7 +224,7 @@ public final class EndSanctums {
             return null;
         }
         BlockPos center = center(level, sanctum);
-        BlockPos origin = center.subtract(TEMPLATE_CENTER);
+        BlockPos origin = center.subtract(sanctum.templateCenter);
         StructurePlaceSettings settings = new StructurePlaceSettings().addProcessor(new KeepExisting());
         template.placeInWorld(level, origin, origin, settings, level.getRandom(), Block.UPDATE_CLIENTS);
         return center.above();
@@ -252,12 +308,14 @@ public final class EndSanctums {
     private static final class Data extends SavedData {
         private int kills;
         private double angle = Double.NaN;
+        private boolean square;
         private final BlockPos[] centers = new BlockPos[Sanctum.values().length];
 
         static Data load(CompoundTag tag, HolderLookup.Provider registries) {
             Data data = new Data();
             data.kills = tag.getInt("kills");
             data.angle = tag.contains("angle") ? tag.getDouble("angle") : Double.NaN;
+            data.square = tag.getBoolean("square");
             for (Sanctum sanctum : Sanctum.values()) {
                 data.centers[sanctum.ordinal()] = NbtUtils.readBlockPos(tag, sanctum.id()).orElse(null);
             }
@@ -270,6 +328,7 @@ public final class EndSanctums {
             if (!Double.isNaN(angle)) {
                 tag.putDouble("angle", angle);
             }
+            tag.putBoolean("square", square);
             for (Sanctum sanctum : Sanctum.values()) {
                 if (centers[sanctum.ordinal()] != null) {
                     tag.put(sanctum.id(), NbtUtils.writeBlockPos(centers[sanctum.ordinal()]));

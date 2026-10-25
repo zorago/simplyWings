@@ -130,7 +130,9 @@ def lang(drops, crafts):
             "When your stamina runs dry, its Intensified Essence keeps your wings beating.")
     for c, title, nth, place in [("sanctum_compass", "Sanctum Compass", "second", "Sky Sanctum"),
                                  ("forge_compass", "Forge Compass", "third", "Wing Forge"),
-                                 ("refinery_compass", "Refinery Compass", "fourth", "Cloud Refinery")]:
+                                 ("refinery_compass", "Refinery Compass", "fourth", "Cloud Refinery"),
+                                 ("summoning_compass", "Summoning Compass", "fifth", "Summoning Sanctum"),
+                                 ("fountain_compass", "Fountain Compass", "fifth", "Offering Fountain")]:
         out[f"item.simplywings.{c}"] = title
         out[f"item.simplywings.{c}.lore"] = CRAFT_LORE[c]
         out[f"item.simplywings.{c}.riddle"] = (
@@ -228,6 +230,8 @@ COMPASSES = {
     "sanctum_compass": ((34, 30, 58, 255), (150, 120, 220, 255), (236, 232, 250, 255), (120, 220, 255, 255)),
     "forge_compass": ((40, 24, 18, 255), (150, 80, 40, 255), (230, 214, 170, 255), (240, 110, 40, 255)),
     "refinery_compass": ((30, 34, 30, 255), (190, 120, 70, 255), (220, 236, 230, 255), (244, 197, 66, 255)),
+    "summoning_compass": ((14, 10, 20, 255), (90, 40, 130, 255), (40, 30, 52, 255), (200, 120, 255, 255)),
+    "fountain_compass": ((20, 40, 44, 255), (90, 170, 160, 255), (226, 244, 246, 255), (90, 200, 240, 255)),
 }
 
 

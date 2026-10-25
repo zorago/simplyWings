@@ -2,6 +2,12 @@ package com.zorago.simplywings.command;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.FloatArgumentType;
+import com.mojang.brigadier.arguments.IntegerArgumentType;
+import com.zorago.simplywings.gacha.Gacha;
+import com.zorago.simplywings.gacha.GachaData;
+import com.zorago.simplywings.gacha.GachaTier;
+import java.util.Locale;
+import com.zorago.simplywings.item.ModItems;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.DynamicCommandExceptionType;
@@ -64,7 +70,52 @@ public final class WingsCommand {
                                         java.util.Arrays.stream(EndSanctums.Sanctum.values()).map(EndSanctums.Sanctum::id), builder))
                                 .executes(ctx -> sanctum(ctx, EndSanctums.Sanctum.byId(StringArgumentType.getString(ctx, "name")).orElse(null)))))
                 .then(Commands.literal("dragon").executes(WingsCommand::dragon))
-                .then(Commands.literal("energy").executes(WingsCommand::energy)));
+                .then(Commands.literal("energy").executes(WingsCommand::energy))
+                .then(Commands.literal("gacha")
+                        .then(Commands.literal("feathers")
+                                .then(Commands.argument("count", IntegerArgumentType.integer(1, 6400)).executes(WingsCommand::feathers)))
+                        .then(Commands.literal("pity")
+                                .then(Commands.argument("s", IntegerArgumentType.integer(0, 99))
+                                        .then(Commands.argument("ss", IntegerArgumentType.integer(0, 499))
+                                                .then(Commands.argument("sss", IntegerArgumentType.integer(0, 999)).executes(WingsCommand::pity)))))
+                        .then(Commands.literal("reset").executes(WingsCommand::gachaReset))
+                        .then(Commands.literal("info").executes(WingsCommand::gachaInfo))));
+    }
+
+    private static int feathers(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
+        ServerPlayer player = ctx.getSource().getPlayerOrException();
+        int count = IntegerArgumentType.getInteger(ctx, "count");
+        while (count > 0) {
+            int n = Math.min(64, count);
+            ItemStack stack = new ItemStack(ModItems.SUMMONING_FEATHER.get(), n);
+            if (!player.getInventory().add(stack)) {
+                player.drop(stack, false);
+            }
+            count -= n;
+        }
+        return 1;
+    }
+
+    private static int pity(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
+        ServerPlayer player = ctx.getSource().getPlayerOrException();
+        ModAttachments.gacha(player).setPity(IntegerArgumentType.getInteger(ctx, "s"), IntegerArgumentType.getInteger(ctx, "ss"),
+                IntegerArgumentType.getInteger(ctx, "sss"));
+        return gachaInfo(ctx);
+    }
+
+    private static int gachaReset(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
+        ModAttachments.gacha(ctx.getSource().getPlayerOrException()).clear();
+        return gachaInfo(ctx);
+    }
+
+    private static int gachaInfo(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
+        ServerPlayer player = ctx.getSource().getPlayerOrException();
+        GachaData data = ModAttachments.gacha(player);
+        ctx.getSource().sendSuccess(() -> Component.literal("Pity S " + data.pity(GachaTier.S)
+                + "/" + Gacha.HARD_S + ", SS " + data.pity(GachaTier.SS) + "/" + Gacha.HARD_SS
+                + ", SSS " + data.pity(GachaTier.SSS) + "/" + Gacha.HARD_SSS
+                + ", total " + data.total() + ", reserve " + String.format(Locale.ROOT, "%.3f", data.reserve())), false);
+        return 1;
     }
 
     private static ResourceLocation wing(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
@@ -178,7 +229,7 @@ public final class WingsCommand {
         ServerPlayer player = ctx.getSource().getPlayerOrException();
         var data = ModAttachments.get(player);
         var stats = data.stats(player.registryAccess());
-        String text = stats.map(s -> String.format(java.util.Locale.ROOT,
+        String text = stats.map(s -> String.format(Locale.ROOT,
                 "%s | stamina %.1f/%.1f | accel %.2f | vmax %.1f | vmin %.1f | handling %.0f | stab %.1f | mode %s",
                 s.wing(), data.stamina(), s.stamina(), s.acceleration(), s.maxSpeed(), s.minSpeed(), s.handling(),
                 s.stabilization(), data.mode())).orElse("-");

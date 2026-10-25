@@ -16,6 +16,14 @@ public final class ClientNet {
                 payload.rescueJumps());
     }
 
+    public static void onGachaState(Payloads.GachaState payload) {
+        ClientGacha.onState(payload);
+    }
+
+    public static void onGachaResults(Payloads.GachaResults payload) {
+        ClientGacha.onResults(payload);
+    }
+
     public static void onStamina(Payloads.Stamina payload) {
         ClientWings.setStamina(payload.stamina());
         ClientWings.setRescueJumps(payload.rescueJumps());

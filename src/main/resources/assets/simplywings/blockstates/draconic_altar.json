@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=south": {
+      "model": "simplywings:block/draconic_altar"
+    },
+    "facing=west": {
+      "model": "simplywings:block/draconic_altar",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "simplywings:block/draconic_altar",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "simplywings:block/draconic_altar",
+      "y": 270
+    }
+  }
+}

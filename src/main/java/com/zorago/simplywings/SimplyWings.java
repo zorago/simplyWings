@@ -5,6 +5,7 @@ import com.zorago.simplywings.block.ModBlocks;
 import com.zorago.simplywings.command.WingsCommand;
 import com.zorago.simplywings.config.ServerConfig;
 import com.zorago.simplywings.data.WingRegistries;
+import com.zorago.simplywings.gacha.OfferingValues;
 import com.zorago.simplywings.flight.ServerFlight;
 import com.zorago.simplywings.item.ModComponents;
 import com.zorago.simplywings.item.ModItems;
@@ -39,6 +40,7 @@ public class SimplyWings {
         ServerFlight.register(NeoForge.EVENT_BUS);
         EndSanctums.register(NeoForge.EVENT_BUS);
         NeoForge.EVENT_BUS.addListener(WingsCommand::register);
+        NeoForge.EVENT_BUS.addListener(OfferingValues::onReload);
     }
 
     public static ResourceLocation id(String path) {

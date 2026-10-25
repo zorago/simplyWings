@@ -47,6 +47,28 @@ public final class ServerConfig {
     public static final ModConfigSpec.IntValue RESCUE_JUMPS;
     public static final ModConfigSpec.DoubleValue AIR_JUMP_COST;
 
+    public static final ModConfigSpec.DoubleValue RATE_A;
+    public static final ModConfigSpec.DoubleValue RATE_S;
+    public static final ModConfigSpec.DoubleValue RATE_SS;
+    public static final ModConfigSpec.DoubleValue RATE_SSS;
+    public static final ModConfigSpec.DoubleValue MYTHIC_CHANCE;
+    public static final ModConfigSpec.IntValue SOFT_S;
+    public static final ModConfigSpec.IntValue SOFT_SS;
+    public static final ModConfigSpec.IntValue SOFT_SSS;
+    public static final ModConfigSpec.DoubleValue STEP_S;
+    public static final ModConfigSpec.DoubleValue STEP_SS;
+    public static final ModConfigSpec.DoubleValue STEP_SSS;
+    public static final ModConfigSpec.DoubleValue B_STACK_VALUE;
+    public static final ModConfigSpec.DoubleValue CHEST_CHANCE;
+    public static final ModConfigSpec.DoubleValue CHEST_LUCK_BONUS;
+    public static final ModConfigSpec.IntValue CHEST_MAX;
+    public static final ModConfigSpec.IntValue END_CHEST_MIN;
+    public static final ModConfigSpec.IntValue END_CHEST_MAX;
+    public static final ModConfigSpec.BooleanValue MODDED_CHESTS;
+    public static final ModConfigSpec.IntValue SUMMONING_Y;
+    public static final ModConfigSpec.IntValue FOUNTAIN_DRAGON;
+    public static final ModConfigSpec.IntValue SUMMONING_COMPASS_DRAGON;
+
     public static final ModConfigSpec.DoubleValue CRASH_THRESHOLD;
     public static final ModConfigSpec.DoubleValue CRASH_DAMAGE_PER_SPEED;
 
@@ -162,12 +184,39 @@ public final class ServerConfig {
         b.pop();
 
         b.push("forge");
-        FORGE_RADIUS = b.comment("Horizontal distance from (0, 0) of the three End sanctums (Sky Sanctum, Wing Forge, Cloud Refinery), set 120 degrees apart, in blocks. Read once, at the first placement.")
+        FORGE_RADIUS = b.comment("Horizontal distance from (0, 0) of the four End islands (Sky Sanctum, Wing Forge, Cloud Refinery, Offering Fountain), set 90 degrees apart, in blocks. Read once, at the first placement.")
                 .defineInRange("radius", 512, 64, 100000);
         FORGE_Y = b.comment("Height of the top of the sanctum islands in the End. Read once, at the first placement.")
                 .defineInRange("y", 80, 0, 250);
         FORGE_ISLAND_RADIUS = b.comment("Players within this horizontal distance of (0, 0) receive the compass of each unlocked sanctum when a dragon dies.")
                 .defineInRange("islandRadius", 192.0, 0.0, 10000.0);
+        b.pop();
+
+        b.push("gacha");
+        RATE_A = b.comment("Base chance of an A pull (a craftable item of the mod).").defineInRange("rateA", 0.12, 0.0, 1.0);
+        RATE_S = b.comment("Base chance of an S pull (a rare pair of wings).").defineInRange("rateS", 0.006, 0.0, 1.0);
+        RATE_SS = b.comment("Base chance of an SS pull (an epic pair).").defineInRange("rateSS", 0.001, 0.0, 1.0);
+        RATE_SSS = b.comment("Base chance of an SSS pull (a legendary pair).").defineInRange("rateSSS", 0.0003, 0.0, 1.0);
+        MYTHIC_CHANCE = b.comment("Chance that an SSS pull turns into a mythic pair (Night or Light).").defineInRange("mythicChance", 0.01, 0.0, 1.0);
+        SOFT_S = b.comment("Soft pity: pull count after which the S chance rises by stepS per pull (100 % at the hard pity).")
+                .defineInRange("softS", 80, 1, 100000);
+        SOFT_SS = b.defineInRange("softSS", 400, 1, 100000);
+        SOFT_SSS = b.defineInRange("softSSS", 800, 1, 100000);
+        STEP_S = b.defineInRange("stepS", 0.05, 0.0, 1.0);
+        STEP_SS = b.defineInRange("stepSS", 0.01, 0.0, 1.0);
+        STEP_SSS = b.defineInRange("stepSSS", 0.005, 0.0, 1.0);
+        B_STACK_VALUE = b.comment("Offering value (in summons) of a B pull: the stack size of the drawn resource is this value divided by the resource value.")
+                .defineInRange("bStackValue", 0.094, 0.0, 10.0);
+        CHEST_CHANCE = b.comment("Chance that a loot chest outside the End holds Summoning Feathers.").defineInRange("chestChance", 0.04, 0.0, 1.0);
+        CHEST_LUCK_BONUS = b.comment("Added chance per point of luck.").defineInRange("chestLuckBonus", 0.02, 0.0, 1.0);
+        CHEST_MAX = b.comment("Feathers in such a chest: 1 to this value.").defineInRange("chestMax", 2, 1, 64);
+        END_CHEST_MIN = b.comment("Feathers in every loot chest of the End: min to max, plus one per point of luck.").defineInRange("endChestMin", 3, 0, 64);
+        END_CHEST_MAX = b.defineInRange("endChestMax", 7, 0, 64);
+        MODDED_CHESTS = b.comment("Also add feathers to the chest loot tables of other mods (any loot table under chests/).").define("moddedChests", true);
+        SUMMONING_Y = b.comment("Floor height of the Summoning Sanctum, hidden under the central End island. Read once, at placement.")
+                .defineInRange("summoningY", 22, -60, 250);
+        SUMMONING_COMPASS_DRAGON = b.comment("Dragon death that gives the Summoning Compass.").defineInRange("summoningCompassDragon", 5, 1, 1000);
+        FOUNTAIN_DRAGON = b.comment("Dragon death that raises the Offering Fountain island.").defineInRange("fountainDragon", 5, 1, 1000);
         b.pop();
 
         b.push("damage");

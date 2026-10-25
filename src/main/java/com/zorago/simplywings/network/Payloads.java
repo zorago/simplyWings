@@ -1,6 +1,7 @@
 package com.zorago.simplywings.network;
 
 import com.zorago.simplywings.SimplyWings;
+import com.zorago.simplywings.gacha.GachaData;
 import java.util.List;
 import java.util.Optional;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -211,6 +212,49 @@ public final class Payloads {
                 ByteBufCodecs.VAR_INT, FuryEvent::entityId,
                 ByteBufCodecs.VAR_INT, FuryEvent::kind,
                 FuryEvent::new);
+
+        @Override
+        public Type<? extends CustomPacketPayload> type() {
+            return TYPE;
+        }
+    }
+
+    public record GachaPull(int count) implements CustomPacketPayload {
+        public static final Type<GachaPull> TYPE = payloadType("gacha_pull");
+        public static final StreamCodec<RegistryFriendlyByteBuf, GachaPull> CODEC = StreamCodec.composite(
+                ByteBufCodecs.VAR_INT, GachaPull::count,
+                GachaPull::new);
+
+        @Override
+        public Type<? extends CustomPacketPayload> type() {
+            return TYPE;
+        }
+    }
+
+    public record GachaState(int pityS, int pitySS, int pitySSS, int total, int feathers, List<GachaData.Entry> history)
+            implements CustomPacketPayload {
+        public static final Type<GachaState> TYPE = payloadType("gacha_state");
+        public static final StreamCodec<RegistryFriendlyByteBuf, GachaState> CODEC = StreamCodec.composite(
+                ByteBufCodecs.VAR_INT, GachaState::pityS,
+                ByteBufCodecs.VAR_INT, GachaState::pitySS,
+                ByteBufCodecs.VAR_INT, GachaState::pitySSS,
+                ByteBufCodecs.VAR_INT, GachaState::total,
+                ByteBufCodecs.VAR_INT, GachaState::feathers,
+                GachaData.Entry.STREAM_CODEC.apply(ByteBufCodecs.list()), GachaState::history,
+                GachaState::new);
+
+        @Override
+        public Type<? extends CustomPacketPayload> type() {
+            return TYPE;
+        }
+    }
+
+    public record GachaResults(List<GachaData.Entry> results, GachaState state) implements CustomPacketPayload {
+        public static final Type<GachaResults> TYPE = payloadType("gacha_results");
+        public static final StreamCodec<RegistryFriendlyByteBuf, GachaResults> CODEC = StreamCodec.composite(
+                GachaData.Entry.STREAM_CODEC.apply(ByteBufCodecs.list()), GachaResults::results,
+                GachaState.CODEC, GachaResults::state,
+                GachaResults::new);
 
         @Override
         public Type<? extends CustomPacketPayload> type() {

@@ -286,3 +286,16 @@ Reste à tester :
 - [ ] Cinq absorbeurs (flacon, fer, doré, radiant, Furie) : 100 s pour un flacon, 200 s pour le réservoir de fer avec l'absorbeur de fer, puis 400, 800, 1 600 s.
 - [ ] Pose du joueur en vol (mixin `PlayerModel.setupAnim`) : profilé en croisière, cabré bras écartés et jambes en avant au freinage, collé en piqué, roulis en virage, bras et jambes qui flottent en stationnaire. À vérifier avec Not Enough Animations et playerAnimator du pack.
 - [ ] Monde de construction `run/saves/SimplyWings Builds` (client de dev) : les trois îles dans des cadres rouges, à x 0, 100 et 200. Après retouche : `/simplywings sanctum export <nom>`, puis prévenir Claude, qui copie le fichier dans le mod.
+
+## 14. Gacha des ailes (25 octobre, rien de testé en jeu)
+
+Codé sans lancer Minecraft (zorago utilisait le PC). Conception et choix par défaut dans `gatcha.md`.
+- [ ] Monde de construction `run/saves/SimplyWings Builds` : `/simplywings sanctum build` pose maintenant les cinq structures (x 0 à 400), dont le sanctuaire d'invocation (x 300) et l'île de la fontaine (x 400), pour la retouche à la main.
+- [ ] Coffres : `/loot spawn ~ ~ ~ loot minecraft:chests/simple_dungeon` plusieurs fois (environ 4 % avec des plumes), `minecraft:chests/end_city_treasure` (3 à 7 plumes) ; avec Lootr dans le pack.
+- [ ] Autel : `/setblock ~ ~ ~ simplywings:draconic_altar`, clic droit : fenêtre, illustration, tracker, onglets Historique et Taux ; `/simplywings gacha feathers 64` ; ×1 et ×10 ; plumes retirées ; objets donnés (ou jetés si l'inventaire est plein) ; animation (comète, flash, cartes, rayons S et plus, récapitulatif), clic et Échap pour passer.
+- [ ] Garanties : `/simplywings gacha pity 99 0 0` puis ×1 → S garanti ; `pity 0 499 0` → SS ; `pity 0 0 999` → SSS ; compteurs remis à zéro dans le tracker ; `gacha info`.
+- [ ] Le tirage est refusé sans la fenêtre ouverte et sans assez de plumes (message) ; en créatif, pas de coût.
+- [ ] Fontaine : `/setblock ~ ~ ~ simplywings:offering_fountain`, poser des items du mod, valeur affichée, « Offer » → plumes + réserve ; les objets sans valeur restent et reviennent à la fermeture.
+- [ ] Structures par de vraies morts du dragon : 1re → sanctuaire d'invocation sous l'île (voile noir, autel au centre), 5e → île de la fontaine en carré avec les trois autres, compas de l'autel et de la fontaine.
+- [ ] Monde ancien (îles en triangle) : la fontaine se pose dans le plus grand écart.
+- [ ] Serveur dédié pour tout ce qui précède.

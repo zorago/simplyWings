@@ -2,9 +2,11 @@ package com.zorago.simplywings.client;
 
 import com.zorago.simplywings.SimplyWings;
 import com.zorago.simplywings.block.ModBlocks;
+import com.zorago.simplywings.client.gui.AltarScreen;
 import com.zorago.simplywings.client.gui.AssemblyTableScreen;
 import com.zorago.simplywings.client.gui.CloudCompressorScreen;
 import com.zorago.simplywings.client.gui.ForgeBenchScreen;
+import com.zorago.simplywings.client.gui.FountainScreen;
 import com.zorago.simplywings.essence.EssenceContainerItem;
 import com.zorago.simplywings.essence.EssenceType;
 import com.zorago.simplywings.item.ModItems;
@@ -49,6 +51,8 @@ public final class AssemblyTableClient {
         event.register(ModBlocks.ASSEMBLY_TABLE_MENU.get(), AssemblyTableScreen::new);
         event.register(ModBlocks.FORGE_BENCH_MENU.get(), ForgeBenchScreen::new);
         event.register(ModBlocks.CLOUD_COMPRESSOR_MENU.get(), CloudCompressorScreen::new);
+        event.register(ModBlocks.ALTAR_MENU.get(), AltarScreen::new);
+        event.register(ModBlocks.FOUNTAIN_MENU.get(), FountainScreen::new);
     }
 
     private static void onSetup(FMLClientSetupEvent event) {

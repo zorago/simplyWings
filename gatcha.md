@@ -2,6 +2,8 @@
 
 Dernier morceau de gameplay du mod, imaginé par zorago le 25 octobre 2026. Ce document fait foi pour la conception ; les points marqués **à valider** se posent à zorago avant l'étape qui en dépend.
 
+**État (25 octobre 2026, soir)** : tout est implémenté, avec des animations provisoires ; rien n'est encore testé en jeu (voir `ToDoTesting.md` § 14). Les points « à valider » ont reçu une valeur par défaut, notée **[défaut]**, à confirmer par zorago.
+
 ## Pourquoi un gacha, et pourquoi il ne casse pas le jeu
 
 Le gacha est une **voie bonus** pour obtenir des ailes et des ressources, à côté des routes de craft (qui restent la voie principale et sûre). Trois garde-fous :
@@ -12,7 +14,7 @@ Le gacha est une **voie bonus** pour obtenir des ailes et des ressources, à cô
 
 ## L'item : l'invocation
 
-- Nom de travail : **Summoning Feather** (`simplywings:summoning_feather`), « plume d'invocation ». Nom définitif **à valider**.
+- **Summoning Feather** (`simplywings:summoning_feather`), « plume d'invocation » **[défaut]**.
 - Non craftable, empilable par 64, rareté épique (nom en couleur).
 - Tooltip : description romancée + énigme d'obtention, comme tous les items du mod.
 
@@ -65,7 +67,7 @@ Règles :
 | SSS | 0,14 % | 730 tirages | 856 |
 | Mythique | 0,0014 % | ≈ 73 000 tirages | — |
 
-Les garanties dures ne sont presque jamais atteintes : la garantie douce les fait tomber avant. Le simulateur est dans le dépôt (`tools/gacha/simulate.py`, à créer avec l'implémentation) et doit être relancé à chaque changement de taux.
+Les garanties dures ne sont presque jamais atteintes : la garantie douce les fait tomber avant. Le simulateur est dans le dépôt (`python -I tools/gacha/simulate.py [tirages]`) et doit être relancé à chaque changement de taux.
 
 ## Économie : la fontaine aux offrandes
 
@@ -85,7 +87,12 @@ Repères voulus par zorago :
 - on ne peut pas boucler (tirer, recycler ce qu'on a tiré, retirer) : chaque tour perd environ 90 % ;
 - la répartition de ces 10 % entre les paliers fixe la valeur de fontaine des paires d'ailes. Exemple d'équilibre (à recalculer par l'outil) : paire rare ≈ 3 invocations, épique ≈ 8, légendaire ≈ 20, objet A ≈ 0,1, pile B ≈ 0,003 ; un doublon d'aile n'est donc pas perdu, il se recycle.
 
-Les valeurs ne sont pas tapées à la main : un script (`tools/crafting_gen/values.py`, à créer) les calcule depuis `tools/crafting_gen/data.py` et les recettes générées, vérifie les deux repères et le rendement de 10 %, et écrit un JSON de datapack (`data/simplywings/simplywings/offering_value/*.json`), donc réglable par les packs.
+Les valeurs ne sont pas tapées à la main : `python -I tools/crafting_gen/values.py` les calcule depuis les sources de drops (`loot_source`) et les recettes générées (composants et assemblages), et écrit `data/simplywings/simplywings_offering/values.json` (rechargé par `/reload`, réglable par les packs). Méthode :
+
+- valeur brute d'un drop = 0,5 × multiplicateur de difficulté (dimension, mob ou bloc dangereux, condition) ÷ chance^0,6 ; valeurs brutes fixes pour les ingrédients vanilla (fer 1, diamant 8, étoile du Nether 150…) ;
+- valeur brute d'un objet craftable = somme des ingrédients × 1,1 + coût en essences × 0,012 ;
+- courbe finale `valeur = a × brut^b`, calée sur les deux repères : un gland (drop de bois) = 0,005 invocation (200 pour une), le cœur de dernier palier (cœur de Night) = 20 invocations. Résultat : b ≈ 1,45, donc un objet fabriqué vaut un peu plus que ses ingrédients (fabriquer avant d'offrir est récompensé) ;
+- rendement : le tirage A pondère chaque objet craftable par 1 / sa valeur (moyenne ≈ 0,03 invocation) ; les paires valent en moyenne 0,28 (rare), 1,5 (épique), 6 (légendaire), 47 (mythique) ; la valeur d'une pile B (config `gacha.bStackValue` = 0,094) est réglée pour que la valeur moyenne d'un tirage fasse exactement **0,10 invocation**.
 
 ## Les deux nouvelles structures
 
@@ -95,7 +102,7 @@ Le mod a aujourd'hui trois sanctuaires de l'End (2e, 3e et 4e morts du dragon). 
 
 - Apparaît après la **première** mort du dragon, **sous l'île principale de l'End**, caché par un **voile de blocs noirs** (blackstone, obsidienne, béton noir) qui le fait passer pour le vide ou la roche. On peut le trouver par hasard en creusant, mais rien ne le signale.
 - Son **compas** n'est donné qu'à la **cinquième** mort du dragon, en même temps que l'apparition de la fontaine.
-- Au centre : l'**autel draconique** (« Draconic Altar »), un bloc unique dans la vibe ange, démon et dragon : socle en os de dragon et obsidienne, ailes de plumes blanches d'un côté et de membrane rouge de l'autre, cristaux de l'End en suspension, flammes violettes. Clic droit : ouvre l'interface d'invocation. Il n'est pas craftable ; s'il est cassé, il est réparé à la mort suivante du dragon, comme les autres sanctuaires. Un autel en jeu suffit (il n'y a pas d'autel portatif). **À valider** : l'autel est-il cassable par les joueurs ?
+- Au centre : l'**autel draconique** (« Draconic Altar »), un bloc unique dans la vibe ange, démon et dragon : socle en os de dragon et obsidienne, ailes de plumes blanches d'un côté et de membrane rouge de l'autre, cristaux de l'End en suspension, flammes violettes. Clic droit : ouvre l'interface d'invocation. Il n'est pas craftable et il est **incassable en survie** **[défaut]**, comme la bedrock ; s'il disparaît quand même, il est réparé à la mort suivante du dragon, comme les autres sanctuaires. Un autel en jeu suffit (il n'y a pas d'autel portatif).
 - Placement : comme les autres sanctuaires (template généré par script, réparation sans écraser les blocs posés par les joueurs), jamais via un hook interne d'`EndDragonFight`.
 
 ### 2. La fontaine aux offrandes (quatrième île)
@@ -103,7 +110,7 @@ Le mod a aujourd'hui trois sanctuaires de l'End (2e, 3e et 4e morts du dragon). 
 - Apparaît à la **cinquième** mort du dragon : une nouvelle île flottante qui rejoint les trois autres.
 - Les îles passent d'un **triangle** (120°) à un **carré** : quatre îles aux quatre coins, à environ 512 blocs du centre, à 90° les unes des autres.
   - Monde neuf : les positions sont calculées en carré dès la première île.
-  - Monde existant (trois îles déjà posées en triangle) : on ne déplace rien ; la fontaine se pose dans le plus grand écart entre deux îles. **À valider** avec zorago.
+  - Monde existant (trois îles déjà posées en triangle) : on ne déplace rien ; la fontaine se pose dans le plus grand écart entre deux îles **[défaut]**.
 - Au centre : la **fontaine aux offrandes**, un bassin d'essence où l'on jette (ou dépose dans une interface) des items du mod ; elle affiche leur valeur et rend les invocations.
 - Compas de la fontaine donné à la cinquième mort, avec celui du sanctuaire d'invocation.
 
@@ -127,7 +134,16 @@ Direction artistique des animations : motion design **low poly**, ombres et lumi
 
 Contrainte technique : Minecraft ne lit pas les vidéos et le mod n'a **aucune dépendance**. En jeu, chaque animation est donc rejouée à partir de la même source : soit en planches d'images (textures animées, comme la nappe d'eau), soit reconstruite en temps réel dans l'interface (calques, particules d'interface), avec le son en `.ogg` découpé par étape. Le choix se fait animation par animation, **à valider** au moment de la création.
 
-## Ordre d'implémentation proposé
+## Implémentation (code)
+
+- `gacha/` : `Gacha` (tirage côté serveur, garanties, pools), `GachaData` (compteurs, réserve, 100 derniers tirages ; attachment `simplywings:gacha`, conservé à la mort), `GachaTier`, `OfferingValues` (valeurs rechargeables), `SummoningLootModifier` (GLM `simplywings:summoning_feathers`), `DraconicAltarBlock` + `AltarMenu`, `OfferingFountainBlock` + `FountainMenu` (9 cases, bouton « Offer », réserve des fractions).
+- Réseau : `GachaPull` (client → serveur, ×1 ou ×10, refusé si la fenêtre de l'autel n'est pas ouverte), `GachaState` et `GachaResults` (serveur → client, à l'ouverture et après un tirage, jamais par tick).
+- Client : `ClientGacha`, `AltarScreen` (illustration, tracker de pitié, historique, taux ; animation provisoire : comète colorée par le meilleur palier, d'abord bleue puis qui bascule pour S et plus, flash, cartes révélées une à une avec des rayons pour S et plus, récapitulatif ×10, sons vanilla provisoires), `FountainScreen`.
+- Structures : `EndSanctums` (îles en carré, sanctuaire d'invocation sous l'île à y = `gacha.summoningY`, compas au 5e dragon), templates générés par `tools/crafting_gen/sanctums.py` (`summoning_sanctum`, `offering_fountain`). Modèles et textures de l'autel, de la fontaine, de la plume et de l'illustration : `tools/crafting_gen/gacha_blocks.py` (provisoires, à refaire avec zorago).
+- Config serveur `[gacha]` : taux, garanties, valeur des piles B, coffres, hauteur du sanctuaire, dragons de la fontaine et du compas.
+- Commandes : `/simplywings gacha feathers <n>`, `gacha pity <s> <ss> <sss>`, `gacha reset`, `gacha info`, et `/simplywings sanctum summoning_sanctum|offering_fountain` (pose et compas).
+
+## Ordre d'implémentation proposé (fait, sauf l'étape 7 en provisoire et l'étape 8 reportée)
 
 1. Item d'invocation + Global Loot Modifier des coffres (hors End et End) + config.
 2. Données : compteurs de pitié par joueur (attachment), tirage côté serveur, paquets (résultats et compteurs, jamais par tick).

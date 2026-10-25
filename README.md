@@ -171,20 +171,20 @@ Progress as of October 25, 2026. Design documents are in French; `gatcha.md` des
 - [x] Winged energy data component, `simplywings:loot_source` registry (59 sources) and the winged drops Global Loot Modifier.
 - [x] Component items, textures, lore and riddle tooltips; crafting routes of the 40 non-common pairs generated as recipe JSON; mythic recipes for Night and Light.
 - [x] Optional JEI plugin (EMI reads JEI plugins).
-- [ ] **Wing gacha** (`gatcha.md`): summoning item in every chest loot table (much more in the End, Lootr compatible), five loot tiers (B, A, S, SS, SSS + 1 % mythic), pity counters (S 100, SS 500, SSS 1000 with soft pity, no 50/50), Draconic Altar, Offering Fountain that recycles mod items into summons, item values computed from the crafting routes.
+- [x] **Wing gacha** (`gatcha.md`), implemented on October 25, not yet play-tested: summoning item in every chest loot table (much more in the End, Lootr compatible), five loot tiers (B, A, S, SS, SSS + 1 % mythic), pity counters (S 100, SS 500, SSS 1000 with soft pity, no 50/50), Draconic Altar, Offering Fountain that recycles mod items into summons, item values computed from the crafting routes.
 - [ ] Remove `/simplywings unlock` from normal play (keep it for operators).
 - [ ] Open question in the specification: name of the block drops category.
 
 ### Structures
 - [x] Three End sanctums (Sky Sanctum, Wing Forge, Cloud Refinery) placed on the 2nd, 3rd and 4th dragon deaths, repaired on later deaths, one compass each.
-- [ ] **Summoning sanctum** hidden under the main End island behind a veil of black blocks, placed on the 1st dragon death, compass given on the 5th.
-- [ ] **Offering Fountain**, a fourth floating island placed on the 5th dragon death; the islands move from a triangle to a square (four corners).
+- [x] **Summoning sanctum** (generated template, to be hand-polished) hidden under the main End island behind a veil of black blocks, placed on the 1st dragon death, compass given on the 5th.
+- [x] **Offering Fountain** (generated template, to be hand-polished), a fourth floating island placed on the 5th dragon death; the islands move from a triangle to a square (four corners).
 - [ ] Hand polish of the five structures by the author.
 - [ ] Check with YUNG's Better End Island, BetterEnd and the other End mods of the pack.
 
 ### Interface
-- [ ] **Summoning screen** in the style of Wuthering Waves: AI-assisted cover art with Night and Light as dark silhouettes in the sky, x1 and x10 summons, pity tracker, history, rates.
-- [ ] **Summoning animations**: launch, reveal, and one appearance animation per tier from S up, plus the mythic one (low-poly motion design, lights and shadows, full sound design and music; masters exported as MP4, replayed in game without any dependency).
+- [x] **Summoning screen** (first version, placeholder art) in the style of Wuthering Waves: AI-assisted cover art with Night and Light as dark silhouettes in the sky, x1 and x10 summons, pity tracker, history, rates.
+- [ ] **Summoning animations** (placeholders in place: comet, flash, card reveal, rays): final launch, reveal, and one appearance animation per tier from S up, plus the mythic one (low-poly motion design, lights and shadows, full sound design and music; masters exported as MP4, replayed in game without any dependency).
 - [ ] Tutorial panels of the Wings screen (flight modes, keys, stamina, collection and stats).
 - [ ] Final layout of the Wings screen, check the inventory button against the other mods' buttons.
 

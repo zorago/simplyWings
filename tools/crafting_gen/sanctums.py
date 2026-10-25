@@ -70,13 +70,15 @@ class Noise:
 
 
 class Build:
-    def __init__(self, seed):
+    def __init__(self, seed, size=(W, H, W)):
         self.rnd = random.Random(seed)
         self.blocks = {}
         self.surface = {}
+        self.size = size
 
     def put(self, x, y, z, name, props=None, nbt=None, replace=True):
-        if not (0 <= x < W and 0 <= y < H and 0 <= z < W):
+        sx, sy, sz = self.size
+        if not (0 <= x < sx and 0 <= y < sy and 0 <= z < sz):
             return
         if not replace and (x, y, z) in self.blocks:
             return
@@ -209,7 +211,8 @@ class Build:
             if nbt:
                 entry["nbt"] = nbt
             entries.append(entry)
-        return {"DataVersion": Int(DATA_VERSION), "size": [Int(W), Int(H), Int(W)],
+        sx, sy, sz = self.size
+        return {"DataVersion": Int(DATA_VERSION), "size": [Int(sx), Int(sy), Int(sz)],
                 "palette": palette, "blocks": entries, "entities": []}
 
 
@@ -476,6 +479,182 @@ def refinery():
     return b, {"center": [C, TOP, C]}
 
 
+def summoning():
+    sw, sh = 41, 28
+    cx = cz = 20
+    floor = 2
+    b = Build(0xD5A6, (sw, sh, sw))
+    veil = ["minecraft:blackstone", "minecraft:polished_blackstone", "minecraft:obsidian", "minecraft:black_concrete",
+            "minecraft:gilded_blackstone", "minecraft:crying_obsidian", "minecraft:polished_blackstone_bricks"]
+    weights = [26, 14, 30, 16, 2, 4, 8]
+    rough = Noise(b.rnd, 3)
+    mid = floor + 8
+    for x in range(sw):
+        for z in range(sw):
+            for y in range(sh):
+                dx, dz, dy = x - cx, z - cz, y - mid
+                r = math.sqrt(dx * dx + dz * dz + (dy * (1.3 if dy < 0 else 0.8)) ** 2)
+                outer = 18.6 + rough(x * 1.3, z * 1.3 + y) * 1.3
+                if 14.6 <= r <= outer:
+                    b.put(x, y, z, b.rnd.choices(veil, weights)[0])
+    for _ in range(30):
+        x, z = cx + b.rnd.randint(-12, 12), cz + b.rnd.randint(-12, 12)
+        if math.hypot(x - cx, z - cz) > 12:
+            continue
+        ys = [y for y in range(sh) if b.get(x, y, z)]
+        if not ys:
+            continue
+        low = min(ys)
+        for d in range(1, b.rnd.randint(2, 6)):
+            b.put(x, low - d, z, "minecraft:blackstone" if d < 3 else "minecraft:basalt", {"axis": "y"} if d >= 3 else None)
+    for x in range(sw):
+        for z in range(sw):
+            d = math.hypot(x - cx, z - cz)
+            if d <= 13.8:
+                name = "minecraft:polished_blackstone_bricks"
+                if d <= 4.6:
+                    name = "minecraft:obsidian"
+                elif 6.5 <= d <= 7.5:
+                    name = "minecraft:purpur_block"
+                elif d >= 12.8:
+                    name = "minecraft:chiseled_polished_blackstone"
+                b.put(x, floor, z, name)
+                b.put(x, floor - 1, z, "minecraft:obsidian")
+    for side, block in ((1, "minecraft:quartz_bricks"), (-1, "minecraft:red_nether_bricks")):
+        for t in range(9):
+            span = 1 + t // 2
+            for w in range(-span, span + 1):
+                x = cx + side * (8 + t // 2)
+                z = cz + w
+                if math.hypot(x - cx, z - cz) <= 12.6:
+                    b.put(x, floor, z, block)
+        for k in range(5):
+            x = cx + side * (9 + k)
+            for z in (cz - 3 - k, cz + 3 + k):
+                if math.hypot(x - cx, z - cz) <= 12.6:
+                    b.put(x, floor, z, block)
+    for r, name in ((3, "minecraft:polished_blackstone_bricks"), (2, "minecraft:obsidian"), (1, "minecraft:crying_obsidian")):
+        h = 4 - r
+        for x in range(cx - r, cx + r + 1):
+            for z in range(cz - r, cz + r + 1):
+                for yy in range(floor + 1, floor + 1 + h):
+                    b.put(x, yy, z, name)
+    top = floor + 4
+    b.put(cx, top, cz, "simplywings:draconic_altar", {"facing": "south"})
+    for k in range(8):
+        a = k * math.pi / 4 + math.pi / 8
+        px, pz = cx + round(math.sin(a) * 10), cz + round(math.cos(a) * 10)
+        angel = math.sin(a) > 0
+        hgt = 7 + (k % 2) * 2
+        for yy in range(floor + 1, floor + 1 + hgt):
+            b.put(px, yy, pz, "minecraft:quartz_pillar" if angel else "minecraft:polished_basalt", {"axis": "y"})
+        b.put(px, floor + 1, pz, "minecraft:chiseled_quartz_block" if angel else "minecraft:chiseled_nether_bricks")
+        if angel:
+            b.put(px, floor + 1 + hgt, pz, "minecraft:end_rod", {"facing": "up"})
+        else:
+            b.put(px, floor + 1 + hgt, pz, "minecraft:soul_lantern", {"hanging": "false", "waterlogged": "false"})
+    for i in range(-9, 10, 3):
+        for t in range(0, 15):
+            a = t / 14 * math.pi
+            x = cx + i
+            y = floor + 2 + round(math.sin(a) * 11)
+            z = cz + round(math.cos(a) * 12)
+            b.put(x, y, z, "minecraft:bone_block", {"axis": "x"})
+    for x in range(cx - 12, cx + 13):
+        b.put(x, floor + 13, cz, "minecraft:bone_block", {"axis": "x"})
+    for _ in range(14):
+        x, z = cx + b.rnd.randint(-11, 11), cz + b.rnd.randint(-11, 11)
+        d = math.hypot(x - cx, z - cz)
+        if d < 5 or d > 12:
+            continue
+        roof = [y for y in range(floor + 6, sh) if b.get(x, y, z)]
+        if not roof:
+            continue
+        ry = min(roof)
+        length = b.rnd.randint(1, 3)
+        for k in range(1, length + 1):
+            b.put(x, ry - k, z, "minecraft:chain", {"axis": "y", "waterlogged": "false"})
+        b.put(x, ry - length - 1, z, "minecraft:soul_lantern" if x < cx else "minecraft:lantern", {"hanging": "true", "waterlogged": "false"})
+    for _ in range(28):
+        x, z = cx + b.rnd.randint(-12, 12), cz + b.rnd.randint(-12, 12)
+        d = math.hypot(x - cx, z - cz)
+        if not (5 < d < 12.5) or b.get(x, floor + 1, z) is not None:
+            continue
+        pick = b.rnd.random()
+        if pick < 0.4:
+            b.put(x, floor + 1, z, "minecraft:amethyst_cluster", {"facing": "up", "waterlogged": "false"})
+        elif pick < 0.75:
+            color = "white" if x > cx else "red"
+            b.put(x, floor + 1, z, f"minecraft:{color}_candle",
+                  {"candles": str(b.rnd.randint(1, 4)), "lit": "true", "waterlogged": "false"})
+        else:
+            b.put(x, floor + 1, z, "minecraft:skeleton_skull" if x > cx else "minecraft:wither_skeleton_skull",
+                  {"rotation": str(b.rnd.randint(0, 15))})
+    return b, {"center": [cx, floor, cz]}
+
+
+def fountain():
+    b = Build(0xF0A7)
+    patch = Noise(b.rnd, 4)
+
+    def surface(x, z, d):
+        n = patch(x, z)
+        return "minecraft:moss_block" if n > 0.3 else "minecraft:calcite" if n < -0.3 else "minecraft:end_stone"
+
+    b.island(surface, lambda x, z, d: "minecraft:end_stone", "minecraft:end_stone",
+             ["minecraft:prismarine", "minecraft:calcite", "minecraft:amethyst_block", "minecraft:end_stone_bricks"])
+    y = TOP + 1
+    for x in range(W):
+        for z in range(W):
+            d = math.hypot(x - C, z - C)
+            if d <= 11.5:
+                b.put(x, TOP, z, "minecraft:dark_prismarine" if d > 10.5 else "minecraft:prismarine_bricks")
+            if 8.5 < d <= 9.6:
+                b.put(x, y, z, "minecraft:quartz_bricks")
+                b.put(x, y + 1, z, "minecraft:smooth_quartz_slab", {"type": "bottom", "waterlogged": "false"})
+            elif d <= 8.5:
+                lantern = (x + 2 * z) % 6 == 0 and d > 3
+                b.put(x, TOP, z, "minecraft:sea_lantern" if lantern else "minecraft:prismarine_bricks")
+                b.put(x, y, z, "minecraft:water", {"level": "0"})
+    for x in range(C - 1, C + 2):
+        for z in range(C - 1, C + 2):
+            centre = (x, z) == (C, C)
+            for yy in range(y, y + 2):
+                b.put(x, yy, z, "minecraft:quartz_pillar" if centre else "minecraft:smooth_quartz", {"axis": "y"} if centre else None)
+    b.put(C, y + 2, C, "simplywings:offering_fountain")
+    for k in range(6):
+        a = k * math.pi / 3
+        px, pz = C + round(math.sin(a) * 13), C + round(math.cos(a) * 13)
+        if front_open(px, pz, 22):
+            continue
+        for yy in range(y, y + 9):
+            b.put(px, yy, pz, "minecraft:quartz_pillar", {"axis": "y"})
+        b.put(px, y + 9, pz, "minecraft:chiseled_quartz_block")
+        b.put(px, y + 10, pz, "minecraft:amethyst_cluster", {"facing": "up", "waterlogged": "false"})
+        b.put(px, y + 4, pz + (1 if pz < C else -1), "minecraft:sea_lantern")
+    for k in range(48):
+        a = k * math.pi * 2 / 48
+        px, pz = C + round(math.sin(a) * 13), C + round(math.cos(a) * 13)
+        if not front_open(px, pz, 16):
+            b.put(px, y + 9, pz, "minecraft:smooth_quartz_slab", {"type": "top", "waterlogged": "false"}, replace=False)
+    for z in range(C + 12, C + 24):
+        for x in range(C - 1, C + 2):
+            ty = b.top(x, z)
+            if ty is not None and b.rnd.random() < 0.85:
+                b.put(x, ty, z, "minecraft:prismarine_bricks" if x == C else "minecraft:dark_prismarine")
+    avoid = lambda x, z: math.hypot(x - C, z - C) < 15 or abs(x - C) <= 1 and z > C
+    for _ in range(8):
+        x, z = b.rnd.randrange(W), b.rnd.randrange(W)
+        if b.top(x, z) is not None and not avoid(x, z):
+            b.tree(x, z, "minecraft:cherry_log", "minecraft:cherry_leaves", b.rnd.randint(3, 5), 2)
+    b.scatter([("minecraft:moss_carpet", None), ("minecraft:pink_petals", {"facing": "north", "flower_amount": "4"}),
+               ("minecraft:short_grass", None)], 0.22,
+              lambda x, z: avoid(x, z) or b.get(x, b.top(x, z), z) != "minecraft:moss_block")
+    b.hanging("minecraft:glow_lichen", 0.03, (1, 1), {"down": "false", "up": "true", "north": "false", "south": "false",
+                                                       "east": "false", "west": "false", "waterlogged": "false"})
+    return b, {"center": [C, TOP, C]}
+
+
 def write_loot():
     LOOT.parent.mkdir(parents=True, exist_ok=True)
     LOOT.write_text(json.dumps({
@@ -496,7 +675,8 @@ def write_loot():
 
 def main():
     STRUCTURES.mkdir(parents=True, exist_ok=True)
-    for name, fn in (("sky_sanctum", sanctum), ("wing_forge", forge), ("cloud_refinery", refinery)):
+    for name, fn in (("sky_sanctum", sanctum), ("wing_forge", forge), ("cloud_refinery", refinery),
+                     ("summoning_sanctum", summoning), ("offering_fountain", fountain)):
         b, _ = fn()
         root = b.nbt()
         (STRUCTURES / f"{name}.nbt").write_bytes(gzip.compress(struct.pack(">bH", 10, 0) + payload(root)))

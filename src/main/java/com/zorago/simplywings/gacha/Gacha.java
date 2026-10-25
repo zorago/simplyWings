@@ -1,0 +1,195 @@
+package com.zorago.simplywings.gacha;
+
+import com.zorago.simplywings.config.ServerConfig;
+import com.zorago.simplywings.data.WingRarity;
+import com.zorago.simplywings.data.WingRegistries;
+import com.zorago.simplywings.item.MaterialIds;
+import com.zorago.simplywings.item.ModItems;
+import com.zorago.simplywings.item.WingItem;
+import com.zorago.simplywings.network.Payloads;
+import com.zorago.simplywings.player.ModAttachments;
+import java.util.ArrayList;
+import java.util.EnumMap;
+import java.util.List;
+import java.util.Map;
+import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.network.PacketDistributor;
+import net.neoforged.neoforge.registries.DeferredItem;
+
+public final class Gacha {
+    public static final int MULTI = 10;
+    public static final int HARD_S = 100;
+    public static final int HARD_SS = 500;
+    public static final int HARD_SSS = 1000;
+
+    public static double rate(GachaTier tier, int pulls) {
+        return switch (tier) {
+            case S -> soft(ServerConfig.RATE_S.get(), ServerConfig.SOFT_S.get(), ServerConfig.STEP_S.get(), pulls);
+            case SS -> soft(ServerConfig.RATE_SS.get(), ServerConfig.SOFT_SS.get(), ServerConfig.STEP_SS.get(), pulls);
+            case SSS -> soft(ServerConfig.RATE_SSS.get(), ServerConfig.SOFT_SSS.get(), ServerConfig.STEP_SSS.get(), pulls);
+            case A -> ServerConfig.RATE_A.get();
+            default -> 0.0;
+        };
+    }
+
+    private static double soft(double base, int start, double step, int pulls) {
+        return Math.min(1.0, base + Math.max(0, pulls - start) * step);
+    }
+
+    public static int feathers(ServerPlayer player) {
+        int count = 0;
+        for (ItemStack stack : player.getInventory().items) {
+            if (stack.is(ModItems.SUMMONING_FEATHER.get())) {
+                count += stack.getCount();
+            }
+        }
+        return count;
+    }
+
+    private static void consume(ServerPlayer player, int count) {
+        for (ItemStack stack : player.getInventory().items) {
+            if (count <= 0) {
+                return;
+            }
+            if (stack.is(ModItems.SUMMONING_FEATHER.get())) {
+                int take = Math.min(count, stack.getCount());
+                stack.shrink(take);
+                count -= take;
+            }
+        }
+    }
+
+    public static void onPull(ServerPlayer player, Payloads.GachaPull request) {
+        if (!(player.containerMenu instanceof AltarMenu)) {
+            return;
+        }
+        int count = request.count() >= MULTI ? MULTI : 1;
+        if (!player.isCreative() && feathers(player) < count) {
+            player.displayClientMessage(Component.translatable("message.simplywings.gacha_feathers"), true);
+            return;
+        }
+        if (!player.isCreative()) {
+            consume(player, count);
+        }
+        GachaData data = ModAttachments.gacha(player);
+        List<GachaData.Entry> results = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            results.add(roll(player, data));
+        }
+        for (GachaData.Entry entry : results) {
+            data.record(entry);
+            ItemStack stack = new ItemStack(BuiltInRegistries.ITEM.get(entry.item()), entry.count());
+            if (!player.getInventory().add(stack)) {
+                player.drop(stack, false);
+            }
+        }
+        PacketDistributor.sendToPlayer(player, new Payloads.GachaResults(results, state(player)));
+    }
+
+    public static Payloads.GachaState state(ServerPlayer player) {
+        GachaData data = ModAttachments.gacha(player);
+        return new Payloads.GachaState(data.pity(GachaTier.S), data.pity(GachaTier.SS), data.pity(GachaTier.SSS),
+                data.total(), feathers(player), data.history());
+    }
+
+    public static GachaData.Entry roll(ServerPlayer player, GachaData data) {
+        data.tickPity();
+        RandomSource random = player.getRandom();
+        double r = random.nextDouble();
+        double acc = 0;
+        GachaTier tier = null;
+        for (GachaTier t : new GachaTier[]{GachaTier.SSS, GachaTier.SS, GachaTier.S}) {
+            acc += rate(t, data.pity(t));
+            if (r < acc) {
+                tier = t;
+                break;
+            }
+        }
+        if (tier == null) {
+            tier = r < acc + rate(GachaTier.A, 0) ? GachaTier.A : GachaTier.B;
+        }
+        if (tier == GachaTier.SSS && random.nextDouble() < ServerConfig.MYTHIC_CHANCE.get()) {
+            tier = GachaTier.MYTHIC;
+        }
+        data.reset(tier);
+        ItemStack stack = draw(player, tier, random);
+        return new GachaData.Entry(tier.ordinal(), BuiltInRegistries.ITEM.getKey(stack.getItem()), stack.getCount());
+    }
+
+    private static ItemStack draw(ServerPlayer player, GachaTier tier, RandomSource random) {
+        return switch (tier) {
+            case B -> {
+                List<Item> pool = ModItems.materials(MaterialIds.DROPS);
+                Item item = pool.get(random.nextInt(pool.size()));
+                double value = OfferingValues.value(item);
+                int count = value <= 0 ? 1 : Mth.clamp((int) Math.round(ServerConfig.B_STACK_VALUE.get() / value), 1, 64);
+                yield new ItemStack(item, count);
+            }
+            case A -> {
+                List<Item> pool = new ArrayList<>(ModItems.materials(MaterialIds.INTERMEDIATES));
+                pool.addAll(ModItems.materials(MaterialIds.PARTS));
+                yield new ItemStack(weighted(pool, random));
+            }
+            default -> {
+                List<WingItem> pool = wings(player.registryAccess()).get(rarity(tier));
+                if (pool == null || pool.isEmpty()) {
+                    yield new ItemStack(ModItems.SUMMONING_FEATHER.get());
+                }
+                if (tier == GachaTier.MYTHIC) {
+                    List<WingItem> fresh = pool.stream()
+                            .filter(w -> !ModAttachments.get(player).collection().contains(w.wing())).toList();
+                    if (!fresh.isEmpty()) {
+                        pool = fresh;
+                    }
+                }
+                yield new ItemStack(pool.get(random.nextInt(pool.size())));
+            }
+        };
+    }
+
+    private static Item weighted(List<Item> pool, RandomSource random) {
+        double total = 0;
+        double[] weights = new double[pool.size()];
+        for (int i = 0; i < pool.size(); i++) {
+            double value = OfferingValues.value(pool.get(i));
+            weights[i] = value > 0 ? 1.0 / value : 1.0;
+            total += weights[i];
+        }
+        double r = random.nextDouble() * total;
+        for (int i = 0; i < pool.size(); i++) {
+            r -= weights[i];
+            if (r <= 0) {
+                return pool.get(i);
+            }
+        }
+        return pool.get(pool.size() - 1);
+    }
+
+    private static WingRarity rarity(GachaTier tier) {
+        return switch (tier) {
+            case S -> WingRarity.RARE;
+            case SS -> WingRarity.EPIC;
+            case SSS -> WingRarity.LEGENDARY;
+            default -> WingRarity.MYTHIC;
+        };
+    }
+
+    public static Map<WingRarity, List<WingItem>> wings(RegistryAccess access) {
+        Map<WingRarity, List<WingItem>> out = new EnumMap<>(WingRarity.class);
+        for (DeferredItem<WingItem> holder : ModItems.wings()) {
+            WingItem item = holder.get();
+            WingRegistries.get(access, item.wing()).ifPresent(def -> out.computeIfAbsent(def.rarity(), k -> new ArrayList<>()).add(item));
+        }
+        return out;
+    }
+
+    private Gacha() {
+    }
+}

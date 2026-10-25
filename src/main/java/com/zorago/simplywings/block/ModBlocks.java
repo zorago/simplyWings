@@ -2,6 +2,11 @@ package com.zorago.simplywings.block;
 
 import com.zorago.simplywings.SimplyWings;
 import com.zorago.simplywings.block.recipe.ModRecipes;
+import com.zorago.simplywings.gacha.AltarMenu;
+import com.zorago.simplywings.gacha.DraconicAltarBlock;
+import com.zorago.simplywings.gacha.FountainMenu;
+import com.zorago.simplywings.gacha.OfferingFountainBlock;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.BlockItem;
@@ -68,6 +73,32 @@ public final class ModBlocks {
                     () -> BlockEntityType.Builder.of(CloudCompressorBlockEntity::new, CLOUD_COMPRESSOR.get()).build(null));
     public static final DeferredHolder<MenuType<?>, MenuType<CloudCompressorMenu>> CLOUD_COMPRESSOR_MENU =
             MENUS.register("cloud_compressor", () -> IMenuTypeExtension.create(CloudCompressorMenu::new));
+
+    public static final DeferredBlock<DraconicAltarBlock> DRACONIC_ALTAR = BLOCKS.register("draconic_altar",
+            () -> new DraconicAltarBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_BLACK)
+                    .strength(-1.0F, 3600000.0F)
+                    .noLootTable()
+                    .lightLevel(state -> 11)
+                    .sound(SoundType.DEEPSLATE_BRICKS)
+                    .noOcclusion()));
+    public static final DeferredItem<BlockItem> DRACONIC_ALTAR_ITEM = ITEMS.register("draconic_altar",
+            () -> new BlockItem(DRACONIC_ALTAR.get(), new Item.Properties().rarity(Rarity.EPIC)));
+    public static final DeferredHolder<MenuType<?>, MenuType<AltarMenu>> ALTAR_MENU =
+            MENUS.register("draconic_altar", () -> IMenuTypeExtension.create(AltarMenu::new));
+
+    public static final DeferredBlock<OfferingFountainBlock> OFFERING_FOUNTAIN = BLOCKS.register("offering_fountain",
+            () -> new OfferingFountainBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.QUARTZ)
+                    .strength(-1.0F, 3600000.0F)
+                    .noLootTable()
+                    .lightLevel(state -> 13)
+                    .sound(SoundType.AMETHYST)
+                    .noOcclusion()));
+    public static final DeferredItem<BlockItem> OFFERING_FOUNTAIN_ITEM = ITEMS.register("offering_fountain",
+            () -> new BlockItem(OFFERING_FOUNTAIN.get(), new Item.Properties().rarity(Rarity.EPIC)));
+    public static final DeferredHolder<MenuType<?>, MenuType<FountainMenu>> FOUNTAIN_MENU =
+            MENUS.register("offering_fountain", () -> IMenuTypeExtension.create(FountainMenu::new));
 
     public static void register(IEventBus modBus) {
         BLOCKS.register(modBus);

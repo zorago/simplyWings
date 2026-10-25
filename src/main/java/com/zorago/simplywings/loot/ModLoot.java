@@ -2,6 +2,7 @@ package com.zorago.simplywings.loot;
 
 import com.mojang.serialization.MapCodec;
 import com.zorago.simplywings.SimplyWings;
+import com.zorago.simplywings.gacha.SummoningLootModifier;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.loot.IGlobalLootModifier;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -13,6 +14,7 @@ public final class ModLoot {
 
     static {
         MODIFIERS.register("winged_drops", () -> WingedLootModifier.CODEC);
+        MODIFIERS.register("summoning_feathers", () -> SummoningLootModifier.CODEC);
     }
 
     public static void register(IEventBus modBus) {

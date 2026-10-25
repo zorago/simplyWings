@@ -1,0 +1,571 @@
+{
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "quartz": "simplywings:block/offering_fountain_quartz",
+    "prismarine": "simplywings:block/offering_fountain_prismarine",
+    "water": "simplywings:block/offering_fountain_water",
+    "amethyst": "simplywings:block/offering_fountain_amethyst",
+    "particle": "simplywings:block/offering_fountain_quartz"
+  },
+  "elements": [
+    {
+      "name": "base",
+      "from": [
+        -4,
+        0,
+        -4
+      ],
+      "to": [
+        20,
+        2,
+        20
+      ],
+      "faces": {
+        "north": {
+          "texture": "#prismarine"
+        },
+        "south": {
+          "texture": "#prismarine"
+        },
+        "east": {
+          "texture": "#prismarine"
+        },
+        "west": {
+          "texture": "#prismarine"
+        },
+        "up": {
+          "texture": "#prismarine"
+        },
+        "down": {
+          "texture": "#prismarine"
+        }
+      }
+    },
+    {
+      "name": "wall_n",
+      "from": [
+        -4,
+        2,
+        -4
+      ],
+      "to": [
+        20,
+        6,
+        -2
+      ],
+      "faces": {
+        "north": {
+          "texture": "#quartz"
+        },
+        "south": {
+          "texture": "#quartz"
+        },
+        "east": {
+          "texture": "#quartz"
+        },
+        "west": {
+          "texture": "#quartz"
+        },
+        "up": {
+          "texture": "#quartz"
+        },
+        "down": {
+          "texture": "#quartz"
+        }
+      }
+    },
+    {
+      "name": "wall_s",
+      "from": [
+        -4,
+        2,
+        18
+      ],
+      "to": [
+        20,
+        6,
+        20
+      ],
+      "faces": {
+        "north": {
+          "texture": "#quartz"
+        },
+        "south": {
+          "texture": "#quartz"
+        },
+        "east": {
+          "texture": "#quartz"
+        },
+        "west": {
+          "texture": "#quartz"
+        },
+        "up": {
+          "texture": "#quartz"
+        },
+        "down": {
+          "texture": "#quartz"
+        }
+      }
+    },
+    {
+      "name": "wall_w",
+      "from": [
+        -4,
+        2,
+        -2
+      ],
+      "to": [
+        -2,
+        6,
+        18
+      ],
+      "faces": {
+        "north": {
+          "texture": "#quartz"
+        },
+        "south": {
+          "texture": "#quartz"
+        },
+        "east": {
+          "texture": "#quartz"
+        },
+        "west": {
+          "texture": "#quartz"
+        },
+        "up": {
+          "texture": "#quartz"
+        },
+        "down": {
+          "texture": "#quartz"
+        }
+      }
+    },
+    {
+      "name": "wall_e",
+      "from": [
+        18,
+        2,
+        -2
+      ],
+      "to": [
+        20,
+        6,
+        18
+      ],
+      "faces": {
+        "north": {
+          "texture": "#quartz"
+        },
+        "south": {
+          "texture": "#quartz"
+        },
+        "east": {
+          "texture": "#quartz"
+        },
+        "west": {
+          "texture": "#quartz"
+        },
+        "up": {
+          "texture": "#quartz"
+        },
+        "down": {
+          "texture": "#quartz"
+        }
+      }
+    },
+    {
+      "name": "water",
+      "from": [
+        -2,
+        2,
+        -2
+      ],
+      "to": [
+        18,
+        5,
+        18
+      ],
+      "faces": {
+        "up": {
+          "texture": "#water"
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "pillar",
+      "from": [
+        5,
+        2,
+        5
+      ],
+      "to": [
+        11,
+        12,
+        11
+      ],
+      "faces": {
+        "north": {
+          "texture": "#quartz"
+        },
+        "south": {
+          "texture": "#quartz"
+        },
+        "east": {
+          "texture": "#quartz"
+        },
+        "west": {
+          "texture": "#quartz"
+        }
+      }
+    },
+    {
+      "name": "pillar_band",
+      "from": [
+        4.5,
+        9,
+        4.5
+      ],
+      "to": [
+        11.5,
+        10,
+        11.5
+      ],
+      "faces": {
+        "north": {
+          "texture": "#prismarine"
+        },
+        "south": {
+          "texture": "#prismarine"
+        },
+        "east": {
+          "texture": "#prismarine"
+        },
+        "west": {
+          "texture": "#prismarine"
+        },
+        "up": {
+          "texture": "#prismarine"
+        },
+        "down": {
+          "texture": "#prismarine"
+        }
+      }
+    },
+    {
+      "name": "cup",
+      "from": [
+        2,
+        12,
+        2
+      ],
+      "to": [
+        14,
+        14,
+        14
+      ],
+      "faces": {
+        "north": {
+          "texture": "#quartz"
+        },
+        "south": {
+          "texture": "#quartz"
+        },
+        "east": {
+          "texture": "#quartz"
+        },
+        "west": {
+          "texture": "#quartz"
+        },
+        "down": {
+          "texture": "#quartz"
+        }
+      }
+    },
+    {
+      "name": "cup_water",
+      "from": [
+        3,
+        14,
+        3
+      ],
+      "to": [
+        13,
+        13.9,
+        13
+      ],
+      "faces": {
+        "up": {
+          "texture": "#water"
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "amethyst",
+      "from": [
+        6,
+        14,
+        6
+      ],
+      "to": [
+        10,
+        22,
+        10
+      ],
+      "faces": {
+        "north": {
+          "texture": "#amethyst"
+        },
+        "south": {
+          "texture": "#amethyst"
+        },
+        "east": {
+          "texture": "#amethyst"
+        },
+        "west": {
+          "texture": "#amethyst"
+        },
+        "up": {
+          "texture": "#amethyst"
+        },
+        "down": {
+          "texture": "#amethyst"
+        }
+      },
+      "neoforge_data": {
+        "block_light": 15,
+        "sky_light": 15
+      },
+      "rotation": {
+        "origin": [
+          8,
+          18,
+          8
+        ],
+        "axis": "y",
+        "angle": 45
+      }
+    },
+    {
+      "name": "spout_0",
+      "from": [
+        7,
+        10,
+        -1
+      ],
+      "to": [
+        9,
+        11,
+        1
+      ],
+      "faces": {
+        "north": {
+          "texture": "#prismarine"
+        },
+        "south": {
+          "texture": "#prismarine"
+        },
+        "east": {
+          "texture": "#prismarine"
+        },
+        "west": {
+          "texture": "#prismarine"
+        },
+        "up": {
+          "texture": "#prismarine"
+        },
+        "down": {
+          "texture": "#prismarine"
+        }
+      }
+    },
+    {
+      "name": "spout_1",
+      "from": [
+        7,
+        10,
+        15
+      ],
+      "to": [
+        9,
+        11,
+        17
+      ],
+      "faces": {
+        "north": {
+          "texture": "#prismarine"
+        },
+        "south": {
+          "texture": "#prismarine"
+        },
+        "east": {
+          "texture": "#prismarine"
+        },
+        "west": {
+          "texture": "#prismarine"
+        },
+        "up": {
+          "texture": "#prismarine"
+        },
+        "down": {
+          "texture": "#prismarine"
+        }
+      }
+    },
+    {
+      "name": "spout_2",
+      "from": [
+        -1,
+        10,
+        7
+      ],
+      "to": [
+        1,
+        11,
+        9
+      ],
+      "faces": {
+        "north": {
+          "texture": "#prismarine"
+        },
+        "south": {
+          "texture": "#prismarine"
+        },
+        "east": {
+          "texture": "#prismarine"
+        },
+        "west": {
+          "texture": "#prismarine"
+        },
+        "up": {
+          "texture": "#prismarine"
+        },
+        "down": {
+          "texture": "#prismarine"
+        }
+      }
+    },
+    {
+      "name": "spout_3",
+      "from": [
+        15,
+        10,
+        7
+      ],
+      "to": [
+        17,
+        11,
+        9
+      ],
+      "faces": {
+        "north": {
+          "texture": "#prismarine"
+        },
+        "south": {
+          "texture": "#prismarine"
+        },
+        "east": {
+          "texture": "#prismarine"
+        },
+        "west": {
+          "texture": "#prismarine"
+        },
+        "up": {
+          "texture": "#prismarine"
+        },
+        "down": {
+          "texture": "#prismarine"
+        }
+      }
+    }
+  ],
+  "display": {
+    "gui": {
+      "rotation": [
+        30,
+        225,
+        0
+      ],
+      "translation": [
+        0,
+        -1.5,
+        0
+      ],
+      "scale": [
+        0.42,
+        0.42,
+        0.42
+      ]
+    },
+    "ground": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        3,
+        0
+      ],
+      "scale": [
+        0.2,
+        0.2,
+        0.2
+      ]
+    },
+    "fixed": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        0.4,
+        0.4,
+        0.4
+      ]
+    },
+    "thirdperson_righthand": {
+      "rotation": [
+        75,
+        45,
+        0
+      ],
+      "translation": [
+        0,
+        2.5,
+        0
+      ],
+      "scale": [
+        0.3,
+        0.3,
+        0.3
+      ]
+    },
+    "firstperson_righthand": {
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        0.3,
+        0.3,
+        0.3
+      ]
+    }
+  }
+}

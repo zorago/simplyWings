@@ -48,7 +48,7 @@ def main():
             checks["wing json"] = pair in wings
             checks["wing name"] = f"wing.simplywings.{pair}" in lang
             checks["obtainable"] = i in produced
-        elif not i.endswith("_compass") and i not in ("cloud_absorber", "cloud_flask", "fury_essence_tank", "fury_cloud_absorber"):
+        elif not i.endswith("_compass") and i not in ("cloud_absorber", "cloud_flask", "fury_essence_tank", "fury_cloud_absorber", "summoning_feather"):
             checks["used"] = i in consumed
         for name, ok in checks.items():
             if not ok:
