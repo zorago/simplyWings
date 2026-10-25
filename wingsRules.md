@@ -117,6 +117,8 @@ Principe (zorago) : une membrane de peau reste un plan qui pousse l'air, comme l
 - **M2 — Membrane bombée** (née sur `bat`). Une membrane plate fait « plaque ». En vol, elle se bombe vers le dos, de 12 % de sa largeur au maximum, comme une voile gonflée par l'air qui la porte : la face du dessous est creusée et emprisonne l'air. Au plané, elle est légèrement courbée (`GLIDE_BILLOW` 0,5). Elle se gonfle plus à la frappe, se creuse dans l'autre sens à la remontée et se gonfle fort en parachute (même source que la cambrure des plumes, `RigPose.CAMBER`). Repliée ou au sol, elle est à plat. La valeur passe par `Membrane.billow`, que la scène reçoit sur le groupe `scene_membrane`.
 - **M3 — Doigts en éventail** (née sur `bat`). Le battement ouvre et ferme l'éventail des doigts : ils se resserrent à la remontée pour réduire la surface (cycle `FAN` négatif), puis s'ouvrent en grand à la frappe. Les règles d'amplitude (G4) s'appliquent au bras, l'avant-bras et la main exactement comme pour l'oiseau.
 
+- **M4 — Dos de créature** (née sur `night`, pour les Furies et toute paire qui « devient » une créature : queue, gouvernails, épines). Une plaque dorsale à écailles, légèrement bombée (trois couches en escalier : base, arête, quille), couvre le dos du joueur et le suit. Elle cache le skin entre les ailes et fait la jonction entre les ailes, les gouvernails des hanches et la queue. Dans `fury.js` : option `backPlate: true`, peinte par `plate` dans `fury_px.js` (rangées d'écailles décalées, couleurs `skin*` de la paire).
+
 ### Insecte
 
 Les ailes d'insecte sont des plaques rigides montées sur une charnière, sans coude ni poignet. Les règles générales s'y appliquent en version « charnière » (nées sur `bee`, validées par zorago sans modification).
@@ -232,6 +234,7 @@ Règles appliquées avant revue :
 - M1 à M3 sur la grande paire et la paire arrière : peau sans trou (18 panneaux), bombée en vol, doigts en éventail au battement.
 - G1 à G5 via `FlightRules` sur la grande paire (parachute, frein lent, BLAST, amplitude anatomique, nage, stationnaire au sol, traînées au bout du doigt 1). La paire arrière suit la grande avec un léger retard, et s'abaisse en parachute pour ajouter de la surface.
 - G8 : la grande paire est sur les omoplates, la petite paire arrière plus bas, comme les gouvernails de seraph.
+- Retour de zorago (animations validées) : il manquait un dos complet, le skin du joueur ressortait entre les ailes et les épines. Ajout de la plaque dorsale à écailles (M4), aussi sur `light`.
 - Conservé tel quel : la queue (`DragonTail`) et ses ailerons, les épines et leur charge de plasma, la prothèse rouge, les 8 idles et les pouvoirs des Furies.
 
 ## Plan de review

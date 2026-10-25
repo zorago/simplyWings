@@ -102,6 +102,23 @@ var FURY_PAINT = (R, T) => {
     c.hline(u, v + fh - 1, fw, low)
     if (speck) for (let i = 0; i < fw * fh / 6; i++) c.px(u + Math.floor(hash(i, 1, u) * fw), v + Math.floor(hash(i, 2, v) * fh), speck)
   }
+  const plate = (c, cube) => {
+    const w = cube.to[0] - cube.from[0], h = cube.to[1] - cube.from[1], dd = cube.to[2] - cube.from[2]
+    const fw = Math.ceil(2 * (w + dd) - 1e-6), fh = Math.ceil(h + dd - 1e-6)
+    const [u, v] = cube.uv
+    for (let x = 0; x < fw; x++) {
+      for (let y = 0; y < fh; y++) {
+        const row = Math.floor(y / 2)
+        const col = Math.floor((x + (row % 2) * 2) / 4)
+        const lx = (x + (row % 2) * 2) % 4
+        const ly = y % 2
+        let t = (col + row) % 3 === 0 ? T.skinSpeck : T.skin
+        if (ly === 1 && (lx === 0 || lx === 3)) t = T.skinLow
+        else if (ly === 0 && (lx === 1 || lx === 2)) t = T.skinTop
+        c.px(u + x, v + y, t)
+      }
+    }
+  }
   const fin = (cube) => (x, row, dorsal, w, h) => {
     const t = row / Math.max(1, h - 1)
     const outer = cube.side === 'right' ? x / (w - 1) : 1 - x / (w - 1)
@@ -123,6 +140,7 @@ var FURY_PAINT = (R, T) => {
       if (cube.kind === 'skin') box(c, cube, T.skinTop, T.skin, T.skinLow, T.skinSpeck)
       else if (cube.kind === 'claw') box(c, cube, T.clawTop, T.claw, T.claw)
       else if (cube.kind === 'tail') box(c, cube, T.skinTop, T.skin, T.skinLow, T.skinSpeck)
+      else if (cube.kind === 'plate') plate(c, cube)
       else if (cube.kind === 'spine') box(c, cube, T.spineTop, T.spine, T.spineLow)
       else if (cube.kind === 'mid_fin' || cube.kind === 'tip_fin') FEATHERS.plate(c, cube, fin(cube))
     }

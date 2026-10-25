@@ -47,6 +47,12 @@ var FURY = (o) => {
     })
     return { S, E, W }
   }
+  if (o.backPlate) {
+    groups.push({ name: 'back_plate', origin: [0, 18, 2], single: true })
+    cubes.push({ name: 'back_plate_base', group: 'back_plate', from: [-4.1, 11.6, 1.98], to: [4.1, 24.2, 2.5], kind: 'plate' })
+    cubes.push({ name: 'back_plate_ridge', group: 'back_plate', from: [-3.3, 12.4, 2.5], to: [3.3, 23.6, 2.95], kind: 'plate' })
+    cubes.push({ name: 'back_plate_keel', group: 'back_plate', from: [-2.1, 13.2, 2.95], to: [2.1, 22.8, 3.25], kind: 'plate' })
+  }
   const main = wing(o.main)
   const hind = wing(o.hind)
   const tail = o.tail
