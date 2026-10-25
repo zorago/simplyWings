@@ -355,6 +355,20 @@ Retour de zorago :
 1. Tout est validé. Les deux points du taiji passent de 2 px à 1 px (le pixel collé à la bordure est retiré).
 2. Les « yeux » des ailes (cercle blanc sur le Yin, noir sur le Yang), qui formaient un yin-yang vu de dos, étaient à moitié cachés sous les rangées de plumes. Ils passent sur les grandes couvertures de l'avant-bras, plus haut sur la plaque, et les couvertures remontent au-dessus des plumes (comme sur un vrai oiseau) : le cercle entier se voit de dos en vol.
 
+### 15. Ailes de colibri (`hummingbird`, plume + vrombissement, aspects A4, A17, A18)
+
+Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+
+Règles appliquées avant revue (aile de plumes, mais règles insecte pour le vrombissement) :
+
+- I1 / G4 : le vrombissement oscille autour d'un centre qui garde le point le plus bas à −5° sous l'épaule (l'ancien descendait à environ −45°). Amplitude : plané 0,45, stationnaire 0,6, frein lent 0,3. Les deux fantômes translucides suivent la même limite.
+- I2 / A18 : stationnaire à plat (`HOVER_PLANE`) à hauteur d'épaules, battement d'avant en arrière avec inversion d'incidence à chaque demi-coup, et un huit horizontal plus marqué qu'en vol (balayage haut/bas au double de la fréquence).
+- I3 / G1 : parachute figé avec la pose de `basic` (aile et bras de parachute), plus de vrombissement ni de fantômes, tremblement des bouts d'aile ; sous la vitesse minimale, le vrombissement revient derrière les bras.
+- I4 / G3 : à la charge, l'aile se déplie et se lève, le vrombissement grandit (au carré), puis rafale à l'envol.
+- G2 : traînées au bout de `primary_1`.
+- P1 sans objet : le bras (2 px) et l'avant-bras (3 px) sont trop courts pour porter des rangées de plumes ; l'aile du colibri est presque toute en main, et ses primaires sont déjà des plumes séparées.
+- Conservé : coude et poignet verrouillés, battement visuel sur l'horloge de rendu (~10 Hz apparents), courte rafale de bourdonnement au repos.
+
 ## Plan de review
 
 Deux phases. **Phase 1** : une paire dominante par aspect, choisie pour ouvrir le plus de logique nouvelle, revue une à une avec zorago, jusqu'à ce que chaque aspect ait ses règles. **Phase 2** : toutes les autres paires, une à une aussi. On applique d'abord toutes les règles de leurs familles et de leurs aspects, puis on ne polit que ce qui leur est propre.
