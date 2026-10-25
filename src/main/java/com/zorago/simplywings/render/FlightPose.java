@@ -29,9 +29,13 @@ public final class FlightPose {
         ResourceLocation modelId = visual.look().flatMap(id -> WingRegistries.get(player.registryAccess(), id))
                 .map(WingDefinition::model).orElse(BASIC);
         WingMotion motion = visual.animator.motion(partialTick, WingStyle.of(modelId), MOTION);
+        pose(model, visual.mode, motion, visual.animator.bank(partialTick), ageInTicks);
+    }
+
+    public static void pose(PlayerModel<?> model, FlightMode mode, WingMotion motion, float bankDegrees, float ageInTicks) {
         float t = ageInTicks * 0.05f;
-        if (visual.mode == FlightMode.TRAVEL) {
-            travel(model, visual, motion, partialTick, t);
+        if (mode == FlightMode.TRAVEL) {
+            travel(model, motion, bankDegrees, t);
         } else {
             hover(model, motion, t);
         }
@@ -48,10 +52,10 @@ public final class FlightPose {
         return Mth.clamp(visual.animator.motion(partialTick, WingStyle.of(modelId), MOTION).w(WingMotion.BRAKE), 0, 1);
     }
 
-    private static void travel(PlayerModel<?> model, WingVisuals.Visual visual, WingMotion motion, float partialTick, float t) {
+    private static void travel(PlayerModel<?> model, WingMotion motion, float bankDegrees, float t) {
         float brake = Mth.clamp(motion.w(WingMotion.BRAKE), 0, 1);
         float dive = Mth.clamp(motion.w(WingMotion.DIVE) + motion.w(WingMotion.TUCK), 0, 1);
-        float bank = Mth.clamp(visual.animator.bank(partialTick) / 45f, -1, 1);
+        float bank = Mth.clamp(bankDegrees / 45f, -1, 1);
         float beat = motion.beating() ? Mth.sin(motion.beat * Mth.TWO_PI) * motion.beatWeight : 0;
         float sway = Mth.sin(t * 6.0f);
 

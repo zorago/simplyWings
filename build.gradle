@@ -219,3 +219,13 @@ idea {
         downloadJavadoc = true
     }
 }
+
+tasks.register('bakeRig', JavaExec) {
+    group = 'simplywings'
+    description = 'Samples a wing rig class into keyframes for a Blockbench scene (-Pwing=<model>)'
+    dependsOn tasks.named('classes')
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'com.zorago.simplywings.client.studio.RigBake'
+    workingDir = rootDir
+    args = [project.findProperty('wing') ?: 'basic', "build/rigbake/${project.findProperty('wing') ?: 'basic'}.json", rootDir.absolutePath]
+}

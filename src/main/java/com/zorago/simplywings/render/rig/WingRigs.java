@@ -120,6 +120,10 @@ public final class WingRigs {
         }
     }
 
+    public static WingRig byName(String name) {
+        return ALL.stream().filter(rig -> rig.name().equals(name)).findFirst().orElse(null);
+    }
+
     public static WingRig get(ResourceLocation model) {
         return BOUND.get(model);
     }

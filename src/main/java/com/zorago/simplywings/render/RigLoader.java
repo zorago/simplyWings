@@ -65,6 +65,10 @@ public final class RigLoader {
         return rig != null ? Optional.of(rig) : load(name);
     }
 
+    public static Rig parse(Reader reader) {
+        return parse(JsonParser.parseReader(reader).getAsJsonObject());
+    }
+
     private static Rig parse(JsonObject json) {
         JsonObject resolution = json.getAsJsonObject("resolution");
         int width = resolution.get("width").getAsInt();
