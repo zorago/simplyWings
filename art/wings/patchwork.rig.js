@@ -18,8 +18,10 @@ var RIG = (() => {
     { name: 'knot', group: 'hand', from: [W[0] - 0.8, y - 0.8, z - 0.8], to: [W[0] + 0.8, y + 0.8, z + 0.8], kind: 'string' },
     { name: 'string_tail', group: 'hand', from: [W[0] - 0.2, y - 4.5, z - 0.2], to: [W[0] + 0.2, y - 0.8, z + 0.2], kind: 'string', only: 'left' }
   )
-  b.groups.push({ name: 'flap', parent: 'secondaries', origin: [E[0] + 6, y - 9, z], rot: [0, 0, -18] })
-  b.cubes.push({ name: 'flap_plate', group: 'flap', from: [E[0] + 6, y - 14, z + 1.0], to: [E[0] + 10, y - 9, z + 1.02], kind: 'flap', only: 'left' })
+  const host = b.groups.find(g => g.name === 'secondary_feather_3')
+  const fx = host.origin[0] - 1.5
+  b.groups.push({ name: 'flap', parent: 'secondary_feather_3', origin: [fx + 1, y - 7, z], rot: [0, 0, -10] })
+  b.cubes.push({ name: 'flap_plate', group: 'flap', from: [fx + 1, y - 12, z + 1.04], to: [fx + 5, y - 7, z + 1.06], kind: 'flap', only: 'left' })
   const rig = { model: 'patchwork', texture: [128, 128], ...b }
   rig.used = PACK(rig, 128)
   const plates = rig.cubes.filter(c => c.kind !== 'bone' && c.to[2] - c.from[2] < 0.05 && !c.only)

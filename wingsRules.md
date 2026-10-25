@@ -122,7 +122,7 @@ Principe (zorago) : une membrane de peau reste un plan qui pousse l'air, comme l
 ### Planeur (membrane sans doigts)
 
 - **S1 — Le planeur vole avec les bras du joueur** (née sur `squirrel`, demande de zorago : « une vraie vibe d'écureuil volant »). En vol, les bras du joueur s'écartent (croix au plané, vers l'avant au frein, pompage au battement, bras intérieur replié en virage, rentrés en piqué) et les jambes s'écartent un peu. Le squelette est réduit au strict nécessaire : **un seul os par aile**, qui recopie la pose réelle du bras du joueur (`WingRig.playerArms`, ramenée dans le repère du torse), et une seule peau tendue de l'arête intérieure du bras, jusqu'à la main, au flanc jusqu'au bas du torse (`rigs/squirrel.membranes.json`, UV explicites dessinées bras à l'horizontale). La peau est dans le plan médian du corps (z = 0), qui passe par l'axe de l'épaule, et son coin du haut est fixé au torse : l'aisselle ne bouge pas quand le bras balance, tourne ou se lève, donc le tissu ne se déchire jamais. Pour ça, une classe de rig peut poser le corps du joueur (`WingRig.poseBody`, appelé par `FlightPose` après la pose de vol, dans tous les modes). L'aile est donc collée à la main **en permanence**, exactement, au sol aussi : la marche, la frappe et le minage tendent la peau ; bras le long du corps, elle disparaît contre le flanc. À la charge, les bras se lèvent et s'écartent en tremblant. Pas de coude ni d'IK : le pli suit le bras humain.
-- **Queue :** elle part du bas du dos, collée au joueur (pivot sur la surface du dos, pas de décalage), et ne doit jamais passer sous les pieds. En vol, elle suit les jambes, à peine relevée (base 0,08 rad, bout 0,12 rad) ; elle ne se relève franchement qu'au frein et à l'atterrissage.
+- **Queue :** (vaut pour toute queue ou traîne, A9 : retrouvé sur `peacock`) elle part du bas du dos, collée au joueur (pivot sur la surface du dos, pas de décalage), et ne doit jamais passer sous les pieds. En vol, elle suit les jambes, à peine relevée (base 0,08 rad, bout 0,12 rad) ; elle ne se relève franchement qu'au frein et à l'atterrissage.
 
 ### Insecte
 
@@ -485,6 +485,10 @@ Règles appliquées avant revue :
 - G1 à G5 via `FlightRules` : parachute et bras de parachute, frein lent, charge et BLAST, battement au-dessus de −5° (l'ancien descendait à −49°), stationnaire à plat, traînées au bout de `primary_1`.
 - Conservé : la traîne (4 plumes ocellées) qui se déploie en roue au sol pendant l'ébrouement et au stationnaire (à moitié au frein) ; en vol, elle traîne derrière, ondule et se balance dans les virages.
 
+Retour de zorago :
+
+1. La traîne était trop haute et décollée du joueur (même défaut que la queue de `squirrel`) : elle part du bas du dos (y 12), collée (pivot sur la surface du dos, plumes à 2,05–2,17).
+
 ### 24. Ailes d'améthyste (`amethyst`, plume de cristal, aspects A8, A10)
 
 Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
@@ -515,6 +519,10 @@ Règles appliquées avant revue :
 - G1 à G5 via `FlightRules` : parachute, frein lent, charge et BLAST, battement au-dessus de −5° (l'ancien descendait à −46°), stationnaire à plat, traînées au bout de `primary_1`.
 - Asymétrie (A14, comme `yin_yang`) : l'aile gauche, la plus abîmée, bat avec un léger retard (3,5 % du cycle) et 8 % moins ample ; le hoquet du battement reste ; au repos et au plané, les deux ailes ne respirent pas en même temps.
 - Conservé : l'attelle et les bandages de l'aile droite, la ficelle de l'aile gauche, le rabat qui claque au vent, la plume rapportée.
+
+Retour de zorago :
+
+1. Le rabat bleu de l'aile gauche était mal attaché : il pendait du groupe des secondaires, qui ne suit plus le repli depuis les rangées de plumes. Il est maintenant cousu sur la 3e secondaire et se replie avec elle.
 
 ### 27. Ailes de terre (`earth`, plume de pierre, aspects A8, A10, A15)
 

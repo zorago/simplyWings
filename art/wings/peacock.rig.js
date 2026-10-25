@@ -8,12 +8,12 @@ var RIG = (() => {
       { angle: -81, length: 12 }
     ]
   })
-  const T = [0.5, 15, 2.4]
+  const T = [0.5, 12, 2]
   const train = [
-    { k: 1, angle: -60, length: 17, z: 4.8, display: 80 },
-    { k: 2, angle: -70, length: 18, z: 4.75, display: 60 },
-    { k: 3, angle: -80, length: 19, z: 4.7, display: 39 },
-    { k: 4, angle: -90, length: 20, z: 4.65, display: 18 }
+    { k: 1, angle: -60, length: 17, z: 2.17, display: 80 },
+    { k: 2, angle: -70, length: 18, z: 2.13, display: 60 },
+    { k: 3, angle: -80, length: 19, z: 2.09, display: 39 },
+    { k: 4, angle: -90, length: 20, z: 2.05, display: 18 }
   ]
   b.groups.push({ name: 'train', origin: T })
   for (const f of train) {
