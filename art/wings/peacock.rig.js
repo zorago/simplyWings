@@ -10,10 +10,10 @@ var RIG = (() => {
   })
   const T = [0.5, 12, 2]
   const train = [
-    { k: 1, angle: -60, length: 17, z: 2.17, display: 80 },
-    { k: 2, angle: -70, length: 18, z: 2.13, display: 60 },
-    { k: 3, angle: -80, length: 19, z: 2.09, display: 39 },
-    { k: 4, angle: -90, length: 20, z: 2.05, display: 18 }
+    { k: 1, angle: -60, length: 17, z: 2.27, display: 80 },
+    { k: 2, angle: -70, length: 18, z: 2.23, display: 60 },
+    { k: 3, angle: -80, length: 19, z: 2.19, display: 39 },
+    { k: 4, angle: -90, length: 20, z: 2.15, display: 18 }
   ]
   b.groups.push({ name: 'train', origin: T })
   for (const f of train) {

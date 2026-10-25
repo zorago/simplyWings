@@ -31,6 +31,7 @@ public final class PeacockRig extends WingRig {
             BEND_ELBOW, BEND_WRIST);
     private static final String[] TIPS = {"right_primary_1", "left_primary_1"};
 
+    private static final float TRAIN_LIFT = 12f * Mth.DEG_TO_RAD;
     private final RigPose drive = new RigPose();
     private final RigPose state = new RigPose();
     private FeatherWing right;
@@ -112,8 +113,10 @@ public final class PeacockRig extends WingRig {
         float sway = memory.get(SWAY, m.partialTick);
         float flying = 1f - ground;
         float length = Mth.lerp(Math.max(open, 0.6f * flying), 0.72f, 1f);
-        rightTrain.rotate(-0.25f * open, 0f, flying * 0.12f * sway);
-        leftTrain.rotate(-0.25f * open, 0f, flying * 0.12f * sway);
+        float legsBack = Mth.clamp(m.w(WingMotion.HOVER) + m.w(WingMotion.BRAKE) + m.w(WingMotion.LANDING), 0f, 1f);
+        float lift = TRAIN_LIFT + 0.05f * open + 0.25f * legsBack;
+        rightTrain.rotate(lift, 0f, flying * 0.12f * sway);
+        leftTrain.rotate(lift, 0f, flying * 0.12f * sway);
         for (int k = 0; k < TRAIN; k++) {
             float delta = (OPEN[k] - REST[k]) * Mth.DEG_TO_RAD * open;
             float trail = flying * (1f - open) * (REST[k] + 90f) * -0.6f * Mth.DEG_TO_RAD;

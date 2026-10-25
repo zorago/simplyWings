@@ -122,7 +122,7 @@ Principe (zorago) : une membrane de peau reste un plan qui pousse l'air, comme l
 ### Planeur (membrane sans doigts)
 
 - **S1 — Le planeur vole avec les bras du joueur** (née sur `squirrel`, demande de zorago : « une vraie vibe d'écureuil volant »). En vol, les bras du joueur s'écartent (croix au plané, vers l'avant au frein, pompage au battement, bras intérieur replié en virage, rentrés en piqué) et les jambes s'écartent un peu. Le squelette est réduit au strict nécessaire : **un seul os par aile**, qui recopie la pose réelle du bras du joueur (`WingRig.playerArms`, ramenée dans le repère du torse), et une seule peau tendue de l'arête intérieure du bras, jusqu'à la main, au flanc jusqu'au bas du torse (`rigs/squirrel.membranes.json`, UV explicites dessinées bras à l'horizontale). La peau est dans le plan médian du corps (z = 0), qui passe par l'axe de l'épaule, et son coin du haut est fixé au torse : l'aisselle ne bouge pas quand le bras balance, tourne ou se lève, donc le tissu ne se déchire jamais. Pour ça, une classe de rig peut poser le corps du joueur (`WingRig.poseBody`, appelé par `FlightPose` après la pose de vol, dans tous les modes). L'aile est donc collée à la main **en permanence**, exactement, au sol aussi : la marche, la frappe et le minage tendent la peau ; bras le long du corps, elle disparaît contre le flanc. À la charge, les bras se lèvent et s'écartent en tremblant. Pas de coude ni d'IK : le pli suit le bras humain.
-- **Queue :** (vaut pour toute queue ou traîne, A9 : retrouvé sur `peacock`) elle part du bas du dos, collée au joueur (pivot sur la surface du dos, pas de décalage), et ne doit jamais passer sous les pieds. En vol, elle suit les jambes, à peine relevée (base 0,08 rad, bout 0,12 rad) ; elle ne se relève franchement qu'au frein et à l'atterrissage.
+- **Queue :** (vaut pour toute queue ou traîne, A9 : retrouvé sur `peacock`) **jamais dans les jambes, sur aucune animation** (vérifié par un test de collision plaque/jambe sur toutes les frames de la scène complète, à faire pour chaque queue). Elle est légèrement levée vers l'arrière en permanence (+12° sur `peacock`, pose de zorago), plus quand les jambes passent derrière (stationnaire, frein, atterrissage), et décollée de 0,15 px du dos pour que le haut des jambes qui pivotent ne la traverse pas. Elle part du bas du dos, collée au joueur (pivot sur la surface du dos, pas de décalage), et ne doit jamais passer sous les pieds. En vol, elle suit les jambes, à peine relevée (base 0,08 rad, bout 0,12 rad) ; elle ne se relève franchement qu'au frein et à l'atterrissage.
 
 ### Insecte
 
@@ -487,7 +487,8 @@ Règles appliquées avant revue :
 
 Retour de zorago :
 
-1. La traîne était trop haute et décollée du joueur (même défaut que la queue de `squirrel`) : elle part du bas du dos (y 12), collée (pivot sur la surface du dos, plumes à 2,05–2,17).
+1. La traîne était trop haute et décollée du joueur (même défaut que la queue de `squirrel`) : elle part du bas du dos (y 12), collée (pivot sur la surface du dos, plumes à 2,15–2,27).
+2. Elle finissait dans les jambes : levée permanente de +12° vers l'arrière (pose de zorago sur `right_train`), +0,25 rad quand les jambes passent derrière. Vérifié sur les 18 animations : aucune plume dans les jambes.
 
 ### 24. Ailes d'améthyste (`amethyst`, plume de cristal, aspects A8, A10)
 
