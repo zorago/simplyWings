@@ -3,6 +3,8 @@ package com.zorago.simplywings.render.rig;
 import com.zorago.simplywings.anim.RigPose;
 import java.util.ArrayList;
 import java.util.List;
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
 
 public final class FeatherWing {
     public final float sign;
@@ -19,6 +21,8 @@ public final class FeatherWing {
     public final List<Bone> tertial = new ArrayList<>();
     public final List<Bone> secondary = new ArrayList<>();
     public final List<Bone> handFeather = new ArrayList<>();
+    private static final float HAND_ROW_INNER = 0.15f;
+    private static final float HAND_ROW_OUTER = 0.85f;
     private final float foldArm;
     private final float foldElbow;
     private final float foldWrist;
@@ -63,6 +67,11 @@ public final class FeatherWing {
     }
 
     private static void row(Bone group, List<Bone> feathers, float turn, float fold, float twistIn, float twistOut, float camber) {
+        row(group, feathers, turn, fold, twistIn, twistOut, camber, 0f);
+    }
+
+    private static void row(Bone group, List<Bone> feathers, float turn, float fold, float twistIn, float twistOut, float camber,
+                            float pitchOut) {
         if (feathers.isEmpty()) {
             group.rotate(camber, 0f, turn);
             return;
@@ -71,8 +80,40 @@ public final class FeatherWing {
         for (int k = 0; k < n; k++) {
             Bone feather = feathers.get(k);
             float t = n == 1 ? 0.5f : k / (float) (n - 1);
-            feather.rotation(feather.rest().xRot + camber, feather.rest().yRot + twistIn + (twistOut - twistIn) * t,
+            feather.rotation(feather.rest().xRot + camber + pitchOut * t, feather.rest().yRot + twistIn + (twistOut - twistIn) * t,
                     feather.rest().zRot * (1f - fold) + turn);
+        }
+    }
+
+    private static Quaternionf orientation(Bone bone) {
+        return new Quaternionf().rotationZYX(bone.zRot(), bone.yRot(), bone.xRot());
+    }
+
+    private void alignHandRow() {
+        Quaternionf toHand = orientation(hand).conjugate();
+        Vector3f inner = toHand.mul(orientation(secondary.get(secondary.size() - 1)), new Quaternionf())
+                .transform(new Vector3f(0f, 0f, 1f));
+        Vector3f outer = orientation(primary.get(primary.size() - 1)).transform(new Vector3f(0f, 0f, 1f));
+        if (inner.dot(outer) < 0f) {
+            outer.negate();
+        }
+        int n = handFeather.size();
+        Vector3f euler = new Vector3f();
+        for (int k = 0; k < n; k++) {
+            Bone feather = handFeather.get(k);
+            float t = HAND_ROW_INNER + (HAND_ROW_OUTER - HAND_ROW_INNER) * (n == 1 ? 0.5f : k / (float) (n - 1));
+            Quaternionf q = orientation(feather);
+            Vector3f normal = q.transform(new Vector3f(0f, 0f, 1f));
+            Vector3f target = new Vector3f(inner).lerp(outer, t);
+            if (target.lengthSquared() < 1e-6f) {
+                continue;
+            }
+            target.normalize();
+            if (target.dot(normal) < 0f) {
+                target.negate();
+            }
+            new Quaternionf().rotationTo(normal, target).mul(q).getEulerAnglesZYX(euler);
+            feather.rotation(euler.x, euler.y, euler.z);
         }
     }
 
@@ -102,6 +143,9 @@ public final class FeatherWing {
             Bone feather = primary.get(k);
             feather.rotation(feather.rest().xRot, feather.rest().yRot + s * p.get(RigPose.BEND_TIPS) * tips.weight(k, count),
                     feather.rest().zRot * fan);
+        }
+        if (!handFeather.isEmpty() && !secondary.isEmpty() && !primary.isEmpty()) {
+            alignHandRow();
         }
     }
 }

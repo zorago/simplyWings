@@ -53,6 +53,7 @@ La liste se précise au fil des passes ; une paire peut emprunter à deux famill
 
 - **P2 — Plan de portance des plumes** (née sur `basic`). L'aile forme une seule surface qui emprisonne l'air dessous, sans plume qui casse ou en traverse une autre. Deux mécanismes dans `FeatherWing` :
   - **Torsion de raccord aux articulations** : quand l'avant-bras ou la main se plie hors du plan (`BEND_ELBOW`, `BEND_WRIST`), les plumes de la rangée tournent progressivement autour de leur tige. Les tertiaires près du coude prennent la moitié du pli de l'avant-bras. Les secondaires vont de −½ pli du coude (côté corps) à +½ pli du poignet (côté main). La plaque de main reprend −0,3 du pli du poignet.
+  - **Rangée de la main, entre deux plans** (retour de zorago : les plumes de la main sortaient du plan). La main tourne sur elle-même (`HAND_TWIST`) et porte les primaires, ce que les secondaires ne font pas. Les plumes de la main ne suivent donc pas la main telle quelle. `FeatherWing.alignHandRow` calcule le plan de la dernière secondaire et celui de la dernière primaire, puis amène chaque plume de la main entre les deux, par la plus petite rotation (15 % du chemin vers les primaires pour la plume côté corps, 85 % pour celle côté bout). Résultat sur toutes les animations de `basic` : au plus 5° d'écart entre deux plumes voisines (contre 48° avant), et l'écart total entre secondaires et primaires (jusqu'à 30°) est réparti sur toute la rangée.
   - **Cambrure** (canal `RigPose.CAMBER`, rotation X des plumes et de la plaque de main) : en vol, le bord de fuite descend un peu sous l'aile (−0,15 rad), comme un profil d'aile creusé dessous. Pendant la frappe, l'air plaque les plumes vers le haut. Pendant la remontée, elles s'ouvrent vers le bas pour laisser passer l'air (décalage du cycle `STROKE` × 1,2). En parachute, l'air qui arrive de face les rabat vers le dos (+0,35, avec un tremblement). En stationnaire, la cambrure suit l'aller-retour.
 
 ### Membrane
@@ -95,5 +96,7 @@ Modifications :
 8. Retour de zorago (« à 80 % parfait ») : remontée vers l'avant et frappe vers l'arrière, comme à la nage (G4). Plan de portance des plumes : torsion de raccord au coude et au poignet, et cambrure dynamique (P2).
 
 9. Plaque de la main remplacée par 4 plumes (longueurs 12, 12, 11, 11 ; inclinaison 14° à 16°), avec la même torsion de raccord et la même cambrure (P1, P2). La rangée de plumes est maintenant continue du corps jusqu'aux primaires.
+
+10. Plumes de la main hors du plan (repérées par zorago dans `full_flight`) : alignement automatique entre le plan des secondaires et celui des primaires (P2).
 
 Règles créées : P1, P2, G1, G2, G3, G4.
