@@ -114,8 +114,8 @@ public final class ShadowRig extends WingRig {
                 default -> coil = env;
             }
         }
-        add(ground, state.clear().set(RigPose.FOLD, 1f - 0.4f * dissolve).set(RigPose.STROKE, 0.12f + 0.2f * dissolve)
-                .set(RigPose.FAN, 0.8f * dissolve));
+        add(ground, state.clear().set(RigPose.FOLD, 1f - 0.4f * dissolve - 0.6f * stare).set(RigPose.STROKE, 0.12f + 0.2f * dissolve + 0.15f * stare)
+                .set(RigPose.FAN, 0.8f * dissolve + 0.6f * stare));
         add(m.w(WingMotion.CHARGE), state.clear().set(RigPose.FOLD, 0f).set(RigPose.STROKE, 0.35f)
                 .set(RigPose.SWEEP, 0.75f).set(RigPose.FAN, 1.25f).set(RigPose.TWIST, 0.1f).set(RigPose.BEND_TIPS, -0.12f));
         add(m.w(WingMotion.AIR), state.clear().set(RigPose.FOLD, 0.4f).set(RigPose.STROKE, 0.3f)
@@ -160,9 +160,10 @@ public final class ShadowRig extends WingRig {
             writhe(side.wing.handFeather, s, time, writhe, coil, spread, 1.3f);
             for (int k = 0; k < EYES; k++) {
                 float blink = blink(time, k, s);
-                float open = Mth.lerp(stare, blink, 1.3f) * (1f - 0.8f * fold * (1f - ground)) * (1f - 0.7f * dissolve);
+                float lid = Mth.clamp((0.7f - fold) / 0.3f, 0f, 1f);
+                float open = Mth.lerp(stare, blink, 1.3f) * lid * (1f - 0.7f * dissolve);
                 float lookX = 0.5f * Mth.sin(time * 0.05f + k * 2.1f) + stare * 0.6f * Mth.sin(time * 0.17f + k);
-                side.eye[k].scale(1f, Mth.clamp(open, 0.05f, 1.15f), 1f);
+                side.eye[k].visible(open > 0.06f).scale(1f, Mth.clamp(open, 0.05f, 1.15f), 1f);
                 side.pupil[k].move(s * Mth.clamp(2f * lookX, -1f, 1f), 0f, 0f);
             }
         }
