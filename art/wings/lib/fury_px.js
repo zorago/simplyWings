@@ -11,8 +11,10 @@ var FURY_PAINT = (R, T) => {
   const wingData = (P, desc) => {
     const g = (n) => P + n
     const y = desc.S[1]
-    const W2 = [desc.W[0], y]
-    const pt = (grp, x) => GEOM.world(R, grp, [x, y])
+    const pt = (grp, x, yy) => GEOM.world(R, grp, [x, yy === undefined ? y : yy])
+    const W2 = pt(P + 'hand', desc.W[0])
+    const S2 = pt(P + 'arm', desc.S[0])
+    const E2 = pt(P + 'forearm', desc.E[0])
     const fingers = []
     R.groups.filter(q => new RegExp('^' + P + 'finger_\\d$').test(q.name)).forEach((q) => {
       const k = q.name.slice(P.length)
@@ -20,7 +22,7 @@ var FURY_PAINT = (R, T) => {
       const tipCube = R.cubes.find(c => c.name === P + k + '_tip_bone')
       fingers.push({ k, j: pt(P + k + '_tip', tipG.origin[0]), tip: pt(P + k + '_tip', tipCube.to[0]) })
     })
-    const bones = [[[desc.S[0], y], [desc.E[0], y]], [[desc.E[0], y], W2]]
+    const bones = [[S2, E2], [E2, W2]]
     for (const f of fingers) bones.push([W2, f.j], [f.j, f.tip])
     const panels = {}
     for (let i = 0; i + 1 < fingers.length; i++) {
@@ -30,14 +32,15 @@ var FURY_PAINT = (R, T) => {
     }
     const last = fingers[fingers.length - 1]
     const body = [desc.S[0], desc.body]
-    const back = [last.tip, ...GEOM.sag(last.tip, body, T.sag + 0.6, [desc.E[0], y], 12), body]
-    const pat = { poly: [[desc.S[0], y], W2, last.j, ...back], edge: back }
-    const fe = [[desc.S[0], y + desc.front], [(desc.S[0] + desc.E[0]) / 2, y + desc.front * 0.95], [desc.E[0], y + desc.front * 0.8], [W2[0], y + 0.4]]
-    const front = { poly: [[desc.S[0], y], ...fe, W2], edge: fe }
+    const back = [last.tip, ...GEOM.sag(last.tip, body, T.sag + 0.6, E2, 12), body]
+    const pat = { poly: [S2, E2, W2, last.j, ...back, [desc.S[0], y - 2.5]], edge: back }
+    const fe = [pt(P + 'shoulder', desc.S[0], y + desc.front), pt(P + 'arm', (desc.S[0] + desc.E[0]) / 2, y + desc.front * 0.95),
+      pt(P + 'forearm', desc.E[0], y + desc.front * 0.8), pt(P + 'forearm', (desc.E[0] + desc.W[0]) / 2, y + desc.front * 0.5)]
+    const front = { poly: [S2, ...fe, W2, E2], edge: fe }
     return { bones, panels, pat, front }
   }
   const data = {
-    '': wingData('', { ...R.main, body: R.main.S[1] - 14.5, front: 3 }),
+    '': wingData('', { ...R.main, body: R.cubes.some(q => q.kind === 'web') ? R.main.S[1] - 14.5 : R.hind.S[1] + 0.5, front: 3 }),
     'hind_': wingData('hind_', { ...R.hind, body: R.hind.S[1] - 7, front: 1.5 })
   }
   const panelOf = (cube) => {
@@ -70,6 +73,26 @@ var FURY_PAINT = (R, T) => {
       })
     }
   }
+  const skinSheets = (glow) => (c) => {
+    if (R.cubes.some(q => q.kind === 'web')) return
+    const skin = FURY_SKIN(R)
+    for (const P of Object.keys(skin.sheets)) {
+      const sh = skin.sheets[P]
+      const d = data[P]
+      const list = [d.front, d.pat, ...Object.values(d.panels)]
+      for (const [u0, v0, dorsal] of [[sh.ventral[0], sh.ventral[1], false], [sh.dorsal[0], sh.dorsal[1], true]]) {
+        for (let u = 0; u < sh.w; u++) {
+          for (let v = 0; v < sh.h; v++) {
+            const p = [sh.x + u + 0.5, sh.y - v - 0.5]
+            const panel = list.find(q => GEOM.inside(q.poly, p))
+            const bd = Math.min(...d.bones.map(([a, b]) => GEOM.segDist(p, a, b)))
+            const t = panel ? tone(dorsal, p, panel, d, glow) : (!glow && bd < 0.9 ? (dorsal ? T.nearBone : T.nearBoneV) : null)
+            if (t) c.px(u0 + u, v0 + v, t)
+          }
+        }
+      }
+    }
+  }
   const box = (c, cube, top, mid, low, speck) => {
     const w = cube.to[0] - cube.from[0], h = cube.to[1] - cube.from[1], dd = cube.to[2] - cube.from[2]
     const fw = Math.ceil(2 * (w + dd) - 1e-6), fh = Math.ceil(h + dd - 1e-6)
@@ -95,6 +118,7 @@ var FURY_PAINT = (R, T) => {
   }
   const base = (c) => {
     membranes(false)(c)
+    skinSheets(false)(c)
     for (const cube of R.cubes) {
       if (cube.kind === 'skin') box(c, cube, T.skinTop, T.skin, T.skinLow, T.skinSpeck)
       else if (cube.kind === 'claw') box(c, cube, T.clawTop, T.claw, T.claw)
@@ -107,6 +131,7 @@ var FURY_PAINT = (R, T) => {
   }
   const glow = (c) => {
     membranes(true)(c)
+    skinSheets(true)(c)
     for (const cube of R.cubes) if (cube.kind === 'spine_glow') box(c, cube, T.glowHi, T.glow, T.glow)
   }
   return { base, glow }

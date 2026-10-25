@@ -112,6 +112,8 @@ Principe (zorago) : une membrane de peau reste un plan qui pousse l'air, comme l
   - Pour `bat` : plagiopatagium (flanc, de l'épaule à la hanche, jusqu'au bras, l'avant-bras et le doigt 4), trois dactylopatagiums (entre les doigts 1-2, 2-3 et 3-4), propatagium (devant le bras, de l'épaule au poignet).
   - Rendu : `render/rig/Membrane`, quads émis dans le même `RenderType` vanilla que les os (compatible Iris), deux couches à 0,01 px d'écart, l'une avec la face dorsale, l'autre avec la face ventrale.
   - Blockbench : le plugin `tools/blockbench/simplywings_membranes.js` dessine la même peau dans la scène et la fait suivre les os pendant l'animation (il lit `art/scenes/<modèle>.membranes.json`, copié par `scene.py`).
+- **M1 pour les Furies** : `art/wings/lib/fury.js` génère la peau quand le rig passe `skin: true`. Les plaques de membrane disparaissent, `FURY_SKIN` calcule les panneaux à partir des os au repos (plagiopatagium jusqu'au flanc, un dactylopatagium entre deux doigts, propatagium) pour la grande paire et la paire arrière, et `fury_px.js` peint une feuille par paire. Le JSON s'écrit avec `node tools/blockbench/fury_skin.js <modèle>`.
+
 - **M2 — Membrane bombée** (née sur `bat`). Une membrane plate fait « plaque ». En vol, elle se bombe vers le dos, de 12 % de sa largeur au maximum, comme une voile gonflée par l'air qui la porte : la face du dessous est creusée et emprisonne l'air. Au plané, elle est légèrement courbée (`GLIDE_BILLOW` 0,5). Elle se gonfle plus à la frappe, se creuse dans l'autre sens à la remontée et se gonfle fort en parachute (même source que la cambrure des plumes, `RigPose.CAMBER`). Repliée ou au sol, elle est à plat. La valeur passe par `Membrane.billow`, que la scène reçoit sur le groupe `scene_membrane`.
 - **M3 — Doigts en éventail** (née sur `bat`). Le battement ouvre et ferme l'éventail des doigts : ils se resserrent à la remontée pour réduire la surface (cycle `FAN` négatif), puis s'ouvrent en grand à la frappe. Les règles d'amplitude (G4) s'appliquent au bras, l'avant-bras et la main exactement comme pour l'oiseau.
 
@@ -220,6 +222,17 @@ Règles appliquées avant revue :
   - vague décalée : la paire haute bat un peu avant, la basse un peu après (même décalage pour le stationnaire), et le BLAST de l'envol part en cascade de haut en bas ;
   - en éventail : la paire haute est plus levée et la basse plus basse, en parachute (×1,4) comme à la charge (×1,6). Au plané, les paires s'étagent de la tête aux pieds ;
   - les 5 idles au sol de seraph sont conservés.
+
+### 6. Furie nocturne (`night`, membrane à doigts, aspects A7, A9, A16)
+
+Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+
+Règles appliquées avant revue :
+
+- M1 à M3 sur la grande paire et la paire arrière : peau sans trou (18 panneaux), bombée en vol, doigts en éventail au battement.
+- G1 à G5 via `FlightRules` sur la grande paire (parachute, frein lent, BLAST, amplitude anatomique, nage, stationnaire au sol, traînées au bout du doigt 1). La paire arrière suit la grande avec un léger retard, et s'abaisse en parachute pour ajouter de la surface.
+- G8 : la grande paire est sur les omoplates, la petite paire arrière plus bas, comme les gouvernails de seraph.
+- Conservé tel quel : la queue (`DragonTail`) et ses ailerons, les épines et leur charge de plasma, la prothèse rouge, les 8 idles et les pouvoirs des Furies.
 
 ## Plan de review
 
