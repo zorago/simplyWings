@@ -111,7 +111,12 @@ Principe (zorago) : une membrane de peau reste un plan qui pousse l'air, comme l
 
 ### Insecte
 
-Aucune pour l'instant.
+Les ailes d'insecte sont des plaques rigides montées sur une charnière, sans coude ni poignet. Les règles générales s'y appliquent en version « charnière » (proposées sur `bee`, en attente de validation par zorago).
+
+- **I1 — Vrombissement dans les limites de G4.** Le battement oscille autour d'un centre placé pour que le point le plus bas reste à −5° sous l'épaule (`centre = −5° + 1,15 × amplitude`). L'amplitude dépend de l'état : plané 0,45, stationnaire 0,55, frein lent 0,25. Les plans fantômes (`ghost`) donnent le flou et suivent la même limite.
+- **I2 — Stationnaire d'insecte (A18).** Comme G5, le plan des ailes pivote d'environ 80° pour devenir presque horizontal. Mais le battement reste d'avant en arrière, comme chez les vrais insectes et les colibris, avec une inversion de l'incidence à chaque demi-coup (`TWIST` ± 0,55 × cos de la phase). C'est elle qui pousse l'air vers le sol.
+- **I3 — Parachute ailes fixes.** Au frein au-dessus de la vitesse minimale, plus de vrombissement : les deux paires sont figées, déployées, levées et inclinées comme le parachute de `basic` (épaule + bras réunis : `STROKE` 0,31, levée 0,85, incidence 0,48), avec un tremblement fin. Les fantômes disparaissent. Sous la vitesse minimale, le vrombissement revient, derrière les bras.
+- **I4 — Envol : le vrombissement monte, puis rafale.** Pendant la charge, les ailes se déplient et se lèvent, et le vrombissement grandit avec la charge (au carré). Le BLAST devient une rafale : amplitude maximale d'un coup, puis décroissance sur le one-shot `launch`.
 
 ### Objet / machine
 
@@ -182,6 +187,12 @@ Modifications après le premier passage de zorago (« 70 % correct ») :
 3. Braises en cubes 3D supprimées (G6). Les flammes et étincelles restent en vraies particules.
 
 Ce qui reste propre au feu : vacillement de chaque langue, embrasement au coup (chaleur), flammes qui traînent avec la vitesse, 3 idles (embrasement, braises qui couvent, secousse d'étincelles), émissif.
+
+### 4. Ailes d'abeille (`bee`, famille insecte)
+
+Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+
+Règles appliquées avant revue : G1 (I3), G2 (traînée au bout de l'aile avant), G3 (I4), G4 (I1), G5 (I2), G6 (rien à faire), G7 (sans objet : pas d'ornement à cheval sur des os).
 
 ## Plan de review
 
