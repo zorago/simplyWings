@@ -7,7 +7,7 @@ var RIG = (() => {
     { name: 'tail_tip', parent: 'tail', origin: [T[0], T[1] - 7, T[2]], single: true }
   ]
   const cubes = [
-    { name: 'paw', group: 'arm', from: [3.6, 12, 1.8], to: [4.6, 13.5, 2.6], kind: 'paw' },
+    { name: 'paw', group: 'arm', from: [3.6, 12, -0.6], to: [4.6, 13.5, 0.6], kind: 'paw' },
     { name: 'tail_plate', group: 'tail', from: [T[0] - 3, T[1] - 7, T[2] + 0.6], to: [T[0] + 3, T[1], T[2] + 0.62], kind: 'tail' },
     { name: 'tail_tip_plate', group: 'tail_tip', from: [T[0] - 3.5, T[1] - 15, T[2] + 0.64], to: [T[0] + 3.5, T[1] - 7, T[2] + 0.66], kind: 'tail_tip' }
   ]
@@ -26,8 +26,8 @@ var RIG = (() => {
   const y0 = Math.ceil(Math.max(...pts.map(q => q[1])) + 1), y1 = Math.floor(Math.min(...pts.map(q => q[1])) - 1)
   rig.sheet = { x: x0, y: y0, w: x1 - x0, h: y0 - y1, ventral: [0, rig.used], dorsal: [x1 - x0, rig.used] }
   const uv = (p) => [p[0] - x0, y0 - p[1]]
-  const a = ys.map((y, i) => ['root', flankX, y, 2.05, ...uv(flank[i])])
-  const b = ys.map((y, i) => ['arm', flankX, y, 2.1, ...uv(hand[i])])
+  const a = ys.map((y, i) => ['root', flankX, y, 0, ...uv(flank[i])])
+  const b = ys.map((y, i) => [i === 0 ? 'root' : 'arm', flankX, y, 0, ...uv(hand[i])])
   rig.membranes = { sheet: { x: x0, y: y0, ventral: rig.sheet.ventral, dorsal: rig.sheet.dorsal }, panels: [{ name: 'patagium', rows: 3, a, b }] }
   return rig
 })()

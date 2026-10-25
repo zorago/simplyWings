@@ -46,8 +46,7 @@
     clear()
     const s = spec()
     if (!s || !Texture.all.length) return
-    const shoulder = findGroup('right_shoulder')
-    const rootGroup = shoulder && shoulder.parent instanceof Group ? shoulder.parent : null
+    const rootGroup = findGroup('scene_roll') || null
     const panels = []
     for (const panel of s.panels) {
       for (const side of [1, -1]) {
