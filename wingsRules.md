@@ -49,7 +49,7 @@ La liste se précise au fil des passes ; une paire peut emprunter à deux famill
 
 ### Plume
 
-- **P1 — Rangées de plumes sur le bras et l'avant-bras** (née sur `basic`). Pas de plaque unique sous les deux os du centre : au moins 4 plumes séparées par os (rémiges tertiaires sur le bras, secondaires sur l'avant-bras), posées à la suite le long de l'os et qui se chevauchent un peu. Chaque plume est un os à elle, attaché à sa racine sur l'os porteur : groupes `<côté>_tertial_feather_<k>` dans `<côté>_tertials` et `<côté>_secondary_feather_<k>` dans `<côté>_secondaries` (numérotés du corps vers le bout de l'aile). `FeatherWing` les détecte : au repli, chaque plume tourne autour de sa propre racine pour pendre sous l'os, et l'éventail se referme (plumes parallèles). Déployée, l'éventail s'ouvre selon l'angle de repos de chaque plume : les tertiaires penchent vers le corps, les secondaires vers le bout de l'aile. Profondeur : chaque plume de la rangée a son propre Z, décalé de 0,025, pour éviter le scintillement. Texture : une bande par plume (face ventrale puis face dorsale), deux tons alternés, rachis clair au centre, pointe sombre arrondie.
+- **P1 — Rangées de plumes sur le bras et l'avant-bras** (née sur `basic`). Pas de plaque unique sous les deux os du centre : au moins 4 plumes séparées par os (rémiges tertiaires sur le bras, secondaires sur l'avant-bras), posées à la suite le long de l'os et qui se chevauchent un peu. Chaque plume est un os à elle, attaché à sa racine sur l'os porteur : groupes `<côté>_tertial_feather_<k>` dans `<côté>_tertials`, `<côté>_secondary_feather_<k>` dans `<côté>_secondaries` et `<côté>_hand_feather_<k>` dans `<côté>_hand_feathers` (la main aussi : plus aucune plaque sous les os, seules les petites couvertures restent en plaque) (numérotés du corps vers le bout de l'aile). `FeatherWing` les détecte : au repli, chaque plume tourne autour de sa propre racine pour pendre sous l'os, et l'éventail se referme (plumes parallèles). Déployée, l'éventail s'ouvre selon l'angle de repos de chaque plume : les tertiaires penchent vers le corps, les secondaires vers le bout de l'aile. Profondeur : chaque plume de la rangée a son propre Z, décalé de 0,025, pour éviter le scintillement. Texture : une bande par plume (face ventrale puis face dorsale), deux tons alternés, rachis clair au centre, pointe sombre arrondie.
 
 - **P2 — Plan de portance des plumes** (née sur `basic`). L'aile forme une seule surface qui emprisonne l'air dessous, sans plume qui casse ou en traverse une autre. Deux mécanismes dans `FeatherWing` :
   - **Torsion de raccord aux articulations** : quand l'avant-bras ou la main se plie hors du plan (`BEND_ELBOW`, `BEND_WRIST`), les plumes de la rangée tournent progressivement autour de leur tige. Les tertiaires près du coude prennent la moitié du pli de l'avant-bras. Les secondaires vont de −½ pli du coude (côté corps) à +½ pli du poignet (côté main). La plaque de main reprend −0,3 du pli du poignet.
@@ -75,7 +75,7 @@ Aucune pour l'instant.
 
 ### 1. Ailes communes (`basic`, famille plume)
 
-Statut : en cours.
+Statut : **terminé** (25 octobre 2026). Os, animations et règles figés par zorago. Reste à faire : la vérification en jeu (traînées du frein, BLAST vu par un autre joueur sur le serveur dédié).
 
 Modifications :
 
@@ -93,5 +93,7 @@ Modifications :
 7. Battement (retour de zorago : les ailes descendaient trop bas et passaient sous les bras) : nouveau cycle anatomique (G4). L'humérus va de −5° à +53° au lieu de −43° à +60°, et l'avant-bras et la main fouettent sous l'épaule en fin de coup et se relèvent en haut. Même limite pour le stationnaire, le décrochage et le BLAST.
 
 8. Retour de zorago (« à 80 % parfait ») : remontée vers l'avant et frappe vers l'arrière, comme à la nage (G4). Plan de portance des plumes : torsion de raccord au coude et au poignet, et cambrure dynamique (P2).
+
+9. Plaque de la main remplacée par 4 plumes (longueurs 12, 12, 11, 11 ; inclinaison 14° à 16°), avec la même torsion de raccord et la même cambrure (P1, P2). La rangée de plumes est maintenant continue du corps jusqu'aux primaires.
 
 Règles créées : P1, P2, G1, G2, G3, G4.

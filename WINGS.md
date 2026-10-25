@@ -71,7 +71,7 @@ Dernière mise à jour : 22 octobre 2026.
 
 **Vibe** : la première paire, celle qui débloque le mod. Des élytres améliorées, sans point fort ni vrai défaut. Elles décrochent facilement, ce qui apprend au joueur à gérer sa vitesse.
 
-**Apparence** : une aile d'oiseau grise par côté, en trois segments : 4 tertiaires sur le bras et 5 secondaires sur l'avant-bras (une plume par os, qui se replient une à une sous l'os), une plaque de main, des couvertures et 7 primaires en éventail. Au repos, repliée le long du corps à l'extérieur des épaules.
+**Apparence** : une aile d'oiseau grise par côté, en trois segments : 4 tertiaires sur le bras, 5 secondaires sur l'avant-bras et 4 plumes sur la main (une plume par os, qui se replient une à une sous l'os et forment une seule surface creusée dessous), des couvertures et 7 primaires en éventail. Au repos, repliée le long du corps à l'extérieur des épaules.
 
 **En vol** :
 - **Déplacement** : 2 battements par seconde, réguliers, de +3 m/s chacun. Environ 5 battements pour atteindre la vitesse max.

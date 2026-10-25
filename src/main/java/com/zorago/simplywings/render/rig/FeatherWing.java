@@ -18,6 +18,7 @@ public final class FeatherWing {
     public final List<Bone> primary = new ArrayList<>();
     public final List<Bone> tertial = new ArrayList<>();
     public final List<Bone> secondary = new ArrayList<>();
+    public final List<Bone> handFeather = new ArrayList<>();
     private final float foldArm;
     private final float foldElbow;
     private final float foldWrist;
@@ -44,6 +45,9 @@ public final class FeatherWing {
         }
         for (int k = 1; bones.has(prefix + "secondary_feather_" + k); k++) {
             secondary.add(bones.get(prefix + "secondary_feather_" + k));
+        }
+        for (int k = 1; bones.has(prefix + "hand_feather_" + k); k++) {
+            handFeather.add(bones.get(prefix + "hand_feather_" + k));
         }
     }
 
@@ -86,7 +90,12 @@ public final class FeatherWing {
         row(secondaries, secondary, s * (-(foldElbow - foldArm) * fold * 0.95f + 0.4f * p.get(RigPose.ELBOW)), fold,
                 -0.5f * bendElbow, 0.5f * bendWrist, camber);
         hand.rotate(p.get(RigPose.HAND_TWIST), s * p.get(RigPose.BEND_WRIST), s * (-foldWrist * fold - p.get(RigPose.WRIST)));
-        handFeathers.rotate(camber, -0.3f * bendWrist, s * (foldArm - foldElbow + foldWrist) * 0.9f * fold);
+        float handTurn = s * (foldArm - foldElbow + foldWrist) * 0.9f * fold;
+        if (handFeather.isEmpty()) {
+            handFeathers.rotate(camber, -0.3f * bendWrist, handTurn);
+        } else {
+            row(handFeathers, handFeather, handTurn, fold, -0.3f * bendWrist, 0f, camber);
+        }
         handCoverts.rotate(0.5f * camber, -0.3f * bendWrist, s * ((foldElbow - foldArm - foldWrist) * -0.6f * fold));
         int count = primary.size();
         for (int k = 0; k < count; k++) {
