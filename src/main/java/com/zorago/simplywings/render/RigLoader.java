@@ -27,7 +27,7 @@ public final class RigLoader {
     private static final float DEPTH_STEP = 0.012f;
     private static final int DEPTH_LAYERS = 5;
 
-    public record Rig(LayerDefinition layer, Map<String, List<String>> paths) {
+    public record Rig(LayerDefinition layer, Map<String, List<String>> paths, JsonObject membranes, int width, int height) {
     }
 
     private record Group(String name, float[] origin, float[] rotation, boolean export, List<Object> children) {
@@ -49,8 +49,17 @@ public final class RigLoader {
             SimplyWings.LOGGER.warn("Wing rig {} not found, falling back to the legacy model", file(name));
             return Optional.empty();
         }
+        JsonObject membranes = null;
+        Optional<Resource> sheet = Minecraft.getInstance().getResourceManager().getResource(membranes(name));
+        if (sheet.isPresent()) {
+            try (Reader reader = sheet.get().openAsReader()) {
+                membranes = JsonParser.parseReader(reader).getAsJsonObject();
+            } catch (Exception e) {
+                SimplyWings.LOGGER.error("Failed to load wing membranes {}", membranes(name), e);
+            }
+        }
         try (Reader reader = resource.get().openAsReader()) {
-            Rig rig = parse(JsonParser.parseReader(reader).getAsJsonObject());
+            Rig rig = parse(JsonParser.parseReader(reader).getAsJsonObject(), membranes);
             CACHE.put(name, rig);
             SimplyWings.LOGGER.info("Loaded wing rig {} with {} bones", file(name), rig.paths().size());
             return Optional.of(rig);
@@ -65,11 +74,16 @@ public final class RigLoader {
         return rig != null ? Optional.of(rig) : load(name);
     }
 
-    public static Rig parse(Reader reader) {
-        return parse(JsonParser.parseReader(reader).getAsJsonObject());
+    public static ResourceLocation membranes(String name) {
+        return SimplyWings.id("rigs/" + name + ".membranes.json");
     }
 
-    private static Rig parse(JsonObject json) {
+    public static Rig parse(Reader reader, Reader membranes) {
+        return parse(JsonParser.parseReader(reader).getAsJsonObject(),
+                membranes == null ? null : JsonParser.parseReader(membranes).getAsJsonObject());
+    }
+
+    private static Rig parse(JsonObject json, JsonObject membranes) {
         JsonObject resolution = json.getAsJsonObject("resolution");
         int width = resolution.get("width").getAsInt();
         int height = resolution.get("height").getAsInt();
@@ -104,7 +118,7 @@ public final class RigLoader {
         for (Group g : roots) {
             build(root, g, null, elements, new ArrayList<>(), paths);
         }
-        return new Rig(LayerDefinition.create(mesh, width, height), paths);
+        return new Rig(LayerDefinition.create(mesh, width, height), paths, membranes, width, height);
     }
 
     private static Group group(JsonObject node, Map<String, JsonObject> groupData) {

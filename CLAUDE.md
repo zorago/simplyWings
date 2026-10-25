@@ -71,7 +71,7 @@ Refonte des modèles, textures et animations : section « Pipeline art » du cah
    - souris : `CalculatePlayerTurnEvent` avec la sensibilité à −1/3, et lecture de `MouseHandler.getXVelocity()` / `getYVelocity()` ;
    - caméra : `ViewportEvent.ComputeCameraAngles` + `CalculateDetachedCameraDistanceEvent` + `Options.setCameraType` (restaurer le type d'origine, Sable ajoute les siens) ;
    - pose du corps : `RenderPlayerEvent.Pre` / `Post`.
-3. **Rendu** : `ModelPart` + RenderTypes vanilla uniquement, sans shader ni RenderType custom, pour rester compatible Iris et shaderpacks. Effets en particules classiques.
+3. **Rendu** : `ModelPart` + RenderTypes vanilla uniquement, sans shader ni RenderType custom, pour rester compatible Iris et shaderpacks. Effets en particules classiques. Seule géométrie hors `ModelPart` : les membranes de peau (`render/rig/Membrane`, définies dans `rigs/<modèle>.membranes.json`), émises en quads dans le même RenderType vanilla que les os de la paire.
 4. **Autorité** : le serveur fait foi pour la collection, la paire équipée, la stamina et les sauts de secours. La physique de vol tourne côté client (mouvement joueur client-autoritaire en vanilla). **Aucun paquet par tick** : envoi sur changement seulement, état compact à faible fréquence pour les joueurs distants.
 5. **Pas de copie de code** depuis les mods de référence : on décompile pour comprendre une technique, puis on la réimplémente from scratch.
 

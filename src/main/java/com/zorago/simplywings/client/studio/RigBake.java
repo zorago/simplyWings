@@ -48,11 +48,13 @@ public final class RigBake {
         }
         Path file = root.resolve("src/main/resources/assets/simplywings/rigs/" + name + ".bbmodel");
         RigLoader.Rig loaded;
-        try (Reader reader = Files.newBufferedReader(file, StandardCharsets.UTF_8)) {
-            loaded = RigLoader.parse(reader);
+        Path sheet = root.resolve("src/main/resources/assets/simplywings/rigs/" + name + ".membranes.json");
+        try (Reader reader = Files.newBufferedReader(file, StandardCharsets.UTF_8);
+             Reader membranes = Files.exists(sheet) ? Files.newBufferedReader(sheet, StandardCharsets.UTF_8) : null) {
+            loaded = RigLoader.parse(reader, membranes);
         }
         ModelPart model = loaded.layer().bakeRoot();
-        rig.bind(model, loaded.paths());
+        rig.bind(model, loaded);
         for (Map.Entry<String, List<String>> entry : loaded.paths().entrySet()) {
             ModelPart part = model;
             for (String step : entry.getValue()) {
@@ -347,6 +349,7 @@ public final class RigBake {
         float pitch = step.mode == FlightMode.TRAVEL ? com.zorago.simplywings.render.BodyPose.angle(Mth.lerp(pt, sim.prevPitch, sim.pitch), brake) : 0f;
         float roll = step.mode == FlightMode.TRAVEL ? Mth.lerp(pt, sim.prevBank, sim.bank) : 0f;
         frame.addProperty("pitch", pitch);
+        frame.addProperty("billow", rig.membraneBillow());
         frame.addProperty("roll", roll);
         return frame;
     }

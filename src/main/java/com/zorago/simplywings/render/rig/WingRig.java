@@ -27,6 +27,7 @@ public abstract class WingRig {
     private final String name;
     private final ResourceLocation texture;
     private Bones bones;
+    private Membrane membrane;
 
     protected WingRig(String name) {
         this.name = name;
@@ -57,11 +58,13 @@ public abstract class WingRig {
         return Material.CUTOUT;
     }
 
-    public final boolean bind(ModelPart root, Map<String, List<String>> paths) {
-        bones = new Bones(root, paths);
+    public final boolean bind(ModelPart root, RigLoader.Rig loaded) {
+        bones = new Bones(root, loaded.paths());
         if (bones.count() == 0) {
             return false;
         }
+        membrane = loaded.membranes() == null ? null
+                : Membrane.parse(loaded.membranes(), root, loaded.paths(), loaded.width(), loaded.height());
         onBind(bones);
         return true;
     }
@@ -123,7 +126,18 @@ public abstract class WingRig {
         return material() == Material.EMISSIVE ? LightTexture.FULL_BRIGHT : light;
     }
 
+    protected final Membrane membrane() {
+        return membrane;
+    }
+
+    public final float membraneBillow() {
+        return membrane == null ? 0f : membrane.billow();
+    }
+
     public void render(PoseStack poseStack, VertexConsumer consumer, int light, int overlay, int color) {
         bones.root().render(poseStack, consumer, light, overlay, color);
+        if (membrane != null) {
+            membrane.render(poseStack, consumer, light, overlay, color);
+        }
     }
 }

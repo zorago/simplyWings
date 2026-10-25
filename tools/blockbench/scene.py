@@ -18,7 +18,7 @@ BAKE = ROOT / "build" / "rigbake"
 DEG = 180 / math.pi
 TOLERANCE = {"rotation": 0.4, "position": 0.02, "scale": 0.005}
 PIVOT = [0, 14.4, 0]
-SCENE_GROUPS = ("scene_pitch", "scene_roll")
+SCENE_GROUPS = ("scene_pitch", "scene_roll", "scene_membrane")
 PLAYER = "player"
 
 MANNEQUIN = [
@@ -159,7 +159,8 @@ def build(wing, baked):
     pitch = group("scene_pitch", PIVOT)
     roll = group("scene_roll", PIVOT)
     player = group(PLAYER, [0, 0, 0])
-    scene["groups"] += [pitch, roll, player]
+    billow_group = group("scene_membrane", [0, 0, 0])
+    scene["groups"] += [pitch, roll, player, billow_group]
     player_node = {"uuid": player["uuid"], "isOpen": False, "children": []}
     parts = {}
     for name, origin, a, b, uv in MANNEQUIN:
@@ -174,7 +175,8 @@ def build(wing, baked):
                 "export": False}
         scene["elements"].append(cube)
         player_node["children"].append({"uuid": g["uuid"], "isOpen": False, "children": [cube["uuid"]]})
-    roll_node = {"uuid": roll["uuid"], "isOpen": True, "children": scene["outliner"] + [player_node]}
+    billow_node = {"uuid": billow_group["uuid"], "isOpen": False, "children": []}
+    roll_node = {"uuid": roll["uuid"], "isOpen": True, "children": scene["outliner"] + [player_node, billow_node]}
     scene["outliner"] = [{"uuid": pitch["uuid"], "isOpen": True, "children": [roll_node]}]
 
     animations = []
@@ -198,12 +200,18 @@ def build(wing, baked):
         bank = channel(frames, lambda f: [0, f["roll"], 0], None, "rotation")
         if bank:
             animators[roll["uuid"]] = {"name": "scene_roll", "type": "bone", "keyframes": bank}
+        membrane = channel(frames, lambda f: [f.get("billow", 0) * 10, 0, 0], None, "position")
+        if membrane:
+            animators[billow_group["uuid"]] = {"name": "scene_membrane", "type": "bone", "keyframes": membrane}
         animations.append({"uuid": uid(), "name": clip["name"], "loop": clip["loop"], "override": False,
                            "length": round(clip["length"], 4), "snapping": 40, "selected": False,
                            "anim_time_update": "", "blend_weight": "", "start_delay": "", "loop_delay": "",
                            "animators": animators})
     scene["animations"] = animations
     SCENES.mkdir(parents=True, exist_ok=True)
+    sidecar = RIGS / f"{wing}.membranes.json"
+    if sidecar.exists():
+        (SCENES / f"{wing}.membranes.json").write_text(sidecar.read_text(encoding="utf-8"), encoding="utf-8")
     out = SCENES / f"{wing}.bbmodel"
     out.write_text(json.dumps(scene, ensure_ascii=False), encoding="utf-8")
     print(f"{out} : {len(animations)} animations, {out.stat().st_size // 1024} KB")

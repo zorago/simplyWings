@@ -89,4 +89,17 @@ const mannequin = (c) => {
   for (let x = 0; x < 32; x += 4) c.vline(x, R.texture[1] - 16, 16, "Q")
 }
 
-sprite("bat_wings", { w: R.texture[0], h: R.texture[1] }, membrane, boxes, mannequin)
+const SHEET = { x: 2, y: 25.5, w: 38, h: 16 }
+const sheetPanels = [front, pat, ...Object.values(panels)]
+const sheet = (u0, dorsal) => (c) => {
+  for (let u = 0; u < SHEET.w; u++) {
+    for (let v = 0; v < SHEET.h; v++) {
+      const p = [SHEET.x + u + 0.5, SHEET.y - v - 0.5]
+      const panel = sheetPanels.find(q => GEOM.inside(q.poly, p))
+      if (panel) c.px(u0 + u, v, tone(dorsal, p, panel))
+      else if (boneDist(p) < 0.9) c.px(u0 + u, v, dorsal ? "d" : "v")
+    }
+  }
+}
+
+sprite("bat_wings", { w: R.texture[0], h: R.texture[1] }, sheet(0, false), sheet(40, true), boxes, mannequin)

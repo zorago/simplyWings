@@ -92,9 +92,18 @@ Chaque aspect demande sa propre logique. Le plan de review (en fin de document) 
   - **Rangée de la main, entre deux plans** (retour de zorago : les plumes de la main sortaient du plan). La main tourne sur elle-même (`HAND_TWIST`) et porte les primaires, ce que les secondaires ne font pas. Les plumes de la main ne suivent donc pas la main telle quelle. `FeatherWing.alignHandRow` calcule le plan de la dernière secondaire et celui de la dernière primaire, puis amène chaque plume de la main entre les deux, par la plus petite rotation (15 % du chemin vers les primaires pour la plume côté corps, 85 % pour celle côté bout). Résultat sur toutes les animations de `basic` : au plus 5° d'écart entre deux plumes voisines (contre 48° avant), et l'écart total entre secondaires et primaires (jusqu'à 30°) est réparti sur toute la rangée.
   - **Cambrure** (canal `RigPose.CAMBER`, rotation X des plumes et de la plaque de main) : en vol, le bord de fuite descend un peu sous l'aile (−0,15 rad), comme un profil d'aile creusé dessous. Pendant la frappe, l'air plaque les plumes vers le haut. Pendant la remontée, elles s'ouvrent vers le bas pour laisser passer l'air (décalage du cycle `STROKE` × 1,2). En parachute, l'air qui arrive de face les rabat vers le dos (+0,35, avec un tremblement). En stationnaire, la cambrure suit l'aller-retour.
 
-### Membrane
+### Membrane à doigts
 
-Aucune pour l'instant.
+Principe (zorago) : une membrane de peau reste un plan qui pousse l'air, comme les plumes. Toutes les règles générales s'appliquent (G1 à G5, `FlightRules` partagé), seule la surface change.
+
+- **M1 — Membrane peau, sans trou** (née sur `bat`). La membrane n'est plus faite de plaques rigides : c'est une peau déformable. Chaque sommet est accroché à un os (son « père ») à sa position de repos, et suit cet os. Deux panneaux voisins partagent les mêmes points d'accroche, donc aucun trou ne peut s'ouvrir, quel que soit le pli. Définition par paire dans `rigs/<modèle>.membranes.json` (hors du `.bbmodel`, que Blockbench réécrit) :
+  - `sheet` : la texture est une seule feuille de l'aile déployée, vue de face, à 1 px par unité. `x`, `y` donnent le coin haut-gauche dans le repère du modèle. `ventral` et `dorsal` donnent la position des deux faces dans la texture. Chaque sommet prend la couleur de l'endroit où il se trouve au repos, donc la texture ne dépend pas du découpage.
+  - `panels` : chaque panneau relie deux rails de même longueur (`a`, `b`), points `[os, x, y, z]` du côté droit en coordonnées Blockbench au repos (`root` = le corps). Le côté gauche est construit en miroir. `rows` découpe le panneau en largeur pour qu'il puisse se bomber.
+  - Pour `bat` : plagiopatagium (flanc, de l'épaule à la hanche, jusqu'au bras, l'avant-bras et le doigt 4), trois dactylopatagiums (entre les doigts 1-2, 2-3 et 3-4), propatagium (devant le bras, de l'épaule au poignet).
+  - Rendu : `render/rig/Membrane`, quads émis dans le même `RenderType` vanilla que les os (compatible Iris), deux couches à 0,01 px d'écart, l'une avec la face dorsale, l'autre avec la face ventrale.
+  - Blockbench : le plugin `tools/blockbench/simplywings_membranes.js` dessine la même peau dans la scène et la fait suivre les os pendant l'animation (il lit `art/scenes/<modèle>.membranes.json`, copié par `scene.py`).
+- **M2 — Membrane bombée** (née sur `bat`). Une membrane plate fait « plaque ». En vol, elle se bombe vers le dos, de 12 % de sa largeur au maximum, comme une voile gonflée par l'air qui la porte : la face du dessous est creusée et emprisonne l'air. Au plané, elle est légèrement courbée (`GLIDE_BILLOW` 0,5). Elle se gonfle plus à la frappe, se creuse dans l'autre sens à la remontée et se gonfle fort en parachute (même source que la cambrure des plumes, `RigPose.CAMBER`). Repliée ou au sol, elle est à plat. La valeur passe par `Membrane.billow`, que la scène reçoit sur le groupe `scene_membrane`.
+- **M3 — Doigts en éventail** (née sur `bat`). Le battement ouvre et ferme l'éventail des doigts : ils se resserrent à la remontée pour réduire la surface (cycle `FAN` négatif), puis s'ouvrent en grand à la frappe. Les règles d'amplitude (G4) s'appliquent au bras, l'avant-bras et la main exactement comme pour l'oiseau.
 
 ### Insecte
 
@@ -138,6 +147,18 @@ Modifications :
 11. Stationnaire (retour de zorago : l'air partait vers l'avant) : même animation, mais le plan de l'aile pivote de 80° et le battement passe de haut en bas, pour pousser l'air au sol (G5).
 
 Règles créées : P1, P2, G1, G2, G3, G4, G5.
+
+### 2. Ailes de chauve-souris (`bat`, famille membrane à doigts)
+
+Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+
+Modifications :
+
+1. Règles générales G1 à G5 sorties de `CommonRig` dans un outil partagé, `render/rig/FlightRules` (sans aucun changement pour `basic`, vérifié : écart 0 sur toutes les frames), et appliquées à `bat` : parachute et frein lent, BLAST, amplitude anatomique, nage avant/arrière, stationnaire qui pousse l'air au sol, traînées au bout du doigt 1.
+2. Membranes en peau déformable (M1) à la place des 20 plaques. Texture refaite en une seule feuille par face (`bat.px.js`, fonction `sheet`).
+3. Membrane bombée en vol (M2) et éventail des doigts au battement (M3).
+
+Règles créées : M1, M2, M3.
 
 ## Plan de review
 

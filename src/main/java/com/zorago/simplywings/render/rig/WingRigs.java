@@ -111,7 +111,7 @@ public final class WingRigs {
         for (WingRig rig : ALL) {
             ModelPart baked = models.bakeLayer(rig.layer());
             RigLoader.cached(rig.name()).ifPresent(loaded -> {
-                if (rig.bind(baked, loaded.paths())) {
+                if (rig.bind(baked, loaded)) {
                     BOUND.put(SimplyWings.id(rig.name()), rig);
                 } else {
                     SimplyWings.LOGGER.warn("Wing rig {} has no bones, falling back to the legacy model", rig.file());

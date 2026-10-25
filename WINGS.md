@@ -97,7 +97,7 @@ Dernière mise à jour : 22 octobre 2026.
 
 **Vibe** : aérodynamiques et nerveuses. Elles fendent l'air avec peu de traînée et virent sec, mais leur vitesse de pointe reste modeste. Elles décrochent facilement.
 
-**Apparence** : une vraie main de chauve-souris par côté (modèle `rigs/bat.bbmodel`, 50 cubes) : bras, avant-bras et quatre doigts de deux phalanges en éventail, pouce griffu au poignet, touffe de fourrure à l'épaule. Membrane violet-gris sombre tendue entre les doigts, festons profonds au bord de fuite, patagium jusqu'à la cuisse et propatagium devant le bras. Face dorsale plus sombre, liseré clair le long du bord de fuite, os en relief des deux côtés.
+**Apparence** : une vraie main de chauve-souris par côté (modèle `rigs/bat.bbmodel`, 35 cubes, membranes dans `rigs/bat.membranes.json`) : bras, avant-bras et quatre doigts de deux phalanges en éventail, pouce griffu au poignet, touffe de fourrure à l'épaule. Membrane violet-gris sombre en peau déformable (une peau accrochée aux os, sans trou, qui se bombe en vol), tendue entre les doigts, festons profonds au bord de fuite, patagium du flanc jusqu'à la hanche et propatagium devant le bras. Face dorsale plus sombre, liseré clair le long du bord de fuite, os en relief des deux côtés.
 
 **Mouvement signature** (`BatRig`) : la membrane est élastique, elle se contracte quand l'aile se plie (au repos, cape en V dans le dos, poignets et griffes de pouce à hauteur d'épaule) ; remontée très fléchie, doigts à demi fermés ; descente ample balayée vers l'avant, membrane gonflée en creux ; frémissement du bord de fuite en plané, au frein et en piqué.
 
