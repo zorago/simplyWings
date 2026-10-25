@@ -1,6 +1,6 @@
 var RIG = (() => {
   const A = [5, 22, 0]
-  const T = [0, 11.5, 2.6]
+  const T = [0, 12, 2]
   const groups = [
     { name: 'arm', origin: A },
     { name: 'tail', origin: T, single: true },
@@ -8,8 +8,8 @@ var RIG = (() => {
   ]
   const cubes = [
     { name: 'paw', group: 'arm', from: [3.6, 12, -0.6], to: [4.6, 13.5, 0.6], kind: 'paw' },
-    { name: 'tail_plate', group: 'tail', from: [T[0] - 3, T[1] - 7, T[2] + 0.6], to: [T[0] + 3, T[1], T[2] + 0.62], kind: 'tail' },
-    { name: 'tail_tip_plate', group: 'tail_tip', from: [T[0] - 3.5, T[1] - 15, T[2] + 0.64], to: [T[0] + 3.5, T[1] - 7, T[2] + 0.66], kind: 'tail_tip' }
+    { name: 'tail_plate', group: 'tail', from: [T[0] - 3, T[1] - 7, T[2] + 0.05], to: [T[0] + 3, T[1], T[2] + 0.07], kind: 'tail' },
+    { name: 'tail_tip_plate', group: 'tail_tip', from: [T[0] - 3.5, T[1] - 15, T[2] + 0.09], to: [T[0] + 3.5, T[1] - 7, T[2] + 0.11], kind: 'tail_tip' }
   ]
   const rig = { model: 'squirrel', texture: [64, 64], A, T, groups, cubes }
   rig.used = PACK(rig, 64)

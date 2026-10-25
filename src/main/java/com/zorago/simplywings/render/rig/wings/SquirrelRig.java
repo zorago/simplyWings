@@ -100,8 +100,8 @@ public final class SquirrelRig extends WingRig {
         float sway = memory.get(TAIL_SWAY, m.partialTick);
         float lift = memory.get(TAIL_LIFT, m.partialTick);
         float flying = 1f - ground;
-        tail.rotate(0.3f * flying + 0.9f * lift + ground * 0.3f, 0f, flying * 0.35f * sway + 0.04f * Mth.sin(time * 0.21f));
-        tailTip.rotate(0.35f * flying + 0.5f * lift + ground * 0.4f, 0f, flying * (0.25f * sway + 0.06f * Mth.sin(time * 0.6f - 0.8f)));
+        tail.rotate(0.08f * flying + 0.9f * lift + ground * 0.3f, 0f, flying * 0.35f * sway + 0.04f * Mth.sin(time * 0.21f));
+        tailTip.rotate(0.12f * flying + 0.5f * lift + ground * 0.4f, 0f, flying * (0.25f * sway + 0.06f * Mth.sin(time * 0.6f - 0.8f)));
     }
 
     private static Matrix4f matrix(PartPose pose) {

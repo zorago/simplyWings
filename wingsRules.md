@@ -122,7 +122,7 @@ Principe (zorago) : une membrane de peau reste un plan qui pousse l'air, comme l
 ### Planeur (membrane sans doigts)
 
 - **S1 — Le planeur vole avec les bras du joueur** (née sur `squirrel`, demande de zorago : « une vraie vibe d'écureuil volant »). En vol, les bras du joueur s'écartent (croix au plané, vers l'avant au frein, pompage au battement, bras intérieur replié en virage, rentrés en piqué) et les jambes s'écartent un peu. Le squelette est réduit au strict nécessaire : **un seul os par aile**, qui recopie la pose réelle du bras du joueur (`WingRig.playerArms`, ramenée dans le repère du torse), et une seule peau tendue de l'arête intérieure du bras, jusqu'à la main, au flanc jusqu'au bas du torse (`rigs/squirrel.membranes.json`, UV explicites dessinées bras à l'horizontale). La peau est dans le plan médian du corps (z = 0), qui passe par l'axe de l'épaule, et son coin du haut est fixé au torse : l'aisselle ne bouge pas quand le bras balance, tourne ou se lève, donc le tissu ne se déchire jamais. Pour ça, une classe de rig peut poser le corps du joueur (`WingRig.poseBody`, appelé par `FlightPose` après la pose de vol, dans tous les modes). L'aile est donc collée à la main **en permanence**, exactement, au sol aussi : la marche, la frappe et le minage tendent la peau ; bras le long du corps, elle disparaît contre le flanc. À la charge, les bras se lèvent et s'écartent en tremblant. Pas de coude ni d'IK : le pli suit le bras humain.
-- **Queue :** elle ne doit jamais passer sous les pieds. En vol, elle reste relevée vers l'arrière (base et bout inclinés vers le dos).
+- **Queue :** elle part du bas du dos, collée au joueur (pivot sur la surface du dos, pas de décalage), et ne doit jamais passer sous les pieds. En vol, elle suit les jambes, à peine relevée (base 0,08 rad, bout 0,12 rad) ; elle ne se relève franchement qu'au frein et à l'atterrissage.
 
 ### Insecte
 
@@ -332,6 +332,7 @@ Retour de zorago :
 4. Le coude de l'aile pliait à l'envers d'un coude humain (correction de zorago sur `left_forearm`) : biais du coude miroir et contrainte de signe dans l'IK, vérifié des deux côtés.
 5. Squelette simplifié à la demande de zorago : un seul os par aile qui suit le bras du joueur, et le tissu du bout du bras au bas du torse. L'IK, l'avant-bras et l'éperon disparaissent.
 6. Le point d'attache du haut du torse ne suivait pas le joueur et déchirait le tissu : le plugin de scène ancrait le torse sur `right_shoulder` (absent du nouveau squelette), il prend maintenant `scene_roll`. En plus, la peau passe dans le plan de l'axe de l'épaule et son coin du haut est fixé au torse.
+7. L'ancienne membrane restait affichée (deux instances du plugin après un rechargement) : le plugin efface maintenant toute membrane déjà présente avant d'en construire une. La queue était trop haute et décollée du joueur : elle part du bas du dos, collée, et ne se relève presque plus en vol.
 
 ## Plan de review
 

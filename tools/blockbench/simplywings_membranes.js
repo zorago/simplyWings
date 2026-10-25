@@ -84,9 +84,9 @@
   }
 
   const clear = () => {
-    if (holder) {
-      scene.remove(holder)
-      holder.traverse(o => o.geometry && o.geometry.dispose())
+    for (const old of scene.children.filter(c => c.name === 'simplywings_membranes')) {
+      scene.remove(old)
+      old.traverse(o => o.geometry && o.geometry.dispose())
     }
     holder = null
     built = null
