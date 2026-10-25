@@ -132,7 +132,7 @@ def wing_tracks(frames, name, rest, source="bones"):
         + channel(frames, scl, [1, 1, 1], "scale")
 
 
-def build(wing, baked):
+def build(wing, baked, only=None, out_dir=None):
     rig = json.loads((RIGS / f"{wing}.bbmodel").read_text(encoding="utf-8"))
     scene = copy.deepcopy(rig)
     scene["name"] = f"{wing}_scene"
@@ -183,7 +183,7 @@ def build(wing, baked):
 
     animations = []
     zero = [0, 0, 0, 0, 0, 0, 1, 1, 1]
-    for clip in baked["clips"]:
+    for clip in [c for c in baked["clips"] if only is None or c["name"] == only]:
         frames = [f for f in clip["frames"] if abs(f["t"] * 20 - round(f["t"] * 20)) < 1e-3 or f is clip["frames"][-1]]
         animators = {}
         for name, rest in baked["rest"].items():
@@ -210,11 +210,12 @@ def build(wing, baked):
                            "anim_time_update": "", "blend_weight": "", "start_delay": "", "loop_delay": "",
                            "animators": animators})
     scene["animations"] = animations
-    SCENES.mkdir(parents=True, exist_ok=True)
+    target = out_dir or SCENES
+    target.mkdir(parents=True, exist_ok=True)
     sidecar = RIGS / f"{wing}.membranes.json"
     if sidecar.exists():
-        (SCENES / f"{wing}.membranes.json").write_text(sidecar.read_text(encoding="utf-8"), encoding="utf-8")
-    out = SCENES / f"{wing}.bbmodel"
+        (target / f"{wing}.membranes.json").write_text(sidecar.read_text(encoding="utf-8"), encoding="utf-8")
+    out = target / f"{wing}.bbmodel"
     out.write_text(json.dumps(scene, ensure_ascii=False), encoding="utf-8")
     print(f"{out} : {len(animations)} animations, {out.stat().st_size // 1024} KB")
 
@@ -270,5 +271,8 @@ if __name__ == "__main__":
     wing = sys.argv[1]
     if "--pull" in sys.argv:
         pull(wing)
+    elif "--only" in sys.argv:
+        only = sys.argv[sys.argv.index("--only") + 1]
+        build(wing, bake(wing), only, SCENES / "review")
     else:
         build(wing, bake(wing))
