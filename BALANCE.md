@@ -186,8 +186,8 @@ Rappels de mécanique :
 
 | Paramètre | Valeur | Effet |
 | --- | --- | --- |
-| `terminalVelocity` | 110 m/s | Plafond absolu, atteint seulement en repli faucon |
-| `diveDragSpeed` | 60 m/s | Vitesse terminale d'un piqué vertical ailes ouvertes |
+| `terminalVelocity` | 220 m/s | Plafond absolu, atteint seulement en repli faucon |
+| `diveDragSpeed` | 120 m/s | Vitesse terminale d'un piqué vertical ailes ouvertes |
 | `glideDragSpeed` | 150 m/s | Traînée de base à plat (multipliée par le Plané) |
 | `tuckDragFactor` | 0,35 | Traînée en repli faucon |
 | `perturbationSwing` | 0,6 bloc | Amplitude d'instabilité du stationnaire à stabilité 0 |

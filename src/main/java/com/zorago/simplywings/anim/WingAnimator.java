@@ -20,6 +20,8 @@ public final class WingAnimator {
     private float prevHoverWeight;
     private float stallWeight;
     private float prevStallWeight;
+    private float slowWeight;
+    private float prevSlowWeight;
     private float vibrationWeight;
     private float prevVibrationWeight;
     private float phase;
@@ -180,12 +182,14 @@ public final class WingAnimator {
 
         prevHoverWeight = hoverWeight;
         prevStallWeight = stallWeight;
+        prevSlowWeight = slowWeight;
         prevVibrationWeight = vibrationWeight;
         boolean hoverBeats = hovering && style.hoverAmplitude() > 0;
         boolean vibrating = style.vibration() > 0 && (hovering || thrust || (mode == FlightMode.TRAVEL && !tuck));
         float vibrationTarget = vibrating ? (hovering || thrust ? 1f : 0.3f) : 0f;
         hoverWeight += ((hoverBeats ? 1f : 0f) - hoverWeight) * 0.2f;
         stallWeight += ((stall ? 1f : 0f) - stallWeight) * 0.25f;
+        slowWeight += ((brake && (flags & FlightMode.FLAG_SLOW) != 0 ? 1f : 0f) - slowWeight) * 0.25f;
         vibrationWeight += (vibrationTarget - vibrationWeight) * 0.3f;
 
         prevHoverPhase = hoverPhase;
@@ -343,6 +347,7 @@ public final class WingAnimator {
         out.buzz = forced ? (out.hoverBeat > 0f || forcedBeat >= 0f ? 1f : 0f)
                 : Mth.lerp(partialTick, prevVibrationWeight, vibrationWeight);
         out.bank = forced ? 0f : bank(partialTick) * Mth.DEG_TO_RAD;
+        out.brakeBeat = forced ? 0f : Mth.lerp(partialTick, prevSlowWeight, slowWeight);
         out.rouse = 0f;
         out.rouseProgress = 0f;
         out.rouseVariant = forcedVariant >= 0 ? forcedVariant : rouseVariant;

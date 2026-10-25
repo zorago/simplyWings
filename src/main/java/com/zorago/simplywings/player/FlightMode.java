@@ -9,6 +9,7 @@ public enum FlightMode {
     public static final int FLAG_STALL = 2;
     public static final int FLAG_TUCK = 4;
     public static final int FLAG_THRUST = 8;
+    public static final int FLAG_SLOW = 16;
 
     private static final FlightMode[] VALUES = values();
 

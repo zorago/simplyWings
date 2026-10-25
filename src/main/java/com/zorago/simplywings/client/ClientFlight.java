@@ -695,7 +695,8 @@ public final class ClientFlight {
         lastVelocity = velocity;
 
         int nextFlags = (braking ? FlightMode.FLAG_BRAKE : 0) | (stalled ? FlightMode.FLAG_STALL : 0)
-                | (tucked ? FlightMode.FLAG_TUCK : 0) | (thrusting ? FlightMode.FLAG_THRUST : 0);
+                | (tucked ? FlightMode.FLAG_TUCK : 0) | (thrusting ? FlightMode.FLAG_THRUST : 0)
+                | (braking && speed < vMin ? FlightMode.FLAG_SLOW : 0);
         if (nextFlags != flags) {
             flags = nextFlags;
             PacketDistributor.sendToServer(new Payloads.RequestMode(FlightMode.TRAVEL.ordinal(), flags));

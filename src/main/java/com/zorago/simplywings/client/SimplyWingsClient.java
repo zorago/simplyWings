@@ -142,7 +142,10 @@ public class SimplyWingsClient {
             player.walkAnimation.setSpeed(0f);
         }
         if (visual.mode == FlightMode.TRAVEL && visual.has(FlightMode.FLAG_BRAKE)) {
-            spawnTrails(player);
+            spawnTrails(player, visual);
+        } else {
+            visual.tipTrail[0] = null;
+            visual.tipTrail[1] = null;
         }
         WingEffects.tick(player, style, visual.mode, visual.flags);
         if (TailModel.SPECS.stream().anyMatch(spec -> SimplyWings.id(spec.name()).equals(model))) {
@@ -155,7 +158,7 @@ public class SimplyWingsClient {
         }
     }
 
-    private static void spawnTrails(Player player) {
+    private static void spawnTrails(Player player, WingVisuals.Visual visual) {
         Minecraft mc = Minecraft.getInstance();
         if (!ClientConfig.PARTICLES.get()) {
             return;
@@ -168,12 +171,22 @@ public class SimplyWingsClient {
         if (motion.lengthSqr() < 0.15 * 0.15) {
             return;
         }
+        boolean fresh = player.tickCount - visual.tipTick <= 3;
+        boolean slow = visual.has(FlightMode.FLAG_SLOW);
         double yaw = Math.toRadians(player.yBodyRot);
-        Vec3 side = new Vec3(-Math.cos(yaw), 0, -Math.sin(yaw)).scale(1.4);
-        Vec3 center = player.position().add(0, player.getBbHeight() * 0.5, 0);
-        for (int sign = -1; sign <= 1; sign += 2) {
-            Vec3 tip = center.add(side.scale(sign));
-            player.level().addParticle(ParticleTypes.CLOUD, tip.x, tip.y, tip.z, 0, 0, 0);
+        Vec3 side = new Vec3(-Math.cos(yaw), 0, -Math.sin(yaw)).scale(1.6);
+        Vec3 center = player.position().add(0, player.getBbHeight() * 0.9, 0);
+        int count = slow ? 1 : 4;
+        for (int i = 0; i < 2; i++) {
+            Vec3 tip = fresh ? player.position().add(visual.tipOffset[i]) : center.add(side.scale(i == 0 ? 1 : -1));
+            Vec3 from = visual.tipTrail[i] != null && visual.tipTrail[i].distanceToSqr(tip) < 36 ? visual.tipTrail[i] : tip;
+            for (int k = 0; k < count; k++) {
+                Vec3 p = from.lerp(tip, (k + 1) / (double) count);
+                double jitter = 0.04;
+                player.level().addParticle(ParticleTypes.CLOUD, p.x, p.y, p.z, (player.getRandom().nextDouble() - 0.5) * jitter,
+                        (player.getRandom().nextDouble() - 0.5) * jitter, (player.getRandom().nextDouble() - 0.5) * jitter);
+            }
+            visual.tipTrail[i] = tip;
         }
     }
 

@@ -12,6 +12,10 @@ import net.minecraft.util.Mth;
 public final class CommonRig extends WingRig {
     private static final int ROUSE = 0;
     private static final float BRAKE_BEAT = Mth.TWO_PI * (4f / 3f) / 20f;
+    private static final float CHUTE_ARM_X = 0.679f;
+    private static final float CHUTE_ARM_Y = 0.831f;
+    private static final float CHUTE_ARM_Z = 0.149f;
+    private static final String[] TIPS = {"right_primary_1", "left_primary_1"};
     private static final float[] KEYS = Cycle.beat(0.45f, 0.25f);
     private static final Cycle STROKE = Cycle.of(KEYS, -0.75f, 0f, 1f, 1.05f, -0.3f, -0.9f);
     private static final Cycle SWEEP = Cycle.of(KEYS, 0.25f, -0.15f, -0.25f, -0.1f, 0.25f, 0.35f);
@@ -28,6 +32,11 @@ public final class CommonRig extends WingRig {
 
     public CommonRig() {
         super("basic");
+    }
+
+    @Override
+    public String[] tipBones() {
+        return TIPS;
     }
 
     @Override
@@ -126,6 +135,17 @@ public final class CommonRig extends WingRig {
         drive.add(RigPose.BEND_TIPS, glide * 0.05f * (Mth.sin(time * 0.37f) + Mth.sin(time * 0.23f)));
         drive.add(RigPose.STROKE, glide * 0.02f * Mth.sin(time * 0.31f));
         float brake = m.w(WingMotion.BRAKE);
+        float slow = Mth.clamp(m.brakeBeat, 0f, 1f);
+        float chute = brake * (1f - slow);
+        drive.add(RigPose.STROKE, chute * -0.175f);
+        drive.add(RigPose.SWEEP, chute * 0.104f);
+        drive.add(RigPose.ELBOW, chute * 0.26f);
+        drive.add(RigPose.WRIST, chute * 0.346f);
+        drive.add(RigPose.BEND_ELBOW, chute * -0.349f);
+        drive.add(RigPose.BEND_WRIST, chute * -0.218f);
+        drive.add(RigPose.BEND_TIPS, chute * (-0.1f + 0.05f * Mth.sin(time * 4.7f) + 0.03f * Mth.sin(time * 7.3f)));
+        drive.add(RigPose.FAN, chute * 0.03f * Mth.sin(time * 5.3f));
+        brake *= slow;
         float push = time * BRAKE_BEAT;
         float down = Mth.sin(push);
         float recover = Math.max(0f, -down);
@@ -134,13 +154,15 @@ public final class CommonRig extends WingRig {
         drive.add(RigPose.TWIST, brake * -0.2f * Math.max(0f, down));
         drive.add(RigPose.ELBOW, brake * 0.3f * recover);
         drive.add(RigPose.WRIST, brake * 0.4f * recover);
-        drive.add(RigPose.BEND_TIPS, brake * (0.25f * Mth.sin(push - 0.6f) + 0.05f * Mth.sin(time * 2.6f)));
+        drive.add(RigPose.BEND_TIPS, brake * 0.25f * Mth.sin(push - 0.6f));
 
         drive.set(RigPose.FOLD, Mth.clamp(drive.get(RigPose.FOLD), 0f, 1f));
         drive.set(RigPose.FAN, Math.max(0f, drive.get(RigPose.FAN)));
         FeatherWing.TipCurve tips = (k, n) -> Math.max(0.4f, 1.1f - 0.1f * k);
         right.apply(drive, tips);
         left.apply(drive, tips);
+        right.arm.rotate(chute * CHUTE_ARM_X, chute * CHUTE_ARM_Y, chute * CHUTE_ARM_Z);
+        left.arm.rotate(chute * CHUTE_ARM_X, -chute * CHUTE_ARM_Y, -chute * CHUTE_ARM_Z);
     }
 
     private void add(float weight, RigPose pose) {

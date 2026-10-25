@@ -23,6 +23,9 @@ import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.phys.Vec3;
+import com.zorago.simplywings.player.FlightMode;
+import org.joml.Vector3f;
 
 public class WingsLayer extends RenderLayer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> {
     private static final ResourceLocation BASIC = SimplyWings.id("basic");
@@ -33,6 +36,7 @@ public class WingsLayer extends RenderLayer<AbstractClientPlayer, PlayerModel<Ab
     private final Map<ResourceLocation, TailModel> tails;
     private final WingPose pose = new WingPose();
     private final WingMotion motion = new WingMotion();
+    private final Vector3f[] tips = new Vector3f[2];
 
     public WingsLayer(RenderLayerParent<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> parent,
                       Map<String, WingModel> models,
@@ -69,6 +73,26 @@ public class WingsLayer extends RenderLayer<AbstractClientPlayer, PlayerModel<Ab
             rig.setup(visual.animator.motion(partialTick, style, motion), visual.rig);
             rig.render(poseStack, buffer.getBuffer(rig.renderType(ghost)), rig.light(light), OverlayTexture.NO_OVERLAY,
                     ghost ? GHOST_COLOR : -1);
+            if (visual.mode == FlightMode.TRAVEL && visual.has(FlightMode.FLAG_BRAKE) && rig.tips(poseStack, tips)) {
+                Vec3 camera = Minecraft.getInstance().gameRenderer.getMainCamera().getPosition();
+                Vec3 body = player.getPosition(partialTick);
+                boolean inWorld = true;
+                Vec3[] offsets = new Vec3[2];
+                for (int i = 0; i < 2; i++) {
+                    if (tips[i] == null) {
+                        inWorld = false;
+                        break;
+                    }
+                    offsets[i] = camera.add(tips[i].x(), tips[i].y(), tips[i].z()).subtract(body);
+                    inWorld &= offsets[i].lengthSqr() < 16.0;
+                }
+                if (inWorld) {
+                    System.arraycopy(offsets, 0, visual.tipOffset, 0, 2);
+                    visual.tipTick = player.tickCount;
+                }
+                tips[0] = null;
+                tips[1] = null;
+            }
             if (rig.glow() != null && !ghost) {
                 rig.render(poseStack, buffer.getBuffer(RenderType.eyes(rig.glow())), LightTexture.FULL_BRIGHT,
                         OverlayTexture.NO_OVERLAY, -1);

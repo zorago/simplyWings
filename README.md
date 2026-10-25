@@ -123,7 +123,7 @@ Operator only (permission level 2).
 
 ## Configuration
 
-- `simplywings-server.toml`: physics (gravity, terminal velocity 110 m/s, drag, brake, takeoff), stabilized mode, stamina costs and regeneration, crash damage, Fury invisibility, and the physical scale of every stat.
+- `simplywings-server.toml`: physics (gravity, terminal velocity 220 m/s, drag, brake, takeoff), stabilized mode, stamina costs and regeneration, crash damage, Fury invisibility, and the physical scale of every stat.
 - `simplywings-client.toml`: camera distance and transitions, inverted pitch, double-tap window, hover speed curve (`EASE_IN` or `SMOOTHSTEP`), particles.
 - Pair data lives in datapack JSON: `data/simplywings/simplywings/wing/<id>.json` (rarity, model, color, flap and hover cadence, equipped stats, collection bonuses).
 

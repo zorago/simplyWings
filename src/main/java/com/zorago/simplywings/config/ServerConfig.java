@@ -73,13 +73,13 @@ public final class ServerConfig {
                 .defineInRange("gravity", 9.81, 1.0, 40.0);
         TERMINAL_VELOCITY = b.comment("Terminal velocity of a vertical dive, in m/s (1 block = 1 m).",
                         "WARNING: above 55 m/s the server has to load and generate terrain faster than most servers can handle.")
-                .defineInRange("terminalVelocity", 110.0, 10.0, 300.0);
+                .defineInRange("terminalVelocity", 220.0, 10.0, 400.0);
         GLIDE_DRAG_SPEED = b.comment("Air drag in level flight, expressed as the speed where it would equal gravity, in m/s.",
                         "Higher = less speed lost between wing beats.")
                 .defineInRange("glideDragSpeed", 150.0, 10.0, 500.0);
         DIVE_DRAG_SPEED = b.comment("Terminal speed of an open-wing vertical dive, in m/s.",
                         "Only a tucked dive (falcon stoop) goes beyond it, up to terminalVelocity.")
-                .defineInRange("diveDragSpeed", 60.0, 10.0, 300.0);
+                .defineInRange("diveDragSpeed", 120.0, 10.0, 400.0);
         AIR_DRAG = b.comment("Air drag multiplier. Below 1, speed bleeds off more slowly.")
                 .defineInRange("airDrag", 1.0, 0.1, 2.0);
         OVERSPEED_FRICTION = b.comment("Extra friction above cruise speed, in 1/s.")

@@ -13,6 +13,7 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
+import org.joml.Vector3f;
 
 public abstract class WingRig {
     public enum Material {
@@ -66,6 +67,32 @@ public abstract class WingRig {
     }
 
     protected abstract void onBind(Bones bones);
+
+    public String[] tipBones() {
+        return new String[0];
+    }
+
+    public final boolean tips(PoseStack poseStack, Vector3f[] out) {
+        String[] names = tipBones();
+        if (names.length == 0 || bones == null) {
+            return false;
+        }
+        Vector3f anchor = poseStack.last().pose().transformPosition(0f, 1.4f, 0f, new Vector3f());
+        boolean[] found = new boolean[1];
+        bones.root().visit(poseStack, (pose, path, index, cube) -> {
+            for (int i = 0; i < names.length && i < out.length; i++) {
+                if (path.endsWith("/" + names[i])) {
+                    float y = (cube.minY + cube.maxY) / 32f;
+                    float z = (cube.minZ + cube.maxZ) / 32f;
+                    Vector3f a = pose.pose().transformPosition(cube.minX / 16f, y, z, new Vector3f());
+                    Vector3f b = pose.pose().transformPosition(cube.maxX / 16f, y, z, new Vector3f());
+                    out[i] = a.distanceSquared(anchor) > b.distanceSquared(anchor) ? a : b;
+                    found[0] = true;
+                }
+            }
+        });
+        return found[0];
+    }
 
     public int[] idleLengths() {
         return DEFAULT_IDLE;

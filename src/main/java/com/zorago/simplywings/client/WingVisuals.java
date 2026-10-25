@@ -24,6 +24,9 @@ public final class WingVisuals {
         public final WingAnimator animator = new WingAnimator();
         public final TailAnimator tail = new TailAnimator();
         public final RigMemory rig = new RigMemory();
+        public final net.minecraft.world.phys.Vec3[] tipOffset = new net.minecraft.world.phys.Vec3[2];
+        public final net.minecraft.world.phys.Vec3[] tipTrail = new net.minecraft.world.phys.Vec3[2];
+        public int tipTick = -100;
 
         public Optional<ResourceLocation> look() {
             return equipped.isEmpty() || appearance.isEmpty() ? equipped : appearance;

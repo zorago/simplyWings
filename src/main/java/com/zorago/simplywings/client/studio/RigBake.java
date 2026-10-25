@@ -92,6 +92,7 @@ public final class RigBake {
         float charge;
         boolean beating;
         boolean stall;
+        boolean slow;
         float dive;
         float pitch;
         float bank;
@@ -107,7 +108,7 @@ public final class RigBake {
         final WingMotion motion = new WingMotion();
         Step step = new Step();
         float stall, prevStall, dive, prevDive, bank, prevBank, pitch, prevPitch;
-        float hoverWeight, prevHoverWeight, vibration, prevVibration;
+        float hoverWeight, prevHoverWeight, vibration, prevVibration, slowWeight, prevSlowWeight;
         double hoverPhase, prevHoverPhase;
         float phase, prevPhase, amp, prevAmp, ampVelocity;
         int rouseTicks, rouseLength = 1;
@@ -135,6 +136,7 @@ public final class RigBake {
                 System.arraycopy(target, 0, prevWeight, 0, WingMotion.COUNT);
                 java.util.Arrays.fill(velocity, 0f);
                 stall = prevStall = next.stall ? 1f : 0f;
+                slowWeight = prevSlowWeight = next.slow ? 1f : 0f;
                 dive = prevDive = next.dive;
                 bank = prevBank = next.bank;
                 pitch = prevPitch = next.pitch;
@@ -177,6 +179,8 @@ public final class RigBake {
             prevBank = bank;
             prevPitch = pitch;
             stall += ((step.stall ? 1f : 0f) - stall) * 0.3f;
+            prevSlowWeight = slowWeight;
+            slowWeight += ((step.slow && step.state == WingMotion.BRAKE ? 1f : 0f) - slowWeight) * 0.25f;
             dive += (step.dive - dive) * 0.25f;
             bank += (step.bank - bank) * 0.25f;
             pitch += (step.pitch - pitch) * 0.5f;
@@ -220,6 +224,7 @@ public final class RigBake {
                 out.w[i] = Mth.lerp(pt, prevWeight[i], weight[i]);
             }
             out.stall = Mth.lerp(pt, prevStall, stall);
+            out.brakeBeat = Mth.lerp(pt, prevSlowWeight, slowWeight);
             out.diveDepth = Mth.lerp(pt, prevDive, dive);
             float hoverRaw = Mth.lerp(pt, prevHoverWeight, hoverWeight);
             out.hoverBeat = hoverRaw;
@@ -408,6 +413,11 @@ public final class RigBake {
         clips.add(clip("dive_deep", "loop", 60, true, List.of(new Segment(1, deep))));
         clips.add(clip("tuck", "loop", 60, true, List.of(new Segment(1, travel(WingMotion.TUCK, 15f)))));
         clips.add(clip("brake", "loop", 60, true, List.of(new Segment(1, travel(WingMotion.BRAKE, 0f)))));
+        Step slow = travel(WingMotion.BRAKE, 0f);
+        slow.slow = true;
+        clips.add(clip("brake_slow", "loop", 45, true, List.of(new Segment(1, slow))));
+        clips.add(clip("brake_to_hover", "once", 100, true, List.of(new Segment(30, travel(WingMotion.BRAKE, 0f)),
+                new Segment(30, slow), new Segment(1, step(FlightMode.STABILIZED, WingMotion.HOVER)))));
         clips.add(clip("hover", "loop", hoverLoop, true, List.of(new Segment(1, step(FlightMode.STABILIZED, WingMotion.HOVER)))));
 
         Step seqFlap = travel(WingMotion.CRUISE, -10f);
@@ -428,11 +438,12 @@ public final class RigBake {
         sequence.add(new Segment(40, seqBank));
         sequence.add(new Segment(40, seqDive));
         sequence.add(new Segment(30, travel(WingMotion.BRAKE, 0f)));
+        sequence.add(new Segment(25, slow));
         sequence.add(new Segment(60, step(FlightMode.STABILIZED, WingMotion.HOVER)));
         sequence.add(new Segment(12, step(FlightMode.NONE, WingMotion.AIR)));
         sequence.add(new Segment(14, step(FlightMode.NONE, WingMotion.LANDING)));
         sequence.add(new Segment(1, step(FlightMode.NONE, WingMotion.GROUND)));
-        clips.add(clip("full_flight", "once", 360, false, sequence));
+        clips.add(clip("full_flight", "once", 385, false, sequence));
         return clips;
     }
 

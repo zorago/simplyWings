@@ -129,7 +129,7 @@ C'est le vol de voyage, inspiré de Wuthering Waves : la direction se contrôle 
 
 A est la stat d'accélération (gain d'un battement à basse vitesse). À plat ou en montée, V cap = V max : le gain reste presque constant puis s'écrase près de la vitesse max (exposant 3), ce qui donne 4 à 5 battements pour l'atteindre. Au-dessus de V max, battre ne sert plus à rien : en piqué, sprint replie les ailes en faucon (traînée réduite) pour foncer vers V term.
 
-La traînée k dépend de l'angle : faible à plat (`glideDragSpeed`, 150 m/s par défaut, pour que la vitesse ne fonde pas entre deux battements), forte en piqué ailes ouvertes (`diveDragSpeed`, 60 m/s). Seul le repli faucon dépasse cette vitesse, jusqu'à V term (110 m/s par défaut).
+La traînée k dépend de l'angle : faible à plat (`glideDragSpeed`, 150 m/s par défaut, pour que la vitesse ne fonde pas entre deux battements), forte en piqué ailes ouvertes (`diveDragSpeed`, 120 m/s). Seul le repli faucon dépasse cette vitesse, jusqu'à V term (220 m/s par défaut ; doublé le 25 octobre 2026 à la demande de zorago, pour qu'un piqué puisse vraiment mettre le joueur en danger et rendre le freinage d'urgence nécessaire).
 
 **Freinage**
 
@@ -158,7 +158,7 @@ V_{term} = \sqrt{g / k}
 
 **Vitesse terminale (config serveur)**
 
-- Valeur par défaut : `terminalVelocity` = 110 m/s, atteinte seulement en repli faucon (sprint maintenu en piqué au-delà de V max, au moins `tuckMinPitch` = 15°). Ailes ouvertes, un piqué vertical plafonne à `diveDragSpeed` (60 m/s) ; à plat, la traînée vaut `glideDragSpeed` (150 m/s), multipliée par la stat de Plané.
+- Valeur par défaut : `terminalVelocity` = 220 m/s, atteinte seulement en repli faucon (sprint maintenu en piqué au-delà de V max, au moins `tuckMinPitch` = 15°). Ailes ouvertes, un piqué vertical plafonne à `diveDragSpeed` (120 m/s) ; à plat, la traînée vaut `glideDragSpeed` (150 m/s), multipliée par la stat de Plané.
 - Attention à la génération de chunks : l'élytre avec fusées, autour de 30 à 35 m/s, met déjà les serveurs sous tension. Au-delà de 55 m/s, le serveur doit charger plus de terrain qu'il n'en génère. Le commentaire de la config l'indique.
 - La physique est écrite en m/s puis convertie en blocs/tick (1 bloc = 1 m, 20 ticks/s). On n'utilise pas la gravité d'entité vanilla (0,08 bloc/tick², environ 32 m/s²), trop forte pour un vol réaliste.
 
