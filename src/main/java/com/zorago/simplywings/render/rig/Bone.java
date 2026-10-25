@@ -14,6 +14,10 @@ public final class Bone {
         this.rest = part == null ? PartPose.ZERO : part.storePose();
     }
 
+    public ModelPart part() {
+        return part;
+    }
+
     public boolean present() {
         return part != null;
     }

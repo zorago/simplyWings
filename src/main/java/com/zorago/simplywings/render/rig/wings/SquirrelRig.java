@@ -4,7 +4,13 @@ import com.zorago.simplywings.anim.Cycle;
 import com.zorago.simplywings.anim.RigMemory;
 import com.zorago.simplywings.anim.WingMotion;
 import com.zorago.simplywings.render.rig.Bone;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.zorago.simplywings.render.rig.Bones;
+import net.minecraft.client.model.PlayerModel;
+import net.minecraft.client.model.geom.ModelPart;
+import org.joml.Matrix3f;
+import org.joml.Matrix4f;
+import org.joml.Vector3f;
 import com.zorago.simplywings.render.rig.FlightRules;
 import com.zorago.simplywings.render.rig.Membrane;
 import com.zorago.simplywings.render.rig.WingRig;
@@ -24,6 +30,13 @@ public final class SquirrelRig extends WingRig {
     private static final String[] TIPS = {"right_spur", "left_spur"};
     private static final Cycle PULL = Cycle.of(KEYS, 0.1f, 0.2f, 0.08f, 0f, 0f, 0.03f);
 
+    private static final int IK_STEPS = 16;
+    private static final float IK_MAX_STEP = 0.25f;
+    private static final float IK_EPS = 1e-3f;
+    private static final float IK_DAMP = 0.02f;
+    private static final float SPUR = 3f;
+    private static final float ELBOW_BIAS = 0.5f;
+    private final float[] limbPose = new float[3];
     private final Bone[] shoulder = new Bone[2];
     private final Bone[] arm = new Bone[2];
     private final Bone[] forearm = new Bone[2];
@@ -129,7 +142,127 @@ public final class SquirrelRig extends WingRig {
         float sway = memory.get(TAIL_SWAY, m.partialTick);
         float lift = memory.get(TAIL_LIFT, m.partialTick);
         float flying = 1f - ground;
-        tail.rotate(-0.1f * flying + 0.9f * lift + ground * 0.3f, 0f, flying * 0.35f * sway + 0.04f * Mth.sin(time * 0.21f));
-        tailTip.rotate(0.5f * lift + ground * 0.4f, 0f, flying * (0.25f * sway + 0.06f * Mth.sin(time * 0.6f - 0.8f)));
+        tail.rotate(0.3f * flying + 0.9f * lift + ground * 0.3f, 0f, flying * 0.35f * sway + 0.04f * Mth.sin(time * 0.21f));
+        tailTip.rotate(0.35f * flying + 0.5f * lift + ground * 0.4f, 0f, flying * (0.25f * sway + 0.06f * Mth.sin(time * 0.6f - 0.8f)));
+
+        float glue = Mth.clamp(1f - ground - charge, 0f, 1f) * (1f - fold);
+        if (glue > 0.001f) {
+            for (int i = 0; i < 2; i++) {
+                float s = i == 0 ? 1f : -1f;
+                limb(m, s, limbPose);
+                Vector3f hand = new Vector3f(-s * 1f, 10f, 0f);
+                new Matrix4f().rotationZYX(limbPose[2], limbPose[1], limbPose[0]).transformPosition(hand);
+                hand.add(-s * 5f, 2f, 0f).div(16f);
+                reach(i, s, hand, glue);
+            }
+        }
+    }
+
+    private void reach(int i, float s, Vector3f target, float weight) {
+        ModelPart[] chain = {root(), shoulder[i].part(), arm[i].part(), forearm[i].part(), spur[i].part()};
+        if (chain[1] == null || chain[3] == null || chain[4] == null) {
+            return;
+        }
+        float baseY = chain[1].yRot;
+        float baseZ = chain[1].zRot;
+        float baseE = chain[3].zRot;
+        float[] q = {0f, 0f, ELBOW_BIAS};
+        Vector3f tip = new Vector3f();
+        for (int it = 0; it < IK_STEPS; it++) {
+            tip(chain, s, baseY, baseZ, baseE, q, tip);
+            Vector3f r = new Vector3f(tip).sub(target);
+            if (r.lengthSquared() < 1e-8f) {
+                break;
+            }
+            Matrix3f j = new Matrix3f();
+            for (int k = 0; k < 3; k++) {
+                q[k] += IK_EPS;
+                Vector3f moved = new Vector3f();
+                tip(chain, s, baseY, baseZ, baseE, q, moved);
+                q[k] -= IK_EPS;
+                moved.sub(tip).div(IK_EPS);
+                j.setColumn(k, moved);
+            }
+            Matrix3f jt = new Matrix3f(j).transpose();
+            Matrix3f normal = new Matrix3f(jt).mul(j);
+            normal.m00 += IK_DAMP;
+            normal.m11 += IK_DAMP;
+            normal.m22 += IK_DAMP;
+            Vector3f step = jt.transform(new Vector3f(r)).negate();
+            normal.invert().transform(step);
+            float len = step.length();
+            if (len > IK_MAX_STEP) {
+                step.mul(IK_MAX_STEP / len);
+            }
+            q[0] = Mth.clamp(q[0] + step.x, -1.6f, 1.6f);
+            q[1] = Mth.clamp(q[1] + step.y, -1.6f, 1.6f);
+            q[2] = Mth.clamp(q[2] + step.z, -2.4f, 2.4f);
+        }
+        chain[1].yRot = baseY + weight * q[0];
+        chain[1].zRot = baseZ + weight * q[1];
+        chain[3].zRot = baseE + weight * q[2];
+    }
+
+    private static void tip(ModelPart[] chain, float s, float baseY, float baseZ, float baseE, float[] q, Vector3f out) {
+        chain[1].yRot = baseY + q[0];
+        chain[1].zRot = baseZ + q[1];
+        chain[3].zRot = baseE + q[2];
+        PoseStack stack = new PoseStack();
+        for (ModelPart part : chain) {
+            part.translateAndRotate(stack);
+        }
+        stack.last().pose().transformPosition(-s * SPUR / 16f, 0f, 0f, out);
+    }
+
+    private void limb(WingMotion m, float s, float[] out) {
+        float cruise = m.w(WingMotion.CRUISE);
+        float hover = m.w(WingMotion.HOVER);
+        float chute = FlightRules.chute(m);
+        float slow = m.w(WingMotion.BRAKE) - chute;
+        float dive = m.w(WingMotion.DIVE);
+        float tuck = m.w(WingMotion.TUCK);
+        float air = m.w(WingMotion.AIR) + m.w(WingMotion.LANDING);
+        float total = Math.max(0.001f, cruise + hover + chute + slow + dive + tuck + air);
+        float spread = (1.45f * cruise + 1.3f * hover + 1.35f * chute + 1.2f * slow + Mth.lerp(m.diveDepth, 0.9f, 0.45f) * dive
+                + 0.3f * tuck + 1.1f * air) / total;
+        float pitch = (-0.1f * cruise - 0.2f * hover - 0.7f * chute - 0.35f * slow + 0.25f * dive + 0.3f * tuck - 0.45f * air) / total;
+        if (m.beating()) {
+            spread += m.beatWeight * 0.6f * (STROKE.at(m.beat) - 0.2f);
+            pitch += m.beatWeight * 0.25f * SWEEP.at(m.beat);
+        }
+        if (m.hoverBeat > 0.001f) {
+            spread += m.hoverBeat * 0.15f * Mth.cos(m.hoverPhase);
+            pitch += m.hoverBeat * 0.2f * Mth.sin(m.hoverPhase);
+        }
+        if (m.launch >= 0f) {
+            spread = Mth.lerp(Mth.clamp(m.launch * 2f, 0f, 1f), 0.4f, spread);
+        }
+        float inside = Math.max(0f, s * m.bank) * 1.2f;
+        spread -= 0.6f * inside;
+        spread += chute * 0.03f * Mth.sin(m.time * 4.7f);
+        out[0] = pitch;
+        out[1] = s * 0.05f;
+        out[2] = s * spread;
+    }
+
+    @Override
+    public void poseBody(PlayerModel<?> model, WingMotion m) {
+        float w = Mth.clamp(1f - m.w(WingMotion.GROUND) - m.w(WingMotion.CHARGE), 0f, 1f);
+        if (w <= 0.001f) {
+            return;
+        }
+        limb(m, 1f, limbPose);
+        blend(model.rightArm, limbPose, w);
+        limb(m, -1f, limbPose);
+        blend(model.leftArm, limbPose, w);
+        float legs = 0.28f * w * (1f - m.w(WingMotion.TUCK));
+        model.rightLeg.zRot = Mth.lerp(w, model.rightLeg.zRot, legs);
+        model.leftLeg.zRot = Mth.lerp(w, model.leftLeg.zRot, -legs);
+    }
+
+    private static void blend(ModelPart part, float[] target, float w) {
+        part.xRot = Mth.lerp(w, part.xRot, target[0]);
+        part.yRot = Mth.lerp(w, part.yRot, target[1]);
+        part.zRot = Mth.lerp(w, part.zRot, target[2]);
     }
 }

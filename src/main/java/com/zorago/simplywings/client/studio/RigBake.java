@@ -338,7 +338,7 @@ public final class RigBake {
         }
         Step step = sim.step;
         if (step.mode != FlightMode.NONE) {
-            FlightPose.pose(player, step.mode, motion, Mth.lerp(pt, sim.prevBank, sim.bank), motion.time);
+            FlightPose.pose(player, step.mode, motion, Mth.lerp(pt, sim.prevBank, sim.bank), motion.time, rig);
         }
         JsonObject parts = new JsonObject();
         for (Map.Entry<String, ModelPart> entry : body.entrySet()) {

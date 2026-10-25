@@ -119,6 +119,11 @@ Principe (zorago) : une membrane de peau reste un plan qui pousse l'air, comme l
 
 - **M4 — Dos de créature** (née sur `night`, pour les Furies et toute paire qui « devient » une créature : queue, gouvernails, épines). Une plaque dorsale à écailles, légèrement bombée (trois couches en escalier : base, arête, quille), couvre le dos du joueur et le suit. Elle cache le skin entre les ailes et fait la jonction entre les ailes, les gouvernails des hanches et la queue. Dans `fury.js` : option `backPlate: true`, peinte par `plate` dans `fury_px.js` (rangées d'écailles décalées, couleurs `skin*` de la paire).
 
+### Planeur (membrane sans doigts)
+
+- **S1 — Le planeur vole avec les bras du joueur** (née sur `squirrel`, demande de zorago : « une vraie vibe d'écureuil volant »). En vol, les bras du joueur s'écartent (croix au plané, vers l'avant au frein, pompage au battement, bras intérieur replié en virage, rentrés en piqué) et les jambes s'écartent un peu. Le bout de l'aile (fin de l'éperon, 3e os) est collé à la main du joueur par cinématique inverse (`SquirrelRig.reach` : épaule et coude ajustés en moindres carrés amortis, à moins de 0,6 px de la main). La peau se tend donc entre le flanc et la main. Pour ça, une classe de rig peut poser le corps du joueur (`WingRig.poseBody`, appelé par `FlightPose` après la pose de vol). Au sol et à la charge, le joueur garde ses bras normaux et l'aile se replie.
+- **Queue :** elle ne doit jamais passer sous les pieds. En vol, elle reste relevée vers l'arrière (base et bout inclinés vers le dos).
+
 ### Insecte
 
 Les ailes d'insecte sont des plaques rigides montées sur une charnière, sans coude ni poignet. Les règles générales s'y appliquent en version « charnière » (nées sur `bee`, validées par zorago sans modification).
@@ -318,6 +323,11 @@ Règles appliquées avant revue :
 - M1 en version planeur : les deux plaques rigides (bras et avant-bras), qui s'écartaient au coude, deviennent une seule peau tendue du flanc (de l'épaule à la cheville) jusqu'au bras, à l'avant-bras et au bout de l'éperon (`rigs/squirrel.membranes.json`). Le liseré crème et la bande sombre du bord sont repeints sur une feuille d'un seul tenant. Bombée au plané, beaucoup en parachute, à plat repliée.
 - G1 à G5 : parachute, frein lent ; charge et BLAST discrets (le polatouche ne fait que pomper des bras) ; pompage au-dessus de −5° (virages compris) avec une petite nage avant/arrière ; stationnaire à plat ; traînées au bout des éperons.
 - Conservé : le bras intérieur qui se replie en virage, les éperons qui sortent au plané, la queue gouvernail et relevée à l'atterrissage.
+
+Retour de zorago :
+
+1. La queue passait sous les pieds en vol : elle reste maintenant relevée vers l'arrière.
+2. Animation spéciale : le bout de l'éperon est collé à la main du joueur, et les ailes suivent les bras, qui s'écartent comme un vrai écureuil volant (S1).
 
 ## Plan de review
 

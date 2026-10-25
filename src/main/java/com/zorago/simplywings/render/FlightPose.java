@@ -6,6 +6,8 @@ import com.zorago.simplywings.client.WingVisuals;
 import com.zorago.simplywings.data.WingDefinition;
 import com.zorago.simplywings.data.WingRegistries;
 import com.zorago.simplywings.player.FlightMode;
+import com.zorago.simplywings.render.rig.WingRig;
+import com.zorago.simplywings.render.rig.WingRigs;
 import net.minecraft.client.model.PlayerModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.resources.ResourceLocation;
@@ -29,15 +31,19 @@ public final class FlightPose {
         ResourceLocation modelId = visual.look().flatMap(id -> WingRegistries.get(player.registryAccess(), id))
                 .map(WingDefinition::model).orElse(BASIC);
         WingMotion motion = visual.animator.motion(partialTick, WingStyle.of(modelId), MOTION);
-        pose(model, visual.mode, motion, visual.animator.bank(partialTick), ageInTicks);
+        pose(model, visual.mode, motion, visual.animator.bank(partialTick), ageInTicks, WingRigs.get(modelId));
     }
 
-    public static void pose(PlayerModel<?> model, FlightMode mode, WingMotion motion, float bankDegrees, float ageInTicks) {
+    public static void pose(PlayerModel<?> model, FlightMode mode, WingMotion motion, float bankDegrees, float ageInTicks,
+                            WingRig rig) {
         float t = ageInTicks * 0.05f;
         if (mode == FlightMode.TRAVEL) {
             travel(model, motion, bankDegrees, t);
         } else {
             hover(model, motion, t);
+        }
+        if (rig != null) {
+            rig.poseBody(model, motion);
         }
         model.leftSleeve.copyFrom(model.leftArm);
         model.rightSleeve.copyFrom(model.rightArm);

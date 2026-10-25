@@ -71,6 +71,13 @@ public abstract class WingRig {
 
     protected abstract void onBind(Bones bones);
 
+    public void poseBody(net.minecraft.client.model.PlayerModel<?> model, WingMotion motion) {
+    }
+
+    protected final ModelPart root() {
+        return bones.root();
+    }
+
     public String[] tipBones() {
         return new String[0];
     }
