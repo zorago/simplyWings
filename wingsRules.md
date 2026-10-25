@@ -296,6 +296,8 @@ Retour de zorago (le style liquide marche) :
 
 1. Repliée, la cascade remontait en volute vers la tête : l'eau coule maintenant vers les pieds, avec juste une légère courbe vers l'extérieur.
 2. Texture animée : 10 images, 5 par seconde, la vague et la houle courent sur la nappe (feuille animée, voir M1 / G7).
+3. Repliées, les deux ailes se superposent légèrement : l'aile gauche passe sur la droite (épaule gauche tournée de 12,5°, pose réglée par zorago dans Blockbench sur `idle_ground`, appliquée à toutes les poses repliées).
+4. Le coin bas de l'aile côté dos (la « base de la lame ») est arrondi sur 4 px, pour ne plus avoir un bord coupé une fois refermée. La ligne droite contre le dos est gardée (plus de 10 px).
 
 ## Plan de review
 

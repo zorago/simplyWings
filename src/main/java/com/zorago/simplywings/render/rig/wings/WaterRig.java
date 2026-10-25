@@ -21,6 +21,7 @@ public final class WaterRig extends WingRig {
     private static final float[] FOLD_Y = {0f, -6f * D, -6f * D, -6f * D, -4f * D};
     private static final float FOLD_SHOULDER_Z = -70f * D;
     private static final float FOLD_SHOULDER_Y = 16f * D;
+    private static final float FOLD_OVERLAP = 12.5f * D;
     private static final float[] KEYS = Cycle.beat(0.5f, 0.3f);
     private static final Cycle STROKE = Cycle.of(KEYS, 0.09f, 0.5f, 0.82f, 0.78f, 0.35f, -0.14f);
     private static final Cycle SWEEP = Cycle.of(KEYS, -0.25f, 0.05f, 0.3f, 0.28f, 0f, -0.3f);
@@ -158,7 +159,8 @@ public final class WaterRig extends WingRig {
             shoulderSweep = Mth.lerp(chute, shoulderSweep, CHUTE_RAISE) + chute * 0.02f * Mth.sin(time * 4.7f);
             shoulderTwist = Mth.lerp(chute, shoulderTwist, CHUTE_PITCH);
             float rest = Math.max(FLOOR, shoulderStroke - s * bank);
-            shoulder[i].rotate(shoulderTwist, s * (rest + FOLD_SHOULDER_Y * f),
+            float overlap = i == 1 ? FOLD_OVERLAP * f : 0f;
+            shoulder[i].rotate(shoulderTwist + overlap, s * (rest + FOLD_SHOULDER_Y * f),
                     s * (shoulderSweep + FOLD_SHOULDER_Z * f));
             for (int k = 0; k < SEGMENTS; k++) {
                 float reach = (k + 1f) / SEGMENTS;

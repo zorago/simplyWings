@@ -32,7 +32,15 @@ for (const b of bot) {
   trail.push(...GEOM.sag(prev, b, 1.6, [prev[0] * 0.5 + b[0] * 0.5, y + 4], 5), b)
   prev = b
 }
-const poly = [...top, ...trail, [R.S[0] - 0.5, bottom[0][1]], [R.S[0] - 0.5, y + 2.6]]
+const corner = [Math.min(bottom[0][0], R.S[0] - 0.5), bottom[0][1]]
+const trailEnd = trail.filter(q => q[0] >= corner[0] + 4.5)
+const ROUND = 4
+const arc = []
+for (let i = 0; i <= 6; i++) {
+  const a = -Math.PI / 2 - (i / 6) * (Math.PI / 2)
+  arc.push([corner[0] + ROUND + ROUND * Math.cos(a), corner[1] + ROUND + ROUND * Math.sin(a)])
+}
+const poly = [...top, ...trailEnd, ...arc, [corner[0], y + 2.6]]
 const crestLine = [...top, tip]
 
 const lineDist = (p, pts) => {
