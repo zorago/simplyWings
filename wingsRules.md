@@ -642,7 +642,7 @@ Règles appliquées avant revue :
 Retour de zorago :
 
 1. Au repos, les ailes étaient trop repliées et la peau se froissait : repli de repos ramené à 78 % (au lieu de 100 %).
-2. Mieux : au repos, les os tombent droit vers le bas comme des élytres. L'aile (29 px) est repliée en trois segments verticaux superposés à plat sur le dos : bras vers le bas (−89°), avant-bras remonté (+175°), main redescendue (−167°). La peau se range entre eux en fourreau. Repli de repos revenu à 100 %.
+2. Au repos, pose réglée par zorago dans Blockbench (côtés moyennés et mis en miroir) : les ailes pendent presque droites en « Λ » depuis les épaules, peau bien étalée et tournée vers l'arrière. Épaule levée de 35,3° et reculée (`STROKE` 0,3, incidence 0,08) ; bras à −86,6°, basculé de 23,5° vers l'arrière ; avant-bras plié de 21° seulement, main de 22,1°. L'ancien repli en zigzag écrasait l'épaisseur des os (et la peau accrochée dessous) : supprimé.
 
 ### 36. Ailes de poisson volant (`flying_fish`, planeur, aspects A3, A10)
 

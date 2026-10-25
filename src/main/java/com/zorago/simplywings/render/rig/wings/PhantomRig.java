@@ -16,10 +16,15 @@ import net.minecraft.util.Mth;
 public final class PhantomRig extends WingRig {
     private static final ResourceLocation GLOW = SimplyWings.id("textures/entity/phantom_glow.png");
     private static final int ROUSE = 0;
-    private static final float FOLD_ARM = 1.55f;
-    private static final float FOLD_ELBOW = 3.05f;
-    private static final float FOLD_WRIST = 2.92f;
+    private static final float FOLD_ARM = 86.6f * Mth.DEG_TO_RAD;
+    private static final float FOLD_ELBOW = 21f * Mth.DEG_TO_RAD;
+    private static final float FOLD_WRIST = 22.1f * Mth.DEG_TO_RAD;
+    private static final float FOLD_PITCH = 23.5f * Mth.DEG_TO_RAD;
+    private static final float FOLD_YAW = 3.4f * Mth.DEG_TO_RAD;
+    private static final float FOLD_HAND_YAW = 6.5f * Mth.DEG_TO_RAD;
+    private static final float FOLD_HAND_PITCH = 0.9f * Mth.DEG_TO_RAD;
     private static final float REST_FOLD = 1f;
+    private static final float REST_SWEEP = 35.3f * Mth.DEG_TO_RAD;
     private static final float GLIDE_BILLOW = 0.45f;
     private static final String[] TIPS = {"right_hand", "left_hand"};
     private static final float[] KEYS = Cycle.beat(0.5f, 0.2f);
@@ -79,7 +84,7 @@ public final class PhantomRig extends WingRig {
         float time = m.time;
         float rouse = memory.get(ROUSE, m.partialTick);
         drive.blendIn(m.w(WingMotion.GROUND), state.clear().set(RigPose.FOLD, Mth.lerp(rouse, REST_FOLD, 0.5f))
-                .set(RigPose.STROKE, Mth.lerp(rouse, 0.08f, 0.3f)).set(RigPose.SWEEP, 0.15f * rouse));
+                .set(RigPose.STROKE, 0.3f).set(RigPose.SWEEP, Mth.lerp(rouse, REST_SWEEP, 0.15f)).set(RigPose.TWIST, 0.082f * (1f - rouse)));
         drive.blendIn(m.w(WingMotion.CHARGE), state.clear().set(RigPose.FOLD, 0f).set(RigPose.STROKE, 0.35f)
                 .set(RigPose.SWEEP, 0.75f).set(RigPose.TWIST, 0.1f).set(RigPose.BEND_TIPS, -0.15f));
         drive.blendIn(m.w(WingMotion.AIR), state.clear().set(RigPose.FOLD, 0.3f).set(RigPose.STROKE, 0.3f)
@@ -113,15 +118,14 @@ public final class PhantomRig extends WingRig {
             skin.billow(Mth.clamp(GLIDE_BILLOW * lift + 2f * (drive.get(RigPose.CAMBER) + 0.15f * lift), -0.8f, 1.2f));
         }
         float chute = FlightRules.chute(m);
-        float spread = Mth.lerp(fold, 1f, 0.45f);
         for (int i = 0; i < 2; i++) {
             float s = i == 0 ? 1f : -1f;
             shoulder[i].rotate(drive.get(RigPose.TWIST), s * drive.get(RigPose.STROKE) - drive.get(RigPose.ASYM),
                     s * drive.get(RigPose.SWEEP));
-            arm[i].rotate(0f, 0f, s * -FOLD_ARM * fold).scale(1f, spread, 1f);
-            forearm[i].rotate(0f, s * drive.get(RigPose.BEND_ELBOW), s * (FOLD_ELBOW * fold - drive.get(RigPose.ELBOW)))
-                    .scale(1f, Mth.lerp(fold, 1f, 0.6f), 1f);
-            hand[i].rotate(drive.get(RigPose.HAND_TWIST), s * (drive.get(RigPose.BEND_WRIST) + drive.get(RigPose.BEND_TIPS)),
+            arm[i].rotate(FOLD_PITCH * fold, s * -FOLD_YAW * fold, s * -FOLD_ARM * fold);
+            forearm[i].rotate(0f, s * drive.get(RigPose.BEND_ELBOW), s * (FOLD_ELBOW * fold - drive.get(RigPose.ELBOW)));
+            hand[i].rotate(drive.get(RigPose.HAND_TWIST) - FOLD_HAND_PITCH * fold,
+                    s * (drive.get(RigPose.BEND_WRIST) + drive.get(RigPose.BEND_TIPS) - FOLD_HAND_YAW * fold),
                     s * (-FOLD_WRIST * fold - drive.get(RigPose.WRIST)));
             FlightRules.chuteArm(arm[i], s, chute);
         }
