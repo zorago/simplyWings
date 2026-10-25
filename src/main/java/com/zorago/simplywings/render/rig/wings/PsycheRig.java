@@ -29,6 +29,7 @@ public final class PsycheRig extends WingRig {
     private static final float CHUTE_PITCH = 0.48f;
     private static final String[] TIPS = {"right_fore_flame_3", "left_fore_flame_3"};
 
+    private static final float TAIL_OUT = 0.8f;
     private final Bone[] fore = new Bone[2];
     private final Bone[] hind = new Bone[2];
     private final Bone[] tail = new Bone[2];
@@ -199,7 +200,7 @@ public final class PsycheRig extends WingRig {
             fore[i].rotate(fTwist, s * Math.max(FLOOR, fStroke - s * bank), s * fSweep);
             hind[i].rotate(hTwist, s * Math.max(FLOOR, hStroke - s * bank), s * hSweep);
             float trail = 0.25f * cruise + 0.3f * dive + 0.15f * Mth.clamp(m.speed / 30f, 0f, 1f);
-            tail[i].rotate(trail * 0.5f + 0.1f * Mth.sin(time * 0.5f + i), s * 0.08f * Mth.sin(time * 0.7f), s * 0.06f * Mth.sin(time * 0.43f));
+            tail[i].rotate(-TAIL_OUT * (1f - m.w(WingMotion.GROUND)) + trail * 0.5f - 0.1f * (0.5f + 0.5f * Mth.sin(time * 0.5f + i)), s * 0.08f * Mth.sin(time * 0.7f), s * 0.06f * Mth.sin(time * 0.43f));
             tailTip[i].rotate(trail * 0.4f + 0.15f * Mth.sin(time * 0.8f + i + 1f), 0f, s * 0.1f * Mth.sin(time * 0.6f + 1f));
             float size = 1f + 0.5f * flare + 0.25f * settle;
             flames(foreFlame[i], s, time, size, trail, 0.3f);

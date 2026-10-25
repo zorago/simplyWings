@@ -588,7 +588,7 @@ Règles appliquées avant revue :
 
 ### 32. Ailes de démon (`demon`, membrane à doigts, aspects A10, A15)
 
-Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+Statut : **terminé**, validé par zorago (revue groupée, lot 4).
 
 Règles appliquées avant revue :
 
@@ -601,7 +601,7 @@ Règles appliquées avant revue :
 
 ### 33. Ailes de ptérosaure (`ptero`, membrane à doigts, aspect A2)
 
-Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+Statut : **terminé**, validé par zorago (revue groupée, lot 4).
 
 Règles appliquées avant revue :
 
@@ -616,7 +616,7 @@ Retour de zorago :
 
 ### 34. Furie éclatante (`light`, membrane à doigts, aspects A7, A9, A16)
 
-Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+Statut : **terminé**, validé par zorago (revue groupée, lot 4).
 
 Règles appliquées avant revue (mise à niveau sur `night`) :
 
@@ -629,7 +629,7 @@ Avant revue, règle des queues (test de collision sur toutes les animations) : l
 
 ### 35. Ailes de phantom (`phantom`, membrane sans doigts / planeur, aspects A3, A10)
 
-Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+Statut : **terminé**, validé par zorago (revue groupée, lot 4).
 
 Règles appliquées avant revue :
 
@@ -646,7 +646,7 @@ Retour de zorago :
 
 ### 36. Ailes de poisson volant (`flying_fish`, planeur, aspects A3, A10)
 
-Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+Statut : **terminé**, validé par zorago (revue groupée, lot 4).
 
 Règles appliquées avant revue :
 
@@ -665,6 +665,8 @@ Règles appliquées avant revue :
 - M2 : voile gonflée par le vent selon la vitesse, beaucoup en parachute, qui claque avec les rafales et tire à chaque coup.
 - G1 à G5 : parachute figé, voile gonflée, queue relevée ; frein lent ; charge et grand coup de BLAST ; tirage lent au-dessus de −5° (descendait à −16°) ; stationnaire à plat ; traînées au bout de la partie extérieure.
 - Conservé : la queue à rubans et nœuds, le balancement du cerf-volant, le claquement de la toile.
+
+Avant revue, règle des queues : la queue à rubans passait jusqu'à 1,9 px dans les jambes en vol, au frein et au stationnaire. Sa base se lève maintenant vers l'arrière en vol (+0,3), plus quand les jambes passent derrière (+0,3), et son ondulation ne la ramène plus vers les jambes. Vérifié sur les 18 animations : aucune collision.
 
 ### 38. Ailes d'ornithoptère (`ornithopter`, machine, aspect A12)
 
@@ -702,6 +704,8 @@ Règles appliquées avant revue (comme `moth`) :
 - I4 / G3 : frisson qui grandit pendant la charge, ailes levées, puis BLAST unique.
 - G2 : traînées au bout de l'aile avant (flamme d'âme `fore_flame_3`).
 - Conservé : ailes refermées au-dessus du dos au repos, flammes d'âme qui vacillent et traînent avec la vitesse, queues de l'aile arrière, lampe qui se balance, 5 idles, émissif.
+
+Avant revue, règle des queues : les queues de l'aile arrière sont inclinées vers le dos en vol (−0,8), ce qui réduit leur contact avec les jambes de 0,75 à 0,4 px. Le contact restant vient des grandes ailes elles-mêmes, qui descendent jusque dans les jambes en bas du battement (jusqu'à 1,5 px en `cruise_flap`) : à trancher avec zorago.
 
 ### 41. Ailes d'air (`air`, matière non squelettique, aspects A7, A10, A11)
 

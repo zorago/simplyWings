@@ -26,6 +26,7 @@ public final class KiteRig extends WingRig {
     private final Bone[] shoulder = new Bone[2];
     private final Bone[] strut = new Bone[2];
     private final Bone[] outer = new Bone[2];
+    private static final float TAIL_LIFT = 0.3f;
     private final Bone[] tail = new Bone[TAIL];
 
     public KiteRig() {
@@ -121,11 +122,12 @@ public final class KiteRig extends WingRig {
             outer[i].rotate(0f, s * (snap * 0.6f + 0.15f * pull), s * (-0.5f * fold + tremble));
         }
         float swing = flying * (0.5f + 0.6f * wind);
+        float legsBack = Mth.clamp(m.w(WingMotion.HOVER) + m.w(WingMotion.BRAKE) + m.w(WingMotion.LANDING) + m.w(WingMotion.AIR), 0f, 1f);
         for (int k = 0; k < TAIL; k++) {
             float phase = time * (0.35f + 0.25f * wind) - k * 0.9f;
             float lateral = swing * (0.12f + 0.05f * k) * Mth.sin(phase);
-            float lift = flying * (0.08f + 0.04f * k) * Mth.sin(phase * 0.7f + 0.5f) + m.w(WingMotion.GROUND) * (k == 0 ? 0.12f : 0.03f)
-                    + chute * 0.15f;
+            float lift = flying * (0.08f + 0.04f * k) * (0.5f + 0.5f * Mth.sin(phase * 0.7f + 0.5f)) + m.w(WingMotion.GROUND) * (k == 0 ? 0.12f : 0.03f)
+                    + chute * 0.15f + (k == 0 ? TAIL_LIFT * flying + 0.3f * legsBack : 0f);
             tail[k].rotate(lift, 0f, lateral - (k == 0 ? m.bank * 0.4f * flying : 0f));
         }
     }
