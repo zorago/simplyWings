@@ -241,7 +241,7 @@ Règles appliquées avant revue :
 
 ### 7. Ailes de scarabée (`beetle`, famille insecte, aspect A6)
 
-Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+Statut : **terminé** (25 octobre 2026), validé par zorago.
 
 Règles appliquées avant revue : I1 à I4 (battement au-dessus de −5°, stationnaire à plat avec inversion d'incidence, parachute figé, charge et rafale), G2 (traînée au bout de l'aile), G8 (élytres et ailes sur les omoplates), I5 (élytres en deux temps, aérofreins au parachute).
 
@@ -261,8 +261,8 @@ Deux phases. **Phase 1** : une paire dominante par aspect, choisie pour ouvrir l
 | 4 | bee | A4, A7, A13, A18, A10 (translucide) | Vrombissement, flou par plans fantômes, deux paires couplées, poussée continue, stationnaire d'insecte. **Terminé** (I1 à I4). | ancient, beetle, hummingbird |
 | 5 | seraph | A7 (plumes) | Plusieurs paires à coordonner. **Terminé**, refondu en deux grandes paires superposées et des gouvernails (G8, G9). | angel, et les ailes arrière de night, light, air, aurora, forest |
 | 6 | night | A9, A16 | Aile de dragon (`DragonWing`), paire arrière, queue (`DragonTail`), pouvoirs des Furies. | light, et les queues de peacock, kite, squirrel, psyche |
-| 7 | **beetle** | A6 | Élytres qui s'ouvrent, puis aile qui se déplie : séquence en deux temps à l'envol et au repli. | — |
-| 8 | moth | A5 | Insecte lent : ailes avant et arrière couplées, sans articulation, battement souple. | psyche |
+| 7 | beetle | A6 | Élytres qui s'ouvrent, puis aile qui se déplie : séquence en deux temps à l'envol et au repli. | — |
+| 8 | **moth** | A5 | Insecte lent : ailes avant et arrière couplées, sans articulation, battement souple. | psyche |
 | 9 | daedalus | A12, A13 | Machine : engrenages, longerons, propulseurs orientables, flammes, poussée continue. | ornithopter, kite, copper |
 | 10 | aurora | A11 (tissu), A15 | Voiles sans os qui ondulent et retombent, battement lent. | air, psyche |
 | 11 | water | A11 (fluide) | Segments et gouttes : une aile qui coule plutôt qu'elle ne se plie. | — |
@@ -304,4 +304,4 @@ Deux phases. **Phase 1** : une paire dominante par aspect, choisie pour ouvrir l
 
 P = famille plume (P1, P2), M = membrane à doigts, I = insecte. Les règles générales (G1 à G5) s'appliquent toujours, adaptées à l'anatomie.
 
-**Prochaine paire : beetle** (phase 1, n° 7).
+**Prochaine paire : moth** (phase 1, n° 8).
