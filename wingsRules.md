@@ -281,6 +281,17 @@ Règles appliquées avant revue :
 - Conservé : ondulation le long des rails, lumière qui respire, 3 idles (couronne, vague, plissé).
 - Outil : le plugin Blockbench laisse passer la transparence (seuil alpha 0,02 au lieu de 0,5), sinon le bas violet des voiles disparaissait.
 
+### 11. Ailes d'eau (`water`, matière non squelettique, aspect A11)
+
+Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+
+Règles appliquées avant revue :
+
+- G7 : l'aile était faite de 5 plaques d'eau rigides, une par segment, qui s'ouvraient quand la vague courbe les segments. C'est maintenant une seule nappe d'eau continue, accrochée à la crête et au bas de chaque segment (`rigs/water.membranes.json`, généré par `water.rig.js`), peinte d'un seul tenant (`water.px.js`). Elle se bombe en vol et suit le fouet du battement. Repliée, la cascade et sa volute restent d'un seul tenant.
+- G6 : les gouttes en cubes 3D sont supprimées (les vraies particules d'eau existent déjà dans `WingEffects`).
+- G1 à G5 : parachute, frein lent, charge où l'aile se lève et ondule de plus en plus, puis BLAST ; battement anatomique au-dessus de −5° avec nage avant/arrière, le fouet segment par segment conservé ; stationnaire à plat, nage de haut en bas comme une raie ; traînées au bout du dernier segment.
+- Conservé : la vague permanente de l'épaule à la pointe, les 3 idles (vague dans la cascade, verse, déploiement en onde), l'éclaboussure à l'atterrissage.
+
 ## Plan de review
 
 Deux phases. **Phase 1** : une paire dominante par aspect, choisie pour ouvrir le plus de logique nouvelle, revue une à une avec zorago, jusqu'à ce que chaque aspect ait ses règles. **Phase 2** : toutes les autres paires, une à une aussi. On applique d'abord toutes les règles de leurs familles et de leurs aspects, puis on ne polit que ce qui leur est propre.

@@ -11,17 +11,31 @@ var RIG = (() => {
     const k = i + 1, name = 'seg_' + k
     groups.push({ name, parent, origin: [x, y, z], rot: [0, 0, -3] })
     const lift = Math.round(2.6 - 0.5 * i)
-    cubes.push({ name: name + '_water', group: name, from: [x, y - g.h, z + (i % 2 ? 0.06 : 0)], to: [x + g.len + (k === segs.length ? 2 : 0.5), y + lift, z + 0.02 + (i % 2 ? 0.06 : 0)], kind: 'water', index: i, lift })
     cubes.push({ name: name + '_crest', group: name, from: [x, y - 0.6, z - 0.5], to: [x + g.len + 0.3, y + 0.6, z + 0.5], kind: 'crest', index: i })
     x += g.len
     parent = name
   })
-  const drops = [{ seg: 5, at: [30, 18, 2.6] }, { seg: 4, at: [24, 14.5, 2.6] }, { seg: 3, at: [17, 12, 2.6] }]
-  drops.forEach((d, i) => {
-    groups.push({ name: 'drop_' + (i + 1), parent: 'seg_' + d.seg, origin: d.at })
-    cubes.push({ name: 'drop_cube_' + (i + 1), group: 'drop_' + (i + 1), from: [d.at[0] - 0.45, d.at[1] - 0.7, d.at[2] - 0.45], to: [d.at[0] + 0.45, d.at[1] + 0.5, d.at[2] + 0.45], kind: 'drop' })
-  })
   const rig = { model: 'water', texture: [128, 64], S, segs, groups, cubes }
   rig.used = PACK(rig, 128)
+  const at = (k, px, py) => {
+    const w = GEOM.world(rig, 'seg_' + k, [px, py])
+    return ['seg_' + k, Math.round(w[0] * 1000) / 1000, Math.round(w[1] * 1000) / 1000, z + 0.04]
+  }
+  const a = [], b = []
+  let sx = S[0]
+  segs.forEach((g, i) => {
+    a.push(at(i + 1, sx, y + Math.round(2.6 - 0.5 * i)))
+    b.push(at(i + 1, sx, y - g.h))
+    sx += g.len
+  })
+  const n = segs.length
+  a.push(at(n, sx - 1, y + 0.6), at(n, sx + 2, y - 0.5))
+  b.push(at(n, sx - 1, y - segs[n - 1].h + 1), at(n, sx + 2, y - 0.5))
+  const pts = [...a, ...b]
+  const x0 = Math.floor(Math.min(...pts.map(q => q[1])) - 1), x1 = Math.ceil(Math.max(...pts.map(q => q[1])) + 1)
+  const y0 = Math.ceil(Math.max(...pts.map(q => q[2])) + 1), y1 = Math.floor(Math.min(...pts.map(q => q[2])) - 1)
+  const sheet = { x: x0, y: y0, w: x1 - x0, h: y0 - y1, ventral: [0, rig.used], dorsal: [x1 - x0, rig.used] }
+  rig.sheet = sheet
+  rig.membranes = { sheet: { x: sheet.x, y: sheet.y, ventral: sheet.ventral, dorsal: sheet.dorsal }, panels: [{ name: 'water', rows: 2, a, b }] }
   return rig
 })()

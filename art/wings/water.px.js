@@ -56,10 +56,14 @@ const tone = (p, dorsal) => {
 }
 
 const paint = (c) => {
-  for (const cube of R.cubes.filter(q => q.kind === "water")) {
-    GEOM.pixels(R, cube, (px, py, p, dorsal) => {
-      if (GEOM.inside(poly, p)) c.px(px, py, tone(p, dorsal))
-    })
+  const sh = R.sheet
+  for (const [u0, v0, dorsal] of [[sh.ventral[0], sh.ventral[1], false], [sh.dorsal[0], sh.dorsal[1], true]]) {
+    for (let u = 0; u < sh.w; u++) {
+      for (let v = 0; v < sh.h; v++) {
+        const p = [sh.x + u + 0.5, sh.y - v - 0.5]
+        if (GEOM.inside(poly, p)) c.px(u0 + u, v0 + v, tone(p, dorsal))
+      }
+    }
   }
   for (const cube of R.cubes) {
     if (cube.kind === "water") continue
