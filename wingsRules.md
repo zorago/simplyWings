@@ -249,7 +249,7 @@ Retour de zorago : tout bon sauf le stationnaire, où les deux carapaces travers
 
 ### 8. Ailes de papillon de nuit (`moth`, famille insecte, aspect A5)
 
-Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+Statut : **terminé** (25 octobre 2026), validé par zorago sans modification.
 
 Règles appliquées avant revue (version lente des règles insecte, sans vrombissement ni fantômes) :
 
@@ -274,8 +274,8 @@ Deux phases. **Phase 1** : une paire dominante par aspect, choisie pour ouvrir l
 | 5 | seraph | A7 (plumes) | Plusieurs paires à coordonner. **Terminé**, refondu en deux grandes paires superposées et des gouvernails (G8, G9). | angel, et les ailes arrière de night, light, air, aurora, forest |
 | 6 | night | A9, A16 | Aile de dragon (`DragonWing`), paire arrière, queue (`DragonTail`), pouvoirs des Furies. | light, et les queues de peacock, kite, squirrel, psyche |
 | 7 | beetle | A6 | Élytres qui s'ouvrent, puis aile qui se déplie : séquence en deux temps à l'envol et au repli. | — |
-| 8 | **moth** | A5 | Insecte lent : ailes avant et arrière couplées, sans articulation, battement souple. | psyche |
-| 9 | daedalus | A12, A13 | Machine : engrenages, longerons, propulseurs orientables, flammes, poussée continue. | ornithopter, kite, copper |
+| 8 | moth | A5 | Insecte lent : ailes avant et arrière couplées, sans articulation, battement souple. | psyche |
+| 9 | **daedalus** | A12, A13 | Machine : engrenages, longerons, propulseurs orientables, flammes, poussée continue. | ornithopter, kite, copper |
 | 10 | aurora | A11 (tissu), A15 | Voiles sans os qui ondulent et retombent, battement lent. | air, psyche |
 | 11 | water | A11 (fluide) | Segments et gouttes : une aile qui coule plutôt qu'elle ne se plie. | — |
 | 12 | forest | A11 (végétal), A8 | Branches rigides, feuilles et fleurs qui réagissent au vent, paire arrière. | — |
@@ -316,4 +316,4 @@ Deux phases. **Phase 1** : une paire dominante par aspect, choisie pour ouvrir l
 
 P = famille plume (P1, P2), M = membrane à doigts, I = insecte. Les règles générales (G1 à G5) s'appliquent toujours, adaptées à l'anatomie.
 
-**Prochaine paire : moth** (phase 1, n° 8).
+**Prochaine paire : daedalus** (phase 1, n° 9).
