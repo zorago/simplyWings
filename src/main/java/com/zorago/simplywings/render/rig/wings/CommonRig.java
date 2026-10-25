@@ -146,10 +146,12 @@ public final class CommonRig extends WingRig {
         drive.add(RigPose.BEND_TIPS, chute * (-0.1f + 0.05f * Mth.sin(time * 4.7f) + 0.03f * Mth.sin(time * 7.3f)));
         drive.add(RigPose.FAN, chute * 0.03f * Mth.sin(time * 5.3f));
         brake *= slow;
+        drive.add(RigPose.STROKE, brake * 0.6f);
+        drive.add(RigPose.SWEEP, brake * -0.25f);
         float push = time * BRAKE_BEAT;
         float down = Mth.sin(push);
         float recover = Math.max(0f, -down);
-        drive.add(RigPose.STROKE, brake * 0.35f * Mth.cos(push));
+        drive.add(RigPose.STROKE, brake * 0.25f * Mth.cos(push));
         drive.add(RigPose.SWEEP, brake * -0.12f * down);
         drive.add(RigPose.TWIST, brake * -0.2f * Math.max(0f, down));
         drive.add(RigPose.ELBOW, brake * 0.3f * recover);

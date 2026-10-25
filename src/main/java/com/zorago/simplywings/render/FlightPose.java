@@ -59,10 +59,11 @@ public final class FlightPose {
         float beat = motion.beating() ? Mth.sin(motion.beat * Mth.TWO_PI) * motion.beatWeight : 0;
         float sway = Mth.sin(t * 6.0f);
 
-        float balance = Mth.sin(t * 5.0f) * brake;
-        float armX = Mth.lerp(brake, 0.05f + 0.06f * beat, 0.42f);
-        float armY = 0.05f * brake;
-        float armZ = Mth.lerp(brake, 0.14f + 0.08f * beat + 0.03f * sway, 1.35f) * (1 - 0.8f * dive);
+        float slow = brake * Mth.clamp(motion.brakeBeat, 0, 1);
+        float balance = Mth.sin(t * 5.0f) * (brake - slow);
+        float armX = Mth.lerp(slow, Mth.lerp(brake, 0.05f + 0.06f * beat, 0.42f), -0.08f);
+        float armY = 0.05f * (brake - slow);
+        float armZ = Mth.lerp(slow, Mth.lerp(brake, 0.14f + 0.08f * beat + 0.03f * sway, 1.35f), 0.12f) * (1 - 0.8f * dive);
         set(model.rightArm, armX, armY, armZ - bank * 0.25f + 0.06f * balance);
         set(model.leftArm, armX, -armY, -armZ - bank * 0.25f + 0.06f * balance);
 
