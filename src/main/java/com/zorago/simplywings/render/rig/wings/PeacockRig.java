@@ -31,6 +31,7 @@ public final class PeacockRig extends WingRig {
             BEND_ELBOW, BEND_WRIST);
     private static final String[] TIPS = {"right_primary_1", "left_primary_1"};
 
+    private static final float TRAIN_TILT = 1f;
     private static final float TRAIN_LIFT = 12f * Mth.DEG_TO_RAD;
     private final RigPose drive = new RigPose();
     private final RigPose state = new RigPose();
@@ -114,15 +115,15 @@ public final class PeacockRig extends WingRig {
         float flying = 1f - ground;
         float length = Mth.lerp(Math.max(open, 0.6f * flying), 0.72f, 1f);
         float legsBack = Mth.clamp(m.w(WingMotion.HOVER) + m.w(WingMotion.BRAKE) + m.w(WingMotion.LANDING), 0f, 1f);
-        float lift = TRAIN_LIFT + 0.05f * open + 0.25f * legsBack;
-        rightTrain.rotate(lift, 0f, flying * 0.12f * sway);
-        leftTrain.rotate(lift, 0f, flying * 0.12f * sway);
+        float tilt = TRAIN_TILT * (TRAIN_LIFT + 0.25f * legsBack);
+        rightTrain.rotate(0f, 0f, flying * 0.12f * sway);
+        leftTrain.rotate(0f, 0f, flying * 0.12f * sway);
         for (int k = 0; k < TRAIN; k++) {
             float delta = (OPEN[k] - REST[k]) * Mth.DEG_TO_RAD * open;
             float trail = flying * (1f - open) * (REST[k] + 90f) * -0.6f * Mth.DEG_TO_RAD;
             float wave = flying * 0.05f * Mth.sin(time * 0.6f - k * 0.7f);
-            train[k].rotate(0f, 0f, delta + trail + wave + rattle).scale(length, 1f, 1f);
-            train[TRAIN + k].rotate(0f, 0f, -(delta + trail + wave + rattle)).scale(length, 1f, 1f);
+            train[k].rotate(0f, tilt, delta + trail + wave + rattle).scale(length, 1f, 1f);
+            train[TRAIN + k].rotate(0f, -tilt, -(delta + trail + wave + rattle)).scale(length, 1f, 1f);
         }
     }
 }
