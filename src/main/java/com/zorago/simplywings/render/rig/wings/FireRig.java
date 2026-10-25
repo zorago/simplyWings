@@ -18,7 +18,6 @@ public final class FireRig extends WingRig {
     private static final int HEAT = 2;
     private static final int STREAM = 3;
     private static final int[] IDLES = {40, 64, 30};
-    private static final int EMBERS = 4;
     private static final float UP = 0.45f;
     private static final float DOWN = 0.12f;
     private static final String[] TIPS = {"right_primary_2", "left_primary_2"};
@@ -57,14 +56,10 @@ public final class FireRig extends WingRig {
     private static final class Side {
         final FeatherWing wing;
         final float s;
-        final Bone[] ember = new Bone[EMBERS];
 
         Side(Bones b, String p, float s) {
             this.s = s;
             wing = new FeatherWing(b, p, s, 1.25f, 2.75f, 2.85f);
-            for (int k = 0; k < EMBERS; k++) {
-                ember[k] = b.get(p + "ember_" + (k + 1));
-            }
         }
     }
 
@@ -116,7 +111,6 @@ public final class FireRig extends WingRig {
         float groundSweep = 0f;
         float scaleIdle = 1f;
         float flicker = 1f;
-        float scatter = 0f;
         if (idle > 0.001f) {
             switch (variant) {
                 case 0 -> {
@@ -142,7 +136,6 @@ public final class FireRig extends WingRig {
                     groundStroke = 0.12f + 0.3f * flick;
                     groundSweep = 0.25f * snap;
                     groundFan = 0.6f * flick;
-                    scatter = idle * smooth(Mth.clamp(p * 1.6f, 0f, 1f));
                 }
             }
         }
@@ -197,18 +190,6 @@ public final class FireRig extends WingRig {
             flame(side.wing.tertial, s, time, size, flicker, back, 3.1f);
             flame(side.wing.secondary, s, time, size, flicker, back, 1.7f);
             flame(side.wing.handFeather, s, time, size, flicker, back, 0.6f);
-            for (int k = 0; k < EMBERS; k++) {
-                float e = Cycle.wrap(time * (0.035f + 0.006f * k) + k * 0.27f);
-                float life = Mth.sin((float) Math.PI * e);
-                float rise = 7f * e * (1f - flying) + scatter * 4f;
-                float trail = 9f * e * flying;
-                float drift = 1.2f * Mth.sin(time * 0.4f + k * 2f) + scatter * 3f * (k % 2 == 0 ? 1f : -1f);
-                Bone ember = side.ember[k];
-                ember.move(s * drift, -rise + trail, trail * 0.2f);
-                float sz = life * (0.6f + 0.4f * heat) * (1f - 0.6f * fold * (1f - ground));
-                ember.scale(sz, sz, sz);
-                ember.rotate(time * 0.2f + k, time * 0.13f, 0f);
-            }
         }
     }
 

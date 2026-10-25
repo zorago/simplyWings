@@ -54,10 +54,11 @@
         const a = panel.a.map(p => anchorOf(p, side, rootGroup))
         const b = panel.b.map(p => anchorOf(p, side, rootGroup))
         if (a.includes(null) || b.includes(null)) continue
+        const sheet = panel.sheet || s.sheet
         panels.push({
-          a, b, rows: panel.rows || 1,
-          ua: panel.a.map(p => [p[1] - s.sheet.x, s.sheet.y - p[2]]),
-          ub: panel.b.map(p => [p[1] - s.sheet.x, s.sheet.y - p[2]])
+          a, b, rows: panel.rows || 1, sheet,
+          ua: panel.a.map(p => [p[1] - sheet.x, sheet.y - p[2]]),
+          ub: panel.b.map(p => [p[1] - sheet.x, sheet.y - p[2]])
         })
       }
     }
@@ -140,7 +141,7 @@
           if (normal.lengthSq() < 1e-9) normal.copy(c0.up)
           normal.normalize()
           if (normal.dot(c0.up) < 0) normal.negate()
-          for (const [offset, sign] of [[s.sheet.dorsal, 1], [s.sheet.ventral, -1]]) {
+          for (const [offset, sign] of [[panel.sheet.dorsal, 1], [panel.sheet.ventral, -1]]) {
             for (const c of [c0, c1, c2, c0, c2, c3]) put(c, offset, sign, normal)
           }
         }

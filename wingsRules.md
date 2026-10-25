@@ -81,6 +81,10 @@ Chaque aspect demande sa propre logique. Le plan de review (en fin de document) 
 
 - **G5 — Le stationnaire pousse l'air vers le sol** (née sur `basic`). En stationnaire, le but est de lutter contre la gravité, pas d'avancer. Le corps est debout, alors l'aile tourne d'environ 80° autour de sa longueur (`TWIST` de l'état `HOVER`, `HOVER_PLANE`) : son plan devient presque horizontal, les plumes traînent vers l'arrière, et sa face du dessous regarde le sol. Le battement passe sur l'axe haut/bas (`SWEEP` : humérus d'environ −6° à +47°, toujours dans la limite de G4), avec un léger huit d'avant en arrière sur `STROKE`. Pendant la frappe vers le bas, la surface est presque à plat (normale à environ 20° de la verticale) et pousse l'air au sol. Pendant la remontée, l'aile se replie et se met de profil pour fendre l'air. La cambrure suit le mouvement. Les « un peu moins de 90° » voulus par zorago gardent une petite poussée vers l'arrière, qui stabilise.
 
+- **G6 — Pas de particules en cubes dans le modèle** (née sur `fire`). Les braises, étincelles, poussières, etc. ne sont jamais des cubes 3D animés dans le rig (trop lourd, et ça fait ramer Blockbench quand ils apparaissent). Elles passent par les vraies particules Minecraft (`client/WingEffects`), réglées par paire.
+
+- **G7 — Ornement qui traverse une articulation = peau** (née sur `fire`). Une pièce décorative ou une surface qui s'étend sur plusieurs os (crête, cœur lumineux, bordure, voile) n'est jamais une plaque rigide posée sur un seul os : elle passe sous les articulations et s'en détache dès que l'aile bouge. Elle devient une peau (M1), avec ses points accrochés à chaque os qu'elle longe. Si elle doit se replier avec des plumes, son bord libre s'accroche aux plumes elles-mêmes, pas à l'os. Chaque panneau peut avoir sa propre feuille de texture (`sheet` dans le panneau).
+
 ## Règles de famille
 
 ### Plume
@@ -146,7 +150,7 @@ Modifications :
 
 11. Stationnaire (retour de zorago : l'air partait vers l'avant) : même animation, mais le plan de l'aile pivote de 80° et le battement passe de haut en bas, pour pousser l'air au sol (G5).
 
-Règles créées : P1, P2, G1, G2, G3, G4, G5.
+Règles créées : P1, P2, G1, G2, G3, G4, G5 (G6 et G7 viennent de `fire`).
 
 ### 2. Ailes de chauve-souris (`bat`, famille membrane à doigts)
 
@@ -171,7 +175,13 @@ Règles appliquées avant revue :
 - P2 : torsion de raccord, cambrure et alignement de la rangée de la main, repris par `FeatherWing`.
 - M1 appliquée hors de la famille membrane : le cœur blanc-jaune sous les flammes était fait de trois plaques rigides (bras, avant-bras, main), qui s'ouvraient aux articulations. C'est maintenant une peau continue accrochée aux trois os (`rigs/fire.membranes.json`, feuille de texture peinte par `coreSheet` dans `fire.px.js`), légèrement bombée en vol.
 
-Ce qui reste propre au feu : vacillement de chaque langue, embrasement au coup (chaleur), flammes qui traînent avec la vitesse, braises qui montent au sol et filent en vol, 3 idles (embrasement, braises qui couvent, secousse d'étincelles), émissif.
+Modifications après le premier passage de zorago (« 70 % correct ») :
+
+1. La crête de petites flammes du bord d'attaque était une plaque posée sur la main et passait en travers du coude. Elle sortait au-dessus des épaules une fois l'aile repliée. C'est maintenant une peau accrochée au bras, à l'avant-bras et à la main (G7, feuille `CREST`).
+2. Le cœur en peau faisait de grands panneaux jaunes une fois replié, parce que son bas était accroché aux os. Son bord bas est maintenant accroché aux flammes (première et dernière de chaque os, à 7 px de la racine), donc il se replie avec elles et vacille avec elles (G7).
+3. Braises en cubes 3D supprimées (G6). Les flammes et étincelles restent en vraies particules.
+
+Ce qui reste propre au feu : vacillement de chaque langue, embrasement au coup (chaleur), flammes qui traînent avec la vitesse, 3 idles (embrasement, braises qui couvent, secousse d'étincelles), émissif.
 
 ## Plan de review
 

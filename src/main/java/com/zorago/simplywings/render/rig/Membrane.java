@@ -21,38 +21,35 @@ public final class Membrane {
     private record Anchor(List<ModelPart> chain, Vector3f local, float u, float v) {
     }
 
-    private record Panel(Anchor[] a, Anchor[] b, int rows) {
+    private record Panel(Anchor[] a, Anchor[] b, int rows, float[] ventral, float[] dorsal) {
     }
 
     private final List<Panel> panels = new ArrayList<>();
     private final Map<List<ModelPart>, Matrix4f> frame = new IdentityHashMap<>();
     private final float texWidth;
     private final float texHeight;
-    private final float[] ventral;
-    private final float[] dorsal;
     private float billow;
 
-    private Membrane(float texWidth, float texHeight, float[] ventral, float[] dorsal) {
+    private Membrane(float texWidth, float texHeight) {
         this.texWidth = texWidth;
         this.texHeight = texHeight;
-        this.ventral = ventral;
-        this.dorsal = dorsal;
     }
 
     public static Membrane parse(JsonObject json, ModelPart root, Map<String, List<String>> paths, int texWidth, int texHeight) {
-        JsonObject sheet = json.getAsJsonObject("sheet");
-        float sheetX = sheet.get("x").getAsFloat();
-        float sheetY = sheet.get("y").getAsFloat();
-        Membrane membrane = new Membrane(texWidth, texHeight, pair(sheet, "ventral"), pair(sheet, "dorsal"));
+        JsonObject defaultSheet = json.getAsJsonObject("sheet");
+        Membrane membrane = new Membrane(texWidth, texHeight);
         Map<String, List<ModelPart>> chains = new java.util.HashMap<>();
         for (JsonElement element : json.getAsJsonArray("panels")) {
             JsonObject panel = element.getAsJsonObject();
             int rows = panel.has("rows") ? panel.get("rows").getAsInt() : 1;
+            JsonObject sheet = panel.has("sheet") ? panel.getAsJsonObject("sheet") : defaultSheet;
+            float sheetX = sheet.get("x").getAsFloat();
+            float sheetY = sheet.get("y").getAsFloat();
             for (int side : new int[]{1, -1}) {
                 Anchor[] a = anchors(panel.getAsJsonArray("a"), side, sheetX, sheetY, root, paths, chains);
                 Anchor[] b = anchors(panel.getAsJsonArray("b"), side, sheetX, sheetY, root, paths, chains);
                 if (a != null && b != null && a.length == b.length && a.length > 1) {
-                    membrane.panels.add(new Panel(a, b, Math.max(1, rows)));
+                    membrane.panels.add(new Panel(a, b, Math.max(1, rows), pair(sheet, "ventral"), pair(sheet, "dorsal")));
                 }
             }
         }
@@ -147,13 +144,13 @@ public final class Membrane {
             }
             for (int i = 0; i + 1 < n; i++) {
                 for (int r = 0; r < rows; r++) {
-                    quad(consumer, pos, u, v, up[i], i, r, light, overlay, color);
+                    quad(consumer, panel, pos, u, v, up[i], i, r, light, overlay, color);
                 }
             }
         }
     }
 
-    private void quad(VertexConsumer consumer, Vector3f[][] pos, float[][] u, float[][] v, Vector3f up, int i, int r,
+    private void quad(VertexConsumer consumer, Panel panel, Vector3f[][] pos, float[][] u, float[][] v, Vector3f up, int i, int r,
                       int light, int overlay, int color) {
         int[][] corners = {{i, r}, {i + 1, r}, {i + 1, r + 1}, {i, r + 1}};
         Vector3f p0 = pos[i][r];
@@ -167,7 +164,7 @@ public final class Membrane {
         }
         for (int layer = 0; layer < 2; layer++) {
             float side = layer == 0 ? 1f : -1f;
-            float[] offset = layer == 0 ? dorsal : ventral;
+            float[] offset = layer == 0 ? panel.dorsal() : panel.ventral();
             for (int k = 0; k < 4; k++) {
                 int[] c = corners[layer == 0 ? k : 3 - k];
                 Vector3f p = pos[c[0]][c[1]];

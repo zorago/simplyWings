@@ -53,6 +53,18 @@ const coreSheet = (c) => {
   }
 }
 
+const CREST = { x: 8, y: 26, w: 19, h: 3, ventral: [100, 100], dorsal: [100, 104] }
+const crestSheet = (c) => {
+  for (const [u0, v0] of [CREST.ventral, CREST.dorsal]) {
+    for (let u = 0; u < CREST.w; u++) {
+      for (let v = 0; v < CREST.h; v++) {
+        const col = crest(u, v, false, CREST.w, CREST.h)
+        if (col) c.px(u0 + u, v0 + v, col)
+      }
+    }
+  }
+}
+
 const crest = (x, row, dorsal, w, h) => {
   const k = x % 4
   const height = [1.2, 2.6, 3.4, 2]
@@ -74,6 +86,7 @@ const paint = (c) => {
     }
   }
   coreSheet(c)
+  crestSheet(c)
   c.rect(0, R.texture[1] - 16, 32, 16, "q")
   for (let x = 0; x < 32; x += 4) c.vline(x, R.texture[1] - 16, 16, "Q")
 }
