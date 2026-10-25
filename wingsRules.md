@@ -371,7 +371,7 @@ Règles appliquées avant revue (aile de plumes, mais règles insecte pour le vr
 
 ### 16. Ailes d'aigle (`eagle`, plume, aspect A17)
 
-Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+Statut : **terminé**, validé par zorago sans modification. Fin de la phase 1.
 
 Règles appliquées avant revue :
 
@@ -408,7 +408,7 @@ Deux phases. **Phase 1** : une paire dominante par aspect, choisie pour ouvrir l
 | 13 | squirrel | A3, A9 | Planeur : membrane sans doigts tendue entre les membres, queue de stabilisation. | flying_fish, phantom, kite |
 | 14 | yin_yang | A14 | Asymétrie voulue : deux ailes qui ne font pas la même chose, avec le taiji. | patchwork |
 | 15 | hummingbird | A4 + A1, A17, A18 | Hybride plume et vrombissement, stationnaire en huit horizontal (exception à G5). | — |
-| 16 | **eagle** | A17 | Premier oiseau d'espèce : doigts écartés, alula, battement lent et ample. Ouvre la méthode des signatures d'espèce. | crow, owl, gull, swift, pigeon, parrot |
+| 16 | eagle | A17 | Premier oiseau d'espèce : doigts écartés, alula, battement lent et ample. Ouvre la méthode des signatures d'espèce. | crow, owl, gull, swift, pigeon, parrot |
 
 ### Phase 2 : toutes les autres paires
 
@@ -442,4 +442,4 @@ Deux phases. **Phase 1** : une paire dominante par aspect, choisie pour ouvrir l
 
 P = famille plume (P1, P2), M = membrane à doigts, I = insecte. Les règles générales (G1 à G5) s'appliquent toujours, adaptées à l'anatomie.
 
-**Prochaine paire : eagle** (phase 1, n° 16).
+**Phase 2 en cours** : toutes les paires restantes sont préparées d'un coup et ouvertes chacune dans un onglet Blockbench sur `full_flight`, pour une revue groupée de zorago.
