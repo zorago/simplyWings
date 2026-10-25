@@ -18,10 +18,12 @@ public final class CommonRig extends WingRig {
     private static final float CHUTE_ARM_Z = 0.149f;
     private static final String[] TIPS = {"right_primary_1", "left_primary_1"};
     private static final float[] KEYS = Cycle.beat(0.45f, 0.25f);
-    private static final Cycle STROKE = Cycle.of(KEYS, -0.75f, 0f, 1f, 1.05f, -0.3f, -0.9f);
-    private static final Cycle SWEEP = Cycle.of(KEYS, 0.25f, -0.15f, -0.25f, -0.1f, 0.25f, 0.35f);
-    private static final Cycle ELBOW = Cycle.of(KEYS, 0.1f, 0.55f, 0.25f, 0f, -0.05f, 0f);
-    private static final Cycle WRIST = Cycle.of(KEYS, 0.1f, 0.7f, 0.35f, -0.1f, -0.1f, 0f);
+    private static final Cycle STROKE = Cycle.of(KEYS, 0.09f, 0.5f, 0.82f, 0.78f, 0.35f, -0.14f);
+    private static final Cycle BEND_ELBOW = Cycle.of(KEYS, -0.44f, 0f, 0.25f, 0.22f, 0.06f, -0.61f);
+    private static final Cycle BEND_WRIST = Cycle.of(KEYS, -0.61f, -0.17f, 0.2f, 0.24f, 0.12f, -0.7f);
+    private static final Cycle SWEEP = Cycle.of(KEYS, 0.2f, -0.1f, -0.2f, -0.1f, 0.25f, 0.3f);
+    private static final Cycle ELBOW = Cycle.of(KEYS, 0.25f, 0.5f, 0.15f, 0f, -0.05f, 0.05f);
+    private static final Cycle WRIST = Cycle.of(KEYS, 0.45f, 0.65f, 0.2f, -0.05f, -0.1f, 0.1f);
     private static final Cycle TWIST = Cycle.of(KEYS, 0f, 0.3f, 0.1f, -0.05f, -0.25f, -0.1f);
     private static final Cycle FAN = Cycle.of(KEYS, 0.1f, -0.2f, 0.1f, 0.25f, 0.2f, 0.05f);
     private static final Cycle HAND_TWIST = Cycle.of(KEYS, 0f, -0.5f, -0.2f, 0f, 0.15f, 0.05f);
@@ -91,15 +93,16 @@ public final class CommonRig extends WingRig {
             float c = Mth.cos(ph);
             float forward = Math.max(0f, s);
             float back = Math.max(0f, -s);
-            drive.add(RigPose.STROKE, hw * a * 0.85f * c);
+            drive.add(RigPose.STROKE, hw * (0.12f + 0.45f * c));
             drive.add(RigPose.SWEEP, hw * 0.18f * Mth.sin(2f * ph));
             drive.add(RigPose.TWIST, hw * 0.5f * s);
             drive.add(RigPose.ELBOW, hw * 0.35f * back);
             drive.add(RigPose.WRIST, hw * 0.5f * back);
             drive.add(RigPose.HAND_TWIST, hw * -0.55f * back);
             drive.add(RigPose.FAN, hw * (0.2f * forward - 0.2f * back));
-            drive.add(RigPose.BEND_WRIST, hw * a * 0.4f * (Mth.cos(ph - 0.3f) - c));
-            drive.add(RigPose.BEND_TIPS, hw * a * 0.6f * (Mth.cos(ph - 0.5f) - c));
+            drive.add(RigPose.BEND_ELBOW, hw * 0.3f * Mth.cos(ph - 0.35f));
+            drive.add(RigPose.BEND_WRIST, hw * 0.4f * Mth.cos(ph - 0.7f));
+            drive.add(RigPose.BEND_TIPS, hw * a * 0.5f * (Mth.cos(ph - 1.0f) - c));
         }
         float charge = m.w(WingMotion.CHARGE);
         float shiver = charge * charge;
@@ -114,14 +117,14 @@ public final class CommonRig extends WingRig {
             strike = strike * strike * (3f - 2f * strike);
             blast = p < BLAST_STRIKE ? 1f : 1f - smooth((p - BLAST_STRIKE) / (1f - BLAST_STRIKE));
             float settle = p < BLAST_STRIKE ? 0f : Mth.sin((float) Math.PI * (p - BLAST_STRIKE) / (1f - BLAST_STRIKE));
-            drive.add(RigPose.STROKE, blast * Mth.lerp(strike, 1.1f, -1.15f));
+            drive.add(RigPose.STROKE, blast * Mth.lerp(strike, 1.1f, -0.15f));
             drive.add(RigPose.SWEEP, blast * Mth.lerp(strike, 0.55f, -0.15f));
             drive.add(RigPose.FAN, blast * 0.25f);
             drive.add(RigPose.TWIST, blast * Mth.lerp(strike, 0.15f, -0.25f));
             drive.add(RigPose.ELBOW, 0.45f * settle);
             drive.add(RigPose.WRIST, 0.55f * settle);
-            drive.add(RigPose.BEND_ELBOW, blast * 0.3f * Mth.sin((float) Math.PI * strike));
-            drive.add(RigPose.BEND_WRIST, blast * 0.5f * Mth.sin((float) Math.PI * strike));
+            drive.add(RigPose.BEND_ELBOW, blast * (0.35f * Mth.sin((float) Math.PI * strike) - 0.75f * strike));
+            drive.add(RigPose.BEND_WRIST, blast * (0.45f * Mth.sin((float) Math.PI * strike) - 0.9f * strike));
             drive.add(RigPose.BEND_TIPS, blast * 0.75f * Mth.sin((float) Math.PI * strike));
         }
         if (m.beating()) {
@@ -134,13 +137,14 @@ public final class CommonRig extends WingRig {
             drive.add(RigPose.TWIST, a * TWIST.at(t));
             drive.add(RigPose.FAN, a * FAN.at(t));
             drive.add(RigPose.HAND_TWIST, a * HAND_TWIST.at(t));
-            drive.add(RigPose.BEND_ELBOW, a * 0.2f * STROKE.lagged(t, 0.04f));
-            drive.add(RigPose.BEND_WRIST, a * 0.3f * STROKE.lagged(t, 0.07f));
-            drive.add(RigPose.BEND_TIPS, a * 0.35f * STROKE.lagged(t, 0.1f));
+            drive.add(RigPose.BEND_ELBOW, a * BEND_ELBOW.at(t));
+            drive.add(RigPose.BEND_WRIST, a * BEND_WRIST.at(t));
+            drive.add(RigPose.BEND_TIPS, a * 0.25f * BEND_WRIST.lagged(t, 0.06f));
         }
         float sw = m.stall;
         if (sw > 0.001f) {
-            drive.add(RigPose.STROKE, sw * 0.55f * Mth.sin(time * 1.1f));
+            drive.add(RigPose.STROKE, sw * (0.25f + 0.3f * Mth.sin(time * 1.1f)));
+            drive.add(RigPose.BEND_ELBOW, sw * 0.35f * Mth.sin(time * 1.1f - 0.6f));
             drive.add(RigPose.ELBOW, sw * 0.45f * (0.5f + 0.5f * Mth.sin(time * 1.7f)));
             drive.add(RigPose.TWIST, sw * 0.5f * Mth.sin(time * 0.9f));
             drive.add(RigPose.ASYM, sw * 0.35f * Mth.sin(time * 0.6f));

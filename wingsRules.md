@@ -38,6 +38,12 @@ La liste se précise au fil des passes ; une paire peut emprunter à deux famill
 
 - **G3 — Envol chargé : se gonfler, puis BLAST** (née sur `basic`). Pendant la charge (Alt maintenu au sol), les ailes se déploient complètement et se lèvent haut au-dessus du dos, en V, l'éventail grand ouvert, les bouts d'aile retroussés. Elles se « gonflent » avec un tremblement fin qui grandit avec la charge (au carré), et de la poussière part des pieds. À la fin de la charge : le **BLAST**, un coup d'aile unique et violent qui part de tout en haut et descend très bas (30 % du one-shot `WingMotion.launch`, 16 ticks), avec les bouts d'aile qui suivent en retard, puis un repli de récupération vers le vol. Il s'accompagne d'un anneau de nuages au sol, de bouffées sous le joueur et d'un battement de dragon. Le battement normal est effacé pendant le blast. Cette animation sert surtout aux **autres joueurs** : le début et la fin de la charge leur sont envoyés (`TakeoffCharge` → `TakeoffEvent`, un paquet à chaque bout), et chaque client détecte lui-même le départ (passage au vol de déplacement avec une charge ≥ 0,8).
 
+- **G4 — Amplitude anatomique du battement** (née sur `basic`, sources : études XROMM de l'articulation de l'épaule des oiseaux). Le premier os, attaché au dos (humérus, `STROKE` de l'épaule), monte jusqu'à environ +50 à +80° au-dessus du plan du dos, mais ne descend jamais à plus d'environ −5° sous l'épaule : il ne passe pas sous les bras du joueur. Seuls le deuxième et le troisième os (avant-bras, main, puis plumes) vont plus bas, en se pliant vers le bas en fin de coup. Le battement est une vague qui part du corps vers le bout de l'aile : l'humérus mène, l'avant-bras et la main suivent en retard.
+  - **Descente (coup moteur)** : aile tendue, balayée un peu vers l'avant, l'humérus descend à −5°, puis l'avant-bras (−35°) et la main (−40°) fouettent sous l'épaule en fin de coup.
+  - **Remontée (récupération)** : l'aile se replie au poignet dès le début, l'humérus remonte en premier pendant que la main traîne encore en bas, puis la main se déroule vers le haut. En haut, l'avant-bras et la main finissent relevés (+15 à +20° chacun, bout d'aile vers +80°), au-dessus et un peu en arrière du dos.
+  - Repères de `basic`, réglés par zorago dans Blockbench : en haut, bras de l'aile vers +50°, avant-bras +20°, main +17,5° ; en bas, bras vers −3°, avant-bras −35°, main −40°. Dans le code, ce sont les cycles `STROKE`, `BEND_ELBOW` et `BEND_WRIST`.
+  - S'applique à **tout** ce qui bat : battement de croisière, stationnaire (l'humérus va de −5° à +47° et l'avant-bras donne la portée vers l'avant), décrochage, BLAST de l'envol (l'humérus s'arrête à −5° et le reste est fait par l'avant-bras et la main). Seules les poses fixes voulues par zorago peuvent amener l'aile devant, comme le parachute du frein, corps debout.
+
 ## Règles de famille
 
 ### Plume
@@ -79,4 +85,6 @@ Modifications :
 
 6. Envol chargé (retour de zorago) : déploiement et gonflement tremblant pendant la charge, puis BLAST au départ (voir G3). La charge est maintenant visible des autres joueurs. Animation de scène `takeoff` (remplace `takeoff_charge`), et `full_flight` passe par le blast.
 
-Règles créées : P1, G1, G2, G3.
+7. Battement (retour de zorago : les ailes descendaient trop bas et passaient sous les bras) : nouveau cycle anatomique (G4). L'humérus va de −5° à +53° au lieu de −43° à +60°, et l'avant-bras et la main fouettent sous l'épaule en fin de coup et se relèvent en haut. Même limite pour le stationnaire, le décrochage et le BLAST.
+
+Règles créées : P1, G1, G2, G3, G4.
