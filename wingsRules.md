@@ -111,7 +111,7 @@ Principe (zorago) : une membrane de peau reste un plan qui pousse l'air, comme l
 
 ### Insecte
 
-Les ailes d'insecte sont des plaques rigides montées sur une charnière, sans coude ni poignet. Les règles générales s'y appliquent en version « charnière » (proposées sur `bee`, en attente de validation par zorago).
+Les ailes d'insecte sont des plaques rigides montées sur une charnière, sans coude ni poignet. Les règles générales s'y appliquent en version « charnière » (nées sur `bee`, validées par zorago sans modification).
 
 - **I1 — Vrombissement dans les limites de G4.** Le battement oscille autour d'un centre placé pour que le point le plus bas reste à −5° sous l'épaule (`centre = −5° + 1,15 × amplitude`). L'amplitude dépend de l'état : plané 0,45, stationnaire 0,55, frein lent 0,25. Les plans fantômes (`ghost`) donnent le flou et suivent la même limite.
 - **I2 — Stationnaire d'insecte (A18).** Comme G5, le plan des ailes pivote d'environ 80° pour devenir presque horizontal. Mais le battement reste d'avant en arrière, comme chez les vrais insectes et les colibris, avec une inversion de l'incidence à chaque demi-coup (`TWIST` ± 0,55 × cos de la phase). C'est elle qui pousse l'air vers le sol.
@@ -190,7 +190,7 @@ Ce qui reste propre au feu : vacillement de chaque langue, embrasement au coup (
 
 ### 4. Ailes d'abeille (`bee`, famille insecte)
 
-Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+Statut : **terminé** (25 octobre 2026), validé par zorago sans modification. Note de zorago : les insectes plus complexes (ancient, beetle, moth, psyche) auront peut-être des idles à revoir.
 
 Règles appliquées avant revue : G1 (I3), G2 (traînée au bout de l'aile avant), G3 (I4), G4 (I1), G5 (I2), G6 (rien à faire), G7 (sans objet : pas d'ornement à cheval sur des os).
 
@@ -205,8 +205,8 @@ Deux phases. **Phase 1** : une paire dominante par aspect, choisie pour ouvrir l
 | 1 | common (`basic`) | A1 | Base de la famille plume. **Terminé.** | toute la famille plume |
 | 2 | bat | A2 | Anatomie la plus éloignée de l'oiseau : doigts, peau qui se tend et se plisse. **Terminé**, méthode membrane validée. | demon, ptero, night, light, phantom |
 | 3 | fire | A8, A10 (émissif) | Plume + pièces attachées + émissif. **Terminé** (G6, G7). | earth, nebula, shadow, storm, amethyst, copper, angel, peacock, psyche |
-| 4 | **bee** | A4, A7, A13, A18, A10 (translucide) | Vrombissement, flou par plans fantômes, deux paires couplées, poussée continue, stationnaire d'insecte. | ancient, beetle, hummingbird |
-| 5 | seraph | A7 (plumes) | Trois paires de plumes à coordonner : déphasage, repli emboîté, frein et BLAST à six ailes. | angel, et les ailes arrière de night, light, air, aurora, forest |
+| 4 | bee | A4, A7, A13, A18, A10 (translucide) | Vrombissement, flou par plans fantômes, deux paires couplées, poussée continue, stationnaire d'insecte. **Terminé** (I1 à I4). | ancient, beetle, hummingbird |
+| 5 | **seraph** | A7 (plumes) | Trois paires de plumes à coordonner : déphasage, repli emboîté, frein et BLAST à six ailes. | angel, et les ailes arrière de night, light, air, aurora, forest |
 | 6 | night | A9, A16 | Aile de dragon (`DragonWing`), paire arrière, queue (`DragonTail`), pouvoirs des Furies. | light, et les queues de peacock, kite, squirrel, psyche |
 | 7 | beetle | A6 | Élytres qui s'ouvrent, puis aile qui se déplie : séquence en deux temps à l'envol et au repli. | — |
 | 8 | moth | A5 | Insecte lent : ailes avant et arrière couplées, sans articulation, battement souple. | psyche |
@@ -251,4 +251,4 @@ Deux phases. **Phase 1** : une paire dominante par aspect, choisie pour ouvrir l
 
 P = famille plume (P1, P2), M = membrane à doigts, I = insecte. Les règles générales (G1 à G5) s'appliquent toujours, adaptées à l'anatomie.
 
-**Prochaine paire : bee** (phase 1, n° 4).
+**Prochaine paire : seraph** (phase 1, n° 5).
