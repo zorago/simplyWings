@@ -16,6 +16,8 @@ public final class BeetleRig extends WingRig {
     private static final float CHUTE_STROKE = 0.31f;
     private static final float CHUTE_RAISE = 0.85f;
     private static final float CHUTE_PITCH = 0.48f;
+    private static final float HOVER_LIFT = 0.25f;
+    private static final float HOVER_SPREAD = 0.28f;
     private static final String[] TIPS = {"right_wing_tip", "left_wing_tip"};
 
     private final Bone[] shell = new Bone[2];
@@ -83,8 +85,8 @@ public final class BeetleRig extends WingRig {
         float center = FLOOR * Mth.clamp(amplitude * 10f, 0f, 1f) + amplitude * 1.2f;
 
         float dive = m.w(WingMotion.DIVE) * m.diveDepth;
-        float lift = 0.9f * open - 0.3f * dive + 0.35f * chute + 0.15f * charge;
-        float spread = 0.5f * open + 0.35f * chute;
+        float lift = Mth.lerp(hover, 0.9f * open - 0.3f * dive + 0.35f * chute + 0.15f * charge, HOVER_LIFT * open);
+        float spread = Mth.lerp(hover, 0.5f * open + 0.35f * chute, HOVER_SPREAD * open);
         float rattle = open * (buzz * 0.03f * Mth.sin(time * 4.3f) + chute * 0.025f * Mth.sin(time * 5.1f));
         float raise = chute * CHUTE_RAISE + charge * 0.5f + 0.1f * hover - 0.25f * cruise - 0.4f * dive + m.bank * 0.15f
                 + chute * 0.02f * Mth.sin(time * 4.7f);
