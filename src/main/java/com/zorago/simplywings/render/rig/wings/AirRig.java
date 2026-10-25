@@ -20,8 +20,9 @@ public final class AirRig extends WingRig {
     private static final float D = Mth.DEG_TO_RAD;
     private static final float[] FOLD_Z = {-4f * D, -3f * D, 0f, 4f * D, 7f * D};
     private static final float[] FOLD_Y = {0f, -4f * D, -4f * D, -3f * D, -2f * D};
-    private static final float FOLD_SHOULDER_Z = -72f * D;
-    private static final float FOLD_SHOULDER_Y = 14f * D;
+    private static final float FOLD_SHOULDER_Z = -50.3f * D;
+    private static final float FOLD_SHOULDER_Y = 11.1f * D;
+    private static final float FOLD_SHOULDER_X = 4.7f * D;
     private static final float FOLD_OVERLAP = 10f * D;
     private static final float[] KEYS = Cycle.beat(0.42f, 0.2f);
     private static final Cycle STROKE = Cycle.of(KEYS, 0.09f, 0.5f, 0.82f, 0.78f, 0.35f, -0.14f);
@@ -165,7 +166,7 @@ public final class AirRig extends WingRig {
             shoulderTwist = Mth.lerp(chute, shoulderTwist, CHUTE_PITCH);
             float rest = Math.max(FLOOR, shoulderStroke - s * bank);
             float overlap = i == 1 ? FOLD_OVERLAP * f : 0f;
-            shoulder[i].rotate(shoulderTwist + overlap, s * (rest + FOLD_SHOULDER_Y * f),
+            shoulder[i].rotate(shoulderTwist + overlap + FOLD_SHOULDER_X * f, s * (rest + FOLD_SHOULDER_Y * f),
                     s * (shoulderSweep + FOLD_SHOULDER_Z * f));
             for (int k = 0; k < SEGMENTS; k++) {
                 float reach = (k + 1f) / SEGMENTS;

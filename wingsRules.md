@@ -659,7 +659,7 @@ Règles appliquées avant revue :
 
 ### 37. Ailes de cerf-volant (`kite`, planeur + machine, aspects A3, A9, A12, A15)
 
-Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+Statut : **terminé**, validé par zorago (revue groupée, lot 5).
 
 Règles appliquées avant revue :
 
@@ -672,7 +672,7 @@ Avant revue, règle des queues : la queue à rubans passait jusqu'à 1,9 px dans
 
 ### 38. Ailes d'ornithoptère (`ornithopter`, machine, aspect A12)
 
-Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+Statut : **terminé**, validé par zorago (revue groupée, lot 5).
 
 Règles appliquées avant revue :
 
@@ -687,7 +687,7 @@ Retour de zorago :
 
 ### 39. Ailes anciennes (`ancient`, modèle `dragonfly`, insecte, aspects A4, A7, A8, A13, A18)
 
-Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+Statut : **terminé**, validé par zorago (revue groupée, lot 5).
 
 Règles appliquées avant revue :
 
@@ -700,7 +700,7 @@ Règles appliquées avant revue :
 
 ### 40. Ailes de Psyché (`psyche`, insecte lent, aspects A5, A8, A9, A10, A15)
 
-Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+Statut : **terminé**, validé par zorago (revue groupée, lot 5).
 
 Règles appliquées avant revue (comme `moth`) :
 
@@ -711,11 +711,11 @@ Règles appliquées avant revue (comme `moth`) :
 - G2 : traînées au bout de l'aile avant (flamme d'âme `fore_flame_3`).
 - Conservé : ailes refermées au-dessus du dos au repos, flammes d'âme qui vacillent et traînent avec la vitesse, queues de l'aile arrière, lampe qui se balance, 5 idles, émissif.
 
-Avant revue, règle des queues : les queues de l'aile arrière sont inclinées vers le dos en vol (−0,8), ce qui réduit leur contact avec les jambes de 0,75 à 0,4 px. Le contact restant vient des grandes ailes elles-mêmes, qui descendent jusque dans les jambes en bas du battement (jusqu'à 1,5 px en `cruise_flap`) : à trancher avec zorago.
+Avant revue, règle des queues : les queues de l'aile arrière sont inclinées vers le dos en vol (−0,8), ce qui réduit leur contact avec les jambes de 0,75 à 0,4 px. Le contact restant vient des grandes ailes elles-mêmes, qui descendent jusque dans les jambes en bas du battement (jusqu'à 1,5 px en `cruise_flap`) : accepté par zorago.
 
 ### 41. Ailes d'air (`air`, matière non squelettique, aspects A10, A11)
 
-Statut : en cours, refonte complète demandée par zorago (« qu'elles matchent la qualité des 3 autres éléments »), scène prête.
+Statut : **terminé**, refonte complète demandée par zorago (« qu'elles matchent la qualité des 3 autres éléments »), validée (lot 5).
 
 Refonte, sur la structure validée de `water` :
 
@@ -723,7 +723,8 @@ Refonte, sur la structure validée de `water` :
 - Trois couches de courants d'air superposées, chacune une peau continue accrochée aux mêmes segments (`rigs/air.membranes.json`) : « dérive » (la plus grande, au fond, la plus transparente), « brise » (au milieu) et « rafale » (la plus courte, devant, la plus blanche, qui dépasse en pointe). Elles donnent la profondeur d'une aile de vent vue de dos.
 - Texture animée (8 images à 8 par seconde, comme l'eau) : ciel pâle translucide, filets de vent blancs qui filent de l'épaule vers la pointe dans des couloirs, bord de fuite effiloché qui se défait en volutes, pointe déchirée.
 - Mouvement : celui de l'eau (G1 à G5, fouet segment par segment, nage du stationnaire, repli superposé), avec en plus un frémissement de vent rapide qui grandit avec la vitesse et des bouffées dans les voiles. 3 idles : rafale (frémissement et onde rapides, ailes entrouvertes), tourbillon (les segments s'enroulent et se déroulent), respiration (les ailes s'ouvrent et les voiles se gonflent).
-- G10 : repliées, les 5 segments s'alignent droit vers le bas le long du dos et les trois voiles tombent à plat comme une cape, sans pli.
+- G10 : repliées, les 5 segments s'alignent vers le bas et les trois voiles tombent à plat, sans pli.
+- Retour de zorago : au repos, pose réglée dans Blockbench pour que ça fasse davantage une cape d'air : épaule moins rabattue (−50,3° au lieu de −72°, ailes plus écartées en cape), recul 11,1°, incidence +4,7°.
 
 ## Plan de review
 
@@ -782,4 +783,4 @@ Deux phases. **Phase 1** : une paire dominante par aspect, choisie pour ouvrir l
 
 P = famille plume (P1, P2), M = membrane à doigts, I = insecte. Les règles générales (G1 à G5) s'appliquent toujours, adaptées à l'anatomie.
 
-**Phase 2 en cours** : toutes les paires restantes sont préparées d'un coup et ouvertes chacune dans un onglet Blockbench sur `full_flight`, pour une revue groupée de zorago.
+**Phase 2 terminée** : les 41 paires sont polies et validées par zorago. Reste : la vérification en jeu.
