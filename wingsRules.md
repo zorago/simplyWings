@@ -126,6 +126,8 @@ Les ailes d'insecte sont des plaques rigides montées sur une charnière, sans c
 - **I1 — Vrombissement dans les limites de G4.** Le battement oscille autour d'un centre placé pour que le point le plus bas reste à −5° sous l'épaule (`centre = −5° + 1,15 × amplitude`). L'amplitude dépend de l'état : plané 0,45, stationnaire 0,55, frein lent 0,25. Les plans fantômes (`ghost`) donnent le flou et suivent la même limite.
 - **I2 — Stationnaire d'insecte (A18).** Comme G5, le plan des ailes pivote d'environ 80° pour devenir presque horizontal. Mais le battement reste d'avant en arrière, comme chez les vrais insectes et les colibris, avec une inversion de l'incidence à chaque demi-coup (`TWIST` ± 0,55 × cos de la phase). C'est elle qui pousse l'air vers le sol.
 - **I3 — Parachute ailes fixes.** Au frein au-dessus de la vitesse minimale, plus de vrombissement : les deux paires sont figées, déployées, levées et inclinées comme le parachute de `basic` (épaule + bras réunis : `STROKE` 0,31, levée 0,85, incidence 0,48), avec un tremblement fin. Les fantômes disparaissent. Sous la vitesse minimale, le vrombissement revient, derrière les bras.
+- **I5 — Élytres (A6)** (née sur `beetle`). Deux temps, toujours dans cet ordre : les élytres s'ouvrent (poids `OPEN`), puis l'aile se déplie de dessous (`UNFOLD`, qui suit l'ouverture avec du retard). Au repli, c'est l'inverse : l'aile rentre d'abord, puis les coques se referment. À la charge, les élytres s'ouvrent dès le début pour libérer les ailes. Au parachute, les élytres se lèvent et s'écartent davantage pour servir d'aérofreins, avec un léger tremblement, pendant que les ailes restent figées (I3).
+
 - **I4 — Envol : le vrombissement monte, puis rafale.** Pendant la charge, les ailes se déplient et se lèvent, et le vrombissement grandit avec la charge (au carré). Le BLAST devient une rafale : amplitude maximale d'un coup, puis décroissance sur le one-shot `launch`.
 
 ### Objet / machine
@@ -236,6 +238,12 @@ Règles appliquées avant revue :
 - G8 : la grande paire est sur les omoplates, la petite paire arrière plus bas, comme les gouvernails de seraph.
 - Retour de zorago (animations validées) : il manquait un dos complet, le skin du joueur ressortait entre les ailes et les épines. Ajout de la plaque dorsale à écailles (M4), aussi sur `light`.
 - Conservé tel quel : la queue (`DragonTail`) et ses ailerons, les épines et leur charge de plasma, la prothèse rouge, les 8 idles et les pouvoirs des Furies.
+
+### 7. Ailes de scarabée (`beetle`, famille insecte, aspect A6)
+
+Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+
+Règles appliquées avant revue : I1 à I4 (battement au-dessus de −5°, stationnaire à plat avec inversion d'incidence, parachute figé, charge et rafale), G2 (traînée au bout de l'aile), G8 (élytres et ailes sur les omoplates), I5 (élytres en deux temps, aérofreins au parachute).
 
 ## Plan de review
 
