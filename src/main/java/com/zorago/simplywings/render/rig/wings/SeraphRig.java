@@ -33,6 +33,8 @@ public final class SeraphRig extends WingRig {
     private static final FlightRules.Beat BEAT = new FlightRules.Beat(STROKE, SWEEP, ELBOW, WRIST, TWIST, FAN, HAND_TWIST,
             BEND_ELBOW, BEND_WRIST);
     private static final float SPLIT_UPPER = 0.32f;
+    private static final float SPLIT_HOVER = 0.62f;
+    private static final float SPLIT_LEVEL = 0.52f;
     private static final float SPLIT_LOWER = -0.08f;
     private static final String[] TIPS = {"right_primary_1", "left_primary_1"};
     private static final ResourceLocation GLOW = SimplyWings.id("textures/entity/seraph_glow.png");
@@ -143,9 +145,11 @@ public final class SeraphRig extends WingRig {
         FeatherWing.TipCurve tips = (k, n) -> Math.max(0.4f, 1.2f - 0.11f * k);
         float level = Mth.clamp(m.w(WingMotion.CRUISE) + m.w(WingMotion.DIVE) + m.w(WingMotion.TUCK), 0f, 1f);
         for (int t = 0; t < 2; t++) {
-            float offset = split * (t == 0 ? SPLIT_UPPER : SPLIT_LOWER) * (1f - fold * 0.6f);
+            float hover = Mth.clamp(m.hoverBeat, 0f, 1f) * (1f - level);
+            float upper = Mth.lerp(hover, SPLIT_UPPER, SPLIT_HOVER);
+            float offset = split * (t == 0 ? upper : SPLIT_LOWER) * (1f - fold * 0.6f);
             float raise = offset * (1f - level);
-            float stroke = t == 0 ? offset * level : 0f;
+            float stroke = t == 0 ? split * SPLIT_LEVEL * (1f - fold * 0.6f) * level : 0f;
             drive.add(RigPose.SWEEP, raise);
             drive.add(RigPose.STROKE, stroke);
             for (int i = 0; i < 2; i++) {

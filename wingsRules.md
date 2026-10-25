@@ -87,7 +87,7 @@ Chaque aspect demande sa propre logique. Le plan de review (en fin de document) 
 
 - **G8 — Les ailes partent des omoplates** (née sur `seraph`). Toute paire principale s'accroche sur le haut du dos, au niveau des omoplates, jamais sur la tête ni au-dessus. Une paire en plus va soit sur les omoplates aussi (juste sous la première), soit plus bas comme gouvernail (vers les hanches). Les idles au sol restent compacts sur le dos : pas d'aile dressée au-dessus de la tête ni enroulée autour des jambes.
 
-- **G9 — Plusieurs paires : superposées au calme, écartées à l'effort** (née sur `seraph`, référence : le Stormcutter de Valka dans *Dragons 2*, dont la seconde paire se plaque sous la première ou s'ouvre en X). Les paires principales identiques se plaquent l'une sur l'autre pour n'en former qu'une au repos, au plané et en piqué. Elles s'écartent en X au stationnaire, en accélération (battement), à la charge, au BLAST et dans les idles (poids lissé `SPLIT`), et battent en phase. L'écartement respecte G4 : c'est la paire du haut qui monte (+0,32), celle du bas ne descend presque pas (−0,08). Corps debout, l'écart se fait en hauteur (`SWEEP`) ; en vol couché, sur `STROKE`.
+- **G9 — Plusieurs paires : superposées au calme, écartées à l'effort** (née sur `seraph`, référence : le Stormcutter de Valka dans *Dragons 2*, dont la seconde paire se plaque sous la première ou s'ouvre en X). Les paires principales identiques se plaquent l'une sur l'autre pour n'en former qu'une au repos, au plané et en piqué. Elles s'écartent en X au stationnaire, en accélération (battement), à la charge, au BLAST et dans les idles (poids lissé `SPLIT`), et battent en phase. L'écartement respecte G4 : c'est la paire arrière (la plus éloignée du dos) qui monte, celle du bas ne descend presque pas (−0,08). Pour bien marquer « deux ailes » (retour de zorago), la paire arrière monte vers le haut de la tête au stationnaire (+0,62 en hauteur) et vers le haut du dos en accélération, en vol couché (+0,52 sur `STROKE`). Ailleurs, l'écart est de +0,32.
 
 ## Règles de famille
 
@@ -202,7 +202,7 @@ Règles appliquées avant revue : G1 (I3), G2 (traînée au bout de l'aile avant
 
 ### 5. Ailes de séraphin (`seraph`, famille plume, aspect A7)
 
-Statut : en cours, refonte prête pour le jugement de zorago sur `full_flight`.
+Statut : **terminé** (25 octobre 2026). Validé par zorago (« superbe taf ») après une dernière retouche : la paire arrière monte plus haut à l'effort, vers la tête au stationnaire et vers le haut du dos en accélération (G9). Reste à vérifier en jeu.
 
 Retour de zorago sur le premier passage : vol, battement et frein corrects, mais les ailes étaient attachées sur la tête, et les idles prenaient beaucoup trop de place. Refonte (G8, G9) :
 
@@ -233,8 +233,8 @@ Deux phases. **Phase 1** : une paire dominante par aspect, choisie pour ouvrir l
 | 2 | bat | A2 | Anatomie la plus éloignée de l'oiseau : doigts, peau qui se tend et se plisse. **Terminé**, méthode membrane validée. | demon, ptero, night, light, phantom |
 | 3 | fire | A8, A10 (émissif) | Plume + pièces attachées + émissif. **Terminé** (G6, G7). | earth, nebula, shadow, storm, amethyst, copper, angel, peacock, psyche |
 | 4 | bee | A4, A7, A13, A18, A10 (translucide) | Vrombissement, flou par plans fantômes, deux paires couplées, poussée continue, stationnaire d'insecte. **Terminé** (I1 à I4). | ancient, beetle, hummingbird |
-| 5 | **seraph** | A7 (plumes) | Trois paires de plumes à coordonner : déphasage, repli emboîté, frein et BLAST à six ailes. | angel, et les ailes arrière de night, light, air, aurora, forest |
-| 6 | night | A9, A16 | Aile de dragon (`DragonWing`), paire arrière, queue (`DragonTail`), pouvoirs des Furies. | light, et les queues de peacock, kite, squirrel, psyche |
+| 5 | seraph | A7 (plumes) | Plusieurs paires à coordonner. **Terminé**, refondu en deux grandes paires superposées et des gouvernails (G8, G9). | angel, et les ailes arrière de night, light, air, aurora, forest |
+| 6 | **night** | A9, A16 | Aile de dragon (`DragonWing`), paire arrière, queue (`DragonTail`), pouvoirs des Furies. | light, et les queues de peacock, kite, squirrel, psyche |
 | 7 | beetle | A6 | Élytres qui s'ouvrent, puis aile qui se déplie : séquence en deux temps à l'envol et au repli. | — |
 | 8 | moth | A5 | Insecte lent : ailes avant et arrière couplées, sans articulation, battement souple. | psyche |
 | 9 | daedalus | A12, A13 | Machine : engrenages, longerons, propulseurs orientables, flammes, poussée continue. | ornithopter, kite, copper |
@@ -278,4 +278,4 @@ Deux phases. **Phase 1** : une paire dominante par aspect, choisie pour ouvrir l
 
 P = famille plume (P1, P2), M = membrane à doigts, I = insecte. Les règles générales (G1 à G5) s'appliquent toujours, adaptées à l'anatomie.
 
-**Prochaine paire : seraph** (phase 1, n° 5).
+**Prochaine paire : night** (phase 1, n° 6).
