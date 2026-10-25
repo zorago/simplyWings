@@ -1133,9 +1133,9 @@ Dernière mise à jour : 22 octobre 2026.
 
 **Vibe** : les ailes de l'inventeur. Dans la mythologie grecque, Dédale a fabriqué des ailes pour s'évader du labyrinthe avec son fils Icare. Ici, c'est une machine : une armature de laiton, des panneaux d'acier rivetés et deux réacteurs dans le dos. Rien ne bat, tout pousse. Les réacteurs vectorisés changent de cap à l'instant : c'est la paire la plus maniable.
 
-**Apparence** : une aile mécanique par côté (modèle `rigs/daedalus.bbmodel`) : longerons de laiton en 3 segments, entretoises, panneaux d'acier rivetés, aileron, engrenages à l'épaule et au coude, et trois plumes d'Icare collées à la cire au bord de fuite. Dans le dos, un caisson de laiton avec cadran et deux réacteurs à flamme (couche `daedalus_glow`).
+**Apparence** : (`rigs/daedalus.bbmodel`, inspiré des ailes EXO-7 du Faucon de Marvel) une aile de lames d'acier à bord de laiton par côté, en rangées qui se chevauchent comme des plumes (bras, avant-bras, main), terminée par 7 longues lames tranchantes en éventail. Les ailes sortent d'un sac dorsal à deux réacteurs centraux (flammes en couche `daedalus_glow`).
 
-**Mouvement signature** : (`DaedalusRig`) rien ne bat : ailes à flèche variable qui se replient vers l'arrière avec la vitesse, réacteurs vectorisés (poussée inversée au freinage, différentiel en virage), ailerons qui suivent le roulis, engrenages qui tournent avec la poussée, panneaux qui se rétractent au sol. 5 idles : vérification des panneaux un par un, engrenages et ratés de réacteur, test des ailerons, balayage des tuyères, dépliage et test de la flèche.
+**Mouvement signature** : (`DaedalusRig`) tout est au jetpack : accélération, envol et stationnaire. Les ailes restent repliées en V dans le dos, sauf en vol de déplacement où elles planent figées et ne servent que de gouvernail (roulis, incidence et flèche en virage) et de frein (parachute). 3 idles : ratés de réacteur, déploiement de contrôle, balayage des tuyères.
 
 **Effets** : les réacteurs crachent des flammes et de la fumée, vers le bas en stationnaire et vers l'arrière pendant la poussée.
 

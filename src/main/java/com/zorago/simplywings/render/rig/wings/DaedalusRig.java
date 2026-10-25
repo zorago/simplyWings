@@ -2,9 +2,11 @@ package com.zorago.simplywings.render.rig.wings;
 
 import com.zorago.simplywings.SimplyWings;
 import com.zorago.simplywings.anim.RigMemory;
+import com.zorago.simplywings.anim.RigPose;
 import com.zorago.simplywings.anim.WingMotion;
 import com.zorago.simplywings.render.rig.Bone;
 import com.zorago.simplywings.render.rig.Bones;
+import com.zorago.simplywings.render.rig.FeatherWing;
 import com.zorago.simplywings.render.rig.FlightRules;
 import com.zorago.simplywings.render.rig.WingRig;
 import net.minecraft.resources.ResourceLocation;
@@ -12,25 +14,19 @@ import net.minecraft.util.Mth;
 
 public final class DaedalusRig extends WingRig {
     private static final int IDLE = 0;
-    private static final int SETTLE = 1;
-    private static final int FOLD = 2;
-    private static final int THRUST = 3;
-    private static final int GEAR = 4;
-    private static final int SWING = 5;
-    private static final int[] IDLES = {64, 50, 44, 56, 84};
-    private static final int PANELS = 4;
-    private static final int FEATHERS = 3;
-    private static final float FOLD_ROOT = -1.2f;
-    private static final float FOLD_MID = 2.35f;
-    private static final float FOLD_TIP = -2.25f;
-    private static final float FLOOR = -5f * Mth.DEG_TO_RAD;
-    private static final float CHUTE_STROKE = 0.31f;
-    private static final float CHUTE_RAISE = 0.85f;
-    private static final float CHUTE_PITCH = 0.48f;
-    private static final String[] TIPS = {"right_spar_tip", "left_spar_tip"};
+    private static final int FOLD = 1;
+    private static final int THRUST = 2;
+    private static final int[] IDLES = {50, 64, 56};
+    private static final float BANK_ROLL = 0.35f;
+    private static final float BANK_PITCH = 0.45f;
+    private static final float BANK_SWEEP = 0.2f;
+    private static final float FOLDED_SPLAY = 0.4f;
+    private static final String[] TIPS = {"right_primary_1", "left_primary_1"};
     private static final ResourceLocation GLOW = SimplyWings.id("textures/entity/daedalus_glow.png");
 
-    private final Side[] sides = new Side[2];
+    private final RigPose drive = new RigPose();
+    private FeatherWing right;
+    private FeatherWing left;
     private Bone pack;
     private Bone thrusterLeft;
     private Bone thrusterRight;
@@ -56,40 +52,10 @@ public final class DaedalusRig extends WingRig {
         return TIPS;
     }
 
-    private static final class Side {
-        final float s;
-        final Bone shoulder;
-        final Bone root;
-        final Bone mid;
-        final Bone tip;
-        final Bone gear;
-        final Bone elbowGear;
-        final Bone aileron;
-        final Bone[] panel = new Bone[PANELS];
-        final Bone[] feather = new Bone[FEATHERS];
-
-        Side(Bones b, String p, float s) {
-            this.s = s;
-            shoulder = b.get(p + "shoulder");
-            root = b.get(p + "spar_root");
-            mid = b.get(p + "spar_mid");
-            tip = b.get(p + "spar_tip");
-            gear = b.get(p + "gear");
-            elbowGear = b.get(p + "elbow_gear");
-            aileron = b.get(p + "aileron");
-            for (int k = 0; k < PANELS; k++) {
-                panel[k] = b.get(p + "panel_" + (k + 1));
-            }
-            for (int k = 0; k < FEATHERS; k++) {
-                feather[k] = b.get(p + "icarus_" + (k + 1));
-            }
-        }
-    }
-
     @Override
     protected void onBind(Bones bones) {
-        sides[0] = new Side(bones, "right_", 1f);
-        sides[1] = new Side(bones, "left_", -1f);
+        right = new FeatherWing(bones, "right_", 1f, 1.25f, 2.75f, 2.85f);
+        left = new FeatherWing(bones, "left_", -1f, 1.25f, 2.75f, 2.85f);
         pack = bones.get("pack");
         thrusterLeft = bones.get("thruster_left");
         thrusterRight = bones.get("thruster_right");
@@ -100,20 +66,17 @@ public final class DaedalusRig extends WingRig {
     @Override
     public void tick(WingMotion m, RigMemory memory) {
         memory.spring(IDLE, m.rouse, 0.2f, 0.65f);
-        memory.spring(SETTLE, m.w(WingMotion.LANDING), 0.4f, 0.5f);
-        boolean unfold = m.rouse > 0f && (m.rouseVariant % 5 == 0 || m.rouseVariant % 5 == 4);
-        float fold = m.w(WingMotion.GROUND) * (unfold ? 1f - m.rouse : 1f) + 0.85f * m.w(WingMotion.TUCK);
-        memory.spring(FOLD, Mth.clamp(fold, 0f, 1f), 0.16f, 0.62f);
-        float thrust = Math.max(m.buzz, Math.max(0.7f * m.w(WingMotion.HOVER), m.w(WingMotion.CHARGE)));
-        thrust = Math.max(thrust, 0.12f * (1f - m.w(WingMotion.GROUND)));
-        memory.spring(THRUST, thrust, 0.3f, 0.6f);
-        float gear = 0.02f + 0.25f * memory.now(THRUST) + (m.rouse > 0f && m.rouseVariant % 5 == 1 ? 0.5f * m.rouse : 0f);
-        if (memory.now(GEAR) > Mth.TWO_PI) {
-            memory.snap(GEAR, memory.now(GEAR) - Mth.TWO_PI);
+        float chute = FlightRules.chute(m);
+        float open = m.w(WingMotion.CRUISE) + m.w(WingMotion.DIVE) + chute;
+        boolean check = m.rouse > 0f && m.rouseVariant % 3 == 1;
+        if (check) {
+            open = Math.max(open, 0.55f * Mth.sin((float) Math.PI * m.rouseProgress));
         }
-        memory.set(GEAR, memory.now(GEAR) + gear);
-        float swing = Mth.clamp((m.speed - 12f) / 28f, 0f, 1f) * m.w(WingMotion.CRUISE) + m.w(WingMotion.DIVE) * Mth.lerp(m.diveDepth, 0.6f, 1f);
-        memory.spring(SWING, swing, 0.08f, 0.75f);
+        memory.spring(FOLD, 1f - Mth.clamp(open, 0f, 1f), 0.14f, 0.68f);
+        float launch = m.launch >= 0f ? 1f : 0f;
+        float thrust = Math.max(Math.max(m.buzz, m.w(WingMotion.HOVER)), Math.max(m.w(WingMotion.CHARGE), launch));
+        thrust = Math.max(thrust, 0.15f * (1f - m.w(WingMotion.GROUND)));
+        memory.spring(THRUST, thrust, 0.3f, 0.6f);
     }
 
     @Override
@@ -121,68 +84,50 @@ public final class DaedalusRig extends WingRig {
         float pt = m.partialTick;
         float time = m.time;
         float idle = Mth.clamp(memory.get(IDLE, pt), 0f, 1f);
-        float settle = memory.get(SETTLE, pt);
         float fold = Mth.clamp(memory.get(FOLD, pt), 0f, 1f);
         float thrust = Mth.clamp(memory.get(THRUST, pt), 0f, 1.2f);
-        float gearAngle = memory.get(GEAR, pt);
-        float swing = memory.get(SWING, pt);
-        float hover = m.w(WingMotion.HOVER);
-        float brake = m.w(WingMotion.BRAKE);
-        float cruise = m.w(WingMotion.CRUISE);
-        int variant = m.rouseVariant % 5;
-        float p = m.rouseProgress;
-        float env = idle * Mth.sin((float) Math.PI * p);
-
-        float sweepTest = variant == 4 ? env * 0.6f * Mth.sin(p * Mth.TWO_PI * 2f) : 0f;
-        float aileronTest = variant == 2 ? env : 0f;
-        float nozzleTest = variant == 3 ? env : 0f;
-        float sputter = variant == 1 ? env * Math.max(0f, Mth.sin(time * 1.7f)) : 0f;
-        float charge = m.w(WingMotion.CHARGE);
         float chute = FlightRules.chute(m);
-        float slowBrake = brake - chute;
+        float charge = m.w(WingMotion.CHARGE);
+        float brake = m.w(WingMotion.BRAKE);
+        float hover = m.w(WingMotion.HOVER);
+        int variant = m.rouseVariant % 3;
+        float env = idle * Mth.sin((float) Math.PI * m.rouseProgress);
+        float sputter = variant == 0 ? env * Math.max(0f, Mth.sin(time * 1.7f)) : 0f;
+        float nozzleTest = variant == 2 ? env : 0f;
         float blast = 0f;
         if (m.launch >= 0f) {
             float lp = m.launch;
             blast = lp < 0.15f ? lp / 0.15f : (1f - lp) * (1f - lp) / 0.7225f;
         }
-        float hum = thrust * 0.012f * Mth.sin(time * 9.1f) + settle * 0.06f * Mth.sin(time * 3.3f)
-                + charge * charge * 0.035f * Mth.sin(time * 7.3f) + blast * 0.03f * Mth.sin(time * 11.1f);
-        float lift = Mth.lerp(chute, 0.15f * hover + 0.05f * cruise + 0.25f * slowBrake + 0.35f * charge + 0.2f * m.w(WingMotion.AIR),
-                CHUTE_STROKE);
-        float sweep = Mth.lerp(chute, -0.75f * swing + 0.1f * hover + sweepTest + 0.6f * charge - 0.5f * blast, CHUTE_RAISE)
-                + chute * 0.02f * Mth.sin(time * 4.7f);
-        float twist = hover * FlightRules.HOVER_PLANE + chute * CHUTE_PITCH - 0.3f * slowBrake + m.stall * 0.3f * Mth.sin(time * 1.2f);
-        float bank = m.bank;
+        float glide = 1f - chute;
+        float bank = m.bank * (1f - fold) * glide;
 
-        for (int i = 0; i < 2; i++) {
-            Side sd = sides[i];
-            float s = sd.s;
-            float open = 1f - fold;
-            sd.shoulder.rotate(twist * open, s * Math.max(FLOOR, lift * open + hum - s * bank * 0.15f), s * sweep * open);
-            sd.root.rotate(0f, 0f, s * FOLD_ROOT * fold);
-            sd.mid.rotate(0f, s * 0.04f * Mth.sin(time * 0.3f) * open, s * (FOLD_MID * fold - 0.1f * swing * open));
-            sd.tip.rotate(0f, 0f, s * (FOLD_TIP * fold - 0.15f * swing * open));
-            sd.gear.rotate(0f, 0f, s * gearAngle);
-            sd.elbowGear.rotate(0f, 0f, -s * gearAngle * 1.6f);
-            float roll = -s * bank * 0.9f;
-            float ail = 0.5f * brake + roll + aileronTest * 0.7f * Mth.sin(time * 1.1f + i * Mth.PI) + settle * 0.3f * Mth.sin(time * 2.7f + i);
-            sd.aileron.rotate(ail, 0f, 0f);
-            for (int k = 0; k < PANELS; k++) {
-                float seq = variant == 0 ? Mth.clamp(idle * (p * 5f - k), 0f, 1f) * Mth.clamp(idle * ((1f - p) * 5f - (3 - k) * 0.6f), 0f, 1f) : 0f;
-                float extend = Math.max(open, seq);
-                float air = k == 1 ? 0.9f * brake : k == 2 ? 0.5f * brake : 0f;
-                float clatter = settle * 0.08f * Mth.sin(time * 5.1f + k * 1.7f);
-                sd.panel[k].rotate(air + clatter, 0f, 0f).scale(1f, 0.35f + 0.65f * extend, 1f)
-                        .move(s * 2f * (1f - extend) * (k + 1) * 0.5f, 0f, 0f);
-            }
-            for (int k = 0; k < FEATHERS; k++) {
-                float flutter = (0.05f + 0.08f * cruise * Mth.clamp(m.speed / 30f, 0f, 1f)) * Mth.sin(time * 2.3f + k * 1.3f);
-                sd.feather[k].rotate(flutter * 2f, 0f, s * (0.9f * fold + flutter));
-            }
-        }
+        drive.zero();
+        drive.set(RigPose.FOLD, fold);
+        drive.set(RigPose.STROKE, Mth.lerp(chute, 0.1f, -0.525f));
+        drive.set(RigPose.SWEEP, Mth.lerp(chute, -0.05f, 0.704f) + FOLDED_SPLAY * fold);
+        drive.set(RigPose.TWIST, -0.2f * chute + 0.02f * chute * Mth.sin(time * 5.3f));
+        drive.set(RigPose.ELBOW, 0.26f * chute);
+        drive.set(RigPose.WRIST, 0.346f * chute);
+        drive.set(RigPose.BEND_ELBOW, -0.349f * chute);
+        drive.set(RigPose.BEND_WRIST, -0.218f * chute);
+        drive.set(RigPose.BEND_TIPS, 0.08f * glide - 0.1f * chute + 0.04f * chute * Mth.sin(time * 4.7f));
+        drive.set(RigPose.FAN, 1.1f);
+        drive.set(RigPose.ASYM, BANK_ROLL * bank);
+        drive.set(RigPose.CAMBER, (1f - fold) * (-0.1f * glide + 0.35f * chute));
+        FeatherWing.TipCurve tips = (k, n) -> Math.max(0.4f, 1.1f - 0.1f * k);
+        right.apply(drive, tips);
+        left.apply(drive, tips);
+        FlightRules.chuteArm(right.arm, 1f, chute);
+        FlightRules.chuteArm(left.arm, -1f, chute);
+        right.shoulder.rotate(BANK_PITCH * bank, 0f, -BANK_SWEEP * bank);
+        left.shoulder.rotate(-BANK_PITCH * bank, 0f, -BANK_SWEEP * bank);
 
-        float pitchVector = -0.35f * Mth.clamp(m.climb / 15f, -1f, 1f) * (1f - hover) + 1.6f * brake - 0.7f * blast;
-        float diff = bank * 0.5f;
+        float hum = thrust * 0.012f * Mth.sin(time * 9.1f) + charge * charge * 0.035f * Mth.sin(time * 7.3f)
+                + blast * 0.03f * Mth.sin(time * 11.1f);
+        float pitchVector = -0.35f * Mth.clamp(m.climb / 15f, -1f, 1f) * (1f - hover) + 0.8f * brake - 0.7f * blast
+                - 0.5f * m.w(WingMotion.CRUISE);
+        float diff = m.bank * 0.5f;
         float circle = nozzleTest * 0.5f;
         thrusterRight.rotate(pitchVector + hum + circle * Mth.sin(time * 0.4f), 0f, diff + circle * Mth.cos(time * 0.4f));
         thrusterLeft.rotate(pitchVector + hum + circle * Mth.sin(time * 0.4f + 1f), 0f, -diff + circle * Mth.cos(time * 0.4f + 1f));

@@ -132,7 +132,8 @@ Les ailes d'insecte sont des plaques rigides montées sur une charnière, sans c
 
 ### Objet / machine
 
-- **O1 — Une machine ne bat pas, elle pousse** (née sur `daedalus`). Les règles générales passent par les réacteurs et des poses fixes. Frein : ailes figées en pose parachute (comme les insectes, I3), panneaux en aérofreins, réacteurs en poussée inversée. Charge : les réacteurs montent en régime (vibration et flamme qui grandissent au carré de la charge, engrenages qui accélèrent), ailes levées. BLAST : rafale de poussée (flamme ×2,6, tuyères vers l'arrière) et ailes qui balaient vers l'arrière. Stationnaire : ailes à plat comme stabilisateurs (G5), poussée vers le sol. La limite de −5° (G4) borne aussi l'inclinaison en virage, côté par côté. Traînées au bout des longerons.
+- **O1 — Une machine à jetpack : les ailes ne servent qu'à tourner et freiner** (née sur `daedalus`, référence : les ailes EXO-7 du Faucon de Marvel ; règle réécrite après le premier passage). La propulsion est entièrement au jetpack : accélération, envol (charge puis rafale), stationnaire. Les ailes restent repliées au sol, à la charge, au saut, à l'atterrissage, au stationnaire et en repli faucon, écartées en V pour dégager les réacteurs. Elles ne se déploient qu'en vol de déplacement, figées en plané, et ne bougent que pour tourner (roulis, incidence différentielle gauche/droite et flèche, comme un gouvernail) et pour freiner (pose parachute de G1). Aucun battement, aucun frémissement de vol. Traînées au bout des lames.
+- **O2 — Lames plutôt que plaques** (née sur `daedalus`). Une aile mécanique n'est pas faite de panneaux disjoints qui laissent des trous. Elle est faite de lames de métal qui se chevauchent comme des plumes, en rangées régulières et harmonieuses (squelette d'oiseau `bird.js` avec `rows: true`, lames en acier à bord de laiton), et se termine par de longues lames tranchantes et pointues en éventail.
 
 ### Élémentaire / magique
 
@@ -261,7 +262,13 @@ Règles appliquées avant revue (version lente des règles insecte, sans vrombis
 
 ### 9. Ailes de Dédale (`daedalus`, famille machine, aspects A12, A13)
 
-Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`. Règles appliquées avant revue : O1 (G1 à G5 version machine), G2, G8. Conservé : flèche variable avec la vitesse, réacteurs vectorisés, ailerons, engrenages, panneaux qui se rétractent, les 5 idles de vérification.
+Statut : en cours, refonte prête pour le jugement de zorago sur `full_flight`.
+
+Retour de zorago sur le premier passage : beaucoup de problèmes. Refonte complète sur le modèle des ailes du Faucon (Marvel) :
+
+1. Design : les longerons, panneaux d'acier, entretoises, aileron, engrenages et les trois plumes d'Icare sont supprimés. Les ailes sont maintenant des rangées de lames d'acier à bord de laiton qui se chevauchent (4 sur le bras, 5 sur l'avant-bras, 4 sur la main), plus 7 longues lames tranchantes en éventail au bout (O2). Elles sortent des côtés d'un sac dorsal à deux réacteurs centraux.
+2. Animation (O1) : tout est fait au jetpack (vibration et flamme qui montent à la charge, rafale à l'envol, poussée vers le sol au stationnaire, flamme orientée avec la montée et le virage). Les ailes restent repliées en V sauf en vol de déplacement, où elles planent figées et ne bougent que pour tourner et freiner.
+3. Idles : ratés de réacteur, déploiement de contrôle des ailes, balayage des tuyères.
 
 ## Plan de review
 

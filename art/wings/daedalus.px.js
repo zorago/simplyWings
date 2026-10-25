@@ -1,4 +1,5 @@
 include("lib/rig_pack.js")
+include("lib/bird.js")
 include("lib/feathers.js")
 include("daedalus.rig.js")
 
@@ -101,6 +102,34 @@ const dial = (c, cube) => {
   c.px(u + 2, v + 1, "k")
 }
 
+const blade = (cube) => (x, row, dorsal, w, h) => {
+  const tip = Math.max(0, row - (h - 3))
+  if (tip > 0 && (x < tip - 0.5 || x > w - 1 - tip + 0.5)) return null
+  if (x === 0) return dorsal ? "e" : "d"
+  if (x === w - 1) return dorsal ? "m" : "o"
+  if (row >= h - 2) return dorsal ? "K" : "s"
+  if (row === 0) return dorsal ? "p" : "r"
+  const alt = (cube.index || 0) % 2
+  if (x === 1) return dorsal ? (alt ? "r" : "s") : "K"
+  return dorsal ? (alt ? "o" : "p") : (alt ? "r" : "s")
+}
+
+const edge = (cube) => (x, row, dorsal, w, h) => {
+  const point = Math.max(0, x - (w - 4))
+  const mid = (h - 1) / 2
+  if (point > 0 && Math.abs(row - mid) > (h / 2) * (1 - point / 4) + 0.2) return null
+  if (row === 0) return dorsal ? "e" : "d"
+  if (row === h - 1) return dorsal ? "m" : "o"
+  if (x >= w - 3) return dorsal ? "K" : "s"
+  return dorsal ? (row === 1 ? "s" : ((cube.index || 0) % 2 ? "o" : "p")) : "r"
+}
+
+const covert = (x, row, dorsal, w, h) => {
+  if (row === h - 1 && x % 3 === 2) return null
+  if (row === 0) return dorsal ? "e" : "d"
+  return dorsal ? (x % 3 === 2 ? "n" : "o") : "p"
+}
+
 const base = (c) => {
   for (const cube of R.cubes) {
     switch (cube.kind) {
@@ -113,6 +142,11 @@ const base = (c) => {
       case "wax": P.box(c, cube, "Y", "y", "c"); break
       case "jet": case "jet_side": jet(false)(c, cube); break
       case "dial": dial(c, cube); break
+      case "pack": steelBox(c, cube); break
+      case "bone": tube(c, cube); break
+      case "tertial_feather": case "secondary_feather": case "hand_feather": P.plate(c, cube, blade(cube)); break
+      case "primary": P.plate(c, cube, edge(cube)); break
+      case "hand_coverts": case "greater_coverts": case "arm_coverts": P.plate(c, cube, covert); break
     }
   }
   c.rect(0, R.texture[1] - 16, 32, 16, "q")
