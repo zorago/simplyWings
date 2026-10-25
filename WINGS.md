@@ -1102,9 +1102,9 @@ Dernière mise à jour : 22 octobre 2026.
 
 **Vibe** : la vitesse céleste. Six ailes qui battent ensemble comme une seule et emportent le joueur plus vite que tout. Elles restent assez stables pour se poser avec précision.
 
-**Apparence** : **6 ailes** dorées (modèle `rigs/seraph.bbmodel`), haute, centrale et basse, chacune sur un squelette d'oiseau complet. Au repos, la paire haute se dresse et croise ses pointes au-dessus de la tête, la paire basse enveloppe les jambes.
+**Apparence** : **6 ailes** dorées (modèle `rigs/seraph.bbmodel`) : deux grandes paires identiques sur les omoplates, l'une sous l'autre, plus une petite paire de gouvernails près des hanches. Plumes en rangées (une plume par os). Au repos, les deux grandes paires se superposent en une seule cape dorée.
 
-**Mouvement signature** : (`SeraphRig`) les trois paires battent en vague décalée. 5 idles : adoration (la paire haute couvre le visage, la basse les pieds, celle du milieu s'ouvre), éventail de gloire qui s'ouvre de haut en bas, onde, frémissement de la paire haute, révérence.
+**Mouvement signature** : (`SeraphRig`) comme le Stormcutter : au repos, au plané et en piqué, les deux grandes paires n'en font qu'une ; au stationnaire, en accélération et à l'envol, elles s'écartent en X et battent en phase. Les gouvernails suivent les virages. 3 idles compacts : écart en X, gouvernails qui s'agitent, ondulation des deux paires.
 
 **Effets** :
 - **Rendu** : les plumes et les os dorés rayonnent (passe lumineuse).

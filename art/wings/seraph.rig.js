@@ -1,27 +1,18 @@
 var RIG = (() => {
+  const major = {
+    rows: true, arm: 11, forearm: 15, hand: 6, bone: 1.25, tertials: 16, secondaries: 20, handSheet: 20, handCoverts: 8, coverts: 8,
+    alula: { angle: 22, length: 7 }, primaryWidth: 5, primaryStep: [0.6, 0.4],
+    primaries: [{ angle: 4, length: 17 }, { angle: -8, length: 22 }, { angle: -19, length: 26 }, { angle: -30, length: 27 },
+      { angle: -41, length: 26 }, { angle: -52, length: 25 }, { angle: -63, length: 23 }, { angle: -74, length: 22 }, { angle: -85, length: 21 }]
+  }
   const wings = [
+    { prefix: '', dy: 0, dz: 0, rot: 0, o: major },
+    { prefix: 'second_', dy: -1.6, dz: -0.35, rot: 0, o: major },
     {
-      prefix: '', dy: 0, dz: 0, rot: 0, o: {
-        rows: true, arm: 9, forearm: 12, hand: 5, bone: 1.1, tertials: 13, secondaries: 16, handSheet: 16, handCoverts: 7, coverts: 7,
-        alula: { angle: 22, length: 6 }, primaryWidth: 5, primaryStep: [0.55, 0.35],
-        primaries: [{ angle: 4, length: 14 }, { angle: -8, length: 18 }, { angle: -19, length: 21 }, { angle: -30, length: 22 },
-          { angle: -41, length: 21 }, { angle: -52, length: 20 }, { angle: -63, length: 19 }, { angle: -74, length: 18 }, { angle: -85, length: 17 }]
-      }
-    },
-    {
-      prefix: 'high_', dy: 2.2, dz: -0.5, rot: 32, o: {
-        rows: true, arm: 7, forearm: 9, hand: 4, bone: 0.9, tertials: 9, secondaries: 11, handSheet: 11, handCoverts: 6,
-        primaryWidth: 4, primaryStep: [0.5, 0.3],
-        primaries: [{ angle: 4, length: 11 }, { angle: -9, length: 14 }, { angle: -22, length: 16 }, { angle: -35, length: 16 },
-          { angle: -48, length: 15 }, { angle: -61, length: 14 }, { angle: -74, length: 13 }]
-      }
-    },
-    {
-      prefix: 'low_', dy: -5.5, dz: 0.6, rot: -30, o: {
-        rows: true, arm: 6, forearm: 8, hand: 4, bone: 0.85, tertials: 8, secondaries: 10, handSheet: 10, handCoverts: 5,
-        primaryWidth: 4, primaryStep: [0.5, 0.3],
-        primaries: [{ angle: 4, length: 10 }, { angle: -9, length: 13 }, { angle: -22, length: 15 }, { angle: -35, length: 15 },
-          { angle: -48, length: 14 }, { angle: -61, length: 13 }, { angle: -74, length: 12 }]
+      prefix: 'rudder_', dy: -9.5, dz: 0.2, rot: -38, o: {
+        arm: 3, forearm: 4, hand: 2, bone: 0.7, tertials: 4, secondaries: 5, handSheet: 5, handCoverts: 3,
+        primaryWidth: 3, primaryStep: [0.4, 0.25],
+        primaries: [{ angle: 4, length: 7 }, { angle: -14, length: 8 }, { angle: -32, length: 8 }, { angle: -50, length: 7 }, { angle: -68, length: 6 }]
       }
     }
   ]
@@ -37,7 +28,7 @@ var RIG = (() => {
     }
     for (const c of b.cubes) cubes.push({ ...c, name: rename(c.name), group: rename(c.group), from: shift(c.from), to: shift(c.to), wing: w.prefix || 'main' })
   }
-  const rig = { model: 'seraph', texture: [256, 128], wings, groups, cubes }
+  const rig = { model: 'seraph', texture: [256, 256], wings, groups, cubes }
   rig.used = PACK(rig, 256)
   return rig
 })()

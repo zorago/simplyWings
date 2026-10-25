@@ -85,6 +85,10 @@ Chaque aspect demande sa propre logique. Le plan de review (en fin de document) 
 
 - **G7 — Ornement qui traverse une articulation = peau** (née sur `fire`). Une pièce décorative ou une surface qui s'étend sur plusieurs os (crête, cœur lumineux, bordure, voile) n'est jamais une plaque rigide posée sur un seul os : elle passe sous les articulations et s'en détache dès que l'aile bouge. Elle devient une peau (M1), avec ses points accrochés à chaque os qu'elle longe. Si elle doit se replier avec des plumes, son bord libre s'accroche aux plumes elles-mêmes, pas à l'os. Chaque panneau peut avoir sa propre feuille de texture (`sheet` dans le panneau).
 
+- **G8 — Les ailes partent des omoplates** (née sur `seraph`). Toute paire principale s'accroche sur le haut du dos, au niveau des omoplates, jamais sur la tête ni au-dessus. Une paire en plus va soit sur les omoplates aussi (juste sous la première), soit plus bas comme gouvernail (vers les hanches). Les idles au sol restent compacts sur le dos : pas d'aile dressée au-dessus de la tête ni enroulée autour des jambes.
+
+- **G9 — Plusieurs paires : superposées au calme, écartées à l'effort** (née sur `seraph`, référence : le Stormcutter de Valka dans *Dragons 2*, dont la seconde paire se plaque sous la première ou s'ouvre en X). Les paires principales identiques se plaquent l'une sur l'autre pour n'en former qu'une au repos, au plané et en piqué. Elles s'écartent en X au stationnaire, en accélération (battement), à la charge, au BLAST et dans les idles (poids lissé `SPLIT`), et battent en phase. L'écartement respecte G4 : c'est la paire du haut qui monte (+0,32), celle du bas ne descend presque pas (−0,08). Corps debout, l'écart se fait en hauteur (`SWEEP`) ; en vol couché, sur `STROKE`.
+
 ## Règles de famille
 
 ### Plume
@@ -198,7 +202,16 @@ Règles appliquées avant revue : G1 (I3), G2 (traînée au bout de l'aile avant
 
 ### 5. Ailes de séraphin (`seraph`, famille plume, aspect A7)
 
-Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+Statut : en cours, refonte prête pour le jugement de zorago sur `full_flight`.
+
+Retour de zorago sur le premier passage : vol, battement et frein corrects, mais les ailes étaient attachées sur la tête, et les idles prenaient beaucoup trop de place. Refonte (G8, G9) :
+
+1. Deux grandes paires identiques, plus grandes d'environ 25 % (bras 11, avant-bras 15, main 6, primaires jusqu'à 27), accrochées sur les omoplates, la seconde juste sous la première (1,6 px plus bas, 0,35 plus près du dos). Elles se superposent au calme et s'écartent en X à l'effort (G9).
+2. Une petite paire de gouvernails près des hanches (comme les ailerons de queue de Krokmou), en plaques : repliés au repos, déployés en vol, ils s'inclinent à l'opposé du virage et frémissent quand les grandes paires battent.
+3. Trois idles compacts : les deux paires s'écartent puis se rejoignent, les gouvernails s'agitent, les paires ondulent l'une contre l'autre.
+4. Idée notée pour la suite, pas faite : les séraphins de l'iconographie sont souvent couverts d'yeux.
+
+Premier passage, conservé pour l'historique :
 
 Règles appliquées avant revue :
 
