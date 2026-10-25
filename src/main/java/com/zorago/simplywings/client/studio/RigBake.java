@@ -327,7 +327,7 @@ public final class RigBake {
         }
         frame.add("player", parts);
         float brake = Mth.clamp(motion.w(WingMotion.BRAKE), 0f, 1f);
-        float pitch = step.mode == FlightMode.TRAVEL ? 90f + Mth.lerp(pt, sim.prevPitch, sim.pitch) - brake * 40f : 0f;
+        float pitch = step.mode == FlightMode.TRAVEL ? com.zorago.simplywings.render.BodyPose.angle(Mth.lerp(pt, sim.prevPitch, sim.pitch), brake) : 0f;
         float roll = step.mode == FlightMode.TRAVEL ? Mth.lerp(pt, sim.prevBank, sim.bank) : 0f;
         frame.addProperty("pitch", pitch);
         frame.addProperty("roll", roll);

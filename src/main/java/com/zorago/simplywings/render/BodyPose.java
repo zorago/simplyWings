@@ -12,7 +12,7 @@ import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.client.event.RenderPlayerEvent;
 
 public final class BodyPose {
-    private static final float BRAKE_FLARE = 40f;
+    private static final float LANDING_LEAN = -8f;
     private static final Set<Player> PUSHED = Collections.newSetFromMap(new IdentityHashMap<>());
 
     public static void onPre(RenderPlayerEvent.Pre event) {
@@ -23,18 +23,22 @@ public final class BodyPose {
         }
         float pt = event.getPartialTick();
         float yaw = Mth.rotLerp(pt, player.yBodyRotO, player.yBodyRot);
-        float pitch = Mth.lerp(pt, player.xRotO, player.getXRot()) - FlightPose.brake(player, visual, pt) * BRAKE_FLARE;
+        float angle = angle(Mth.lerp(pt, player.xRotO, player.getXRot()), FlightPose.brake(player, visual, pt));
         float roll = visual.animator.bank(pt);
         float pivot = player.getBbHeight() * 0.5f;
         PoseStack stack = event.getPoseStack();
         stack.pushPose();
         stack.translate(0, pivot, 0);
         stack.mulPose(Axis.YP.rotationDegrees(-yaw));
-        stack.mulPose(Axis.XP.rotationDegrees(90f + pitch));
+        stack.mulPose(Axis.XP.rotationDegrees(angle));
         stack.mulPose(Axis.YP.rotationDegrees(roll));
         stack.mulPose(Axis.YP.rotationDegrees(yaw));
         stack.translate(0, -pivot, 0);
         PUSHED.add(player);
+    }
+
+    public static float angle(float pitch, float brake) {
+        return Mth.lerp(brake, 90f + pitch, LANDING_LEAN);
     }
 
     public static void onPost(RenderPlayerEvent.Post event) {

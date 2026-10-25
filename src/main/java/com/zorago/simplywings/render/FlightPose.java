@@ -59,18 +59,20 @@ public final class FlightPose {
         float beat = motion.beating() ? Mth.sin(motion.beat * Mth.TWO_PI) * motion.beatWeight : 0;
         float sway = Mth.sin(t * 6.0f);
 
-        float armX = Mth.lerp(brake, 0.05f + 0.06f * beat, -0.75f);
-        float armZ = Mth.lerp(brake, 0.14f + 0.08f * beat + 0.03f * sway, 1.25f) * (1 - 0.8f * dive);
-        set(model.rightArm, armX, 0, armZ - bank * 0.25f);
-        set(model.leftArm, armX, 0, -armZ - bank * 0.25f);
+        float balance = Mth.sin(t * 5.0f) * brake;
+        float armX = Mth.lerp(brake, 0.05f + 0.06f * beat, 0.42f);
+        float armY = 0.05f * brake;
+        float armZ = Mth.lerp(brake, 0.14f + 0.08f * beat + 0.03f * sway, 1.35f) * (1 - 0.8f * dive);
+        set(model.rightArm, armX, armY, armZ - bank * 0.25f + 0.06f * balance);
+        set(model.leftArm, armX, -armY, -armZ - bank * 0.25f + 0.06f * balance);
 
         float kick = 0.08f * Mth.sin(t * 9.0f) * (1 - brake) * (1 - dive);
-        float legX = Mth.lerp(brake, 0.04f, -0.95f);
-        float legZ = Mth.lerp(brake, 0.04f, 0.16f) * (1 - dive);
-        set(model.rightLeg, legX + kick, 0, legZ - bank * 0.12f);
-        set(model.leftLeg, legX - kick + Mth.lerp(brake, 0, 0.25f), 0, -legZ - bank * 0.12f);
+        float legX = Mth.lerp(brake, 0.04f, -0.15f);
+        float legZ = Mth.lerp(brake, 0.04f, 0.12f) * (1 - dive);
+        set(model.rightLeg, legX + kick + 0.04f * balance, 0, legZ - bank * 0.12f);
+        set(model.leftLeg, legX - kick + Mth.lerp(brake, 0, 0.35f) - 0.04f * balance, 0, -legZ - bank * 0.12f);
 
-        model.head.xRot = Mth.lerp(dive, Mth.lerp(brake, -1.25f, -1.45f), -0.95f);
+        model.head.xRot = Mth.lerp(dive, Mth.lerp(brake, -1.25f, 0.3f), -0.95f);
         model.head.zRot = -bank * 0.2f;
     }
 

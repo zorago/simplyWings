@@ -11,6 +11,7 @@ import net.minecraft.util.Mth;
 
 public final class CommonRig extends WingRig {
     private static final int ROUSE = 0;
+    private static final float BRAKE_BEAT = Mth.TWO_PI * (4f / 3f) / 20f;
     private static final float[] KEYS = Cycle.beat(0.45f, 0.25f);
     private static final Cycle STROKE = Cycle.of(KEYS, -0.75f, 0f, 1f, 1.05f, -0.3f, -0.9f);
     private static final Cycle SWEEP = Cycle.of(KEYS, 0.25f, -0.15f, -0.25f, -0.1f, 0.25f, 0.35f);
@@ -61,8 +62,8 @@ public final class CommonRig extends WingRig {
         add(m.w(WingMotion.DIVE), state.clear().set(RigPose.FOLD, Mth.lerp(d, 0.15f, 0.55f))
                 .set(RigPose.SWEEP, Mth.lerp(d, -0.1f, -0.45f)).set(RigPose.FAN, Mth.lerp(d, 0.7f, 0.15f))
                 .set(RigPose.STROKE, 0.05f).set(RigPose.BEND_TIPS, 0.1f));
-        add(m.w(WingMotion.BRAKE), state.clear().set(RigPose.FOLD, 0.02f).set(RigPose.STROKE, 0.35f)
-                .set(RigPose.SWEEP, 0.55f).set(RigPose.TWIST, -0.75f).set(RigPose.FAN, 1.2f).set(RigPose.BEND_TIPS, -0.1f));
+        add(m.w(WingMotion.BRAKE), state.clear().set(RigPose.FOLD, 0.02f).set(RigPose.STROKE, -0.35f)
+                .set(RigPose.SWEEP, 0.6f).set(RigPose.TWIST, -0.2f).set(RigPose.FAN, 1.25f).set(RigPose.BEND_TIPS, 0.1f));
         add(m.w(WingMotion.TUCK), state.clear().set(RigPose.FOLD, 0.82f).set(RigPose.SWEEP, -0.55f)
                 .set(RigPose.STROKE, 0.08f).set(RigPose.FAN, 0f));
         if (m.stall > 0.001f) {
@@ -125,8 +126,15 @@ public final class CommonRig extends WingRig {
         drive.add(RigPose.BEND_TIPS, glide * 0.05f * (Mth.sin(time * 0.37f) + Mth.sin(time * 0.23f)));
         drive.add(RigPose.STROKE, glide * 0.02f * Mth.sin(time * 0.31f));
         float brake = m.w(WingMotion.BRAKE);
-        drive.add(RigPose.BEND_TIPS, brake * 0.12f * Mth.sin(time * 2.6f));
-        drive.add(RigPose.FAN, brake * 0.08f * Mth.sin(time * 3.1f));
+        float push = time * BRAKE_BEAT;
+        float down = Mth.sin(push);
+        float recover = Math.max(0f, -down);
+        drive.add(RigPose.STROKE, brake * 0.35f * Mth.cos(push));
+        drive.add(RigPose.SWEEP, brake * -0.12f * down);
+        drive.add(RigPose.TWIST, brake * -0.2f * Math.max(0f, down));
+        drive.add(RigPose.ELBOW, brake * 0.3f * recover);
+        drive.add(RigPose.WRIST, brake * 0.4f * recover);
+        drive.add(RigPose.BEND_TIPS, brake * (0.25f * Mth.sin(push - 0.6f) + 0.05f * Mth.sin(time * 2.6f)));
 
         drive.set(RigPose.FOLD, Mth.clamp(drive.get(RigPose.FOLD), 0f, 1f));
         drive.set(RigPose.FAN, Math.max(0f, drive.get(RigPose.FAN)));

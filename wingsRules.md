@@ -29,7 +29,9 @@ La liste se précise au fil des passes ; une paire peut emprunter à deux famill
 
 ## Règles générales (toutes les paires)
 
-Aucune pour l'instant.
+- **G1 — Le joueur donne l'intention, les ailes exécutent** (née sur `basic`, au frein). Le corps du joueur montre ce qu'il **veut** faire (avancer, piquer, s'arrêter, se poser), et les ailes travaillent pour lui. Jamais l'inverse : le corps ne doit pas avoir l'air traîné, écrasé ou ballotté par des ailes plus fortes que lui. Pour chaque état, on se demande : « qu'est-ce que le joueur veut faire, et comment un être ailé surpuissant le ferait-il ? ». La posture vient de cette intention, puis les ailes s'organisent autour pour produire l'effort.
+  - Frein : c'est l'**atterrissage d'un être ailé surpuissant**. Le corps se redresse quel que soit le regard, à peu près vertical et penché de 8° en arrière (`BodyPose.angle`, `LANDING_LEAN`). Les jambes sont dessous, l'une un peu en avant et l'autre en arrière, prêtes à toucher le sol. Les bras sont écartés sur les côtés pour l'équilibre, avec un léger balancement. La tête regarde devant, un peu vers le bas (`FlightPose`). Les ailes sont levées et ramenées vers l'avant, la face ventrale tournée vers l'avant pour prendre l'air. Elles donnent des coups de freinage puissants vers l'avant (4/3 par seconde), avec une remontée repliée au coude et au poignet, et les bouts d'aile qui suivent en retard.
+  - Repère d'axes quand le corps est debout : `STROKE` positif envoie l'aile vers le dos et négatif vers l'avant du corps ; `SWEEP` positif la lève. En vol couché, les mêmes axes donnent le haut et le bas (stroke), l'avant et l'arrière (sweep). Toujours raisonner dans le repère du corps de l'état concerné.
 
 ## Règles de famille
 
@@ -63,4 +65,6 @@ Modifications :
 
 1. Les plaques uniques du bras (tertiaires) et de l'avant-bras (secondaires) se déformaient mal au repli. Elles sont remplacées par 4 tertiaires (longueurs 8, 9, 9, 10 ; inclinaison −12° à 0°) et 5 secondaires (longueurs 11 à 12 ; inclinaison 2° à 14°), une plume par os, qui se replient sous l'os.
 
-Règles créées : P1.
+2. Frein (retour de zorago : « écrasé vers l'avant, comme si les ailes étaient plus puissantes que lui ») : le corps se redresse en posture d'atterrissage (penché de 8° en arrière au lieu de 50° vers l'avant), les jambes passent dessous, les bras s'écartent, la tête regarde devant. Les ailes sont levées et vers l'avant, avec des coups de freinage puissants (`CommonRig`, `BRAKE_BEAT`).
+
+Règles créées : P1, G1.
