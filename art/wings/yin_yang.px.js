@@ -116,8 +116,8 @@ const taiji = (x, row, dorsal, w, h) => {
   if (d > r) return null
   if (d > r - 0.6) return "K"
   const upper = Math.hypot(px, py + r / 2), lower = Math.hypot(px, py - r / 2)
-  if (upper < r / 6 + 0.2) return "k"
-  if (lower < r / 6 + 0.2) return "w"
+  if (upper < 0.5) return "k"
+  if (lower < 0.5) return "w"
   const yang = upper < r / 2 ? true : lower < r / 2 ? false : px > 0
   return yang ? "E" : "b"
 }

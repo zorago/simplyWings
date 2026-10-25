@@ -336,7 +336,7 @@ Retour de zorago :
 
 ### 14. Ailes Yin et Yang (`yin_yang`, plume, aspect A14)
 
-Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+Statut : **terminé**, validé par zorago.
 
 Règles appliquées avant revue :
 
@@ -349,6 +349,10 @@ Asymétrie (A14), proposée à zorago :
 - Le Yin suit le Yang : l'aile gauche bat avec un léger retard (6 % du cycle, 0,35 rad en stationnaire), comme les deux moitiés du taiji qui se poursuivent.
 - Équilibre au plané : les bouts d'aile ondulent lentement en opposition (l'un monte quand l'autre descend), comme une balance.
 - Au repos et à l'atterrissage, les deux ailes respirent en décalé.
+
+Retour de zorago :
+
+1. Tout est validé. Les deux points du taiji passent de 2 px à 1 px (le pixel collé à la bordure est retiré).
 
 ## Plan de review
 
@@ -371,8 +375,8 @@ Deux phases. **Phase 1** : une paire dominante par aspect, choisie pour ouvrir l
 | 11 | water | A11 (fluide) | Segments et gouttes : une aile qui coule plutôt qu'elle ne se plie. | — |
 | 12 | forest | A11 (végétal), A8 | Branches rigides, feuilles et fleurs qui réagissent au vent, paire arrière. | — |
 | 13 | squirrel | A3, A9 | Planeur : membrane sans doigts tendue entre les membres, queue de stabilisation. | flying_fish, phantom, kite |
-| 14 | **yin_yang** | A14 | Asymétrie voulue : deux ailes qui ne font pas la même chose, avec le taiji. | patchwork |
-| 15 | hummingbird | A4 + A1, A17, A18 | Hybride plume et vrombissement, stationnaire en huit horizontal (exception à G5). | — |
+| 14 | yin_yang | A14 | Asymétrie voulue : deux ailes qui ne font pas la même chose, avec le taiji. | patchwork |
+| 15 | **hummingbird** | A4 + A1, A17, A18 | Hybride plume et vrombissement, stationnaire en huit horizontal (exception à G5). | — |
 | 16 | eagle | A17 | Premier oiseau d'espèce : doigts écartés, alula, battement lent et ample. Ouvre la méthode des signatures d'espèce. | crow, owl, gull, swift, pigeon, parrot |
 
 ### Phase 2 : toutes les autres paires
@@ -407,4 +411,4 @@ Deux phases. **Phase 1** : une paire dominante par aspect, choisie pour ouvrir l
 
 P = famille plume (P1, P2), M = membrane à doigts, I = insecte. Les règles générales (G1 à G5) s'appliquent toujours, adaptées à l'anatomie.
 
-**Prochaine paire : yin_yang** (phase 1, n° 14).
+**Prochaine paire : hummingbird** (phase 1, n° 15).
