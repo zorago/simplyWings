@@ -247,6 +247,18 @@ Règles appliquées avant revue : I1 à I4 (battement au-dessus de −5°, stati
 
 Retour de zorago : tout bon sauf le stationnaire, où les deux carapaces traversaient les ailes. Premier essai (élytres rabattues le long du dos) refusé. Corrigé avec la pose de zorago : au stationnaire, les élytres montent au-dessus des ailes (I5).
 
+### 8. Ailes de papillon de nuit (`moth`, famille insecte, aspect A5)
+
+Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+
+Règles appliquées avant revue (version lente des règles insecte, sans vrombissement ni fantômes) :
+
+- I1 / G4 : battement ample mais jamais sous −5° (y compris l'inclinaison en virage, bornée par côté), remontée vers l'avant et frappe vers l'arrière ; en haut du coup, les ailes se rapprochent comme le « clap » des vrais papillons. L'aile postérieure suit l'antérieure avec un léger retard (elles restent accrochées).
+- I2 / G5 : stationnaire à plat, battement de haut en bas, inversion d'incidence et léger huit, la postérieure en retard.
+- I3 / G1 : parachute figé (même pose que `basic`, postérieure un peu plus basse), puis frein lent derrière les bras.
+- I4 / G3 : le frisson d'échauffement existant grandit pendant la charge, puis BLAST unique (une paire lente ne vrombit pas).
+- G2 : traînées au bout des ailes antérieures. Conservé : les petites irrégularités du vol de papillon de nuit.
+
 ## Plan de review
 
 Deux phases. **Phase 1** : une paire dominante par aspect, choisie pour ouvrir le plus de logique nouvelle, revue une à une avec zorago, jusqu'à ce que chaque aspect ait ses règles. **Phase 2** : toutes les autres paires, une à une aussi. On applique d'abord toutes les règles de leurs familles et de leurs aspects, puis on ne polit que ce qui leur est propre.
