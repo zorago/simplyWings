@@ -15,7 +15,7 @@ var RIG = (() => {
     x += g.len
     parent = name
   })
-  const rig = { model: 'water', texture: [128, 64], S, segs, groups, cubes }
+  const rig = { model: 'water', texture: [128, 256], S, segs, groups, cubes }
   rig.used = PACK(rig, 128)
   const at = (k, px, py) => {
     const w = GEOM.world(rig, 'seg_' + k, [px, py])
@@ -34,8 +34,9 @@ var RIG = (() => {
   const pts = [...a, ...b]
   const x0 = Math.floor(Math.min(...pts.map(q => q[1])) - 1), x1 = Math.ceil(Math.max(...pts.map(q => q[1])) + 1)
   const y0 = Math.ceil(Math.max(...pts.map(q => q[2])) + 1), y1 = Math.floor(Math.min(...pts.map(q => q[2])) - 1)
-  const sheet = { x: x0, y: y0, w: x1 - x0, h: y0 - y1, ventral: [0, rig.used], dorsal: [x1 - x0, rig.used] }
+  const frames = 10
+  const sheet = { x: x0, y: y0, w: x1 - x0, h: y0 - y1, ventral: [0, rig.used], dorsal: [x1 - x0, rig.used], frames, fps: 5, step: [0, y0 - y1 + 1] }
   rig.sheet = sheet
-  rig.membranes = { sheet: { x: sheet.x, y: sheet.y, ventral: sheet.ventral, dorsal: sheet.dorsal }, panels: [{ name: 'water', rows: 2, a, b }] }
+  rig.membranes = { sheet: { x: sheet.x, y: sheet.y, ventral: sheet.ventral, dorsal: sheet.dorsal, frames, fps: sheet.fps, step: sheet.step }, panels: [{ name: 'water', rows: 2, a, b }] }
   return rig
 })()

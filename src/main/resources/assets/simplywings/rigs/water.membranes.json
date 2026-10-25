@@ -9,6 +9,12 @@
   "dorsal": [
    35,
    6
+  ],
+  "frames": 10,
+  "fps": 5,
+  "step": [
+   0,
+   20
   ]
  },
  "panels": [

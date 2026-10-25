@@ -41,13 +41,15 @@ const lineDist = (p, pts) => {
   return d
 }
 
-const tone = (p, dorsal) => {
+const tone = (p, dorsal, phase) => {
   const dc = lineDist(p, crestLine)
   const dt = lineDist(p, trail)
   if (dt < 0.8) return dorsal ? "w" : "W"
   if (dt < 1.7) return "h"
   if (dc < 0.9) return dorsal ? "f" : "F"
-  const ripple = Math.sin(p[0] * 0.62 + p[1] * 0.95) + Math.sin(p[0] * 0.27 - p[1] * 0.6)
+  const ripple = Math.sin(p[0] * 0.62 + p[1] * 0.95 - phase) + Math.sin(p[0] * 0.27 - p[1] * 0.6 - 2 * phase)
+  const swell = Math.sin(p[0] * 0.35 - phase)
+  if (dc > 1.6 && dc < 2.6 + 0.8 * swell && dt > 1.7) return dorsal ? "d" : "E"
   if (ripple > 1.55) return dorsal ? "f" : "h"
   if (ripple > 1.2) return dorsal ? "e" : "F"
   const depth = Math.min(5, Math.floor(dc / 2.3))
@@ -57,11 +59,14 @@ const tone = (p, dorsal) => {
 
 const paint = (c) => {
   const sh = R.sheet
-  for (const [u0, v0, dorsal] of [[sh.ventral[0], sh.ventral[1], false], [sh.dorsal[0], sh.dorsal[1], true]]) {
-    for (let u = 0; u < sh.w; u++) {
-      for (let v = 0; v < sh.h; v++) {
-        const p = [sh.x + u + 0.5, sh.y - v - 0.5]
-        if (GEOM.inside(poly, p)) c.px(u0 + u, v0 + v, tone(p, dorsal))
+  for (let f = 0; f < sh.frames; f++) {
+    const phase = (f / sh.frames) * Math.PI * 2
+    for (const [u0, v0, dorsal] of [[sh.ventral[0], sh.ventral[1], false], [sh.dorsal[0], sh.dorsal[1], true]]) {
+      for (let u = 0; u < sh.w; u++) {
+        for (let v = 0; v < sh.h; v++) {
+          const p = [sh.x + u + 0.5, sh.y - v - 0.5]
+          if (GEOM.inside(poly, p)) c.px(u0 + u + f * sh.step[0], v0 + v + f * sh.step[1], tone(p, dorsal, phase))
+        }
       }
     }
   }

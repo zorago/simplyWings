@@ -21,7 +21,7 @@ public final class Membrane {
     private record Anchor(List<ModelPart> chain, Vector3f local, float u, float v) {
     }
 
-    private record Panel(Anchor[] a, Anchor[] b, int rows, float[] ventral, float[] dorsal) {
+    private record Panel(Anchor[] a, Anchor[] b, int rows, float[] ventral, float[] dorsal, int frames, float fps, float[] step) {
     }
 
     private final List<Panel> panels = new ArrayList<>();
@@ -29,6 +29,7 @@ public final class Membrane {
     private final float texWidth;
     private final float texHeight;
     private float billow;
+    private float time;
 
     private Membrane(float texWidth, float texHeight) {
         this.texWidth = texWidth;
@@ -49,7 +50,10 @@ public final class Membrane {
                 Anchor[] a = anchors(panel.getAsJsonArray("a"), side, sheetX, sheetY, root, paths, chains);
                 Anchor[] b = anchors(panel.getAsJsonArray("b"), side, sheetX, sheetY, root, paths, chains);
                 if (a != null && b != null && a.length == b.length && a.length > 1) {
-                    membrane.panels.add(new Panel(a, b, Math.max(1, rows), pair(sheet, "ventral"), pair(sheet, "dorsal")));
+                    int frames = sheet.has("frames") ? sheet.get("frames").getAsInt() : 1;
+                    float fps = sheet.has("fps") ? sheet.get("fps").getAsFloat() : 0f;
+                    float[] step = sheet.has("step") ? pair(sheet, "step") : new float[]{0f, 0f};
+                    membrane.panels.add(new Panel(a, b, Math.max(1, rows), pair(sheet, "ventral"), pair(sheet, "dorsal"), frames, fps, step));
                 }
             }
         }
@@ -119,6 +123,10 @@ public final class Membrane {
         return billow;
     }
 
+    public void time(float ticks) {
+        this.time = ticks;
+    }
+
     public void render(PoseStack stack, VertexConsumer consumer, int light, int overlay, int color) {
         frame.clear();
         for (Panel panel : panels) {
@@ -166,7 +174,9 @@ public final class Membrane {
         }
         for (int layer = 0; layer < 2; layer++) {
             float side = layer == 0 ? 1f : -1f;
-            float[] offset = layer == 0 ? panel.dorsal() : panel.ventral();
+            float[] base = layer == 0 ? panel.dorsal() : panel.ventral();
+            int frame = panel.frames() > 1 ? Math.floorMod((int) Math.floor(time / 20f * panel.fps()), panel.frames()) : 0;
+            float[] offset = {base[0] + frame * panel.step()[0], base[1] + frame * panel.step()[1]};
             for (int k = 0; k < 4; k++) {
                 int[] c = corners[layer == 0 ? k : 3 - k];
                 Vector3f p = pos[c[0]][c[1]];

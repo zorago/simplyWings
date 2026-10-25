@@ -109,6 +109,9 @@ public abstract class WingRig {
     public final void setup(WingMotion motion, RigMemory memory) {
         bones.reset();
         pose(motion, memory);
+        if (membrane != null) {
+            membrane.time(motion.time);
+        }
     }
 
     public RenderType renderType(boolean ghost) {

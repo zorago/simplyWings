@@ -17,7 +17,7 @@ public final class WaterRig extends WingRig {
     private static final int SEGMENTS = 5;
     private static final int[] IDLES = {50, 60, 44};
     private static final float D = Mth.DEG_TO_RAD;
-    private static final float[] FOLD_Z = {-6f * D, 14f * D, 36f * D, 46f * D, 52f * D};
+    private static final float[] FOLD_Z = {-6f * D, 2f * D, 6f * D, 8f * D, 8f * D};
     private static final float[] FOLD_Y = {0f, -6f * D, -6f * D, -6f * D, -4f * D};
     private static final float FOLD_SHOULDER_Z = -70f * D;
     private static final float FOLD_SHOULDER_Y = 16f * D;

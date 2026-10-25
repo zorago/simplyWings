@@ -83,7 +83,7 @@ Chaque aspect demande sa propre logique. Le plan de review (en fin de document) 
 
 - **G6 — Pas de particules en cubes dans le modèle** (née sur `fire`). Les braises, étincelles, poussières, etc. ne sont jamais des cubes 3D animés dans le rig (trop lourd, et ça fait ramer Blockbench quand ils apparaissent). Elles passent par les vraies particules Minecraft (`client/WingEffects`), réglées par paire.
 
-- **G7 — Ornement qui traverse une articulation = peau** (née sur `fire`). Une pièce décorative ou une surface qui s'étend sur plusieurs os (crête, cœur lumineux, bordure, voile) n'est jamais une plaque rigide posée sur un seul os : elle passe sous les articulations et s'en détache dès que l'aile bouge. Elle devient une peau (M1), avec ses points accrochés à chaque os qu'elle longe. Si elle doit se replier avec des plumes, son bord libre s'accroche aux plumes elles-mêmes, pas à l'os. Chaque panneau peut avoir sa propre feuille de texture (`sheet` dans le panneau). Un point peut aussi porter ses coordonnées de texture explicites (`[os, x, y, z, u, v]`), pour les tissus dont la texture doit rester droite même si les os sont tournés au repos (voiles d'`aurora`).
+- **G7 — Ornement qui traverse une articulation = peau** (née sur `fire`). Une pièce décorative ou une surface qui s'étend sur plusieurs os (crête, cœur lumineux, bordure, voile) n'est jamais une plaque rigide posée sur un seul os : elle passe sous les articulations et s'en détache dès que l'aile bouge. Elle devient une peau (M1), avec ses points accrochés à chaque os qu'elle longe. Si elle doit se replier avec des plumes, son bord libre s'accroche aux plumes elles-mêmes, pas à l'os. Chaque panneau peut avoir sa propre feuille de texture (`sheet` dans le panneau). Un point peut aussi porter ses coordonnées de texture explicites (`[os, x, y, z, u, v]`), pour les tissus dont la texture doit rester droite même si les os sont tournés au repos (voiles d'`aurora`). Une feuille peut être **animée** (née sur `water`, demande de zorago) : `frames`, `fps` et `step` dans `sheet`. Les images sont empilées dans la texture (comme les items animés de Minecraft, qui ne marchent pas sur une texture d'entité), et `Membrane` passe de l'une à l'autre avec l'horloge de rendu. Pour `water` : 10 images à 5 par seconde, une boucle de 2 s, avec la vague qui court sur l'eau. Le plugin Blockbench suit le temps de la timeline.
 
 - **G8 — Les ailes partent des omoplates** (née sur `seraph`). Toute paire principale s'accroche sur le haut du dos, au niveau des omoplates, jamais sur la tête ni au-dessus. Une paire en plus va soit sur les omoplates aussi (juste sous la première), soit plus bas comme gouvernail (vers les hanches). Les idles au sol restent compacts sur le dos : pas d'aile dressée au-dessus de la tête ni enroulée autour des jambes.
 
@@ -291,6 +291,11 @@ Règles appliquées avant revue :
 - G6 : les gouttes en cubes 3D sont supprimées (les vraies particules d'eau existent déjà dans `WingEffects`).
 - G1 à G5 : parachute, frein lent, charge où l'aile se lève et ondule de plus en plus, puis BLAST ; battement anatomique au-dessus de −5° avec nage avant/arrière, le fouet segment par segment conservé ; stationnaire à plat, nage de haut en bas comme une raie ; traînées au bout du dernier segment.
 - Conservé : la vague permanente de l'épaule à la pointe, les 3 idles (vague dans la cascade, verse, déploiement en onde), l'éclaboussure à l'atterrissage.
+
+Retour de zorago (le style liquide marche) :
+
+1. Repliée, la cascade remontait en volute vers la tête : l'eau coule maintenant vers les pieds, avec juste une légère courbe vers l'extérieur.
+2. Texture animée : 10 images, 5 par seconde, la vague et la houle courent sur la nappe (feuille animée, voir M1 / G7).
 
 ## Plan de review
 

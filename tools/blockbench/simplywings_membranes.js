@@ -141,7 +141,12 @@
           if (normal.lengthSq() < 1e-9) normal.copy(c0.up)
           normal.normalize()
           if (normal.dot(c0.up) < 0) normal.negate()
-          for (const [offset, sign] of [[panel.sheet.dorsal, 1], [panel.sheet.ventral, -1]]) {
+          const sh = panel.sheet
+          const frames = sh.frames || 1
+          const frame = frames > 1 ? ((Math.floor(Timeline.time * (sh.fps || 0)) % frames) + frames) % frames : 0
+          const step = sh.step || [0, 0]
+          for (const [base, sign] of [[sh.dorsal, 1], [sh.ventral, -1]]) {
+            const offset = [base[0] + frame * step[0], base[1] + frame * step[1]]
             for (const c of [c0, c1, c2, c0, c2, c3]) put(c, offset, sign, normal)
           }
         }

@@ -769,7 +769,7 @@ Dernière mise à jour : 22 octobre 2026.
 
 **Vibe** : un esprit de l'eau. Le vol est fluide, comme une nage dans l'air : les ailes ondulent, glissent et virent sans effort. Elles sont plutôt stables et gardent bien leur élan.
 
-**Apparence** : une aile d'eau translucide par côté (modèle `rigs/water.bbmodel`) en 5 segments, bleue avec des reflets qui ondulent, une crête d'eau claire sur le bord d'attaque et un liseré d'écume en vagues sur le bord de fuite. Repliée, elle tombe en cascade le long du flanc et remonte en volute d'écume à hauteur de taille. Des gouttes tombent des pointes.
+**Apparence** : une aile d'eau translucide par côté (modèle `rigs/water.bbmodel`) en 5 segments, bleue avec des reflets qui ondulent, une crête d'eau claire sur le bord d'attaque et un liseré d'écume en vagues sur le bord de fuite. Une seule nappe d'eau continue, dont la texture est animée (10 images, une vague qui court en boucle de 2 s). Repliée, elle tombe en cascade le long du flanc jusqu'aux pieds. Des gouttes (particules) tombent des pointes.
 
 **Mouvement signature** : (`WaterRig`) une vague court en permanence de l'épaule à la pointe ; le battement fouette d'un segment à l'autre, et en stationnaire l'aile nage comme une raie. 3 idles : vague qui roule dans la cascade, ailes qui se lèvent et « versent » en avant, déploiement avec onde ; éclaboussure amortie à l'atterrissage.
 
