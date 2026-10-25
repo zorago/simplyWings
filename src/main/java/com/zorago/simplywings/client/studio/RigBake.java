@@ -330,7 +330,7 @@ public final class RigBake {
         }
         Step step = sim.step;
         FlightPose.pose(player, step.mode, motion, Mth.lerp(pt, sim.prevBank, sim.bank), motion.time, rig);
-        rig.playerArms(player.rightArm, player.leftArm);
+        rig.playerArms(player.body, player.rightArm, player.leftArm);
         rig.setup(motion, sim.memory);
         JsonObject frame = new JsonObject();
         frame.addProperty("t", seconds);

@@ -24,7 +24,7 @@ const membrane = (c) => {
     {
       if (!GEOM.inside(R.panel, p)) continue
       const ed = lineDist(p, R.edge)
-      const bone = Math.abs(p[1] - 22.5) < 1.3 && p[0] <= R.W[0]
+      const bone = lineDist(p, R.armLine) < 1.2
       let k
       if (ed < 1.3) k = "w"
       else if (ed < 2.1) k = dorsal ? "b" : "W"
@@ -50,9 +50,7 @@ const tail = (wide) => (x, row, dorsal, w, h) => {
 const paint = (c) => {
   membrane(c)
   for (const cube of R.cubes) {
-    if (cube.kind === "fur") P.box(c, cube, "e", "d", "c")
-    else if (cube.kind === "spur") P.box(c, cube, "f", "e", "x")
-    else if (cube.kind === "paw") P.box(c, cube, "p", "c", "b")
+    if (cube.kind === "paw") P.box(c, cube, "p", "c", "b")
     else if (cube.kind === "tail") P.plate(c, cube, tail(true))
     else if (cube.kind === "tail_tip") P.plate(c, cube, tail(false))
   }

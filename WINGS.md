@@ -459,9 +459,9 @@ Dernière mise à jour : 22 octobre 2026.
 
 **Vibe** : Le planeur. Une membrane de fourrure tendue entre les bras : elle bat à peine, mais plane loin et se pilote au millimètre.
 
-**Apparence** : une membrane de fourrure par côté (modèle `rigs/squirrel.bbmodel`) tendue du poignet à la cheville, courte et large, sur un bras et un avant-bras fourrés avec une petite patte rose et l'éperon cartilagineux du poignet ; gris-brun dessus, crème dessous, bordée d'un liseré crème net doublé d'une bande sombre comme le vrai polatouche. Une queue plate et touffue en deux parties au bas du dos.
+**Apparence** : une membrane de fourrure par côté (modèle `rigs/squirrel.bbmodel`) tendue entre le bras du joueur et son flanc, de la main au bas du torse, avec une petite patte rose au poignet ; gris-brun dessus, crème dessous, bordée d'un liseré crème net doublé d'une bande sombre comme le vrai polatouche. Une queue plate et touffue en deux parties au bas du dos.
 
-**Mouvement signature** : (`SquirrelRig`) plané bras et jambes écartés, membrane tendue qui ondule à peine, éperons sortis pour piloter ; en virage le bras intérieur se replie et la queue sert de gouvernail ; battements à peine marqués (un pompage des bras) ; atterrissage en parachute, membrane gonflée et queue relevée ; au sol, la membrane se ramasse le long des flancs.
+**Mouvement signature** : (`SquirrelRig`) plané bras et jambes écartés, membrane tendue par les bras du joueur (un seul os par aile, collé au bras) qui ondule à peine ; en virage le bras intérieur se replie et la queue sert de gouvernail ; battements à peine marqués (un pompage des bras) ; atterrissage en parachute, membrane gonflée et queue relevée ; au sol, la membrane se ramasse le long des flancs.
 
 **Effets** : Aucun, des ailes simples et discrètes.
 
