@@ -45,6 +45,8 @@ La liste se précise au fil des passes ; une paire peut emprunter à deux famill
   - Repères de `basic`, réglés par zorago dans Blockbench : en haut, bras de l'aile vers +50°, avant-bras +20°, main +17,5° ; en bas, bras vers −3°, avant-bras −35°, main −40°. Dans le code, ce sont les cycles `STROKE`, `BEND_ELBOW` et `BEND_WRIST`.
   - S'applique à **tout** ce qui bat : battement de croisière, stationnaire (l'humérus va de −5° à +47° et l'avant-bras donne la portée vers l'avant), décrochage, BLAST de l'envol (l'humérus s'arrête à −5° et le reste est fait par l'avant-bras et la main). Seules les poses fixes voulues par zorago peuvent amener l'aile devant, comme le parachute du frein, corps debout.
 
+- **G5 — Le stationnaire pousse l'air vers le sol** (née sur `basic`). En stationnaire, le but est de lutter contre la gravité, pas d'avancer. Le corps est debout, alors l'aile tourne d'environ 80° autour de sa longueur (`TWIST` de l'état `HOVER`, `HOVER_PLANE`) : son plan devient presque horizontal, les plumes traînent vers l'arrière, et sa face du dessous regarde le sol. Le battement passe sur l'axe haut/bas (`SWEEP` : humérus d'environ −6° à +47°, toujours dans la limite de G4), avec un léger huit d'avant en arrière sur `STROKE`. Pendant la frappe vers le bas, la surface est presque à plat (normale à environ 20° de la verticale) et pousse l'air au sol. Pendant la remontée, l'aile se replie et se met de profil pour fendre l'air. La cambrure suit le mouvement. Les « un peu moins de 90° » voulus par zorago gardent une petite poussée vers l'arrière, qui stabilise.
+
 ## Règles de famille
 
 ### Plume
@@ -99,4 +101,6 @@ Modifications :
 
 10. Plumes de la main hors du plan (repérées par zorago dans `full_flight`) : alignement automatique entre le plan des secondaires et celui des primaires (P2).
 
-Règles créées : P1, P2, G1, G2, G3, G4.
+11. Stationnaire (retour de zorago : l'air partait vers l'avant) : même animation, mais le plan de l'aile pivote de 80° et le battement passe de haut en bas, pour pousser l'air au sol (G5).
+
+Règles créées : P1, P2, G1, G2, G3, G4, G5.

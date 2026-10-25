@@ -12,6 +12,7 @@ import net.minecraft.util.Mth;
 public final class CommonRig extends WingRig {
     private static final int ROUSE = 0;
     private static final float BLAST_STRIKE = 0.3f;
+    private static final float HOVER_PLANE = 80f * Mth.DEG_TO_RAD;
     private static final float BRAKE_BEAT = Mth.TWO_PI * (4f / 3f) / 20f;
     private static final float CHUTE_ARM_X = 0.679f;
     private static final float CHUTE_ARM_Y = 0.831f;
@@ -67,7 +68,7 @@ public final class CommonRig extends WingRig {
         add(m.w(WingMotion.LANDING), state.clear().set(RigPose.FOLD, 0.35f).set(RigPose.STROKE, 0.45f)
                 .set(RigPose.SWEEP, 0.25f).set(RigPose.FAN, 0.9f));
         add(m.w(WingMotion.HOVER), state.clear().set(RigPose.FOLD, 0.03f).set(RigPose.STROKE, 0.25f)
-                .set(RigPose.SWEEP, 0.12f));
+                .set(RigPose.SWEEP, 0.12f).set(RigPose.TWIST, HOVER_PLANE));
         add(m.w(WingMotion.CRUISE), state.clear().set(RigPose.STROKE, 0.08f).set(RigPose.SWEEP, 0.05f)
                 .set(RigPose.BEND_TIPS, 0.25f).set(RigPose.ASYM, m.bank * 0.3f));
         float d = m.diveDepth;
@@ -93,8 +94,8 @@ public final class CommonRig extends WingRig {
             float c = Mth.cos(ph);
             float forward = Math.max(0f, s);
             float back = Math.max(0f, -s);
-            drive.add(RigPose.STROKE, hw * (0.12f + 0.45f * c));
-            drive.add(RigPose.SWEEP, hw * 0.18f * Mth.sin(2f * ph));
+            drive.add(RigPose.SWEEP, hw * (0.2f + 0.42f * c));
+            drive.add(RigPose.STROKE, hw * 0.12f * Mth.sin(2f * ph));
             drive.add(RigPose.TWIST, hw * 0.5f * s);
             drive.add(RigPose.ELBOW, hw * 0.35f * back);
             drive.add(RigPose.WRIST, hw * 0.5f * back);
