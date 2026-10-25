@@ -16,8 +16,9 @@ public final class BeetleRig extends WingRig {
     private static final float CHUTE_STROKE = 0.31f;
     private static final float CHUTE_RAISE = 0.85f;
     private static final float CHUTE_PITCH = 0.48f;
-    private static final float HOVER_LIFT = 0.25f;
-    private static final float HOVER_SPREAD = 0.28f;
+    private static final float HOVER_LIFT = 1.9f;
+    private static final float HOVER_YAW = 0.701f;
+    private static final float HOVER_SPREAD = 0.171f;
     private static final String[] TIPS = {"right_wing_tip", "left_wing_tip"};
 
     private final Bone[] shell = new Bone[2];
@@ -97,7 +98,7 @@ public final class BeetleRig extends WingRig {
         boolean show = buzz > 0.35f && unfold > 0.85f;
         for (int i = 0; i < 2; i++) {
             float s = i == 0 ? 1f : -1f;
-            shell[i].rotate(lift + rattle, 0f, s * (spread + rattle));
+            shell[i].rotate(lift + rattle, -s * HOVER_YAW * hover * open, s * (spread + rattle));
             float folded = 1f - unfold;
             wing[i].rotate(twist * unfold, s * stroke * unfold, s * (-1.45f * folded + raise * unfold));
             wing[i].scale(Mth.lerp(unfold, 0.5f, 1f), 1f, 1f);
