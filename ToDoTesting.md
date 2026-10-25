@@ -2,7 +2,7 @@
 
 Tout ce qui doit être testé et validé en jeu, puis les modèles 3D qui restent à faire. Chaque ligne se coche quand elle est validée **en solo et sur le serveur dédié** (règle du projet). Un échec se note directement sous la ligne, avec ce qui a été observé.
 
-Dernière mise à jour : 23 octobre 2026 (section 13 : refonte essences et sanctuaires). Avant : 22 octobre au soir. Session de test sur le PC de jeu, **en solo dans le client de dev** (Simply Wings + JEI), pilotée par le studio (`tools/studio/send.py`, commandes de test de `client/studio/StudioTest`). Les cases cochées ce soir l'ont été en solo seulement : la règle « solo et serveur dédié » reste à compléter pour elles.
+Dernière mise à jour : 25 octobre 2026 (section 12 : ailes terminées ; prochain chantier : le gacha, voir `gatcha.md`). Avant : 23 octobre 2026 (section 13 : refonte essences et sanctuaires). Avant : 22 octobre au soir. Session de test sur le PC de jeu, **en solo dans le client de dev** (Simply Wings + JEI), pilotée par le studio (`tools/studio/send.py`, commandes de test de `client/studio/StudioTest`). Les cases cochées ce soir l'ont été en solo seulement : la règle « solo et serveur dédié » reste à compléter pour elles.
 
 ## Reprise (état au 23/10, 2 h)
 
@@ -239,25 +239,18 @@ Rien n'est codé : le plan est dans `docs/WIKI_PLAN.md`.
 - [ ] Animation de récupération après l'atterrissage : à ajouter à chaque rare.
 - [x] Passe studio des 21 rares (planches dans `run/studio/sheets/`) : 22/10, la commune et les 21 rares se chargent et s'affichent dans les 15 états, sans texture manquante.
 
-## 12. Modèles 3D (refonte Blockbench)
+## 12. Ailes (refonte Blockbench) : terminées
 
-**Fait le 22-23/10** : les 19 paires restantes ont leur modèle Blockbench, leur texture pxl et leur classe de rig (épiques avec 3 idles, légendaires avec 5, Night 8 et Light 7, plus une récupération après l'atterrissage). Les queues des Furies sont dans leur modèle (`DragonTail`), la queue procédurale `TailModel` ne sert plus que de repli. Détail par paire dans `WINGS.md` (« Apparence » et « Mouvement signature »). Passe studio faite sur les 19 (planches dans `run/studio/sheets/`) : tous les états se lisent, aucune pièce cassée.
+**Validé par zorago le 25 octobre 2026** : les 41 paires sont polies une par une (modèle, texture, classe d'animation), dans des scènes Blockbench qui rejouent la vraie classe de rig. Règles et journal dans `wingsRules.md`. Les retours de modèle de l'ancienne liste (méganeure, ptérosaure, vent, nébuleuse, ombre, séraphin, Dédale…) sont tous traités dans ce polish.
 
-À valider ou affiner, par paire, avec zorago et le designer :
-- [ ] Méganeure : l'ambre est un peu terne sur ciel clair ; vérifier les images fantômes de vibration en vol réel.
-- [ ] Ptérosaure : pose de charge (le doigt ailé descend très bas).
-- [ ] Flamme, Orage, Aurore, Psyché : rendu émissif à vérifier de nuit et avec un shaderpack (Iris).
-- [ ] Marée : en repli faucon, les ailes restent assez ouvertes.
-- [ ] Vent : au repos, les voiles forment une collerette de rubans ; à revoir si ça ne plaît pas.
-- [ ] Esprit sylvestre : vue de dessus en vol, les feuilles paraissent clairsemées.
-- [ ] Nébuleuse et Ombre : lobes et volutes encore un peu carrés.
-- [ ] Séraphin : la paire haute qui se croise au-dessus de la tête au repos (choix iconographique) à valider.
-- [ ] Dédale : vérifier la rétraction des panneaux au sol et les flammes des réacteurs en vol réel.
-- [ ] Night et Light : sens d'ouverture des ailerons en virage, clic de la prothèse, épines qui s'allument pendant la charge (frein tenu) ; la queue en marchant.
-- [ ] Tester chaque idle en jeu (variantes tirées au hasard ; au studio : `rouse <0..1> <variante>`).
-- [ ] Rares : ajouter la récupération après l'atterrissage (demandée, pas encore faite).
-- [ ] One-shots en keyframes (déploiement, repli, atterrissage) pour toutes les paires.
-- [ ] Finition des textures par le designer.
+Reste à vérifier **en jeu** (solo puis serveur dédié) :
+- [ ] Peaux (membranes, voiles, nappes) : position, éclairage, transparence, feuilles animées (eau, air).
+- [ ] Ailes émissives et calques lumineux de nuit et avec un shaderpack (Iris).
+- [ ] Traînées au freinage depuis les bons os (`tipBones`), en particulier orage et méganeure.
+- [ ] Polatouche : bout de l'aile collé à la main pendant la marche, la frappe et le minage.
+- [ ] Queues et traînes (Furies, paon, cerf-volant, polatouche, Psyché) : jamais dans les jambes en vol réel.
+- [ ] Joueurs distants : animations reconstruites depuis le mouvement interpolé, BLAST de l'envol vu par un autre joueur.
+- [ ] Passe particules et sound design par paire (voir la todo du `README.md`).
 
 ## 13. Refonte essences, établis, compresseur et sanctuaires (23 octobre)
 
