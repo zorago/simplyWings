@@ -150,7 +150,7 @@ Règles créées : P1, P2, G1, G2, G3, G4, G5.
 
 ### 2. Ailes de chauve-souris (`bat`, famille membrane à doigts)
 
-Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+Statut : **terminé** (25 octobre 2026). Validé par zorago du premier coup (« rien à redire »), toutes les animations comprises. La méthode de la famille membrane à doigts est validée (M1 à M3 + `FlightRules`). Reste à vérifier en jeu : le rendu de la peau dans Minecraft (position, éclairage, festons en transparence).
 
 Modifications :
 
@@ -169,8 +169,8 @@ Deux phases. **Phase 1** : une paire dominante par aspect, choisie pour ouvrir l
 | # | Paire | Aspects ouverts | Pourquoi elle | Prépare |
 | --- | --- | --- | --- | --- |
 | 1 | common (`basic`) | A1 | Base de la famille plume. **Terminé.** | toute la famille plume |
-| 2 | **bat** | A2 | Anatomie la plus éloignée de l'oiseau : doigts, peau qui se tend et se plisse. Le repli en éventail des doigts et le plan de la membrane sont à inventer. | demon, ptero, night, light, phantom |
-| 3 | fire | A8, A10 (émissif) | Plume + pièces attachées (braises) + émissif + particules. La plus grosse famille dérivée. | earth, nebula, shadow, storm, amethyst, copper, angel, peacock, psyche |
+| 2 | bat | A2 | Anatomie la plus éloignée de l'oiseau : doigts, peau qui se tend et se plisse. **Terminé**, méthode membrane validée. | demon, ptero, night, light, phantom |
+| 3 | **fire** | A8, A10 (émissif) | Plume + pièces attachées (braises) + émissif + particules. La plus grosse famille dérivée. | earth, nebula, shadow, storm, amethyst, copper, angel, peacock, psyche |
 | 4 | bee | A4, A7, A13, A18, A10 (translucide) | Vrombissement, flou par plans fantômes, deux paires couplées, poussée continue, stationnaire d'insecte. | ancient, beetle, hummingbird |
 | 5 | seraph | A7 (plumes) | Trois paires de plumes à coordonner : déphasage, repli emboîté, frein et BLAST à six ailes. | angel, et les ailes arrière de night, light, air, aurora, forest |
 | 6 | night | A9, A16 | Aile de dragon (`DragonWing`), paire arrière, queue (`DragonTail`), pouvoirs des Furies. | light, et les queues de peacock, kite, squirrel, psyche |
@@ -217,4 +217,4 @@ Deux phases. **Phase 1** : une paire dominante par aspect, choisie pour ouvrir l
 
 P = famille plume (P1, P2), M = membrane à doigts, I = insecte. Les règles générales (G1 à G5) s'appliquent toujours, adaptées à l'anatomie.
 
-**Prochaine paire : bat** (phase 1, n° 2).
+**Prochaine paire : fire** (phase 1, n° 3).
