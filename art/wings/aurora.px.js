@@ -1,4 +1,5 @@
 include("lib/rig_pack.js")
+include("lib/rig_geom.js")
 include("lib/feathers.js")
 include("aurora.rig.js")
 
@@ -31,7 +32,27 @@ const light = (cube) => (x, row, dorsal, w, h) => {
   return RAMP[Math.max(0, Math.min(RAMP.length - 1, k))]
 }
 
+const strips = (c) => {
+  for (const st of R.strips) {
+    for (const [u0, v0, dorsal] of [[st.ventral[0], st.ventral[1], false], [st.dorsal[0], st.dorsal[1], true]]) {
+      let start = 0
+      st.segs.forEach((sg, i) => {
+        const fn = light({ index: i, curtain: st.curtain })
+        const w = i === st.segs.length - 1 ? sg.len + 1 : sg.len
+        for (let x = 0; x < w; x++) {
+          for (let row = 0; row < sg.h; row++) {
+            const col = fn(x, row, dorsal, sg.len + 0.3, sg.h + 0.6)
+            if (col) c.px(u0 + start + x, v0 + row, col)
+          }
+        }
+        start += sg.len
+      })
+    }
+  }
+}
+
 const paint = (c) => {
+  strips(c)
   for (const cube of R.cubes) {
     if (cube.kind === "light") P.plate(c, cube, light(cube))
     else if (cube.kind === "ray") P.box(c, cube, "r", "R", "b")

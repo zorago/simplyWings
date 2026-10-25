@@ -5,7 +5,7 @@ const root = path.resolve(__dirname, '..', '..');
 const wings = path.join(root, 'art', 'wings');
 const model = process.argv[2];
 eval(['lib/rig_pack.js', 'lib/bird.js', 'lib/rig_geom.js', 'lib/fury.js', model + '.rig.js'].map(f => fs.readFileSync(path.join(wings, f), 'utf8')).join('\n') + '\nglobal.RIG = RIG;');
-const skin = FURY_SKIN(RIG);
+const skin = RIG.membranes || FURY_SKIN(RIG);
 const out = path.join(root, 'src', 'main', 'resources', 'assets', 'simplywings', 'rigs', model + '.membranes.json');
 fs.writeFileSync(out, JSON.stringify({ sheet: skin.sheet, panels: skin.panels }, null, 1));
 console.log(out + ' : ' + skin.panels.length + ' panels');

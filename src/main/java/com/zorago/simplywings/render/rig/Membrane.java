@@ -77,7 +77,9 @@ public final class Membrane {
             float z = p.get(3).getAsFloat();
             Vector3f model = new Vector3f(-side * x / 16f, (24f - y) / 16f, z / 16f);
             Matrix4f rest = matrix(new PoseStack(), chain).invert();
-            out[i] = new Anchor(chain, rest.transformPosition(model), x - sheetX, sheetY - y);
+            float u = p.size() >= 6 ? p.get(4).getAsFloat() : x - sheetX;
+            float v = p.size() >= 6 ? p.get(5).getAsFloat() : sheetY - y;
+            out[i] = new Anchor(chain, rest.transformPosition(model), u, v);
         }
         return out;
     }

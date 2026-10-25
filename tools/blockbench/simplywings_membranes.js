@@ -57,8 +57,8 @@
         const sheet = panel.sheet || s.sheet
         panels.push({
           a, b, rows: panel.rows || 1, sheet,
-          ua: panel.a.map(p => [p[1] - sheet.x, sheet.y - p[2]]),
-          ub: panel.b.map(p => [p[1] - sheet.x, sheet.y - p[2]])
+          ua: panel.a.map(p => p.length >= 6 ? [p[4], p[5]] : [p[1] - sheet.x, sheet.y - p[2]]),
+          ub: panel.b.map(p => p.length >= 6 ? [p[4], p[5]] : [p[1] - sheet.x, sheet.y - p[2]])
         })
       }
     }
@@ -66,7 +66,7 @@
     tex.magFilter = THREE.NearestFilter
     tex.minFilter = THREE.NearestFilter
     tex.needsUpdate = true
-    const material = new THREE.MeshLambertMaterial({ map: tex, transparent: true, alphaTest: 0.5, side: THREE.DoubleSide })
+    const material = new THREE.MeshLambertMaterial({ map: tex, transparent: true, alphaTest: 0.02, side: THREE.DoubleSide })
     holder = new THREE.Group()
     holder.name = 'simplywings_membranes'
     const meshes = panels.map(panel => {

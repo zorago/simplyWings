@@ -5,6 +5,8 @@ import com.zorago.simplywings.anim.RigMemory;
 import com.zorago.simplywings.anim.WingMotion;
 import com.zorago.simplywings.render.rig.Bone;
 import com.zorago.simplywings.render.rig.Bones;
+import com.zorago.simplywings.render.rig.FlightRules;
+import com.zorago.simplywings.render.rig.Membrane;
 import com.zorago.simplywings.render.rig.WingRig;
 import net.minecraft.util.Mth;
 
@@ -15,8 +17,13 @@ public final class AuroraRig extends WingRig {
     private static final String[] CURTAINS = {"veil", "hind_veil"};
     private static final int[] SEGMENTS = {4, 3};
     private static final float[] KEYS = Cycle.beat(0.55f, 0.3f);
-    private static final Cycle STROKE = Cycle.of(KEYS, -0.55f, 0.05f, 0.75f, 0.8f, -0.2f, -0.65f);
-    private static final Cycle SWEEP = Cycle.of(KEYS, 0.1f, -0.08f, -0.12f, -0.03f, 0.14f, 0.18f);
+    private static final Cycle STROKE = Cycle.of(KEYS, 0.09f, 0.45f, 0.75f, 0.72f, 0.3f, -0.12f);
+    private static final Cycle SWEEP = Cycle.of(KEYS, -0.2f, 0.04f, 0.25f, 0.23f, 0f, -0.25f);
+    private static final float FLOOR = -5f * Mth.DEG_TO_RAD;
+    private static final float CHUTE_STROKE = 0.31f;
+    private static final float CHUTE_RAISE = 0.85f;
+    private static final float CHUTE_PITCH = 0.48f;
+    private static final String[] TIPS = {"right_veil_rail_4", "left_veil_rail_4"};
 
     private final Bone[][] curtain = new Bone[2][2];
     private final Bone[][][] rail = new Bone[2][2][];
@@ -29,6 +36,11 @@ public final class AuroraRig extends WingRig {
     @Override
     public Material material() {
         return Material.EMISSIVE;
+    }
+
+    @Override
+    public String[] tipBones() {
+        return TIPS;
     }
 
     @Override
@@ -85,15 +97,27 @@ public final class AuroraRig extends WingRig {
                 default -> pleat = env;
             }
         }
-        float droop = -0.42f * ground - 0.1f * m.w(WingMotion.AIR) + 0.08f * hover + 0.25f * brake - 0.4f * dive
-                - 0.7f * tuck + 0.15f * m.w(WingMotion.CHARGE) + 0.85f * corona;
-        float lift = 0.12f * hover + 0.04f * cruise + 0.3f * brake + 0.2f * m.w(WingMotion.CHARGE) + 0.15f * m.w(WingMotion.AIR)
-                + 0.05f * ground + 0.15f * corona;
-        float twist = -0.5f * brake;
+        float charge = m.w(WingMotion.CHARGE);
+        float chute = FlightRules.chute(m);
+        float slowBrake = brake - chute;
+        float blast = 0f;
+        if (m.launch >= 0f) {
+            float lp = m.launch;
+            float strike = Mth.clamp(lp / 0.3f, 0f, 1f);
+            blast = (lp < 0.3f ? 1f : 1f - (lp - 0.3f) / 0.7f) * (1f - 2f * strike);
+        }
+        float shiver = charge * charge;
+        float droop = -0.42f * ground - 0.1f * m.w(WingMotion.AIR) + 0.12f * hover + 0.1f * slowBrake - 0.4f * dive
+                - 0.7f * tuck + 0.75f * charge + 0.85f * corona + 0.4f * blast + 0.03f * shiver * Mth.sin(time * 3.7f);
+        float lift = 0.25f * hover + 0.04f * cruise + 0.25f * slowBrake + 0.35f * charge + 0.15f * m.w(WingMotion.AIR)
+                + 0.05f * ground + 0.15f * corona + 0.035f * shiver * Mth.sin(time * 2.9f);
+        float twist = hover * FlightRules.HOVER_PLANE;
         float rippleAmp = 0.06f + 0.05f * cruise + 0.04f * hover + 0.12f * brake + 0.2f * rippleIdle + 0.15f * settle
                 + 0.25f * m.stall;
         float rippleRate = 0.1f + 0.04f * cruise + 0.05f * rippleIdle;
-        float breath = 1f + 0.06f * Mth.sin(time * 0.05f) + 0.2f * corona + 0.05f * rippleIdle;
+        float breath = 1f + 0.06f * Mth.sin(time * 0.05f) + 0.2f * corona + 0.05f * rippleIdle + 0.12f * shiver;
+        float airborne = Mth.clamp(1f - ground - charge, 0f, 1f);
+        float billow = 0.4f * airborne + 0.9f * chute + 0.3f * shiver;
         float beatA = m.beating() ? m.beatWeight : 0f;
         float hw = m.hoverBeat;
 
@@ -107,13 +131,21 @@ public final class AuroraRig extends WingRig {
                     float t = m.beat - 0.08f * c;
                     stroke += beatA * (c == 0 ? 1f : 0.8f) * STROKE.at(t);
                     sweep += beatA * SWEEP.at(t);
+                    if (c == 0 && i == 0) {
+                        billow += beatA * 1.2f * STROKE.lagged(t, 0.06f);
+                    }
                 }
                 if (hw > 0.001f) {
                     float ph = m.hoverPhase - 0.7f * c;
-                    stroke += hw * 0.4f * Mth.cos(ph);
-                    tw += hw * 0.2f * Mth.sin(ph);
+                    sweep += hw * (0.2f + 0.38f * Mth.cos(ph));
+                    stroke += hw * 0.1f * Mth.sin(2f * ph);
+                    tw += hw * 0.45f * Mth.sin(ph);
                 }
-                curtain[i][c].rotate(tw, s * stroke - m.bank * 0.25f, s * sweep);
+                stroke = Mth.lerp(chute, stroke, CHUTE_STROKE * (c == 0 ? 1f : 0.9f));
+                sweep = Mth.lerp(chute, sweep, CHUTE_RAISE * (c == 0 ? 1f : 0.6f)) + chute * 0.02f * Mth.sin(time * 4.7f + c);
+                tw = Mth.lerp(chute, tw, CHUTE_PITCH);
+                float roll = m.bank * 0.25f;
+                curtain[i][c].rotate(tw, s * Math.max(FLOOR, stroke - s * roll), s * sweep);
                 for (int k = 0; k < SEGMENTS[c]; k++) {
                     float phase = time * rippleRate * 2f - k * 0.85f - c * 1.4f + i * 0.6f;
                     float wave = rippleAmp * Mth.sin(phase);
@@ -125,6 +157,10 @@ public final class AuroraRig extends WingRig {
                     drape[i][c][k].rotate(sway, s * fold, 0f).scale(1f, breath * shimmer, 1f);
                 }
             }
+        }
+        Membrane veil = membrane();
+        if (veil != null) {
+            veil.billow(Mth.clamp(billow, -0.6f, 1.2f));
         }
     }
 }

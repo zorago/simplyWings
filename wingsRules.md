@@ -83,7 +83,7 @@ Chaque aspect demande sa propre logique. Le plan de review (en fin de document) 
 
 - **G6 — Pas de particules en cubes dans le modèle** (née sur `fire`). Les braises, étincelles, poussières, etc. ne sont jamais des cubes 3D animés dans le rig (trop lourd, et ça fait ramer Blockbench quand ils apparaissent). Elles passent par les vraies particules Minecraft (`client/WingEffects`), réglées par paire.
 
-- **G7 — Ornement qui traverse une articulation = peau** (née sur `fire`). Une pièce décorative ou une surface qui s'étend sur plusieurs os (crête, cœur lumineux, bordure, voile) n'est jamais une plaque rigide posée sur un seul os : elle passe sous les articulations et s'en détache dès que l'aile bouge. Elle devient une peau (M1), avec ses points accrochés à chaque os qu'elle longe. Si elle doit se replier avec des plumes, son bord libre s'accroche aux plumes elles-mêmes, pas à l'os. Chaque panneau peut avoir sa propre feuille de texture (`sheet` dans le panneau).
+- **G7 — Ornement qui traverse une articulation = peau** (née sur `fire`). Une pièce décorative ou une surface qui s'étend sur plusieurs os (crête, cœur lumineux, bordure, voile) n'est jamais une plaque rigide posée sur un seul os : elle passe sous les articulations et s'en détache dès que l'aile bouge. Elle devient une peau (M1), avec ses points accrochés à chaque os qu'elle longe. Si elle doit se replier avec des plumes, son bord libre s'accroche aux plumes elles-mêmes, pas à l'os. Chaque panneau peut avoir sa propre feuille de texture (`sheet` dans le panneau). Un point peut aussi porter ses coordonnées de texture explicites (`[os, x, y, z, u, v]`), pour les tissus dont la texture doit rester droite même si les os sont tournés au repos (voiles d'`aurora`).
 
 - **G8 — Les ailes partent des omoplates** (née sur `seraph`). Toute paire principale s'accroche sur le haut du dos, au niveau des omoplates, jamais sur la tête ni au-dessus. Une paire en plus va soit sur les omoplates aussi (juste sous la première), soit plus bas comme gouvernail (vers les hanches). Les idles au sol restent compacts sur le dos : pas d'aile dressée au-dessus de la tête ni enroulée autour des jambes.
 
@@ -112,7 +112,7 @@ Principe (zorago) : une membrane de peau reste un plan qui pousse l'air, comme l
   - Pour `bat` : plagiopatagium (flanc, de l'épaule à la hanche, jusqu'au bras, l'avant-bras et le doigt 4), trois dactylopatagiums (entre les doigts 1-2, 2-3 et 3-4), propatagium (devant le bras, de l'épaule au poignet).
   - Rendu : `render/rig/Membrane`, quads émis dans le même `RenderType` vanilla que les os (compatible Iris), deux couches à 0,01 px d'écart, l'une avec la face dorsale, l'autre avec la face ventrale.
   - Blockbench : le plugin `tools/blockbench/simplywings_membranes.js` dessine la même peau dans la scène et la fait suivre les os pendant l'animation (il lit `art/scenes/<modèle>.membranes.json`, copié par `scene.py`).
-- **M1 pour les Furies** : `art/wings/lib/fury.js` génère la peau quand le rig passe `skin: true`. Les plaques de membrane disparaissent, `FURY_SKIN` calcule les panneaux à partir des os au repos (plagiopatagium jusqu'au flanc, un dactylopatagium entre deux doigts, propatagium) pour la grande paire et la paire arrière, et `fury_px.js` peint une feuille par paire. Le JSON s'écrit avec `node tools/blockbench/fury_skin.js <modèle>`.
+- **M1 pour les Furies** : `art/wings/lib/fury.js` génère la peau quand le rig passe `skin: true`. Les plaques de membrane disparaissent, `FURY_SKIN` calcule les panneaux à partir des os au repos (plagiopatagium jusqu'au flanc, un dactylopatagium entre deux doigts, propatagium) pour la grande paire et la paire arrière, et `fury_px.js` peint une feuille par paire. Le JSON s'écrit avec `node tools/blockbench/rig_skin.js <modèle>`.
 
 - **M2 — Membrane bombée** (née sur `bat`). Une membrane plate fait « plaque ». En vol, elle se bombe vers le dos, de 12 % de sa largeur au maximum, comme une voile gonflée par l'air qui la porte : la face du dessous est creusée et emprisonne l'air. Au plané, elle est légèrement courbée (`GLIDE_BILLOW` 0,5). Elle se gonfle plus à la frappe, se creuse dans l'autre sens à la remontée et se gonfle fort en parachute (même source que la cambrure des plumes, `RigPose.CAMBER`). Repliée ou au sol, elle est à plat. La valeur passe par `Membrane.billow`, que la scène reçoit sur le groupe `scene_membrane`.
 - **M3 — Doigts en éventail** (née sur `bat`). Le battement ouvre et ferme l'éventail des doigts : ils se resserrent à la remontée pour réduire la surface (cycle `FAN` négatif), puis s'ouvrent en grand à la frappe. Les règles d'amplitude (G4) s'appliquent au bras, l'avant-bras et la main exactement comme pour l'oiseau.
@@ -269,6 +269,17 @@ Retour de zorago sur le premier passage : beaucoup de problèmes. Refonte compl�
 1. Design : les longerons, panneaux d'acier, entretoises, aileron, engrenages et les trois plumes d'Icare sont supprimés. Les ailes sont maintenant des rangées de lames d'acier à bord de laiton qui se chevauchent (4 sur le bras, 5 sur l'avant-bras, 4 sur la main), plus 7 longues lames tranchantes en éventail au bout (O2). Elles sortent des côtés d'un sac dorsal à deux réacteurs centraux.
 2. Animation (O1) : tout est fait au jetpack (vibration et flamme qui montent à la charge, rafale à l'envol, poussée vers le sol au stationnaire, flamme orientée avec la montée et le virage). Les ailes restent repliées en V sauf en vol de déplacement, où elles planent figées et ne bougent que pour tourner et freiner.
 3. Idles : ratés de réacteur, déploiement de contrôle des ailes, balayage des tuyères.
+
+### 10. Ailes d'aurore (`aurora`, matière non squelettique, aspects A11, A15)
+
+Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+
+Règles appliquées avant revue :
+
+- G7 : les rideaux étaient des pans rigides, un par segment de rail, qui s'ouvraient quand le rail ondule. Chaque rideau est maintenant un seul tissu continu : le haut est accroché aux rails, le bas aux pans qui ondulent (`rigs/aurora.membranes.json`, généré par `aurora.rig.js`). Il se gonfle en vol, beaucoup en parachute (une voile de lumière qui freine), et suit le battement.
+- G1 à G5 : parachute (rideaux levés vers l'avant, la paire arrière plus basse), frein lent ; charge où les voiles se dressent et respirent en tremblant, puis BLAST ; battement anatomique lent au-dessus de −5° avec nage avant/arrière ; stationnaire à plat, battement de haut en bas ; traînées au bout du rail.
+- Conservé : ondulation le long des rails, lumière qui respire, 3 idles (couronne, vague, plissé).
+- Outil : le plugin Blockbench laisse passer la transparence (seuil alpha 0,02 au lieu de 0,5), sinon le bas violet des voiles disparaissait.
 
 ## Plan de review
 
