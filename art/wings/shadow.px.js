@@ -4,7 +4,7 @@ include("shadow.rig.js")
 
 pal({
   a: "#0c0612e0", b: "#170c22d4", c: "#24123ac4", d: "#341c4eb4", e: "#4a2a66a0", f: "#62388088", g: "#7a4a9a60",
-  p: "#c060ff", P: "#f0c8ff", k: "#08040c",
+  p: "#c060ff", P: "#f0c8ff", k: "#08040c", i: "#9a3ae0", I: "#d68cff", L: "#2a1240",
   q: "#b9c0c8", Q: "#a3abb4"
 })
 
@@ -53,8 +53,17 @@ const plume = (cube) => (x, row, dorsal, w, h) => {
 }
 
 const eye = (glow) => (x, row, dorsal, w, h) => {
+  const corner = (x === 0 || x === w - 1) && (row === 0 || row === h - 1)
+  if (corner) return null
+  const rim = x === 0 || x === w - 1 || row === 0 || row === h - 1
   if (!dorsal) return glow ? null : "a"
-  if (glow) return x === 1 ? "P" : "p"
+  if (glow) return rim ? null : (x === 1 && row === 1 ? "P" : "p")
+  if (rim) return "L"
+  return x === 1 && row === 1 ? "I" : "i"
+}
+
+const pupil = (glow) => (x, row, dorsal) => {
+  if (glow || !dorsal) return null
   return "k"
 }
 
@@ -64,6 +73,7 @@ const base = (c) => {
       case "curl_h": P.plate(c, cube, (x, row, dorsal, w, h) => curl(x + 0.5, row, w, h, cube.index * 1.9, dorsal)); break
       case "plume": P.plate(c, cube, plume(cube)); break
       case "eye": P.plate(c, cube, eye(false)); break
+      case "pupil": P.plate(c, cube, pupil(false)); break
       case "heart": P.box(c, cube, "c", "b", "a"); break
     }
   }

@@ -919,7 +919,7 @@ Dernière mise à jour : 22 octobre 2026.
 
 **Vibe** : un esprit des ténèbres. Des ailes de fumée noire qui se défont sur les bords, rapides à réagir : départs vifs et virages serrés. Elles sont discrètes mais peu stables.
 
-**Apparence** : une aile de fumée par côté (modèle `rigs/shadow.bbmodel`), translucide : nappes de fumée violet-noir à remous et trouées, volutes qui pendent et se tordent, et cinq yeux violets lumineux (couche `shadow_glow`).
+**Apparence** : une aile de fumée par côté (modèle `rigs/shadow.bbmodel`), translucide : nappes de fumée violet-noir à remous et trouées, volutes qui pendent et se tordent, et cinq yeux en amande à iris violet lumineux et pupille fendue (couche `shadow_glow` pour la lueur).
 
 **Mouvement signature** : (`ShadowRig`) les volutes se tordent avec retard comme des tentacules ; les yeux clignent et regardent autour d'eux. 3 idles : regard fixe (les yeux s'ouvrent grand et suivent), dissipation, enroulement.
 

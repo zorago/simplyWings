@@ -558,6 +558,10 @@ Règles appliquées avant revue :
 - G6 : rien à faire (la fumée en particules est déjà dans `WingEffects`).
 - Conservé : les 5 yeux qui clignent et regardent autour, le cœur, la volute qui se tord de chaque plume, les 3 idles, translucide et calque lumineux.
 
+Retour de zorago :
+
+1. Les 5 yeux étaient des fentes de 3×1 px, noires sur la texture de base (le violet n'était que sur le calque lumineux) : des artefacts noirs presque immobiles. Ils sont refaits en amande de 5×4 px, iris violet peint aussi sur la texture de base (reflet clair en haut à gauche, contour violet sombre), pupille fendue noire sur son propre os (`eye_k_pupil`) qui glisse d'un côté à l'autre pour regarder autour. Le clignement écrase l'œil entier, et il s'ouvre un peu plus grand au regard fixe.
+
 ### 30. Ailes d'orage (`storm`, plume, aspects A8, A10)
 
 Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.

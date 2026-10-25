@@ -36,8 +36,11 @@ var RIG = (() => {
     { parent: 'hand', at: [28, y - 7, z + 1.75] }
   ]
   eyes.forEach((e, i) => {
-    groups.push({ name: 'eye_' + (i + 1), parent: e.parent, origin: e.at })
-    cubes.push({ name: 'eye_' + (i + 1) + '_glint', group: 'eye_' + (i + 1), from: [e.at[0] - 1.5, e.at[1] - 0.5, e.at[2]], to: [e.at[0] + 1.5, e.at[1] + 0.5, e.at[2] + 0.02], kind: 'eye' })
+    const g = 'eye_' + (i + 1)
+    groups.push({ name: g, parent: e.parent, origin: e.at })
+    cubes.push({ name: g + '_white', group: g, from: [e.at[0] - 2.5, e.at[1] - 2, e.at[2]], to: [e.at[0] + 2.5, e.at[1] + 2, e.at[2] + 0.02], kind: 'eye' })
+    groups.push({ name: g + '_pupil', parent: g, origin: e.at })
+    cubes.push({ name: g + '_slit', group: g + '_pupil', from: [e.at[0] - 0.5, e.at[1] - 1, e.at[2] + 0.04], to: [e.at[0] + 0.5, e.at[1] + 1, e.at[2] + 0.06], kind: 'pupil' })
   })
   const rig = { model: 'shadow', texture: [128, 64], S, E, W, H, groups, cubes }
   rig.used = PACK(rig, 128)

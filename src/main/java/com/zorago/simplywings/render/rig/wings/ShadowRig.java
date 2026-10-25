@@ -63,12 +63,14 @@ public final class ShadowRig extends WingRig {
         final FeatherWing wing;
         final float s;
         final Bone[] eye = new Bone[EYES];
+        final Bone[] pupil = new Bone[EYES];
 
         Side(Bones b, String p, float s) {
             this.s = s;
             wing = new FeatherWing(b, p, s, 1.25f, 2.75f, 2.85f);
             for (int k = 0; k < EYES; k++) {
                 eye[k] = b.get(p + "eye_" + (k + 1));
+                pupil[k] = b.get(p + "eye_" + (k + 1) + "_pupil");
             }
         }
     }
@@ -160,8 +162,8 @@ public final class ShadowRig extends WingRig {
                 float blink = blink(time, k, s);
                 float open = Mth.lerp(stare, blink, 1.3f) * (1f - 0.8f * fold * (1f - ground)) * (1f - 0.7f * dissolve);
                 float lookX = 0.5f * Mth.sin(time * 0.05f + k * 2.1f) + stare * 0.6f * Mth.sin(time * 0.17f + k);
-                float lookY = 0.3f * Mth.sin(time * 0.037f + k * 1.3f);
-                side.eye[k].move(s * lookX, lookY, 0f).scale(1f, Math.max(0.05f, open), 1f);
+                side.eye[k].scale(1f, Mth.clamp(open, 0.05f, 1.15f), 1f);
+                side.pupil[k].move(s * Mth.clamp(2f * lookX, -1f, 1f), 0f, 0f);
             }
         }
     }
