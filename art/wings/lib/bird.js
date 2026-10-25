@@ -46,9 +46,13 @@ var BIRD = (o) => {
     row('secondary_feather', 'secondaries', E[0], W[0] + 1, count(o.forearm), [o.secondaries - 1, o.secondaries], [2, 14], 1.0, -0.025, 'secondary_feather')
     row('hand_feather', 'hand_feathers', W[0], H[0] + 2, 4, [o.handSheet, o.handSheet - 1], [14, 16], 1.002, 0.012, 'hand_feather')
   }
+  if (o.coverts && o.rows) {
+    groups.push({ name: 'greater_coverts', parent: 'secondaries', origin: E })
+    groups.push({ name: 'arm_coverts', parent: 'tertials', origin: S })
+  }
   if (o.coverts) {
-    cubes.push({ name: 'greater_coverts', group: 'secondaries', from: [E[0], y - o.coverts, z + 0.96], to: [W[0], y, z + 0.96], kind: 'greater_coverts' })
-    cubes.push({ name: 'arm_coverts', group: 'tertials', from: [S[0], y - Math.min(o.coverts, o.tertials - 2), z + 0.8], to: [E[0], y, z + 0.8], kind: 'arm_coverts' })
+    cubes.push({ name: 'greater_coverts', group: o.rows ? 'greater_coverts' : 'secondaries', from: [E[0], y - o.coverts, z + 0.96], to: [W[0], y, z + 0.96], kind: 'greater_coverts' })
+    cubes.push({ name: 'arm_coverts', group: o.rows ? 'arm_coverts' : 'tertials', from: [S[0], y - Math.min(o.coverts, o.tertials - 2), z + 0.8], to: [E[0], y, z + 0.8], kind: 'arm_coverts' })
   }
   if (o.marginal) {
     cubes.push({ name: 'marginal_coverts', group: 'forearm', from: [E[0], y - o.marginal, z + 1.0], to: [W[0], y + 1, z + 1.0], kind: 'marginal' })

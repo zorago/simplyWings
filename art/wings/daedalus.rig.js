@@ -1,7 +1,7 @@
 var RIG = (() => {
   const dx = 0.5, dz = 1.6
   const b = BIRD({
-    rows: true, arm: 8, forearm: 10, hand: 5, bone: 1.1, tertials: 10, secondaries: 13, handSheet: 13, handCoverts: 5, coverts: 5,
+    rows: true, arm: 8, forearm: 10, hand: 5, bone: 1.1, tertials: 10, secondaries: 13, handSheet: 13, handCoverts: 4, coverts: 3,
     primaryWidth: 3, primaryStep: [0.55, 0.3],
     primaries: [{ angle: 2, length: 17 }, { angle: -10, length: 19 }, { angle: -22, length: 20 }, { angle: -34, length: 19 },
       { angle: -46, length: 17 }, { angle: -58, length: 15 }, { angle: -70, length: 13 }]
