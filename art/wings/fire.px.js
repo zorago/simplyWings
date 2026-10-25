@@ -39,6 +39,20 @@ const core = (cube) => (x, row, dorsal, w, h) => {
   return t < 0.25 ? "W" : t < 0.5 ? "y" : t < 0.75 ? "Y" : "o"
 }
 
+const CORE = { x: 2.5, y: 23.5, w: 25, h: 9, ventral: [40, 100], dorsal: [70, 100] }
+const coreSheet = (c) => {
+  for (const [u0, v0] of [CORE.ventral, CORE.dorsal]) {
+    for (let u = 0; u < CORE.w; u++) {
+      const x = CORE.x + u
+      const role = x < R.E[0] ? "arm" : x < R.W[0] ? "forearm" : "hand"
+      for (let v = 0; v < CORE.h; v++) {
+        const col = core({ role })(u, v, false, CORE.w, CORE.h)
+        if (col) c.px(u0 + u, v0 + v, col)
+      }
+    }
+  }
+}
+
 const crest = (x, row, dorsal, w, h) => {
   const k = x % 4
   const height = [1.2, 2.6, 3.4, 2]
@@ -59,6 +73,7 @@ const paint = (c) => {
       case "ember": P.box(c, cube, "e", "E", "O"); break
     }
   }
+  coreSheet(c)
   c.rect(0, R.texture[1] - 16, 32, 16, "q")
   for (let x = 0; x < 32; x += 4) c.vline(x, R.texture[1] - 16, 16, "Q")
 }

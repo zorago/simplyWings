@@ -49,6 +49,8 @@ def steve():
 
 
 def decode(texture):
+    if texture.get("path") and Path(texture["path"]).exists():
+        return Image.open(texture["path"]).convert("RGBA")
     source = texture.get("source", "")
     if source.startswith("data:"):
         return Image.open(io.BytesIO(base64.b64decode(source.split(",", 1)[1]))).convert("RGBA")
@@ -107,8 +109,8 @@ def channel(frames, value, rest, kind):
     if all(max(abs(v[k] - neutral[k]) for k in range(3)) <= TOLERANCE[kind] for _, v in keys):
         return []
     keys = thin(keys, TOLERANCE[kind])
-    return [{"channel": kind, "data_points": [{"x": round(v[0], 4), "y": round(v[1], 4), "z": round(v[2], 4)}],
-             "uuid": uid(), "time": round(t, 4), "color": -1, "interpolation": "linear"} for t, v in keys]
+    return [{"channel": kind, "data_points": [{"x": round(v[0], 3), "y": round(v[1], 3), "z": round(v[2], 3)}],
+             "time": round(t, 4), "interpolation": "catmullrom"} for t, v in keys]
 
 
 def wing_tracks(frames, name, rest, source="bones"):
@@ -182,7 +184,7 @@ def build(wing, baked):
     animations = []
     zero = [0, 0, 0, 0, 0, 0, 1, 1, 1]
     for clip in baked["clips"]:
-        frames = clip["frames"]
+        frames = [f for f in clip["frames"] if abs(f["t"] * 20 - round(f["t"] * 20)) < 1e-3 or f is clip["frames"][-1]]
         animators = {}
         for name, rest in baked["rest"].items():
             g = groups.get(name)

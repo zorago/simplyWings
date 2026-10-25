@@ -160,6 +160,19 @@ Modifications :
 
 Règles créées : M1, M2, M3.
 
+### 3. Ailes de feu (`fire`, famille plume, aspects A8 et A10)
+
+Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+
+Règles appliquées avant revue :
+
+- G1 à G5 : via `FlightRules`, avec le cycle anatomique adapté au battement sec du feu (montée 0,45, frappe très courte 0,12). Parachute, frein lent, BLAST, stationnaire qui pousse l'air au sol, traînées au bout de la flamme `primary_2`.
+- P1 : les langues de feu sont des plumes. 4 tertiaires (une ajoutée), 4 secondaires et 4 nouvelles flammes sur la main, chacune un os (`tertial_feather_k`, `secondary_feather_k`, `hand_feather_k`), qui se replient une à une sous l'os. Elles gardent leur vacillement et leur allongement propres (`FireRig.flame`).
+- P2 : torsion de raccord, cambrure et alignement de la rangée de la main, repris par `FeatherWing`.
+- M1 appliquée hors de la famille membrane : le cœur blanc-jaune sous les flammes était fait de trois plaques rigides (bras, avant-bras, main), qui s'ouvraient aux articulations. C'est maintenant une peau continue accrochée aux trois os (`rigs/fire.membranes.json`, feuille de texture peinte par `coreSheet` dans `fire.px.js`), légèrement bombée en vol.
+
+Ce qui reste propre au feu : vacillement de chaque langue, embrasement au coup (chaleur), flammes qui traînent avec la vitesse, braises qui montent au sol et filent en vol, 3 idles (embrasement, braises qui couvent, secousse d'étincelles), émissif.
+
 ## Plan de review
 
 Deux phases. **Phase 1** : une paire dominante par aspect, choisie pour ouvrir le plus de logique nouvelle, revue une à une avec zorago, jusqu'à ce que chaque aspect ait ses règles. **Phase 2** : toutes les autres paires, une à une aussi. On applique d'abord toutes les règles de leurs familles et de leurs aspects, puis on ne polit que ce qui leur est propre.

@@ -17,22 +17,25 @@ var RIG = (() => {
     { name: 'forearm_rod', group: 'forearm', from: [E[0], y - 0.75, z - 0.6], to: [W[0], y + 0.75, z + 0.6], kind: 'rod' },
     { name: 'hand_rod', group: 'hand', from: [W[0], y - 0.6, z - 0.5], to: [H[0], y + 0.6, z + 0.5], kind: 'rod' },
     { name: 'shoulder_heart', group: 'shoulder', from: [1.2, 21, 1.4], to: [4.2, 24, 3.6], kind: 'heart' },
-    { name: 'arm_core', group: 'tertials', from: [S[0], y - 7, z + 0.6], to: [E[0], y + 1, z + 0.62], kind: 'core', role: 'arm' },
-    { name: 'forearm_core', group: 'secondaries', from: [E[0], y - 8, z + 0.62], to: [W[0], y + 1, z + 0.64], kind: 'core', role: 'forearm' },
-    { name: 'hand_core', group: 'hand_feathers', from: [W[0], y - 7, z + 0.64], to: [H[0] + 2, y + 1, z + 0.66], kind: 'core', role: 'hand' },
     { name: 'crest', group: 'hand_coverts', from: [E[0] - 2, y + 0.5, z + 0.7], to: [H[0] + 1, y + 3.5, z + 0.72], kind: 'crest' }
   ]
-  const tert = [{ x: 3, len: 9, w: 4, rot: -6 }, { x: 5.5, len: 11, w: 4, rot: -10 }, { x: 8, len: 12, w: 4, rot: -14 }]
+  const tert = [{ x: 3, len: 9, w: 4, rot: -6 }, { x: 5.2, len: 10, w: 4, rot: -9 }, { x: 7.4, len: 11, w: 4, rot: -12 }, { x: 9.6, len: 12, w: 4, rot: -15 }]
   tert.forEach((t, i) => {
     const o = [t.x, y, z]
-    groups.push({ name: 'tertial_' + (i + 1), parent: 'tertials', origin: o, rot: [0, 0, t.rot] })
-    cubes.push({ name: 'tertial_flame_' + (i + 1), group: 'tertial_' + (i + 1), from: [t.x - t.w / 2, y - t.len, z + 0.75 + 0.04 * i], to: [t.x + t.w / 2, y, z + 0.77 + 0.04 * i], kind: 'tongue_v', index: i })
+    groups.push({ name: 'tertial_feather_' + (i + 1), parent: 'tertials', origin: o, rot: [0, 0, t.rot] })
+    cubes.push({ name: 'tertial_flame_' + (i + 1), group: 'tertial_feather_' + (i + 1), from: [t.x - t.w / 2, y - t.len, z + 0.75 + 0.04 * i], to: [t.x + t.w / 2, y, z + 0.77 + 0.04 * i], kind: 'tongue_v', index: i })
   })
   const sec = [{ x: 11, len: 12, w: 4, rot: -6 }, { x: 13.5, len: 13, w: 4, rot: -9 }, { x: 16, len: 13, w: 4, rot: -13 }, { x: 18.5, len: 12, w: 4, rot: -18 }]
   sec.forEach((t, i) => {
     const o = [t.x, y, z]
-    groups.push({ name: 'secondary_' + (i + 1), parent: 'secondaries', origin: o, rot: [0, 0, t.rot] })
-    cubes.push({ name: 'secondary_flame_' + (i + 1), group: 'secondary_' + (i + 1), from: [t.x - t.w / 2, y - t.len, z + 0.9 + 0.04 * i], to: [t.x + t.w / 2, y, z + 0.92 + 0.04 * i], kind: 'tongue_v', index: i + 3 })
+    groups.push({ name: 'secondary_feather_' + (i + 1), parent: 'secondaries', origin: o, rot: [0, 0, t.rot] })
+    cubes.push({ name: 'secondary_flame_' + (i + 1), group: 'secondary_feather_' + (i + 1), from: [t.x - t.w / 2, y - t.len, z + 0.9 + 0.04 * i], to: [t.x + t.w / 2, y, z + 0.92 + 0.04 * i], kind: 'tongue_v', index: i + 4 })
+  })
+  const hand = [{ x: 20.6, len: 12, w: 4, rot: -20 }, { x: 21.9, len: 11, w: 4, rot: -22 }, { x: 23.2, len: 11, w: 4, rot: -24 }, { x: 24.5, len: 10, w: 4, rot: -26 }]
+  hand.forEach((t, i) => {
+    const o = [t.x, y, z]
+    groups.push({ name: 'hand_feather_' + (i + 1), parent: 'hand_feathers', origin: o, rot: [0, 0, t.rot] })
+    cubes.push({ name: 'hand_flame_' + (i + 1), group: 'hand_feather_' + (i + 1), from: [t.x - t.w / 2, y - t.len, z + 1.06 + 0.02 * i], to: [t.x + t.w / 2, y, z + 1.08 + 0.02 * i], kind: 'tongue_v', index: i + 8 })
   })
   const prim = [
     { angle: 4, len: 13 }, { angle: -9, len: 16 }, { angle: -22, len: 18 }, { angle: -35, len: 18 },
