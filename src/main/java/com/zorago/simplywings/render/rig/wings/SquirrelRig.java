@@ -8,6 +8,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.zorago.simplywings.render.rig.Bones;
 import net.minecraft.client.model.PlayerModel;
 import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartPose;
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
@@ -36,6 +37,9 @@ public final class SquirrelRig extends WingRig {
     private static final float IK_DAMP = 0.02f;
     private static final float SPUR = 3f;
     private static final float ELBOW_BIAS = 0.5f;
+    private static final float ELBOW_MIN = 0.05f;
+    private PartPose rightHand;
+    private PartPose leftHand;
     private final float[] limbPose = new float[3];
     private final Bone[] shoulder = new Bone[2];
     private final Bone[] arm = new Bone[2];
@@ -145,17 +149,26 @@ public final class SquirrelRig extends WingRig {
         tail.rotate(0.3f * flying + 0.9f * lift + ground * 0.3f, 0f, flying * 0.35f * sway + 0.04f * Mth.sin(time * 0.21f));
         tailTip.rotate(0.35f * flying + 0.5f * lift + ground * 0.4f, 0f, flying * (0.25f * sway + 0.06f * Mth.sin(time * 0.6f - 0.8f)));
 
-        float glue = Mth.clamp(1f - ground - charge, 0f, 1f) * (1f - fold);
-        if (glue > 0.001f) {
-            for (int i = 0; i < 2; i++) {
-                float s = i == 0 ? 1f : -1f;
+        for (int i = 0; i < 2; i++) {
+            float s = i == 0 ? 1f : -1f;
+            PartPose held = i == 0 ? rightHand : leftHand;
+            Vector3f hand = new Vector3f(-s * 1f, 10f, 0f);
+            if (held != null) {
+                new Matrix4f().rotationZYX(held.zRot, held.yRot, held.xRot).transformPosition(hand);
+                hand.add(held.x, held.y, held.z).div(16f);
+            } else {
                 limb(m, s, limbPose);
-                Vector3f hand = new Vector3f(-s * 1f, 10f, 0f);
                 new Matrix4f().rotationZYX(limbPose[2], limbPose[1], limbPose[0]).transformPosition(hand);
                 hand.add(-s * 5f, 2f, 0f).div(16f);
-                reach(i, s, hand, glue);
             }
+            reach(i, s, hand, 1f);
         }
+    }
+
+    @Override
+    public void playerArms(ModelPart right, ModelPart left) {
+        rightHand = right == null ? null : right.storePose();
+        leftHand = left == null ? null : left.storePose();
     }
 
     private void reach(int i, float s, Vector3f target, float weight) {
@@ -166,7 +179,7 @@ public final class SquirrelRig extends WingRig {
         float baseY = chain[1].yRot;
         float baseZ = chain[1].zRot;
         float baseE = chain[3].zRot;
-        float[] q = {0f, 0f, ELBOW_BIAS};
+        float[] q = {0f, 0f, s * ELBOW_BIAS};
         Vector3f tip = new Vector3f();
         for (int it = 0; it < IK_STEPS; it++) {
             tip(chain, s, baseY, baseZ, baseE, q, tip);
@@ -194,9 +207,12 @@ public final class SquirrelRig extends WingRig {
             if (len > IK_MAX_STEP) {
                 step.mul(IK_MAX_STEP / len);
             }
-            q[0] = Mth.clamp(q[0] + step.x, -1.6f, 1.6f);
-            q[1] = Mth.clamp(q[1] + step.y, -1.6f, 1.6f);
-            q[2] = Mth.clamp(q[2] + step.z, -2.4f, 2.4f);
+            q[0] = Mth.clamp(q[0] + step.x, -3f, 3f);
+            q[1] = Mth.clamp(q[1] + step.y, -3f, 3f);
+            q[2] = Mth.clamp(q[2] + step.z, -2.6f, 2.6f);
+            if (s * (baseE + q[2]) < ELBOW_MIN) {
+                q[2] = s * ELBOW_MIN - baseE;
+            }
         }
         chain[1].yRot = baseY + weight * q[0];
         chain[1].zRot = baseZ + weight * q[1];
@@ -222,10 +238,13 @@ public final class SquirrelRig extends WingRig {
         float dive = m.w(WingMotion.DIVE);
         float tuck = m.w(WingMotion.TUCK);
         float air = m.w(WingMotion.AIR) + m.w(WingMotion.LANDING);
-        float total = Math.max(0.001f, cruise + hover + chute + slow + dive + tuck + air);
+        float charge = m.w(WingMotion.CHARGE);
+        float total = Math.max(0.001f, cruise + hover + chute + slow + dive + tuck + air + charge);
         float spread = (1.45f * cruise + 1.3f * hover + 1.35f * chute + 1.2f * slow + Mth.lerp(m.diveDepth, 0.9f, 0.45f) * dive
-                + 0.3f * tuck + 1.1f * air) / total;
-        float pitch = (-0.1f * cruise - 0.2f * hover - 0.7f * chute - 0.35f * slow + 0.25f * dive + 0.3f * tuck - 0.45f * air) / total;
+                + 0.3f * tuck + 1.1f * air + 1.25f * charge) / total;
+        float pitch = (-0.1f * cruise - 0.2f * hover - 0.7f * chute - 0.35f * slow + 0.25f * dive + 0.3f * tuck - 0.45f * air
+                - 0.35f * charge) / total;
+        spread += charge * charge * 0.04f * Mth.sin(m.time * 3.3f);
         if (m.beating()) {
             spread += m.beatWeight * 0.6f * (STROKE.at(m.beat) - 0.2f);
             pitch += m.beatWeight * 0.25f * SWEEP.at(m.beat);
@@ -247,7 +266,7 @@ public final class SquirrelRig extends WingRig {
 
     @Override
     public void poseBody(PlayerModel<?> model, WingMotion m) {
-        float w = Mth.clamp(1f - m.w(WingMotion.GROUND) - m.w(WingMotion.CHARGE), 0f, 1f);
+        float w = Mth.clamp(1f - m.w(WingMotion.GROUND), 0f, 1f);
         if (w <= 0.001f) {
             return;
         }

@@ -121,7 +121,7 @@ Principe (zorago) : une membrane de peau reste un plan qui pousse l'air, comme l
 
 ### Planeur (membrane sans doigts)
 
-- **S1 — Le planeur vole avec les bras du joueur** (née sur `squirrel`, demande de zorago : « une vraie vibe d'écureuil volant »). En vol, les bras du joueur s'écartent (croix au plané, vers l'avant au frein, pompage au battement, bras intérieur replié en virage, rentrés en piqué) et les jambes s'écartent un peu. Le bout de l'aile (fin de l'éperon, 3e os) est collé à la main du joueur par cinématique inverse (`SquirrelRig.reach` : épaule et coude ajustés en moindres carrés amortis, à moins de 0,6 px de la main). La peau se tend donc entre le flanc et la main. Pour ça, une classe de rig peut poser le corps du joueur (`WingRig.poseBody`, appelé par `FlightPose` après la pose de vol). Au sol et à la charge, le joueur garde ses bras normaux et l'aile se replie.
+- **S1 — Le planeur vole avec les bras du joueur** (née sur `squirrel`, demande de zorago : « une vraie vibe d'écureuil volant »). En vol, les bras du joueur s'écartent (croix au plané, vers l'avant au frein, pompage au battement, bras intérieur replié en virage, rentrés en piqué) et les jambes s'écartent un peu. Le bout de l'aile (fin de l'éperon, 3e os) est collé à la main du joueur par cinématique inverse (`SquirrelRig.reach` : épaule et coude ajustés en moindres carrés amortis, à moins de 0,6 px de la main). La peau se tend donc entre le flanc et la main. Pour ça, une classe de rig peut poser le corps du joueur (`WingRig.poseBody`, appelé par `FlightPose` après la pose de vol, dans tous les modes). Le collage est **permanent**, au sol aussi : la cible est la pose réelle du bras du joueur (`WingRig.playerArms`), donc la marche, la frappe et le minage tirent l'aile avec la main. À la charge, les bras se lèvent et s'écartent en tremblant. Le coude de l'aile plie toujours comme un coude humain, des deux côtés (signe imposé à l'IK, symétrique gauche/droite).
 - **Queue :** elle ne doit jamais passer sous les pieds. En vol, elle reste relevée vers l'arrière (base et bout inclinés vers le dos).
 
 ### Insecte
@@ -316,7 +316,7 @@ Règles appliquées avant revue :
 
 ### 13. Ailes de polatouche (`squirrel`, membrane sans doigts / planeur, aspects A3, A9)
 
-Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+Statut : en cours, scène régénérée après les retours 3 et 4, prête pour le jugement de zorago sur `full_flight`.
 
 Règles appliquées avant revue :
 
@@ -328,6 +328,8 @@ Retour de zorago :
 
 1. La queue passait sous les pieds en vol : elle reste maintenant relevée vers l'arrière.
 2. Animation spéciale : le bout de l'éperon est collé à la main du joueur, et les ailes suivent les bras, qui s'écartent comme un vrai écureuil volant (S1).
+3. Le bout de l'aile doit rester accroché à la main **tout le temps**, même au sol quand on frappe : collage sur la pose réelle du bras, dans tous les modes, et pose de charge bras levés. Erreur mesurée ≤ 1 px sur toutes les animations.
+4. Le coude de l'aile pliait à l'envers d'un coude humain (correction de zorago sur `left_forearm`) : biais du coude miroir et contrainte de signe dans l'IK, vérifié des deux côtés.
 
 ## Plan de review
 

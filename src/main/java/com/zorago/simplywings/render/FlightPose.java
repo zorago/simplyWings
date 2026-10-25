@@ -24,7 +24,7 @@ public final class FlightPose {
             return;
         }
         WingVisuals.Visual visual = WingVisuals.of(player);
-        if (visual == null || visual.equipped.isEmpty() || visual.mode == FlightMode.NONE) {
+        if (visual == null || visual.equipped.isEmpty()) {
             return;
         }
         float partialTick = ageInTicks - Mth.floor(ageInTicks);
@@ -39,7 +39,7 @@ public final class FlightPose {
         float t = ageInTicks * 0.05f;
         if (mode == FlightMode.TRAVEL) {
             travel(model, motion, bankDegrees, t);
-        } else {
+        } else if (mode == FlightMode.STABILIZED) {
             hover(model, motion, t);
         }
         if (rig != null) {

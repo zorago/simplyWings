@@ -325,6 +325,12 @@ public final class RigBake {
 
     private JsonObject frame(Sim sim, float seconds, float pt) {
         WingMotion motion = sim.motion(pt);
+        for (ModelPart part : body.values()) {
+            part.resetPose();
+        }
+        Step step = sim.step;
+        FlightPose.pose(player, step.mode, motion, Mth.lerp(pt, sim.prevBank, sim.bank), motion.time, rig);
+        rig.playerArms(player.rightArm, player.leftArm);
         rig.setup(motion, sim.memory);
         JsonObject frame = new JsonObject();
         frame.addProperty("t", seconds);
@@ -333,13 +339,6 @@ public final class RigBake {
             wing.add(entry.getKey(), state(entry.getValue()));
         }
         frame.add("bones", wing);
-        for (ModelPart part : body.values()) {
-            part.resetPose();
-        }
-        Step step = sim.step;
-        if (step.mode != FlightMode.NONE) {
-            FlightPose.pose(player, step.mode, motion, Mth.lerp(pt, sim.prevBank, sim.bank), motion.time, rig);
-        }
         JsonObject parts = new JsonObject();
         for (Map.Entry<String, ModelPart> entry : body.entrySet()) {
             parts.add(entry.getKey(), state(entry.getValue()));

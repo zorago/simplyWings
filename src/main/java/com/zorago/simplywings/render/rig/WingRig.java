@@ -74,6 +74,9 @@ public abstract class WingRig {
     public void poseBody(net.minecraft.client.model.PlayerModel<?> model, WingMotion motion) {
     }
 
+    public void playerArms(ModelPart right, ModelPart left) {
+    }
+
     protected final ModelPart root() {
         return bones.root();
     }

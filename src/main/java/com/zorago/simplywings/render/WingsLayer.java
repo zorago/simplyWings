@@ -70,6 +70,7 @@ public class WingsLayer extends RenderLayer<AbstractClientPlayer, PlayerModel<Ab
         WingRig rig = WingRigs.get(modelId);
         if (rig != null) {
             visual.rig.claim(rig.name());
+            rig.playerArms(getParentModel().rightArm, getParentModel().leftArm);
             rig.setup(visual.animator.motion(partialTick, style, motion), visual.rig);
             rig.render(poseStack, buffer.getBuffer(rig.renderType(ghost)), rig.light(light), OverlayTexture.NO_OVERLAY,
                     ghost ? GHOST_COLOR : -1);
