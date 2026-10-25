@@ -642,6 +642,7 @@ Règles appliquées avant revue :
 Retour de zorago :
 
 1. Au repos, les ailes étaient trop repliées et la peau se froissait : repli de repos ramené à 78 % (au lieu de 100 %).
+2. Mieux : au repos, les os tombent droit vers le bas comme des élytres. L'aile (29 px) est repliée en trois segments verticaux superposés à plat sur le dos : bras vers le bas (−89°), avant-bras remonté (+175°), main redescendue (−167°). La peau se range entre eux en fourreau. Repli de repos revenu à 100 %.
 
 ### 36. Ailes de poisson volant (`flying_fish`, planeur, aspects A3, A10)
 

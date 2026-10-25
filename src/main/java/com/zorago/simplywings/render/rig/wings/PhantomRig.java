@@ -16,10 +16,10 @@ import net.minecraft.util.Mth;
 public final class PhantomRig extends WingRig {
     private static final ResourceLocation GLOW = SimplyWings.id("textures/entity/phantom_glow.png");
     private static final int ROUSE = 0;
-    private static final float FOLD_ARM = 1.2f;
-    private static final float FOLD_ELBOW = 2.55f;
-    private static final float FOLD_WRIST = 2.35f;
-    private static final float REST_FOLD = 0.78f;
+    private static final float FOLD_ARM = 1.55f;
+    private static final float FOLD_ELBOW = 3.05f;
+    private static final float FOLD_WRIST = 2.92f;
+    private static final float REST_FOLD = 1f;
     private static final float GLIDE_BILLOW = 0.45f;
     private static final String[] TIPS = {"right_hand", "left_hand"};
     private static final float[] KEYS = Cycle.beat(0.5f, 0.2f);
