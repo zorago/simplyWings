@@ -80,6 +80,8 @@ const scapulars = (glow) => (x, row, dorsal, w, h) => {
   return dorsal ? (row >= len - 1 ? "i" : (x % 2 ? "J" : "j")) : "h"
 }
 
+const alternate = (cube, fn) => (x, row, dorsal, w, h) => fn(x + 3 * (cube.index % 2), row, dorsal, w, h)
+
 const fns = (cube, glow) => ({
   primary: primary(cube.index, glow),
   tertials: sheet({ fw: 3, steps: [0, 1, 0, 2], light: 4 }, glow),
@@ -90,7 +92,10 @@ const fns = (cube, glow) => ({
   arm_coverts: coverts({ fw: 4, shift: 0, top: "I", mid: "i" }, glow),
   marginal: marginal(glow),
   alula: primary(11, glow),
-  scapulars: scapulars(glow)
+  scapulars: scapulars(glow),
+  tertial_feather: alternate(cube, sheet({ fw: 3, steps: [0], light: 4 }, glow)),
+  secondary_feather: alternate(cube, sheet({ fw: 3, steps: [0], light: 2 }, glow)),
+  hand_feather: alternate(cube, sheet({ fw: 3, steps: [0], light: 0 }, glow))
 }[cube.kind])
 
 const base = (c) => {

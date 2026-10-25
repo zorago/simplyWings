@@ -25,6 +25,27 @@ var BIRD = (o) => {
     { name: 'hand_feathers_plate', group: 'hand_feathers', from: [W[0], y - o.handSheet, z + 1.0], to: [H[0], y, z + 1.0], kind: 'hand_sheet' },
     { name: 'hand_coverts_plate', group: 'hand_coverts', from: [W[0], y - o.handCoverts, z + 1.05], to: [H[0], y, z + 1.05], kind: 'hand_coverts' }
   ]
+  if (o.rows) {
+    const drop = new Set(['tertials_plate', 'secondaries_plate', 'hand_feathers_plate'])
+    for (let i = cubes.length - 1; i >= 0; i--) if (drop.has(cubes[i].name)) cubes.splice(i, 1)
+    const row = (name, parent, x0, x1, count, length, splay, zBase, zStep, kind) => {
+      const fw = 3
+      const step = (x1 - x0 - fw) / Math.max(1, count - 1)
+      for (let k = 0; k < count; k++) {
+        const x = x0 + step * k
+        const t = count === 1 ? 0 : k / (count - 1)
+        const L = Math.round(length[0] + (length[1] - length[0]) * t)
+        const g = name + '_' + (k + 1)
+        const zz = z + zBase + zStep * k
+        groups.push({ name: g, parent, origin: [x + fw / 2, y, z], rot: [0, 0, splay[0] + (splay[1] - splay[0]) * t] })
+        cubes.push({ name: g, group: g, from: [x, y - L, zz], to: [x + fw, y, zz], kind, index: k })
+      }
+    }
+    const count = (span) => Math.max(4, Math.round(span / 2))
+    row('tertial_feather', 'tertials', S[0], E[0], count(o.arm), [o.tertials - 2, o.tertials], [-12, 0], 0.845, -0.025, 'tertial_feather')
+    row('secondary_feather', 'secondaries', E[0], W[0] + 1, count(o.forearm), [o.secondaries - 1, o.secondaries], [2, 14], 1.0, -0.025, 'secondary_feather')
+    row('hand_feather', 'hand_feathers', W[0], H[0] + 2, 4, [o.handSheet, o.handSheet - 1], [14, 16], 1.002, 0.012, 'hand_feather')
+  }
   if (o.coverts) {
     cubes.push({ name: 'greater_coverts', group: 'secondaries', from: [E[0], y - o.coverts, z + 0.96], to: [W[0], y, z + 0.96], kind: 'greater_coverts' })
     cubes.push({ name: 'arm_coverts', group: 'tertials', from: [S[0], y - Math.min(o.coverts, o.tertials - 2), z + 0.8], to: [E[0], y, z + 0.8], kind: 'arm_coverts' })

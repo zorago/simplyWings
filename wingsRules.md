@@ -91,6 +91,8 @@ Chaque aspect demande sa propre logique. Le plan de review (en fin de document) 
 
 - **P1 — Rangées de plumes sur le bras et l'avant-bras** (née sur `basic`). Pas de plaque unique sous les deux os du centre : au moins 4 plumes séparées par os (rémiges tertiaires sur le bras, secondaires sur l'avant-bras), posées à la suite le long de l'os et qui se chevauchent un peu. Chaque plume est un os à elle, attaché à sa racine sur l'os porteur : groupes `<côté>_tertial_feather_<k>` dans `<côté>_tertials`, `<côté>_secondary_feather_<k>` dans `<côté>_secondaries` et `<côté>_hand_feather_<k>` dans `<côté>_hand_feathers` (la main aussi : plus aucune plaque sous les os, seules les petites couvertures restent en plaque) (numérotés du corps vers le bout de l'aile). `FeatherWing` les détecte : au repli, chaque plume tourne autour de sa propre racine pour pendre sous l'os, et l'éventail se referme (plumes parallèles). Déployée, l'éventail s'ouvre selon l'angle de repos de chaque plume : les tertiaires penchent vers le corps, les secondaires vers le bout de l'aile. Profondeur : chaque plume de la rangée a son propre Z, décalé de 0,025, pour éviter le scintillement. Texture : une bande par plume (face ventrale puis face dorsale), deux tons alternés, rachis clair au centre, pointe sombre arrondie.
 
+- **P1 dans la bibliothèque d'oiseau** : `art/wings/lib/bird.js` génère les rangées de P1 quand l'aile passe `rows: true` (tertiaires et secondaires : au moins 4, environ une plume pour 2 px d'os ; main : 4). Les plaques correspondantes disparaissent. Côté texture, chaque plume reprend le motif de la plaque d'origine avec les tons alternés (`alternate` dans `seraph.px.js`). Les oiseaux de la phase 2 n'ont qu'à activer l'option.
+
 - **P2 — Plan de portance des plumes** (née sur `basic`). L'aile forme une seule surface qui emprisonne l'air dessous, sans plume qui casse ou en traverse une autre. Deux mécanismes dans `FeatherWing` :
   - **Torsion de raccord aux articulations** : quand l'avant-bras ou la main se plie hors du plan (`BEND_ELBOW`, `BEND_WRIST`), les plumes de la rangée tournent progressivement autour de leur tige. Les tertiaires près du coude prennent la moitié du pli de l'avant-bras. Les secondaires vont de −½ pli du coude (côté corps) à +½ pli du poignet (côté main). La plaque de main reprend −0,3 du pli du poignet.
   - **Rangée de la main, entre deux plans** (retour de zorago : les plumes de la main sortaient du plan). La main tourne sur elle-même (`HAND_TWIST`) et porte les primaires, ce que les secondaires ne font pas. Les plumes de la main ne suivent donc pas la main telle quelle. `FeatherWing.alignHandRow` calcule le plan de la dernière secondaire et celui de la dernière primaire, puis amène chaque plume de la main entre les deux, par la plus petite rotation (15 % du chemin vers les primaires pour la plume côté corps, 85 % pour celle côté bout). Résultat sur toutes les animations de `basic` : au plus 5° d'écart entre deux plumes voisines (contre 48° avant), et l'écart total entre secondaires et primaires (jusqu'à 30°) est réparti sur toute la rangée.
@@ -193,6 +195,18 @@ Ce qui reste propre au feu : vacillement de chaque langue, embrasement au coup (
 Statut : **terminé** (25 octobre 2026), validé par zorago sans modification. Note de zorago : les insectes plus complexes (ancient, beetle, moth, psyche) auront peut-être des idles à revoir.
 
 Règles appliquées avant revue : G1 (I3), G2 (traînée au bout de l'aile avant), G3 (I4), G4 (I1), G5 (I2), G6 (rien à faire), G7 (sans objet : pas d'ornement à cheval sur des os).
+
+### 5. Ailes de séraphin (`seraph`, famille plume, aspect A7)
+
+Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+
+Règles appliquées avant revue :
+
+- P1 sur les trois paires (`rows: true`) : 15 plumes par aile pour la paire centrale, 13 pour la haute, 12 pour la basse. P2 repris par `FeatherWing`.
+- G1 à G5 via `FlightRules`, pour chaque paire. Coordination des trois paires (A7), proposée :
+  - vague décalée : la paire haute bat un peu avant, la basse un peu après (même décalage pour le stationnaire), et le BLAST de l'envol part en cascade de haut en bas ;
+  - en éventail : la paire haute est plus levée et la basse plus basse, en parachute (×1,4) comme à la charge (×1,6). Au plané, les paires s'étagent de la tête aux pieds ;
+  - les 5 idles au sol de seraph sont conservés.
 
 ## Plan de review
 
