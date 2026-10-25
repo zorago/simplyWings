@@ -21,7 +21,7 @@ public final class CommonRig extends WingRig {
     private static final Cycle STROKE = Cycle.of(KEYS, 0.09f, 0.5f, 0.82f, 0.78f, 0.35f, -0.14f);
     private static final Cycle BEND_ELBOW = Cycle.of(KEYS, -0.44f, 0f, 0.25f, 0.22f, 0.06f, -0.61f);
     private static final Cycle BEND_WRIST = Cycle.of(KEYS, -0.61f, -0.17f, 0.2f, 0.24f, 0.12f, -0.7f);
-    private static final Cycle SWEEP = Cycle.of(KEYS, 0.2f, -0.1f, -0.2f, -0.1f, 0.25f, 0.3f);
+    private static final Cycle SWEEP = Cycle.of(KEYS, -0.25f, 0.05f, 0.3f, 0.28f, 0f, -0.3f);
     private static final Cycle ELBOW = Cycle.of(KEYS, 0.25f, 0.5f, 0.15f, 0f, -0.05f, 0.05f);
     private static final Cycle WRIST = Cycle.of(KEYS, 0.45f, 0.65f, 0.2f, -0.05f, -0.1f, 0.1f);
     private static final Cycle TWIST = Cycle.of(KEYS, 0f, 0.3f, 0.1f, -0.05f, -0.25f, -0.1f);
@@ -140,6 +140,7 @@ public final class CommonRig extends WingRig {
             drive.add(RigPose.BEND_ELBOW, a * BEND_ELBOW.at(t));
             drive.add(RigPose.BEND_WRIST, a * BEND_WRIST.at(t));
             drive.add(RigPose.BEND_TIPS, a * 0.25f * BEND_WRIST.lagged(t, 0.06f));
+            drive.add(RigPose.CAMBER, a * 1.2f * STROKE.lagged(t, 0.06f));
         }
         float sw = m.stall;
         if (sw > 0.001f) {
@@ -185,6 +186,13 @@ public final class CommonRig extends WingRig {
         drive.add(RigPose.ELBOW, brake * 0.3f * recover);
         drive.add(RigPose.WRIST, brake * 0.4f * recover);
         drive.add(RigPose.BEND_TIPS, brake * 0.25f * Mth.sin(push - 0.6f));
+
+        float airborne = Mth.clamp(1f - m.w(WingMotion.GROUND) - m.w(WingMotion.CHARGE), 0f, 1f);
+        drive.add(RigPose.CAMBER, -0.15f * airborne * (1f - drive.get(RigPose.FOLD)));
+        drive.add(RigPose.CAMBER, chute * (0.35f + 0.06f * Mth.sin(time * 5.9f)));
+        if (hw > 0.001f) {
+            drive.add(RigPose.CAMBER, hw * 0.3f * Mth.sin(m.hoverPhase));
+        }
 
         drive.set(RigPose.FOLD, Mth.clamp(drive.get(RigPose.FOLD), 0f, 1f));
         drive.set(RigPose.FAN, Math.max(0f, drive.get(RigPose.FAN)));

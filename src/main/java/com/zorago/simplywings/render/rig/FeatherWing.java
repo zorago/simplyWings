@@ -58,13 +58,17 @@ public final class FeatherWing {
         float weight(int index, int count);
     }
 
-    private static void row(Bone group, List<Bone> feathers, float turn, float fold) {
+    private static void row(Bone group, List<Bone> feathers, float turn, float fold, float twistIn, float twistOut, float camber) {
         if (feathers.isEmpty()) {
-            group.rotate(0f, 0f, turn);
+            group.rotate(camber, 0f, turn);
             return;
         }
-        for (Bone feather : feathers) {
-            feather.rotation(feather.rest().xRot, feather.rest().yRot, feather.rest().zRot * (1f - fold) + turn);
+        int n = feathers.size();
+        for (int k = 0; k < n; k++) {
+            Bone feather = feathers.get(k);
+            float t = n == 1 ? 0.5f : k / (float) (n - 1);
+            feather.rotation(feather.rest().xRot + camber, feather.rest().yRot + twistIn + (twistOut - twistIn) * t,
+                    feather.rest().zRot * (1f - fold) + turn);
         }
     }
 
@@ -74,12 +78,16 @@ public final class FeatherWing {
         float fan = p.get(RigPose.FAN) * (1f - fold);
         shoulder.rotate(p.get(RigPose.TWIST), s * p.get(RigPose.STROKE) - p.get(RigPose.ASYM), s * p.get(RigPose.SWEEP));
         arm.rotate(0f, 0f, s * -foldArm * fold);
-        row(tertials, tertial, s * foldArm * fold * 0.85f, fold);
+        float bendElbow = s * p.get(RigPose.BEND_ELBOW);
+        float bendWrist = s * p.get(RigPose.BEND_WRIST);
+        float camber = p.get(RigPose.CAMBER);
+        row(tertials, tertial, s * foldArm * fold * 0.85f, fold, 0f, 0.5f * bendElbow, camber);
         forearm.rotate(0f, s * p.get(RigPose.BEND_ELBOW), s * (foldElbow * fold - p.get(RigPose.ELBOW)));
-        row(secondaries, secondary, s * (-(foldElbow - foldArm) * fold * 0.95f + 0.4f * p.get(RigPose.ELBOW)), fold);
+        row(secondaries, secondary, s * (-(foldElbow - foldArm) * fold * 0.95f + 0.4f * p.get(RigPose.ELBOW)), fold,
+                -0.5f * bendElbow, 0.5f * bendWrist, camber);
         hand.rotate(p.get(RigPose.HAND_TWIST), s * p.get(RigPose.BEND_WRIST), s * (-foldWrist * fold - p.get(RigPose.WRIST)));
-        handFeathers.rotate(0f, 0f, s * (foldArm - foldElbow + foldWrist) * 0.9f * fold);
-        handCoverts.rotate(0f, 0f, s * ((foldElbow - foldArm - foldWrist) * -0.6f * fold));
+        handFeathers.rotate(camber, -0.3f * bendWrist, s * (foldArm - foldElbow + foldWrist) * 0.9f * fold);
+        handCoverts.rotate(0.5f * camber, -0.3f * bendWrist, s * ((foldElbow - foldArm - foldWrist) * -0.6f * fold));
         int count = primary.size();
         for (int k = 0; k < count; k++) {
             Bone feather = primary.get(k);

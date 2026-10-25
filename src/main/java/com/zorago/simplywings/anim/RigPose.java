@@ -15,7 +15,8 @@ public final class RigPose {
     public static final int FAN = 9;
     public static final int HAND_TWIST = 10;
     public static final int ASYM = 11;
-    public static final int SIZE = 12;
+    public static final int CAMBER = 12;
+    public static final int SIZE = 13;
 
     public final float[] v = new float[SIZE];
 
