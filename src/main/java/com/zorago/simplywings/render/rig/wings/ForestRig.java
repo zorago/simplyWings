@@ -5,6 +5,7 @@ import com.zorago.simplywings.anim.RigMemory;
 import com.zorago.simplywings.anim.WingMotion;
 import com.zorago.simplywings.render.rig.Bone;
 import com.zorago.simplywings.render.rig.Bones;
+import com.zorago.simplywings.render.rig.FlightRules;
 import com.zorago.simplywings.render.rig.WingRig;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,8 +20,13 @@ public final class ForestRig extends WingRig {
     private static final String[] WINGS = {"branch", "hind_branch"};
     private static final String[] SEGMENTS = {"", "_mid", "_tip"};
     private static final float[] KEYS = Cycle.beat(0.5f, 0.25f);
-    private static final Cycle STROKE = Cycle.of(KEYS, -0.7f, 0.1f, 0.95f, 1f, -0.3f, -0.85f);
-    private static final Cycle SWEEP = Cycle.of(KEYS, 0.18f, -0.12f, -0.2f, -0.05f, 0.22f, 0.28f);
+    private static final Cycle STROKE = Cycle.of(KEYS, 0.09f, 0.5f, 0.82f, 0.78f, 0.35f, -0.14f);
+    private static final Cycle SWEEP = Cycle.of(KEYS, -0.25f, 0.05f, 0.3f, 0.28f, 0f, -0.3f);
+    private static final float FLOOR = -5f * Mth.DEG_TO_RAD;
+    private static final float CHUTE_STROKE = 0.31f;
+    private static final float CHUTE_RAISE = 0.85f;
+    private static final float CHUTE_PITCH = 0.48f;
+    private static final String[] TIPS = {"right_branch_tip", "left_branch_tip"};
     private static final Cycle TWIST = Cycle.of(KEYS, 0f, 0.28f, 0.1f, -0.05f, -0.24f, -0.08f);
 
     private final Bone[][][] segment = new Bone[2][2][3];
@@ -29,6 +35,11 @@ public final class ForestRig extends WingRig {
 
     public ForestRig() {
         super("forest");
+    }
+
+    @Override
+    public String[] tipBones() {
+        return TIPS;
     }
 
     @Override
@@ -69,7 +80,7 @@ public final class ForestRig extends WingRig {
     public void tick(WingMotion m, RigMemory memory) {
         memory.spring(IDLE, m.rouse, 0.15f, 0.75f);
         memory.spring(SETTLE, m.w(WingMotion.LANDING), 0.3f, 0.6f);
-        float fold = m.w(WingMotion.GROUND) + 0.8f * m.w(WingMotion.TUCK) + 0.45f * m.diveDepth * m.w(WingMotion.DIVE)
+        float fold = m.w(WingMotion.GROUND) * (1f - m.w(WingMotion.CHARGE)) + 0.8f * m.w(WingMotion.TUCK) + 0.45f * m.diveDepth * m.w(WingMotion.DIVE)
                 + 0.3f * m.w(WingMotion.AIR);
         memory.spring(FOLD, Mth.clamp(fold, 0f, 1f), 0.12f, 0.7f);
         memory.spring(WIND, Mth.clamp(m.speed / 25f, 0f, 1.3f), 0.12f, 0.75f);
@@ -101,12 +112,23 @@ public final class ForestRig extends WingRig {
             }
         }
         float f = Mth.clamp(fold - 0.6f * sun, 0f, 1f);
-        float lift = 0.8f * m.w(WingMotion.CHARGE) + 0.22f * hover + 0.06f * cruise + 0.35f * brake + 0.3f * m.w(WingMotion.AIR)
-                + 0.35f * sun;
-        float sweep = 0.12f * hover + 0.45f * brake - 0.35f * m.w(WingMotion.DIVE) * Mth.lerp(m.diveDepth, 0.4f, 1f)
-                - 0.4f * m.w(WingMotion.TUCK) + 0.25f * m.w(WingMotion.CHARGE) + 0.2f * sun;
-        float twist = -0.65f * brake;
-        float rustleAmp = 0.06f + 0.1f * wind + 0.05f * hover + 0.12f * brake + 0.3f * shiver + 0.15f * settle + 0.2f * m.stall;
+        float charge = m.w(WingMotion.CHARGE);
+        float chute = FlightRules.chute(m);
+        float slowBrake = brake - chute;
+        float warm = charge * charge;
+        float blast = 0f;
+        if (m.launch >= 0f) {
+            float lp = m.launch;
+            float strike = Mth.clamp(lp / 0.3f, 0f, 1f);
+            blast = (lp < 0.3f ? 1f : 1f - (lp - 0.3f) / 0.7f) * (1f - 2f * strike);
+        }
+        float lift = 0.35f * charge + 0.25f * hover + 0.06f * cruise + 0.3f * slowBrake + 0.3f * m.w(WingMotion.AIR)
+                + 0.35f * sun + 0.7f * Math.max(0f, blast) + 0.035f * warm * Mth.sin(time * 2.9f);
+        float sweep = 0.12f * hover - 0.35f * m.w(WingMotion.DIVE) * Mth.lerp(m.diveDepth, 0.4f, 1f)
+                - 0.4f * m.w(WingMotion.TUCK) + 0.75f * charge + 0.2f * sun + 0.03f * warm * Mth.sin(time * 3.7f);
+        float twist = hover * FlightRules.HOVER_PLANE;
+        float rustleAmp = 0.06f + 0.1f * wind + 0.05f * hover + 0.12f * brake + 0.3f * shiver + 0.15f * settle + 0.2f * m.stall
+                + 0.25f * warm;
         float rustleRate = 0.35f + 0.6f * wind + 0.9f * shiver;
         float beatA = m.beating() ? m.beatWeight : 0f;
         float hw = m.hoverBeat;
@@ -125,13 +147,18 @@ public final class ForestRig extends WingRig {
                 }
                 if (hw > 0.001f) {
                     float ph = m.hoverPhase - w * 0.6f;
-                    stroke += hw * 0.6f * Mth.cos(ph);
-                    tw += hw * 0.4f * Mth.sin(ph);
+                    sw += hw * (0.2f + 0.4f * Mth.cos(ph));
+                    stroke += hw * 0.12f * Mth.sin(2f * ph);
+                    tw += hw * 0.45f * Mth.sin(ph);
                 }
                 stroke += settle * 0.12f * Mth.sin(time * 1.4f + w);
                 stroke += 0.015f * Mth.sin(time * 0.06f + w) * m.w(WingMotion.GROUND);
+                stroke += m.stall * (0.25f + 0.3f * Mth.sin(time * 1.2f + w));
+                stroke = Mth.lerp(chute, stroke, CHUTE_STROKE * (w == 0 ? 1f : 0.9f));
+                sw = Mth.lerp(chute, sw, w == 0 ? CHUTE_RAISE : -0.2f) + chute * 0.02f * Mth.sin(time * 4.7f + w);
+                tw = Mth.lerp(chute, tw, CHUTE_PITCH);
                 Bone[] seg = segment[i][w];
-                seg[0].rotate(tw, s * stroke - m.bank * 0.3f, s * sw);
+                seg[0].rotate(tw, s * Math.max(FLOOR, stroke - s * m.bank * 0.3f), s * sw);
                 for (int k = 1; k < 3; k++) {
                     float whip = beatA > 0f ? beatA * 0.25f * STROKE.lagged(m.beat - w * 0.07f, 0.05f + 0.05f * k) : 0f;
                     float droop = -0.22f * f * k + 0.04f * Mth.sin(time * 0.2f + k + w) * (0.5f + wind);

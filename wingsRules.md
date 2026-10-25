@@ -299,6 +299,16 @@ Retour de zorago (le style liquide marche) :
 3. Repliées, les deux ailes se superposent légèrement : l'aile gauche passe sur la droite (épaule gauche tournée de 12,5°, pose réglée par zorago dans Blockbench sur `idle_ground`, appliquée à toutes les poses repliées).
 4. Le coin bas de l'aile côté dos (la « base de la lame ») est arrondi sur 4 px, pour ne plus avoir un bord coupé une fois refermée. La ligne droite contre le dos est gardée (plus de 10 px).
 
+### 12. Ailes de forêt (`forest`, matière non squelettique, aspects A11, A8, A7)
+
+Statut : en cours, scène prête pour le jugement de zorago sur `full_flight`.
+
+Règles appliquées avant revue :
+
+- Pas de peau : les feuilles et les fleurs ont chacune leur os et suivent leur branche, comme des plumes. Le feuillage peut laisser passer le jour, c'est naturel.
+- G1 à G5 sur les branches : parachute (branche principale levée vers l'avant, branche arrière abaissée pour ajouter de la surface, comme `seraph` et `night`) ; frein lent ; charge où les branches se lèvent et les feuilles frémissent de plus en plus, puis BLAST ; battement anatomique au-dessus de −5° (virages compris, côté par côté) avec nage avant/arrière, le fouet des segments conservé ; stationnaire à plat, battement de haut en bas ; traînées au bout de la branche.
+- Conservé : le frémissement de chaque feuille avec la vitesse, les fleurs, les 3 idles (floraison, bruissement, étirement vers le soleil).
+
 ## Plan de review
 
 Deux phases. **Phase 1** : une paire dominante par aspect, choisie pour ouvrir le plus de logique nouvelle, revue une à une avec zorago, jusqu'à ce que chaque aspect ait ses règles. **Phase 2** : toutes les autres paires, une à une aussi. On applique d'abord toutes les règles de leurs familles et de leurs aspects, puis on ne polit que ce qui leur est propre.
