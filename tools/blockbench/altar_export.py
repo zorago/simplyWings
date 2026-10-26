@@ -7,6 +7,7 @@ OUT = ROOT / "src/main/resources/assets/simplywings/gacha/altar_show.json.gz"
 EXCLUDED_ROOTS = {"floor", "build", "anchors", "altar", "player", "particles"}
 EXCLUDED_ANIMS = {"summon_x10_particles"}
 LIT_ROOTS = {"flyers", "clouds", "offerings"}
+NO_CUBES = {"camera", "camera_target"}
 FACES = ("north", "east", "south", "west", "up", "down")
 INTERP = {"linear": 0, "catmullrom": 1, "step": 2, "bezier": 1}
 
@@ -36,7 +37,7 @@ def export(rig, textures, animations, meta):
         index[g["name"]] = idx
         cubes = []
         for child in g["children"]:
-            if isinstance(child, dict):
+            if isinstance(child, dict) or g["name"] in NO_CUBES:
                 continue
             e = rig.by_uuid[child]
             inflate = e.get("inflate", 0) or 0

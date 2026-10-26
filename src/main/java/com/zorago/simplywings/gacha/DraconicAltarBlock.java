@@ -56,6 +56,7 @@ public class DraconicAltarBlock extends HorizontalDirectionalBlock implements ne
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
         if (player instanceof ServerPlayer serverPlayer) {
+            level.getBlockEntity(pos);
             serverPlayer.openMenu(new SimpleMenuProvider((id, inventory, p) -> new AltarMenu(id, inventory, ContainerLevelAccess.create(level, pos)),
                     Component.translatable("container.simplywings.draconic_altar")), buf -> buf.writeBlockPos(pos));
             PacketDistributor.sendToPlayer(serverPlayer, Gacha.state(serverPlayer));
@@ -74,6 +75,16 @@ public class DraconicAltarBlock extends HorizontalDirectionalBlock implements ne
             Level level, BlockState state, net.minecraft.world.level.block.entity.BlockEntityType<T> type) {
         return level.isClientSide || type != com.zorago.simplywings.block.ModBlocks.DRACONIC_ALTAR_ENTITY.get() ? null
                 : (l, p, s, be) -> DraconicAltarBlockEntity.serverTick(l, p, s, (DraconicAltarBlockEntity) be);
+    }
+
+    @Override
+    protected boolean isRandomlyTicking(BlockState state) {
+        return true;
+    }
+
+    @Override
+    protected void randomTick(BlockState state, net.minecraft.server.level.ServerLevel level, BlockPos pos, RandomSource random) {
+        level.getBlockEntity(pos);
     }
 
     @Override

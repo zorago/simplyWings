@@ -89,6 +89,7 @@ public final class AltarShows {
 
     public static void startAnimation(ServerPlayer player, BlockPos altar, String anim, List<Integer> tiers) {
         ServerLevel level = player.serverLevel();
+        level.getBlockEntity(altar);
         ACTIVE.removeIf(s -> s.dimension == level.dimension() && s.payload.pos().equals(altar) && clear(level, s));
         int facing = facing(level.getBlockState(altar));
         Payloads.SummonShow payload = new Payloads.SummonShow(altar, facing, anim, level.getGameTime() + 2,
