@@ -188,6 +188,7 @@ Les ids sont à ajouter à `SOUND_DESIGN.md` § 6.4 (ils complètent ceux de l'a
   - Révélation : elle recule pour cadrer les ailes, puis tourne lentement.
 - Les clés de référence (`CAM` dans `altar_timeline.py`) sont celles du master ; les autres variantes les étirent par ancres (`remap`), comme le prototype. Sans sigil, rayon et hauteur sont réduits.
 - **Convention Blockbench** vérifiée : dans les animations d'os, la rotation **X est inversée** par rapport aux rotations de cubes. Le lecteur Java devra appliquer la même convention.
+- **Vue caméra dans Blockbench** : plugin `tools/blockbench/simplywings_camera.js`, installé dans le Blockbench de zorago. Menu Affichage, « Camera view (SimplyWings) », raccourci **K** : pendant la lecture ou le déplacement sur la timeline, la vue principale regarde à travers `camera`, vers `camera_target` (focale 50°, appareil et cible masqués).
 - Revue dans Blockbench : `swPlay('<animation>', t)` (fonction installée dans la console par Claude) place le temps et renvoie la position de la caméra et de sa cible.
 
 ### 9.3 Reste à faire
