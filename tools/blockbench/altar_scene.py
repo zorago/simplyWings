@@ -120,8 +120,8 @@ def to_bb(x, y, z, center):
 SOLID_SKIP = {"minecraft:air"}
 
 
-def main():
-    source = Path(sys.argv[1]) if len(sys.argv) > 1 else (WORLD_EXPORT if WORLD_EXPORT.exists() else RESOURCE)
+def build(source=None):
+    source = source or (WORLD_EXPORT if WORLD_EXPORT.exists() else RESOURCE)
     size, blocks = load_template(source)
     altar = next(p for p, s in blocks.items() if s["Name"] == ALTAR)
     floor_y = altar[1] - 2
@@ -182,6 +182,22 @@ def main():
             rotation = [0, 0, 0]
             rotation["xyz".index(r["axis"])] = r["angle"]
         groups["altar"].append(cube(f"altar_{i}", frm, to, faces, origin, rotation, color=4))
+    return source, groups, tex, altar, floor_y, anchors
+
+
+def textures_json(tex):
+    textures = []
+    for i, (ref, data) in enumerate(tex.list):
+        textures.append({"name": ref.split("/")[-1] + ".png", "folder": "", "namespace": "", "id": str(i),
+                         "width": 16, "height": 16, "uv_width": 16, "uv_height": 16, "particle": False,
+                         "render_mode": "default", "render_sides": "auto", "visible": True, "internal": True,
+                         "saved": True, "uuid": new_id(),
+                         "source": "data:image/png;base64," + base64.b64encode(data).decode()})
+    return textures
+
+
+def main():
+    source, groups, tex, altar, floor_y, anchors = build(Path(sys.argv[1]) if len(sys.argv) > 1 else None)
     elements, outliner = [], []
     for gname, items in groups.items():
         if not items:
@@ -190,13 +206,7 @@ def main():
         outliner.append({"name": gname, "origin": [0, 0, 0], "color": 0, "uuid": new_id(), "export": True,
                          "isOpen": gname == "anchors", "locked": gname == "floor", "visibility": True,
                          "autouv": 0, "children": [e["uuid"] for e in items]})
-    textures = []
-    for i, (ref, data) in enumerate(tex.list):
-        textures.append({"name": ref.split("/")[-1] + ".png", "folder": "", "namespace": "", "id": str(i),
-                         "width": 16, "height": 16, "uv_width": 16, "uv_height": 16, "particle": False,
-                         "render_mode": "default", "render_sides": "auto", "visible": True, "internal": True,
-                         "saved": True, "uuid": new_id(),
-                         "source": "data:image/png;base64," + base64.b64encode(data).decode()})
+    textures = textures_json(tex)
     bb = {"meta": {"format_version": "4.10", "model_format": "free", "box_uv": False},
           "name": "summoning_altar", "model_identifier": "", "visible_box": [1, 1, 0],
           "variable_placeholders": "", "variable_placeholder_buttons": [], "timeline_setups": [],
