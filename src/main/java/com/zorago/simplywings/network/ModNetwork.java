@@ -20,6 +20,7 @@ public final class ModNetwork {
         r.playToClient(Payloads.TakeoffEvent.TYPE, Payloads.TakeoffEvent.CODEC, (p, ctx) -> ClientNet.onTakeoffEvent(p));
         r.playToClient(Payloads.GachaState.TYPE, Payloads.GachaState.CODEC, (p, ctx) -> ClientNet.onGachaState(p));
         r.playToClient(Payloads.GachaResults.TYPE, Payloads.GachaResults.CODEC, (p, ctx) -> ClientNet.onGachaResults(p));
+        r.playToClient(Payloads.SummonShow.TYPE, Payloads.SummonShow.CODEC, (p, ctx) -> ClientNet.onSummonShow(p));
 
         r.playToServer(Payloads.RequestMode.TYPE, Payloads.RequestMode.CODEC,
                 (p, ctx) -> ServerFlight.onRequestMode((ServerPlayer) ctx.player(), p));

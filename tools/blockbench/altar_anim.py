@@ -114,12 +114,12 @@ class Textures:
         self.entries = [{"ref": ref, "data": data} for ref, data in scene_tex.list]
         self.by_ref = {e["ref"]: i for i, e in enumerate(self.entries)}
 
-    def add(self, ref, data, uv=None, frames=None):
+    def add(self, ref, data, uv=None, frames=None, path=None):
         if ref in self.by_ref:
             return self.by_ref[ref]
         img = Image.open(io.BytesIO(data))
         w, h = img.size
-        entry = {"ref": ref, "data": data, "width": w, "height": h, "uv_width": (uv or (w, h))[0], "uv_height": (uv or (w, h))[1]}
+        entry = {"ref": ref, "data": data, "width": w, "height": h, "uv_width": (uv or (w, h))[0], "uv_height": (uv or (w, h))[1], "path": path}
         if frames:
             entry.update({"uv_height": entry["uv_width"], "frame_time": frames})
         self.entries.append(entry)
@@ -145,7 +145,8 @@ class Rig:
     def __init__(self, palette, textures):
         self.palette = palette
         self.textures = textures
-        self.tex = textures.add("simplywings:gacha/palette", palette.png)
+        self.tex = textures.add("simplywings:gacha/palette", palette.png, path="simplywings:textures/gacha/palette.png")
+        self.meta = {}
         self.groups = {}
         self.roots = []
         self.elements = []
@@ -402,7 +403,7 @@ def build_flame(rig, name, x, z, tex):
 
 def build_flames(rig):
     for name, x, z, _ in flame_positions():
-        tex = rig.textures.add(f"simplywings:gacha/flame_{name}", SPRITES[f"flame_{name}"], frames=2)
+        tex = rig.textures.add(f"simplywings:gacha/flame_{name}", SPRITES[f"flame_{name}"], frames=2, path=f"simplywings:textures/gacha/flame_{name}.png")
         build_flame(rig, name, x, z, tex)
 
 
@@ -525,7 +526,7 @@ def octa(rig, bone, center, radius, v, color, core="s_white"):
 
 
 def build_star(rig):
-    glow = rig.textures.add("simplywings:gacha/glow", SPRITES["glow"], frames=2)
+    glow = rig.textures.add("simplywings:gacha/glow", SPRITES["glow"], frames=2, path="simplywings:textures/gacha/glow.png")
     rig.bone("star", (0, 0, 0))
     for c in ("white", "blue", "violet", "gold", "red"):
         b = rig.bone(f"star_{c}", (0, 0, 0), "star")
@@ -630,7 +631,8 @@ def import_rig(rig, model, parent, prefix):
     tex_map = {}
     for i, t in enumerate(data["textures"]):
         raw = base64.b64decode(t["source"].split(",", 1)[1])
-        tex_map[i] = rig.textures.add(f"simplywings:rigs/{model}_{i}", raw, uv=(t.get("uv_width", t["width"]), t.get("uv_height", t["height"])))
+        tex_map[i] = rig.textures.add(f"simplywings:rigs/{model}_{i}", raw, uv=(t.get("uv_width", t["width"]), t.get("uv_height", t["height"])),
+                                      path=f"simplywings:textures/entity/{t['name']}")
     groups = {g["uuid"]: g for g in data.get("groups", [])}
     elements = {e["uuid"]: e for e in data["elements"]}
     tops = []
@@ -688,7 +690,7 @@ def build_flyers(rig):
 def build_player(rig):
     rig.bone("player", PLAYER)
     player_model(rig, "player", PLAYER)
-    feather_tex = rig.textures.add("simplywings:item/summoning_feather", ITEM_TEX.read_bytes())
+    feather_tex = rig.textures.add("simplywings:item/summoning_feather", ITEM_TEX.read_bytes(), path="simplywings:textures/item/summoning_feather.png")
     rig.bone("offerings", (0, 0, 0))
     for i in range(10):
         b = rig.bone(f"offering_{i}", (0, 0, 0), "offerings")
@@ -757,6 +759,10 @@ def main():
           "unhandled_root_fields": {}, "resolution": {"width": 16, "height": 16},
           "elements": elements, "outliner": outliner, "textures": textures.json(), "animations": rig.animations()}
     OUT.write_text(json.dumps(bb, separators=(",", ":")), encoding="utf-8")
+    (ROOT / "src/main/resources/assets/simplywings/textures/gacha/palette.png").write_bytes(palette.png)
+    import altar_export
+    nb, raw, gz = altar_export.export(rig, textures, bb["animations"], rig.meta)
+    print(f"runtime: {nb} bones, {raw // 1024} KiB json, {gz // 1024} KiB gzip")
     keys = sum(len(f["keyframes"]) for a in bb["animations"] for f in a["animators"].values())
     print(f"{len(elements)} cubes, {len(rig.groups)} bones, {keys} keyframes, {len(bb['textures'])} textures -> {OUT.relative_to(ROOT)}")
 

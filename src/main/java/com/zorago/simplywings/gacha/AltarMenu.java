@@ -26,6 +26,10 @@ public class AltarMenu extends AbstractContainerMenu {
         return ItemStack.EMPTY;
     }
 
+    public java.util.Optional<net.minecraft.core.BlockPos> pos() {
+        return access.evaluate((level, pos) -> pos);
+    }
+
     @Override
     public boolean stillValid(Player player) {
         return stillValid(access, player, ModBlocks.DRACONIC_ALTAR.get());

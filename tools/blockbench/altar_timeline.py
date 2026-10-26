@@ -11,6 +11,7 @@ POST = 2.4
 FLAME_SPEED = {"fire": 1.0, "dark": 0.55, "earth": 0.45, "water": 0.75, "light": 0.8, "air": 1.3}
 FLYER_CATEGORIES = {"b": ["common"], "a": ["common"], "s": ["rare", "common"], "ss": ["epic", "rare"], "sss": ["legendary", "epic"]}
 CONTAINERS = ("flyers", "clouds", "offerings", "particles", "multi_stars")
+FLIGHTS = {}
 
 
 class Plan:
@@ -86,8 +87,7 @@ def build_extras(rig, pulls):
     rig.bone("multi_stars", (0, 0, 0))
     for i, p in enumerate(pulls):
         b = rig.bone(f"multi_star_{i}", (0, 0, 0), "multi_stars")
-        c = TIER_COLORS[TIERS.index(p)]
-        octa(rig, b, (0, 0, 0), 13, 3.5, f"s_{c}")
+        octa(rig, b, (0, 0, 0), 13, 3.5, "s_white", core="circle_hot")
         rig.box(b, (0, 0, 0), (2, 60, 2), "s_white")
         rig.box(b, (0, 0, 0), (60, 2, 2), "s_white")
         rig.crossed(b, (0, 0, 0), 64, 64, glow, count=2, uv=(32, 32))
@@ -489,6 +489,7 @@ def flights(rig, A, P, flyers, rnd):
                 rig.key(A, cb, "scale", at + 0.5, (1, 1, 1), "linear")
                 rig.key(A, cb, "scale", at + 1.1, (1.4, 0, 1.4), "linear")
                 rig.sample(A, cb, "rotation", t0, at + 1.1, lambda t: (0, 20 * t, 0), rate=1, interp="linear")
+            FLIGHTS.setdefault(A, []).append([round(rig.offsets.get(A, 0) + start, 3), round(dur, 3)])
             cloud += 2
 
 
@@ -756,6 +757,13 @@ def summon(rig, A, P, rnd, flyers):
         particles(rig, A, P, random.Random(5))
     camera_keys(rig, A, P, lambda t: star_pos_for_camera(P, t))
     rig.lengths[A] = round(PRE + P.end + POST, 2)
+    rig.meta[A] = {"pre": PRE, "post": POST, "rank": P.rank, "mythic": P.mythic or "", "sigil": P.sigil, "wings": P.wings,
+                   "birth": PRE + P.birth, "desc": PRE + P.desc, "hover": PRE + P.hover, "burst": PRE + P.burst, "reveal": PRE + P.reveal,
+                   "settle": PRE + P.settle, "end": PRE + P.end, "pillarH": P.pillar_h, "top": P.top,
+                   "beats": [PRE + b[0] for b in P.beats], "beatColors": [b[1] for b in P.beats],
+                   "spawn": [PRE + t for t in P.spawn] if P.pulls else [], "pulls": P.pulls or [],
+                   "player": list(PLAYER), "crystal": list(CRYSTAL), "offerings": P.offerings,
+                   "flights": FLIGHTS.pop(A, []), "ignite": [PRE + IGNITE[n] for n, *_ in flame_positions()]}
     hide_unused(rig, A)
 
 
@@ -962,6 +970,7 @@ def idle(rig, A):
     flames(rig, A, Plan("idle", "b"), length, quiet=True)
     rig.key(A, "player", "scale", 0, (1, 1, 1), "step", absolute=True)
     rig.lengths[A] = length
+    rig.meta[A] = {"pre": 0, "post": 0}
     hide_unused(rig, A)
 
 

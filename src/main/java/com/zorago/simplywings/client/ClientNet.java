@@ -24,6 +24,10 @@ public final class ClientNet {
         ClientGacha.onResults(payload);
     }
 
+    public static void onSummonShow(Payloads.SummonShow payload) {
+        com.zorago.simplywings.client.show.ClientShows.start(payload);
+    }
+
     public static void onStamina(Payloads.Stamina payload) {
         ClientWings.setStamina(payload.stamina());
         ClientWings.setRescueJumps(payload.rescueJumps());

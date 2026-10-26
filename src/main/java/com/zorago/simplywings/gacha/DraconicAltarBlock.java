@@ -24,7 +24,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.network.PacketDistributor;
 
-public class DraconicAltarBlock extends HorizontalDirectionalBlock {
+public class DraconicAltarBlock extends HorizontalDirectionalBlock implements net.minecraft.world.level.block.EntityBlock {
     public static final MapCodec<DraconicAltarBlock> CODEC = simpleCodec(DraconicAltarBlock::new);
     private static final VoxelShape SHAPE = Shapes.or(Block.box(0, 0, 0, 16, 6, 16), Block.box(3, 6, 3, 13, 14, 13));
 
@@ -61,6 +61,27 @@ public class DraconicAltarBlock extends HorizontalDirectionalBlock {
             PacketDistributor.sendToPlayer(serverPlayer, Gacha.state(serverPlayer));
         }
         return InteractionResult.sidedSuccess(level.isClientSide);
+    }
+
+    @Override
+    public net.minecraft.world.level.block.entity.BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new DraconicAltarBlockEntity(pos, state);
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public <T extends net.minecraft.world.level.block.entity.BlockEntity> net.minecraft.world.level.block.entity.BlockEntityTicker<T> getTicker(
+            Level level, BlockState state, net.minecraft.world.level.block.entity.BlockEntityType<T> type) {
+        return level.isClientSide || type != com.zorago.simplywings.block.ModBlocks.DRACONIC_ALTAR_ENTITY.get() ? null
+                : (l, p, s, be) -> DraconicAltarBlockEntity.serverTick(l, p, s, (DraconicAltarBlockEntity) be);
+    }
+
+    @Override
+    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
+        if (!state.is(newState.getBlock()) && level instanceof net.minecraft.server.level.ServerLevel server) {
+            AltarShows.flameLights(server, pos, state, true);
+        }
+        super.onRemove(state, level, pos, newState, movedByPiston);
     }
 
     @Override

@@ -32,6 +32,7 @@ public class SimplyWings {
         ModBlocks.register(modBus);
         ModComponents.register(modBus);
         ModSounds.register(modBus);
+        com.zorago.simplywings.gacha.ModParticles.register(modBus);
         ModAttachments.register(modBus);
         ModLoot.register(modBus);
         modBus.addListener(WingRegistries::onNewRegistry);
@@ -39,6 +40,7 @@ public class SimplyWings {
         container.registerConfig(ModConfig.Type.SERVER, ServerConfig.SPEC);
         ServerFlight.register(NeoForge.EVENT_BUS);
         EndSanctums.register(NeoForge.EVENT_BUS);
+        com.zorago.simplywings.gacha.AltarShows.register(NeoForge.EVENT_BUS);
         NeoForge.EVENT_BUS.addListener(WingsCommand::register);
         NeoForge.EVENT_BUS.addListener(OfferingValues::onReload);
     }

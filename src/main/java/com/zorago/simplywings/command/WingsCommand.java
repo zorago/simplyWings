@@ -83,7 +83,12 @@ public final class WingsCommand {
                                         .then(Commands.argument("ss", IntegerArgumentType.integer(0, 499))
                                                 .then(Commands.argument("sss", IntegerArgumentType.integer(0, 999)).executes(WingsCommand::pity)))))
                         .then(Commands.literal("reset").executes(WingsCommand::gachaReset))
-                        .then(Commands.literal("info").executes(WingsCommand::gachaInfo))));
+                        .then(Commands.literal("info").executes(WingsCommand::gachaInfo))
+                        .then(Commands.literal("show")
+                                .then(Commands.argument("animation", StringArgumentType.word())
+                                        .suggests((ctx, builder) -> SharedSuggestionProvider.suggest(java.util.List.of("summon_b", "summon_a", "summon_s",
+                                                "summon_ss", "summon_sss", "summon_mythic_night", "summon_mythic_light", "summon_x10"), builder))
+                                        .executes(WingsCommand::gachaShow)))));
     }
 
     private static int feathers(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
@@ -97,6 +102,25 @@ public final class WingsCommand {
             }
             count -= n;
         }
+        return 1;
+    }
+
+    private static int gachaShow(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
+        ServerPlayer player = ctx.getSource().getPlayerOrException();
+        BlockPos found = null;
+        BlockPos at = player.blockPosition();
+        for (BlockPos pos : BlockPos.betweenClosed(at.offset(-24, -12, -24), at.offset(24, 12, 24))) {
+            if (player.level().getBlockState(pos).is(com.zorago.simplywings.block.ModBlocks.DRACONIC_ALTAR.get())
+                    && (found == null || pos.distSqr(at) < found.distSqr(at))) {
+                found = pos.immutable();
+            }
+        }
+        if (found == null) {
+            ctx.getSource().sendFailure(Component.literal("No Draconic Altar within 24 blocks"));
+            return 0;
+        }
+        com.zorago.simplywings.gacha.AltarShows.startAnimation(player, found, StringArgumentType.getString(ctx, "animation"),
+                java.util.List.of(0, 0, 0, 0, 0, 0, 1, 2, 3, 4));
         return 1;
     }
 

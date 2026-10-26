@@ -47,6 +47,7 @@ public class AltarScreen extends AbstractContainerScreen<AltarMenu> {
     private int card;
     private boolean flashPlayed;
     private boolean cardSound;
+    private boolean showSeen;
 
     public AltarScreen(AltarMenu menu, Inventory inventory, Component title) {
         super(menu, inventory, title);
@@ -86,13 +87,14 @@ public class AltarScreen extends AbstractContainerScreen<AltarMenu> {
             phaseStart = now();
             flashPlayed = false;
             tab = Tab.NONE;
-            sound(SoundEvents.BEACON_ACTIVATE, 1.5f, 0.8f);
-            if (best.atLeast(GachaTier.S)) {
-                sound(SoundEvents.ENDER_EYE_LAUNCH, 0.6f, 0.7f);
-            }
+            showSeen = false;
         }
-        if (phase == Phase.LAUNCH && now() - phaseStart > launchLength()) {
-            startCard(0);
+        if (phase == Phase.LAUNCH) {
+            boolean running = com.zorago.simplywings.client.show.ClientShows.summonerShowRunning();
+            showSeen |= running;
+            if (showSeen ? !running : now() - phaseStart > 1500) {
+                startCard(0);
+            }
         }
     }
 
@@ -133,6 +135,10 @@ public class AltarScreen extends AbstractContainerScreen<AltarMenu> {
 
     @Override
     public void render(GuiGraphics g, int mouseX, int mouseY, float partialTick) {
+        if (phase == Phase.LAUNCH && showSeen) {
+            g.drawCenteredString(font, Component.translatable("screen.simplywings.altar.skip"), width / 2, height - 20, 0x99E8DDFF);
+            return;
+        }
         drawCover(g);
         switch (phase) {
             case IDLE -> drawIdle(g, mouseX, mouseY);
@@ -450,6 +456,7 @@ public class AltarScreen extends AbstractContainerScreen<AltarMenu> {
                 return super.mouseClicked(mouseX, mouseY, button);
             }
             case LAUNCH -> {
+                com.zorago.simplywings.client.show.ClientShows.skip();
                 startCard(0);
                 return true;
             }
@@ -473,6 +480,11 @@ public class AltarScreen extends AbstractContainerScreen<AltarMenu> {
 
     @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
+        if (phase == Phase.LAUNCH && keyCode == 256) {
+            com.zorago.simplywings.client.show.ClientShows.skip();
+            startCard(0);
+            return true;
+        }
         if (phase != Phase.IDLE && keyCode == 256) {
             phase = results.size() > 1 && phase != Phase.SUMMARY ? Phase.SUMMARY : Phase.IDLE;
             return true;
@@ -490,5 +502,11 @@ public class AltarScreen extends AbstractContainerScreen<AltarMenu> {
             return;
         }
         PacketDistributor.sendToServer(new Payloads.GachaPull(count));
+    }
+
+    @Override
+    public void removed() {
+        com.zorago.simplywings.client.show.ClientShows.skip();
+        super.removed();
     }
 }

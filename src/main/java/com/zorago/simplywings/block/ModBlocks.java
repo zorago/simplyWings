@@ -84,6 +84,9 @@ public final class ModBlocks {
                     .noOcclusion()));
     public static final DeferredItem<BlockItem> DRACONIC_ALTAR_ITEM = ITEMS.register("draconic_altar",
             () -> new BlockItem(DRACONIC_ALTAR.get(), new Item.Properties().rarity(Rarity.EPIC)));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<com.zorago.simplywings.gacha.DraconicAltarBlockEntity>> DRACONIC_ALTAR_ENTITY =
+            BLOCK_ENTITIES.register("draconic_altar",
+                    () -> BlockEntityType.Builder.of(com.zorago.simplywings.gacha.DraconicAltarBlockEntity::new, DRACONIC_ALTAR.get()).build(null));
     public static final DeferredHolder<MenuType<?>, MenuType<AltarMenu>> ALTAR_MENU =
             MENUS.register("draconic_altar", () -> IMenuTypeExtension.create(AltarMenu::new));
 

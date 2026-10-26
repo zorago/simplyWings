@@ -261,4 +261,36 @@ public final class Payloads {
             return TYPE;
         }
     }
+
+    public record SummonShow(net.minecraft.core.BlockPos pos, int facing, String anim, long start, int seed, List<Integer> tiers,
+                             int summoner) implements CustomPacketPayload {
+        public static final Type<SummonShow> TYPE = payloadType("summon_show");
+        public static final StreamCodec<RegistryFriendlyByteBuf, SummonShow> CODEC = StreamCodec.of((buf, v) -> {
+            buf.writeBlockPos(v.pos());
+            buf.writeVarInt(v.facing());
+            buf.writeUtf(v.anim());
+            buf.writeLong(v.start());
+            buf.writeInt(v.seed());
+            buf.writeVarInt(v.tiers().size());
+            v.tiers().forEach(buf::writeVarInt);
+            buf.writeVarInt(v.summoner());
+        }, buf -> {
+            net.minecraft.core.BlockPos pos = buf.readBlockPos();
+            int facing = buf.readVarInt();
+            String anim = buf.readUtf();
+            long start = buf.readLong();
+            int seed = buf.readInt();
+            int n = buf.readVarInt();
+            java.util.List<Integer> tiers = new java.util.ArrayList<>();
+            for (int i = 0; i < n; i++) {
+                tiers.add(buf.readVarInt());
+            }
+            return new SummonShow(pos, facing, anim, start, seed, tiers, buf.readVarInt());
+        });
+
+        @Override
+        public Type<? extends CustomPacketPayload> type() {
+            return TYPE;
+        }
+    }
 }

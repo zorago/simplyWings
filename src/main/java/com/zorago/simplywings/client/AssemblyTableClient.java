@@ -45,6 +45,7 @@ public final class AssemblyTableClient {
 
     private static void onRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerBlockEntityRenderer(ModBlocks.CLOUD_COMPRESSOR_ENTITY.get(), CloudCompressorRenderer::new);
+        event.registerBlockEntityRenderer(ModBlocks.DRACONIC_ALTAR_ENTITY.get(), com.zorago.simplywings.client.show.AltarRenderer::new);
     }
 
     private static void onScreens(RegisterMenuScreensEvent event) {

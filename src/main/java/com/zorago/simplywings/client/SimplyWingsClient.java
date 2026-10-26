@@ -55,6 +55,8 @@ public class SimplyWingsClient {
         modBus.addListener(SimplyWingsClient::onLayerDefinitions);
         modBus.addListener(SimplyWingsClient::onAddLayers);
         modBus.addListener(SimplyWingsClient::onGuiLayers);
+        modBus.addListener(SimplyWingsClient::onParticles);
+        modBus.addListener(SimplyWingsClient::onReloadListeners);
 
         IEventBus game = NeoForge.EVENT_BUS;
         game.addListener(ClientFlight::onMovementInput);
@@ -69,8 +71,37 @@ public class SimplyWingsClient {
         game.addListener(InventoryButton::onInit);
         game.addListener(InventoryButton::onRender);
         game.addListener(ItemLore::onTooltip);
+        game.addListener(com.zorago.simplywings.client.show.ClientShows::onRenderStage);
+        game.addListener(com.zorago.simplywings.client.show.ClientShows::onRenderFrame);
+        game.addListener(com.zorago.simplywings.client.show.ClientShows::onClientTick);
         AssemblyTableClient.register(modBus, game);
         com.zorago.simplywings.client.studio.Studio.register(game);
+    }
+
+    private static void onParticles(net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent event) {
+        java.util.Map<String, com.zorago.simplywings.client.show.GachaParticle.Kind> kinds = java.util.Map.ofEntries(
+                java.util.Map.entry("ember", new com.zorago.simplywings.client.show.GachaParticle.Kind(-0.02f, 0.96f, 0.12f, 18, 34, true)),
+                java.util.Map.entry("wisp", new com.zorago.simplywings.client.show.GachaParticle.Kind(-0.01f, 0.95f, 0.2f, 28, 48, false)),
+                java.util.Map.entry("pebble", new com.zorago.simplywings.client.show.GachaParticle.Kind(0.04f, 0.96f, 0.1f, 18, 32, false)),
+                java.util.Map.entry("drop", new com.zorago.simplywings.client.show.GachaParticle.Kind(0.05f, 0.97f, 0.1f, 16, 28, false)),
+                java.util.Map.entry("spark", new com.zorago.simplywings.client.show.GachaParticle.Kind(0.0f, 0.9f, 0.14f, 12, 26, true)),
+                java.util.Map.entry("gust", new com.zorago.simplywings.client.show.GachaParticle.Kind(-0.005f, 0.93f, 0.26f, 18, 30, false)),
+                java.util.Map.entry("mote", new com.zorago.simplywings.client.show.GachaParticle.Kind(-0.01f, 0.97f, 0.12f, 28, 56, true)),
+                java.util.Map.entry("shard", new com.zorago.simplywings.client.show.GachaParticle.Kind(0.03f, 0.95f, 0.16f, 24, 44, false)),
+                java.util.Map.entry("feather", new com.zorago.simplywings.client.show.GachaParticle.Kind(0.006f, 0.98f, 0.22f, 60, 100, false)),
+                java.util.Map.entry("smoke", new com.zorago.simplywings.client.show.GachaParticle.Kind(-0.01f, 0.94f, 0.5f, 30, 56, false)),
+                java.util.Map.entry("flare", new com.zorago.simplywings.client.show.GachaParticle.Kind(0.0f, 1.0f, 2.2f, 8, 14, true)));
+        for (var entry : com.zorago.simplywings.gacha.ModParticles.GACHA.entrySet()) {
+            var kind = kinds.get(entry.getKey());
+            event.registerSpriteSet(entry.getValue().get(), sprites -> com.zorago.simplywings.client.show.GachaParticle.provider(sprites, kind));
+        }
+    }
+
+    private static void onReloadListeners(net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent event) {
+        event.registerReloadListener((net.minecraft.server.packs.resources.ResourceManagerReloadListener) manager -> {
+            com.zorago.simplywings.client.show.ShowModel.reload(manager);
+            com.zorago.simplywings.client.show.ShowRenderer.clearCache();
+        });
     }
 
     private static void onLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {

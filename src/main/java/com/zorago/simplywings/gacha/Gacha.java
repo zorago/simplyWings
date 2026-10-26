@@ -90,6 +90,7 @@ public final class Gacha {
             }
         }
         PacketDistributor.sendToPlayer(player, new Payloads.GachaResults(results, state(player)));
+        ((AltarMenu) player.containerMenu).pos().ifPresent(pos -> AltarShows.start(player, pos, results));
     }
 
     public static Payloads.GachaState state(ServerPlayer player) {

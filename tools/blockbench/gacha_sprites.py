@@ -1,4 +1,5 @@
 import io
+import json
 import math
 import random
 from pathlib import Path
@@ -135,6 +136,22 @@ def build():
     OUT.mkdir(parents=True, exist_ok=True)
     for name, img in out.items():
         img.save(OUT / f"{name}.png")
+    particle_dir = ROOT / "src/main/resources/assets/simplywings/textures/particle"
+    json_dir = ROOT / "src/main/resources/assets/simplywings/particles"
+    particle_dir.mkdir(parents=True, exist_ok=True)
+    json_dir.mkdir(parents=True, exist_ok=True)
+    for name, img in out.items():
+        if not name.startswith("particle_") and name != "glow":
+            continue
+        kind = "flare" if name == "glow" else name[len("particle_"):]
+        w = img.width
+        frames = img.height // w
+        names = []
+        for f in range(frames):
+            frame = img.crop((0, f * w, w, f * w + w))
+            frame.save(particle_dir / f"gacha_{kind}_{f}.png")
+            names.append(f"simplywings:gacha_{kind}_{f}")
+        (json_dir / f"gacha_{kind}.json").write_text(json.dumps({"textures": names}) + chr(10), encoding="utf-8")
     return {name: png(img) for name, img in out.items()}
 
 
