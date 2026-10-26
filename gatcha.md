@@ -4,6 +4,8 @@ Dernier morceau de gameplay du mod, imaginé par zorago le 25 octobre 2026. Ce d
 
 **État (25 octobre 2026, soir)** : tout est implémenté, avec des animations provisoires ; rien n'est encore testé en jeu (voir `ToDoTesting.md` § 14). Les points « à valider » ont reçu une valeur par défaut, notée **[défaut]**, à confirmer par zorago.
 
+**Animations (26 octobre 2026)** : un prototype de motion design existe, hors jeu, dans `GATCHA_ANIMATION_SOURCE/` (7 films MP4 et le code qui les produit). Le single B est validé par zorago, caméra comprise ; les singles A à SSS et deux ×10 restent à valider. Il n'y a pas encore les mythiques ni le son. Le détail est dans `GACHA_ANIMATIONS.md` § 0, et l'écran du jeu tourne toujours avec les animations provisoires.
+
 **Correction de zorago (25 octobre, nuit)** : un seul exemplaire par tirage B et A (plus de piles), économie **exponentielle** à la fontaine (B 100 pour 1, A 10 pour 1, S 1 pour 1, SS 1 pour 10, SSS 1 pour 100), coffres à 5 % / 10 % / 20 % selon la dimension avec toujours 1 à 3 invocations, autel et fontaine **cassables et récupérables**, blocs du mod régénérés à chaque dragon et structures entièrement reconstruites à partir du sixième. Le présent document est à jour de cette correction ; les animations finales sont spécifiées dans `GACHA_ANIMATIONS.md`.
 
 ## Pourquoi un gacha, et pourquoi il ne casse pas le jeu
@@ -129,13 +131,28 @@ Les cinq structures seront ensuite **polies à la main par zorago** (générées
 
 ### Animation d'invocation
 
-1. **Lancement** : l'autel s'embrase, une plume (ou une comète) traverse un ciel étoilé. Sa couleur annonce le meilleur palier du tirage : B blanc, A bleu, S violet, SS or, SSS rouge sang irisé ; mythique noir et blanc entrelacés (Night et Light).
-2. **Révélation** : un objet à la fois en ×1 ; en ×10, révélation une par une puis récapitulatif en grille. Bouton « passer ».
+Direction retenue depuis le prototype du 26 octobre (`GACHA_ANIMATIONS.md` § 0) :
+
+1. **Lancement** :
+   - la plume se consume sur l'autel et 24 runes s'allument une à une ;
+   - un faisceau monte, et une étoile naît dans le ciel ;
+   - elle **retombe en spirale dans la vasque**, en allumant les 4 flammes des piliers (bleu, rouge, blanc, vert).
+2. **Escalade** :
+   - pendant la chute, la couleur de l'étoile monte palier par palier jusqu'au palier tiré : blanc (B), bleu (A), violet (S), or (SS), rouge sang irisé (SSS) ;
+   - en SSS, le ciel se fissure ;
+   - la couleur ne descend jamais.
+   - Mythiques, encore à créer : l'escalade SSS, puis noir et blanc entrelacés (Night et Light).
+3. **Éclat**, puis **révélation** :
+   - en ×1, une carte qui jaillit en tournoyant ;
+   - en ×10, les 10 étoiles apparaissent une à une dans le ciel, en tournant en anneau, et chacune a son arrivée propre à son palier. Elles tombent ensemble dans la vasque, puis 10 cartes face cachée se retournent dans l'ordre du tirage. Deux SSS dans le même ×10 donnent bien deux étoiles et deux cartes rouges.
+   - Bouton « passer ».
 3. **Chaque palier** (B, A, S, SS, SSS, mythique Night, mythique Light) a sa propre animation 3D + 2D : cahier des charges complet dans **`GACHA_ANIMATIONS.md`**.
 
 Direction artistique des animations : motion design **low poly**, ombres et lumières travaillées, **sound design complet** (sfx par étape) et musique. Les originaux sont montés et exportés en **MP4** (vitrine et bande-annonce du mod).
 
 Contrainte technique : Minecraft ne lit pas les vidéos et le mod n'a **aucune dépendance**. En jeu, chaque animation est donc rejouée à partir de la même source : soit en planches d'images (textures animées, comme la nappe d'eau), soit reconstruite en temps réel dans l'interface (calques, particules d'interface), avec le son en `.ogg` découpé par étape. Le choix se fait animation par animation, **à valider** au moment de la création.
+
+Depuis le prototype : le ×10 doit être rendu **en direct**, puisqu'il existe environ 9,8 millions de combinaisons de paliers. Le code du prototype est fait pour ça : chaque image est une fonction pure du temps. Le portage visé est un lecteur Java qui recalcule l'état à `T = (ticks + partialTick) / 20`, avec un autel refait en blocs dans Blockbench (assets vanilla, ou build custom de zorago) et des flammes voxelisées. Les singles suivront probablement la même voie, choix **à valider**.
 
 ## Implémentation (code)
 
@@ -154,5 +171,5 @@ Contrainte technique : Minecraft ne lit pas les vidéos et le mod n'a **aucune d
 4. Sanctuaire d'invocation sous l'île + autel (bloc, interface minimale fonctionnelle).
 5. Fontaine aux offrandes (île, bloc, interface), passage des îles au carré.
 6. Interface finale : illustration, tracker, historique.
-7. Animations (lancement, révélations, S, SS, SSS, mythique) et sound design, créées avec zorago.
+7. Animations (lancement, révélations, S, SS, SSS, mythique) et sound design, créées avec zorago. **26 octobre** : prototype hors jeu livré, single B validé (`GACHA_ANIMATIONS.md` § 0). Reste : valider les autres films, créer les mythiques et le son, puis porter en Java.
 8. Wiki (quatrième onglet de la table) et JEI : pages du gacha, de l'autel et de la fontaine, taux affichés.

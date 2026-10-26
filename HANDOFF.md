@@ -61,6 +61,13 @@ Pour chaque mod : la technique retenue, ce qu'on fera différemment et pourquoi.
 
 ## Prochaine session
 
+**Gacha, animations (26 octobre)** :
+- Zorago a produit dans claude.ai un prototype de motion design des invocations : `GATCHA_ANIMATION_SOURCE/` contient 7 films MP4 et le code (`gacha-motion-code.zip`).
+- Le single B est validé, caméra comprise ; les autres films restent à valider.
+- Tout est décrit dans `GACHA_ANIMATIONS.md` § 0 : chorégraphie, durées, architecture, écarts avec le cahier des charges et portage prévu.
+- Prochaine étape côté code : le lecteur Java en direct et l'autel en blocs dans Blockbench, une fois les points du § 10 tranchés.
+
+
 **Refonte du 23 octobre** (structures et craft) : quatre essences et leurs conteneurs, table d'assemblage et établi de la forge à 4 jauges, coûts répartis par palier, substitut de stamina, compresseur de nuage, trois sanctuaires de l'End. Tout est codé, poussé et vu une première fois en solo dans le studio ; ce qui reste à tester est dans `ToDoTesting.md`, section 13.
 
 **Session du 22-23 octobre** : 19 paires épiques, légendaires et mythiques refaites dans Blockbench, correctif 1 codé, la plupart des tests en solo faits par le studio. Le point de reprise et l'ordre des tâches restantes sont en tête de `ToDoTesting.md` (« Reprise »).

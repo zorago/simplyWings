@@ -2,7 +2,7 @@
 
 Tout ce qui doit être testé et validé en jeu, puis les modèles 3D qui restent à faire. Chaque ligne se coche quand elle est validée **en solo et sur le serveur dédié** (règle du projet). Un échec se note directement sous la ligne, avec ce qui a été observé.
 
-Dernière mise à jour : 25 octobre 2026 (section 12 : ailes terminées ; prochain chantier : le gacha, voir `gatcha.md`). Avant : 23 octobre 2026 (section 13 : refonte essences et sanctuaires). Avant : 22 octobre au soir. Session de test sur le PC de jeu, **en solo dans le client de dev** (Simply Wings + JEI), pilotée par le studio (`tools/studio/send.py`, commandes de test de `client/studio/StudioTest`). Les cases cochées ce soir l'ont été en solo seulement : la règle « solo et serveur dédié » reste à compléter pour elles.
+Dernière mise à jour : 26 octobre 2026 (section 14 bis : prototype des animations du gacha). Avant : 25 octobre 2026 (section 12 : ailes terminées ; prochain chantier : le gacha, voir `gatcha.md`). Avant : 23 octobre 2026 (section 13 : refonte essences et sanctuaires). Avant : 22 octobre au soir. Session de test sur le PC de jeu, **en solo dans le client de dev** (Simply Wings + JEI), pilotée par le studio (`tools/studio/send.py`, commandes de test de `client/studio/StudioTest`). Les cases cochées ce soir l'ont été en solo seulement : la règle « solo et serveur dédié » reste à compléter pour elles.
 
 ## Reprise (état au 23/10, 2 h)
 
@@ -273,6 +273,15 @@ Reste à tester :
 - [ ] Direction artistique des trois îles (à valider par zorago) : plus de détails, raffinerie un peu vide.
 - [ ] JEI : catégorie « Cloud Compression », coûts par essence affichés dans les catégories assemblage et composants.
 - [ ] Serveur dédié pour tout ce qui précède.
+
+### 14 bis. Animations du gacha : prototype du 26 octobre (hors jeu)
+
+Sources dans `GATCHA_ANIMATION_SOURCE/`, détail dans `GACHA_ANIMATIONS.md` § 0. Rien n'est encore porté dans le jeu : l'écran de l'autel garde les animations provisoires.
+- [x] Single B validé par zorago (chorégraphie et caméra accélérée).
+- [ ] Regarder en mouvement et valider : `single_a`, `single_s`, `single_ss`, `single_sss`, `multi_x10`, `multi_x10_double_sss`. Sur l'autre PC, seules des images fixes ont été vérifiées. Le défaut possible à surveiller : des faces qui se chevauchent quand la caméra frôle les ailes de l'autel.
+- [ ] Trancher les points du § 10 de `GACHA_ANIMATIONS.md` (ajoutés le 26 octobre) : durée des communs, voie de portage, live ou pré-rendu, autel (scène du prototype ou build de zorago), flammes, dragon, plafonds de flash.
+- [ ] À produire : mythiques Night et Light, vraie paire en 3D sur la carte, mentions « New! » et « Duplicate », écran IDLE, sons calés sur les timelines (`SOUND_DESIGN.md` § 6.4).
+- [ ] Après le portage, en jeu : chaque palier, un ×10 avec deux SSS, saut et Échap, `reduceFlashes`, 60 i/s avec le pack (Sodium, Iris), même rendu que les films de référence.
 
 ### 13 bis. Retours de zorago du 24 octobre (corrigés, à revérifier)
 

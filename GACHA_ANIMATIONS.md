@@ -6,6 +6,136 @@ Ce document sert d'entrée unique au **skill Claude de motion design** qui gén�
 
 État au 25 octobre 2026 : des animations **provisoires** tournent déjà dans `client/gui/AltarScreen` (comète colorée, fausse piste bleue pour S et plus, flash, cartes, rayons, sons vanilla). Elles servent de référence de rythme, pas de direction artistique.
 
+**État au 26 octobre 2026** : un **prototype de motion design** existe, hors jeu (§ 0). Le single B est validé par zorago, caméra comprise ; les autres films sont livrés et restent à valider. Là où le prototype contredit les § 4 à 6, c'est lui qui donne la direction, sous réserve des points du § 0.4.
+
+## 0. Prototype de motion design (26 octobre 2026)
+
+### 0.1 Sources
+
+- Dossier `GATCHA_ANIMATION_SOURCE/` à la racine du dépôt, produit par zorago dans une conversation claude.ai (motion design), hors de Claude Code :
+  - 7 vidéos MP4 1920 × 1080, **30 i/s** (choisi pour être facile à analyser), H.264, **sans son** : `single_b` (14,4 s), `single_a` (15,3 s), `single_s` (16,8 s), `single_ss` (18,3 s), `single_sss` (20,2 s), `multi_x10` (34 s), `multi_x10_double_sss` (36,3 s) ;
+  - `gacha-motion-code.zip` : le code complet qui produit ces vidéos (dossier `gacha-motion/`).
+- Le zip contient :
+
+| Fichier | Rôle |
+| --- | --- |
+| `README.md` | Mode d'emploi écrit pour Claude Code : découpage, live ou pré-rendu, guide de portage vers Minecraft |
+| `src/core.js` | Maths, easings, PRNG déterministe (mulberry32), courbes de clés Hermite, intégrale de vitesse angulaire, remappage de temps |
+| `src/tiers.js` | **Palette et réglages par palier** (couleurs signal de `GachaTier`, chaîne d'escalade, durées, puissance). Le premier fichier à retoucher |
+| `src/altar.js` | La scène low poly, pièce par pièce (`PART …`), en blocs (1 unité = 1 bloc) : dimensions prêtes à refaire dans Blockbench |
+| `src/timeline.js` | `GM.plan(pulls)` : liste de tirages → ancres de temps, courbes de caméra, secousses, battements, liste d'événements horodatés |
+| `src/state.js` | `GM.state(plan, T)` : l'état complet du monde à l'instant T (caméra, lumières, flammes, étoiles, particules, anneaux, rayons, fissures, flash, cartes) |
+| `src/renderer.js` | Projection perspective, tri du peintre, ombrage plat (lune + lumières ponctuelles), halos additifs, canvas 1920 × 1080 |
+| `src/cards.js` | Cartes 2D et police pixel 5 × 7 maison (majuscules) |
+| `src/anims.js` | Les listes de tirages rendues |
+| `player.html` | Lecteur web en direct : choix de l'animation, barre de temps, boutons « Random ×1 » et « Random ×10 », paramètres `?anim=`, `?pulls=`, `?t=`, `?hud=1` |
+| `tools/render.js` | Rendu MP4 (Playwright + ffmpeg) et écriture des timelines JSON |
+| `out/*.timeline.json` | Pour chaque vidéo : ancres, battements, apparitions, retournements, emplacements des cartes et **événements** (ids de son) |
+
+### 0.2 Ce que zorago a validé
+
+- **Single B, en entier** : la chorégraphie et le rythme.
+- **Caméra accélérée** du single B, jugée « parfaite » : environ un tour trois quarts autour de l'autel en 14,4 s, sans jamais s'arrêter (la vitesse monte et descend par courbes). Elle démarre loin et haut puis plonge vers l'autel pendant la combustion de la plume ; elle se rapproche en contre-plongée pendant la charge ; elle atteint sa vitesse maximale juste avant l'éclat, avec un recul pour voir les quatre flammes ; elle ralentit d'un coup et pousse vers l'étoile à l'éclat, puis tourne doucement autour de la carte.
+- **Pas encore validés** : les singles A, S, SS, SSS et les deux ×10. Sur l'autre PC, seules des images fixes en ont été vérifiées, pas les films en mouvement.
+
+### 0.3 La chorégraphie du prototype
+
+Elle **remplace la comète qui monte dans le ciel** (§ 4 et 6) : ici, une étoile naît au-dessus de l'autel, puis **retombe dans la vasque**.
+
+**Single** (temps du B ; les phases suivantes s'allongent avec le palier) :
+
+| Temps (B) | Phase |
+| --- | --- |
+| 0 – 2,2 s | **Autel** : la caméra plonge, la plume d'invocation descend et se consume en braises violettes |
+| 2,2 – 4,4 s | **Charge** : 24 runes au sol s'allument une à une (le « chargeur »), le cristal accélère, faisceau vers le ciel à 4,05 s |
+| 4,4 – 5,9 s | **Étoile** : pure, lente, éthérée ; la caméra la suit |
+| 5,9 s – fin de chute | **Chute** : spirale autour de l'autel, 12 petites étoiles nées dans son sillage, les 4 flammes des piliers s'allument dans l'ordre **bleu, rouge, blanc, vert** (choix de zorago), puis éruption de la vasque. **Escalade** : un battement par palier de la chaîne, avec changement de couleur, anneau, mini-flash et secousse |
+| fin de chute – éclat | **Temps d'arrêt** : l'étoile se contracte et aspire les petites étoiles |
+| éclat | **Éclat** : flash, rayons, éclats colorés, ondes de choc |
+| carte – fin | **Carte** : elle jaillit en tournoyant (2 tours, plus ½ tour par palier), rebond de l'objet, reflet, lettres du palier, étoiles une à une (3 pour S, 4 pour SS, 5 pour SSS), nom lettre par lettre |
+
+- **Escalade** : un B reste blanc et n'a aucun battement. Pour les autres paliers, l'étoile passe par la chaîne A → S → SS → SSS jusqu'à son palier (bleu, violet, or, rouge). Au dernier battement d'un SSS, le ciel **se fissure en rouge**. Il n'y a donc jamais de déception mise en scène : la couleur ne fait que monter.
+- **Durées par palier** (s ; tirées des timelines) :
+
+| Palier | Battements | Fin de chute | Éclat | Carte | Fin |
+| --- | --- | --- | --- | --- | --- |
+| B | — | 8,9 | 9,6 | 10,4 | **14,4** |
+| A | A 7,51 | 9,4 | 10,2 | 11,0 | **15,3** |
+| S | A 7,29 · S 8,28 | 10,0 | 11,0 | 11,8 | **16,8** |
+| SS | A 7,24 · S 8,11 · SS 8,97 | 10,7 | 11,9 | 12,7 | **18,3** |
+| SSS | A 7,27 · S 8,07 · SS 8,88 · SSS 9,69 | 11,5 | 13,0 | 13,8 | **20,2** |
+
+Réglages dans `tiers.js` : `fallExtra` (chute en plus des 3 s du B), `hold` (temps d'arrêt), `cardDur` (carte), `power` (particules, secousse, anneaux, lumière).
+
+**Multi ×10** (`multi_x10` = `B B B B B B A S SS SSS`, 34 s) :
+
+1. Les 10 plumes descendent en couronne et se consument.
+2. La charge, comme pour un single.
+3. Les **10 étoiles apparaissent l'une après l'autre**, dans l'ordre du tirage, et virevoltent en anneau dans le ciel. Leur arrivée dure plus longtemps et frappe plus fort selon le palier (`spawn`, de 0,42 s pour un B à 1,95 s pour un SSS) :
+   - **B** : l'étoile s'allume sur place ;
+   - **A** : elle descend de 14 blocs ;
+   - **S** : elle tombe de haut, avec un anneau dans le ciel et un mini-flash ;
+   - **SS** : elle tombe du zénith, avec des rayons dorés et une secousse ;
+   - **SSS** : elle arrive de l'horizon et fissure le ciel, avec des rayons rouges et une forte secousse.
+4. Elles tombent toutes en spirale dans la vasque, à 0,09 s d'écart. Les 4 flammes s'allument, puis le noyau grossit à chaque étoile absorbée.
+5. **Éclat** à la couleur du meilleur palier.
+6. **10 cartes** distribuées face cachée devant le joueur, en grille 5 × 2. Leur dos est neutre : rien ne trahit le palier avant l'anticipation.
+7. Elles se retournent dans l'ordre du tirage :
+   - **B et A** : retournement rapide (0,30 s et 0,45 s) ;
+   - **S et plus** : anticipation (la carte tremble, se soulève, liseré de couleur), retournement (un tour et demi pour SS et SSS), rayons, gerbe de particules, flash et secousse de plus en plus forts. Un SSS dure 1,9 s, sans compter son anticipation.
+8. La ou les meilleures cartes pulsent jusqu'à la fin.
+
+`multi_x10_double_sss` (36,3 s) montre qu'un joueur très chanceux voit **deux étoiles rouges** dans le ciel et **deux cartes rouges** : chaque étoile porte la couleur de son propre tirage.
+
+### 0.4 Écarts avec le cahier des charges (à trancher avec zorago)
+
+1. **Durées.** Le single B validé dure 14,4 s, contre 2,4 s au § 6.1. Or le § 1 veut des communs courts, puisque B et A représentent 98 % des tirages. Proposition à valider : garder le film complet, et ajouter des points de saut (à l'éclat et à la carte) ainsi qu'un mode rapide pour les tirages répétés.
+2. **Vraie paire en 3D** (§ 3.1) : pas encore faite. Pour S et plus, la carte montre une icône d'ailes générique.
+3. **Absents du prototype** :
+   - la silhouette de dragon (SS) et le dragon de l'End (SSS) des § 6.4 et 6.5 ;
+   - les mentions « New! » et « Duplicate » (§ 5) ;
+   - les **mythiques Night et Light** (§ 6.6 et 6.7) ;
+   - l'écran IDLE (§ 7) ;
+   - le son.
+4. **Flashs** : le prototype plafonne à 0,7, et à 0,85 pour l'éclat SSS. Le § 8.4 autorise un blanc SSS à 100 % pendant 200 ms : le prototype est plus doux, ce qui va dans le sens de l'accessibilité.
+5. **Fausse piste** (§ 4.1) : tous les paliers à partir de A partent en blanc puis passent au bleu, et seul un B reste blanc. La variante « S ou SS violet d'emblée, une fois sur trois » n'est pas faite.
+6. **Cadence** : les films sont en 30 i/s pour l'analyse. Le master du § 9 était prévu en 60 i/s avec les sons mixés.
+7. **Cartes et police** : le prototype dessine ses cartes sur un canvas, avec une police pixel 5 × 7 maison. En jeu, la police de Minecraft s'applique (§ 5).
+8. **Placeholders** : les noms d'objets (`END SHARD`, `DRAGON SCALE`, `VIOLET WINGS`, `GOLDEN WINGS`, `CRIMSON WINGS`) et les icônes sont inventés.
+9. **Défaut connu** : le prototype trie les faces sans z-buffer, donc quelques faces peuvent se chevaucher quand la caméra frôle les ailes de l'autel. Le rendu en jeu, avec un vrai z-buffer, n'aura pas ce problème.
+
+### 0.5 Live ou pré-rendu
+
+- Dans le prototype, chaque image est une **fonction pure du temps** : `state(plan, T)` ne dépend jamais de l'image précédente.
+- Le **×10 sera forcément rendu en direct** : il y a 5¹⁰, soit environ 9,8 millions de combinaisons de paliers, et on ne peut pas pré-rendre une vidéo par cas. Minecraft ne lit de toute façon pas les vidéos : le direct est donc aussi la voie naturelle pour les singles. Le choix final reste à confirmer.
+- En jeu : `T = (ticks + partialTick) / 20`, puis l'état à chaque frame. La couleur de chaque étoile, la longueur de son arrivée et de son retournement viennent de son palier, ce qui donne une animation propre à chaque tirage.
+
+### 0.6 Portage prévu vers le jeu
+
+Souhait de zorago : que Claude Code refasse ces animations à partir du code, avec des **assets Minecraft vanilla**, un **build custom de zorago** pour l'autel, et des **flammes voxelisées**.
+
+1. **Modèles** :
+   - chaque `PART` de `altar.js` est refait dans Blockbench, en cubes et en plaques (dimensions en blocs) ;
+   - les prismes à 5 à 8 côtés deviennent des cubes tournés ;
+   - les flammes deviennent des empilements de cubes qui ondulent, ou une planche de sprites ;
+   - zorago peut remplacer l'autel par sa propre construction en blocs.
+2. **Couleurs** : `tiers.js` (`PAL`, `TIERS`, `FLAMES`). Les couleurs signal sont celles de `GachaTier` (§ 2).
+3. **Timeline** : deux voies, **à valider**.
+   - Porter `timeline.js` et `state.js` en Java presque tels quels, puisque ce ne sont que des maths. C'est la voie que conseille le README du prototype.
+   - Ou convertir le prototype au format de tracks du § 8.3.
+   - Dans les deux cas, les fichiers `out/*.timeline.json` servent de référence pour caler les sons et vérifier le portage.
+4. **Caméra** :
+   - orbite autour de l'axe Y : l'angle `th` est l'intégrale d'une vitesse angulaire `OM`, ce qui évite tout arrêt sec ;
+   - rayon `R`, hauteur `H`, cible `TY` et focale `FL` sont des courbes de clés ;
+   - la cible se mélange à la position de l'étoile selon `WS` ;
+   - les clés du single B validé sont dans `timeline.js` (`CAM_B`). Les autres paliers les étirent avec `U.remap`.
+5. **Rendu** :
+   - la 3D passe en `ModelPart` dans un `PoseStack`, en pleine lumière, avec la couleur calculée face par face comme dans `shade()` de `renderer.js` (lune fixe et lumières ponctuelles des flammes et de l'étoile) ;
+   - halos, rayons, flash et cartes deviennent des blits d'interface, en mélange additif si le § 3.2 l'autorise.
+6. **Accessibilité** : pour `reduceFlashes`, mettre le flash et la secousse à 0, comme le prévoit le README du prototype.
+7. **Sons** : les ids des événements du prototype sont listés dans `SOUND_DESIGN.md` § 6.4. Ils complètent ou remplacent les ids du § 6 de ce document.
+8. **Reste à créer, comme le prévoit ce cahier** : la vraie paire en 3D, « New! » et « Duplicate », les deux mythiques et l'écran IDLE.
+
 ## 1. Intentions
 
 - **Lire le palier sans lire de texte.** Couleur, durée, ampleur et son annoncent le palier. Un joueur qui regarde l'écran du coin de l'œil sait ce qu'il a tiré.
@@ -305,6 +435,8 @@ Boucle de travail : storyboard → validation de zorago → production → prév
 
 Ordre de production : **décor commun et lecteur Java** d'abord (sans eux, rien ne tourne), puis B et A (les plus vues, elles fixent la qualité de base), puis S, SS, SSS, puis les deux mythiques, puis IDLE.
 
+**26 octobre 2026** : la première production ne s'est pas faite avec ce skill, mais dans une conversation claude.ai de motion design, qui a produit le prototype du § 0. Elle couvre le storyboard, la prévisualisation en MP4 et une timeline au format du prototype. Le skill `simplywings-motion-design`, quand il sera créé, part de ce code (`gacha-motion-code.zip`) plutôt que de zéro.
+
 ## 10. Points à valider avec zorago
 
 - Mélange additif dans l'interface (§ 3.2) : autorisé ou non.
@@ -313,3 +445,13 @@ Ordre de production : **décor commun et lecteur Java** d'abord (sans eux, rien 
 - Pas de saut possible pendant le premier mythique d'un joueur (§ 6.6).
 - Mention « Duplicate » avec la valeur de revente à la fontaine (§ 5).
 - Durées : les fiches donnent des valeurs de départ ; zorago tranchera sur les prévisualisations.
+- **Ajoutés le 26 octobre, après le prototype (§ 0)** :
+  - valider les films A, S, SS, SSS et les deux ×10 en mouvement (le B est validé) ;
+  - durée des communs : le film complet de 14,4 s pour un B, avec saut et mode rapide pour les tirages répétés, ou un film court spécifique (§ 0.4, point 1) ;
+  - portage : traduire `timeline.js` + `state.js` en Java, ou convertir au format de tracks du § 8.3 (§ 0.6, point 3) ;
+  - live pour tout, ou pré-rendu en planches pour les singles (§ 0.5) ;
+  - autel : la scène du prototype refaite en cubes, ou le build custom de zorago ;
+  - flammes : en cubes animés ou en planche de sprites ;
+  - garder ou non la silhouette de dragon (SS) et le dragon de l'End (SSS), absents du prototype ;
+  - mythiques Night et Light : à produire dans le même langage visuel que le prototype (étoile qui retombe dans l'autel, 4 flammes, carte) ;
+  - flashs : garder les plafonds du prototype (0,7 ; 0,85 pour l'éclat SSS) plutôt que le blanc à 100 % du § 8.4.

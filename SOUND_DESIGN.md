@@ -612,6 +612,34 @@ Le tableau ci-dessus couvre l'animation provisoire. Les animations finales déco
 | `gacha.mythic.light.shimmer` | Montée au blanc et camouflage | Nappe aérienne irisée (verre frotté, harmoniques), crescendo de 1 s | P1 |
 | `gacha.mythic.light.reveal` | Révélation de Light | Thème lumineux, carillons et chœur clair, 4 s, `stream: true` | P1 |
 
+#### Événements du prototype de motion design (26 octobre 2026)
+
+Le prototype des animations (`GACHA_ANIMATIONS.md` § 0, sources dans `GATCHA_ANIMATION_SOURCE/`) écrit, pour chaque film, une timeline JSON avec tous ses événements horodatés (`out/<film>.timeline.json` dans `gacha-motion-code.zip`). Les vidéos sont muettes : ces timelines sont la référence pour caler les sons. Ses identifiants suivent la convention `simplywings:gacha.<événement>` :
+
+| Id | Moment (single B, sauf mention) | Statut |
+| --- | --- | --- |
+| `gacha.launch` | 0 s, début du tirage | déjà prévu (provisoire) |
+| `gacha.feather.burn` | 1,25 s, la plume se consume sur l'autel | **nouveau** |
+| `gacha.rune.charge` | 2,45 s, les 24 runes s'allument une à une (0,068 s d'écart) | **nouveau** |
+| `gacha.beam` | 4,05 s, faisceau vers le ciel | **nouveau** |
+| `gacha.star.appear` | 4,4 s, l'étoile naît (single) | **nouveau** |
+| `gacha.star.spawn.b` … `.sss` | ×10 : arrivée de chaque étoile dans le ciel, plus longue et plus forte selon le palier (0,42 s pour B, 1,95 s pour SSS) | **nouveau** |
+| `gacha.escalate.a` | battement blanc → bleu | **nouveau** (le § ci-dessus commence à `.s`) |
+| `gacha.escalate.s` / `.ss` / `.sss` | battements suivants ; en SSS, le ciel se fissure | déjà prévus |
+| `gacha.star.fall` | 5,9 s, l'étoile commence sa chute en spirale | **nouveau** |
+| `gacha.flame.ignite` | 4 fois pendant la chute, paramètre `flame` = `blue`, `red`, `white`, `green` (dans cet ordre) | **nouveau** : un son par couleur, ou un son avec 4 variations |
+| `gacha.flame.erupt` | éruption de la vasque, vers 82 % de la chute | **nouveau** |
+| `gacha.impact.b` / `.a` | éclat d'un B (9,6 s) ou d'un A | **nouveau** (le § ci-dessus commence à `.s`) |
+| `gacha.impact.s` / `.ss` / `.sss` | éclat, plus violent selon le palier | déjà prévus |
+| `gacha.card.spin` | single : la carte jaillit en tournoyant | **nouveau** |
+| `gacha.card.deal` | ×10 : les 10 cartes sont distribuées face cachée | **nouveau** |
+| `gacha.reveal.b` … `.sss` | single : vers 0,85 s après `card.spin` ; ×10 : chaque retournement, paramètre `index` | déjà prévus |
+| `gacha.star` | chaque étoile de la carte (0,08 s d'écart) | déjà prévu |
+
+- Pas encore dans le prototype : `gacha.dragon_roar`, `gacha.eclipse` et tous les sons des mythiques (ces animations n'existent pas encore), `gacha.summary`, `gacha.skip`.
+- Les sons de lancement `gacha.launch.small`, `.rare` et `.legendary` du tableau précédent ne correspondent plus à une phase unique : le lancement du prototype enchaîne plume, runes et faisceau. Il reste à choisir entre un son par étape (`feather.burn`, `rune.charge`, `beam`) et un long son de lancement par palier. **À valider** avec zorago.
+- Durées des films à couvrir : B 14,4 s, A 15,3 s, S 16,8 s, SS 18,3 s, SSS 20,2 s, ×10 environ 34 à 36 s. Une musique ou une nappe doit tenir sur toute la durée, et s'arrêter proprement si le joueur saute l'animation.
+
 ### 6.5 Fontaine aux offrandes
 
 | Id | Déclencheur | Actuel | Cible | Prio |
