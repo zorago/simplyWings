@@ -171,6 +171,12 @@ class Rig:
             length = END if anim != "idle" else 2.0
             animators = {}
             for bone, channels in bones.items():
+                scale = channels.get("scale")
+                if scale:
+                    last_t = max(scale)
+                    last = scale[last_t][0]
+                    if any(abs(v) < 1e-6 for v in last) and any(abs(v) > 1e-6 for v in last):
+                        scale[round(last_t + 0.01, 4)] = ((0, 0, 0), "linear")
                 frames = []
                 for channel, keys in channels.items():
                     for t, (vec, interp) in sorted(keys.items()):
@@ -198,81 +204,100 @@ def ring(rig, bone, center, radius, count, color, thick=4, height=3, glow=None):
 
 def flame_positions():
     for name, (dx, dz) in FLAMES:
-        yield name, dx * B, dz * B, math.degrees(math.atan2(-dx, -dz))
+        yield name, dx * B, dz * B, math.degrees(math.atan2(dx, dz))
+
+
+def layers(rig, name, body, x, z, specs, rot_step=0, shrink=0.8):
+    y = FLAME_BASE
+    for i, (w, h, c, ox, oz) in enumerate(specs):
+        lb = rig.bone(f"flame_{name}_layer_{i}", (x, y, z), body)
+        rig.box(lb, (x + ox, y + h / 2, z + oz), (w, h, w), c, rot=[0, rot_step * i, 0])
+        y += h * shrink
+    return y
 
 
 def build_flames(rig):
     for name, x, z, yaw in flame_positions():
         root = rig.bone(f"flame_{name}", (x, FLAME_BASE, z))
         body = rig.bone(f"flame_{name}_body", (x, FLAME_BASE, z), root)
-        y = FLAME_BASE
         if name == "fire":
-            for w, h, c in ((11, 8, "red"), (9, 9, "orange"), (7, 8, "orange"), (5, 7, "yellow"), (3, 6, "yellow")):
-                rig.box(body, (x, y + h / 2, z), (w, h, w), c, rot=[0, 12 * (w % 3), 0])
-                y += h * 0.8
-            for i in range(4):
-                a = math.pi / 2 * i + 0.4
-                t = rig.bone(f"flame_fire_tongue_{i}", (x + 3 * math.cos(a), FLAME_BASE + 6, z + 3 * math.sin(a)), body)
-                rig.box(t, (x + 4 * math.cos(a), FLAME_BASE + 13, z + 4 * math.sin(a)), (3, 14, 3), "red" if i % 2 else "orange",
-                        rot=[18 * math.sin(a), 0, -18 * math.cos(a)])
+            layers(rig, name, body, x, z, [(12, 7, "red", 0, 0), (10.5, 8, "orange", 0.6, -0.4), (9, 8, "orange", -0.5, 0.5),
+                                           (7.5, 7, "ember", 0.4, 0.3), (6, 7, "yellow", -0.3, -0.4), (4.5, 6, "yellow", 0.3, 0.2),
+                                           (3, 5, "white", 0, 0)], rot_step=17)
+            rig.box(body, (x, FLAME_BASE + 14, z), (6, 22, 6), "yellow", rot=[0, 45, 0])
             for i in range(6):
-                e = rig.bone(f"flame_fire_ember_{i}", (x, FLAME_BASE, z), root)
-                a = i * 1.05
-                rig.box(e, (x + 5 * math.cos(a), FLAME_BASE + 4, z + 5 * math.sin(a)), (1.6, 1.6, 1.6), "ember")
+                a = math.pi / 3 * i + 0.4
+                t = rig.bone(f"flame_fire_tongue_{i}", (x + 3 * math.cos(a), FLAME_BASE + 5, z + 3 * math.sin(a)), body)
+                h = 12 + 5 * (i % 3)
+                rig.box(t, (x + 4.5 * math.cos(a), FLAME_BASE + 5 + h / 2, z + 4.5 * math.sin(a)), (3, h, 3), ("red", "orange", "ember")[i % 3],
+                        rot=[16 * math.sin(a), 0, -16 * math.cos(a)])
+            for i in range(8):
+                e = rig.bone(f"flame_fire_ember_{i}", (x, FLAME_BASE, z), body)
+                a = i * 0.79
+                rig.box(e, (x + 5 * math.cos(a), FLAME_BASE + 4, z + 5 * math.sin(a)), (1.6, 1.6, 1.6), "ember" if i % 2 else "yellow")
         elif name == "dark":
-            for w, h, c in ((5, 6, "black"), (8, 8, "purple"), (11, 9, "black"), (9, 7, "purple"), (6, 6, "black")):
-                rig.box(body, (x, y + h / 2, z), (w, h, w), c, rot=[0, 20, 0])
-                y += h * 0.85
-            rig.box(body, (x, FLAME_BASE + 16, z), (4, 14, 4), "violet")
-            for i in range(3):
-                a = 2 * math.pi / 3 * i
-                t = rig.bone(f"flame_dark_tongue_{i}", (x, FLAME_BASE + 20, z), body)
-                rig.box(t, (x + 6 * math.cos(a), FLAME_BASE + 30, z + 6 * math.sin(a)), (3, 12, 3), "purple",
-                        rot=[25 * math.sin(a), 0, -25 * math.cos(a)])
-            eyes = rig.bone("flame_dark_eyes", (x, FLAME_BASE + 20, z), root)
+            layers(rig, name, body, x, z, [(5, 5, "black", 0, 0), (7, 6, "purple", 0.5, 0), (10, 7, "black", 0, 0.5), (12, 8, "purple", -0.5, 0),
+                                           (10, 7, "black", 0, -0.5), (7, 6, "purple", 0.4, 0.4)], rot_step=24, shrink=0.88)
+            rig.box(body, (x, FLAME_BASE + 18, z), (4, 20, 4), "violet", rot=[0, 45, 0])
+            for i in range(4):
+                a = math.pi / 2 * i + 0.3
+                t = rig.bone(f"flame_dark_tongue_{i}", (x + 4 * math.cos(a), FLAME_BASE + 26, z + 4 * math.sin(a)), body)
+                for k in range(3):
+                    rig.box(t, (x + (5 + k * 2) * math.cos(a), FLAME_BASE + 30 + k * 5, z + (5 + k * 2) * math.sin(a)), (3 - k * 0.6, 6, 3 - k * 0.6),
+                            "purple" if k % 2 else "black", rot=[22 * math.sin(a) * (k + 1), 0, -22 * math.cos(a) * (k + 1)])
+            eyes = rig.bone("flame_dark_eyes", (x, FLAME_BASE + 20, z), body)
             fx, fz = -x / math.hypot(x, z), -z / math.hypot(x, z)
             for s in (-1, 1):
-                rig.box(eyes, (x + fx * 6 + fz * 2.2 * s, FLAME_BASE + 21, z + fz * 6 - fx * 2.2 * s), (2, 1.2, 2), "eye")
+                rig.box(eyes, (x + fx * 7 + fz * 2.4 * s, FLAME_BASE + 22, z + fz * 7 - fx * 2.4 * s), (2.4, 1.2, 2.4), "eye")
         elif name == "earth":
-            rig.box(body, (x, FLAME_BASE + 9, z), (12, 9, 12), "rock", rot=[8, 25, -6])
-            rig.box(body, (x, FLAME_BASE + 14, z), (11, 2, 11), "moss", rot=[8, 25, -6])
-            rig.box(body, (x, FLAME_BASE + 4, z), (7, 6, 7), "dirt", rot=[0, 40, 0])
-            for i, (ox, oz, h) in enumerate(((-2, 1, 9), (2, -1, 12), (0, 3, 7))):
-                rig.box(body, (x + ox, FLAME_BASE + 17 + h / 2, z + oz), (2.5, h, 2.5), "crystal", rot=[10 * ox, 0, 8 * oz])
-            orbit = rig.bone("flame_earth_orbit", (x, FLAME_BASE + 10, z), root)
-            for i in range(5):
-                a = 2 * math.pi * i / 5
-                rig.box(orbit, (x + 11 * math.cos(a), FLAME_BASE + 10 + 3 * math.sin(3 * a), z + 11 * math.sin(a)),
-                        (3, 3, 3), "rock" if i % 2 else "crystal", rot=[30, 45 * i, 20])
-        elif name == "water":
-            for i in range(5):
-                rig.box(body, (x, FLAME_BASE + 4 + i * 6, z), (9 - i, 6, 9 - i), "deep" if i % 2 else "water", rot=[0, 22 * i, 0])
-            rig.box(body, (x, FLAME_BASE + 34, z), (5, 3, 5), "foam", rot=[0, 45, 0])
-            orbit = rig.bone("flame_water_orbit", (x, FLAME_BASE + 16, z), root)
+            core = rig.bone("flame_earth_layer_0", (x, FLAME_BASE + 9, z), body)
+            rig.box(core, (x, FLAME_BASE + 9, z), (12, 9, 12), "rock", rot=[8, 25, -6])
+            rig.box(core, (x, FLAME_BASE + 14, z), (11, 2, 11), "moss", rot=[8, 25, -6])
+            rig.box(core, (x, FLAME_BASE + 4, z), (7, 6, 7), "dirt", rot=[0, 40, 0])
+            rig.box(core, (x + 3, FLAME_BASE + 6, z - 2), (5, 5, 5), "rock", rot=[20, 10, 30])
+            for i, (ox, oz, h) in enumerate(((-2, 1, 9), (2, -1, 12), (0, 3, 7), (-3, -2, 6))):
+                rig.box(core, (x + ox, FLAME_BASE + 17 + h / 2, z + oz), (2.5, h, 2.5), "crystal", rot=[10 * ox, 0, 8 * oz])
+            orbit = rig.bone("flame_earth_orbit", (x, FLAME_BASE + 10, z), body)
             for i in range(8):
                 a = 2 * math.pi * i / 8
-                rig.box(orbit, (x + 9 * math.cos(a), FLAME_BASE + 16 + 4 * math.sin(2 * a), z + 9 * math.sin(a)), (2, 2, 2), "foam")
+                r = 11 + 2 * (i % 2)
+                rig.box(orbit, (x + r * math.cos(a), FLAME_BASE + 10 + 3 * math.sin(3 * a), z + r * math.sin(a)),
+                        (3 + i % 2, 3 + i % 2, 3 + i % 2), ("rock", "crystal", "dirt")[i % 3], rot=[30, 45 * i, 20])
+        elif name == "water":
+            layers(rig, name, body, x, z, [(10, 6, "deep", 0, 0), (9, 6, "water", 0, 0), (8.5, 6, "deep", 0, 0), (8, 6, "water", 0, 0),
+                                           (7, 6, "deep", 0, 0), (6, 5, "water", 0, 0), (4.5, 4, "foam", 0, 0)], rot_step=22, shrink=0.95)
+            crown = rig.bone("flame_water_crown", (x, FLAME_BASE + 36, z), body)
+            for i in range(6):
+                a = math.pi / 3 * i
+                rig.box(crown, (x + 4 * math.cos(a), FLAME_BASE + 38, z + 4 * math.sin(a)), (1.6, 5, 1.6), "foam", rot=[25 * math.sin(a), 0, -25 * math.cos(a)])
+            orbit = rig.bone("flame_water_orbit", (x, FLAME_BASE + 16, z), body)
+            for i in range(12):
+                a = 2 * math.pi * i / 12
+                rig.box(orbit, (x + 10 * math.cos(a), FLAME_BASE + 16 + 5 * math.sin(2 * a), z + 10 * math.sin(a)), (2, 2, 2), "foam" if i % 2 else "water")
         elif name == "light":
-            rig.box(body, (x, FLAME_BASE + 16, z), (8, 8, 8), "white", rot=[45, 0, 35])
-            rig.box(body, (x, FLAME_BASE + 16, z), (11, 11, 11), "ray", rot=[0, 45, 45])
-            rays = rig.bone("flame_light_rays", (x, FLAME_BASE + 16, z), root)
-            rig.box(rays, (x, FLAME_BASE + 16, z), (1.2, 30, 1.2), "gold")
-            rig.box(rays, (x, FLAME_BASE + 16, z), (22, 1.2, 1.2), "gold")
-            rig.box(rays, (x, FLAME_BASE + 16, z), (1.2, 1.2, 22), "gold")
-            halo = rig.bone("flame_light_halo", (x, FLAME_BASE + 16, z), root)
-            ring(rig, halo, (x, FLAME_BASE + 16, z), 10, 10, "gold", thick=1.2, height=1.2)
-        elif name == "air":
-            for r in range(3):
-                rb = rig.bone(f"flame_air_ribbon_{r}", (x, FLAME_BASE, z), body)
-                for i in range(7):
-                    a = i * 0.9 + r * 2.1
-                    rad = 3 + i * 0.9
-                    rig.box(rb, (x + rad * math.cos(a), FLAME_BASE + 3 + i * 4.5, z + rad * math.sin(a)), (6, 1.2, 2),
-                            "pale" if (i + r) % 2 else "cyan", rot=[0, -math.degrees(a), 12])
-            leaves = rig.bone("flame_air_leaves", (x, FLAME_BASE + 12, z), root)
+            core = rig.bone("flame_light_layer_0", (x, FLAME_BASE + 18, z), body)
+            rig.box(core, (x, FLAME_BASE + 18, z), (8, 8, 8), "white", rot=[45, 0, 35])
+            rig.box(core, (x, FLAME_BASE + 18, z), (12, 12, 12), "ray", rot=[0, 45, 45])
+            rig.box(core, (x, FLAME_BASE + 6, z), (4, 10, 4), "gold", rot=[0, 45, 0])
+            rays = rig.bone("flame_light_rays", (x, FLAME_BASE + 18, z), body)
             for i in range(4):
-                a = math.pi / 2 * i
-                rig.box(leaves, (x + 8 * math.cos(a), FLAME_BASE + 10 + i * 4, z + 8 * math.sin(a)), (3, 0.6, 2), "leaf", rot=[20, 30 * i, 0])
+                a = math.pi / 4 * i
+                rig.box(rays, (x, FLAME_BASE + 18, z), (1.2, 34 if i % 2 == 0 else 22, 1.2), "gold", rot=[0, 0, 45 * i])
+            rig.box(rays, (x, FLAME_BASE + 18, z), (1.2, 1.2, 26), "gold")
+            halo = rig.bone("flame_light_halo", (x, FLAME_BASE + 18, z), body)
+            ring(rig, halo, (x, FLAME_BASE + 18, z), 11, 12, "gold", thick=1.2, height=1.2)
+        elif name == "air":
+            for r in range(4):
+                rb = rig.bone(f"flame_air_ribbon_{r}", (x, FLAME_BASE, z), body)
+                for i in range(8):
+                    a = i * 0.85 + r * 1.57
+                    rad = 2.5 + i * 0.85
+                    rig.box(rb, (x + rad * math.cos(a), FLAME_BASE + 3 + i * 4.2, z + rad * math.sin(a)), (6, 1.2, 2),
+                            "pale" if (i + r) % 2 else "cyan", rot=[0, -math.degrees(a), 12])
+            leaves = rig.bone("flame_air_leaves", (x, FLAME_BASE + 12, z), body)
+            for i in range(6):
+                a = math.pi / 3 * i
+                rig.box(leaves, (x + 8 * math.cos(a), FLAME_BASE + 8 + i * 4, z + 8 * math.sin(a)), (3, 0.6, 2), "leaf" if i % 2 else "pale", rot=[20, 30 * i, 0])
 
 
 def build_floor(rig):
@@ -297,7 +322,17 @@ def build_floor(rig):
         rig.box("floor_circle", (mid * math.cos(a), 0.5, mid * math.sin(a)), (70, 0.8, 2), "circle_hot", rot=[0, -math.degrees(a), 0])
 
 
+BEAM_COLORS = {"fire": "orange", "dark": "violet", "earth": "crystal", "water": "water", "light": "gold", "air": "cyan"}
+
+
 def build_streams(rig):
+    rig.bone("element_beams", (0, 0, 0))
+    for name, x, z, _ in flame_positions():
+        b = rig.bone(f"beam_{name}", (x, FLAME_BASE + 40, z), "element_beams")
+        top = WING_Y + 120
+        rig.box(b, (x, (FLAME_BASE + 40 + top) / 2, z), (7, top - FLAME_BASE - 40, 7), BEAM_COLORS[name])
+        rig.box(b, (x, (FLAME_BASE + 40 + top) / 2, z), (16, top - FLAME_BASE - 40, 16), "energy")
+        rig.box(b, (x, top, z), (22, 22, 22), BEAM_COLORS[name], rot=[45, 45, 0])
     rig.bone("streams", (0, 0, 0))
     for name, x, z, _ in flame_positions():
         b = rig.bone(f"stream_{name}", (x, FLAME_BASE + 40, z), "streams")
@@ -404,6 +439,8 @@ def build_star(rig):
     rig.box(fl, HOVER, (30, 30, 30), "flash", rot=[45, 45, 0])
     rig.box(fl, HOVER, (60, 6, 6), "flash")
     rig.box(fl, HOVER, (6, 60, 6), "flash")
+    for i in range(12):
+        rig.box(fl, HOVER, (3, 3, 70 + 20 * (i % 3)), "s_white" if i % 2 else "circle_hot", rot=[(i * 47) % 180 - 90, (i * 73) % 360, 0])
     birth = rig.bone("birth_flash", (0, SIGIL_Y, 0))
     rig.box(birth, (0, SIGIL_Y, 0), (30, 30, 30), "flash", rot=[45, 45, 0])
 
@@ -421,7 +458,7 @@ def build_waves(rig):
     rig.bone("shards", HOVER)
     for i in range(48):
         b = rig.bone(f"shard_{i}", HOVER, "shards")
-        s = rnd.uniform(2.5, 6)
+        s = rnd.uniform(4, 10)
         rig.box(b, HOVER, (s, s, s), rnd.choice(["s_white", "s_red", "s_gold", "circle_hot"]), rot=[rnd.uniform(0, 90), rnd.uniform(0, 90), 0])
 
 
@@ -624,14 +661,25 @@ def animate(rig):
         rig.key(A, root, "rotation", 0, (0, 0, 0))
         rig.groups[root]["rotation"] = [0, round(yaw, 2), 0]
 
-    for i in range(4):
+    for name, x, z, _ in flame_positions():
+        for i in range(8):
+            lb = f"flame_{name}_layer_{i}"
+            if lb not in rig.groups:
+                break
+            n = Noise1(300 + i * 7 + len(name))
+            amp = 0.35 + 0.28 * i
+            rig.sample(A, lb, "position", 0, END, lambda t, n=n, amp=amp: (amp * n(t * 2.4), 0.25 * amp * n(t * 3.1 + 4), amp * n(t * 2.2 + 9)), rate=10)
+            rig.sample(A, lb, "scale", 0, END, lambda t, n=n, i=i: (1 + 0.06 * n(t * 3.3 + i), 1 + 0.1 * n(t * 2.9 + 2 * i), 1 + 0.06 * n(t * 3.1 + 3 * i)), rate=10)
+    rig.sample(A, "flame_water_crown", "rotation", 0, END, lambda t: (0, -90 * t, 0), rate=2, interp="linear")
+    rig.sample(A, "flame_water_crown", "scale", 0, END, lambda t: (1 + 0.3 * math.sin(t * 6), 1 + 0.4 * math.sin(t * 6 + 1), 1 + 0.3 * math.sin(t * 6)), rate=10)
+    for i in range(6):
         b = f"flame_fire_tongue_{i}"
         n = Noise1(100 + i)
         rig.sample(A, b, "rotation", 0, END, lambda t, n=n: (14 * n(t * 3.2), 0, 14 * n(t * 2.7 + 1)), rate=10)
         rig.sample(A, b, "scale", 0, END, lambda t, n=n: (1, 1 + 0.35 * n(t * 3.5 + 2), 1), rate=10)
-    for i in range(6):
+    for i in range(8):
         b = f"flame_fire_ember_{i}"
-        period = 1.1 + 0.17 * i
+        period = 1.1 + 0.13 * i
         t = (i * 0.37) % period
         while t < END:
             rig.key(A, b, "position", t, (0, 0, 0), "linear")
@@ -640,7 +688,7 @@ def animate(rig):
             rig.key(A, b, "position", t + period - 0.02, (2 * math.sin(i + t), 46 + 6 * (i % 3), 2 * math.cos(i + t)), "linear")
             rig.key(A, b, "scale", t + period - 0.02, (0.2, 0.2, 0.2), "linear")
             t += period
-    for i in range(3):
+    for i in range(4):
         n = Noise1(200 + i)
         rig.sample(A, f"flame_dark_tongue_{i}", "rotation", 0, END, lambda t, n=n: (20 * n(t * 0.9), 25 * t, 20 * n(t * 0.7 + 2)), rate=8)
     rig.key(A, "flame_dark_eyes", "scale", 0, (0, 0, 0), "linear")
@@ -652,9 +700,10 @@ def animate(rig):
     for b, rate in (("flame_earth_orbit", 50), ("flame_water_orbit", -140), ("flame_light_rays", 60), ("flame_light_halo", -90)):
         rig.sample(A, b, "rotation", 0, END, lambda t, r=rate: (0, r * t, 0), rate=2, interp="linear")
     rig.sample(A, "flame_light_rays", "scale", 0, END, lambda t: (1 + 0.25 * math.sin(t * 5), 1 + 0.25 * math.sin(t * 5), 1 + 0.25 * math.sin(t * 5)), rate=8)
-    for r in range(3):
+    for r in range(4):
         rig.sample(A, f"flame_air_ribbon_{r}", "rotation", 0, END, lambda t, r=r: (0, -(260 + 40 * r) * t, 0), rate=2, interp="linear")
     rig.sample(A, "flame_air_leaves", "rotation", 0, END, lambda t: (10 * math.sin(t * 3), 200 * t, 0), rate=6)
+    rig.sample(A, "flame_earth_layer_0", "rotation", 0, END, lambda t: (6 * math.sin(t * 0.9), 25 * t, 5 * math.cos(t * 1.1)), rate=4)
     rig.sample(A, "flame_earth_body", "position", 0, END, lambda t: (0, 3 * math.sin(t * 1.4) + (6 if 12.4 < t < 19 else 0) * smooth((t - 12.4) / 0.6), 0), rate=6)
     rig.sample(A, "flame_water_body", "rotation", 0, END, lambda t: (0, 120 * t, 0), rate=2, interp="linear")
 
@@ -770,20 +819,21 @@ def animate(rig):
 
     star_on = 5.2
     rig.hide_until(A, "star", star_on)
-    rig.key(A, "star", "scale", 5.7, (0.6, 0.6, 0.6))
-    rig.key(A, "star", "scale", 5.95, (0.45, 0.45, 0.45))
-    rig.key(A, "star", "scale", 6.05, (1.35, 1.35, 1.35))
-    rig.key(A, "star", "scale", 6.25, (1, 1, 1))
-    last = 1.0
+    rig.key(A, "star", "scale", 5.7, (1.6, 1.6, 1.6))
+    rig.key(A, "star", "scale", 5.95, (1.2, 1.2, 1.2))
+    rig.key(A, "star", "scale", 6.05, (3.4, 3.4, 3.4))
+    rig.key(A, "star", "scale", 6.25, (2.6, 2.6, 2.6))
+    last = 2.6
     for k, (bt, _, _) in enumerate(BEATS):
-        amp = 1.25 + 0.15 * k
+        amp = (2.2 + 0.25 * k) * (0.42 + 0.58 * star_path(bt)[1] / SIGIL_Y)
         rig.key(A, "star", "scale", bt - 0.12, (last, last, last))
-        rig.key(A, "star", "scale", bt - 0.02, (0.78, 0.78, 0.78))
+        rig.key(A, "star", "scale", bt - 0.02, (last * 0.75, last * 0.75, last * 0.75))
         rig.key(A, "star", "scale", bt + 0.05, (amp * 1.2, amp * 1.2, amp * 1.2))
         rig.key(A, "star", "scale", bt + 0.35, (amp, amp, amp))
         last = amp
-    rig.key(A, "star", "scale", 10.4, (last, last, last))
-    rig.key(A, "star", "scale", 11.88, (last * 1.25, last * 1.25, last * 1.25))
+    rig.key(A, "star", "scale", 10.4, (1.05, 1.05, 1.05))
+    rig.key(A, "star", "scale", 11.5, (0.95, 0.95, 0.95))
+    rig.key(A, "star", "scale", 11.88, (1.3, 1.3, 1.3))
     rig.key(A, "star", "scale", 12.0, (0.3, 0.3, 0.3), "linear")
     rig.key(A, "star", "scale", 12.06, (0, 0, 0), "linear")
     rig.sample(A, "star", "position", star_on, 10.4, star_path, rate=16, extra=[b[0] for b in BEATS])
@@ -803,7 +853,7 @@ def animate(rig):
         b = f"star_ghost_{g}"
         lag = 0.035 * (g + 1)
         rig.hide_until(A, b, 6.2 + lag)
-        size = 0.92 - 0.1 * g
+        size = 2.2 - 0.22 * g
         rig.key(A, b, "scale", 6.3 + lag, (size, size, size))
         rig.key(A, b, "scale", 10.3, (size, size, size), "linear")
         rig.key(A, b, "scale", 10.6, (0, 0, 0), "linear")
@@ -884,6 +934,15 @@ def animate(rig):
     for t, ang in ((6.6, 0), (6.9, 0), (7.02, 34), (7.6, 30), (7.95, 0), (10.5, 0), (10.65, 28), (11.3, 0)):
         rig.key(A, "dragon_jaw", "rotation", t, (ang, 0, 0))
 
+    for i, (name, x, z, _) in enumerate(flame_positions()):
+        b = f"beam_{name}"
+        on = 12.3 + 0.05 * i
+        rig.hide_until(A, b, on)
+        rig.key(A, b, "scale", on + 0.1, (1.6, 1.15, 1.6))
+        rig.key(A, b, "scale", on + 0.3, (1, 1, 1))
+        rig.sample(A, b, "scale", on + 0.35, 13.7, lambda t, i=i: (1 + 0.25 * math.sin(t * 14 + i), 1, 1 + 0.25 * math.sin(t * 14 + i)), rate=10)
+        rig.key(A, b, "scale", 13.75, (1, 1, 1), "linear")
+        rig.key(A, b, "scale", 14.1, (0, 1.2, 0), "linear")
     rig.hide_until(A, "wings", 12.4)
     rig.key(A, "wings", "scale", 12.75, (1.05, 1.05, 1.05))
     rig.key(A, "wings", "scale", 12.95, (1, 1, 1))
@@ -951,7 +1010,7 @@ def animate(rig):
     for b, rate in (("flame_earth_orbit", 180), ("flame_water_orbit", -360), ("flame_light_halo", -180)):
         rig.key(I, b, "rotation", 0, (0, 0, 0), "linear")
         rig.key(I, b, "rotation", 2, (0, rate, 0), "linear")
-    for r in range(3):
+    for r in range(4):
         rig.key(I, f"flame_air_ribbon_{r}", "rotation", 0, (0, 0, 0), "linear")
         rig.key(I, f"flame_air_ribbon_{r}", "rotation", 2, (0, -720, 0), "linear")
 

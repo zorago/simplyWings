@@ -69,13 +69,16 @@ Références : les ultimes des gachas actuels (*Wuthering Waves*, *Honkai: Star 
 | `floor_circle` | Cercle magique au sol, double anneau contrarotatif + 6 rayons vers les flammes | rayon 8 blocs |
 | `stack_1` à `stack_3` | Cercles empilés au-dessus de l'autel (+10, +24, +44 blocs), contrarotatifs | rayons 5, 8, 12 blocs |
 | `sky_sigil` | Le grand sigil du ciel, **au-dessus de la hauteur maximale** (+96 blocs au-dessus du sol de l'île, soit au-delà de y = 319 dans l'End) : trois anneaux, douze branches, un hexagramme | rayon 30 blocs |
-| `pillar` | Colonne d'énergie de l'autel au sigil | 2 blocs de large, 96 de haut |
+| `pillar` | Colonne d'énergie de l'autel au sigil : cœur blanc, gaine violette, halo, **double hélice** de cubes (`pillar_helix_a/b`, contrarotatives) | 2 à 4 blocs de large, 96 de haut |
+| `motes` | 40 étincelles qui montent le long de la colonne en boucle | petits cubes |
+| `element_beams` | Six colonnes élémentaires, une par flamme (couleur de l'élément), qui montent jusqu'aux ailes à la révélation | 0,5 bloc de large |
 | `streams` | Six flux des flammes vers l'autel puis vers l'étoile | arcs |
-| `star` | L'étoile d'invocation : deux octaèdres croisés + halo, cinq variantes de couleur (blanc, bleu, violet, or, rouge) + `star_ghost_1…4` (traînées) | 1,5 bloc |
-| `waves` | Ondes de choc au sol et dans le ciel (anneaux plats qui s'élargissent) | jusqu'à 40 blocs |
+| `star` | L'étoile d'invocation : deux octaèdres croisés, noyau blanc, halo, trois piques et deux lames, anneau orbital (`star_ring`), cinq variantes de couleur (blanc, bleu, violet, or, rouge), plus `star_ghost_0…7` (traînée de 8 fantômes décalés de 35 ms) | 2,5 blocs, jusqu'à 7 dans le ciel |
+| `waves` | Ondes de choc au sol (`ground_wave_0…2`, `pillar_wave`) et dans le ciel à chaque battement (`beat_wave_0…3`) | jusqu'à 40 blocs |
+| `flash` | Éclat : octaèdre blanc, croix, 12 lames lumineuses ; `birth_flash` à la naissance de l'étoile | jusqu'à 15 blocs |
 | `shards` | 48 éclats de l'explosion, trajectoires balistiques | petits cubes |
 | `cracks` | Fissures rouges du ciel (SSS) autour du sigil | plaques |
-| `dragon` | Dragon spectral colossal (SS et SSS) qui tourne autour du sigil, ailes battantes | 50 blocs d'envergure |
+| `dragon` | Dragon spectral colossal (SS et SSS) : corps, crête lumineuse, cou en 5 segments, tête avec cornes et mâchoire articulée (`dragon_jaw`), queue en 10 segments (`dragon_tail`), ailes à bras, avant-bras et cinq doigts avec membrane (`dragon_wing_r/l`, `_tip`). Il tourne autour du sigil, rugit à 7,0 s et plonge derrière l'île | 56 blocs d'envergure |
 | `wings` | La paire d'ailes spectrale révélée au-dessus de l'autel (en jeu : remplacée par la vraie paire tirée, à grande échelle), deux battements puis repli et dissolution | 40 blocs d'envergure |
 | `feathers` | Plumes et pétales qui retombent en se balançant | petits cubes |
 
@@ -96,7 +99,7 @@ Temps en secondes. Les paliers inférieurs coupent des blocs (§ 6). Le hit-stop
 | 9,75 | **Fissure** | Au battement rouge, le ciel se fissure en rouge autour du sigil |
 | 10,40 – 12,00 | **Absorption** | L'étoile se fige à 3 blocs au-dessus de l'autel et tremble. Les six flammes s'étirent en flux vers elle et rapetissent. Le dragon plonge en piqué derrière l'île |
 | 12,00 | **Éclat** | Implosion (0,12 s), hit-stop 120 ms, explosion : 48 éclats, trois ondes de choc (rapide, moyenne, lente), flash vertical, le sigil vole en éclats et ses branches tournoient en s'éloignant |
-| 12,40 – 16,40 | **Révélation** | Les ailes spectrales se déploient au-dessus de l'autel (+14 blocs) et font deux grands battements qui soufflent des plumes. Les flammes se rallument à la couleur du palier, deux fois plus hautes |
+| 12,30 – 16,40 | **Révélation** | Six colonnes élémentaires jaillissent des flammes (12,30 à 14,10, 50 ms d’écart). Les ailes spectrales se déploient au-dessus de l’autel (+14 blocs, à partir de 12,40) et font deux grands battements (13,60 et 14,60) qui soufflent des plumes. Les flammes se rallument à la couleur du palier, deux fois plus hautes |
 | 16,40 – 19,60 | **Retombée** | Les ailes se replient et se dissolvent vers le ciel, les cercles se referment en spirale, la colonne s'amincit, les plumes finissent de tomber |
 | 19,60 – 21,00 | **Repos** | Les flammes reviennent au repos, les runes s'éteignent l'une après l'autre |
 
@@ -149,3 +152,16 @@ Les ids sont à ajouter à `SOUND_DESIGN.md` § 6.4 (ils complètent ceux de l'a
 4. **Effets procéduraux** ajoutés par-dessus les clés : flicker des flammes, traînées de l'étoile, éclats et plumes simulés, hit-stop.
 5. Caméra, cartes et musique pour l'invocateur.
 6. Tests : solo, serveur dédié, deux clients (un invocateur, un spectateur à 12 chunks et y = 0), avec et sans Iris.
+
+## 9. Fichiers, commandes et état (26 octobre)
+
+- Générateur : `python -I tools/blockbench/altar_anim.py` écrit `art/gacha/summoning_animation.bbmodel` (format Generic Model, environ 2 900 cubes, 370 os, 29 000 clés). Il lit le décor de l'île exporté (`altar_scene.py`) et ajoute toute l'animation. La géométrie et les clés sont **générées par code** (fonctions du temps échantillonnées en clés Catmull-Rom), ce qui permet de tout régler par paramètres et de porter les mêmes fonctions en Java.
+- Animations : `summon_sss` (21 s, le master complet) et `idle` (2 s en boucle, les flammes au repos).
+- Retouche à la main dans Blockbench : possible, mais une regénération écrase le fichier. Pour garder une retouche, il faut la reporter dans le générateur (ou demander à Claude de le faire).
+- Palette : une texture 64 × 64 générée (`simplywings:gacha/palette`), trois nuances par couleur (dessus clair, côtés, dessous sombre) et des couleurs translucides pour les halos.
+- Réglages de base du générateur : `SIGIL_Y` (hauteur du sigil, 96 blocs), `WING_Y` (ailes, 14 blocs), `HOVER` (point d'éclat, 6 blocs), `BEATS` (temps et hit-stop des battements), `IGNITE` (allumage des flammes), `FLAMES` (ancres et éléments).
+- **Pas encore faits** :
+  - les animations des autres paliers (`summon_b` à `summon_ss`) et du ×10, qui seront des coupes du master (§ 6) produites par le même générateur ;
+  - la teinte des flammes à la couleur du palier pendant la révélation : en jeu, c'est une couleur multiplicatrice que Blockbench ne sait pas animer ;
+  - l'éclipse et le blanc des mythiques ;
+  - le portage en jeu (§ 8).
