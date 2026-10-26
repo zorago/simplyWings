@@ -172,7 +172,8 @@ public final class EndSanctums {
         Data data = data(level);
         if (data.centers[sanctum.ordinal()] == null) {
             if (!sanctum.island()) {
-                data.centers[sanctum.ordinal()] = new BlockPos(0, ServerConfig.SUMMONING_Y.get(), 0);
+                int height = level.getStructureManager().getOrCreate(SimplyWings.id(sanctum.id())).getSize().getY();
+                data.centers[sanctum.ordinal()] = new BlockPos(0, level.getMaxBuildHeight() - height + sanctum.templateCenter.getY(), 0);
                 data.setDirty();
                 return data.centers[sanctum.ordinal()];
             }
@@ -241,8 +242,11 @@ public final class EndSanctums {
         return new BlockPos(sanctum.ordinal() * BUILD_SPACING, BUILD_Y, 0);
     }
 
-    public static void buildWorld(ServerLevel level) {
+    public static void buildWorld(ServerLevel level, Optional<Sanctum> only) {
         for (Sanctum sanctum : Sanctum.values()) {
+            if (only.isPresent() && only.get() != sanctum) {
+                continue;
+            }
             StructureTemplate template = level.getStructureManager().getOrCreate(SimplyWings.id(sanctum.id()));
             Vec3i size = template.getSize();
             BlockPos origin = buildOrigin(sanctum);

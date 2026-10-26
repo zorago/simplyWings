@@ -71,6 +71,13 @@ neoForge {
             programArguments.addAll '--quickPlaySingleplayer', 'New World', '--width', '1280', '--height', '960'
         }
 
+        builds {
+            client()
+            gameDirectory = project.file('run')
+            systemProperty 'simplywings.studio', 'true'
+            programArguments.addAll '--quickPlaySingleplayer', 'SimplyWings Builds', '--width', '1600', '--height', '900'
+        }
+
         studioMp {
             client()
             gameDirectory = project.file('run-mp')

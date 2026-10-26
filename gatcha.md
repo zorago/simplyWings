@@ -96,9 +96,9 @@ Les valeurs ne sont pas tapées à la main : `python -I tools/crafting_gen/value
 
 Le mod a aujourd'hui trois sanctuaires de l'End (2e, 3e et 4e morts du dragon). Le gacha en ajoute deux, pour **cinq structures** au total.
 
-### 1. Le sanctuaire d'invocation (sous l'île principale)
+### 1. Le sanctuaire d'invocation (île au sommet du ciel)
 
-- Apparaît après la **première** mort du dragon, **sous l'île principale de l'End**, caché par un **voile de blocs noirs** (blackstone, obsidienne, béton noir) qui le fait passer pour le vide ou la roche. On peut le trouver par hasard en creusant, mais rien ne le signale.
+- Apparaît après la **première** mort du dragon. **Changement du 26 octobre (zorago)** : ce n'est plus une salle sous l'île principale, c'est une **île flottante** posée au-dessus du centre de l'End (x = 0, z = 0), le **sommet du template collé à la hauteur maximale** du monde (y = 319 dans l'End vanilla), même taille qu'avant (41 × 28 × 41). Son **dessous est en béton noir**, pour être invisible contre le ciel de l'End vu d'en bas. Les mondes où elle a déjà été posée sous l'île gardent leur position.
 - Son **compas** n'est donné qu'à la **cinquième** mort du dragon, en même temps que l'apparition de la fontaine.
 - Au centre : l'**autel draconique** (« Draconic Altar »), un bloc unique dans la vibe ange, démon et dragon : socle en os de dragon et obsidienne, ailes de plumes blanches d'un côté et de membrane rouge de l'autre, cristaux de l'End en suspension, flammes violettes. Clic droit : ouvre l'interface d'invocation. Il n'est pas craftable, mais il est **cassable à la pioche et récupérable** (il se pose ailleurs, par exemple dans la base du joueur). La mort suivante du dragon en fait repousser un dans le sanctuaire (voir § Régénération).
 - Placement : comme les autres sanctuaires (template généré par script), jamais via un hook interne d'`EndDragonFight`.
@@ -159,7 +159,7 @@ Depuis le prototype : le ×10 doit être rendu **en direct**, puisqu'il existe e
 - `gacha/` : `Gacha` (tirage côté serveur, garanties, pools), `GachaData` (compteurs, réserve, 100 derniers tirages ; attachment `simplywings:gacha`, conservé à la mort), `GachaTier`, `OfferingValues` (valeurs rechargeables), `SummoningLootModifier` (GLM `simplywings:summoning_feathers`), `DraconicAltarBlock` + `AltarMenu`, `OfferingFountainBlock` + `FountainMenu` (9 cases, bouton « Offer », réserve des fractions).
 - Réseau : `GachaPull` (client → serveur, ×1 ou ×10, refusé si la fenêtre de l'autel n'est pas ouverte), `GachaState` et `GachaResults` (serveur → client, à l'ouverture et après un tirage, jamais par tick).
 - Client : `ClientGacha`, `AltarScreen` (illustration, tracker de pitié, historique, taux ; animation provisoire : comète colorée par le meilleur palier, d'abord bleue puis qui bascule pour S et plus, flash, cartes révélées une à une avec des rayons pour S et plus, récapitulatif ×10, sons vanilla provisoires), `FountainScreen`.
-- Structures : `EndSanctums` (îles en carré, sanctuaire d'invocation sous l'île à y = `gacha.summoningY`, compas au 5e dragon), templates générés par `tools/crafting_gen/sanctums.py` (`summoning_sanctum`, `offering_fountain`). Modèles et textures de l'autel, de la fontaine, de la plume et de l'illustration : `tools/crafting_gen/gacha_blocks.py` (provisoires, à refaire avec zorago).
+- Structures : `EndSanctums` (îles en carré, sanctuaire d'invocation au-dessus de l'île centrale, sommet du template collé à la hauteur maximale du monde, compas au 5e dragon), templates générés par `tools/crafting_gen/sanctums.py` (`summoning_sanctum`, `offering_fountain`). Modèles et textures de l'autel, de la fontaine, de la plume et de l'illustration : `tools/crafting_gen/gacha_blocks.py` (provisoires, à refaire avec zorago).
 - Config serveur `[gacha]` : taux, garanties, coffres (chances par dimension, 1 à 3), hauteur du sanctuaire, dragons de la fontaine, du compas et de la reconstruction.
 - Commandes : `/simplywings gacha feathers <n>`, `gacha pity <s> <ss> <sss>`, `gacha reset`, `gacha info`, et `/simplywings sanctum summoning_sanctum|offering_fountain` (pose et compas).
 
@@ -168,7 +168,7 @@ Depuis le prototype : le ×10 doit être rendu **en direct**, puisqu'il existe e
 1. Item d'invocation + Global Loot Modifier des coffres (hors End et End) + config.
 2. Données : compteurs de pitié par joueur (attachment), tirage côté serveur, paquets (résultats et compteurs, jamais par tick).
 3. Valeurs des items (`values.py`) + simulateur de taux (`tools/gacha/simulate.py`).
-4. Sanctuaire d'invocation sous l'île + autel (bloc, interface minimale fonctionnelle).
+4. Sanctuaire d'invocation + autel (bloc, interface minimale fonctionnelle).
 5. Fontaine aux offrandes (île, bloc, interface), passage des îles au carré.
 6. Interface finale : illustration, tracker, historique.
 7. Animations (lancement, révélations, S, SS, SSS, mythique) et sound design, créées avec zorago. **26 octobre** : prototype hors jeu livré, single B validé (`GACHA_ANIMATIONS.md` § 0). Reste : valider les autres films, créer les mythiques et le son, puis porter en Java.

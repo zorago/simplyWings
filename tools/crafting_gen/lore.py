@@ -171,7 +171,7 @@ CRAFT_LORE = {
     "cloud_absorber": "A copper funnel that drinks the clouds as you fly through them.",
     "forge_compass": "Its needle trembles toward the Wing Forge, somewhere out in the End.",
     "sanctum_compass": "Its needle drifts like a feather toward the Sky Sanctum, adrift in the End.",
-    "summoning_compass": "Its needle points down, always down, toward something hidden beneath the central island of the End.",
+    "summoning_compass": "Its needle points up, always up, toward something hidden at the top of the End sky.",
     "fountain_compass": "Its needle shivers like a drop of water, drawn to the Offering Fountain out in the void.",
     "refinery_compass": "Its needle hums toward the Cloud Refinery, where the skies are pressed into gold.",
     "iron_cloud_absorber": "An iron funnel: it drinks the sky fast enough to fill an Iron Essence Tank.",

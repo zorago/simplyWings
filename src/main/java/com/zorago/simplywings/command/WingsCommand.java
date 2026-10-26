@@ -59,7 +59,11 @@ public final class WingsCommand {
                 .then(Commands.literal("info").executes(WingsCommand::info))
                 .then(Commands.literal("forge").executes(ctx -> sanctum(ctx, EndSanctums.Sanctum.WING_FORGE)))
                 .then(Commands.literal("sanctum")
-                        .then(Commands.literal("build").executes(WingsCommand::sanctumBuild))
+                        .then(Commands.literal("build").executes(ctx -> sanctumBuild(ctx, Optional.empty()))
+                                .then(Commands.argument("name", StringArgumentType.word())
+                                        .suggests((ctx, builder) -> SharedSuggestionProvider.suggest(
+                                                java.util.Arrays.stream(EndSanctums.Sanctum.values()).map(EndSanctums.Sanctum::id), builder))
+                                        .executes(ctx -> sanctumBuild(ctx, EndSanctums.Sanctum.byId(StringArgumentType.getString(ctx, "name"))))))
                         .then(Commands.literal("export")
                                 .then(Commands.argument("name", StringArgumentType.word())
                                         .suggests((ctx, builder) -> SharedSuggestionProvider.suggest(
@@ -184,8 +188,8 @@ public final class WingsCommand {
         return 1;
     }
 
-    private static int sanctumBuild(CommandContext<CommandSourceStack> ctx) {
-        EndSanctums.buildWorld(ctx.getSource().getLevel());
+    private static int sanctumBuild(CommandContext<CommandSourceStack> ctx, Optional<EndSanctums.Sanctum> only) {
+        EndSanctums.buildWorld(ctx.getSource().getLevel(), only);
         ctx.getSource().sendSuccess(() -> Component.translatable("commands.simplywings.sanctum_build"), true);
         return 1;
     }

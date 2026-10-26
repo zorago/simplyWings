@@ -65,7 +65,6 @@ public final class ServerConfig {
     public static final ModConfigSpec.IntValue CHEST_MIN;
     public static final ModConfigSpec.IntValue CHEST_MAX;
     public static final ModConfigSpec.BooleanValue MODDED_CHESTS;
-    public static final ModConfigSpec.IntValue SUMMONING_Y;
     public static final ModConfigSpec.IntValue FOUNTAIN_DRAGON;
     public static final ModConfigSpec.IntValue SUMMONING_COMPASS_DRAGON;
     public static final ModConfigSpec.IntValue REBUILD_DRAGON;
@@ -214,8 +213,6 @@ public final class ServerConfig {
         CHEST_MIN = b.comment("Feathers in such a chest: chestMin to chestMax, never more, whatever the luck.").defineInRange("chestMin", 1, 1, 64);
         CHEST_MAX = b.defineInRange("chestMax", 3, 1, 64);
         MODDED_CHESTS = b.comment("Also add feathers to the chest loot tables of other mods (any loot table under chests/).").define("moddedChests", true);
-        SUMMONING_Y = b.comment("Floor height of the Summoning Sanctum, hidden under the central End island. Read once, at placement.")
-                .defineInRange("summoningY", 22, -60, 250);
         SUMMONING_COMPASS_DRAGON = b.comment("Dragon death that gives the Summoning Compass.").defineInRange("summoningCompassDragon", 5, 1, 1000);
         FOUNTAIN_DRAGON = b.comment("Dragon death that raises the Offering Fountain island.").defineInRange("fountainDragon", 5, 1, 1000);
         REBUILD_DRAGON = b.comment("Every dragon death puts back the missing blocks of the mod in the five structures. From this dragon death on, every death also rebuilds the five structures entirely (the air of the templates is not placed).")
