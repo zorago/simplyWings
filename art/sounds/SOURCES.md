@@ -33,6 +33,14 @@ Tous les sons du mod viennent de bibliothèques **CC0** (domaine public : usage 
 | Impact Sounds (https://kenney.nl/assets/impact-sounds) | `impactBell_heavy_000-004`, `impactGlass_medium_000-004`, `impactGlass_light_000-004` | `gacha/bell`, `gacha/chime`, `gacha/twinkle` |
 | UI Audio (https://kenney.nl/assets/ui-audio) | téléchargé, pas encore utilisé | réserve pour l'interface |
 
+## Sample fourni par zorago (hors CC0)
+
+| Fichier local | Origine | Utilisé pour |
+|---|---|---|
+| `user/night_fury_dive.mp3` | cri de piqué de Night Fury isolé par zorago (`audio-editor-output.mp3`, 6,48 s, explosion du piqué à ≈ 5,1 s) | `fury/dive` : 0 à 5,0 s + 3 s d'écho qui s'atténue (Night et Light) ; `fury/invisible` : sample entier + 3 s d'écho, hauteur 0,97 (Night) et 1,03 (Light), joué au dash qui rend invisible |
+
+Ce son vient du film : il n'est **pas** libre de droits. Il convient pour un usage privé (le pack entre amis) ; avant une publication du mod, il faudra le remplacer par une recréation originale (`SOUND_DESIGN.md` § 5).
+
 ## Choix faits sans écoute
 
 Les sons ont été choisis sur leur description, leur durée et leur enveloppe (découpage automatique des coups). À valider à l'oreille en jeu : `ToDoTesting.md` § 15.

@@ -168,7 +168,7 @@ public final class FuryEffects {
     private static void dashNight(Player player) {
         Level level = player.level();
         RandomSource random = player.getRandom();
-        playDash(player, ModSounds.NIGHT_DASH.get());
+        playDash(player, ModSounds.NIGHT_INVISIBLE.get());
         Vec3 look = player.getLookAngle();
         for (int i = 0; i < 40; i++) {
             Vec3 p = player.position().add(0, player.getBbHeight() * 0.5, 0).add(look.scale(random.nextDouble() * BLAST_DISTANCE))
@@ -197,6 +197,7 @@ public final class FuryEffects {
             level.addParticle(i % 3 == 0 ? ParticleTypes.SOUL_FIRE_FLAME : PLASMA, blast.x, blast.y, blast.z, v.x, v.y, v.z);
         }
         playDash(player, ModSounds.LIGHT_BLAST.get());
+        playDash(player, ModSounds.LIGHT_INVISIBLE.get());
     }
 
     private FuryEffects() {

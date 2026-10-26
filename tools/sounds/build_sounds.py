@@ -23,8 +23,11 @@ INTERFACE = "kenney_interface-sounds/Audio/"
 IMPACT = "kenney_impact-sounds/Audio/"
 
 
-def clip(source, start=0.0, end=None, peak=-3.0, fade_in=0.004, fade_out=0.25):
-    return {"source": source, "start": start, "end": end, "peak": peak, "fade_in": fade_in, "fade_out": fade_out}
+FURY = "user/night_fury_dive.mp3"
+
+
+def clip(source, start=0.0, end=None, peak=-3.0, fade_in=0.004, fade_out=0.25, echo=0.0):
+    return {"source": source, "start": start, "end": end, "peak": peak, "fade_in": fade_in, "fade_out": fade_out, "echo": echo}
 
 
 FILES = {
@@ -36,6 +39,8 @@ FILES = {
                          clip(INSECT, 4.09, 4.55, -6.0, fade_out=0.15)],
     "wing/strong/flap": [clip(HUGE, 2.42, 3.62, -1.5, fade_out=0.4), clip(HUGE, 3.72, 4.3, -1.5), clip(HUGE, 5.06, 5.6, -1.5),
                          clip(HUGE, 5.87, 6.98, -1.5, fade_out=0.4), clip(HUGE, 9.27, 10.4, -1.5, fade_out=0.4)],
+    "fury/dive": [clip(FURY, 0.0, 5.0, -1.0, fade_out=0.03, echo=3.0)],
+    "fury/invisible": [clip(FURY, 0.0, None, -1.0, fade_out=0.05, echo=3.0)],
     "gacha/ignite": [clip(f"oga_magical_{n}.ogg", 0, None, -2.0, fade_out=0.3) for n in ("1_0", "2", "4", "5", "6_0", "7_0")],
     "gacha/offer": [clip("oga_magical_3.ogg", 0, None, -2.0, fade_out=0.4)],
     "gacha/rune_charge": [clip("fs_832552_crystal_ball.mp3", 1.0, 9.6, -3.0, fade_in=0.3, fade_out=2.5),
@@ -114,6 +119,36 @@ def load(path):
     return np.frombuffer(raw, dtype=np.float32).copy()
 
 
+def lowpass(x, cutoff):
+    a = np.exp(-2 * np.pi * cutoff / SR)
+    y = np.empty_like(x)
+    acc = 0.0
+    for i, v in enumerate(x):
+        acc = (1 - a) * v + a * acc
+        y[i] = acc
+    return y
+
+
+def echo(x, tail, delays=(0.23, 0.37), feedback=0.68, wet=0.5):
+    n = len(x) + int(tail * SR)
+    dry = np.zeros(n, dtype=np.float32)
+    dry[:len(x)] = x
+    out = dry.copy()
+    for k, delay in enumerate(delays):
+        d = int(delay * SR)
+        tap = dry.copy()
+        gain = wet / len(delays)
+        shift = 0
+        while gain > 0.002 and shift + d < n:
+            shift += d
+            tap = lowpass(tap, 5200 - 700 * k) if shift == d else tap
+            out[shift:] += gain * tap[:n - shift]
+            gain *= feedback
+    fade = int(tail * SR)
+    out[-fade:] *= np.linspace(1, 0, fade) ** 1.3
+    return out
+
+
 def render(spec, target):
     x = load(SRC / spec["source"])
     a = int(spec["start"] * SR)
@@ -123,6 +158,8 @@ def render(spec, target):
     n_out = min(len(x) // 2, max(1, int(spec["fade_out"] * SR)))
     x[:n_in] *= np.linspace(0, 1, n_in)
     x[-n_out:] *= np.linspace(1, 0, n_out) ** 2
+    if spec["echo"] > 0:
+        x = echo(x, spec["echo"])
     x *= 10 ** (spec["peak"] / 20) / max(1e-6, np.abs(x).max())
     target.parent.mkdir(parents=True, exist_ok=True)
     subprocess.run([FFMPEG, "-v", "error", "-y", "-f", "f32le", "-ar", str(SR), "-ac", "1", "-i", "-",
@@ -155,11 +192,17 @@ def main():
 
     sounds_file = ASSETS / "sounds.json"
     sounds = {k: v for k, v in json.loads(sounds_file.read_text(encoding="utf-8")).items()
-              if k.startswith(("night_fury.", "light_fury."))}
+              if k in ("light_fury.charge", "light_fury.blast")}
+    for fury, pitch in (("night_fury", 0.97), ("light_fury", 1.03)):
+        name = "Night" if fury == "night_fury" else "Light"
+        sounds[f"{fury}.dive"] = {"subtitle": subtitle(f"{fury}.dive"), "sounds": files("fury/dive")}
+        sounds[f"{fury}.invisible"] = {"subtitle": subtitle(f"{fury}.invisible"),
+                                       "sounds": [dict(files("fury/invisible")[0], pitch=pitch)]}
+        SUBTITLES[f"{fury}.invisible"] = f"{name} Fury vanishes"
     for family in ("feather", "membrane", "leather", "insect", "strong"):
         sounds[f"wing.{family}.flap"] = {"sounds": files(f"wing/{family}/flap")}
     for base in FILES:
-        if base.startswith(("gacha/", "ui/")):
+        if base.startswith(("gacha/", "ui/", "block/", "essence/", "flight/")):
             key = base.replace("/", ".")
             sounds[key] = {"subtitle": subtitle(key), "sounds": files(base)}
     sounds["flight.takeoff_launch"] = {"subtitle": subtitle("flight.takeoff_launch"),
