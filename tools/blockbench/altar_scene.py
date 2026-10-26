@@ -103,6 +103,7 @@ def new_id():
 
 
 def cube(name, frm, to, faces, origin=None, rotation=None, color=0):
+    faces = {f: faces.get(f, {"uv": [0, 0, 0, 0], "texture": None}) for f in ("north", "east", "south", "west", "up", "down")}
     element = {"name": name, "box_uv": False, "render_order": "default", "locked": False, "export": True,
                "from": frm, "to": to, "autouv": 0, "color": color, "origin": origin or [0, 0, 0],
                "faces": faces, "type": "cube", "uuid": new_id()}
