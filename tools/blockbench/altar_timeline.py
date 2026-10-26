@@ -165,14 +165,14 @@ def lerp3(a, b, u):
 
 REF = [0, 1.9, 4.0, 4.6, 6.2, 10.4, 12.0, 21.0]
 CAM = {
-    "R": [(0, 30), (1.3, 24), (1.9, 21), (3.6, 16), (4.0, 19), (5.2, 24), (6.2, 26), (8.0, 32), (9.6, 28), (10.4, 19), (11.6, 15), (12.0, 13),
-          (12.6, 32), (14.0, 38), (17.0, 40), (21.0, 34)],
-    "H": [(0, 13), (1.3, 9), (1.9, 6), (3.6, 3), (4.0, 2.5), (5.2, 4), (6.2, 6), (8.0, 14), (9.6, 12), (10.4, 8), (12.0, 5), (12.6, 7),
+    "R": [(0, 22), (1.3, 21), (1.9, 21), (3.6, 16), (4.0, 19), (5.2, 24), (6.2, 26), (8.0, 32), (9.6, 28), (10.4, 19), (11.6, 15), (12.0, 13),
+          (12.8, 20), (14.5, 32), (17.0, 36), (21.0, 32)],
+    "H": [(0, 9), (1.3, 8), (1.9, 6), (3.6, 3), (4.0, 2.5), (5.2, 4), (6.2, 6), (8.0, 14), (9.6, 12), (10.4, 8), (12.0, 5), (12.6, 7),
           (14.0, 11), (21.0, 9)],
     "TY": [(0, 3), (1.9, 3.5), (3.6, 4), (4.0, 14), (5.2, 40), (6.2, 50), (8.0, 34), (9.6, 18), (10.4, 7), (12.0, 6.5), (12.6, 13),
            (14.0, 17), (21.0, 6)],
     "WS": [(0, 0), (4.6, 0), (5.4, 0.55), (6.2, 0.6), (8.0, 0.45), (9.6, 0.3), (10.4, 0.0), (21.0, 0)],
-    "OM": [(0, 0.45), (1.2, 0.6), (1.9, 0.75), (3.6, 1.0), (4.0, 0.6), (5.2, 0.35), (6.2, 0.5), (7.5, 1.1), (9.0, 1.6), (10.4, 1.9),
+    "OM": [(0, 0.45), (1.2, 0.6), (1.9, 0.75), (3.6, 1.0), (4.0, 0.6), (5.2, 0.35), (6.2, 0.5), (7.5, 0.9), (9.0, 1.15), (10.4, 1.3),
            (11.6, 0.9), (12.0, 0.25), (12.6, 0.4), (14.0, 0.3), (21.0, 0.2)],
 }
 SHOULDER = (PLAYER[0] + 18, PLAYER[1] + 40, PLAYER[2] + 36)
@@ -200,14 +200,33 @@ def camera_keys(rig, A, P, star_pos):
     anchors = [0, 1.9, 4.0, P.birth, P.desc, P.hover, P.burst, P.end]
     scale = 1.0 if P.sigil else 0.55
 
+    angle_cache = {}
+
+    def angle(t):
+        key = round(t, 3)
+        if key not in angle_cache:
+            total, x, step = 0.0, 0.0, 0.02
+            while x < t:
+                dt = min(step, t - x)
+                total += curve(CAM["OM"], tref(x + dt / 2)) * dt
+                x += dt
+            angle_cache[key] = 0.6 + total
+        return angle_cache[key]
+
+    t12 = P.burst
+
+    def tref(t):
+        return remap(t, anchors, REF) if t <= P.burst else 12.0 + (t - P.burst)
+
     def orbit(t):
-        tr = remap(t, anchors, REF)
-        th = 0.6 + integral(CAM["OM"], tr)
+        tr = tref(t)
+        th = angle(t)
         if P.wings and tr > 12.0:
-            front = math.pi / 2 + 0.35 * math.sin((tr - 12.0) * 0.5)
-            front += 2 * math.pi * round((th - front) / (2 * math.pi))
-            th = th + (front - th) * smooth((tr - 12.0) / 0.9)
-        r = curve(CAM["R"], tr) * B * (0.8 + 0.2 * scale + (0.15 if P.wings == 0 and tr > 12 else 0))
+            th12 = angle(t12)
+            turns = round((th12 - math.pi / 2) / math.pi)
+            front = math.pi / 2 + math.pi * turns + 0.3 * math.sin((tr - 12.0) * 0.4) + (th - th12) * 0.15
+            th = th + (front - th) * smooth((tr - 12.0) / 2.4)
+        r = curve(CAM["R"], tr) * B * (0.8 + 0.2 * scale + (0.15 * smooth((tr - 12.0) / 1.0) if P.wings == 0 else 0))
         h = curve(CAM["H"], tr) * B * (0.6 + 0.4 * scale)
         ty = curve(CAM["TY"], tr) * B * (scale if 4.0 < tr < 10.4 else 1)
         ws = curve(CAM["WS"], tr)
@@ -224,10 +243,10 @@ def camera_keys(rig, A, P, star_pos):
         return lerp3(CRYSTAL, fmean, 0.7 * math.sin(math.pi * min(1, T / 1.9)))
 
     def cam(T):
-        if T < 1.7:
-            return lerp3(SHOULDER, near, smooth((T - 0.2) / 1.4)), look(T)
+        if T < 1.2:
+            return lerp3(SHOULDER, near, smooth((T - 0.2) / 1.0)), look(T)
         if T < PRE:
-            u = ease_in_out((T - 1.7) / (PRE - 1.7))
+            u = ease_in_out((T - 1.2) / (PRE - 1.2))
             p1, t1 = orbit(0)
             return lerp3(near, p1, u), lerp3(look(T), t1, u)
         if T <= PRE + P.end:
@@ -251,10 +270,9 @@ def camera_keys(rig, A, P, star_pos):
         last[0] = yaw
         return (pitch, yaw, 0)
 
-    extra = [PRE + b[0] for b in P.beats] + [PRE + P.burst, PRE, 1.7, PRE + P.end]
-    rig.sample(A, "camera", "position", 0, total, lambda T: cam(T)[0], rate=8, extra=extra, absolute=True)
-    rig.sample(A, "camera", "rotation", 0, total, rot, rate=8, extra=extra, absolute=True)
-    rig.sample(A, "camera_target", "position", 0, total, lambda T: cam(T)[1], rate=8, extra=extra, absolute=True)
+    rig.sample(A, "camera", "position", 0, total, lambda T: cam(T)[0], rate=10, absolute=True)
+    rig.sample(A, "camera", "rotation", 0, total, rot, rate=10, absolute=True)
+    rig.sample(A, "camera_target", "position", 0, total, lambda T: cam(T)[1], rate=10, absolute=True)
 
 
 def prologue(rig, A, P):

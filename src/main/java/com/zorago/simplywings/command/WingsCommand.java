@@ -84,6 +84,11 @@ public final class WingsCommand {
                                                 .then(Commands.argument("sss", IntegerArgumentType.integer(0, 999)).executes(WingsCommand::pity)))))
                         .then(Commands.literal("reset").executes(WingsCommand::gachaReset))
                         .then(Commands.literal("info").executes(WingsCommand::gachaInfo))
+                        .then(Commands.literal("force")
+                                .then(Commands.literal("x10").executes(ctx -> force(ctx, "x10")))
+                                .then(Commands.literal("ss").executes(ctx -> force(ctx, "ss")))
+                                .then(Commands.literal("sss").executes(ctx -> force(ctx, "sss")))
+                                .then(Commands.literal("mythic").executes(ctx -> force(ctx, "mythic"))))
                         .then(Commands.literal("show")
                                 .then(Commands.argument("animation", StringArgumentType.word())
                                         .suggests((ctx, builder) -> SharedSuggestionProvider.suggest(java.util.List.of("summon_b", "summon_a", "summon_s",
@@ -102,6 +107,23 @@ public final class WingsCommand {
             }
             count -= n;
         }
+        return 1;
+    }
+
+    private static int force(CommandContext<CommandSourceStack> ctx, String what) throws CommandSyntaxException {
+        ServerPlayer player = ctx.getSource().getPlayerOrException();
+        java.util.List<com.zorago.simplywings.gacha.GachaTier> tiers = switch (what) {
+            case "x10" -> java.util.List.of(com.zorago.simplywings.gacha.GachaTier.B, com.zorago.simplywings.gacha.GachaTier.A,
+                    com.zorago.simplywings.gacha.GachaTier.S, com.zorago.simplywings.gacha.GachaTier.SS, com.zorago.simplywings.gacha.GachaTier.SSS,
+                    com.zorago.simplywings.gacha.GachaTier.MYTHIC, com.zorago.simplywings.gacha.GachaTier.B, com.zorago.simplywings.gacha.GachaTier.A,
+                    com.zorago.simplywings.gacha.GachaTier.S, com.zorago.simplywings.gacha.GachaTier.SS);
+            case "ss" -> java.util.List.of(com.zorago.simplywings.gacha.GachaTier.SS);
+            case "sss" -> java.util.List.of(com.zorago.simplywings.gacha.GachaTier.SSS);
+            default -> java.util.List.of(com.zorago.simplywings.gacha.GachaTier.MYTHIC);
+        };
+        com.zorago.simplywings.gacha.Gacha.FORCED.put(player.getUUID(), tiers);
+        ctx.getSource().sendSuccess(() -> Component.literal("The next summon at the Draconic Altar is forced: " + tiers
+                + " (no feather used). Open the altar and press any summon button."), false);
         return 1;
     }
 

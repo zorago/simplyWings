@@ -42,6 +42,8 @@ public final class ClientShows {
     private static CameraType previousType;
     private static boolean previousHideGui;
     private static Show cameraShow;
+    private static long ticks;
+    private static ShowModel warmed;
 
     static final class Show {
         final Payloads.SummonShow payload;
@@ -52,6 +54,7 @@ public final class ClientShows {
         final boolean summoner;
         final int[] tint;
         float lastTime = -1;
+        long startTick;
         boolean skipped;
 
         Show(Payloads.SummonShow payload, ShowModel model, ShowModel.Anim anim, boolean summoner) {
@@ -81,8 +84,7 @@ public final class ClientShows {
         }
 
         float time(float partial) {
-            ClientLevel level = Minecraft.getInstance().level;
-            return level == null ? 0 : (level.getGameTime() - payload.start() + partial) / 20f;
+            return (ticks - startTick + partial) / 20f;
         }
     }
 
@@ -106,7 +108,9 @@ public final class ClientShows {
             return false;
         });
         boolean summoner = mc.player != null && mc.player.getId() == payload.summoner();
-        SHOWS.add(new Show(payload, model, anim, summoner));
+        Show show = new Show(payload, model, anim, summoner);
+        show.startTick = ticks + (payload.start() - mc.level.getGameTime());
+        SHOWS.add(show);
     }
 
     public static boolean active(BlockPos pos) {
@@ -226,7 +230,7 @@ public final class ClientShows {
             poseStack.mulPose(Axis.YP.rotationDegrees(show.yaw));
             poseStack.scale(1 / 16f, 1 / 16f, 1 / 16f);
             applyOffsets(model, show, time);
-            ShowRenderer.render(model, show.anim, time, time, poseStack, buffers, i -> show.tint[i]);
+            ShowRenderer.render(model, show.anim, time, time, poseStack, buffers, i -> show.tint[i], event.getFrustum(), cam);
             ShowRenderer.OFFSETS.clear();
             poseStack.popPose();
         }
@@ -387,6 +391,11 @@ public final class ClientShows {
                 releaseCamera();
             }
             return;
+        }
+        ticks++;
+        if (warmed != model) {
+            warmed = model;
+            ShowRenderer.warmUp(model);
         }
         Vec3 cam = mc.gameRenderer.getMainCamera().getPosition();
         Iterator<Show> it = SHOWS.iterator();

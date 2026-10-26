@@ -54,6 +54,10 @@ public final class ShowModel {
         public final float rz;
         public final boolean lit;
         public final Face[] faces;
+        public final float cx;
+        public final float cy;
+        public final float cz;
+        public final float radius;
         int[] children = new int[0];
 
         Bone(String name, int parent, float[] pivot, float[] rot, boolean lit, Face[] faces) {
@@ -67,6 +71,26 @@ public final class ShowModel {
             this.rz = rot[2];
             this.lit = lit;
             this.faces = faces;
+            float minX = Float.MAX_VALUE, minY = Float.MAX_VALUE, minZ = Float.MAX_VALUE;
+            float maxX = -Float.MAX_VALUE, maxY = -Float.MAX_VALUE, maxZ = -Float.MAX_VALUE;
+            for (Face f : faces) {
+                for (int k = 0; k < 4; k++) {
+                    minX = Math.min(minX, f.pos[k * 3]);
+                    maxX = Math.max(maxX, f.pos[k * 3]);
+                    minY = Math.min(minY, f.pos[k * 3 + 1]);
+                    maxY = Math.max(maxY, f.pos[k * 3 + 1]);
+                    minZ = Math.min(minZ, f.pos[k * 3 + 2]);
+                    maxZ = Math.max(maxZ, f.pos[k * 3 + 2]);
+                }
+            }
+            if (faces.length == 0) {
+                cx = cy = cz = radius = 0;
+            } else {
+                cx = (minX + maxX) / 2;
+                cy = (minY + maxY) / 2;
+                cz = (minZ + maxZ) / 2;
+                radius = (float) Math.sqrt((maxX - minX) * (maxX - minX) + (maxY - minY) * (maxY - minY) + (maxZ - minZ) * (maxZ - minZ)) / 2;
+            }
         }
     }
 
@@ -145,14 +169,23 @@ public final class ShowModel {
             if (interpA == 1 || interpB == 1) {
                 int a = Math.max(0, i - 1);
                 int d = Math.min(n - 1, i + 2);
+                float ta = k[a * 5];
+                float td = k[d * 5];
+                float h = t1 - t0;
+                float u2 = u * u;
+                float u3 = u2 * u;
+                float h00 = 2 * u3 - 3 * u2 + 1;
+                float h10 = u3 - 2 * u2 + u;
+                float h01 = -2 * u3 + 3 * u2;
+                float h11 = u3 - u2;
                 for (int c = 0; c < 3; c++) {
                     float p0 = k[a * 5 + 1 + c];
                     float p1 = k[i * 5 + 1 + c];
                     float p2 = k[(i + 1) * 5 + 1 + c];
                     float p3 = k[d * 5 + 1 + c];
-                    float u2 = u * u;
-                    float u3 = u2 * u;
-                    out[c] = 0.5f * (2 * p1 + (-p0 + p2) * u + (2 * p0 - 5 * p1 + 4 * p2 - p3) * u2 + (-p0 + 3 * p1 - 3 * p2 + p3) * u3);
+                    float m1 = (p2 - p0) / Math.max(1e-4f, t1 - ta);
+                    float m2 = (p3 - p1) / Math.max(1e-4f, td - t0);
+                    out[c] = h00 * p1 + h10 * h * m1 + h01 * p2 + h11 * h * m2;
                 }
                 return;
             }

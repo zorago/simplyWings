@@ -27,6 +27,7 @@ public final class Gacha {
     public static final int HARD_S = 100;
     public static final int HARD_SS = 500;
     public static final int HARD_SSS = 1000;
+    public static final java.util.Map<java.util.UUID, List<GachaTier>> FORCED = new java.util.HashMap<>();
 
     public static double rate(GachaTier tier, int pulls) {
         return switch (tier) {
@@ -69,18 +70,24 @@ public final class Gacha {
         if (!(player.containerMenu instanceof AltarMenu)) {
             return;
         }
-        int count = request.count() >= MULTI ? MULTI : 1;
-        if (!player.isCreative() && feathers(player) < count) {
+        List<GachaTier> forced = FORCED.remove(player.getUUID());
+        int count = forced != null ? forced.size() : request.count() >= MULTI ? MULTI : 1;
+        if (forced == null && !player.isCreative() && feathers(player) < count) {
             player.displayClientMessage(Component.translatable("message.simplywings.gacha_feathers"), true);
             return;
         }
-        if (!player.isCreative()) {
+        if (forced == null && !player.isCreative()) {
             consume(player, count);
         }
         GachaData data = ModAttachments.gacha(player);
         List<GachaData.Entry> results = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            results.add(roll(player, data));
+            if (forced != null) {
+                ItemStack stack = draw(player, forced.get(i), player.getRandom());
+                results.add(new GachaData.Entry(forced.get(i).ordinal(), BuiltInRegistries.ITEM.getKey(stack.getItem()), stack.getCount()));
+            } else {
+                results.add(roll(player, data));
+            }
         }
         for (GachaData.Entry entry : results) {
             data.record(entry);

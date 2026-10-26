@@ -21,6 +21,10 @@ public final class ShowRenderer {
     private static final float[] SCL = new float[3];
     private static final Matrix4f TMP = new Matrix4f();
     private static final Vector3f V = new Vector3f();
+    private static final Matrix4f M = new Matrix4f();
+    private static final Vector3f SCALE = new Vector3f();
+    private static final Matrix3f NM = new Matrix3f();
+    private static final Matrix3f NW = new Matrix3f();
     private static final Map<Integer, RenderType> EMISSIVE = new HashMap<>();
     private static final Map<Integer, RenderType> LIT = new HashMap<>();
     public static final Map<Integer, Vector3f> OFFSETS = new HashMap<>();
@@ -108,13 +112,30 @@ public final class ShowRenderer {
         LIT.clear();
     }
 
+    public static void warmUp(ShowModel model) {
+        net.minecraft.client.renderer.texture.TextureManager textures = net.minecraft.client.Minecraft.getInstance().getTextureManager();
+        for (int i = 0; i < model.textures.length; i++) {
+            textures.getTexture(model.textures[i].path());
+            type(model, i, true);
+            type(model, i, false);
+        }
+        for (ShowModel.Anim anim : model.anims.values()) {
+            solve(model, anim, anim.length * 0.5f);
+        }
+    }
+
     public static void render(ShowModel model, ShowModel.Anim anim, float time, float clock, PoseStack poseStack, MultiBufferSource buffers,
                               IntUnaryOperator tint) {
+        render(model, anim, time, clock, poseStack, buffers, tint, null, null);
+    }
+
+    public static void render(ShowModel model, ShowModel.Anim anim, float time, float clock, PoseStack poseStack, MultiBufferSource buffers,
+                              IntUnaryOperator tint, net.minecraft.client.renderer.culling.Frustum frustum, net.minecraft.world.phys.Vec3 camera) {
         solve(model, anim, time);
         Matrix4f base = poseStack.last().pose();
         Matrix3f normalBase = poseStack.last().normal();
-        Matrix4f m = new Matrix4f();
-        Matrix3f nm = new Matrix3f();
+        Matrix4f m = M;
+        Matrix3f nm = NM;
         int light = LightTexture.FULL_BRIGHT;
         for (int i = 0; i < model.bones.length; i++) {
             ShowModel.Bone b = model.bones[i];
@@ -127,7 +148,19 @@ public final class ShowRenderer {
             int cb = color & 0xFF;
             int ca = (color >>> 24) & 0xFF;
             m.set(base).mul(world[i]);
-            nm.set(normalBase).mul(new Matrix3f(world[i]).normal());
+            if (frustum != null) {
+                m.transformPosition(b.cx, b.cy, b.cz, V);
+                m.getScale(SCALE);
+                float scale = Math.max(SCALE.x, Math.max(SCALE.y, SCALE.z));
+                float r = b.radius * scale;
+                double x = V.x + camera.x;
+                double y = V.y + camera.y;
+                double z = V.z + camera.z;
+                if (!frustum.isVisible(new net.minecraft.world.phys.AABB(x - r, y - r, z - r, x + r, y + r, z + r))) {
+                    continue;
+                }
+            }
+            nm.set(normalBase).mul(NW.set(world[i]).normal());
             int lastTex = -1;
             VertexConsumer vc = null;
             float frameOffset = 0;
