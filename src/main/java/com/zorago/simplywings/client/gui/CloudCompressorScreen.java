@@ -13,6 +13,13 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 
 public class CloudCompressorScreen extends AbstractContainerScreen<CloudCompressorMenu> {
+    @Override
+    protected void init() {
+        super.init();
+        addRenderableWidget(net.minecraft.client.gui.components.Button.builder(Component.translatable("gui.simplywings.wiki.button"),
+                b -> com.zorago.simplywings.client.wiki.WikiScreen.open(this, "workshops/cloud_compressor")).bounds(leftPos + imageWidth - 34, topPos + 4, 30, 14).build());
+    }
+
     private static final ResourceLocation BACKGROUND = texture("cloud_compressor");
     private static final ResourceLocation GAUGE = texture("compressor_gauge");
     private static final ResourceLocation VAT = texture("compressor_vat");

@@ -22,6 +22,8 @@ public class AssemblyTableScreen extends EssenceBenchScreen<AssemblyTableMenu> {
         super.init();
         assemble = addRenderableWidget(Button.builder(Component.translatable("button.simplywings.assemble"),
                 b -> press(AssemblyTableMenu.BUTTON_ASSEMBLE)).bounds(leftPos + 52, topPos + 66, 72, 16).build());
+        addRenderableWidget(net.minecraft.client.gui.components.Button.builder(Component.translatable("gui.simplywings.wiki.button"),
+                b -> com.zorago.simplywings.client.wiki.WikiScreen.open(this, "workshops/assembly_table")).bounds(leftPos + imageWidth - 34, topPos + 4, 30, 14).build());
         updateButtons();
     }
 

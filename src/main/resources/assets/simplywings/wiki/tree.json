@@ -1,0 +1,142 @@
+{
+ "root": [
+  "intro",
+  "flight",
+  "wings",
+  "crafting",
+  "workshops",
+  "end",
+  "summoning",
+  "mythics"
+ ],
+ "categories": {
+  "intro": {
+   "title": "Getting Started",
+   "icon": "simplywings:common_wings",
+   "children": []
+  },
+  "flight": {
+   "title": "Flight",
+   "icon": "minecraft:elytra",
+   "children": []
+  },
+  "wings": {
+   "title": "Wing Pairs",
+   "icon": "simplywings:eagle_wings",
+   "children": [
+    "wings/common",
+    "wings/rare",
+    "wings/epic",
+    "wings/legendary",
+    "wings/mythic"
+   ]
+  },
+  "crafting": {
+   "title": "Crafting",
+   "icon": "simplywings:assembly_table",
+   "children": [
+    "materials"
+   ]
+  },
+  "materials": {
+   "title": "Materials",
+   "icon": "simplywings:raptor_talon",
+   "children": [
+    "materials/drops",
+    "materials/components",
+    "materials/parts"
+   ]
+  },
+  "workshops": {
+   "title": "Workshops",
+   "icon": "simplywings:forge_bench",
+   "children": []
+  },
+  "end": {
+   "title": "The End",
+   "icon": "minecraft:dragon_head",
+   "children": []
+  },
+  "summoning": {
+   "title": "Summoning",
+   "icon": "simplywings:summoning_feather",
+   "children": []
+  },
+  "mythics": {
+   "title": "The Furies",
+   "icon": "simplywings:night_wings",
+   "children": []
+  },
+  "wings/common": {
+   "title": "Common pairs",
+   "icon": "simplywings:common_wings",
+   "children": [
+    "wings/common/common"
+   ]
+  },
+  "wings/rare": {
+   "title": "Rare pairs",
+   "icon": "simplywings:amethyst_wings",
+   "children": [
+    "wings/rare/amethyst",
+    "wings/rare/bat",
+    "wings/rare/bee",
+    "wings/rare/beetle",
+    "wings/rare/copper",
+    "wings/rare/crow",
+    "wings/rare/eagle",
+    "wings/rare/flying_fish",
+    "wings/rare/squirrel",
+    "wings/rare/gull",
+    "wings/rare/pigeon",
+    "wings/rare/hummingbird",
+    "wings/rare/kite",
+    "wings/rare/moth",
+    "wings/rare/ornithopter",
+    "wings/rare/owl",
+    "wings/rare/parrot",
+    "wings/rare/patchwork",
+    "wings/rare/peacock",
+    "wings/rare/phantom",
+    "wings/rare/swift"
+   ]
+  },
+  "wings/epic": {
+   "title": "Epic pairs",
+   "icon": "simplywings:aurora_wings",
+   "children": [
+    "wings/epic/aurora",
+    "wings/epic/ancient",
+    "wings/epic/nebula",
+    "wings/epic/ptero",
+    "wings/epic/fire",
+    "wings/epic/shadow",
+    "wings/epic/earth",
+    "wings/epic/forest",
+    "wings/epic/storm",
+    "wings/epic/water",
+    "wings/epic/air"
+   ]
+  },
+  "wings/legendary": {
+   "title": "Legendary pairs",
+   "icon": "simplywings:angel_wings",
+   "children": [
+    "wings/legendary/angel",
+    "wings/legendary/demon",
+    "wings/legendary/seraph",
+    "wings/legendary/daedalus",
+    "wings/legendary/psyche",
+    "wings/legendary/yin_yang"
+   ]
+  },
+  "wings/mythic": {
+   "title": "Mythic pairs",
+   "icon": "simplywings:light_wings",
+   "children": [
+    "wings/mythic/light",
+    "wings/mythic/night"
+   ]
+  }
+ }
+}

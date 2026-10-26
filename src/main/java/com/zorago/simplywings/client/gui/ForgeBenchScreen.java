@@ -29,6 +29,9 @@ public class ForgeBenchScreen extends EssenceBenchScreen<ForgeBenchMenu> {
     @Override
     protected void init() {
         super.init();
+        addRenderableWidget(net.minecraft.client.gui.components.Button.builder(Component.translatable("gui.simplywings.wiki.button"),
+                b -> com.zorago.simplywings.client.wiki.WikiScreen.open(this, "workshops/forge_bench")).bounds(leftPos + imageWidth - 34, topPos + 4, 30, 14).build());
+
         energy = addRenderableWidget(Button.builder(Component.translatable("button.simplywings.imbue"),
                 b -> press(ForgeBenchMenu.BUTTON_ENERGY)).bounds(leftPos + 58, topPos + 80, 60, 16).build());
         updateButtons();

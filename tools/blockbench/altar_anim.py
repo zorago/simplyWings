@@ -694,7 +694,7 @@ def build_player(rig):
     rig.bone("offerings", (0, 0, 0))
     for i in range(10):
         b = rig.bone(f"offering_{i}", (0, 0, 0), "offerings")
-        rig.crossed(b, (0, 0, 0), 9, 9, feather_tex, count=2, uv=(16, 16))
+        rig.plane(b, (0, 0, 0), 9, 9, feather_tex, uv=(16, 16))
 
 
 def build_particles(rig):

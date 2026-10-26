@@ -101,6 +101,7 @@ public class SimplyWingsClient {
         event.registerReloadListener((net.minecraft.server.packs.resources.ResourceManagerReloadListener) manager -> {
             com.zorago.simplywings.client.show.ShowModel.reload(manager);
             com.zorago.simplywings.client.show.ShowRenderer.clearCache();
+            com.zorago.simplywings.client.wiki.WikiData.reload(manager);
         });
     }
 

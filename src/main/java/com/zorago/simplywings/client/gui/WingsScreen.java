@@ -94,6 +94,8 @@ public class WingsScreen extends Screen {
         }
         scroll = Mth.clamp(scroll, 0, maxScroll());
         int x = left + INFO_X;
+        addRenderableWidget(net.minecraft.client.gui.components.Button.builder(Component.translatable("gui.simplywings.wiki.button"),
+                b -> com.zorago.simplywings.client.wiki.WikiScreen.open(this, null)).bounds(width - 36, 4, 30, 14).build());
         equipButton = addRenderableWidget(Button.builder(Component.translatable("gui.simplywings.equip"), b -> equip())
                 .bounds(x, top + 160, 47, 16).build());
         unequipButton = addRenderableWidget(Button.builder(Component.translatable("gui.simplywings.unequip"), b -> unequip())
