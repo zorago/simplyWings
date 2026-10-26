@@ -26,20 +26,54 @@ IMPACT = "kenney_impact-sounds/Audio/"
 FURY = "user/night_fury_dive.mp3"
 
 
-def clip(source, start=0.0, end=None, peak=-3.0, fade_in=0.004, fade_out=0.25, echo=0.0, loop=0.0, tempo=1.0):
+CASINO = "kenney_casino-audio/Audio/"
+UI_AUDIO = "kenney_ui-audio/Audio/"
+
+
+def clip(source, start=0.0, end=None, peak=-3.0, fade_in=0.004, fade_out=0.25, echo=0.0, loop=0.0, tempo=1.0, pitch=1.0, lp=0):
     return {"source": source, "start": start, "end": end, "peak": peak, "fade_in": fade_in, "fade_out": fade_out, "echo": echo,
-            "loop": loop, "tempo": tempo}
+            "loop": loop, "tempo": tempo, "pitch": pitch, "lp": lp}
+
+
+def saw(f, t, top=3500):
+    return sum(np.sin(2 * np.pi * k * f * t) / k for k in range(1, int(top / f) + 1))
+
+
+def spectral(x, cutoff, bump=0.0, bump_at=700.0):
+    spectrum = np.fft.rfft(x)
+    f = np.fft.rfftfreq(len(x), 1 / SR)
+    curve = 1 / (1 + (f / cutoff) ** 4) * (1 + bump * np.exp(-((f - bump_at) / (bump_at * 0.35)) ** 2))
+    curve[f < 35] = 0
+    return np.fft.irfft(spectrum * curve, len(x)).astype(np.float32)
+
+
+def synth(name):
+    rng = np.random.default_rng(7)
+    if name == "buzz_loop":
+        t = np.arange(2 * SR) / SR
+        tone = saw(92.0, t) + 0.8 * saw(92.5, t) + 0.5 * np.sign(np.sin(2 * np.pi * 46 * t))
+        flutter = 1 - 0.5 * (0.5 + 0.5 * np.sin(2 * np.pi * 30 * t))
+        air = spectral(rng.standard_normal(len(t)).astype(np.float32), 2500) * 0.6
+        return spectral((tone * flutter + air * flutter).astype(np.float32), 1300, bump=1.2, bump_at=650)
+    if name.startswith("burr_"):
+        base = float(name[5:])
+        n = int(0.3 * SR)
+        t = np.arange(n) / SR
+        freq = base * (1 - 0.35 * t / t[-1])
+        phase = 2 * np.pi * np.cumsum(freq) / SR
+        tone = sum(np.sin(k * phase) / k for k in range(1, 20))
+        flutter = 1 - 0.6 * (0.5 + 0.5 * np.sin(2 * np.pi * 34 * t))
+        env = np.minimum(1, t / 0.008) * np.exp(-t / 0.09)
+        return spectral((tone * flutter * env).astype(np.float32), 1600, bump=0.8, bump_at=600)
+    raise ValueError(name)
 
 
 FILES = {
-    "wing/feather/flap": [clip(FEATHER, 0.0, 0.62), clip(FEATHER, 1.03, 1.66), clip(FEATHER, 2.08, 2.63),
-                          clip(CAPE, 22.16, 22.75), clip(CAPE, 25.94, 26.5), clip(CAPE, 29.39, 30.0)],
+    "wing/feather/flap": [clip(CAPE, 22.16, 22.75), clip(CAPE, 25.94, 26.5), clip(CAPE, 29.39, 30.0)],
     "wing/membrane/flap": [clip(CREATURE, s - 0.04, s + 0.75, -2.0) for s in (2.28, 3.39, 4.49, 5.54, 6.55)],
     "wing/leather/flap": [clip(UMBRELLA, s - 0.03, s + 0.32, -4.0, fade_out=0.15) for s in (1.81, 2.72, 3.59, 4.50)],
-    "wing/insect/flap": [clip(INSECT, 0.07, 0.45, -6.0, fade_out=0.15), clip(INSECT, 0.94, 1.28, -6.0, fade_out=0.15),
-                         clip(INSECT, 4.09, 4.55, -6.0, fade_out=0.15)],
-    "wing/strong/flap": [clip(HUGE, 2.42, 3.62, -1.5, fade_out=0.4), clip(HUGE, 3.72, 4.3, -1.5), clip(HUGE, 5.06, 5.6, -1.5),
-                         clip(HUGE, 5.87, 6.98, -1.5, fade_out=0.4), clip(HUGE, 9.27, 10.4, -1.5, fade_out=0.4)],
+    "wing/insect/flap": [clip(f"synth:burr_{f}", 0, None, -8.0, fade_out=0.05) for f in (120, 140, 165)],
+    "wing/strong/flap": [clip(HUGE, 2.42, 3.62, -1.5, fade_out=0.4), clip(HUGE, 3.72, 4.3, -1.5), clip(HUGE, 5.06, 5.6, -1.5)],
     "fury/dive": [clip(FURY, 0.0, 5.0, -1.0, fade_out=0.03, echo=3.0)],
     "fury/invisible": [clip(FURY, 0.0, None, -1.0, fade_out=0.05, echo=3.0)],
     "gacha/ignite": [clip(f"oga_magical_{n}.ogg", 0, None, -2.0, fade_out=0.3) for n in ("1_0", "2", "4", "5", "6_0", "7_0")],
@@ -54,24 +88,28 @@ FILES = {
     "gacha/bell": [clip(f"{IMPACT}impactBell_heavy_00{n}.ogg", 0, None, -2.0, fade_out=0.3) for n in range(5)],
     "gacha/chime": [clip(f"{IMPACT}impactGlass_medium_00{n}.ogg", 0, None, -4.0, fade_out=0.2) for n in range(5)],
     "gacha/twinkle": [clip(f"{IMPACT}impactGlass_light_00{n}.ogg", 0, None, -6.0, fade_out=0.1) for n in range(5)],
-    "ui/card_deal": [clip(f"{INTERFACE}drop_00{n}.ogg", 0, None, -6.0, fade_out=0.05) for n in range(1, 5)],
-    "ui/card_flip": [clip(f"{INTERFACE}maximize_00{n}.ogg", 0, None, -5.0, fade_out=0.08) for n in range(1, 5)],
-    "ui/confirm": [clip(f"{INTERFACE}confirmation_00{n}.ogg", 0, None, -5.0, fade_out=0.08) for n in (1, 2)],
+    "ui/card_deal": [clip(f"{CASINO}card-slide-{n}.ogg", 0, None, -8.0, fade_out=0.1, lp=6000) for n in range(1, 9)],
+    "ui/card_flip": [clip(f"{CASINO}card-shove-{n}.ogg", 0, None, -6.0, fade_out=0.1, lp=6000) for n in range(1, 5)]
+                    + [clip(f"{CASINO}card-fan-1.ogg", 0, None, -6.0, fade_out=0.15, lp=6000)],
+    "ui/card_shuffle": [clip(f"{CASINO}card-shuffle.ogg", 0, None, -7.0, fade_out=0.3, lp=5000)],
+    "ui/card_place": [clip(f"{CASINO}card-place-{n}.ogg", 0, None, -6.0, fade_out=0.1, lp=4000, pitch=0.85) for n in range(1, 5)],
+    "ui/confirm": [clip(f"{INTERFACE}bong_001.ogg", 0, None, -9.0, fade_out=0.06, pitch=0.7, lp=1800),
+                   clip(f"{UI_AUDIO}switch3.ogg", 0, None, -9.0, fade_out=0.04, pitch=0.7, lp=1800)],
     "ui/equip": [clip("fs_561287.mp3", 0.2, 4.4, -3.0, fade_out=1.0)],
-    "ui/open": [clip(f"{INTERFACE}open_00{n}.ogg", 0, None, -8.0, fade_out=0.05) for n in (2, 3, 4)],
+    "ui/open": [clip(f"{INTERFACE}open_00{n}.ogg", 0, None, -10.0, fade_out=0.05, pitch=0.75, lp=2000) for n in (2, 3, 4)],
     "fury/night_charge": [clip("fs_814061.mp3", 0.0, 2.6, -2.0, fade_in=0.4, fade_out=0.4)],
     "fury/crackle": [clip("fs_582631.mp3", 0.08, 0.9, -4.0, fade_out=0.2)],
     "fury/light_charge": [clip("fs_407052.mp3", 0.4, 20.0, -2.0, fade_in=0.2, fade_out=0.3, tempo=8.0)],
     "flight/wind": [clip("fs_454072.mp3", 30.0, 46.0, -3.0, loop=1.5)],
     "flight/landing_hard": [clip("fs_504626.mp3", 0.05, 1.4, -2.0, fade_out=0.4)],
     "flight/landing_soft": [clip(f"{IMPACT}impactSoft_medium_00{n}.ogg", 0, None, -8.0, fade_out=0.1) for n in range(4)],
-    "wing/buzz/loop": [clip("fs_496237.mp3", 0.0, 5.0, -4.0, loop=0.6)],
+    "wing/buzz/loop": [clip("synth:buzz_loop", 0, None, -8.0, loop=-1)],
     "block/forge_bench/hammer": [clip("fs_434339.mp3", s - 0.03, s + 0.9, -3.0, fade_out=0.4) for s in (0.23, 4.17, 5.74, 12.16, 13.78, 18.69)],
     "block/forge_bench/quench": [clip("fs_234782.mp3", 0.05, None, -4.0, fade_out=0.5)],
     "block/cloud_compressor/loop": [clip("fs_487748.mp3", 0.0, 7.6, -4.0, loop=0.8)],
     "essence/pour": [clip("fs_875132.mp3", 1.6, 2.6, -5.0, fade_out=0.2), clip("fs_875132.mp3", 2.9, 3.95, -5.0, fade_out=0.2)],
     "essence/full": [clip("fs_511485.mp3", 0, None, -6.0, fade_out=0.3)],
-    "ui/denied": [clip(f"{INTERFACE}error_00{n}.ogg", 0, None, -6.0, fade_out=0.05) for n in (4, 8)],
+    "ui/denied": [clip(f"{INTERFACE}back_00{n}.ogg", 0, None, -9.0, fade_out=0.04, pitch=0.6, lp=1500) for n in (2, 3)],
 }
 
 FAMILIES = {
@@ -82,7 +120,7 @@ FAMILIES = {
     "leather": ("wing.leather.flap", 1.0, 1.0),
     "glider": ("wing.leather.flap", 0.5, 0.85),
     "buzz": ("wing.insect.flap", 0.8, 1.2),
-    "soft": ("wing.insect.flap", 0.45, 0.75),
+    "soft": ("wing.feather.flap", 0.3, 1.3),
     "mechanism": ("minecraft:block.wooden_trapdoor.open", 0.6, 0.8),
 }
 
@@ -123,6 +161,8 @@ SUBTITLES = {
     "gacha.twinkle": "Star twinkles",
     "ui.card_deal": "Card dealt",
     "ui.card_flip": "Card turns",
+    "ui.card_shuffle": "Cards shuffle",
+    "ui.card_place": "Card laid down",
     "ui.confirm": "Card revealed",
     "ui.denied": "Not enough feathers",
     "ui.equip": "Wings unfold",
@@ -139,8 +179,12 @@ SUBTITLES = {
 }
 
 
-def load(path, tempo=1.0):
+def load(path, tempo=1.0, pitch=1.0, lp=0):
     filters = []
+    if pitch != 1.0:
+        filters.append(f"asetrate={int(SR * pitch)},aresample={SR}")
+    if lp:
+        filters += [f"lowpass=f={lp}", f"lowpass=f={lp}"]
     while tempo > 2.0:
         filters.append("atempo=2.0")
         tempo /= 2.0
@@ -183,15 +227,21 @@ def echo(x, tail, delays=(0.23, 0.37), feedback=0.68, wet=0.5):
 
 
 def render(spec, target):
-    x = load(SRC / spec["source"], spec["tempo"])
+    if spec["source"].startswith("synth:"):
+        x = synth(spec["source"][6:])
+    else:
+        x = load(SRC / spec["source"], spec["tempo"], spec["pitch"], spec["lp"])
     a = int(spec["start"] / spec["tempo"] * SR)
     b = len(x) if spec["end"] is None else min(len(x), int(spec["end"] / spec["tempo"] * SR))
     x = x[a:b] - np.mean(x[a:b])
-    if spec["loop"] > 0:
-        xf = int(spec["loop"] * SR)
-        body = x[:len(x) - xf].copy()
-        t = np.linspace(0, np.pi / 2, xf)
-        body[:xf] = body[:xf] * np.sin(t) + x[len(x) - xf:] * np.cos(t)
+    if spec["loop"] != 0:
+        if spec["loop"] < 0:
+            body = x.copy()
+        else:
+            xf = int(spec["loop"] * SR)
+            body = x[:len(x) - xf].copy()
+            t = np.linspace(0, np.pi / 2, xf)
+            body[:xf] = body[:xf] * np.sin(t) + x[len(x) - xf:] * np.cos(t)
         body *= 10 ** (spec["peak"] / 20) / max(1e-6, np.abs(body).max())
         target.parent.mkdir(parents=True, exist_ok=True)
         subprocess.run([FFMPEG, "-v", "error", "-y", "-f", "f32le", "-ar", str(SR), "-ac", "1", "-i", "-",

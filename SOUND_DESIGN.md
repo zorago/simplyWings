@@ -15,7 +15,32 @@ Une première vague de vrais sons remplace une partie des placeholders vanilla. 
 - **Furies** (deuxième passe, même jour) : le cri de piqué est un sample isolé par zorago (hors CC0, voir `art/sounds/SOURCES.md`), coupé à 5,0 s juste avant l'explosion du piqué, plus 3 s d'écho qui s'éteint, pour Night et Light. Le sample entier plus 3 s d'écho, à hauteur 0,97 (Night) et 1,03 (Light), joue au dash qui rend invisible (`night_fury.invisible`, `light_fury.invisible`) ; `night_fury.dash` (explosion vanilla) est supprimé, et le tir de Light garde `light_fury.blast` en plus. Charges : `night_fury.charge` (grésillement) + `night_fury.crackle`, `light_fury.charge` (montée de plasma en 2,4 s).
 - **Vol** (deuxième passe) : `flight.wind`, boucle locale non spatialisée dès 8 m/s en déplacement (volume 0 → 0,75 de 8 à 60 m/s, hauteur 0,8 → 1,25) ; `wing.<paire>.buzz` pour les paires continues (boucle suivie, joueur local et distants à moins de 48 blocs, active en stationnaire ou avec `FLAG_THRUST`, hauteur +25 % avec la vitesse ; Dédale réutilise la boucle du compresseur) ; `flight.landing_soft` et `flight.landing_hard` à l'arrivée au sol (seuil 10 m/s) avec un petit battement de la paire ; le crash avec dégâts joue `flight.landing_hard` pour les autres joueurs. Les `PHANTOM_FLAP` joués par le serveur au saut ailé et au battement sont supprimés (les joueurs proches entendent déjà la paire via `FlapEvent`). Code : `client/FlightLoops`.
 - **Blocs et objets** (deuxième passe) : marteau et trempe de l'établi de la forge, infusion d'énergie (`ui.equip`), boucle du compresseur (une instance par compresseur, volume et hauteur suivant sa vitesse), table d'assemblage refaite avec les sons de l'autel (`gacha.rune_charge`, `gacha.ignite`, `gacha.beam`, puis éclat, coup d'aile puissant et cloche, puis `ui.equip` et `ui.confirm`), `essence.pour` (au plus une fois par seconde) et `essence.full` (un conteneur se remplit en vol, entendu par le joueur seul), `ui.equip` aux boutons Équiper et Retirer du menu J.
-- Pas encore faits : plané, stationnaire (`hover_flap`), piqué, frein, décrochage, sons de mode, essence récoltée en continu, sanctuaires, compas, ouverture des menus (`ui.open` est prêt mais pas branché), musique d'invocation, idles et queue des Furies.
+- **Retours de zorago après écoute (26 octobre)** :
+  - rejetés : les 3 coups `wing_flap_large` d'OpenGameArt (plume), l'enregistrement d'aile d'insecte, l'abeille réaliste (« j'ai envie de m'arracher le casque »), les coups 4 et 5 de `wing.strong.flap`, les « tings » au retournement des cartes ;
+  - remplacés : plume = les 3 coups de cape seuls ; vrombissement et coups d'insecte **synthétisés**, plus vibrants et « jeu vidéo » ; insectes lents = plume très douce ; cartes = bruits de cartes (glissement, retournement, mélange, carte posée, Kenney Casino), la cloche ne reste qu'à partir de S et plus bas ; sons d'interface plus discrets, graves et doux (passe-bas, hauteur 0,6 à 0,75) ;
+  - gardés : membrane, cuir, coups puissants 1 à 3, envol, sons des Furies, vent, atterrissages, autel, blocs, essences.
+  - **Règle pour la suite** : stylisé plutôt que réaliste quand le son est continu ou proche de l'oreille ; interface discrète, grave, douce, jamais de tintement aigu ; pour les cartes, des bruits de cartes.
+
+### Sons encore vides (à faire)
+
+| Id | Où le brancher | Piste |
+|---|---|---|
+| `wing.<famille>.glide` | boucle de plané, sous le vent | souffle filtré par famille, ou le vent avec un passe-bas |
+| `wing.<paire>.hover_flap` | battements du stationnaire, sur la phase de `WingAnimator` | version retenue de `flap`, −6 dB |
+| `flight.dive` | piqué rapide hors Furies | sifflement montant synthétisé |
+| `flight.brake`, `flight.stall`, `flight.tuck` | `FLAG_BRAKE`, `FLAG_STALL`, `FLAG_TUCK` | coup d'aile puissant grave à faible volume, froissement |
+| `flight.mode_travel`, `flight.mode_hover` | bascules Alt et double tap | aujourd'hui un simple battement de la paire |
+| `flight.takeoff_charge` | charge d'Alt maintenu | souffle qui monte, synthétisable |
+| `flight.stamina_low`, `flight.stamina_empty`, `flight.rescue_jump` | HUD de stamina | très discret, grave |
+| `wing.<famille>.unfold` / `fold` | sortie et rangement des ailes | froissement par famille |
+| `essence.harvest`, `essence.reserve` | `CloudHarvest`, `EssenceReserve` | aspiration douce, une fois par seconde au plus |
+| `block.forge_bench.ambient`, `block.cloud_compressor.start` / `stop` / `compress` | établi chargé, cycles du compresseur | braises, soupape |
+| `structure.sanctum_appear`, `item.compass.give` / `lock`, `item.summoning_feather.pickup` | `EndSanctums`, compas, plume | grondement lointain, aimant |
+| `ui.open` (prêt, pas branché), `ui.select`, `ui.locked`, `ui.transmog`, `ui.unlock.<rareté>` | menu J, wiki, établis | doux et grave, règle ci-dessus |
+| `gacha.summary`, `gacha.skip`, `gacha.pity_soft`, `gacha.offer` / `payout` de la fontaine | `AltarScreen`, `FountainMenu` | bruits de cartes, eau |
+| musique d'invocation, `gacha.dragon_roar`, `gacha.eclipse`, sons des mythiques du gacha | `ClientShows` | rugissement original, musique à composer |
+| `fury.night_idle_*`, `fury.light_idle_*`, `fury.tail` | idles au sol des Furies | petits sons d'animal |
+| `night_fury.dive`, `night_fury.invisible`, `light_fury.*` | déjà joués | sample du film : recréation originale obligatoire avant une publication |
 - Les sons ont été choisis sur description et enveloppe, sans écoute : validation à l'oreille dans `ToDoTesting.md` § 15.
 
 ---

@@ -42,6 +42,8 @@ public final class ModSounds {
     public static final Supplier<SoundEvent> GACHA_TWINKLE = sound("gacha.twinkle");
     public static final Supplier<SoundEvent> CARD_DEAL = sound("ui.card_deal");
     public static final Supplier<SoundEvent> CARD_FLIP = sound("ui.card_flip");
+    public static final Supplier<SoundEvent> CARD_SHUFFLE = sound("ui.card_shuffle");
+    public static final Supplier<SoundEvent> CARD_PLACE = sound("ui.card_place");
     public static final Supplier<SoundEvent> CARD_CONFIRM = sound("ui.confirm");
     public static final Supplier<SoundEvent> DENIED = sound("ui.denied");
 

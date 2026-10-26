@@ -982,5 +982,7 @@
   "subtitles.simplywings.block.cloud_compressor.loop": "Compressor churns",
   "subtitles.simplywings.essence.pour": "Essence pours",
   "subtitles.simplywings.essence.full": "Container fills up",
-  "subtitles.simplywings.night_fury.charge": "Night Fury crackles"
+  "subtitles.simplywings.night_fury.charge": "Night Fury crackles",
+  "subtitles.simplywings.ui.card_shuffle": "Cards shuffle",
+  "subtitles.simplywings.ui.card_place": "Card laid down"
 }

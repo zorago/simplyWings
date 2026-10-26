@@ -329,4 +329,6 @@ Sources et licences : `art/sounds/SOURCES.md`. Ajuster dans `tools/sounds/build_
 - [ ] Vrombissement (colibri, abeille, scarabée, ancienne, Dédale) : démarre et s'arrête en fondu, suit le joueur, entendu des autres.
 - [ ] Atterrissages doux et durs, crash entendu par un autre joueur ; plus de double battement au saut ailé côté serveur.
 - [ ] Forge (marteau, trempe, infusion), compresseur (boucle qui suit la vitesse, s'arrête quand on le casse), table d'assemblage, essence versée, conteneur plein, boutons Équiper et Retirer.
+- [ ] Après les retours du 26 octobre : plume (3 coups de cape seuls), vrombissement synthétisé (colibri, abeille, scarabée, ancienne : vibrant mais pas agressif au casque), coups d'insecte synthétisés, papillon de nuit et Psyché très doux, coups puissants sans les variantes 4 et 5.
+- [ ] Cartes : glissement à la distribution, mélange avant une S et plus, retournement, carte posée ; plus aucun tintement en B et A ; bouton refusé (plumes manquantes) grave et doux.
 

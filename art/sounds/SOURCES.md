@@ -6,11 +6,11 @@ Tous les sons du mod viennent de bibliothèques **CC0** (domaine public : usage 
 
 | Fichier local | Page | Auteur | Utilisé pour |
 |---|---|---|---|
-| `fs_670509_huge_wing_flaps.mp3` | https://freesound.org/s/670509/ | 2create | `wing/strong/flap` (coups puissants, envol chargé, ailes du gacha) |
+| `fs_670509_huge_wing_flaps.mp3` | https://freesound.org/s/670509/ | 2create | `wing/strong/flap` (coups 1 à 3 gardés ; les coups 4 et 5, à 5,87 s et 9,27 s, rejetés) |
 | `fs_759529_large_flying_creature.mp3` | https://freesound.org/s/759529/ | Cerise_Virtuelle | `wing/membrane/flap` (démon, ptéro, phantom, Furies) |
 | `fs_593487_umbrella_bat_wings.mp3` | https://freesound.org/s/593487/ | Scottrex05 | `wing/leather/flap` (chauve-souris, planeurs) |
-| `fs_711122_cape_wings.mp3` | https://freesound.org/s/711122/ | Cultureshock007 | `wing/feather/flap` (3 variations) |
-| `fs_482733_insect_wing.mp3` | https://freesound.org/s/482733/ | kalhan | `wing/insect/flap` (vrombissement, insectes lents) |
+| `fs_711122_cape_wings.mp3` | https://freesound.org/s/711122/ | Cultureshock007 | `wing/feather/flap` (les 3 seules variations restantes) ; famille `soft` (papillon de nuit, Psyché) à 30 % du volume et hauteur 1,3 |
+| `fs_482733_insect_wing.mp3` | https://freesound.org/s/482733/ | kalhan | **rejeté** par zorago (« horrible »), plus utilisé |
 | `fs_814044_creation_magic_blast.mp3` | https://freesound.org/s/814044/ | qubodup | `gacha/blast` (éclat de l'étoile, cartes SS) |
 | `fs_814053_shockwave.mp3` | https://freesound.org/s/814053/ | qubodup | `gacha/shockwave` (pilier, éclat, cartes SSS et mythiques) |
 | `fs_814047_fantasy_implosion.mp3` | https://freesound.org/s/814047/ | qubodup | `gacha/implosion` (éclat SSS et mythique) |
@@ -18,7 +18,7 @@ Tous les sons du mod viennent de bibliothèques **CC0** (domaine public : usage 
 | `fs_859497_powerup_loop.mp3` | https://freesound.org/s/859497/ | simranzenov | `gacha/beam` (montée du pilier) |
 | `fs_714257_puff_of_smoke.mp3` | https://freesound.org/s/714257/ | qubodup | `gacha/puff` (nuages, offrande qui s'élève) |
 | `fs_454072.mp3` | https://freesound.org/s/454072/ | kyles | `flight/wind` : boucle de vent du vol de déplacement (30 à 46 s, fondu enchaîné) |
-| `fs_496237.mp3` | https://freesound.org/s/496237/ | fury12 | `wing/buzz/loop` : vrombissement des paires continues (colibri, abeille, scarabée, ancienne) |
+| `fs_496237.mp3` | https://freesound.org/s/496237/ | fury12 | **rejeté** (trop réaliste, agressif au casque), plus utilisé |
 | `fs_504626.mp3` | https://freesound.org/s/504626/ | leonelmail | `flight/landing_hard` : arrivée rapide au sol et crash |
 | `fs_434339.mp3` | https://freesound.org/s/434339/ | draftcraft | `block/forge_bench/hammer` : 6 coups de marteau sur enclume |
 | `fs_234782.mp3` | https://freesound.org/s/234782/ | wubitog | `block/forge_bench/quench` : trempe |
@@ -36,7 +36,7 @@ Tous les sons du mod viennent de bibliothèques **CC0** (domaine public : usage 
 
 | Fichier local | Source | Utilisé pour |
 |---|---|---|
-| `oga_wings_flap_large/wings_flap_large.flac` | https://opengameart.org/content/large-wings-flap | `wing/feather/flap` (3 variations) |
+| `oga_wings_flap_large/wings_flap_large.flac` | https://opengameart.org/content/large-wings-flap | **rejeté** par zorago (« je déteste le son »), plus utilisé |
 | `oga_magical_1_0.ogg` … `oga_magical_7_0.ogg` | https://opengameart.org/sites/default/files/magical_1_0.ogg (et `magical_2.ogg`, `magical_3.ogg`, `magical_4.ogg`, `magical_5.ogg`, `magical_6_0.ogg`, `magical_7_0.ogg`) | `gacha/ignite` (6 variations), `gacha/offer` (`magical_3`) |
 
 ## Kenney (CC0, https://kenney.nl)
@@ -46,6 +46,23 @@ Tous les sons du mod viennent de bibliothèques **CC0** (domaine public : usage 
 | Interface Sounds (https://kenney.nl/assets/interface-sounds) | `drop_001-004`, `maximize_001-004`, `confirmation_001-002`, `error_004`, `error_008`, `open_002-004` | `ui/card_deal`, `ui/card_flip`, `ui/confirm`, `ui/denied`, `ui/open` (pas encore joué) |
 | Impact Sounds (https://kenney.nl/assets/impact-sounds) | `impactBell_heavy_000-004`, `impactGlass_medium_000-004`, `impactGlass_light_000-004`, `impactSoft_medium_000-003` | `gacha/bell`, `gacha/chime`, `gacha/twinkle`, `flight/landing_soft` |
 | UI Audio (https://kenney.nl/assets/ui-audio) | téléchargé, pas encore utilisé | réserve pour l'interface |
+
+## Kenney Casino Audio (CC0, https://kenney.nl/assets/casino-audio)
+
+| Fichiers | Utilisé pour |
+|---|---|
+| `card-slide-1-8` | `ui/card_deal` (carte distribuée) |
+| `card-shove-1-4`, `card-fan-1` | `ui/card_flip` (retournement) |
+| `card-shuffle` | `ui/card_shuffle` (anticipation des cartes S et plus) |
+| `card-place-1-4` (hauteur 0,85) | `ui/card_place` (carte posée, base de chaque palier) |
+
+Tous les sons d'interface passent par deux passe-bas (6000 Hz pour les cartes, 1500 à 2000 Hz pour `ui/confirm`, `ui/denied`, `ui/open`) et sont rabaissés (hauteur 0,6 à 0,75) : discrets, graves et doux, comme le veut zorago.
+
+## Sons synthétisés (aucune source externe)
+
+`tools/sounds/build_sounds.py`, fonction `synth` :
+- `wing/buzz/loop` : vrombissement « jeu vidéo » en boucle parfaite de 2 s, deux dents de scie à 92 et 92,5 Hz (battement lent), sous-octave carrée, trémolo à 30 Hz, souffle filtré, passe-bas 1300 Hz avec bosse à 650 Hz (filtrage par FFT, donc sans couture à la boucle) ;
+- `wing/insect/flap` : « brrrp » de 0,3 s (glissando 120, 140 ou 165 Hz vers −35 %, trémolo à 34 Hz), coups d'aile des paires à vrombissement.
 
 ## Sample fourni par zorago (hors CC0)
 
