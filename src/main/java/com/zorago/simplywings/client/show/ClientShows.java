@@ -55,6 +55,8 @@ public final class ClientShows {
         final int[] tint;
         float lastTime = -1;
         long startTick;
+        boolean holding;
+        float exitAt = -1;
         boolean skipped;
 
         Show(Payloads.SummonShow payload, ShowModel model, ShowModel.Anim anim, boolean summoner) {
@@ -120,6 +122,52 @@ public final class ClientShows {
             }
         }
         return false;
+    }
+
+    public static float holdTime(Show show) {
+        return show.anim.length - show.anim.meta("post", 0);
+    }
+
+    public static Show summonerShow() {
+        for (Show s : SHOWS) {
+            if (s.summoner && !s.skipped) {
+                return s;
+            }
+        }
+        return null;
+    }
+
+    public static float summonerTime() {
+        Show s = summonerShow();
+        return s == null ? -1 : s.time(0);
+    }
+
+    public static float summonerCardsAt() {
+        Show s = summonerShow();
+        return s == null ? -1 : s.anim.meta("reveal", s.anim.length - 6) + 0.9f;
+    }
+
+    public static void hold(boolean hold) {
+        Show s = summonerShow();
+        if (s != null) {
+            s.holding = hold;
+        }
+    }
+
+    public static void release() {
+        Show s = summonerShow();
+        if (s == null) {
+            return;
+        }
+        float now = s.time(0);
+        if (s.holding && now > holdTime(s)) {
+            s.exitAt = now;
+        }
+        s.holding = false;
+    }
+
+    static boolean frozen(Show s, float raw) {
+        return (s.holding || s.exitAt >= 0) && raw > holdTime(s);
     }
 
     public static boolean summonerShowRunning() {
@@ -218,10 +266,12 @@ public final class ClientShows {
         float fogStart = RenderSystem.getShaderFogStart();
         float fogEnd = RenderSystem.getShaderFogEnd();
         for (Show show : SHOWS) {
-            float time = show.time(partial);
-            if (time < 0 || time > show.anim.length) {
+            float raw = show.time(partial);
+            if (raw < 0 || raw > show.anim.length && !frozen(show, raw)) {
                 continue;
             }
+            boolean freeze = frozen(show, raw);
+            float time = freeze ? holdTime(show) : raw;
             if (show.origin.distanceToSqr(cam) > 1536 * 1536) {
                 continue;
             }
@@ -230,7 +280,18 @@ public final class ClientShows {
             poseStack.mulPose(Axis.YP.rotationDegrees(show.yaw));
             poseStack.scale(1 / 16f, 1 / 16f, 1 / 16f);
             applyOffsets(model, show, time);
-            ShowRenderer.render(model, show.anim, time, time, poseStack, buffers, i -> show.tint[i], event.getFrustum(), cam);
+            if (freeze) {
+                java.util.Set<Integer> roots = flameRoots(model);
+                ShowRenderer.render(model, show.anim, time, raw, poseStack, buffers, i -> show.tint[i], event.getFrustum(), cam,
+                        r -> !roots.contains(r));
+                ShowModel.Anim idle = model.anims.get("idle");
+                if (idle != null) {
+                    ShowRenderer.render(model, idle, raw % idle.length, raw, poseStack, buffers, i -> 0xFFFFFFFF, event.getFrustum(), cam,
+                            roots::contains);
+                }
+            } else {
+                ShowRenderer.render(model, show.anim, time, time, poseStack, buffers, i -> show.tint[i], event.getFrustum(), cam, null);
+            }
             ShowRenderer.OFFSETS.clear();
             poseStack.popPose();
         }
@@ -239,6 +300,40 @@ public final class ClientShows {
         buffers.endBatch();
         RenderSystem.setShaderFogStart(fogStart);
         RenderSystem.setShaderFogEnd(fogEnd);
+    }
+
+    private static java.util.Set<Integer> flameRootSet;
+    private static ShowModel flameModel;
+
+    private static java.util.Set<Integer> flameRoots(ShowModel model) {
+        if (flameModel != model) {
+            flameModel = model;
+            flameRootSet = new java.util.HashSet<>();
+            for (String e : ELEMENTS) {
+                int b = model.bone("flame_" + e);
+                if (b >= 0) {
+                    flameRootSet.add(b);
+                }
+            }
+        }
+        return flameRootSet;
+    }
+
+    private static Vec3[] cameraAt(ShowModel model, Show show, float time) {
+        int c = model.bone("camera");
+        int t = model.bone("camera_target");
+        applyOffsets(model, show, time);
+        Vec3 pos = toWorld(show, ShowRenderer.position(model, show.anim, c, time, new Vector3f()));
+        Vec3 target = toWorld(show, ShowRenderer.position(model, show.anim, t, time, new Vector3f()));
+        ShowRenderer.OFFSETS.clear();
+        return new Vec3[]{pos, target};
+    }
+
+    private static Vec3 spin(Show show, Vec3 p, float angle) {
+        Vec3 d = p.subtract(show.origin);
+        double c = Math.cos(angle);
+        double s = Math.sin(angle);
+        return show.origin.add(d.x * c - d.z * s, d.y, d.x * s + d.z * c);
     }
 
     public static void onRenderFrame(RenderFrameEvent.Pre event) {
@@ -257,18 +352,32 @@ public final class ClientShows {
             return;
         }
         float time = show.time(event.getPartialTick().getGameTimeDeltaPartialTick(false));
-        if (time < 0 || time > show.anim.length) {
+        if (time < 0 || time > show.anim.length && !frozen(show, time)) {
             return;
         }
-        int c = model.bone("camera");
-        int t = model.bone("camera_target");
-        if (c < 0 || t < 0) {
+        if (model.bone("camera") < 0 || model.bone("camera_target") < 0) {
             return;
         }
-        applyOffsets(model, show, time);
-        Vec3 pos = toWorld(show, ShowRenderer.position(model, show.anim, c, time, new Vector3f()));
-        Vec3 target = toWorld(show, ShowRenderer.position(model, show.anim, t, time, new Vector3f()));
-        ShowRenderer.OFFSETS.clear();
+        Vec3 pos;
+        Vec3 target;
+        if (frozen(show, time)) {
+            float hold = holdTime(show);
+            Vec3[] base = cameraAt(model, show, hold);
+            float orbit = 0.16f * (time - hold);
+            pos = spin(show, base[0], orbit);
+            target = spin(show, base[1], orbit);
+            if (show.exitAt >= 0) {
+                float post = show.anim.meta("post", 2.4f);
+                float u = smooth((time - show.exitAt) / post);
+                Vec3[] end = cameraAt(model, show, show.anim.length);
+                pos = pos.lerp(end[0], u);
+                target = target.lerp(end[1], u);
+            }
+        } else {
+            Vec3[] at = cameraAt(model, show, time);
+            pos = at[0];
+            target = at[1];
+        }
         if (camera == null || camera.level() != mc.level) {
             camera = new Marker(EntityType.MARKER, mc.level);
         }
@@ -402,7 +511,9 @@ public final class ClientShows {
         while (it.hasNext()) {
             Show show = it.next();
             float now = show.time(0);
-            if (now > show.anim.length + 0.5f) {
+            boolean finished = show.exitAt >= 0 ? now > show.exitAt + show.anim.meta("post", 2.4f) + 0.1f
+                    : !show.holding && now > show.anim.length + 0.5f;
+            if (finished) {
                 if (show == cameraShow) {
                     releaseCamera();
                 }

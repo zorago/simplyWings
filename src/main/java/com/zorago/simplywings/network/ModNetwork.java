@@ -42,6 +42,8 @@ public final class ModNetwork {
                 (p, ctx) -> FuryServer.onDash((ServerPlayer) ctx.player()));
         r.playToServer(Payloads.GachaPull.TYPE, Payloads.GachaPull.CODEC,
                 (p, ctx) -> Gacha.onPull((ServerPlayer) ctx.player(), p));
+        r.playToServer(Payloads.GachaClaim.TYPE, Payloads.GachaClaim.CODEC,
+                (p, ctx) -> Gacha.claim((ServerPlayer) ctx.player()));
         r.playToServer(Payloads.Impact.TYPE, Payloads.Impact.CODEC,
                 (p, ctx) -> ServerFlight.onImpact((ServerPlayer) ctx.player(), p));
     }

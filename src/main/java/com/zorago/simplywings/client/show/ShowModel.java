@@ -205,13 +205,16 @@ public final class ShowModel {
     public final Bone[] bones;
     public final Map<String, Anim> anims;
     public final Map<String, Integer> boneIndex = new HashMap<>();
+    public final int[] root;
 
     private ShowModel(Tex[] textures, Bone[] bones, Map<String, Anim> anims) {
         this.textures = textures;
         this.bones = bones;
         this.anims = anims;
+        root = new int[bones.length];
         for (int i = 0; i < bones.length; i++) {
             boneIndex.put(bones[i].name, i);
+            root[i] = bones[i].parent < 0 ? i : root[bones[i].parent];
         }
         int[] counts = new int[bones.length];
         for (Bone b : bones) {

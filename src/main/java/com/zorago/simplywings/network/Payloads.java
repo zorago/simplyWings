@@ -293,4 +293,14 @@ public final class Payloads {
             return TYPE;
         }
     }
+
+    public record GachaClaim() implements CustomPacketPayload {
+        public static final Type<GachaClaim> TYPE = payloadType("gacha_claim");
+        public static final StreamCodec<RegistryFriendlyByteBuf, GachaClaim> CODEC = StreamCodec.unit(new GachaClaim());
+
+        @Override
+        public Type<? extends CustomPacketPayload> type() {
+            return TYPE;
+        }
+    }
 }

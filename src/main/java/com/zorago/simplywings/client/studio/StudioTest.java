@@ -183,6 +183,15 @@ final class StudioTest {
                 BlockHitResult hit = new BlockHitResult(Vec3.atCenterOf(pos), Direction.UP, pos, false);
                 mc.gameMode.useItemOn(player, InteractionHand.MAIN_HAND, hit);
             }
+            case "pull" -> net.neoforged.neoforge.network.PacketDistributor.sendToServer(
+                    new com.zorago.simplywings.network.Payloads.GachaPull(Integer.parseInt(a[1])));
+            case "click" -> {
+                if (mc.screen != null) {
+                    double sx = mc.getWindow().getGuiScaledWidth() * Double.parseDouble(a[1]);
+                    double sy = mc.getWindow().getGuiScaledHeight() * Double.parseDouble(a[2]);
+                    mc.screen.mouseClicked(sx, sy, 0);
+                }
+            }
             case "look" -> {
                 player.setYRot(Float.parseFloat(a[1]));
                 player.setXRot(Float.parseFloat(a[2]));

@@ -26,6 +26,14 @@ public class AltarMenu extends AbstractContainerMenu {
         return ItemStack.EMPTY;
     }
 
+    @Override
+    public void removed(Player player) {
+        super.removed(player);
+        if (player instanceof net.minecraft.server.level.ServerPlayer server) {
+            Gacha.claim(server);
+        }
+    }
+
     public java.util.Optional<net.minecraft.core.BlockPos> pos() {
         return access.evaluate((level, pos) -> pos);
     }

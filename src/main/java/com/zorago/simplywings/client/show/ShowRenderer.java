@@ -126,11 +126,12 @@ public final class ShowRenderer {
 
     public static void render(ShowModel model, ShowModel.Anim anim, float time, float clock, PoseStack poseStack, MultiBufferSource buffers,
                               IntUnaryOperator tint) {
-        render(model, anim, time, clock, poseStack, buffers, tint, null, null);
+        render(model, anim, time, clock, poseStack, buffers, tint, null, null, null);
     }
 
     public static void render(ShowModel model, ShowModel.Anim anim, float time, float clock, PoseStack poseStack, MultiBufferSource buffers,
-                              IntUnaryOperator tint, net.minecraft.client.renderer.culling.Frustum frustum, net.minecraft.world.phys.Vec3 camera) {
+                              IntUnaryOperator tint, net.minecraft.client.renderer.culling.Frustum frustum, net.minecraft.world.phys.Vec3 camera,
+                              java.util.function.IntPredicate roots) {
         solve(model, anim, time);
         Matrix4f base = poseStack.last().pose();
         Matrix3f normalBase = poseStack.last().normal();
@@ -139,7 +140,7 @@ public final class ShowRenderer {
         int light = LightTexture.FULL_BRIGHT;
         for (int i = 0; i < model.bones.length; i++) {
             ShowModel.Bone b = model.bones[i];
-            if (hidden[i] || b.faces.length == 0) {
+            if (hidden[i] || b.faces.length == 0 || roots != null && !roots.test(model.root[i])) {
                 continue;
             }
             int color = tint.applyAsInt(i);

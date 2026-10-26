@@ -28,6 +28,7 @@ public final class Gacha {
     public static final int HARD_SS = 500;
     public static final int HARD_SSS = 1000;
     public static final java.util.Map<java.util.UUID, List<GachaTier>> FORCED = new java.util.HashMap<>();
+    private static final java.util.Map<java.util.UUID, List<ItemStack>> PENDING = new java.util.HashMap<>();
 
     public static double rate(GachaTier tier, int pulls) {
         return switch (tier) {
@@ -89,15 +90,26 @@ public final class Gacha {
                 results.add(roll(player, data));
             }
         }
+        claim(player);
+        List<ItemStack> pending = PENDING.computeIfAbsent(player.getUUID(), k -> new ArrayList<>());
         for (GachaData.Entry entry : results) {
             data.record(entry);
-            ItemStack stack = new ItemStack(BuiltInRegistries.ITEM.get(entry.item()), entry.count());
+            pending.add(new ItemStack(BuiltInRegistries.ITEM.get(entry.item()), entry.count()));
+        }
+        PacketDistributor.sendToPlayer(player, new Payloads.GachaResults(results, state(player)));
+        ((AltarMenu) player.containerMenu).pos().ifPresent(pos -> AltarShows.start(player, pos, results));
+    }
+
+    public static void claim(ServerPlayer player) {
+        List<ItemStack> pending = PENDING.remove(player.getUUID());
+        if (pending == null) {
+            return;
+        }
+        for (ItemStack stack : pending) {
             if (!player.getInventory().add(stack)) {
                 player.drop(stack, false);
             }
         }
-        PacketDistributor.sendToPlayer(player, new Payloads.GachaResults(results, state(player)));
-        ((AltarMenu) player.containerMenu).pos().ifPresent(pos -> AltarShows.start(player, pos, results));
     }
 
     public static Payloads.GachaState state(ServerPlayer player) {

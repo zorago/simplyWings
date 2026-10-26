@@ -3,6 +3,7 @@ package com.zorago.simplywings.client.gui;
 import com.mojang.math.Axis;
 import com.zorago.simplywings.SimplyWings;
 import com.zorago.simplywings.client.ClientGacha;
+import com.zorago.simplywings.client.show.ClientShows;
 import com.zorago.simplywings.gacha.AltarMenu;
 import com.zorago.simplywings.gacha.GachaData;
 import com.zorago.simplywings.gacha.GachaTier;
@@ -27,14 +28,7 @@ public class AltarScreen extends AbstractContainerScreen<AltarMenu> {
     private static final ResourceLocation COVER = SimplyWings.id("textures/gui/summon_cover.png");
     private static final int COVER_W = 480;
     private static final int COVER_H = 270;
-    private static final long LAUNCH_MS = 1900;
-    private static final long LAUNCH_RARE_MS = 2700;
-    private static final long CARD_MS = 450;
-    private static final long CARD_RARE_MS = 1300;
-    private static final int CARD_W = 70;
-    private static final int CARD_H = 96;
-
-    private enum Phase { IDLE, LAUNCH, REVEAL, SUMMARY }
+    private enum Phase { IDLE, SHOW, CARDS, OUTRO }
 
     private enum Tab { NONE, HISTORY, RATES }
 
@@ -42,12 +36,8 @@ public class AltarScreen extends AbstractContainerScreen<AltarMenu> {
     private Tab tab = Tab.NONE;
     private int seen;
     private List<GachaData.Entry> results = List.of();
-    private GachaTier best = GachaTier.B;
     private long phaseStart;
-    private int card;
-    private boolean flashPlayed;
-    private boolean cardSound;
-    private boolean showSeen;
+    private CardDeck deck;
 
     public AltarScreen(AltarMenu menu, Inventory inventory, Component title) {
         super(menu, inventory, title);
@@ -77,74 +67,57 @@ public class AltarScreen extends AbstractContainerScreen<AltarMenu> {
         if (ClientGacha.serial() != seen) {
             seen = ClientGacha.serial();
             results = ClientGacha.pending();
-            best = GachaTier.B;
-            for (GachaData.Entry entry : results) {
-                if (entry.rank().atLeast(best)) {
-                    best = entry.rank();
-                }
-            }
-            phase = Phase.LAUNCH;
+            deck = new CardDeck(results);
+            phase = Phase.SHOW;
             phaseStart = now();
-            flashPlayed = false;
             tab = Tab.NONE;
-            showSeen = false;
         }
-        if (phase == Phase.LAUNCH) {
-            boolean running = com.zorago.simplywings.client.show.ClientShows.summonerShowRunning();
-            showSeen |= running;
-            if (showSeen ? !running : now() - phaseStart > 1500) {
-                startCard(0);
+        if (phase == Phase.SHOW) {
+            float t = ClientShows.summonerTime();
+            if (t >= 0 ? t >= ClientShows.summonerCardsAt() : now() - phaseStart > 1500) {
+                startCards();
             }
         }
+        if (phase == Phase.OUTRO && (!ClientShows.summonerShowRunning() || now() - phaseStart > 4000)) {
+            phase = Phase.IDLE;
+        }
     }
 
-    private long launchLength() {
-        return best.atLeast(GachaTier.S) ? LAUNCH_RARE_MS : LAUNCH_MS;
-    }
-
-    private void startCard(int index) {
-        phase = Phase.REVEAL;
-        card = index;
+    private void startCards() {
+        phase = Phase.CARDS;
         phaseStart = now();
-        cardSound = false;
+        ClientShows.hold(true);
     }
 
-    private void cardSound(GachaTier tier) {
-        switch (tier) {
-            case B -> sound(SoundEvents.ITEM_PICKUP, 1.2f, 0.6f);
-            case A -> sound(SoundEvents.NOTE_BLOCK_CHIME.value(), 1.4f, 0.8f);
-            case S -> {
-                sound(SoundEvents.AMETHYST_BLOCK_CHIME, 0.8f, 1f);
-                sound(SoundEvents.NOTE_BLOCK_BELL.value(), 1.0f, 0.9f);
-            }
-            case SS -> sound(SoundEvents.UI_TOAST_CHALLENGE_COMPLETE, 1.1f, 0.9f);
-            case SSS -> {
-                sound(SoundEvents.UI_TOAST_CHALLENGE_COMPLETE, 0.8f, 1f);
-                sound(SoundEvents.ENDER_DRAGON_GROWL, 1.2f, 0.35f);
-            }
-            case MYTHIC -> {
-                sound(SoundEvents.END_PORTAL_SPAWN, 1.0f, 0.5f);
-                sound(SoundEvents.ENDER_DRAGON_GROWL, 0.7f, 0.5f);
-            }
-        }
+    private float cardTime() {
+        return (now() - phaseStart) / 1000f;
     }
 
-    private long cardLength(GachaTier tier) {
-        return tier.atLeast(GachaTier.S) ? CARD_RARE_MS : CARD_MS;
+    private void exitCards() {
+        ClientShows.release();
+        PacketDistributor.sendToServer(new Payloads.GachaClaim());
+        phase = Phase.OUTRO;
+        phaseStart = now();
     }
 
     @Override
     public void render(GuiGraphics g, int mouseX, int mouseY, float partialTick) {
-        if (phase == Phase.LAUNCH && showSeen) {
-            g.drawCenteredString(font, Component.translatable("screen.simplywings.altar.skip"), width / 2, height - 20, 0x99E8DDFF);
-            return;
-        }
-        drawCover(g);
         switch (phase) {
-            case IDLE -> drawIdle(g, mouseX, mouseY);
-            case LAUNCH -> drawLaunch(g);
-            case REVEAL -> drawReveal(g);
-            case SUMMARY -> drawSummary(g, mouseX, mouseY);
+            case SHOW -> hint(g, Component.translatable("screen.simplywings.altar.skip"));
+            case CARDS -> {
+                float t = cardTime();
+                GachaData.Entry hovered = deck.render(g, font, t, width, height, mouseX, mouseY);
+                hint(g, Component.translatable(deck.done(t) ? "screen.simplywings.altar.close" : "screen.simplywings.altar.skip"));
+                if (hovered != null) {
+                    g.renderTooltip(font, stackOf(hovered), mouseX, mouseY);
+                }
+            }
+            case OUTRO -> {
+            }
+            default -> {
+                drawCover(g);
+                drawIdle(g, mouseX, mouseY);
+            }
         }
     }
 
@@ -282,149 +255,15 @@ public class AltarScreen extends AbstractContainerScreen<AltarMenu> {
         }
     }
 
-    private void drawLaunch(GuiGraphics g) {
-        long t = now() - phaseStart;
-        float p = Mth.clamp(t / (float) launchLength(), 0f, 1f);
-        g.fill(0, 0, width, height, (int) (0xC0 * Math.min(1f, p * 3f)) << 24);
-        stars(g, t);
-        GachaTier shown = best.atLeast(GachaTier.S) && p < 0.55f ? GachaTier.A : best;
-        int color = shown.color();
-        float travel = Mth.clamp(p / 0.8f, 0f, 1f);
-        float ease = 1f - (1f - travel) * (1f - travel);
-        float sx = width * 0.92f;
-        float sy = -20f;
-        float cx = Mth.lerp(ease, sx, width / 2f);
-        float cy = Mth.lerp(ease, sy, height / 2f);
-        for (int i = 0; i < 26; i++) {
-            float k = i / 26f;
-            float tx = Mth.lerp(k * 0.35f, cx, sx);
-            float ty = Mth.lerp(k * 0.35f, cy, sy);
-            int r = Math.max(1, Math.round(9 * (1 - k)));
-            int alpha = (int) (220 * (1 - k));
-            g.fill(Math.round(tx) - r, Math.round(ty) - r, Math.round(tx) + r, Math.round(ty) + r, (alpha << 24) | (color & 0xFFFFFF));
-        }
-        int core = 6 + (int) (4 * Math.sin(t * 0.03));
-        g.fill(Math.round(cx) - core, Math.round(cy) - core, Math.round(cx) + core, Math.round(cy) + core, 0xFFFFFFFF);
-        if (best.atLeast(GachaTier.S) && p >= 0.55f && p < 0.6f) {
-            g.fill(0, 0, width, height, 0x60000000 | (best.color() & 0xFFFFFF));
-        }
-        if (p > 0.82f) {
-            if (!flashPlayed) {
-                flashPlayed = true;
-                sound(SoundEvents.AMETHYST_BLOCK_RESONATE, 1.6f, 1f);
-            }
-            float f = 1f - Mth.clamp((p - 0.82f) / 0.18f, 0f, 1f);
-            g.fill(0, 0, width, height, ((int) (255 * (1 - f * f) * 0.9f) << 24) | 0xFFFFFF);
-        }
-        hint(g, Component.translatable("screen.simplywings.altar.skip"));
-    }
 
-    private void stars(GuiGraphics g, long t) {
-        for (int i = 0; i < 90; i++) {
-            int x = (int) ((i * 7919L) % Math.max(1, width));
-            int y = (int) ((i * 104729L + t / 6 * (1 + i % 3)) % Math.max(1, height));
-            int a = 80 + (int) (100 * (0.5 + 0.5 * Math.sin(t * 0.004 + i)));
-            g.fill(x, y, x + 1 + i % 2, y + 1 + i % 2, (a << 24) | 0xE8E0FF);
-        }
-    }
 
-    private void drawReveal(GuiGraphics g) {
-        g.fill(0, 0, width, height, 0xD0000000);
-        GachaData.Entry entry = results.get(card);
-        GachaTier tier = entry.rank();
-        long t = now() - phaseStart;
-        if (!cardSound) {
-            cardSound = true;
-            cardSound(tier);
-        }
-        float p = Mth.clamp(t / (float) cardLength(tier), 0f, 1f);
-        if (tier.atLeast(GachaTier.S)) {
-            rays(g, tier, t, p);
-        }
-        float pop = p < 0.35f ? Mth.clamp(p / 0.35f, 0f, 1f) : 1f;
-        float scale = 0.3f + 0.7f * (1f - (1f - pop) * (1f - pop)) + (tier.atLeast(GachaTier.S) ? 0.04f * (float) Math.sin(t * 0.01) : 0f);
-        g.pose().pushPose();
-        g.pose().translate(width / 2f, height / 2f - 6, 0);
-        g.pose().scale(scale * 1.7f, scale * 1.7f, 1f);
-        drawCard(g, -CARD_W / 2, -CARD_H / 2, entry, true);
-        g.pose().popPose();
-        if (tier.atLeast(GachaTier.S) && p > 0.35f) {
-            g.pose().pushPose();
-            g.pose().translate(width / 2f, 26, 0);
-            float big = 3f + 0.4f * (float) Math.sin(t * 0.008);
-            g.pose().scale(big, big, 1f);
-            g.drawCenteredString(font, tier.label(), 0, 0, tier.color());
-            g.pose().popPose();
-        }
-        ItemStack stack = stackOf(entry);
-        g.drawCenteredString(font, stack.getHoverName(), width / 2, height / 2 + CARD_H, tier.color());
-        if (results.size() > 1) {
-            g.drawCenteredString(font, Component.literal((card + 1) + " / " + results.size()), width / 2, height - 30, 0xFFB8A8D8);
-        }
-        hint(g, Component.translatable(p >= 1f ? "screen.simplywings.altar.next" : "screen.simplywings.altar.skip"));
-    }
 
-    private void rays(GuiGraphics g, GachaTier tier, long t, float p) {
-        int count = tier == GachaTier.MYTHIC ? 24 : tier == GachaTier.SSS ? 18 : tier == GachaTier.SS ? 14 : 10;
-        float reach = Math.max(width, height) * (0.25f + 0.6f * Mth.clamp(p * 2f, 0f, 1f));
-        g.pose().pushPose();
-        g.pose().translate(width / 2f, height / 2f - 6, 0);
-        g.pose().mulPose(Axis.ZP.rotationDegrees(t * 0.02f));
-        for (int i = 0; i < count; i++) {
-            g.pose().pushPose();
-            g.pose().mulPose(Axis.ZP.rotationDegrees(360f / count * i));
-            int color = tier == GachaTier.MYTHIC ? (i % 2 == 0 ? 0x70FFFFFF : 0x70101010) : 0x50000000 | (tier.color() & 0xFFFFFF);
-            g.fillGradient(-3, 0, 3, (int) reach, color, 0x00000000);
-            g.pose().popPose();
-        }
-        g.pose().popPose();
-    }
 
     private ItemStack stackOf(GachaData.Entry entry) {
         return new ItemStack(BuiltInRegistries.ITEM.get(entry.item()), entry.count());
     }
 
-    private void drawCard(GuiGraphics g, int x, int y, GachaData.Entry entry, boolean big) {
-        GachaTier tier = entry.rank();
-        int edge = tier.color();
-        int dark = 0xFF000000 | ((edge & 0xFEFEFE) >> 1 & 0x7F7F7F);
-        g.fillGradient(x, y, x + CARD_W, y + CARD_H, 0xFF1A1226, dark);
-        g.renderOutline(x, y, CARD_W, CARD_H, edge);
-        g.renderOutline(x + 2, y + 2, CARD_W - 4, CARD_H - 4, (edge & 0xFFFFFF) | 0x66000000);
-        g.drawCenteredString(font, tier.label(), x + CARD_W / 2, y + 6, edge);
-        g.pose().pushPose();
-        g.pose().translate(x + CARD_W / 2f - 24, y + CARD_H / 2f - 22, 0);
-        g.pose().scale(3f, 3f, 1f);
-        ItemStack stack = stackOf(entry);
-        g.renderItem(stack, 0, 0);
-        g.renderItemDecorations(font, stack, 0, 0);
-        g.pose().popPose();
-    }
 
-    private void drawSummary(GuiGraphics g, int mouseX, int mouseY) {
-        g.fill(0, 0, width, height, 0xC0000000);
-        int cols = Math.min(5, results.size());
-        int rows = (results.size() + cols - 1) / cols;
-        int gap = 10;
-        int totalW = cols * CARD_W + (cols - 1) * gap;
-        int totalH = rows * CARD_H + (rows - 1) * gap;
-        int x0 = (width - totalW) / 2;
-        int y0 = (height - totalH) / 2;
-        GachaData.Entry hovered = null;
-        for (int i = 0; i < results.size(); i++) {
-            int x = x0 + (i % cols) * (CARD_W + gap);
-            int y = y0 + (i / cols) * (CARD_H + gap);
-            drawCard(g, x, y, results.get(i), false);
-            if (inside(mouseX, mouseY, x, y, CARD_W, CARD_H)) {
-                hovered = results.get(i);
-            }
-        }
-        g.drawCenteredString(font, Component.translatable("screen.simplywings.altar.summary"), width / 2, y0 - 18, 0xFFF2E6FF);
-        hint(g, Component.translatable("screen.simplywings.altar.close"));
-        if (hovered != null) {
-            g.renderTooltip(font, stackOf(hovered), mouseX, mouseY);
-        }
-    }
 
     private void hint(GuiGraphics g, Component text) {
         g.drawCenteredString(font, text, width / 2, height - 16, 0xFF9C8CBC);
@@ -455,24 +294,20 @@ public class AltarScreen extends AbstractContainerScreen<AltarMenu> {
                 }
                 return super.mouseClicked(mouseX, mouseY, button);
             }
-            case LAUNCH -> {
-                com.zorago.simplywings.client.show.ClientShows.skip();
-                startCard(0);
+            case SHOW -> {
+                startCards();
                 return true;
             }
-            case REVEAL -> {
-                GachaTier tier = results.get(card).rank();
-                if (now() - phaseStart < cardLength(tier)) {
-                    phaseStart = now() - cardLength(tier);
-                } else if (card + 1 < results.size()) {
-                    startCard(card + 1);
+            case CARDS -> {
+                float t = cardTime();
+                if (deck.done(t)) {
+                    exitCards();
                 } else {
-                    phase = results.size() > 1 ? Phase.SUMMARY : Phase.IDLE;
+                    deck.finish(t);
                 }
                 return true;
             }
             default -> {
-                phase = Phase.IDLE;
                 return true;
             }
         }
@@ -480,13 +315,12 @@ public class AltarScreen extends AbstractContainerScreen<AltarMenu> {
 
     @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
-        if (phase == Phase.LAUNCH && keyCode == 256) {
-            com.zorago.simplywings.client.show.ClientShows.skip();
-            startCard(0);
-            return true;
-        }
         if (phase != Phase.IDLE && keyCode == 256) {
-            phase = results.size() > 1 && phase != Phase.SUMMARY ? Phase.SUMMARY : Phase.IDLE;
+            if (phase == Phase.SHOW || phase == Phase.CARDS) {
+                exitCards();
+            } else {
+                phase = Phase.IDLE;
+            }
             return true;
         }
         if (phase != Phase.IDLE && (keyCode == 32 || keyCode == 257)) {
@@ -506,7 +340,7 @@ public class AltarScreen extends AbstractContainerScreen<AltarMenu> {
 
     @Override
     public void removed() {
-        com.zorago.simplywings.client.show.ClientShows.skip();
+        ClientShows.skip();
         super.removed();
     }
 }

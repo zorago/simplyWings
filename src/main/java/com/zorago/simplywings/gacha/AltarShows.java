@@ -45,6 +45,11 @@ public final class AltarShows {
 
     public static void register(IEventBus bus) {
         bus.addListener(AltarShows::onTick);
+        bus.addListener((net.neoforged.neoforge.event.entity.player.PlayerEvent.PlayerLoggedOutEvent e) -> {
+            if (e.getEntity() instanceof ServerPlayer player) {
+                Gacha.claim(player);
+            }
+        });
     }
 
     public static String animation(List<GachaData.Entry> results) {
