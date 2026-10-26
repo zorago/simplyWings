@@ -18,12 +18,9 @@ FLAME_BASE = 2 * B
 HOVER = (0, 6 * B, 0)
 SIGIL_Y = 96 * B
 WING_Y = 14 * B
-END = 21.0
 
 FLAMES = [("fire", (-4, 6)), ("dark", (-7, 0)), ("earth", (-4, -6)), ("water", (4, -6)), ("light", (7, 0)), ("air", (4, 6))]
 IGNITE = {name: 0.4 + 0.22 * i for i, (name, _) in enumerate(FLAMES)}
-BEATS = [(7.20, "blue", 0.07), (8.05, "violet", 0.08), (8.90, "gold", 0.09), (9.75, "red", 0.11)]
-HITSTOPS = [(t, d, 0.1) for t, _, d in BEATS] + [(12.0, 0.12, 0.05)]
 
 COLORS = {
     "red": (205, 45, 25), "orange": (255, 125, 25), "yellow": (255, 222, 90), "ember": (255, 170, 60),
@@ -88,14 +85,6 @@ def ease_in_out(t):
     return 0.5 - 0.5 * math.cos(math.pi * t)
 
 
-def warp(t):
-    out = t
-    for start, dur, factor in HITSTOPS:
-        if t > start:
-            out -= min(t - start, dur) * (1 - factor)
-    return out
-
-
 class Noise1:
     def __init__(self, seed):
         rnd = random.Random(seed)
@@ -113,6 +102,7 @@ class Rig:
         self.roots = []
         self.elements = []
         self.keys = {}
+        self.lengths = {}
         self.by_uuid = {}
 
     def scale_tree(self, bone, factor, base):
@@ -168,7 +158,7 @@ class Rig:
     def animations(self):
         out = []
         for anim, bones in self.keys.items():
-            length = END if anim != "idle" else 2.0
+            length = self.lengths[anim]
             animators = {}
             for bone, channels in bones.items():
                 scale = channels.get("scale")
@@ -582,439 +572,6 @@ def build_wings(rig):
         rig.box(b, (0, 0, 0), (3, 0.8, 9), rnd.choice(["feather", "feather_edge", "s_violet"]), rot=[0, rnd.uniform(0, 180), 0])
 
 
-def star_path(t):
-    if t < 6.2:
-        return (0, SIGIL_Y - 30, 0)
-    u = ease_in_out((warp(t) - warp(6.2)) / (warp(10.4) - warp(6.2)))
-    turns = 2.4
-    a = u * turns * 2 * math.pi
-    r = math.sin(math.pi * u) ** 0.8 * 150
-    y = (SIGIL_Y - 30) * (1 - u) + HOVER[1] * u
-    return (r * math.cos(a), y, r * math.sin(a))
-
-
-def animate(rig):
-    A = "summon_sss"
-    rnd = random.Random(7)
-    for name, x, z, yaw in flame_positions():
-        root = f"flame_{name}"
-        body = f"flame_{name}_body"
-        ig = IGNITE[name]
-        n = Noise1(hash(name) & 0xFFFF)
-        n2 = Noise1((hash(name) >> 8) & 0xFFFF)
-
-        def flame_scale(t, ig=ig):
-            if t < 0.4:
-                return 0.55 - 0.25 * smooth(t / 0.4)
-            if t < ig:
-                return 0.3
-            if t < ig + 0.08:
-                return 0.3 - 0.12 * smooth((t - ig) / 0.08)
-            if t < ig + 0.30:
-                return 0.18 + 1.42 * ease_out_expo((t - ig - 0.08) / 0.22)
-            if t < ig + 0.80:
-                return 1.6 - 0.6 * ease_in_out((t - ig - 0.3) / 0.5)
-            s = 1.0
-            if 3.6 <= t < 4.0:
-                s = 1.0 - 0.3 * ease_in_out((t - 3.6) / 0.4)
-            elif 4.0 <= t < 4.4:
-                s = 0.7 + 0.5 * ease_out_expo((t - 4.0) / 0.4)
-            elif 4.4 <= t < 10.4:
-                s = 1.2
-                for k, (bt, _, _) in enumerate(BEATS):
-                    if bt - 0.1 <= t < bt + 0.6:
-                        p = (t - bt + 0.1) / 0.7
-                        s += (0.35 + 0.15 * k) * math.sin(math.pi * p) ** 1.5
-            elif 10.4 <= t < 12.0:
-                s = 1.2 - 0.95 * ease_in_out((t - 10.4) / 1.5)
-            elif 12.0 <= t < 12.4:
-                s = 0.25
-            elif 12.4 <= t < 19.6:
-                s = 0.25 + 1.85 * ease_out_expo((t - 12.4) / 0.6) if t < 13.0 else 2.1 - 0.4 * ease_in_out((t - 13.0) / 6.6)
-            else:
-                s = 1.7 - 0.7 * ease_in_out((t - 19.6) / 1.4)
-            return s
-
-        def scale_fn(t, n=n):
-            s = flame_scale(t)
-            fl = 1 + 0.09 * n(t * 1.6)
-            return (s * (1 - 0.04 * n(t * 2.1 + 3)), s * fl, s * (1 - 0.04 * n(t * 2.1 + 3)))
-
-        rig.sample(A, body, "scale", 0, END, scale_fn, rate=14, extra=[ig, ig + 0.08, ig + 0.3, 12.0, 12.4])
-
-        def lean_fn(t, n2=n2):
-            lean = 0.0
-            if 1.9 <= t < 3.6:
-                lean = 14 * ease_in_out((t - 1.9) / 1.0)
-            elif 3.6 <= t < 10.4:
-                lean = 14 - 10 * ease_in_out((t - 3.6) / 1.0)
-            elif 10.4 <= t < 12.0:
-                lean = 4 + 36 * ease_in_out((t - 10.4) / 1.4)
-            elif 12.0 <= t < 12.6:
-                lean = 40 - 52 * ease_out_expo((t - 12.0) / 0.6)
-            elif 12.6 <= t < 14.0:
-                lean = -12 + 12 * ease_in_out((t - 12.6) / 1.4)
-            sway = 4 * n2(t * 0.8)
-            return (lean + sway, 0, 3 * n2(t * 0.6 + 5))
-
-        rig.sample(A, body, "rotation", 0, END, lean_fn, rate=10, extra=[12.0, 12.6])
-        rig.key(A, root, "rotation", 0, (0, 0, 0))
-        rig.groups[root]["rotation"] = [0, round(yaw, 2), 0]
-
-    for name, x, z, _ in flame_positions():
-        for i in range(8):
-            lb = f"flame_{name}_layer_{i}"
-            if lb not in rig.groups:
-                break
-            n = Noise1(300 + i * 7 + len(name))
-            amp = 0.35 + 0.28 * i
-            rig.sample(A, lb, "position", 0, END, lambda t, n=n, amp=amp: (amp * n(t * 2.4), 0.25 * amp * n(t * 3.1 + 4), amp * n(t * 2.2 + 9)), rate=10)
-            rig.sample(A, lb, "scale", 0, END, lambda t, n=n, i=i: (1 + 0.06 * n(t * 3.3 + i), 1 + 0.1 * n(t * 2.9 + 2 * i), 1 + 0.06 * n(t * 3.1 + 3 * i)), rate=10)
-    rig.sample(A, "flame_water_crown", "rotation", 0, END, lambda t: (0, -90 * t, 0), rate=2, interp="linear")
-    rig.sample(A, "flame_water_crown", "scale", 0, END, lambda t: (1 + 0.3 * math.sin(t * 6), 1 + 0.4 * math.sin(t * 6 + 1), 1 + 0.3 * math.sin(t * 6)), rate=10)
-    for i in range(6):
-        b = f"flame_fire_tongue_{i}"
-        n = Noise1(100 + i)
-        rig.sample(A, b, "rotation", 0, END, lambda t, n=n: (14 * n(t * 3.2), 0, 14 * n(t * 2.7 + 1)), rate=10)
-        rig.sample(A, b, "scale", 0, END, lambda t, n=n: (1, 1 + 0.35 * n(t * 3.5 + 2), 1), rate=10)
-    for i in range(8):
-        b = f"flame_fire_ember_{i}"
-        period = 1.1 + 0.13 * i
-        t = (i * 0.37) % period
-        while t < END:
-            rig.key(A, b, "position", t, (0, 0, 0), "linear")
-            rig.key(A, b, "scale", t, (0, 0, 0), "linear")
-            rig.key(A, b, "scale", t + 0.1, (1, 1, 1), "linear")
-            rig.key(A, b, "position", t + period - 0.02, (2 * math.sin(i + t), 46 + 6 * (i % 3), 2 * math.cos(i + t)), "linear")
-            rig.key(A, b, "scale", t + period - 0.02, (0.2, 0.2, 0.2), "linear")
-            t += period
-    for i in range(4):
-        n = Noise1(200 + i)
-        rig.sample(A, f"flame_dark_tongue_{i}", "rotation", 0, END, lambda t, n=n: (20 * n(t * 0.9), 25 * t, 20 * n(t * 0.7 + 2)), rate=8)
-    rig.key(A, "flame_dark_eyes", "scale", 0, (0, 0, 0), "linear")
-    rig.key(A, "flame_dark_eyes", "scale", 9.75, (0, 0, 0), "linear")
-    rig.key(A, "flame_dark_eyes", "scale", 9.9, (1.4, 1.4, 1.4), "catmullrom")
-    rig.key(A, "flame_dark_eyes", "scale", 10.1, (1, 1, 1), "catmullrom")
-    rig.key(A, "flame_dark_eyes", "scale", 12.0, (1, 1, 1), "linear")
-    rig.key(A, "flame_dark_eyes", "scale", 12.15, (0, 0, 0), "linear")
-    for b, rate in (("flame_earth_orbit", 50), ("flame_water_orbit", -140), ("flame_light_rays", 60), ("flame_light_halo", -90)):
-        rig.sample(A, b, "rotation", 0, END, lambda t, r=rate: (0, r * t, 0), rate=2, interp="linear")
-    rig.sample(A, "flame_light_rays", "scale", 0, END, lambda t: (1 + 0.25 * math.sin(t * 5), 1 + 0.25 * math.sin(t * 5), 1 + 0.25 * math.sin(t * 5)), rate=8)
-    for r in range(4):
-        rig.sample(A, f"flame_air_ribbon_{r}", "rotation", 0, END, lambda t, r=r: (0, -(260 + 40 * r) * t, 0), rate=2, interp="linear")
-    rig.sample(A, "flame_air_leaves", "rotation", 0, END, lambda t: (10 * math.sin(t * 3), 200 * t, 0), rate=6)
-    rig.sample(A, "flame_earth_layer_0", "rotation", 0, END, lambda t: (6 * math.sin(t * 0.9), 25 * t, 5 * math.cos(t * 1.1)), rate=4)
-    rig.sample(A, "flame_earth_body", "position", 0, END, lambda t: (0, 3 * math.sin(t * 1.4) + (6 if 12.4 < t < 19 else 0) * smooth((t - 12.4) / 0.6), 0), rate=6)
-    rig.sample(A, "flame_water_body", "rotation", 0, END, lambda t: (0, 120 * t, 0), rate=2, interp="linear")
-
-    for i in range(24):
-        b = f"rune_{i}"
-        on = 1.9 + 0.07 * i
-        off = 19.6 + 0.05 * (23 - i)
-        rig.hide_until(A, b, on)
-        rig.key(A, b, "scale", on + 0.06, (1.5, 3, 1.5), "catmullrom")
-        rig.key(A, b, "scale", on + 0.18, (1, 1, 1), "catmullrom")
-        rig.key(A, b, "position", on, (0, 4, 0), "catmullrom")
-        rig.key(A, b, "position", on + 0.18, (0, 0, 0), "catmullrom")
-        for bt, _, _ in BEATS + [(12.0, None, None)]:
-            rig.key(A, b, "scale", bt, (1, 1, 1), "catmullrom")
-            rig.key(A, b, "scale", bt + 0.05 + 0.004 * i, (1.4, 2.5, 1.4), "catmullrom")
-            rig.key(A, b, "scale", bt + 0.3 + 0.004 * i, (1, 1, 1), "catmullrom")
-        rig.key(A, b, "scale", off, (1, 1, 1), "linear")
-        rig.key(A, b, "scale", off + 0.2, (0, 0, 0), "linear")
-
-    rig.hide_until(A, "floor_circle", 1.9)
-    rig.key(A, "floor_circle", "scale", 2.45, (1.06, 1, 1.06))
-    rig.key(A, "floor_circle", "scale", 2.7, (1, 1, 1))
-    rig.key(A, "floor_circle", "scale", 3.6, (1, 1, 1))
-    rig.key(A, "floor_circle", "scale", 4.0, (0.9, 1, 0.9))
-    rig.key(A, "floor_circle", "scale", 4.15, (1.12, 1, 1.12))
-    rig.key(A, "floor_circle", "scale", 4.5, (1, 1, 1))
-    rig.key(A, "floor_circle", "scale", 19.6, (1, 1, 1), "linear")
-    rig.key(A, "floor_circle", "scale", 20.6, (0, 1, 0), "linear")
-    rig.sample(A, "floor_ring_outer", "rotation", 0, END, lambda t: (0, 18 * warp(t) + (40 * smooth((t - 10.4) / 1.6) if t > 10.4 else 0), 0), rate=4, extra=[h[0] for h in HITSTOPS])
-    rig.sample(A, "floor_ring_inner", "rotation", 0, END, lambda t: (0, -30 * warp(t), 0), rate=4, extra=[h[0] for h in HITSTOPS])
-
-    for name, x, z, _ in flame_positions():
-        sb = f"stream_{name}"
-        for i in range(12):
-            c = f"stream_{name}_{i}"
-            on = 2.2 + IGNITE[name] * 0.3 + i * 0.05
-            rig.hide_until(A, c, on)
-            rig.key(A, c, "scale", on + 0.12, (1.4, 1.4, 1.4))
-            rig.key(A, c, "scale", on + 0.25, (1, 1, 1))
-            rig.sample(A, c, "scale", on + 0.3, 12.0, lambda t, i=i: tuple([1 + 0.3 * math.sin(t * 9 - i * 0.7) + (0.6 * smooth((t - 10.4) / 1.2) if t > 10.4 else 0)] * 3), rate=6)
-            rig.key(A, c, "scale", 12.05, (0, 0, 0), "linear")
-        rig.sample(A, sb, "position", 2.0, 12.0, lambda t, i=0: (0, 2 * math.sin(t * 4), 0), rate=4)
-
-    rig.hide_until(A, "pillar", 4.0)
-    rig.key(A, "pillar", "scale", 4.06, (1.6, 0.35, 1.6), "catmullrom")
-    rig.key(A, "pillar", "scale", 4.18, (0.8, 1.0, 0.8), "catmullrom")
-    rig.key(A, "pillar", "scale", 4.4, (1, 1, 1), "catmullrom")
-    rig.sample(A, "pillar", "scale", 4.5, 11.9, lambda t: (1 + 0.12 * math.sin(t * 7), 1, 1 + 0.12 * math.sin(t * 7)), rate=6)
-    rig.key(A, "pillar", "scale", 12.0, (0.6, 1, 0.6))
-    rig.key(A, "pillar", "scale", 12.1, (2.8, 1, 2.8))
-    rig.key(A, "pillar", "scale", 12.6, (1.3, 1, 1.3))
-    rig.key(A, "pillar", "scale", 16.4, (1.1, 1, 1.1), "linear")
-    rig.key(A, "pillar", "scale", 19.6, (0, 1, 0), "linear")
-    for h in ("a", "b"):
-        sign = 1 if h == "a" else -1
-        rig.sample(A, f"pillar_helix_{h}", "rotation", 4.0, 19.6, lambda t, sign=sign: (0, sign * 160 * warp(t) + sign * 400 * smooth((t - 10.4) / 1.6), 0), rate=3, interp="linear", extra=[x[0] for x in HITSTOPS])
-    rnd2 = random.Random(77)
-    for i in range(40):
-        b = f"mote_{i}"
-        period = rnd2.uniform(1.6, 3.2)
-        t = 4.05 + rnd2.uniform(0, period)
-        rig.hide_until(A, b, t)
-        top = rnd2.uniform(0.35, 1.0) * SIGIL_Y
-        while t + period < 16.4:
-            rig.key(A, b, "position", t, (0, 0, 0), "linear")
-            rig.key(A, b, "scale", t + 0.002, (1, 1, 1), "linear")
-            rig.key(A, b, "position", t + period - 0.01, (0, top, 0), "linear")
-            rig.key(A, b, "scale", t + period - 0.01, (0.3, 2.5, 0.3), "linear")
-            rig.key(A, b, "scale", t + period, (0, 0, 0), "linear")
-            t += period
-    rig.hide_until(A, "pillar_wave", 4.0)
-    rig.key(A, "pillar_wave", "scale", 4.02, (0.5, 1, 0.5), "linear")
-    rig.key(A, "pillar_wave", "scale", 4.7, (9, 0.5, 9), "linear")
-    rig.key(A, "pillar_wave", "scale", 4.9, (10, 0, 10), "linear")
-
-    for k, (open_t, spin) in enumerate(((4.10, 40), (4.22, -55), (4.34, 70))):
-        b = f"stack_{k + 1}"
-        rig.hide_until(A, b, open_t)
-        rig.key(A, b, "scale", open_t + 0.16, (1.12, 1, 1.12))
-        rig.key(A, b, "scale", open_t + 0.36, (1, 1, 1))
-        rig.key(A, b, "scale", 12.0, (1, 1, 1))
-        rig.key(A, b, "scale", 12.12, (1.35, 1, 1.35))
-        rig.key(A, b, "scale", 12.6, (1.05, 1, 1.05))
-        rig.key(A, b, "scale", 16.4 + 0.3 * (2 - k), (1, 1, 1), "linear")
-        rig.key(A, b, "scale", 17.6 + 0.3 * (2 - k), (0, 1, 0), "linear")
-        rig.sample(A, b, "rotation", open_t, 18.5, lambda t, s=spin: (0, s * warp(t) + s * 2 * smooth((t - 16.4) / 1.5), 0), rate=3, interp="linear", extra=[h[0] for h in HITSTOPS])
-        rig.sample(A, f"stack_{k + 1}_inner", "rotation", open_t, 18.5, lambda t, s=spin: (0, -1.6 * s * warp(t), 0), rate=3, interp="linear", extra=[h[0] for h in HITSTOPS])
-
-    S = "sky_sigil"
-    rig.hide_until(A, S, 4.46)
-    rig.key(A, S, "scale", 4.75, (1.08, 1, 1.08))
-    rig.key(A, S, "scale", 5.1, (1, 1, 1))
-    rig.key(A, S, "scale", 11.9, (1, 1, 1))
-    rig.key(A, S, "scale", 12.0, (0.92, 1, 0.92))
-    rig.key(A, S, "scale", 12.25, (1.5, 1, 1.5), "linear")
-    rig.key(A, S, "scale", 13.4, (2.2, 0, 2.2), "linear")
-    for part, spin in (("outer", 12), ("mid", -20), ("inner", 30), ("hex", -8), ("branches", 12)):
-        rig.sample(A, f"{S}_{part}", "rotation", 4.46, 13.5, lambda t, s=spin: (0, s * warp(t) + (6 * s * smooth((t - 12.0) / 1.2) if t > 12 else 0), 0), rate=3, interp="linear", extra=[h[0] for h in HITSTOPS])
-    rig.key(A, f"{S}_hex", "scale", 0, (0, 1, 0), "linear")
-    rig.key(A, f"{S}_hex", "scale", 4.8, (0, 1, 0), "linear")
-    rig.key(A, f"{S}_hex", "scale", 5.2, (1, 1, 1))
-    rig.key(A, f"{S}_branches", "position", 12.0, (0, 0, 0))
-    rig.key(A, f"{S}_branches", "position", 13.4, (0, -260, 0))
-    for i in range(4):
-        bt = BEATS[i][0]
-        rig.key(A, f"{S}_mid", "scale", bt - 0.05, (1, 1, 1))
-        rig.key(A, f"{S}_mid", "scale", bt + 0.04, (1.05 + 0.02 * i, 1, 1.05 + 0.02 * i))
-        rig.key(A, f"{S}_mid", "scale", bt + 0.4, (1, 1, 1))
-
-    rig.hide_until(A, "birth_flash", 5.9)
-    rig.key(A, "birth_flash", "scale", 6.02, (4, 4, 4), "linear")
-    rig.key(A, "birth_flash", "scale", 6.35, (0, 0, 0), "linear")
-
-    star_on = 5.2
-    rig.hide_until(A, "star", star_on)
-    rig.key(A, "star", "scale", 5.7, (1.6, 1.6, 1.6))
-    rig.key(A, "star", "scale", 5.95, (1.2, 1.2, 1.2))
-    rig.key(A, "star", "scale", 6.05, (3.4, 3.4, 3.4))
-    rig.key(A, "star", "scale", 6.25, (2.6, 2.6, 2.6))
-    last = 2.6
-    for k, (bt, _, _) in enumerate(BEATS):
-        amp = (2.2 + 0.25 * k) * (0.42 + 0.58 * star_path(bt)[1] / SIGIL_Y)
-        rig.key(A, "star", "scale", bt - 0.12, (last, last, last))
-        rig.key(A, "star", "scale", bt - 0.02, (last * 0.75, last * 0.75, last * 0.75))
-        rig.key(A, "star", "scale", bt + 0.05, (amp * 1.2, amp * 1.2, amp * 1.2))
-        rig.key(A, "star", "scale", bt + 0.35, (amp, amp, amp))
-        last = amp
-    rig.key(A, "star", "scale", 10.4, (1.05, 1.05, 1.05))
-    rig.key(A, "star", "scale", 11.5, (0.95, 0.95, 0.95))
-    rig.key(A, "star", "scale", 11.88, (1.3, 1.3, 1.3))
-    rig.key(A, "star", "scale", 12.0, (0.3, 0.3, 0.3), "linear")
-    rig.key(A, "star", "scale", 12.06, (0, 0, 0), "linear")
-    rig.sample(A, "star", "position", star_on, 10.4, star_path, rate=16, extra=[b[0] for b in BEATS])
-    rig.sample(A, "star", "position", 10.4, 12.0, lambda t: (HOVER[0] + 1.6 * math.sin(t * 61), HOVER[1] + 1.6 * math.sin(t * 47 + 1) * smooth((t - 10.4) / 1.2), HOVER[2] + 1.6 * math.sin(t * 53 + 2)), rate=20)
-    rig.sample(A, "star", "rotation", star_on, 12.0, lambda t: (35 * warp(t), 140 * warp(t), 0), rate=4, interp="linear", extra=[h[0] for h in HITSTOPS])
-    colors = ["white", "blue", "violet", "gold", "red"]
-    switch = [0.0] + [b[0] for b in BEATS]
-    for idx, c in enumerate(colors):
-        b = f"star_{c}"
-        rig.key(A, b, "scale", 0, (1, 1, 1) if idx == 0 else (0, 0, 0), "step")
-        if idx > 0:
-            rig.key(A, b, "scale", switch[idx], (1, 1, 1), "step")
-        if idx < len(colors) - 1:
-            rig.key(A, b, "scale", switch[idx + 1], (0, 0, 0), "step")
-    rig.sample(A, "star_ring", "rotation", star_on, 12.0, lambda t: (70 + 20 * math.sin(t), 260 * warp(t), 20 * math.cos(t * 1.3)), rate=6)
-    for g in range(8):
-        b = f"star_ghost_{g}"
-        lag = 0.035 * (g + 1)
-        rig.hide_until(A, b, 6.2 + lag)
-        size = 2.2 - 0.22 * g
-        rig.key(A, b, "scale", 6.3 + lag, (size, size, size))
-        rig.key(A, b, "scale", 10.3, (size, size, size), "linear")
-        rig.key(A, b, "scale", 10.6, (0, 0, 0), "linear")
-        rig.sample(A, b, "position", 6.2 + lag, 10.6, lambda t, lag=lag: star_path(t - lag), rate=16)
-
-    for k, (bt, _, _) in enumerate(BEATS):
-        b = f"beat_wave_{k}"
-        pos = star_path(bt)
-        rig.hide_until(A, b, bt)
-        rig.key(A, b, "position", 0, pos, "step")
-        rig.key(A, b, "scale", bt + 0.01, (0.3, 1, 0.3), "linear")
-        rig.key(A, b, "scale", bt + 0.55, (5 + 2.5 * k, 0.6, 5 + 2.5 * k), "linear")
-        rig.key(A, b, "scale", bt + 0.75, (6 + 3 * k, 0, 6 + 3 * k), "linear")
-    for i in range(10):
-        b = f"crack_{i}"
-        on = 9.75 + 0.025 * i
-        rig.hide_until(A, b, on)
-        rig.key(A, b, "scale", on + 0.12, (1.2, 1.2, 1.2))
-        rig.key(A, b, "scale", on + 0.3, (1, 1, 1))
-        rig.key(A, b, "scale", 12.0, (1, 1, 1), "linear")
-        rig.key(A, b, "scale", 12.4, (1.6, 0, 1.6), "linear")
-
-    rig.hide_until(A, "flash", 12.0)
-    rig.key(A, "flash", "scale", 12.06, (5, 5, 5), "linear")
-    rig.key(A, "flash", "scale", 12.14, (8, 8, 8), "linear")
-    rig.key(A, "flash", "scale", 12.4, (0, 0, 0), "linear")
-    for i, (speed, dur) in enumerate(((22, 0.9), (14, 1.3), (8, 1.9))):
-        b = f"ground_wave_{i}"
-        rig.hide_until(A, b, 12.05 + 0.05 * i)
-        rig.key(A, b, "scale", 12.06 + 0.05 * i, (0.5, 1.6, 0.5), "linear")
-        rig.key(A, b, "scale", 12.05 + 0.05 * i + dur * 0.7, (speed * 0.85, 0.8, speed * 0.85), "linear")
-        rig.key(A, b, "scale", 12.05 + 0.05 * i + dur, (speed, 0, speed), "linear")
-    for i in range(48):
-        b = f"shard_{i}"
-        a = rnd.uniform(0, 2 * math.pi)
-        el = rnd.uniform(-0.2, 1.1)
-        sp = rnd.uniform(160, 460)
-        v = (sp * math.cos(a) * math.cos(el), sp * math.sin(el), sp * math.sin(a) * math.cos(el))
-        rig.hide_until(A, b, 12.04)
-        rig.key(A, b, "scale", 12.06, (1.6, 1.6, 1.6), "linear")
-        life = rnd.uniform(1.4, 2.4)
-        rig.key(A, b, "scale", 12.06 + life * 0.6, (1, 1, 1), "linear")
-        rig.key(A, b, "scale", 12.06 + life, (0, 0, 0), "linear")
-        for j in range(8):
-            tt = life * j / 7
-            drag = (1 - math.exp(-2.2 * tt)) / 2.2
-            rig.key(A, b, "position", 12.06 + tt, (v[0] * drag, v[1] * drag - 120 * tt * tt, v[2] * drag))
-        rig.key(A, b, "rotation", 12.06, (0, 0, 0), "linear")
-        rig.key(A, b, "rotation", 12.06 + life, (rnd.uniform(-720, 720), rnd.uniform(-720, 720), 0), "linear")
-
-    def dragon_pos(t):
-        h = 78 * B
-        if t < 10.4:
-            th = 0.9 + 2 * math.pi * (warp(t) - warp(6.6)) / 4.4
-            r = 46 * B
-            return (r * math.cos(th), h + 60 * math.sin(th * 2), r * math.sin(th)), th
-        th0 = 0.9 + 2 * math.pi * (warp(10.4) - warp(6.6)) / 4.4
-        u = ease_in_out((t - 10.4) / 1.4)
-        th = th0 + 0.9 * u
-        r = 46 * B * (1 - 0.3 * u)
-        return (r * math.cos(th), h + 60 * math.sin(th0 * 2) - (h + 40 * B) * u ** 1.6, r * math.sin(th)), th
-
-    rig.hide_until(A, "dragon", 6.6)
-    rig.key(A, "dragon", "scale", 7.3, (1, 1, 1))
-    rig.key(A, "dragon", "scale", 11.4, (1, 1, 1), "linear")
-    rig.key(A, "dragon", "scale", 11.8, (0, 0, 0), "linear")
-    rig.sample(A, "dragon", "position", 6.6, 11.8, lambda t: dragon_pos(t)[0], rate=10, extra=[b[0] for b in BEATS])
-    rig.sample(A, "dragon", "rotation", 6.6, 11.8,
-               lambda t: (40 * smooth((t - 10.4) / 0.8) if t > 10.4 else -8 * math.sin(t * 1.3), -math.degrees(dragon_pos(t)[1]), -12 + (12 * smooth((t - 10.4) / 0.6) if t > 10.4 else 0)),
-               rate=10)
-    for side, s in (("r", 1), ("l", -1)):
-        rig.sample(A, f"dragon_wing_{side}", "rotation", 6.6, 11.8, lambda t, s=s: (0, 0, s * (8 + 30 * math.sin(2 * math.pi * warp(t) / 1.15) + (28 * smooth((t - 10.4) / 0.5) if t > 10.4 else 0))), rate=14)
-        rig.sample(A, f"dragon_wing_{side}_tip", "rotation", 6.6, 11.8, lambda t, s=s: (0, 0, s * 22 * math.sin(2 * math.pi * warp(t) / 1.15 - 0.9)), rate=14)
-    rig.sample(A, "dragon_neck", "rotation", 6.6, 11.8, lambda t: (6 * math.sin(t * 2.1), 10 * math.sin(t * 1.3), 0), rate=6)
-    rig.sample(A, "dragon_tail", "rotation", 6.6, 11.8, lambda t: (6 * math.sin(t * 2.3 + 1), 14 * math.sin(t * 1.7), 0), rate=8)
-    for t, ang in ((6.6, 0), (6.85, 8), (7.0, -26), (7.6, -22), (7.9, 0), (10.4, 0), (10.7, -18), (11.2, 6)):
-        rig.key(A, "dragon_head", "rotation", t, (ang, 0, 0))
-    for t, ang in ((6.6, 0), (6.9, 0), (7.02, 34), (7.6, 30), (7.95, 0), (10.5, 0), (10.65, 28), (11.3, 0)):
-        rig.key(A, "dragon_jaw", "rotation", t, (ang, 0, 0))
-
-    for i, (name, x, z, _) in enumerate(flame_positions()):
-        b = f"beam_{name}"
-        on = 12.3 + 0.05 * i
-        rig.hide_until(A, b, on)
-        rig.key(A, b, "scale", on + 0.1, (1.6, 1.15, 1.6))
-        rig.key(A, b, "scale", on + 0.3, (1, 1, 1))
-        rig.sample(A, b, "scale", on + 0.35, 13.7, lambda t, i=i: (1 + 0.25 * math.sin(t * 14 + i), 1, 1 + 0.25 * math.sin(t * 14 + i)), rate=10)
-        rig.key(A, b, "scale", 13.75, (1, 1, 1), "linear")
-        rig.key(A, b, "scale", 14.1, (0, 1.2, 0), "linear")
-    rig.hide_until(A, "wings", 12.4)
-    rig.key(A, "wings", "scale", 12.75, (1.05, 1.05, 1.05))
-    rig.key(A, "wings", "scale", 12.95, (1, 1, 1))
-    rig.key(A, "wings", "scale", 17.2, (1, 1, 1), "linear")
-    rig.key(A, "wings", "scale", 18.2, (0, 0, 0), "linear")
-    rig.key(A, "wings", "position", 12.4, (0, -60, 0))
-    rig.key(A, "wings", "position", 12.9, (0, 0, 0))
-    rig.key(A, "wings", "position", 15.0, (0, 10, 0))
-    rig.key(A, "wings", "position", 17.2, (0, 20, 0))
-    rig.key(A, "wings", "position", 18.2, (0, 160, 0))
-
-    def wing_pose(t):
-        folded = (-62, -95, -60)
-        spread = (0, 0, 0)
-        if t < 12.6:
-            return folded
-        if t < 13.3:
-            u = (t - 12.6) / 0.7
-            e = ease_out_expo(u)
-            over = math.sin(math.pi * min(1, u * 1.3)) * 0.12
-            return tuple(folded[k] + (spread[k] - folded[k]) * e + (spread[k] - folded[k]) * over for k in range(3))
-        flaps = [(13.6, 0.8), (14.6, 0.8)]
-        for ft, fd in flaps:
-            if ft - 0.25 <= t < ft:
-                u = (t - ft + 0.25) / 0.25
-                return (18 * ease_in_out(u), -10 * ease_in_out(u), 10 * ease_in_out(u))
-            if ft <= t < ft + fd:
-                u = (t - ft) / fd
-                down = math.sin(math.pi * min(1, u * 1.6))
-                up = smooth((u - 0.6) / 0.4)
-                return (18 - 58 * down * (1 - up) - 18 * up, -10 + 30 * down * (1 - up) + 10 * up, 10 - 10 * up)
-        if t < 16.4:
-            return (4 * math.sin(t * 2), 0, 0)
-        if t < 17.2:
-            u = ease_in_out((t - 16.4) / 0.8)
-            return tuple(spread[k] + (folded[k] - spread[k]) * u * 0.7 for k in range(3))
-        return tuple(folded[k] * 0.7 for k in range(3))
-
-    for side, s in (("r", 1), ("l", -1)):
-        rig.sample(A, f"wing_{side}", "rotation", 12.4, 18.2, lambda t, s=s: (0, 0, s * wing_pose(t)[0]), rate=20, extra=[13.3, 13.6, 14.6])
-        rig.sample(A, f"wing_{side}_fore", "rotation", 12.4, 18.2, lambda t, s=s: (0, 0, s * wing_pose(t)[1]), rate=20, extra=[13.3, 13.6, 14.6])
-        rig.sample(A, f"wing_{side}_hand", "rotation", 12.4, 18.2, lambda t, s=s: (0, 0, s * (wing_pose(t)[2] + 8 * math.sin(t * 6))), rate=20, extra=[13.3, 13.6, 14.6])
-        rig.sample(A, f"wing_{side}_coverts", "rotation", 12.4, 18.2, lambda t, s=s: (0, 0, s * 0.3 * wing_pose(t - 0.06)[0]), rate=14)
-
-    for i in range(30):
-        b = f"feather_{i}"
-        t0 = 13.7 + (i % 15) * 0.07 + (1.0 if i >= 15 else 0)
-        x0 = rnd.uniform(-300, 300)
-        y0 = WING_Y + rnd.uniform(-40, 60)
-        z0 = rnd.uniform(-30, 30)
-        fall = rnd.uniform(4.0, 5.2)
-        rig.hide_until(A, b, t0)
-        rig.key(A, b, "scale", t0 + 0.2, (1.4, 1.4, 1.4), "linear")
-        rig.key(A, b, "scale", t0 + fall * 0.85, (1.2, 1.2, 1.2), "linear")
-        rig.key(A, b, "scale", t0 + fall, (0, 0, 0), "linear")
-        ph = rnd.uniform(0, 6.28)
-        rig.sample(A, b, "position", t0, t0 + fall, lambda t, t0=t0, x0=x0, y0=y0, z0=z0, fall=fall, ph=ph:
-                   (x0 * (1 + 0.25 * (t - t0) / fall) + 22 * math.sin((t - t0) * 2.6 + ph), y0 - (y0 - 6) * ((t - t0) / fall) ** 1.15, z0 + 14 * math.cos((t - t0) * 2.1 + ph)), rate=6)
-        rig.sample(A, b, "rotation", t0, t0 + fall, lambda t, ph=ph: (35 * math.sin(t * 2.6 + ph), 90 * t, 25 * math.cos(t * 2.1 + ph)), rate=6)
-
-    I = "idle"
-    for name, x, z, _ in flame_positions():
-        n = Noise1(hash(name) & 0xFFFF)
-        rig.sample(I, f"flame_{name}_body", "scale", 0, 2, lambda t, n=n: (1, 1 + 0.08 * math.sin(2 * math.pi * t) + 0.05 * math.sin(6 * math.pi * t + n(0)), 1), rate=12)
-    for b, rate in (("flame_earth_orbit", 180), ("flame_water_orbit", -360), ("flame_light_halo", -180)):
-        rig.key(I, b, "rotation", 0, (0, 0, 0), "linear")
-        rig.key(I, b, "rotation", 2, (0, rate, 0), "linear")
-    for r in range(4):
-        rig.key(I, f"flame_air_ribbon_{r}", "rotation", 0, (0, 0, 0), "linear")
-        rig.key(I, f"flame_air_ribbon_{r}", "rotation", 2, (0, -720, 0), "linear")
-
-
 def main():
     source, groups, tex, altar, floor_y, anchors = scene.build()
     palette = Palette()
@@ -1030,7 +587,9 @@ def main():
     build_waves(rig)
     build_dragon(rig)
     build_wings(rig)
-    animate(rig)
+    import altar_timeline as tl
+    tl.build_extras(rig, ["b", "b", "b", "b", "b", "b", "a", "s", "ss", "sss"])
+    tl.animate_all(rig)
     elements, outliner = [], []
     for gname, items in groups.items():
         if not items:

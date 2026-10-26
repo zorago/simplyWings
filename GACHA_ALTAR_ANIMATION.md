@@ -153,15 +153,56 @@ Les ids sont à ajouter à `SOUND_DESIGN.md` § 6.4 (ils complètent ceux de l'a
 5. Caméra, cartes et musique pour l'invocateur.
 6. Tests : solo, serveur dédié, deux clients (un invocateur, un spectateur à 12 chunks et y = 0), avec et sans Iris.
 
-## 9. Fichiers, commandes et état (26 octobre)
+## 9. Fichiers, commandes et état (26 octobre, soir)
 
-- Générateur : `python -I tools/blockbench/altar_anim.py` écrit `art/gacha/summoning_animation.bbmodel` (format Generic Model, environ 2 900 cubes, 370 os, 29 000 clés). Il lit le décor de l'île exporté (`altar_scene.py`) et ajoute toute l'animation. La géométrie et les clés sont **générées par code** (fonctions du temps échantillonnées en clés Catmull-Rom), ce qui permet de tout régler par paramètres et de porter les mêmes fonctions en Java.
-- Animations : `summon_sss` (21 s, le master complet) et `idle` (2 s en boucle, les flammes au repos).
-- Retouche à la main dans Blockbench : possible, mais une regénération écrase le fichier. Pour garder une retouche, il faut la reporter dans le générateur (ou demander à Claude de le faire).
-- Palette : une texture 64 × 64 générée (`simplywings:gacha/palette`), trois nuances par couleur (dessus clair, côtés, dessous sombre) et des couleurs translucides pour les halos.
-- Réglages de base du générateur : `SIGIL_Y` (hauteur du sigil, 96 blocs), `WING_Y` (ailes, 14 blocs), `HOVER` (point d'éclat, 6 blocs), `BEATS` (temps et hit-stop des battements), `IGNITE` (allumage des flammes), `FLAMES` (ancres et éléments).
-- **Pas encore faits** :
-  - les animations des autres paliers (`summon_b` à `summon_ss`) et du ×10, qui seront des coupes du master (§ 6) produites par le même générateur ;
-  - la teinte des flammes à la couleur du palier pendant la révélation : en jeu, c'est une couleur multiplicatrice que Blockbench ne sait pas animer ;
-  - l'éclipse et le blanc des mythiques ;
-  - le portage en jeu (§ 8).
+- Générateur : `python -I tools/blockbench/altar_anim.py` (la géométrie) et `tools/blockbench/altar_timeline.py` (les animations, un `Plan` par variante). Ils écrivent `art/gacha/summoning_animation.bbmodel` (format Generic Model, environ 3 600 cubes, 390 os, 140 000 clés, 29 Mo, 3,5 s de chargement dans Blockbench). Ils lisent le décor exporté de l'île (`altar_scene.py`). La géométrie et les clés sont **générées par code** : des fonctions du temps sont échantillonnées en clés Catmull-Rom. Tout se règle par paramètres, et les mêmes fonctions se porteront en Java.
+- Retouche à la main dans Blockbench : possible, mais une regénération écrase le fichier. Une retouche à garder doit être reportée dans le générateur.
+
+### 9.1 Les animations
+
+| Animation | Durée | Contenu |
+| --- | --- | --- |
+| `idle` | 8 s, en boucle | Flammes au repos, ralenties (bruit à 45 % de la vitesse du spectacle, rotations calées pour boucler sans saut). Tout le reste est caché |
+| `summon_b` | 10,8 s | Colonne courte (26 blocs), un seul cercle, étoile blanche née en haut de la colonne, sans battement ni sigil, petit éclat (12 éclats, 1 onde), pas d'ailes |
+| `summon_a` | 11,7 s | Comme B, deux cercles, un battement bleu, 24 éclats, 2 ondes |
+| `summon_s` | 16,7 s | Sigil à 64 blocs, trois cercles, deux battements (bleu, violet), colonnes élémentaires, ailes à 60 % |
+| `summon_ss` | 18,3 s | Sigil à 96 blocs, trois battements (jusqu'à l'or), dragon spectral, ailes à 80 % |
+| `summon_sss` | 19,5 s | Le master : quatre battements, fissures rouges, dragon, ailes complètes |
+| `summon_mythic_night` | 20,1 s | SSS, puis l'éclipse : un disque noir et une couronne violette couvrent le sigil, les flammes s'éteignent sauf celle des ténèbres, qui grandit et ouvre les yeux. Un tir de plasma bleu-violet tombe du sigil jusqu'à l'éclat |
+| `summon_mythic_light` | 20,1 s | SSS, puis un prisme blanc géant naît sous le sigil, un voile nacré enveloppe l'île, et les flammes s'éteignent sauf celle de la lumière |
+| `summon_x10` | 25,4 s | Le ×10 du prototype (`B B B B B B A S SS SSS`) : dix étoiles arrivent l'une après l'autre dans le sigil, avec une arrivée propre à leur palier (B s'allume sur place, A descend, S tombe de haut, SS tombe du zénith, SSS arrive de l'horizon et fissure le ciel), tournent en anneau, puis descendent en spirale décalée et sont absorbées une à une. Éclat et ailes du meilleur palier |
+
+- **Modèles inutilisés cachés** : chaque animation met à l'échelle 0 tout groupe racine qu'elle n'anime pas (dragon dans B à S, sigil dans B et A, éclipse hors Night…). Dans `idle`, seuls le décor et les flammes restent.
+- **Durées** : elles sont calculées par palier dans `Plan` (naissance de l'étoile, descente, battements, éclat, révélation, retombée). Les battements sont répartis dans la descente.
+
+### 9.2 Caméra
+
+- Deux os, **`camera`** (un petit appareil photo, objectif vers +Z) et **`camera_target`** (un petit losange rouge), animés dans toutes les variantes sauf `idle`. En jeu, la caméra de l'invocateur se place sur `camera` et regarde `camera_target`. Les autres joueurs ignorent ces deux os.
+- Mouvement : la caméra accélérée validée du prototype (`CAM_B`), adaptée à la scène. C'est une orbite dont l'angle est l'intégrale d'une vitesse, donc sans arrêt sec ; rayon, hauteur et cible suivent des courbes de clés.
+  - Ouverture : plan large, loin et en hauteur.
+  - Éveil et charge : plongée vers l'autel.
+  - Colonne : contre-plongée vers le ciel.
+  - Naissance de l'étoile : la caméra regarde le sigil, à plus de 90 blocs.
+  - Descente : elle suit l'étoile (mélange de la cible vers l'étoile) en accélérant.
+  - Éclat : elle pousse vers l'autel et ralentit d'un coup.
+  - Révélation : elle recule pour cadrer les ailes, puis tourne lentement.
+- Les clés de référence (`CAM` dans `altar_timeline.py`) sont celles du master ; les autres variantes les étirent par ancres (`remap`), comme le prototype. Sans sigil, rayon et hauteur sont réduits.
+- **Convention Blockbench** vérifiée : dans les animations d'os, la rotation **X est inversée** par rapport aux rotations de cubes. Le lecteur Java devra appliquer la même convention.
+- Revue dans Blockbench : `swPlay('<animation>', t)` (fonction installée dans la console par Claude) place le temps et renvoie la position de la caméra et de sa cible.
+
+### 9.3 Reste à faire
+
+- **Textures** des modèles (§ 10) et **particules** (billboards).
+- Teinte des flammes à la couleur du palier pendant la révélation : en jeu, c'est une couleur multiplicatrice, que Blockbench ne sait pas animer.
+- Portage en jeu (§ 8).
+
+## 10. Textures et particules (prévu)
+
+Aujourd'hui, toute la scène utilise une palette d'aplats (trois nuances par couleur) : c'est un blocage de formes, pas le rendu final. Le passage aux textures se fera ainsi :
+
+- **Flammes** : une texture pixel art par élément (dégradés, cœur clair, bords déchiquetés), **animée par frames** comme une texture Minecraft. Blockbench lit une texture en bande verticale avec `frame_time`, et le jeu fait de même avec un `.mcmeta`. Les langues de flamme deviennent des plaques croisées en X (deux plans perpendiculaires, transparence découpée), à la manière du feu vanilla, et non plus des cubes pleins. Le cœur reste un volume, avec une couche émissive (`RenderType.eyes`).
+- **Énergie** (colonne, cercles, sigil, flux) : textures à motifs (runes, glyphes, dégradés lumineux) en mélange additif, avec un défilement d'UV pour l'énergie qui coule. Le défilement se fait par décalage de texture au rendu.
+- **Étoile, éclat, ondes** : halos en plaques face caméra avec un dégradé radial, lames en plaques étirées.
+- **Particules** : des **billboards** (plaques qui font toujours face à la caméra) générés par notre passe de rendu, avec des sprites pixel art animés : braises du feu, gouttes de l'eau, éclats de roche, plumes et feuilles de l'air, étincelles de lumière, fumée des ténèbres, plus les étincelles montantes, les plumes qui tombent et les éclats de l'explosion. Blockbench ne sait pas faire de billboards en Generic Model : dans la scène, ces particules restent des cubes témoins, et leur sprite est défini à part.
+- **Dragon et ailes spectrales** : textures translucides avec un liseré lumineux sur les bords, nervures des membranes et rachis des plumes dessinés.
+
