@@ -92,9 +92,8 @@ def build_extras(rig, pulls):
         rig.box(b, (0, 0, 0), (60, 2, 2), "s_white")
         rig.crossed(b, (0, 0, 0), 64, 64, glow, count=2, uv=(32, 32))
     ec = rig.bone("eclipse", (0, SIGIL_Y + 60, 0))
-    for r in range(16, 520, 22):
-        ring(rig, ec, (0, SIGIL_Y + 60, 0), r, max(10, int(r / 6)), "eclipse", thick=24, height=4)
-    ring(rig, ec, (0, SIGIL_Y + 58, 0), 540, 160, "violet", thick=8, height=4, glow="energy")
+    voxel_shell(rig, ec, (0, SIGIL_Y + 60, 0), lambda x, y, z: abs(y) < 1 and math.hypot(x, z) <= 520, 528, 16, lambda *a: "eclipse")
+    ring(rig, ec, (0, SIGIL_Y + 58, 0), 540, 96, "violet", thick=8, height=4, glow="energy")
     pl = rig.bone("night_plasma", (0, 0, 0))
     voxel_shell(rig, pl, (0, 0, 0), lambda x, y, z: math.sqrt(x * x + y * y + z * z) <= 30, 30, 5,
                 lambda x, y, z: "s_white" if y > 14 else "s_blue" if (x + z) % 10 < 5 else "s_violet")
@@ -344,7 +343,7 @@ def flames(rig, A, P, end, quiet=False):
         n2 = Noise1((hash(name) >> 8) & 0xFFFF)
         fs = flame_body_scale(P, name, quiet)
         rig.sample(A, body, "scale", 0, end, looped(lambda t, fs=fs, n=n, sp=sp: (fs(t) * (1 - 0.03 * n(t * sp + 3)), fs(t) * (1 + 0.06 * n(t * 1.2 * sp)), fs(t) * (1 - 0.03 * n(t * sp + 3))), L),
-                   rate=8, extra=[IGNITE[name], IGNITE[name] + 0.08, IGNITE[name] + 0.3, P.burst, P.reveal])
+                   rate=6, extra=[IGNITE[name], IGNITE[name] + 0.08, IGNITE[name] + 0.3, P.burst, P.reveal])
 
         def lean(t, n2=n2):
             v = 0.0
@@ -361,14 +360,13 @@ def flames(rig, A, P, end, quiet=False):
                     v = -12 + 12 * ease_in_out((t - P.burst - 0.6) / 1.4)
             return (-v + 3 * n2(t * 0.5), 0, 2 * n2(t * 0.4 + 5))
 
-        rig.sample(A, body, "rotation", 0, end, looped(lean, L), rate=6, extra=[P.burst, P.burst + 0.6])
         for b in range(len(BANDS)):
             nb = Noise1(400 + b * 13 + len(name))
             amp = 0.4 + 1.1 * b
             rig.sample(A, f"flame_{name}_band_{b}", "position", 0, end,
-                       looped(lambda t, nb=nb, amp=amp, sp=sp, b=b: (amp * nb(t * 1.8 * sp), 0.3 * amp * nb(t * 2.3 * sp + 4), amp * nb(t * 1.6 * sp + 9 + b)), L), rate=7)
+                       looped(lambda t, nb=nb, amp=amp, sp=sp, b=b: (amp * nb(t * 1.8 * sp), 0.3 * amp * nb(t * 2.3 * sp + 4), amp * nb(t * 1.6 * sp + 9 + b)), L), rate=4)
             rig.sample(A, f"flame_{name}_band_{b}", "scale", 0, end,
-                       looped(lambda t, nb=nb, b=b, sp=sp: (1 + 0.05 * (b + 1) * nb(t * 2.4 * sp + 2), 1 + 0.08 * (b + 1) * nb(t * 2.1 * sp + 6), 1 + 0.05 * (b + 1) * nb(t * 2.2 * sp + 8)), L), rate=7)
+                       looped(lambda t, nb=nb, b=b, sp=sp: (1 + 0.05 * (b + 1) * nb(t * 2.4 * sp + 2), 1 + 0.08 * (b + 1) * nb(t * 2.1 * sp + 6), 1 + 0.05 * (b + 1) * nb(t * 2.2 * sp + 8)), L), rate=4)
         for k in range(3):
             tb = f"flame_{name}_tongue_{k}"
             period = (0.9 + 0.25 * k) / max(0.35, sp)
@@ -406,6 +404,9 @@ def flights(rig, A, P, flyers, rnd):
     used = []
     for cat in P.categories:
         used.extend(flyers[cat])
+    poses = {}
+    for name, tops, model in used:
+        poses.setdefault(model, glide_pose(model))
     if P.pulls:
         window = (P.spawn[0], P.desc + 2.4)
     else:
@@ -415,7 +416,7 @@ def flights(rig, A, P, flyers, rnd):
     seen = set()
     for wave in range(2):
         span = window[1] - window[0]
-        for name, tops in used:
+        for name, tops, model in used:
             dur = rnd.uniform(1.3, 1.9)
             start = window[0] + wave * span * 0.45 + rnd.uniform(0, max(0.1, span * 0.5 - dur * 0.5))
             start = min(start, window[1] + 1.0 - dur)
@@ -459,11 +460,24 @@ def flights(rig, A, P, flyers, rnd):
                 return (pitch, yaw, 0)
 
             rig.sample(A, name, "rotation", start, start + dur, orient, rate=14)
+            pose = poses[model]
+            if wave == 0:
+                for bone_name, channels in pose.items():
+                    full = f"{name}_{bone_name}"
+                    if full not in rig.groups:
+                        continue
+                    for channel, vec in channels.items():
+                        if channel == "rotation" and full in tops:
+                            continue
+                        rig.key(A, full, channel, 0, vec, "step", absolute=True, raw=True)
             for top in tops:
                 s = 1 if "right" in top else -1 if "left" in top else 0
+                base = pose.get(top[len(name) + 1:], {}).get("rotation", (0, 0, 0))
                 if s:
                     ph = rnd.uniform(0, 6)
-                    rig.sample(A, top, "rotation", start, start + dur, lambda t, s=s, ph=ph: (0, 0, s * 22 * math.sin(2 * math.pi * 3.2 * t + ph)), rate=20)
+                    rig.sample(A, top, "rotation", start, start + dur, lambda t, s=s, ph=ph, base=base: (base[0], base[1], base[2] + s * 16 * math.sin(2 * math.pi * 2.6 * t + ph)), rate=12, raw=True)
+                elif base != (0, 0, 0):
+                    rig.key(A, top, "rotation", 0, base, "step", absolute=True, raw=True)
             for c, at in ((cloud, start), (cloud + 1, start + dur)):
                 cb = f"cloud_{c}"
                 rig.key(A, cb, "scale", 0, (0, 0, 0), "step", absolute=True)
@@ -476,6 +490,35 @@ def flights(rig, A, P, flyers, rnd):
                 rig.key(A, cb, "scale", at + 1.1, (1.4, 0, 1.4), "linear")
                 rig.sample(A, cb, "rotation", t0, at + 1.1, lambda t: (0, 20 * t, 0), rate=1, interp="linear")
             cloud += 2
+
+
+SCENES = __import__("pathlib").Path(__file__).resolve().parents[2] / "art/scenes"
+_POSES = {}
+
+
+def glide_pose(model):
+    if model in _POSES:
+        return _POSES[model]
+    import json
+    pose = {}
+    path = SCENES / f"{model}.bbmodel"
+    if path.exists():
+        data = json.loads(path.read_text(encoding="utf-8"))
+        anims = {a["name"]: a for a in data.get("animations", [])}
+        anim = anims.get("cruise_glide") or anims.get("cruise_flap") or anims.get("full_flight")
+        if anim:
+            for animator in anim["animators"].values():
+                for kf in sorted(animator.get("keyframes", []), key=lambda k: k["time"]):
+                    ch = kf["channel"]
+                    if ch not in ("rotation", "position", "scale"):
+                        continue
+                    pose.setdefault(animator["name"], {})
+                    if ch in pose[animator["name"]]:
+                        continue
+                    dp = kf["data_points"][0]
+                    pose[animator["name"]][ch] = tuple(float(dp[a]) if str(dp[a]).strip() not in ("", None) else (1.0 if ch == "scale" else 0.0) for a in ("x", "y", "z"))
+    _POSES[model] = pose
+    return pose
 
 
 def particles(rig, A, P, rnd):
@@ -580,14 +623,13 @@ def summon(rig, A, P, rnd, flyers):
     rig.sample(A, "floor_ring_inner", "rotation", 0, P.end, lambda t: (0, -30 * P.warp(t), 0), rate=2, extra=hs)
 
     for name, x, z, _ in flame_positions():
-        for i in range(20):
-            c = f"stream_{name}_{i}"
-            on = 2.2 + IGNITE[name] * 0.3 + i * 0.03
-            rig.hide_until(A, c, on)
-            rig.key(A, c, "scale", on + 0.1, (1.5, 1.5, 1.5))
-            rig.key(A, c, "scale", on + 0.22, (1, 1, 1))
-            rig.sample(A, c, "scale", on + 0.3, P.burst, lambda t, i=i: tuple([1 + 0.35 * math.sin(t * 8 - i * 0.6) + (0.6 * smooth((t - P.hover) / 1.2) if t > P.hover else 0)] * 3), rate=4)
-            rig.key(A, c, "scale", P.burst + 0.05, (0, 0, 0), "linear")
+        c = f"stream_{name}"
+        on = 2.2 + IGNITE[name] * 0.3
+        rig.hide_until(A, c, on)
+        rig.key(A, c, "scale", on + 0.45, (1.08, 1.08, 1.08))
+        rig.key(A, c, "scale", on + 0.65, (1, 1, 1))
+        rig.sample(A, c, "scale", on + 0.7, P.burst, lambda t: tuple([1 + 0.04 * math.sin(t * 7) + (0.1 * smooth((t - P.hover) / 1.2) if t > P.hover else 0)] * 3), rate=3)
+        rig.key(A, c, "scale", P.burst + 0.05, (0, 0, 0), "linear")
 
     ph = P.pillar_h / 96
     rig.hide_until(A, "pillar", 4.0)
@@ -848,39 +890,40 @@ def wings(rig, A, P):
     rig.key(A, "wings", "position", t + 2.6, (0, 10, 0))
     rig.key(A, "wings", "position", fold_t + 0.8, (0, 20, 0))
     rig.key(A, "wings", "position", fold_t + 1.8, (0, 160, 0))
-    flaps = [(t + 1.2, 0.8), (t + 2.2, 0.8)] if P.settle - t > 3 else [(t + 1.2, 0.8)]
+    flaps = [(t + 1.15, 1.0), (t + 2.35, 1.0)] if P.settle - t > 3.4 else [(t + 1.15, 1.0)]
+
+    def stroke(u):
+        if u <= 0 or u >= 1:
+            return 0.0
+        if u < 0.28:
+            return 24 * ease_in_out(u / 0.28)
+        if u < 0.62:
+            return 24 - 52 * ease_in_out((u - 0.28) / 0.34)
+        return -28 + 28 * ease_in_out((u - 0.62) / 0.38)
 
     def pose(x):
-        folded = (-62, -95, -60)
+        folded = (55, 25, 12)
         if x < t + 0.2:
             return folded
-        if x < t + 0.9:
-            u = (x - t - 0.2) / 0.7
+        if x < t + 1.0:
+            u = (x - t - 0.2) / 0.8
             e = ease_out_expo(u)
-            over = math.sin(math.pi * min(1, u * 1.3)) * 0.12
-            return tuple(folded[k] * (1 - e) - folded[k] * over for k in range(3))
+            over = -0.1 * math.sin(math.pi * min(1.0, u * 1.25))
+            return tuple(folded[k] * (1 - e) + folded[k] * over for k in range(3))
         for ft, fd in flaps:
-            if ft - 0.25 <= x < ft:
-                u = ease_in_out((x - ft + 0.25) / 0.25)
-                return (18 * u, -10 * u, 10 * u)
-            if ft <= x < ft + fd:
-                u = (x - ft) / fd
-                down = math.sin(math.pi * min(1, u * 1.6))
-                up = smooth((u - 0.6) / 0.4)
-                return (18 - 58 * down * (1 - up) - 18 * up, -10 + 30 * down * (1 - up) + 10 * up, 10 - 10 * up)
+            if ft <= x < ft + fd + 0.2:
+                return (stroke((x - ft) / fd), 0.55 * stroke((x - ft - 0.06) / fd), 0.8 * stroke((x - ft - 0.13) / fd))
         if x < fold_t:
-            return (4 * math.sin(x * 2), 0, 0)
-        if x < fold_t + 0.8:
-            u = ease_in_out((x - fold_t) / 0.8)
-            return tuple(folded[k] * u * 0.7 for k in range(3))
-        return tuple(folded[k] * 0.7 for k in range(3))
+            b = 3 * math.sin((x - t) * 2.2)
+            return (b, 0.5 * b, 0.7 * b)
+        u = ease_in_out((x - fold_t) / 0.9)
+        return tuple(folded[k] * 0.85 * u for k in range(3))
 
     extra = [t + 0.9] + [f[0] for f in flaps]
     for side, s in (("r", 1), ("l", -1)):
         rig.sample(A, f"wing_{side}", "rotation", t, fold_t + 1.8, lambda x, s=s: (0, 0, s * pose(x)[0]), rate=16, extra=extra)
         rig.sample(A, f"wing_{side}_fore", "rotation", t, fold_t + 1.8, lambda x, s=s: (0, 0, s * pose(x)[1]), rate=16, extra=extra)
-        rig.sample(A, f"wing_{side}_hand", "rotation", t, fold_t + 1.8, lambda x, s=s: (0, 0, s * (pose(x)[2] + 8 * math.sin(x * 4))), rate=16, extra=extra)
-        rig.sample(A, f"wing_{side}_coverts", "rotation", t, fold_t + 1.8, lambda x, s=s: (0, 0, s * 0.3 * pose(x - 0.06)[0]), rate=10)
+        rig.sample(A, f"wing_{side}_hand", "rotation", t, fold_t + 1.8, lambda x, s=s: (0, 0, s * pose(x)[2]), rate=16, extra=extra)
 
 
 def mythic(rig, A, P):

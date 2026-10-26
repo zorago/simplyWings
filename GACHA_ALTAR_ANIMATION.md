@@ -204,9 +204,24 @@ Retours de zorago appliqués :
 - **Révélation** : la caméra passe face aux ailes (côté du joueur) et recule pour les cadrer en entier.
 - **Convention Blockbench corrigée** : dans les animations d'os, Blockbench applique les positions avec X inversé et les rotations avec X et Y inversés (convention Bedrock). Le générateur écrit les clés dans cette convention, et la scène est exacte (non miroir). Le lecteur Java devra lire les clés avec la même convention.
 
+### Retouches du 26 octobre (nuit, suite)
+
+- **Flammes droites** : plus aucune inclinaison vers l'autel, seules les bandes ondulent.
+- **Ailes spectrales refaites** :
+  - repli vertical au départ ;
+  - dépliage avec un léger dépassement ;
+  - deux battements mesurés (montée de 24°, puis coup de 52°) avec un retard de l'avant-bras puis de la main, au lieu d'un coup trop ample qui faisait pendre les rémiges jusqu'au sol ;
+  - repli à la fin, et suppression des points blancs détachés au bout des plumes.
+- **Joueurs-ombres** :
+  - chaque ombre a toujours ses ailes : vérifié pour les 15 ombres, de 58 à 170 cubes chacune ;
+  - elles prennent la **vraie pose de plané** de leur paire (`cruise_glide`, lue dans `art/scenes/<modèle>.bbmodel`, que génère `scene.py` à partir des classes de rig). Le battement de l'épaule se fait par-dessus cette pose ;
+  - le modèle d'ailes de chaque ombre est **fixé avant l'animation** : dans la scène par le générateur, en jeu par la graine de l'invocation, choisi au hasard parmi les paires des deux catégories. Il ne change jamais pendant le vol.
+- **Performances Blockbench** : les voxels voisins de même couleur sont fusionnés en boîtes. L'éclipse devient un disque fusionné, les cercles ont moins de segments, les flux n'ont plus qu'un os chacun, les clés des flammes sont moins denses, et il y a 3 ombres par catégorie et 24 nuages.
+  - Résultat : de 15 000 à 7 900 cubes, de 2 175 à 1 580 os, de 200 000 à 109 000 clés, et 7 s de chargement au lieu de 12.
+
 ## 9. Fichiers, commandes et état (26 octobre, soir)
 
-- Générateur : `python -I tools/blockbench/altar_anim.py` (la géométrie) et `tools/blockbench/altar_timeline.py` (les animations, un `Plan` par variante). Ils écrivent `art/gacha/summoning_animation.bbmodel` (format Generic Model, environ 15 000 cubes, 2 200 os, 200 000 clés, 32 textures, 32 Mo, environ 12 s de chargement dans Blockbench). Ils lisent le décor exporté de l'île (`altar_scene.py`). La géométrie et les clés sont **générées par code** : des fonctions du temps sont échantillonnées en clés Catmull-Rom. Tout se règle par paramètres, et les mêmes fonctions se porteront en Java.
+- Générateur : `python -I tools/blockbench/altar_anim.py` (la géométrie) et `tools/blockbench/altar_timeline.py` (les animations, un `Plan` par variante). Ils écrivent `art/gacha/summoning_animation.bbmodel` (format Generic Model, environ 7 900 cubes, 1 580 os, 109 000 clés, 32 textures, 19 Mo, environ 7 s de chargement dans Blockbench). Ils lisent le décor exporté de l'île (`altar_scene.py`). La géométrie et les clés sont **générées par code** : des fonctions du temps sont échantillonnées en clés Catmull-Rom. Tout se règle par paramètres, et les mêmes fonctions se porteront en Java.
 - Retouche à la main dans Blockbench : possible, mais une regénération écrase le fichier. Une retouche à garder doit être reportée dans le générateur.
 
 ### 9.1 Les animations

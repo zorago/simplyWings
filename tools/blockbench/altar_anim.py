@@ -30,8 +30,8 @@ FLAMES = [("fire", (-4, 6)), ("dark", (-7, 0)), ("earth", (-4, -6)), ("water", (
 IGNITE = {name: 0.4 + 0.22 * i for i, (name, _) in enumerate(FLAMES)}
 FLYER_MODELS = {"common": ["basic", "basic"], "rare": ["eagle", "owl"], "epic": ["storm", "forest"],
                 "legendary": ["angel", "seraph"], "mythic": ["night", "light"]}
-FLYERS_PER_CATEGORY = 4
-CLOUDS = 36
+FLYERS_PER_CATEGORY = 3
+CLOUDS = 24
 
 COLORS = {
     "red": (205, 45, 25), "orange": (255, 125, 25), "yellow": (255, 222, 90), "ember": (255, 170, 60),
@@ -207,19 +207,21 @@ class Rig:
         for i in range(count):
             self.plane(bone, center, w, h, texture, rot=[tilt, 180 / count * i, 0], uv=uv)
 
-    def key(self, anim, bone, channel, t, vec, interp="catmullrom", absolute=False):
+    def key(self, anim, bone, channel, t, vec, interp="catmullrom", absolute=False, raw=False):
         t = t if absolute else t + self.offsets.get(anim, 0.0)
-        if channel == "position":
+        if raw:
+            pass
+        elif channel == "position":
             vec = (-vec[0], vec[1], vec[2])
         elif channel == "rotation":
             vec = (-vec[0], -vec[1], vec[2])
         self.keys.setdefault(anim, {}).setdefault(bone, {}).setdefault(channel, {})[round(t, 4)] = (tuple(vec), interp)
 
-    def sample(self, anim, bone, channel, t0, t1, fn, rate=12, interp="catmullrom", extra=(), absolute=False):
+    def sample(self, anim, bone, channel, t0, t1, fn, rate=12, interp="catmullrom", extra=(), absolute=False, raw=False):
         n = max(1, int(math.ceil((t1 - t0) * rate)))
         times = sorted(set([t0 + (t1 - t0) * i / n for i in range(n + 1)] + [t for t in extra if t0 < t < t1]))
         for t in times:
-            self.key(anim, bone, channel, t, fn(t), interp, absolute)
+            self.key(anim, bone, channel, t, fn(t), interp, absolute, raw)
 
     def hide_until(self, anim, bone, t):
         self.key(anim, bone, "scale", 0, (0, 0, 0), "linear", absolute=True)
@@ -262,22 +264,58 @@ def ring(rig, bone, center, radius, count, color, thick=4, height=3, glow=None):
         rig.box(bone, (x, cy, z), (seg, height, thick), color, rot=[0, -math.degrees(a) + 90, 0])
 
 
+def merge_cells(rig, bone, cells, v, origin):
+    ox, oy, oz = origin
+    rows = {}
+    for (i, j, k), color in cells.items():
+        rows.setdefault((j, k, color), []).append(i)
+    runs = {}
+    for (j, k, color), xs in rows.items():
+        xs.sort()
+        start = prev = xs[0]
+        for x in xs[1:] + [None]:
+            if x is not None and x == prev + 1:
+                prev = x
+                continue
+            runs.setdefault((j, start, prev, color), []).append(k)
+            if x is not None:
+                start = prev = x
+    rects = {}
+    for (j, i0, i1, color), ks in runs.items():
+        ks.sort()
+        start = prev = ks[0]
+        for k in ks[1:] + [None]:
+            if k is not None and k == prev + 1:
+                prev = k
+                continue
+            rects.setdefault((i0, i1, start, prev, color), []).append(j)
+            if k is not None:
+                start = prev = k
+    count = 0
+    for (i0, i1, k0, k1, color), js in rects.items():
+        js.sort()
+        start = prev = js[0]
+        for j in js[1:] + [None]:
+            if j is not None and j == prev + 1:
+                prev = j
+                continue
+            cx, cy, cz = (i0 + i1) / 2 * v, (start + prev) / 2 * v, (k0 + k1) / 2 * v
+            rig.box(bone, (ox + cx, oy + cy, oz + cz), ((i1 - i0 + 1) * v, (prev - start + 1) * v, (k1 - k0 + 1) * v), color)
+            count += 1
+            if j is not None:
+                start = prev = j
+    return count
+
+
 def voxel_shell(rig, bone, center, inside, extent, v, color_fn):
-    cx, cy, cz = center
     n = int(math.ceil(extent / v))
-    cells = set()
+    cells = {}
     for i in range(-n, n + 1):
         for j in range(-n, n + 1):
             for k in range(-n, n + 1):
                 if inside(i * v, j * v, k * v):
-                    cells.add((i, j, k))
-    count = 0
-    for (i, j, k) in cells:
-        if all(c in cells for c in ((i + 1, j, k), (i - 1, j, k), (i, j + 1, k), (i, j - 1, k), (i, j, k + 1), (i, j, k - 1))):
-            continue
-        rig.box(bone, (cx + i * v, cy + j * v, cz + k * v), (v, v, v), color_fn(i * v, j * v, k * v))
-        count += 1
-    return count
+                    cells[(i, j, k)] = color_fn(i * v, j * v, k * v)
+    return merge_cells(rig, bone, cells, v, center)
 
 
 def flame_positions():
@@ -334,17 +372,18 @@ def build_flame(rig, name, x, z, tex):
                     cells[(i, j, k)] = py / H
     bands = [rig.bone(f"flame_{name}_band_{b}", (x, FLAME_BASE + lo * H, z), body) for b, (lo, hi) in enumerate(BANDS)]
     ramp = [f"f_{name}_{i}" for i in range(6)]
+    per_band = [{} for _ in BANDS]
     for (i, j, k), h in cells.items():
-        if all(c in cells for c in ((i + 1, j, k), (i - 1, j, k), (i, j + 1, k), (i, j - 1, k), (i, j, k + 1), (i, j, k - 1))):
-            continue
         b = next(idx for idx, (lo, hi) in enumerate(BANDS) if lo <= h < hi or idx == len(BANDS) - 1)
         edge = math.hypot(i, k) * V / max(1.0, R * (1 - h) ** 1.3)
-        level = (1 - h) * 3.6 + (1 - min(1.0, edge)) * 1.4 + rnd.uniform(-0.6, 0.6)
-        idx = max(0, min(5, int(level)))
-        color = ramp[idx]
+        level = (1 - h) * 3.6 + (1 - min(1.0, edge)) * 1.4 + rnd.uniform(-0.45, 0.45)
+        color = ramp[max(0, min(5, int(level)))]
         if name == "earth" and rnd.random() < 0.12 and h < 0.7:
             color = "rock"
-        rig.box(bands[b], (x + i * V, FLAME_BASE + j * V + V / 2, z + k * V), (V, V, V), color)
+        per_band[b][(i, j, k)] = color
+    for b, band_cells in enumerate(per_band):
+        if band_cells:
+            merge_cells(rig, bands[b], band_cells, V, (x, FLAME_BASE + V / 2, z))
     for t in range(3):
         tb = rig.bone(f"flame_{name}_tongue_{t}", (x, FLAME_BASE + H * 0.8, z), body)
         a = t * 2.1
@@ -377,12 +416,12 @@ def build_floor(rig):
         rig.box(b, (x, 1.1, z), (1.5, 0.6, 2.5), "circle_hot", rot=[0, -math.degrees(a) + 45, 0])
     rig.bone("floor_circle", (0, 0.4, 0))
     rig.bone("floor_ring_outer", (0, 0.4, 0), "floor_circle")
-    ring(rig, "floor_ring_outer", (0, 0.4, 0), 128, 112, "circle", thick=2.5, height=0.8, glow="energy")
+    ring(rig, "floor_ring_outer", (0, 0.4, 0), 128, 80, "circle", thick=2.5, height=0.8, glow="energy")
     for i in range(24):
         a = 2 * math.pi * i / 24
         rig.box("floor_ring_outer", (134 * math.cos(a), 0.5, 134 * math.sin(a)), (3, 1, 3), "circle_hot", rot=[0, 45 + i * 15, 0])
     rig.bone("floor_ring_inner", (0, 0.4, 0), "floor_circle")
-    ring(rig, "floor_ring_inner", (0, 0.4, 0), 96, 80, "circle", thick=1.5, height=0.8)
+    ring(rig, "floor_ring_inner", (0, 0.4, 0), 96, 60, "circle", thick=1.5, height=0.8)
     for _, x, z, _ in flame_positions():
         a = math.atan2(z, x)
         rig.box("floor_circle", (76 * math.cos(a), 0.5, 76 * math.sin(a)), (70, 0.8, 1.5), "circle_hot", rot=[0, -math.degrees(a), 0])
@@ -405,16 +444,15 @@ def build_streams(rig):
         base = FLAME_BASE + FLAME_SPEC[name]["H"] * 0.8
         b = rig.bone(f"stream_{name}", (x, base, z), "streams")
         p0, p2, p1 = (x, base, z), HOVER, (x * 0.4, 170, z * 0.4)
-        for i in range(20):
-            t = (i + 0.5) / 20
+        for i in range(22):
+            t = (i + 0.5) / 22
             pt = [(1 - t) ** 2 * p0[k] + 2 * (1 - t) * t * p1[k] + t * t * p2[k] for k in range(3)]
             s = 3.2 - 1.4 * t
-            sb = rig.bone(f"stream_{name}_{i}", pt, b)
-            rig.box(sb, pt, (s, s, s), BEAM_COLORS[name] if i % 3 else "circle_hot", rot=[45, 45, 0])
+            rig.box(b, pt, (s, s, s), BEAM_COLORS[name] if i % 3 else "circle_hot", rot=[45, 45, 0])
 
 
 def build_sky(rig):
-    for k, (h, r, n) in enumerate(((10 * B, 5 * B, 56), (24 * B, 8 * B, 80), (44 * B, 12 * B, 104))):
+    for k, (h, r, n) in enumerate(((10 * B, 5 * B, 44), (24 * B, 8 * B, 60), (44 * B, 12 * B, 80))):
         root = rig.bone(f"stack_{k + 1}", (0, h, 0))
         ring(rig, root, (0, h, 0), r, n, "circle", thick=3, height=2, glow="energy")
         inner = rig.bone(f"stack_{k + 1}_inner", (0, h, 0), root)
@@ -423,7 +461,7 @@ def build_sky(rig):
             a = 2 * math.pi * i / 12
             rig.box(inner, (r * 0.86 * math.cos(a), h, r * 0.86 * math.sin(a)), (4, 1.5, 4), "rune", rot=[0, 45 + 30 * i, 0])
     sig = rig.bone("sky_sigil", (0, SIGIL_Y, 0))
-    for nm, r, n, c, th in (("outer", 480, 168, "circle", 7), ("mid", 400, 140, "circle_hot", 4), ("inner", 260, 96, "circle", 5)):
+    for nm, r, n, c, th in (("outer", 480, 120, "circle", 7), ("mid", 400, 100, "circle_hot", 4), ("inner", 260, 72, "circle", 5)):
         b = rig.bone(f"sky_sigil_{nm}", (0, SIGIL_Y, 0), sig)
         ring(rig, b, (0, SIGIL_Y, 0), r, n, c, thick=th, height=4, glow="energy")
     for i in range(48):
@@ -436,8 +474,8 @@ def build_sky(rig):
         voxel_shell(rig, br, (500 * math.cos(a), SIGIL_Y, 500 * math.sin(a)), lambda px, py, pz: abs(px) + abs(py) * 2 + abs(pz) <= 12, 12, 4,
                     lambda *a: "rune")
     teeth = rig.bone("sky_sigil_teeth", (0, SIGIL_Y, 0), sig)
-    for i in range(48):
-        a = 2 * math.pi * (i + 0.5) / 48
+    for i in range(32):
+        a = 2 * math.pi * (i + 0.5) / 32
         ln = 40 if i % 2 else 90
         rig.box(teeth, (470 * math.cos(a), SIGIL_Y - ln / 2, 470 * math.sin(a)), (4, ln, 4), "circle_hot" if i % 2 else "rune", rot=[0, 45, 0])
         rig.box(teeth, (470 * math.cos(a), SIGIL_Y - ln - 4, 470 * math.sin(a)), (7, 7, 7), "s_violet", rot=[45, 45, 0])
@@ -458,8 +496,8 @@ def build_sky(rig):
     for h in ("a", "b"):
         sign = 1 if h == "a" else -1
         hb = rig.bone(f"pillar_helix_{h}", (0, 0, 0), pil)
-        for i in range(200):
-            u = i / 200
+        for i in range(130):
+            u = i / 130
             a = sign * u * 2 * math.pi * 8 + (0 if h == "a" else math.pi)
             rig.box(hb, (36 * math.cos(a), u * SIGIL_Y, 36 * math.sin(a)), (5, 5, 5), "circle_hot" if i % 3 else "s_white", rot=[45, -math.degrees(a), 0])
     cr = rig.bone("cracks", (0, SIGIL_Y, 0))
@@ -536,7 +574,6 @@ def feather(rig, bone, attach, theta, length, width, color, z, s):
     d = (math.sin(theta) * s, -math.cos(theta))
     center = (attach[0] + d[0] * length / 2, attach[1] + d[1] * length / 2, z)
     rig.box(bone, center, (width, length, 1.2), color, rot=[0, 0, -math.degrees(theta) * s])
-    rig.box(bone, (attach[0] + d[0] * (length - 5), attach[1] + d[1] * (length - 5), z + 0.8), (width * 0.5, 9, 0.8), "s_white", rot=[0, 0, -math.degrees(theta) * s])
 
 
 def build_wings(rig):
@@ -634,9 +671,10 @@ def build_flyers(rig):
             rig.bone(name, (0, 16, 0), "flyers")
             body = rig.bone(f"{name}_body", (0, 16, 0), name, rotation=[-90, 0, 0])
             player_model(rig, body, (0, 0, 0), shadow=True)
-            tops = import_rig(rig, models[k % len(models)], body, f"{name}_")
+            model = models[k % len(models)]
+            tops = import_rig(rig, model, body, f"{name}_")
             rig.scale_tree(name, 2.0, (0, 16, 0))
-            out[cat].append((name, tops))
+            out[cat].append((name, tops, model))
     rig.bone("clouds", (0, 0, 0))
     rnd = random.Random(55)
     for i in range(CLOUDS):
