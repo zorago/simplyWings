@@ -311,3 +311,17 @@ Codé sans lancer Minecraft (zorago utilisait le PC). Conception et choix par d�
 - [ ] Structures par de vraies morts du dragon : 1re → sanctuaire d'invocation sous l'île (voile noir, autel au centre), 5e → île de la fontaine en carré avec les trois autres, compas de l'autel et de la fontaine.
 - [ ] Monde ancien (îles en triangle) : la fontaine se pose dans le plus grand écart.
 - [ ] Serveur dédié pour tout ce qui précède.
+
+## 15. Sons CC0, première passe (26 octobre, rien d'écouté)
+
+Sources et licences : `art/sounds/SOURCES.md`. Ajuster dans `tools/sounds/build_sounds.py` (découpes, pics) ou dans la table `PAIRS` (hauteur, volume par paire), puis relancer le script.
+
+- [ ] Coups d'ailes en déplacement : chaque famille (plume, membrane, cuir, insecte, planeur, mécanique) sonne juste ; pas de clic en début ou fin de fichier ; la chouette reste quasi silencieuse.
+- [ ] Saut ailé, bascule Alt, sortie du déplacement, saut de secours : la version forte n'est pas fatigante à la longue.
+- [ ] Envol chargé : `flight.takeoff_launch` une seule fois, sans doublon.
+- [ ] Joueur distant (serveur dédié) : ses battements s'entendent, rien quand il est invisible.
+- [ ] Transmog Light : le son suit l'apparence.
+- [ ] Autel : offrande, 6 flammes, nappe, onde du pilier, montée, étoile, battements, éclat, ailes ; volumes cohérents à 30 et à 100 blocs ; rien de saturé quand tout s'empile (éclat SSS).
+- [ ] Cartes ×10 : distribution (10 petits sons rapprochés, pas un mur de bruit), anticipation, retournement, couches par palier ; passer (« skip ») ne déclenche pas tous les sons d'un coup.
+- [ ] Sous-titres affichés et lisibles.
+

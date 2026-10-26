@@ -1,5 +1,6 @@
 package com.zorago.simplywings.client;
 
+import net.minecraft.resources.ResourceLocation;
 import com.zorago.simplywings.client.gui.WingsScreen;
 import com.zorago.simplywings.anim.WingStyle;
 import com.zorago.simplywings.config.ClientConfig;
@@ -16,7 +17,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.Options;
 import net.minecraft.client.player.Input;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.phys.Vec3;
@@ -355,7 +355,7 @@ public final class ClientFlight {
         ticksSinceAirJump = 0;
         WingVisuals.local().animator.flap(look(stats).flapRate() * 1.5f);
         WingEffects.strike(player, style(stats), FlightMode.NONE);
-        player.playSound(SoundEvents.PHANTOM_FLAP, 0.7f, 1.2f);
+        WingSounds.play(player, lookId(), true, 0.6f, 1.1f);
         PacketDistributor.sendToServer(new Payloads.AirJump());
     }
 
@@ -365,7 +365,7 @@ public final class ClientFlight {
         player.resetFallDistance();
         ClientWings.setRescueJumps(ClientWings.rescueJumps() - 1);
         WingVisuals.local().animator.flap(3f);
-        player.playSound(SoundEvents.PHANTOM_FLAP, 0.8f, 1.4f);
+        WingSounds.play(player, lookId(), false, 0.6f, 1.3f);
         PacketDistributor.sendToServer(new Payloads.RescueJump());
     }
 
@@ -420,7 +420,6 @@ public final class ClientFlight {
         ticksSinceFlap = 0;
         WingVisuals.local().animator.strike(look(stats).flapRate(), style(stats).strikeAt());
         WingEffects.strike(player, style(stats), FlightMode.TRAVEL);
-        player.playSound(SoundEvents.PHANTOM_FLAP, 1f, 0.9f);
         travelKeyLock = TAKEOFF_KEY_LOCK_TICKS;
         setMode(player, FlightMode.TRAVEL, true);
     }
@@ -444,13 +443,13 @@ public final class ClientFlight {
         ticksSinceFlap = 0;
         WingVisuals.local().animator.strike(look(stats).flapRate(), style(stats).strikeAt());
         WingEffects.strike(player, style(stats), FlightMode.TRAVEL);
-        player.playSound(SoundEvents.PHANTOM_FLAP, 0.8f, 1.1f);
+        WingSounds.play(player, lookId(), true, 0.7f, 1f);
         setMode(player, FlightMode.TRAVEL, true);
     }
 
     private static void stopTravel(LocalPlayer player) {
         WingVisuals.local().animator.flap(3f);
-        player.playSound(SoundEvents.PHANTOM_FLAP, 0.8f, 0.9f);
+        WingSounds.play(player, lookId(), false, 0.8f, 0.9f);
         initStabilized(player, true);
         setMode(player, FlightMode.STABILIZED, true);
     }
@@ -467,6 +466,10 @@ public final class ClientFlight {
         Minecraft mc = Minecraft.getInstance();
         return ClientWings.appearance().flatMap(id -> WingRegistries.get(mc.level.registryAccess(), id))
                 .orElse(stats.definition());
+    }
+
+    private static Optional<ResourceLocation> lookId() {
+        return ClientWings.appearance().or(() -> ClientWings.stats().map(EffectiveStats::wing));
     }
 
     private static WingStyle style(EffectiveStats stats) {
@@ -656,7 +659,7 @@ public final class ClientFlight {
                     speed += stats.beatGain() * (1 - ratio * ratio * ratio);
                     spend(player, beatCost);
                     ticksSinceFlap = 0;
-                    player.playSound(SoundEvents.PHANTOM_FLAP, 0.7f, Math.min(1.5f, 0.6f + definition.flapRate() * 0.3f));
+                    WingSounds.play(player, lookId(), false, 0.7f, 1f);
                     WingEffects.strike(player, style(stats), FlightMode.TRAVEL);
                     PacketDistributor.sendToServer(new Payloads.Flap());
                 }

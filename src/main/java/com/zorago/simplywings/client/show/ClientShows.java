@@ -1,5 +1,7 @@
 package com.zorago.simplywings.client.show;
 
+import com.zorago.simplywings.sound.ModSounds;
+import com.zorago.simplywings.client.WingSounds;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
@@ -550,16 +552,15 @@ public final class ClientShows {
         Vec3 hover = toWorld(show, new Vector3f(0, 96, 0));
         flames(show, model, now, now < pre ? 0.3f : 1.1f);
         if (crossed(show, 0.05f, now)) {
-            sound(show, altar, SoundEvents.BOOK_PAGE_TURN, 1.2f, 0.8f);
-            sound(show, altar, SoundEvents.AMETHYST_BLOCK_CHIME, 1.0f, 1.4f);
+            sound(show, altar, ModSounds.GACHA_OFFER.get(), 2f, 1f);
         }
         if (crossed(show, 0.35f, now)) {
-            sound(show, altar, SoundEvents.ALLAY_THROW, 1.4f, 0.8f);
+            sound(show, altar, ModSounds.GACHA_PUFF.get(), 1.4f, 0.7f);
         }
         if (now > 1.7f && now < 2.05f) {
             burst(show, crystal, "spark", 8, 0.18, 0.05);
             if (crossed(show, 1.8f, now)) {
-                sound(show, crystal, SoundEvents.FIRECHARGE_USE, 1.5f, 1.6f);
+                sound(show, crystal, ModSounds.GACHA_IGNITE.get(), 2f, 1.3f);
                 burst(show, crystal, "flare", 2, 0.0, 0);
             }
         }
@@ -570,21 +571,22 @@ public final class ClientShows {
                 ShowModel.Bone bone = model.bones[Math.max(0, b)];
                 Vec3 base = toWorld(show, new Vector3f(bone.px, bone.py, bone.pz)).add(0, 1.6, 0);
                 burst(show, base, ELEMENT_PARTICLE[i], 24, 0.22, 0.12);
-                sound(show, base, igniteSound(i), 1.6f, 0.9f + 0.1f * i);
+                sound(show, base, ModSounds.GACHA_IGNITE.get(), 2.5f, 0.85f + 0.06f * i);
+                sound(show, base, igniteSound(i), 0.8f, 0.9f + 0.1f * i);
             }
         }
         if (crossed(show, pre + 1.9f, now)) {
-            sound(show, altar, SoundEvents.BEACON_AMBIENT, 2.5f, 0.6f);
+            sound(show, altar, ModSounds.GACHA_RUNE_CHARGE.get(), 4f, 0.9f);
         }
         if (crossed(show, pre + 4.0f, now)) {
-            sound(show, altar, SoundEvents.BEACON_ACTIVATE, 6f, 0.7f);
-            sound(show, altar, SoundEvents.LIGHTNING_BOLT_THUNDER, 4f, 1.6f);
+            sound(show, altar, ModSounds.GACHA_SHOCKWAVE.get(), 6f, 1.2f);
+            sound(show, altar, SoundEvents.BEACON_ACTIVATE, 3f, 0.7f);
             ring(show, altar, "spark", 90, 0.9);
             burst(show, altar, "flare", 3, 0.0, 0);
         }
         for (int k = 0; k < 3; k++) {
             if (crossed(show, pre + 4.1f + 0.12f * k, now)) {
-                sound(show, altar.add(0, 10 + 15 * k, 0), SoundEvents.RESPAWN_ANCHOR_CHARGE, 4f, 0.7f - 0.1f * k);
+                sound(show, altar.add(0, 10 + 15 * k, 0), ModSounds.GACHA_BEAM.get(), 4f, 0.8f + 0.15f * k);
             }
         }
         float settle = a.meta("settle", a.length);
@@ -604,7 +606,8 @@ public final class ClientShows {
         float reveal = a.meta("reveal", a.length);
         if (crossed(show, birth + 1.0f, now)) {
             Vec3 top = toWorld(show, new Vector3f(0, a.meta("top", 384), 0));
-            sound(show, top, SoundEvents.AMETHYST_BLOCK_RESONATE, 8f, 0.7f);
+            sound(show, top, ModSounds.GACHA_BELL.get(), 8f, 0.7f);
+            sound(show, top, ModSounds.GACHA_IGNITE.get(), 8f, 0.6f);
             burst(show, top, "spark", 60, 0.6, 0);
             burst(show, top, "flare", 3, 0, 0);
         }
@@ -619,12 +622,15 @@ public final class ClientShows {
         for (int k = 0; k < beats.length; k++) {
             if (crossed(show, beats[k], now)) {
                 Vec3 star = bone(model, show, "star", beats[k]);
-                sound(show, star, k == 3 ? SoundEvents.ENDER_DRAGON_GROWL : SoundEvents.AMETHYST_BLOCK_CHIME, 8f, 0.6f + 0.15f * k);
-                sound(show, star, SoundEvents.UI_TOAST_CHALLENGE_COMPLETE, 3f + k, 0.8f + 0.1f * k);
+                sound(show, star, ModSounds.GACHA_BELL.get(), 8f, 0.7f + 0.15f * k);
+                sound(show, star, ModSounds.GACHA_CHIME.get(), 4f + k, 0.8f + 0.12f * k);
+                if (k == 3) {
+                    sound(show, star, SoundEvents.ENDER_DRAGON_GROWL, 6f, 0.6f);
+                }
                 burst(show, star, "spark", 70 + 30 * k, 0.9 + 0.2 * k, 0);
                 burst(show, star, "flare", 4 + k, 0.05, 0);
                 if (k == 3) {
-                    sound(show, star, SoundEvents.LIGHTNING_BOLT_THUNDER, 10f, 0.6f);
+                    sound(show, star, ModSounds.GACHA_SHOCKWAVE.get(), 10f, 0.8f);
                 }
             }
         }
@@ -633,7 +639,10 @@ public final class ClientShows {
             int tier = i < show.payload.tiers().size() ? show.payload.tiers().get(i) : 0;
             if (crossed(show, spawn[i] + 0.3f, now)) {
                 Vec3 star = bone(model, show, "multi_star_" + i, spawn[i] + 0.4f);
-                sound(show, star, tier >= 4 ? SoundEvents.ENDER_DRAGON_GROWL : SoundEvents.AMETHYST_BLOCK_CHIME, 6f, 0.7f + 0.15f * tier);
+                sound(show, star, tier >= 2 ? ModSounds.GACHA_BELL.get() : ModSounds.GACHA_TWINKLE.get(), 6f, 0.7f + 0.12f * tier);
+                if (tier >= 4) {
+                    sound(show, star, SoundEvents.ENDER_DRAGON_GROWL, 4f, 0.7f);
+                }
                 burst(show, star, "spark", 20 + 25 * tier, 0.5 + 0.15 * tier, 0);
             }
         }
@@ -649,15 +658,20 @@ public final class ClientShows {
                         Vec3 cloud = bone(model, show, "cloud_" + (i * 2 + c), at);
                         burst(show, cloud, "smoke", 10, 0.12, 0.02);
                         burst(show, cloud, "gust", 8, 0.3, 0);
-                        sound(show, cloud, c == 0 ? SoundEvents.BREEZE_WIND_CHARGE_BURST.value() : SoundEvents.PHANTOM_FLAP, 4f, 0.7f + r.nextFloat() * 0.3f);
+                        sound(show, cloud, ModSounds.GACHA_PUFF.get(), 4f, 0.7f + r.nextFloat() * 0.3f);
+                        if (c == 1) {
+                            sound(show, cloud, WingSounds.flap(java.util.Optional.empty(), true), 4f, 0.9f + r.nextFloat() * 0.2f);
+                        }
                     }
                 }
             }
         }
         if (crossed(show, burstT, now)) {
-            sound(show, hover, SoundEvents.GENERIC_EXPLODE.value(), 10f, 0.7f);
-            sound(show, hover, SoundEvents.FIREWORK_ROCKET_LARGE_BLAST, 10f, 0.6f);
-            sound(show, hover, SoundEvents.TOTEM_USE, 6f, 0.8f);
+            sound(show, hover, ModSounds.GACHA_BLAST.get(), 10f, 1f);
+            sound(show, hover, ModSounds.GACHA_SHOCKWAVE.get(), 6f + 6f * power, 0.9f);
+            if (rank >= 3) {
+                sound(show, hover, ModSounds.GACHA_IMPLOSION.get(), 8f, 0.8f);
+            }
             burst(show, hover, "spark", (int) (300 * power), 1.6, 0.1);
             burst(show, hover, "shard", (int) (130 * power), 1.1, 0.25);
             burst(show, hover, "smoke", (int) (60 * power), 0.25, 0.02);
@@ -678,10 +692,10 @@ public final class ClientShows {
             }
         }
         if (wings > 0 && (crossed(show, reveal + 1.2f, now) || crossed(show, reveal + 2.4f, now))) {
-            sound(show, hover, SoundEvents.ENDER_DRAGON_FLAP, 8f, 0.6f);
+            sound(show, hover, WingSounds.flap(java.util.Optional.empty(), true), 8f, 0.7f);
         }
         if (crossed(show, settle, now)) {
-            sound(show, altar, SoundEvents.BEACON_DEACTIVATE, 4f, 0.8f);
+            sound(show, altar, ModSounds.GACHA_RUNE_CHARGE.get(), 2f, 0.6f);
         }
     }
 

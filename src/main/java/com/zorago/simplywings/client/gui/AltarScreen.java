@@ -332,7 +332,7 @@ public class AltarScreen extends AbstractContainerScreen<AltarMenu> {
     private void pull(int count) {
         Payloads.GachaState state = ClientGacha.state();
         if (state.feathers() < count && !creative()) {
-            sound(SoundEvents.VILLAGER_NO, 1f, 0.6f);
+            sound(com.zorago.simplywings.sound.ModSounds.DENIED.get(), 1f, 0.7f);
             return;
         }
         PacketDistributor.sendToServer(new Payloads.GachaPull(count));

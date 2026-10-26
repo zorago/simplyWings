@@ -51,3 +51,4 @@ tools/*.jar
 !.claude/skills/pxl-pixel-art/bin/
 __pycache__/
 art/scenes/
+art/sounds/source/

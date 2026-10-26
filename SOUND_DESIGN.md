@@ -2,7 +2,18 @@
 
 Spécification de tous les sons de Simply Wings : les ailes (événements de vol communs, familles, 41 paires), les mythiques Night et Light, les blocs, les essences, les sanctuaires et le gacha. Pour chaque son : son déclencheur dans le code, ce qui sonne aujourd'hui (son vanilla provisoire ou rien) et la cible à livrer par un sound designer.
 
-Dernière mise à jour : 25 octobre 2026. Sources : `CLAUDE.md`, `WINGS.md` (identité des paires), `wingsRules.md` (familles), `gatcha.md`, `CAHIER_DES_CHARGES.md`, et le code (`src/main/java/com/zorago/simplywings`). Les ids, noms de fichiers et sous-titres restent en anglais, comme tout le mod.
+Dernière mise à jour : 26 octobre 2026. Sources : `CLAUDE.md`, `WINGS.md` (identité des paires), `wingsRules.md` (familles), `gatcha.md`, `CAHIER_DES_CHARGES.md`, et le code (`src/main/java/com/zorago/simplywings`). Les ids, noms de fichiers et sous-titres restent en anglais, comme tout le mod.
+
+
+## 0. Première passe CC0 (26 octobre)
+
+Une première vague de vrais sons remplace une partie des placeholders vanilla. Ce sont des sons **CC0** de Freesound, OpenGameArt et Kenney, listés avec leurs liens dans `art/sounds/SOURCES.md` et construits par `python -I tools/sounds/build_sounds.py` (découpe, fondus, normalisation, OGG mono). Le script réécrit `sounds.json` : il garde les entrées Fury et génère le reste.
+
+- **Ailes** : 5 familles de fichiers, `wing.feather.flap` (6 variations), `wing.membrane.flap` (5), `wing.leather.flap` (4), `wing.insect.flap` (3) et `wing.strong.flap` (5). Chaque paire a son `wing.<paire>.flap` et son `wing.<paire>.flap_strong`, qui pointent vers une famille avec sa hauteur et son volume (table `PAIRS` du script : famille du § 4.1, hauteur propre à la paire, la chouette à 25 % du volume). La famille `mechanism` reste sur la trappe vanilla. Le code ne joue que des ids de paire (`client/WingSounds`, apparence du transmog comprise) : coups du déplacement, saut ailé, bascule, sortie du déplacement, saut de secours, et les battements des joueurs distants (`FlapEvent`, coupés si le joueur est invisible). `flight.takeoff_launch` remplace `ENDER_DRAGON_FLAP` à l'envol chargé.
+- **Autel** : `gacha.offer`, `gacha.ignite` (en couche sous le son vanilla de l'élément), `gacha.rune_charge`, `gacha.beam`, `gacha.shockwave`, `gacha.blast`, `gacha.implosion`, `gacha.puff`, `gacha.bell`, `gacha.chime`, `gacha.twinkle`, joués par `ClientShows.tick`. Restent vanilla : le rugissement du dragon (SSS, mythique) et l'activation de balise sous l'onde du pilier.
+- **Cartes** : `ui.card_deal` à chaque carte distribuée, `gacha.twinkle` au début de l'anticipation (S et plus), `ui.card_flip` au retournement, puis une couche par palier (`CardDeck.openSound`). `ui.denied` remplace le « non » du villageois.
+- Pas encore faits : vent du vol, plané, stationnaire (`hover_flap`), boucle `buzz`, atterrissages, blocs, essences, interface du menu J, musique d'invocation.
+- Les sons ont été choisis sur description et enveloppe, sans écoute : validation à l'oreille dans `ToDoTesting.md` § 15.
 
 ---
 

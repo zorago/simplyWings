@@ -1,22 +1,1206 @@
 {
   "night_fury.dive": {
     "subtitle": "subtitles.simplywings.night_fury.dive",
-    "sounds": [{"name": "minecraft:entity.phantom.swoop", "type": "event", "pitch": 1.6, "volume": 1.0}]
+    "sounds": [
+      {
+        "name": "minecraft:entity.phantom.swoop",
+        "type": "event",
+        "pitch": 1.6,
+        "volume": 1.0
+      }
+    ]
   },
   "night_fury.dash": {
     "subtitle": "subtitles.simplywings.night_fury.dash",
-    "sounds": [{"name": "minecraft:entity.generic.explode", "type": "event", "pitch": 0.5, "volume": 0.6}]
+    "sounds": [
+      {
+        "name": "minecraft:entity.generic.explode",
+        "type": "event",
+        "pitch": 0.5,
+        "volume": 0.6
+      }
+    ]
   },
   "light_fury.dive": {
     "subtitle": "subtitles.simplywings.light_fury.dive",
-    "sounds": [{"name": "minecraft:entity.phantom.swoop", "type": "event", "pitch": 1.9, "volume": 1.0}]
+    "sounds": [
+      {
+        "name": "minecraft:entity.phantom.swoop",
+        "type": "event",
+        "pitch": 1.9,
+        "volume": 1.0
+      }
+    ]
   },
   "light_fury.charge": {
     "subtitle": "subtitles.simplywings.light_fury.charge",
-    "sounds": [{"name": "minecraft:block.beacon.activate", "type": "event", "pitch": 1.4, "volume": 0.8}]
+    "sounds": [
+      {
+        "name": "minecraft:block.beacon.activate",
+        "type": "event",
+        "pitch": 1.4,
+        "volume": 0.8
+      }
+    ]
   },
   "light_fury.blast": {
     "subtitle": "subtitles.simplywings.light_fury.blast",
-    "sounds": [{"name": "minecraft:entity.generic.explode", "type": "event", "pitch": 1.2, "volume": 0.8}]
+    "sounds": [
+      {
+        "name": "minecraft:entity.generic.explode",
+        "type": "event",
+        "pitch": 1.2,
+        "volume": 0.8
+      }
+    ]
+  },
+  "wing.feather.flap": {
+    "sounds": [
+      {
+        "name": "simplywings:wing/feather/flap_1"
+      },
+      {
+        "name": "simplywings:wing/feather/flap_2"
+      },
+      {
+        "name": "simplywings:wing/feather/flap_3"
+      },
+      {
+        "name": "simplywings:wing/feather/flap_4"
+      },
+      {
+        "name": "simplywings:wing/feather/flap_5"
+      },
+      {
+        "name": "simplywings:wing/feather/flap_6"
+      }
+    ]
+  },
+  "wing.membrane.flap": {
+    "sounds": [
+      {
+        "name": "simplywings:wing/membrane/flap_1"
+      },
+      {
+        "name": "simplywings:wing/membrane/flap_2"
+      },
+      {
+        "name": "simplywings:wing/membrane/flap_3"
+      },
+      {
+        "name": "simplywings:wing/membrane/flap_4"
+      },
+      {
+        "name": "simplywings:wing/membrane/flap_5"
+      }
+    ]
+  },
+  "wing.leather.flap": {
+    "sounds": [
+      {
+        "name": "simplywings:wing/leather/flap_1"
+      },
+      {
+        "name": "simplywings:wing/leather/flap_2"
+      },
+      {
+        "name": "simplywings:wing/leather/flap_3"
+      },
+      {
+        "name": "simplywings:wing/leather/flap_4"
+      }
+    ]
+  },
+  "wing.insect.flap": {
+    "sounds": [
+      {
+        "name": "simplywings:wing/insect/flap_1"
+      },
+      {
+        "name": "simplywings:wing/insect/flap_2"
+      },
+      {
+        "name": "simplywings:wing/insect/flap_3"
+      }
+    ]
+  },
+  "wing.strong.flap": {
+    "sounds": [
+      {
+        "name": "simplywings:wing/strong/flap_1"
+      },
+      {
+        "name": "simplywings:wing/strong/flap_2"
+      },
+      {
+        "name": "simplywings:wing/strong/flap_3"
+      },
+      {
+        "name": "simplywings:wing/strong/flap_4"
+      },
+      {
+        "name": "simplywings:wing/strong/flap_5"
+      }
+    ]
+  },
+  "gacha.ignite": {
+    "subtitle": "subtitles.simplywings.gacha.ignite",
+    "sounds": [
+      {
+        "name": "simplywings:gacha/ignite_1"
+      },
+      {
+        "name": "simplywings:gacha/ignite_2"
+      },
+      {
+        "name": "simplywings:gacha/ignite_3"
+      },
+      {
+        "name": "simplywings:gacha/ignite_4"
+      },
+      {
+        "name": "simplywings:gacha/ignite_5"
+      },
+      {
+        "name": "simplywings:gacha/ignite_6"
+      }
+    ]
+  },
+  "gacha.offer": {
+    "subtitle": "subtitles.simplywings.gacha.offer",
+    "sounds": [
+      {
+        "name": "simplywings:gacha/offer_1"
+      }
+    ]
+  },
+  "gacha.rune_charge": {
+    "subtitle": "subtitles.simplywings.gacha.rune_charge",
+    "sounds": [
+      {
+        "name": "simplywings:gacha/rune_charge_1"
+      },
+      {
+        "name": "simplywings:gacha/rune_charge_2"
+      }
+    ]
+  },
+  "gacha.beam": {
+    "subtitle": "subtitles.simplywings.gacha.beam",
+    "sounds": [
+      {
+        "name": "simplywings:gacha/beam_1"
+      }
+    ]
+  },
+  "gacha.shockwave": {
+    "subtitle": "subtitles.simplywings.gacha.shockwave",
+    "sounds": [
+      {
+        "name": "simplywings:gacha/shockwave_1"
+      }
+    ]
+  },
+  "gacha.blast": {
+    "subtitle": "subtitles.simplywings.gacha.blast",
+    "sounds": [
+      {
+        "name": "simplywings:gacha/blast_1"
+      }
+    ]
+  },
+  "gacha.implosion": {
+    "subtitle": "subtitles.simplywings.gacha.implosion",
+    "sounds": [
+      {
+        "name": "simplywings:gacha/implosion_1"
+      }
+    ]
+  },
+  "gacha.puff": {
+    "subtitle": "subtitles.simplywings.gacha.puff",
+    "sounds": [
+      {
+        "name": "simplywings:gacha/puff_1"
+      }
+    ]
+  },
+  "gacha.bell": {
+    "subtitle": "subtitles.simplywings.gacha.bell",
+    "sounds": [
+      {
+        "name": "simplywings:gacha/bell_1"
+      },
+      {
+        "name": "simplywings:gacha/bell_2"
+      },
+      {
+        "name": "simplywings:gacha/bell_3"
+      },
+      {
+        "name": "simplywings:gacha/bell_4"
+      },
+      {
+        "name": "simplywings:gacha/bell_5"
+      }
+    ]
+  },
+  "gacha.chime": {
+    "subtitle": "subtitles.simplywings.gacha.chime",
+    "sounds": [
+      {
+        "name": "simplywings:gacha/chime_1"
+      },
+      {
+        "name": "simplywings:gacha/chime_2"
+      },
+      {
+        "name": "simplywings:gacha/chime_3"
+      },
+      {
+        "name": "simplywings:gacha/chime_4"
+      },
+      {
+        "name": "simplywings:gacha/chime_5"
+      }
+    ]
+  },
+  "gacha.twinkle": {
+    "subtitle": "subtitles.simplywings.gacha.twinkle",
+    "sounds": [
+      {
+        "name": "simplywings:gacha/twinkle_1"
+      },
+      {
+        "name": "simplywings:gacha/twinkle_2"
+      },
+      {
+        "name": "simplywings:gacha/twinkle_3"
+      },
+      {
+        "name": "simplywings:gacha/twinkle_4"
+      },
+      {
+        "name": "simplywings:gacha/twinkle_5"
+      }
+    ]
+  },
+  "ui.card_deal": {
+    "subtitle": "subtitles.simplywings.ui.card_deal",
+    "sounds": [
+      {
+        "name": "simplywings:ui/card_deal_1"
+      },
+      {
+        "name": "simplywings:ui/card_deal_2"
+      },
+      {
+        "name": "simplywings:ui/card_deal_3"
+      },
+      {
+        "name": "simplywings:ui/card_deal_4"
+      }
+    ]
+  },
+  "ui.card_flip": {
+    "subtitle": "subtitles.simplywings.ui.card_flip",
+    "sounds": [
+      {
+        "name": "simplywings:ui/card_flip_1"
+      },
+      {
+        "name": "simplywings:ui/card_flip_2"
+      },
+      {
+        "name": "simplywings:ui/card_flip_3"
+      },
+      {
+        "name": "simplywings:ui/card_flip_4"
+      }
+    ]
+  },
+  "ui.confirm": {
+    "subtitle": "subtitles.simplywings.ui.confirm",
+    "sounds": [
+      {
+        "name": "simplywings:ui/confirm_1"
+      },
+      {
+        "name": "simplywings:ui/confirm_2"
+      }
+    ]
+  },
+  "ui.denied": {
+    "subtitle": "subtitles.simplywings.ui.denied",
+    "sounds": [
+      {
+        "name": "simplywings:ui/denied_1"
+      },
+      {
+        "name": "simplywings:ui/denied_2"
+      }
+    ]
+  },
+  "flight.takeoff_launch": {
+    "subtitle": "subtitles.simplywings.flight.takeoff_launch",
+    "sounds": [
+      {
+        "name": "simplywings:wing.strong.flap",
+        "type": "event",
+        "pitch": 1.1
+      }
+    ]
+  },
+  "wing.air.flap": {
+    "subtitle": "subtitles.simplywings.wing.flap",
+    "sounds": [
+      {
+        "name": "simplywings:wing.feather.flap",
+        "type": "event",
+        "volume": 0.35,
+        "pitch": 1.38
+      }
+    ]
+  },
+  "wing.air.flap_strong": {
+    "subtitle": "subtitles.simplywings.wing.flap_strong",
+    "sounds": [
+      {
+        "name": "simplywings:wing.strong.flap",
+        "type": "event",
+        "volume": 0.5,
+        "pitch": 1.2
+      }
+    ]
+  },
+  "wing.amethyst.flap": {
+    "subtitle": "subtitles.simplywings.wing.flap",
+    "sounds": [
+      {
+        "name": "simplywings:wing.feather.flap",
+        "type": "event",
+        "volume": 0.6,
+        "pitch": 1.1
+      }
+    ]
+  },
+  "wing.amethyst.flap_strong": {
+    "subtitle": "subtitles.simplywings.wing.flap_strong",
+    "sounds": [
+      {
+        "name": "simplywings:wing.strong.flap",
+        "type": "event"
+      }
+    ]
+  },
+  "wing.ancient.flap": {
+    "subtitle": "subtitles.simplywings.wing.flap",
+    "sounds": [
+      {
+        "name": "simplywings:wing.insect.flap",
+        "type": "event",
+        "volume": 0.8,
+        "pitch": 0.84
+      }
+    ]
+  },
+  "wing.ancient.flap_strong": {
+    "subtitle": "subtitles.simplywings.wing.flap_strong",
+    "sounds": [
+      {
+        "name": "simplywings:wing.strong.flap",
+        "type": "event",
+        "volume": 0.35,
+        "pitch": 1.05
+      }
+    ]
+  },
+  "wing.angel.flap": {
+    "subtitle": "subtitles.simplywings.wing.flap",
+    "sounds": [
+      {
+        "name": "simplywings:wing.feather.flap",
+        "type": "event",
+        "pitch": 0.9
+      }
+    ]
+  },
+  "wing.angel.flap_strong": {
+    "subtitle": "subtitles.simplywings.wing.flap_strong",
+    "sounds": [
+      {
+        "name": "simplywings:wing.strong.flap",
+        "type": "event",
+        "pitch": 0.9
+      }
+    ]
+  },
+  "wing.aurora.flap": {
+    "subtitle": "subtitles.simplywings.wing.flap",
+    "sounds": [
+      {
+        "name": "simplywings:wing.feather.flap",
+        "type": "event",
+        "volume": 0.35,
+        "pitch": 1.265
+      }
+    ]
+  },
+  "wing.aurora.flap_strong": {
+    "subtitle": "subtitles.simplywings.wing.flap_strong",
+    "sounds": [
+      {
+        "name": "simplywings:wing.strong.flap",
+        "type": "event",
+        "volume": 0.5,
+        "pitch": 1.1
+      }
+    ]
+  },
+  "wing.bat.flap": {
+    "subtitle": "subtitles.simplywings.wing.flap",
+    "sounds": [
+      {
+        "name": "simplywings:wing.leather.flap",
+        "type": "event",
+        "pitch": 1.1
+      }
+    ]
+  },
+  "wing.bat.flap_strong": {
+    "subtitle": "subtitles.simplywings.wing.flap_strong",
+    "sounds": [
+      {
+        "name": "simplywings:wing.strong.flap",
+        "type": "event",
+        "pitch": 1.32
+      }
+    ]
+  },
+  "wing.bee.flap": {
+    "subtitle": "subtitles.simplywings.wing.flap",
+    "sounds": [
+      {
+        "name": "simplywings:wing.insect.flap",
+        "type": "event",
+        "volume": 0.8,
+        "pitch": 1.68
+      }
+    ]
+  },
+  "wing.bee.flap_strong": {
+    "subtitle": "subtitles.simplywings.wing.flap_strong",
+    "sounds": [
+      {
+        "name": "simplywings:wing.strong.flap",
+        "type": "event",
+        "volume": 0.35,
+        "pitch": 2.1
+      }
+    ]
+  },
+  "wing.beetle.flap": {
+    "subtitle": "subtitles.simplywings.wing.flap",
+    "sounds": [
+      {
+        "name": "simplywings:wing.insect.flap",
+        "type": "event",
+        "volume": 0.8,
+        "pitch": 1.08
+      }
+    ]
+  },
+  "wing.beetle.flap_strong": {
+    "subtitle": "subtitles.simplywings.wing.flap_strong",
+    "sounds": [
+      {
+        "name": "simplywings:wing.strong.flap",
+        "type": "event",
+        "volume": 0.35,
+        "pitch": 1.35
+      }
+    ]
+  },
+  "wing.common.flap": {
+    "subtitle": "subtitles.simplywings.wing.flap",
+    "sounds": [
+      {
+        "name": "simplywings:wing.feather.flap",
+        "type": "event"
+      }
+    ]
+  },
+  "wing.common.flap_strong": {
+    "subtitle": "subtitles.simplywings.wing.flap_strong",
+    "sounds": [
+      {
+        "name": "simplywings:wing.strong.flap",
+        "type": "event"
+      }
+    ]
+  },
+  "wing.copper.flap": {
+    "subtitle": "subtitles.simplywings.wing.flap",
+    "sounds": [
+      {
+        "name": "simplywings:wing.feather.flap",
+        "type": "event",
+        "volume": 0.6,
+        "pitch": 1.045
+      }
+    ]
+  },
+  "wing.copper.flap_strong": {
+    "subtitle": "subtitles.simplywings.wing.flap_strong",
+    "sounds": [
+      {
+        "name": "simplywings:wing.strong.flap",
+        "type": "event",
+        "pitch": 0.95
+      }
+    ]
+  },
+  "wing.crow.flap": {
+    "subtitle": "subtitles.simplywings.wing.flap",
+    "sounds": [
+      {
+        "name": "simplywings:wing.feather.flap",
+        "type": "event",
+        "pitch": 0.95
+      }
+    ]
+  },
+  "wing.crow.flap_strong": {
+    "subtitle": "subtitles.simplywings.wing.flap_strong",
+    "sounds": [
+      {
+        "name": "simplywings:wing.strong.flap",
+        "type": "event",
+        "pitch": 0.95
+      }
+    ]
+  },
+  "wing.daedalus.flap": {
+    "subtitle": "subtitles.simplywings.wing.flap",
+    "sounds": [
+      {
+        "name": "minecraft:block.wooden_trapdoor.open",
+        "type": "event",
+        "volume": 0.6,
+        "pitch": 0.56
+      }
+    ]
+  },
+  "wing.daedalus.flap_strong": {
+    "subtitle": "subtitles.simplywings.wing.flap_strong",
+    "sounds": [
+      {
+        "name": "simplywings:wing.strong.flap",
+        "type": "event",
+        "volume": 0.4,
+        "pitch": 0.77
+      }
+    ]
+  },
+  "wing.demon.flap": {
+    "subtitle": "subtitles.simplywings.wing.flap",
+    "sounds": [
+      {
+        "name": "simplywings:wing.membrane.flap",
+        "type": "event",
+        "pitch": 0.8
+      }
+    ]
+  },
+  "wing.demon.flap_strong": {
+    "subtitle": "subtitles.simplywings.wing.flap_strong",
+    "sounds": [
+      {
+        "name": "simplywings:wing.strong.flap",
+        "type": "event",
+        "pitch": 0.68
+      }
+    ]
+  },
+  "wing.eagle.flap": {
+    "subtitle": "subtitles.simplywings.wing.flap",
+    "sounds": [
+      {
+        "name": "simplywings:wing.feather.flap",
+        "type": "event",
+        "pitch": 0.85
+      }
+    ]
+  },
+  "wing.eagle.flap_strong": {
+    "subtitle": "subtitles.simplywings.wing.flap_strong",
+    "sounds": [
+      {
+        "name": "simplywings:wing.strong.flap",
+        "type": "event",
+        "pitch": 0.85
+      }
+    ]
+  },
+  "wing.earth.flap": {
+    "subtitle": "subtitles.simplywings.wing.flap",
+    "sounds": [
+      {
+        "name": "simplywings:wing.feather.flap",
+        "type": "event",
+        "volume": 0.6,
+        "pitch": 0.88
+      }
+    ]
+  },
+  "wing.earth.flap_strong": {
+    "subtitle": "subtitles.simplywings.wing.flap_strong",
+    "sounds": [
+      {
+        "name": "simplywings:wing.strong.flap",
+        "type": "event",
+        "pitch": 0.8
+      }
+    ]
+  },
+  "wing.fire.flap": {
+    "subtitle": "subtitles.simplywings.wing.flap",
+    "sounds": [
+      {
+        "name": "simplywings:wing.feather.flap",
+        "type": "event",
+        "volume": 0.6,
+        "pitch": 1.1
+      }
+    ]
+  },
+  "wing.fire.flap_strong": {
+    "subtitle": "subtitles.simplywings.wing.flap_strong",
+    "sounds": [
+      {
+        "name": "simplywings:wing.strong.flap",
+        "type": "event"
+      }
+    ]
+  },
+  "wing.flying_fish.flap": {
+    "subtitle": "subtitles.simplywings.wing.flap",
+    "sounds": [
+      {
+        "name": "simplywings:wing.leather.flap",
+        "type": "event",
+        "volume": 0.5,
+        "pitch": 0.935
+      }
+    ]
+  },
+  "wing.flying_fish.flap_strong": {
+    "subtitle": "subtitles.simplywings.wing.flap_strong",
+    "sounds": [
+      {
+        "name": "simplywings:wing.strong.flap",
+        "type": "event",
+        "volume": 0.5,
+        "pitch": 1.32
+      }
+    ]
+  },
+  "wing.forest.flap": {
+    "subtitle": "subtitles.simplywings.wing.flap",
+    "sounds": [
+      {
+        "name": "simplywings:wing.feather.flap",
+        "type": "event",
+        "volume": 0.35,
+        "pitch": 1.092
+      }
+    ]
+  },
+  "wing.forest.flap_strong": {
+    "subtitle": "subtitles.simplywings.wing.flap_strong",
+    "sounds": [
+      {
+        "name": "simplywings:wing.strong.flap",
+        "type": "event",
+        "volume": 0.5,
+        "pitch": 0.95
+      }
+    ]
+  },
+  "wing.gull.flap": {
+    "subtitle": "subtitles.simplywings.wing.flap",
+    "sounds": [
+      {
+        "name": "simplywings:wing.feather.flap",
+        "type": "event",
+        "pitch": 1.1
+      }
+    ]
+  },
+  "wing.gull.flap_strong": {
+    "subtitle": "subtitles.simplywings.wing.flap_strong",
+    "sounds": [
+      {
+        "name": "simplywings:wing.strong.flap",
+        "type": "event",
+        "pitch": 1.1
+      }
+    ]
+  },
+  "wing.hummingbird.flap": {
+    "subtitle": "subtitles.simplywings.wing.flap",
+    "sounds": [
+      {
+        "name": "simplywings:wing.insect.flap",
+        "type": "event",
+        "volume": 0.8,
+        "pitch": 1.92
+      }
+    ]
+  },
+  "wing.hummingbird.flap_strong": {
+    "subtitle": "subtitles.simplywings.wing.flap_strong",
+    "sounds": [
+      {
+        "name": "simplywings:wing.strong.flap",
+        "type": "event",
+        "volume": 0.35,
+        "pitch": 2.4
+      }
+    ]
+  },
+  "wing.kite.flap": {
+    "subtitle": "subtitles.simplywings.wing.flap",
+    "sounds": [
+      {
+        "name": "simplywings:wing.leather.flap",
+        "type": "event",
+        "volume": 0.5,
+        "pitch": 0.765
+      }
+    ]
+  },
+  "wing.kite.flap_strong": {
+    "subtitle": "subtitles.simplywings.wing.flap_strong",
+    "sounds": [
+      {
+        "name": "simplywings:wing.strong.flap",
+        "type": "event",
+        "volume": 0.5,
+        "pitch": 1.08
+      }
+    ]
+  },
+  "wing.light.flap": {
+    "subtitle": "subtitles.simplywings.wing.flap",
+    "sounds": [
+      {
+        "name": "simplywings:wing.membrane.flap",
+        "type": "event",
+        "pitch": 1.05
+      }
+    ]
+  },
+  "wing.light.flap_strong": {
+    "subtitle": "subtitles.simplywings.wing.flap_strong",
+    "sounds": [
+      {
+        "name": "simplywings:wing.strong.flap",
+        "type": "event",
+        "pitch": 0.892
+      }
+    ]
+  },
+  "wing.moth.flap": {
+    "subtitle": "subtitles.simplywings.wing.flap",
+    "sounds": [
+      {
+        "name": "simplywings:wing.insect.flap",
+        "type": "event",
+        "volume": 0.45,
+        "pitch": 0.75
+      }
+    ]
+  },
+  "wing.moth.flap_strong": {
+    "subtitle": "subtitles.simplywings.wing.flap_strong",
+    "sounds": [
+      {
+        "name": "simplywings:wing.strong.flap",
+        "type": "event",
+        "volume": 0.3,
+        "pitch": 1.4
+      }
+    ]
+  },
+  "wing.nebula.flap": {
+    "subtitle": "subtitles.simplywings.wing.flap",
+    "sounds": [
+      {
+        "name": "simplywings:wing.feather.flap",
+        "type": "event",
+        "volume": 0.6,
+        "pitch": 1.1
+      }
+    ]
+  },
+  "wing.nebula.flap_strong": {
+    "subtitle": "subtitles.simplywings.wing.flap_strong",
+    "sounds": [
+      {
+        "name": "simplywings:wing.strong.flap",
+        "type": "event"
+      }
+    ]
+  },
+  "wing.night.flap": {
+    "subtitle": "subtitles.simplywings.wing.flap",
+    "sounds": [
+      {
+        "name": "simplywings:wing.membrane.flap",
+        "type": "event",
+        "pitch": 0.9
+      }
+    ]
+  },
+  "wing.night.flap_strong": {
+    "subtitle": "subtitles.simplywings.wing.flap_strong",
+    "sounds": [
+      {
+        "name": "simplywings:wing.strong.flap",
+        "type": "event",
+        "pitch": 0.765
+      }
+    ]
+  },
+  "wing.ornithopter.flap": {
+    "subtitle": "subtitles.simplywings.wing.flap",
+    "sounds": [
+      {
+        "name": "minecraft:block.wooden_trapdoor.open",
+        "type": "event",
+        "volume": 0.6,
+        "pitch": 0.8
+      }
+    ]
+  },
+  "wing.ornithopter.flap_strong": {
+    "subtitle": "subtitles.simplywings.wing.flap_strong",
+    "sounds": [
+      {
+        "name": "simplywings:wing.strong.flap",
+        "type": "event",
+        "volume": 0.4,
+        "pitch": 1.1
+      }
+    ]
+  },
+  "wing.owl.flap": {
+    "subtitle": "subtitles.simplywings.wing.flap",
+    "sounds": [
+      {
+        "name": "simplywings:wing.feather.flap",
+        "type": "event",
+        "volume": 0.25,
+        "pitch": 0.9
+      }
+    ]
+  },
+  "wing.owl.flap_strong": {
+    "subtitle": "subtitles.simplywings.wing.flap_strong",
+    "sounds": [
+      {
+        "name": "simplywings:wing.strong.flap",
+        "type": "event",
+        "volume": 0.25,
+        "pitch": 0.9
+      }
+    ]
+  },
+  "wing.parrot.flap": {
+    "subtitle": "subtitles.simplywings.wing.flap",
+    "sounds": [
+      {
+        "name": "simplywings:wing.feather.flap",
+        "type": "event",
+        "pitch": 1.2
+      }
+    ]
+  },
+  "wing.parrot.flap_strong": {
+    "subtitle": "subtitles.simplywings.wing.flap_strong",
+    "sounds": [
+      {
+        "name": "simplywings:wing.strong.flap",
+        "type": "event",
+        "pitch": 1.2
+      }
+    ]
+  },
+  "wing.patchwork.flap": {
+    "subtitle": "subtitles.simplywings.wing.flap",
+    "sounds": [
+      {
+        "name": "simplywings:wing.feather.flap",
+        "type": "event",
+        "pitch": 1.05
+      }
+    ]
+  },
+  "wing.patchwork.flap_strong": {
+    "subtitle": "subtitles.simplywings.wing.flap_strong",
+    "sounds": [
+      {
+        "name": "simplywings:wing.strong.flap",
+        "type": "event",
+        "pitch": 1.05
+      }
+    ]
+  },
+  "wing.peacock.flap": {
+    "subtitle": "subtitles.simplywings.wing.flap",
+    "sounds": [
+      {
+        "name": "simplywings:wing.feather.flap",
+        "type": "event",
+        "pitch": 0.95
+      }
+    ]
+  },
+  "wing.peacock.flap_strong": {
+    "subtitle": "subtitles.simplywings.wing.flap_strong",
+    "sounds": [
+      {
+        "name": "simplywings:wing.strong.flap",
+        "type": "event",
+        "pitch": 0.95
+      }
+    ]
+  },
+  "wing.phantom.flap": {
+    "subtitle": "subtitles.simplywings.wing.flap",
+    "sounds": [
+      {
+        "name": "simplywings:wing.membrane.flap",
+        "type": "event",
+        "pitch": 1.05
+      }
+    ]
+  },
+  "wing.phantom.flap_strong": {
+    "subtitle": "subtitles.simplywings.wing.flap_strong",
+    "sounds": [
+      {
+        "name": "simplywings:wing.strong.flap",
+        "type": "event",
+        "pitch": 0.892
+      }
+    ]
+  },
+  "wing.pigeon.flap": {
+    "subtitle": "subtitles.simplywings.wing.flap",
+    "sounds": [
+      {
+        "name": "simplywings:wing.feather.flap",
+        "type": "event",
+        "pitch": 1.15
+      }
+    ]
+  },
+  "wing.pigeon.flap_strong": {
+    "subtitle": "subtitles.simplywings.wing.flap_strong",
+    "sounds": [
+      {
+        "name": "simplywings:wing.strong.flap",
+        "type": "event",
+        "pitch": 1.15
+      }
+    ]
+  },
+  "wing.psyche.flap": {
+    "subtitle": "subtitles.simplywings.wing.flap",
+    "sounds": [
+      {
+        "name": "simplywings:wing.insect.flap",
+        "type": "event",
+        "volume": 0.45,
+        "pitch": 0.862
+      }
+    ]
+  },
+  "wing.psyche.flap_strong": {
+    "subtitle": "subtitles.simplywings.wing.flap_strong",
+    "sounds": [
+      {
+        "name": "simplywings:wing.strong.flap",
+        "type": "event",
+        "volume": 0.3,
+        "pitch": 1.61
+      }
+    ]
+  },
+  "wing.ptero.flap": {
+    "subtitle": "subtitles.simplywings.wing.flap",
+    "sounds": [
+      {
+        "name": "simplywings:wing.membrane.flap",
+        "type": "event",
+        "pitch": 0.9
+      }
+    ]
+  },
+  "wing.ptero.flap_strong": {
+    "subtitle": "subtitles.simplywings.wing.flap_strong",
+    "sounds": [
+      {
+        "name": "simplywings:wing.strong.flap",
+        "type": "event",
+        "pitch": 0.765
+      }
+    ]
+  },
+  "wing.seraph.flap": {
+    "subtitle": "subtitles.simplywings.wing.flap",
+    "sounds": [
+      {
+        "name": "simplywings:wing.feather.flap",
+        "type": "event",
+        "pitch": 0.85
+      }
+    ]
+  },
+  "wing.seraph.flap_strong": {
+    "subtitle": "subtitles.simplywings.wing.flap_strong",
+    "sounds": [
+      {
+        "name": "simplywings:wing.strong.flap",
+        "type": "event",
+        "pitch": 0.85
+      }
+    ]
+  },
+  "wing.shadow.flap": {
+    "subtitle": "subtitles.simplywings.wing.flap",
+    "sounds": [
+      {
+        "name": "simplywings:wing.feather.flap",
+        "type": "event",
+        "volume": 0.6,
+        "pitch": 0.935
+      }
+    ]
+  },
+  "wing.shadow.flap_strong": {
+    "subtitle": "subtitles.simplywings.wing.flap_strong",
+    "sounds": [
+      {
+        "name": "simplywings:wing.strong.flap",
+        "type": "event",
+        "pitch": 0.85
+      }
+    ]
+  },
+  "wing.squirrel.flap": {
+    "subtitle": "subtitles.simplywings.wing.flap",
+    "sounds": [
+      {
+        "name": "simplywings:wing.leather.flap",
+        "type": "event",
+        "volume": 0.5,
+        "pitch": 1.02
+      }
+    ]
+  },
+  "wing.squirrel.flap_strong": {
+    "subtitle": "subtitles.simplywings.wing.flap_strong",
+    "sounds": [
+      {
+        "name": "simplywings:wing.strong.flap",
+        "type": "event",
+        "volume": 0.5,
+        "pitch": 1.44
+      }
+    ]
+  },
+  "wing.storm.flap": {
+    "subtitle": "subtitles.simplywings.wing.flap",
+    "sounds": [
+      {
+        "name": "simplywings:wing.feather.flap",
+        "type": "event",
+        "volume": 0.6,
+        "pitch": 1.155
+      }
+    ]
+  },
+  "wing.storm.flap_strong": {
+    "subtitle": "subtitles.simplywings.wing.flap_strong",
+    "sounds": [
+      {
+        "name": "simplywings:wing.strong.flap",
+        "type": "event",
+        "pitch": 1.05
+      }
+    ]
+  },
+  "wing.swift.flap": {
+    "subtitle": "subtitles.simplywings.wing.flap",
+    "sounds": [
+      {
+        "name": "simplywings:wing.feather.flap",
+        "type": "event",
+        "pitch": 1.25
+      }
+    ]
+  },
+  "wing.swift.flap_strong": {
+    "subtitle": "subtitles.simplywings.wing.flap_strong",
+    "sounds": [
+      {
+        "name": "simplywings:wing.strong.flap",
+        "type": "event",
+        "pitch": 1.25
+      }
+    ]
+  },
+  "wing.water.flap": {
+    "subtitle": "subtitles.simplywings.wing.flap",
+    "sounds": [
+      {
+        "name": "simplywings:wing.feather.flap",
+        "type": "event",
+        "volume": 0.35,
+        "pitch": 1.035
+      }
+    ]
+  },
+  "wing.water.flap_strong": {
+    "subtitle": "subtitles.simplywings.wing.flap_strong",
+    "sounds": [
+      {
+        "name": "simplywings:wing.strong.flap",
+        "type": "event",
+        "volume": 0.5,
+        "pitch": 0.9
+      }
+    ]
+  },
+  "wing.yin_yang.flap": {
+    "subtitle": "subtitles.simplywings.wing.flap",
+    "sounds": [
+      {
+        "name": "simplywings:wing.feather.flap",
+        "type": "event"
+      }
+    ]
+  },
+  "wing.yin_yang.flap_strong": {
+    "subtitle": "subtitles.simplywings.wing.flap_strong",
+    "sounds": [
+      {
+        "name": "simplywings:wing.strong.flap",
+        "type": "event"
+      }
+    ]
   }
 }

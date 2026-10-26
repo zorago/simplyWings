@@ -68,6 +68,9 @@ public final class ClientNet {
         }
         if (mc.level.getEntity(payload.entityId()) instanceof Player target) {
             WingEffects.strike(target, style, visual.mode);
+            if (!target.isInvisible()) {
+                WingSounds.play(target, visual.look(), false, 0.7f, 1f);
+            }
         }
     }
 

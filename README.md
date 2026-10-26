@@ -162,7 +162,7 @@ Progress as of October 25, 2026. Design documents are in French; `gatcha.md` des
 ### Wings
 - [x] **41 pairs finished**: Blockbench model, pxl texture and dedicated animation class for each pair, polished one by one with the author and validated on October 25 (rules and journal in `wingsRules.md`): feather rows, continuous skins for membranes, veils and fluids, anatomical beats, parachute brake, charged take-off, flat hover, tip trails, tails that never cross the legs.
 - [ ] **Particles and effects**: polish the in-game particles of every pair (beats, glide, brake trails, idles, take-off blast), check them with Iris shaderpacks.
-- [ ] **Sound design**: wing sounds per pair (beats, glide, fold, take-off), copyright-free recreations of the Fury shriek, charge and dash sounds (vanilla placeholders today).
+- [ ] **Sound design**: a first CC0 pass is in (wing beats per family and per pair, take-off, summoning altar show, card reveal; sources in `art/sounds/SOURCES.md`). Still to do: wind, glide, hover, buzz loops, landings, blocks, essences, menu sounds, summoning music, and copyright-free recreations of the Fury shriek, charge and dash sounds (vanilla placeholders today).
 - [ ] **In-game check of the art**: skins (membranes) rendering and lighting, emissive pairs at night and with shaders, z-fighting, remote players on a dedicated server.
 
 ### Gameplay
@@ -196,3 +196,7 @@ Progress as of October 25, 2026. Design documents are in French; `gatcha.md` des
 - [ ] Full pass in single player and on a dedicated server, including high-speed dives with Distant Horizons.
 - [ ] Choose the license, set the `versionRange` lower bound, version `1.0.0`.
 - [ ] CurseForge page, screenshots, the AI-assisted development notice.
+
+## Credits
+
+Sound effects are CC0 (public domain) from [Freesound](https://freesound.org) (2create, Cerise_Virtuelle, Scottrex05, Cultureshock007, kalhan, qubodup, harrisonlace, simranzenov), [OpenGameArt](https://opengameart.org) and [Kenney](https://kenney.nl). Full list in `art/sounds/SOURCES.md`.

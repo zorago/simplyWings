@@ -101,6 +101,7 @@ public class SimplyWingsClient {
         event.registerReloadListener((net.minecraft.server.packs.resources.ResourceManagerReloadListener) manager -> {
             com.zorago.simplywings.client.show.ShowModel.reload(manager);
             com.zorago.simplywings.client.show.ShowRenderer.clearCache();
+            WingSounds.clear();
             com.zorago.simplywings.client.wiki.WikiData.reload(manager);
         });
     }
@@ -197,8 +198,8 @@ public class SimplyWingsClient {
     private static void takeoffEffects(Player player, WingVisuals.Visual visual) {
         boolean launched = visual.animator.consumeLaunch();
         if (launched) {
-            player.level().playLocalSound(player.getX(), player.getY(), player.getZ(), SoundEvents.ENDER_DRAGON_FLAP,
-                    SoundSource.PLAYERS, 1.2f, 1.25f, false);
+            player.level().playLocalSound(player.getX(), player.getY(), player.getZ(), com.zorago.simplywings.sound.ModSounds.TAKEOFF_LAUNCH.get(),
+                    SoundSource.PLAYERS, 1.1f, 1f, false);
         }
         if (!ClientConfig.PARTICLES.get()) {
             return;
