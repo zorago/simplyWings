@@ -1,0 +1,53 @@
+{
+ "title": "The Cloud Refinery",
+ "icon": "simplywings:refinery_compass",
+ "blocks": [
+  {
+   "type": "block3d",
+   "block": "simplywings:cloud_compressor",
+   "caption": "Its treasure: the Cloud Compressor"
+  },
+  {
+   "type": "text",
+   "text": "Copper and glass, pipes and gears, and a vat that hums like a hive. Here the three skies are pressed into gold."
+  },
+  {
+   "type": "heading",
+   "text": "When and where"
+  },
+  {
+   "type": "text",
+   "text": "It appears when the dragon dies for the fourth time, on its own island about 512 blocks from the centre. The Refinery Compass points the way."
+  },
+  {
+   "type": "heading",
+   "text": "What waits inside"
+  },
+  {
+   "type": "text",
+   "text": "The Cloud Compressor, three blocks wide and five high, which turns one unit each of Cloud, Steam and Ethereal Essence into five units of Intensified Cloud Essence. Without it, no mythic pair, no Essence Tank and no better absorber."
+  },
+  {
+   "type": "heading",
+   "text": "Before you fly out"
+  },
+  {
+   "type": "text",
+   "text": "Fill your flasks first: Cloud Essence in the Overworld cloud layer, Steam Essence above the Nether's lava, Ethereal Essence over the End's void. The island itself floats over that void, far from the centre, so if you fly there on your wings with an absorber in your bag, it drinks Ethereal Essence much of the way."
+  },
+  {
+   "type": "text",
+   "text": "You may mine the compressor and rebuild it at home, as long as you give it room: three by three, five blocks high."
+  },
+  {
+   "type": "link",
+   "page": "workshops/cloud_compressor",
+   "text": "The Cloud Compressor"
+  },
+  {
+   "type": "link",
+   "page": "crafting/essences",
+   "text": "The four essences"
+  }
+ ]
+}

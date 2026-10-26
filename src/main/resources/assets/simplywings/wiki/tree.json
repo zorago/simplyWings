@@ -13,12 +13,20 @@
   "intro": {
    "title": "Getting Started",
    "icon": "simplywings:common_wings",
-   "children": []
+   "children": [
+    "intro/welcome",
+    "intro/first_flight"
+   ]
   },
   "flight": {
    "title": "Flight",
    "icon": "minecraft:elytra",
-   "children": []
+   "children": [
+    "flight/controls",
+    "flight/modes",
+    "flight/stamina",
+    "flight/stats"
+   ]
   },
   "wings": {
    "title": "Wing Pairs",
@@ -35,6 +43,9 @@
    "title": "Crafting",
    "icon": "simplywings:assembly_table",
    "children": [
+    "crafting/overview",
+    "crafting/winged_energy",
+    "crafting/essences",
     "materials"
    ]
   },
@@ -50,22 +61,41 @@
   "workshops": {
    "title": "Workshops",
    "icon": "simplywings:forge_bench",
-   "children": []
+   "children": [
+    "workshops/assembly_table",
+    "workshops/forge_bench",
+    "workshops/cloud_compressor"
+   ]
   },
   "end": {
    "title": "The End",
    "icon": "minecraft:dragon_head",
-   "children": []
+   "children": [
+    "end/dragon",
+    "end/sky_sanctum",
+    "end/wing_forge",
+    "end/cloud_refinery",
+    "end/summoning_sanctum",
+    "end/offering_fountain",
+    "end/compasses"
+   ]
   },
   "summoning": {
    "title": "Summoning",
    "icon": "simplywings:summoning_feather",
-   "children": []
+   "children": [
+    "summoning/feathers",
+    "summoning/altar",
+    "summoning/fountain"
+   ]
   },
   "mythics": {
    "title": "The Furies",
    "icon": "simplywings:night_wings",
-   "children": []
+   "children": [
+    "mythics/night",
+    "mythics/light"
+   ]
   },
   "wings/common": {
    "title": "Common pairs",

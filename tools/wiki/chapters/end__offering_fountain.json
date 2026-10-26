@@ -1,0 +1,36 @@
+{
+ "title": "The Fountain Island",
+ "icon": "simplywings:fountain_compass",
+ "blocks": [
+  {
+   "type": "block3d",
+   "block": "simplywings:offering_fountain",
+   "caption": "The Offering Fountain"
+  },
+  {
+   "type": "text",
+   "text": "Five dragons. That is the price of the last island. When the fifth falls, a fourth island rises from the void to join the other three."
+  },
+  {
+   "type": "heading",
+   "text": "When and where"
+  },
+  {
+   "type": "text",
+   "text": "It appears at the fifth dragon death, about 512 blocks from the centre like its sisters, at the last corner of their square. On older worlds where the three first islands form a triangle, it settles in the widest gap between them. Players on the central island receive the Fountain Compass, and the Summoning Compass with it."
+  },
+  {
+   "type": "heading",
+   "text": "What waits there"
+  },
+  {
+   "type": "text",
+   "text": "At its centre, the Offering Fountain, a basin of essence that weighs what you give it and pays you back in Summoning Feathers. Like the altar, it can be mined with a pickaxe and taken home, and the next dragon grows a new one."
+  },
+  {
+   "type": "link",
+   "page": "summoning/fountain",
+   "text": "Read on: the fountain's prices"
+  }
+ ]
+}

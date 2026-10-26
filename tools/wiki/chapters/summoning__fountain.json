@@ -1,0 +1,65 @@
+{
+ "title": "The Offering Fountain",
+ "icon": "simplywings:offering_fountain",
+ "blocks": [
+  {
+   "type": "block3d",
+   "block": "simplywings:offering_fountain",
+   "caption": "Its water weighs what you give it"
+  },
+  {
+   "type": "text",
+   "text": "The altar gives, the fountain takes back. Every flyer ends up with drawers full of things they will never use: this is where they go."
+  },
+  {
+   "type": "heading",
+   "text": "Offering"
+  },
+  {
+   "type": "text",
+   "text": "Open the fountain, place your items in its nine slots and watch their value appear. Click Offer, and the fountain pays you in Summoning Feathers. Items with no value (essences, containers, compasses, blocks) are not taken, and come back to you when you close it."
+  },
+  {
+   "type": "heading",
+   "text": "The prices"
+  },
+  {
+   "type": "text",
+   "text": "Each tier is worth ten times the one below:\n100 B items (primary materials): 1 feather.\n10 A items (craftable items): 1 feather.\n1 rare pair: 1 feather.\n1 epic pair: 10 feathers.\n1 legendary pair: 100 feathers.\n1 mythic pair: 100 feathers."
+  },
+  {
+   "type": "text",
+   "text": "The Common Wings are worth nothing here."
+  },
+  {
+   "type": "heading",
+   "text": "The reserve"
+  },
+  {
+   "type": "text",
+   "text": "Nothing is lost. Fractions of a feather are kept for you in reserve, shown in the window, and added to your next offering. The reserve is yours alone, whichever fountain you use."
+  },
+  {
+   "type": "heading",
+   "text": "Duplicates"
+  },
+  {
+   "type": "text",
+   "text": "Right-clicking a pair you already own only equips it, and the item stays. Keep those duplicates: they are the fountain's best currency. The first copy of a pair unlocks it; the second can fund the next."
+  },
+  {
+   "type": "text",
+   "text": "Do not hope to loop: on average, offering everything a summon gives you back returns only a fifth of a feather."
+  },
+  {
+   "type": "link",
+   "page": "end/offering_fountain",
+   "text": "The Fountain Island"
+  },
+  {
+   "type": "link",
+   "page": "summoning/altar",
+   "text": "The Draconic Altar"
+  }
+ ]
+}

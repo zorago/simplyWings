@@ -1,0 +1,57 @@
+{
+ "title": "The Summoning Sanctum",
+ "icon": "simplywings:summoning_compass",
+ "blocks": [
+  {
+   "type": "block3d",
+   "block": "simplywings:draconic_altar",
+   "caption": "The Draconic Altar"
+  },
+  {
+   "type": "text",
+   "text": "Look up from the central island of the End. You will see nothing but black sky. That is the point."
+  },
+  {
+   "type": "heading",
+   "text": "When and where"
+  },
+  {
+   "type": "text",
+   "text": "It appears with the very first dragon death: a floating island right above the centre of the End, its top pressed against the ceiling of the world. Its whole underside is black stone, invisible against the End sky from below."
+  },
+  {
+   "type": "text",
+   "text": "Its compass, the Summoning Compass, is only given at the fifth death, and its needle points straight up. Until then, those who know simply fly up."
+  },
+  {
+   "type": "heading",
+   "text": "The altar and its six flames"
+  },
+  {
+   "type": "text",
+   "text": "On an End stone floor of bricks and obsidian, the Draconic Altar stands at the centre on a small two-step dais. Around it, in a hexagon, six elemental flames burn on their pedestals: fire, darkness, earth, water, light and air."
+  },
+  {
+   "type": "text",
+   "text": "At rest, the flames flicker quietly. When someone burns a feather at the altar, they wake one after another and the whole island answers."
+  },
+  {
+   "type": "heading",
+   "text": "Taking the altar home"
+  },
+  {
+   "type": "text",
+   "text": "The altar can be mined with a pickaxe and placed anywhere, in your base for instance. The next dragon death grows a new one in the sanctum."
+  },
+  {
+   "type": "link",
+   "page": "summoning/altar",
+   "text": "Read on: summoning at the altar"
+  },
+  {
+   "type": "link",
+   "page": "summoning/feathers",
+   "text": "Summoning Feathers"
+  }
+ ]
+}

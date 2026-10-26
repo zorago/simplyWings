@@ -1,0 +1,72 @@
+{
+ "title": "The Forge Bench",
+ "icon": "simplywings:forge_bench",
+ "blocks": [
+  {
+   "type": "block3d",
+   "block": "simplywings:forge_bench",
+   "caption": "The anvil of the Wing Forge"
+  },
+  {
+   "type": "text",
+   "text": "If the table is where wings are born, the bench is where they are bred. Every harness, every core, every feather of every wing is hammered out here."
+  },
+  {
+   "type": "heading",
+   "text": "Where to find it"
+  },
+  {
+   "type": "text",
+   "text": "It stands in the Wing Forge, an island that appears in the End when the dragon dies for the third time. Follow the Forge Compass. It can be mined with a pickaxe and placed anywhere; the next dragon death grows a new one in the forge."
+  },
+  {
+   "type": "heading",
+   "text": "The Components tab"
+  },
+  {
+   "type": "text",
+   "text": "A 5 by 5 grid without its four corners: 21 cells, three on the top and bottom rows, five on the three middle rows. Recipes are shaped. When the ingredients match and the gauges hold enough essence, the result appears; take it and the essence is paid."
+  },
+  {
+   "type": "items",
+   "items": [
+    "simplywings:cloud_flask",
+    "simplywings:cloud_absorber",
+    "simplywings:iron_harness",
+    "simplywings:gilded_frame",
+    "simplywings:eagle_core"
+   ],
+   "caption": "Flasks, absorbers, tanks, intermediates and wing parts"
+  },
+  {
+   "type": "text",
+   "text": "It makes the wing pieces and their intermediates, the Essence Flask, the Cloud Absorbers and the Essence Tanks. A rare piece costs 10 to 30 Cloud Essence; the higher the rarity, the more essences a piece asks for."
+  },
+  {
+   "type": "heading",
+   "text": "The Winged Energy tab"
+  },
+  {
+   "type": "text",
+   "text": "Place any item in its slot and click Imbue to give it winged energy, or Cleanse to take it back. Imbued tools, weapons and rods collect the mod's drops."
+  },
+  {
+   "type": "heading",
+   "text": "Essence gauges"
+  },
+  {
+   "type": "text",
+   "text": "Like the Assembly Table, the bench keeps four gauges of 1,000 units, filled by dropping a flask or tank in its essence slot."
+  },
+  {
+   "type": "link",
+   "page": "crafting/winged_energy",
+   "text": "Winged energy"
+  },
+  {
+   "type": "link",
+   "page": "end/wing_forge",
+   "text": "The Wing Forge"
+  }
+ ]
+}

@@ -1,0 +1,70 @@
+{
+ "title": "The Wing Forge",
+ "icon": "simplywings:forge_compass",
+ "blocks": [
+  {
+   "type": "block3d",
+   "block": "simplywings:forge_bench",
+   "caption": "Its treasure: the Forge Bench"
+  },
+  {
+   "type": "text",
+   "text": "Smoke in the End, where nothing ever burns. Follow it and you will find a forge of stone and timber, chimneys, anvils and barrels, floating on its own rock."
+  },
+  {
+   "type": "heading",
+   "text": "When and where"
+  },
+  {
+   "type": "text",
+   "text": "It appears when the dragon dies for the third time, on another island about 512 blocks from the centre. The Forge Compass, given to players on the central island, points to it."
+  },
+  {
+   "type": "heading",
+   "text": "What waits inside"
+  },
+  {
+   "type": "text",
+   "text": "The Forge Bench, where every piece of every pair is hammered out, and where items are imbued with winged energy. Barrels around the forge hold feathers, leather and string, a fine start for your first pieces."
+  },
+  {
+   "type": "items",
+   "items": [
+    "minecraft:feather",
+    "minecraft:leather",
+    "minecraft:string"
+   ],
+   "caption": "Forge supplies"
+  },
+  {
+   "type": "heading",
+   "text": "Your first work at the bench"
+  },
+  {
+   "type": "text",
+   "text": "Imbue a pickaxe, a sword and a fishing rod first: without winged energy, the mod's drops never fall. Then wrap a feather in four glass for two Essence Flasks, and forge a Cloud Absorber from glass, copper, Updraft Shards and a feather, so the sky can start filling them."
+  },
+  {
+   "type": "items",
+   "items": [
+    "simplywings:cloud_flask",
+    "simplywings:cloud_absorber",
+    "simplywings:iron_harness"
+   ]
+  },
+  {
+   "type": "text",
+   "text": "From the third dragon on, the road to every rare pair is open. The Iron-Buckled Harness they all share is a good first piece."
+  },
+  {
+   "type": "link",
+   "page": "workshops/forge_bench",
+   "text": "The Forge Bench"
+  },
+  {
+   "type": "link",
+   "page": "crafting/overview",
+   "text": "The road of a pair"
+  }
+ ]
+}

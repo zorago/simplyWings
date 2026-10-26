@@ -1,0 +1,74 @@
+{
+ "title": "Night Wings",
+ "icon": "simplywings:night_wings",
+ "blocks": [
+  {
+   "type": "wings3d",
+   "wing": "simplywings:night",
+   "caption": "The wings of the Night Fury"
+  },
+  {
+   "type": "text",
+   "text": "Unholy offspring of lightning and death itself. Black scales, a tail with a red prosthetic fin, and a shriek that splits the sky. I have seen them fly only once."
+  },
+  {
+   "type": "heading",
+   "text": "The wings of a god"
+  },
+  {
+   "type": "text",
+   "text": "10 out of 10 in every stat, and 12 in Speed: the only wings that fly beyond the cap. They add nothing to your collection bonus; their gift is elsewhere. A dragon's tail trails behind you, sways in a hover and follows your turns."
+  },
+  {
+   "type": "heading",
+   "text": "Owning them: stamina without end"
+  },
+  {
+   "type": "text",
+   "text": "Once the Night Wings are in your collection, your stamina never runs out, whatever pair you wear."
+  },
+  {
+   "type": "heading",
+   "text": "The shriek"
+  },
+  {
+   "type": "text",
+   "text": "Dive beyond your top speed, in a falcon tuck or a steep plunge, and the Night Fury's shriek rings out. Those around you hear it coming from you."
+  },
+  {
+   "type": "heading",
+   "text": "Charge, dash and vanish"
+  },
+  {
+   "type": "text",
+   "text": "In travel flight only, wearing the Night Wings, hold the brake for 2 seconds: you slow and the charge bar fills while lightning strikes all around you, harmless, only for show. Then press sprint within half a second: you shoot forward at full speed and turn invisible for 15 seconds, wings and tail included. The dash has a 5-second cooldown."
+  },
+  {
+   "type": "heading",
+   "text": "Making them"
+  },
+  {
+   "type": "text",
+   "text": "Joined at the Assembly Table from the Fury Saddle, the Night Fury Core and two Night Fury Wings, for 250 of each essence. The road is the deepest in the mod and needs the dragon's own scales. A lucky SSS at the Draconic Altar may also bring them."
+  },
+  {
+   "type": "items",
+   "items": [
+    "simplywings:fury_saddle",
+    "simplywings:night_core",
+    "simplywings:night_wing",
+    "simplywings:night_wings"
+   ]
+  },
+  {
+   "type": "link",
+   "page": "wings/mythic/night",
+   "text": "The Night Wings: stats and recipe"
+  },
+  {
+   "type": "link",
+   "page": "mythics/light",
+   "text": "The Light Wings"
+  }
+ ]
+}

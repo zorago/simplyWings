@@ -1,0 +1,91 @@
+{
+ "title": "Flight Controls",
+ "icon": "minecraft:elytra",
+ "blocks": [
+  {
+   "type": "text",
+   "text": "Wings answer to the hands that know them. Here is every gesture, with the default keys. All of them can be rebound in Controls, under Simply Wings."
+  },
+  {
+   "type": "heading",
+   "text": "Wing jump"
+  },
+  {
+   "type": "text",
+   "text": "Press jump while in the air: one wing beat throws you upward. It costs 20 stamina, with no limit on how many you chain. A wing with strong Acceleration jumps higher."
+  },
+  {
+   "type": "heading",
+   "text": "Rescue jumps"
+  },
+  {
+   "type": "text",
+   "text": "When your stamina is below the cost of a wing jump, two rescue jumps remain. Each one stops your fall dead and wipes away all the fall damage you had gathered. They come back only when you touch the ground."
+  },
+  {
+   "type": "heading",
+   "text": "Hover: double tap"
+  },
+  {
+   "type": "text",
+   "text": "Tap jump twice, very fast (within 4 ticks), while in the air: you enter stabilized flight and hang in place. The wing jump of the first tap is refunded. Double tap again to let go and drop."
+  },
+  {
+   "type": "text",
+   "text": "While hovering: W, A, S, D move you across the plane, jump rises, sneak descends."
+  },
+  {
+   "type": "heading",
+   "text": "Travel flight: Left Alt"
+  },
+  {
+   "type": "text",
+   "text": "In the air, Left Alt (the Travel flight key) switches instantly between hovering and travel flight. Entering travel flight costs one wing beat and launches you at half your top speed."
+  },
+  {
+   "type": "heading",
+   "text": "Charged take-off"
+  },
+  {
+   "type": "text",
+   "text": "On the ground, hold Left Alt for one second, standing, walking or running: a bar fills under your crosshair, then you burst straight into travel flight, climbing at 40 degrees. For the next 1.5 seconds Alt is ignored, so you will not drop into a hover by mistake."
+  },
+  {
+   "type": "heading",
+   "text": "Beating your wings"
+  },
+  {
+   "type": "text",
+   "text": "In travel flight, hold sprint to beat your wings at the rhythm of your pair. Each beat adds speed, and the air takes some back until the next one. Let go and you glide."
+  },
+  {
+   "type": "heading",
+   "text": "Brake"
+  },
+  {
+   "type": "text",
+   "text": "Hold the Brake key to spread your wings like a parachute. It is unbound by default, and sneak does the job. Brake hard enough and you stop and fall into a hover."
+  },
+  {
+   "type": "heading",
+   "text": "Steering: the aim point"
+  },
+  {
+   "type": "text",
+   "text": "In travel flight, W and S tilt your aim point up and down, A and D swing it left and right (Z, Q, S, D on an AZERTY keyboard). Your heading follows that point smoothly; it never snaps. How fast it swings depends on Handling. Pitch can be inverted in the client config."
+  },
+  {
+   "type": "heading",
+   "text": "Camera"
+  },
+  {
+   "type": "text",
+   "text": "In travel flight the mouse only moves the camera, orbiting freely behind you. When you take off, the camera is left behind for a heartbeat and then catches up. When you brake to a stop, it swings forward into your head and you are back in first person."
+  },
+  {
+   "type": "link",
+   "page": "flight/modes",
+   "text": "Read on: the flight modes"
+  }
+ ]
+}

@@ -1,0 +1,81 @@
+{
+ "title": "The Draconic Altar",
+ "icon": "simplywings:draconic_altar",
+ "blocks": [
+  {
+   "type": "block3d",
+   "block": "simplywings:draconic_altar",
+   "caption": "Half feather, half membrane, crowned by a dragon's crystal"
+  },
+  {
+   "type": "text",
+   "text": "Burn a feather, call a pair of wings. The crafting road is the sure one; this is the gambler's road, and it pays only in what the mod itself holds."
+  },
+  {
+   "type": "heading",
+   "text": "Summoning"
+  },
+  {
+   "type": "text",
+   "text": "Right-click the altar with Summoning Feathers in your inventory. Summon once for one feather, or ten times at once for ten. Your feather count and your summons so far are shown; the History tab keeps your last 100 summons, and the Rates tab the rules below."
+  },
+  {
+   "type": "heading",
+   "text": "The tiers"
+  },
+  {
+   "type": "text",
+   "text": "B (about 86 %): one primary material of the mod.\nA (12 %): one craftable item of the mod, from intermediates to cores and wing parts.\nS (0.6 %): a rare pair.\nSS (0.1 %): an epic pair.\nSSS (0.03 %): a legendary pair."
+  },
+  {
+   "type": "text",
+   "text": "One SSS in a hundred turns into a mythic pair, Night or Light, preferring the one you lack. The Common Wings are never summoned. There is no featured banner: every pair of a tier is equally likely."
+  },
+  {
+   "type": "heading",
+   "text": "Guarantees"
+  },
+  {
+   "type": "text",
+   "text": "Three counters watch over you, shown as gauges in the altar's window.\nS: guaranteed by the 100th summon; from the 81st, +5 % per summon.\nSS: guaranteed by the 500th; from the 401st, +1 % per summon.\nSSS: guaranteed by the 1000th; from the 801st, +0.5 % per summon."
+  },
+  {
+   "type": "text",
+   "text": "A tier resets its own counter and every lower one: an SS also counts as an S. A ten-summon is simply ten summons in a row. With the guarantees, an S or better comes about once in 59 summons."
+  },
+  {
+   "type": "heading",
+   "text": "The show"
+  },
+  {
+   "type": "text",
+   "text": "A summon is not a quiet thing. Your feathers rise and burn on the altar's crystal, the six flames wake one by one, a column of light shoots to the sky and a star is born. It falls in a spiral, its colour climbing tier by tier and never going back: white for B, blue for A, violet for S, gold for SS, blood red for SSS, when the sky itself cracks."
+  },
+  {
+   "type": "text",
+   "text": "Then the burst, and great spectral wings unfold above the altar. Everyone within about 512 blocks sees it live, from the island, from below, from afar. Only the summoner's camera flies through it."
+  },
+  {
+   "type": "heading",
+   "text": "The cards"
+  },
+  {
+   "type": "text",
+   "text": "Then come the cards: one for a single summon; for ten, ten cards dealt face down in two rows of five, then turned one by one, the rarest with the longest breath. Click to skip, click to continue."
+  },
+  {
+   "type": "text",
+   "text": "Your summons are given all at once when you close the cards. If you close the altar or leave the game first, they are given then. Pairs arrive as items: right-click one to unlock it."
+  },
+  {
+   "type": "link",
+   "page": "summoning/fountain",
+   "text": "Read on: turning duplicates into feathers"
+  },
+  {
+   "type": "link",
+   "page": "end/summoning_sanctum",
+   "text": "The Summoning Sanctum"
+  }
+ ]
+}
