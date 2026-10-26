@@ -45,7 +45,6 @@ import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 public final class EndSanctums {
     private static final String DATA_NAME = SimplyWings.MOD_ID + "_sanctums";
     private static final BlockPos ISLAND_CENTER = new BlockPos(28, 18, 28);
-    private static final BlockPos UNDER_CENTER = new BlockPos(20, 2, 20);
     private static final int ISLAND_REACH = 36;
     private static final int BUILD_SPACING = 100;
     private static final int BUILD_Y = 0;
@@ -55,7 +54,7 @@ public final class EndSanctums {
         WING_FORGE("wing_forge", 1, () -> 3, () -> 3, ModItems.FORGE_COMPASS::get, ISLAND_CENTER),
         CLOUD_REFINERY("cloud_refinery", 2, () -> 4, () -> 4, ModItems.REFINERY_COMPASS::get, ISLAND_CENTER),
         SUMMONING_SANCTUM("summoning_sanctum", -1, () -> 1, ServerConfig.SUMMONING_COMPASS_DRAGON::get,
-                ModItems.SUMMONING_COMPASS::get, UNDER_CENTER),
+                ModItems.SUMMONING_COMPASS::get, ISLAND_CENTER),
         OFFERING_FOUNTAIN("offering_fountain", 3, ServerConfig.FOUNTAIN_DRAGON::get, ServerConfig.FOUNTAIN_DRAGON::get,
                 ModItems.FOUNTAIN_COMPASS::get, ISLAND_CENTER);
 
@@ -132,7 +131,7 @@ public final class EndSanctums {
         Data data = data(level);
         for (Sanctum sanctum : Sanctum.values()) {
             BlockPos center = data.centers[sanctum.ordinal()];
-            if (sanctum.island() && center != null && Math.abs(x - center.getX()) <= ISLAND_REACH && Math.abs(z - center.getZ()) <= ISLAND_REACH
+            if (center != null && Math.abs(x - center.getX()) <= ISLAND_REACH && Math.abs(z - center.getZ()) <= ISLAND_REACH
                     && y > center.getY() - 30 && y < center.getY() + 40) {
                 return true;
             }
