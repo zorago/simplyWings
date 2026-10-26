@@ -294,12 +294,12 @@ Sources dans `GATCHA_ANIMATION_SOURCE/`, détail dans `GACHA_ANIMATIONS.md` § 0
 - [ ] Compresseur : 1 + 1 + 1 → 5.
 - [ ] Cinq absorbeurs (flacon, fer, doré, radiant, Furie) : 100 s pour un flacon, 200 s pour le réservoir de fer avec l'absorbeur de fer, puis 400, 800, 1 600 s.
 - [ ] Pose du joueur en vol (mixin `PlayerModel.setupAnim`) : profilé en croisière, cabré bras écartés et jambes en avant au freinage, collé en piqué, roulis en virage, bras et jambes qui flottent en stationnaire. À vérifier avec Not Enough Animations et playerAnimator du pack.
-- [ ] Monde de construction `run/saves/SimplyWings Builds` (client de dev) : les trois îles dans des cadres rouges, à x 0, 100 et 200. Après retouche : `/simplywings sanctum export <nom>`, puis prévenir Claude, qui copie le fichier dans le mod.
+- [x] (26 octobre, posées) Monde de construction `run/saves/SimplyWings Builds` (client de dev) : les trois îles dans des cadres rouges, à x 0, 100 et 200. Après retouche : `/simplywings sanctum export <nom>`, puis prévenir Claude, qui copie le fichier dans le mod.
 
 ## 14. Gacha des ailes (25 octobre, rien de testé en jeu)
 
 Codé sans lancer Minecraft (zorago utilisait le PC). Conception et choix par défaut dans `gatcha.md`.
-- [ ] Monde de construction `run/saves/SimplyWings Builds` : `/simplywings sanctum build` pose maintenant les cinq structures (x 0 à 400), dont le sanctuaire d'invocation (x 300) et l'île de la fontaine (x 400), pour la retouche à la main.
+- [x] (26 octobre, posées) Monde de construction `run/saves/SimplyWings Builds` : `/simplywings sanctum build` pose maintenant les cinq structures (x 0 à 400), dont le sanctuaire d'invocation (x 300) et l'île de la fontaine (x 400), pour la retouche à la main.
 - [ ] Coffres : `/loot spawn ~ ~ ~ loot minecraft:chests/simple_dungeon` une centaine de fois dans l'Overworld (environ 5 % avec 1 à 3 plumes), puis dans le Nether (10 %) et dans l'End avec `minecraft:chests/end_city_treasure` (20 %) ; jamais plus de 3 plumes, même avec Chance ; avec Lootr dans le pack.
 - [ ] Gacha corrigé : un tirage B ou A donne **un seul** objet (plus de piles) ; onglet Taux à jour (valeurs de revente).
 - [ ] Autel : `/setblock ~ ~ ~ simplywings:draconic_altar`, clic droit : fenêtre, illustration, tracker, onglets Historique et Taux ; `/simplywings gacha feathers 64` ; ×1 et ×10 ; plumes retirées ; objets donnés (ou jetés si l'inventaire est plein) ; animation (comète, flash, cartes, rayons S et plus, récapitulatif), clic et Échap pour passer.
