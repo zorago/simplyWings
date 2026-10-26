@@ -125,6 +125,9 @@ Tous les sons sont positionnels à l'autel (sauf la musique de l'invocateur). La
 
 | Temps | Id | Description (son professionnel visé) | Placeholder vanilla | Atténuation |
 | --- | --- | --- | --- | --- |
+| −2,4 → −1,9 | `altar.offering.raise` | Le joueur lève la main, la plume s'éveille : froissement doux et tintement | `item.book.page_turn`, `block.amethyst_block.chime` | 16 |
+| −1,9 → −0,6 | `altar.offering.fly` | Vol des plumes vers l'autel : souffle léger, en couronne pour le ×10 | `entity.allay.item_thrown` | 24 |
+| −0,6 → 0 | `altar.offering.burn` | Plume consumée dans le cristal : crépitement violet et aspiration | `item.firecharge.use` (aigu), `block.portal.trigger` (court) | 32 |
 | 0,40 → 1,90 | `altar.flame.ignite.<élément>` ×6 | Allumage de chaque flamme, une signature par élément : feu (souffle et crépitement), ténèbres (aspiration grave inversée), terre (roche qui se soulève), eau (gerbe et remous), lumière (carillon cristallin), air (bourrasque qui tourne) | `item.firecharge.use`, `entity.warden.sonic_charge`, `block.basalt.break`, `entity.player.splash`, `block.amethyst_block.chime`, `entity.breeze.idle_air` | 48 |
 | 0 → fin | `altar.flame.loop.<élément>` | Boucle de chaque flamme au repos, très discrète | — | 16 |
 | 1,90 → 3,60 | `altar.rune` ×24 | Tic cristallin par rune, la hauteur monte d'un demi-ton toutes les 4 runes | `block.note_block.chime` | 32 |
@@ -133,7 +136,8 @@ Tous les sons sont positionnels à l'autel (sauf la musique de l'invocateur). La
 | 4,10 → 4,50 | `altar.circle_open` ×4 | Ouverture de chaque cercle : « vwoom » métallique tournant, de plus en plus grave | `block.respawn_anchor.charge` | 96 |
 | 4,60 → 6,20 | `altar.star_birth` | Condensation (aspiration), puis éclat cristallin pur | `block.amethyst_block.resonate`, `block.end_portal_frame.fill` | 128 |
 | 6,20 → 10,40 | `altar.star_fall` (boucle) | Sifflement aérien de la descente, doppler selon la spirale | `entity.ender_eye.launch` | 96 |
-| 6,60 | `altar.dragon` | Rugissement spectral lointain, réverbéré, puis battements d'ailes colossaux | `entity.ender_dragon.growl`, `entity.ender_dragon.flap` | 160 |
+| descente | `altar.cloud.open` / `altar.cloud.close` | Nuage qui s'ouvre (souffle cotonneux) et se referme, un par sortie et par entrée des ombres | `entity.breeze.wind_burst` (bas) | 64 |
+| descente | `altar.shadow.pass` | Passage rapide d'une ombre ailée : battements serrés et doppler, une variante par catégorie d'ailes | `entity.phantom.flap`, `entity.parrot.fly` | 64 |
 | 7,20 / 8,05 / 8,90 / 9,75 | `altar.escalate.a` / `.s` / `.ss` / `.sss` | Battements d'escalade : impact + accord qui monte d'une quinte à chaque palier, du plus léger au plus puissant | `block.amethyst_block.chime`, `ui.toast.challenge_complete`, `entity.ender_dragon.growl` | 128 |
 | 9,75 | `altar.sky_crack` | Craquement immense qui court dans le ciel, en stéréo | `entity.lightning_bolt.thunder` | 160 |
 | 10,40 → 12,00 | `altar.absorb` | Aspiration croissante + tremblement grave | `block.portal.trigger` | 96 |
@@ -153,9 +157,56 @@ Les ids sont à ajouter à `SOUND_DESIGN.md` § 6.4 (ils complètent ceux de l'a
 5. Caméra, cartes et musique pour l'invocateur.
 6. Tests : solo, serveur dédié, deux clients (un invocateur, un spectateur à 12 chunks et y = 0), avec et sans Iris.
 
+## 8 bis. Version 3 (26 octobre, nuit) : ce qui a changé
+
+Retours de zorago appliqués :
+
+- **Prologue et épilogue** (calculés en jeu, position du joueur en placeholder dans la scène : `player`, debout face à l'autel, 4,5 blocs devant) :
+  - les 2,4 premières secondes, le joueur lève la main ; ses plumes d'invocation (une, ou dix en couronne pour le ×10) s'élèvent, volent en arc jusqu'au cristal de l'autel et s'y consument. La caméra part de derrière l'épaule du joueur, suit les plumes, puis s'élargit vers le plan d'ouverture ;
+  - les 2,4 dernières secondes, la caméra revient derrière l'épaule du joueur, face à l'autel.
+  - Tous les temps de la timeline du § 5 sont donc décalés de 2,4 s dans Blockbench.
+- **Moins « blocky », plus voxel** : les voxels font 3 unités (3/16 de bloc) pour les flammes, 2 à 5 pour l'étoile, les anneaux, l'hélice et les flux, et deux fois plus d'éléments dans chaque cercle.
+- **De vraies flammes** pour les six éléments : chaque flamme est un volume voxel en forme de flamme, posé sur son bloc, avec une silhouette propre :
+  - feu : flamme classique ;
+  - ténèbres : haute et torsadée ;
+  - terre : trapue, avec des voxels de roche ;
+  - eau : torsadée ;
+  - lumière : élancée ;
+  - air : très torsadée.
+
+  Chaque flamme est découpée en **4 bandes** qui ondulent indépendamment (le haut bouge plus que le bas), a **3 langues** qui se détachent et montent en boucle, et porte **trois plans croisés** avec sa planche animée.
+- **Le dragon est remplacé** par des **joueurs-ombres** (joueur tout noir, yeux violets) portant les **vraies ailes** de la catégorie tirée et de celle d'en dessous :
+
+  | Palier | Catégories des ailes |
+  | --- | --- |
+  | B, A | commune |
+  | S | rare + commune |
+  | SS | épique + rare |
+  | SSS | légendaire + épique |
+  | Mythique | mythique + légendaire |
+
+  - Un nuage voxel apparaît, l'ombre en sort, décrit une trajectoire courbe rapide (1,3 à 1,9 s) autour de la colonne, puis rentre dans un autre nuage qui se dissipe.
+  - Toutes volent en même temps, en deux vagues, avec un décalage aléatoire.
+  - Ailes reprises des rigs : basic ; eagle et owl ; storm et forest ; angel et seraph ; night et light (sans leurs membranes). Elles battent à 3,2 Hz.
+  - En jeu, ce seront les vraies paires rendues par leurs classes de rig.
+- **Plans animés** (planches de frames, `tools/blockbench/gacha_sprites.py`, écrites dans `assets/simplywings/textures/gacha/`) :
+  - `flame_<élément>.png` : 32 × 256, 8 frames de 32 × 32, en boucle ;
+  - `glow.png` : halo pulsant, utilisé pour l'étoile, ses fantômes, l'éclat, la naissance et le plasma ;
+  - `particle_<type>.png` : 8 × 32, 4 frames. Dix types : ember, wisp, pebble, drop, spark, gust, mote, shard, feather, smoke.
+
+  Dans Blockbench, les planches jouent toutes seules (`frame_time` 2 ticks, soit 10 i/s) sur des plans croisés. En jeu, la frame est choisie par le temps de l'animation.
+- **Aucun gros bloc à la place des particules** : les étincelles montantes, les éclats, les plumes qui tombent et les braises sont retirés de toutes les animations. Ils n'existent que dans **`summon_x10_particles`**, une copie du ×10 où de petits cubes témoins (1 à 2 unités) montrent où et quand le jeu émettra ses particules :
+  - braises des six flammes ;
+  - étincelles de la colonne ;
+  - éclats de l'explosion ;
+  - plumes de la révélation ;
+  - gerbes d'étincelles aux arrivées S, SS et SSS.
+- **Révélation** : la caméra passe face aux ailes (côté du joueur) et recule pour les cadrer en entier.
+- **Convention Blockbench corrigée** : dans les animations d'os, Blockbench applique les positions avec X inversé et les rotations avec X et Y inversés (convention Bedrock). Le générateur écrit les clés dans cette convention, et la scène est exacte (non miroir). Le lecteur Java devra lire les clés avec la même convention.
+
 ## 9. Fichiers, commandes et état (26 octobre, soir)
 
-- Générateur : `python -I tools/blockbench/altar_anim.py` (la géométrie) et `tools/blockbench/altar_timeline.py` (les animations, un `Plan` par variante). Ils écrivent `art/gacha/summoning_animation.bbmodel` (format Generic Model, environ 3 600 cubes, 390 os, 140 000 clés, 29 Mo, 3,5 s de chargement dans Blockbench). Ils lisent le décor exporté de l'île (`altar_scene.py`). La géométrie et les clés sont **générées par code** : des fonctions du temps sont échantillonnées en clés Catmull-Rom. Tout se règle par paramètres, et les mêmes fonctions se porteront en Java.
+- Générateur : `python -I tools/blockbench/altar_anim.py` (la géométrie) et `tools/blockbench/altar_timeline.py` (les animations, un `Plan` par variante). Ils écrivent `art/gacha/summoning_animation.bbmodel` (format Generic Model, environ 15 000 cubes, 2 200 os, 200 000 clés, 32 textures, 32 Mo, environ 12 s de chargement dans Blockbench). Ils lisent le décor exporté de l'île (`altar_scene.py`). La géométrie et les clés sont **générées par code** : des fonctions du temps sont échantillonnées en clés Catmull-Rom. Tout se règle par paramètres, et les mêmes fonctions se porteront en Java.
 - Retouche à la main dans Blockbench : possible, mais une regénération écrase le fichier. Une retouche à garder doit être reportée dans le générateur.
 
 ### 9.1 Les animations
@@ -163,16 +214,17 @@ Les ids sont à ajouter à `SOUND_DESIGN.md` § 6.4 (ils complètent ceux de l'a
 | Animation | Durée | Contenu |
 | --- | --- | --- |
 | `idle` | 8 s, en boucle | Flammes au repos, ralenties (bruit à 45 % de la vitesse du spectacle, rotations calées pour boucler sans saut). Tout le reste est caché |
-| `summon_b` | 10,8 s | Colonne courte (26 blocs), un seul cercle, étoile blanche née en haut de la colonne, sans battement ni sigil, petit éclat (12 éclats, 1 onde), pas d'ailes |
-| `summon_a` | 11,7 s | Comme B, deux cercles, un battement bleu, 24 éclats, 2 ondes |
-| `summon_s` | 16,7 s | Sigil à 64 blocs, trois cercles, deux battements (bleu, violet), colonnes élémentaires, ailes à 60 % |
-| `summon_ss` | 18,3 s | Sigil à 96 blocs, trois battements (jusqu'à l'or), dragon spectral, ailes à 80 % |
-| `summon_sss` | 19,5 s | Le master : quatre battements, fissures rouges, dragon, ailes complètes |
-| `summon_mythic_night` | 20,1 s | SSS, puis l'éclipse : un disque noir et une couronne violette couvrent le sigil, les flammes s'éteignent sauf celle des ténèbres, qui grandit et ouvre les yeux. Un tir de plasma bleu-violet tombe du sigil jusqu'à l'éclat |
-| `summon_mythic_light` | 20,1 s | SSS, puis un prisme blanc géant naît sous le sigil, un voile nacré enveloppe l'île, et les flammes s'éteignent sauf celle de la lumière |
-| `summon_x10` | 25,4 s | Le ×10 du prototype (`B B B B B B A S SS SSS`) : dix étoiles arrivent l'une après l'autre dans le sigil, avec une arrivée propre à leur palier (B s'allume sur place, A descend, S tombe de haut, SS tombe du zénith, SSS arrive de l'horizon et fissure le ciel), tournent en anneau, puis descendent en spirale décalée et sont absorbées une à une. Éclat et ailes du meilleur palier |
+| `summon_b` | 15,6 s (avec prologue et épilogue) | Colonne courte (26 blocs), un seul cercle, étoile blanche née en haut de la colonne, sans battement ni sigil, petit éclat (12 éclats, 1 onde), pas d'ailes |
+| `summon_a` | 16,5 s | Comme B, deux cercles, un battement bleu, 24 éclats, 2 ondes |
+| `summon_s` | 21,5 s | Sigil à 64 blocs, trois cercles, deux battements (bleu, violet), colonnes élémentaires, ailes à 60 % |
+| `summon_ss` | 23,1 s | Sigil à 96 blocs, trois battements (jusqu'à l'or), ombres épiques et rares, ailes à 80 % |
+| `summon_sss` | 24,3 s | Le master : quatre battements, fissures rouges, ombres légendaires et épiques, ailes complètes |
+| `summon_mythic_night` | 24,9 s | SSS, puis l'éclipse : un disque noir et une couronne violette couvrent le sigil, les flammes s'éteignent sauf celle des ténèbres, qui grandit et ouvre les yeux. Un tir de plasma bleu-violet tombe du sigil jusqu'à l'éclat |
+| `summon_mythic_light` | 24,9 s | SSS, puis un prisme blanc géant naît sous le sigil, un voile nacré enveloppe l'île, et les flammes s'éteignent sauf celle de la lumière |
+| `summon_x10` | 30,2 s | Le ×10 du prototype (`B B B B B B A S SS SSS`) : dix étoiles arrivent l'une après l'autre dans le sigil, avec une arrivée propre à leur palier (B s'allume sur place, A descend, S tombe de haut, SS tombe du zénith, SSS arrive de l'horizon et fissure le ciel), tournent en anneau, puis descendent en spirale décalée et sont absorbées une à une. Éclat et ailes du meilleur palier |
+| `summon_x10_particles` | 30,2 s | Copie du ×10 avec les placeholders de particules (petits cubes) que le jeu remplacera par ses sprites |
 
-- **Modèles inutilisés cachés** : chaque animation met à l'échelle 0 tout groupe racine qu'elle n'anime pas (dragon dans B à S, sigil dans B et A, éclipse hors Night…). Dans `idle`, seuls le décor et les flammes restent.
+- **Modèles inutilisés cachés** : chaque animation met à l'échelle 0 tout groupe racine qu'elle n'anime pas (ombres des autres catégories, sigil dans B et A, éclipse hors Night, particules hors `summon_x10_particles`…). Dans `idle`, seuls le décor et les flammes restent.
 - **Durées** : elles sont calculées par palier dans `Plan` (naissance de l'étoile, descente, battements, éclat, révélation, retombée). Les battements sont répartis dans la descente.
 
 ### 9.2 Caméra
