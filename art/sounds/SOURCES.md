@@ -17,6 +17,20 @@ Tous les sons du mod viennent de bibliothèques **CC0** (domaine public : usage 
 | `fs_832552_crystal_ball.mp3` | https://freesound.org/s/832552/ | harrisonlace | `gacha/rune_charge` (nappe de l'autel, 2 houles) |
 | `fs_859497_powerup_loop.mp3` | https://freesound.org/s/859497/ | simranzenov | `gacha/beam` (montée du pilier) |
 | `fs_714257_puff_of_smoke.mp3` | https://freesound.org/s/714257/ | qubodup | `gacha/puff` (nuages, offrande qui s'élève) |
+| `fs_454072.mp3` | https://freesound.org/s/454072/ | kyles | `flight/wind` : boucle de vent du vol de déplacement (30 à 46 s, fondu enchaîné) |
+| `fs_496237.mp3` | https://freesound.org/s/496237/ | fury12 | `wing/buzz/loop` : vrombissement des paires continues (colibri, abeille, scarabée, ancienne) |
+| `fs_504626.mp3` | https://freesound.org/s/504626/ | leonelmail | `flight/landing_hard` : arrivée rapide au sol et crash |
+| `fs_434339.mp3` | https://freesound.org/s/434339/ | draftcraft | `block/forge_bench/hammer` : 6 coups de marteau sur enclume |
+| `fs_234782.mp3` | https://freesound.org/s/234782/ | wubitog | `block/forge_bench/quench` : trempe |
+| `fs_487748.mp3` | https://freesound.org/s/487748/ | stib | `block/cloud_compressor/loop` : boucle du compresseur (et poussée de Dédale, hauteur 1,4) |
+| `fs_814061.mp3` | https://freesound.org/s/814061/ | YouMightLikeThis | `fury/night_charge` : grésillement électrique de la charge de Night |
+| `fs_582631.mp3` | https://freesound.org/s/582631/ | ironcross32 | `fury/crackle` : craquement en couche sur la charge de Night |
+| `fs_407052.mp3` | https://freesound.org/s/407052/ | Sojan | `fury/light_charge` : charge de plasma de Light (20 s accélérés 8 fois, sans changer la hauteur) |
+| `fs_875132.mp3` | https://freesound.org/s/875132/ | hotpin7 | `essence/pour` : essence versée dans une jauge |
+| `fs_511485.mp3` | https://freesound.org/s/511485/ | MLaudio | `essence/full` : conteneur plein |
+| `fs_561287.mp3` | https://freesound.org/s/561287/ | angelkunev | `ui/equip` : ailes équipées ou retirées, infusion d'énergie, ailes de la table d'assemblage |
+| `fs_841982.mp3` | https://freesound.org/s/841982/ | kevinklang | téléchargé, pas encore utilisé (vent de rechange) |
+| `fs_521972.mp3` | https://freesound.org/s/521972/ | Kastenfrosch | téléchargé, pas encore utilisé (marteau de rechange) |
 
 ## OpenGameArt (CC0)
 
@@ -29,8 +43,8 @@ Tous les sons du mod viennent de bibliothèques **CC0** (domaine public : usage 
 
 | Pack | Fichiers | Utilisé pour |
 |---|---|---|
-| Interface Sounds (https://kenney.nl/assets/interface-sounds) | `drop_001-004`, `maximize_001-004`, `confirmation_001-002`, `error_004`, `error_008` | `ui/card_deal`, `ui/card_flip`, `ui/confirm`, `ui/denied` |
-| Impact Sounds (https://kenney.nl/assets/impact-sounds) | `impactBell_heavy_000-004`, `impactGlass_medium_000-004`, `impactGlass_light_000-004` | `gacha/bell`, `gacha/chime`, `gacha/twinkle` |
+| Interface Sounds (https://kenney.nl/assets/interface-sounds) | `drop_001-004`, `maximize_001-004`, `confirmation_001-002`, `error_004`, `error_008`, `open_002-004` | `ui/card_deal`, `ui/card_flip`, `ui/confirm`, `ui/denied`, `ui/open` (pas encore joué) |
+| Impact Sounds (https://kenney.nl/assets/impact-sounds) | `impactBell_heavy_000-004`, `impactGlass_medium_000-004`, `impactGlass_light_000-004`, `impactSoft_medium_000-003` | `gacha/bell`, `gacha/chime`, `gacha/twinkle`, `flight/landing_soft` |
 | UI Audio (https://kenney.nl/assets/ui-audio) | téléchargé, pas encore utilisé | réserve pour l'interface |
 
 ## Sample fourni par zorago (hors CC0)

@@ -1,5 +1,7 @@
 package com.zorago.simplywings.flight;
 
+import net.minecraft.sounds.SoundSource;
+import com.zorago.simplywings.sound.ModSounds;
 import com.zorago.simplywings.config.ServerConfig;
 import com.zorago.simplywings.essence.CloudAbsorberItem;
 import com.zorago.simplywings.essence.EssenceContainerItem;
@@ -90,7 +92,7 @@ public final class CloudHarvest {
         for (int i = 0; i < inventory.getContainerSize() && amount > 0; i++) {
             ItemStack stack = inventory.getItem(i);
             if (EssenceContainerItem.type(stack) == type) {
-                amount -= EssenceContainerItem.fill(stack, type, amount);
+                amount -= fill(player, stack, type, amount);
             }
         }
         for (int i = 0; i < inventory.getContainerSize() && amount > 0; i++) {
@@ -99,15 +101,23 @@ public final class CloudHarvest {
                 continue;
             }
             if (stack.getCount() == 1) {
-                amount -= EssenceContainerItem.fill(stack, type, amount);
+                amount -= fill(player, stack, type, amount);
             } else {
                 ItemStack filled = stack.split(1);
-                amount -= EssenceContainerItem.fill(filled, type, amount);
+                amount -= fill(player, filled, type, amount);
                 if (!inventory.add(filled)) {
                     player.drop(filled, false);
                 }
             }
         }
+    }
+
+    private static int fill(ServerPlayer player, ItemStack stack, EssenceType type, int amount) {
+        int added = EssenceContainerItem.fill(stack, type, amount);
+        if (added > 0 && EssenceContainerItem.amount(stack) >= EssenceContainerItem.capacity(stack)) {
+            player.playNotifySound(ModSounds.ESSENCE_FULL.get(), SoundSource.PLAYERS, 0.6F, 1.0F);
+        }
+        return added;
     }
 
     private CloudHarvest() {

@@ -1,5 +1,6 @@
 package com.zorago.simplywings.client.gui;
 
+import com.zorago.simplywings.sound.ModSounds;
 import com.zorago.simplywings.SimplyWings;
 import com.zorago.simplywings.client.ClientWings;
 import com.zorago.simplywings.client.WingVisuals;
@@ -145,11 +146,15 @@ public class WingsScreen extends Screen {
     private void equip() {
         if (selected != null && owned(selected)) {
             PacketDistributor.sendToServer(new Payloads.EquipWing(Optional.of(selected)));
+            net.minecraft.client.Minecraft.getInstance().getSoundManager().play(
+                    net.minecraft.client.resources.sounds.SimpleSoundInstance.forUI(ModSounds.UI_EQUIP.get(), 1.0F, 0.7F));
         }
     }
 
     private void unequip() {
         PacketDistributor.sendToServer(new Payloads.EquipWing(Optional.empty()));
+        net.minecraft.client.Minecraft.getInstance().getSoundManager().play(
+                net.minecraft.client.resources.sounds.SimpleSoundInstance.forUI(ModSounds.UI_EQUIP.get(), 0.75F, 0.5F));
     }
 
     @Override

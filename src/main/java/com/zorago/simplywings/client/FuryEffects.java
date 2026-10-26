@@ -72,7 +72,10 @@ public final class FuryEffects {
         switch (kind) {
             case Payloads.FuryEvent.CHARGE_START -> {
                 CHARGING.add(id);
-                if (!night) {
+                if (night) {
+                    follow(player, ModSounds.NIGHT_CHARGE.get(), 1f);
+                    follow(player, ModSounds.NIGHT_CRACKLE.get(), 0.8f);
+                } else {
                     follow(player, ModSounds.LIGHT_CHARGE.get(), 1f);
                 }
             }

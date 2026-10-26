@@ -74,6 +74,7 @@ public class SimplyWingsClient {
         game.addListener(com.zorago.simplywings.client.show.ClientShows::onRenderStage);
         game.addListener(com.zorago.simplywings.client.show.ClientShows::onRenderFrame);
         game.addListener(com.zorago.simplywings.client.show.ClientShows::onClientTick);
+        game.addListener(FlightLoops::onClientTick);
         AssemblyTableClient.register(modBus, game);
         com.zorago.simplywings.client.studio.Studio.register(game);
     }

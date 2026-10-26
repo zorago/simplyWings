@@ -1,5 +1,6 @@
 package com.zorago.simplywings.flight;
 
+import com.zorago.simplywings.sound.ModSounds;
 import com.zorago.simplywings.SimplyWings;
 import com.zorago.simplywings.config.ServerConfig;
 import com.zorago.simplywings.essence.EssenceReserve;
@@ -187,8 +188,6 @@ public final class ServerFlight {
             data.setStamina(data.stamina() - cost);
         }
         data.setLastFlapTick(now);
-        player.level().playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.PHANTOM_FLAP,
-                SoundSource.PLAYERS, 0.6f, 1.3f);
         PacketDistributor.sendToPlayersTrackingEntity(player, new Payloads.FlapEvent(player.getId()));
     }
 
@@ -214,8 +213,6 @@ public final class ServerFlight {
         }
         data.setLastAirJumpTick(player.level().getGameTime());
         player.resetFallDistance();
-        player.level().playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.PHANTOM_FLAP,
-                SoundSource.PLAYERS, 0.5f, 1.2f);
         PacketDistributor.sendToPlayersTrackingEntity(player, new Payloads.FlapEvent(player.getId()));
     }
 
@@ -237,6 +234,8 @@ public final class ServerFlight {
         double speed = Math.min(max, Math.max(0, impact.speed()));
         double damage = ServerConfig.CRASH_DAMAGE_PER_SPEED.get() * Math.max(0, speed - ServerConfig.CRASH_THRESHOLD.get());
         if (damage > 0) {
+            player.level().playSound(player, player.getX(), player.getY(), player.getZ(), ModSounds.LANDING_HARD.get(),
+                    SoundSource.PLAYERS, 1.0f, 0.8f);
             player.hurt(player.damageSources().flyIntoWall(), (float) damage);
         }
     }

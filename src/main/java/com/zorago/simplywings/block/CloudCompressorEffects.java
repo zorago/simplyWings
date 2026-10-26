@@ -1,5 +1,6 @@
 package com.zorago.simplywings.block;
 
+import com.zorago.simplywings.sound.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
@@ -11,6 +12,7 @@ import org.joml.Vector3f;
 
 public final class CloudCompressorEffects {
     private static final Vector3f GOLD = new Vector3f(1.0F, 0.85F, 0.4F);
+    private static final java.util.Map<BlockPos, CompressorSound> SOUNDS = new java.util.HashMap<>();
 
     public static void tick(Level level, BlockPos pos, CloudCompressorBlockEntity compressor) {
         float speed = compressor.speed();
@@ -34,11 +36,54 @@ public final class CloudCompressorEffects {
             level.addParticle(new DustParticleOptions(GOLD, 0.7F), cx + Math.cos(angle) * 0.9, pos.getY() + 1.0 + random.nextDouble() * 2.5,
                     cz + Math.sin(angle) * 0.9, 0, 0.01, 0);
         }
-        if (random.nextFloat() < 0.02F * speed) {
-            level.playLocalSound(cx, pos.getY() + 2.0, cz, SoundEvents.PISTON_EXTEND, SoundSource.BLOCKS, 0.25F, 0.6F + random.nextFloat() * 0.2F, false);
+        CompressorSound sound = SOUNDS.get(pos);
+        if (sound == null || sound.isStopped()) {
+            sound = new CompressorSound(pos.immutable(), cx, pos.getY() + 2.0, cz);
+            SOUNDS.put(pos.immutable(), sound);
+            net.minecraft.client.Minecraft.getInstance().getSoundManager().play(sound);
         }
+        sound.feed(speed, level.getGameTime());
         if (random.nextFloat() < 0.03F * speed) {
             level.playLocalSound(cx, pos.getY() + 1.5, cz, SoundEvents.BUBBLE_COLUMN_UPWARDS_AMBIENT, SoundSource.BLOCKS, 0.5F, 0.8F, false);
+        }
+    }
+
+    private static final class CompressorSound extends net.minecraft.client.resources.sounds.AbstractTickableSoundInstance {
+        private final BlockPos pos;
+        private float target;
+        private long fed;
+
+        CompressorSound(BlockPos pos, double x, double y, double z) {
+            super(ModSounds.COMPRESSOR_LOOP.get(), SoundSource.BLOCKS, net.minecraft.client.resources.sounds.SoundInstance.createUnseededRandom());
+            this.pos = pos;
+            this.x = x;
+            this.y = y;
+            this.z = z;
+            looping = true;
+            delay = 0;
+            volume = 0.01f;
+        }
+
+        void feed(float speed, long time) {
+            target = 0.25F + 0.35F * speed;
+            pitch = 0.85F + 0.25F * speed;
+            fed = time;
+        }
+
+        @Override
+        public void tick() {
+            net.minecraft.client.multiplayer.ClientLevel level = net.minecraft.client.Minecraft.getInstance().level;
+            boolean alive = level != null && level.getGameTime() - fed < 10;
+            volume += ((alive ? target : 0) - volume) * 0.1F;
+            if (!alive && volume < 0.01F) {
+                SOUNDS.remove(pos, this);
+                stop();
+            }
+        }
+
+        @Override
+        public boolean canStartSilent() {
+            return true;
         }
     }
 

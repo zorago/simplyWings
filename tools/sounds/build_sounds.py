@@ -26,8 +26,9 @@ IMPACT = "kenney_impact-sounds/Audio/"
 FURY = "user/night_fury_dive.mp3"
 
 
-def clip(source, start=0.0, end=None, peak=-3.0, fade_in=0.004, fade_out=0.25, echo=0.0):
-    return {"source": source, "start": start, "end": end, "peak": peak, "fade_in": fade_in, "fade_out": fade_out, "echo": echo}
+def clip(source, start=0.0, end=None, peak=-3.0, fade_in=0.004, fade_out=0.25, echo=0.0, loop=0.0, tempo=1.0):
+    return {"source": source, "start": start, "end": end, "peak": peak, "fade_in": fade_in, "fade_out": fade_out, "echo": echo,
+            "loop": loop, "tempo": tempo}
 
 
 FILES = {
@@ -56,6 +57,20 @@ FILES = {
     "ui/card_deal": [clip(f"{INTERFACE}drop_00{n}.ogg", 0, None, -6.0, fade_out=0.05) for n in range(1, 5)],
     "ui/card_flip": [clip(f"{INTERFACE}maximize_00{n}.ogg", 0, None, -5.0, fade_out=0.08) for n in range(1, 5)],
     "ui/confirm": [clip(f"{INTERFACE}confirmation_00{n}.ogg", 0, None, -5.0, fade_out=0.08) for n in (1, 2)],
+    "ui/equip": [clip("fs_561287.mp3", 0.2, 4.4, -3.0, fade_out=1.0)],
+    "ui/open": [clip(f"{INTERFACE}open_00{n}.ogg", 0, None, -8.0, fade_out=0.05) for n in (2, 3, 4)],
+    "fury/night_charge": [clip("fs_814061.mp3", 0.0, 2.6, -2.0, fade_in=0.4, fade_out=0.4)],
+    "fury/crackle": [clip("fs_582631.mp3", 0.08, 0.9, -4.0, fade_out=0.2)],
+    "fury/light_charge": [clip("fs_407052.mp3", 0.4, 20.0, -2.0, fade_in=0.2, fade_out=0.3, tempo=8.0)],
+    "flight/wind": [clip("fs_454072.mp3", 30.0, 46.0, -3.0, loop=1.5)],
+    "flight/landing_hard": [clip("fs_504626.mp3", 0.05, 1.4, -2.0, fade_out=0.4)],
+    "flight/landing_soft": [clip(f"{IMPACT}impactSoft_medium_00{n}.ogg", 0, None, -8.0, fade_out=0.1) for n in range(4)],
+    "wing/buzz/loop": [clip("fs_496237.mp3", 0.0, 5.0, -4.0, loop=0.6)],
+    "block/forge_bench/hammer": [clip("fs_434339.mp3", s - 0.03, s + 0.9, -3.0, fade_out=0.4) for s in (0.23, 4.17, 5.74, 12.16, 13.78, 18.69)],
+    "block/forge_bench/quench": [clip("fs_234782.mp3", 0.05, None, -4.0, fade_out=0.5)],
+    "block/cloud_compressor/loop": [clip("fs_487748.mp3", 0.0, 7.6, -4.0, loop=0.8)],
+    "essence/pour": [clip("fs_875132.mp3", 1.6, 2.6, -5.0, fade_out=0.2), clip("fs_875132.mp3", 2.9, 3.95, -5.0, fade_out=0.2)],
+    "essence/full": [clip("fs_511485.mp3", 0, None, -6.0, fade_out=0.3)],
     "ui/denied": [clip(f"{INTERFACE}error_00{n}.ogg", 0, None, -6.0, fade_out=0.05) for n in (4, 8)],
 }
 
@@ -110,11 +125,29 @@ SUBTITLES = {
     "ui.card_flip": "Card turns",
     "ui.confirm": "Card revealed",
     "ui.denied": "Not enough feathers",
+    "ui.equip": "Wings unfold",
+    "ui.open": "Menu opens",
+    "wing.buzz": "Wings buzz",
+    "flight.wind": "Wind rushes",
+    "flight.landing_hard": "Heavy landing",
+    "flight.landing_soft": "Landing",
+    "block.forge_bench.hammer": "Hammer strikes",
+    "block.forge_bench.quench": "Metal hisses",
+    "block.cloud_compressor.loop": "Compressor churns",
+    "essence.pour": "Essence pours",
+    "essence.full": "Container fills up",
 }
 
 
-def load(path):
-    raw = subprocess.run([FFMPEG, "-v", "error", "-i", str(path), "-ac", "1", "-ar", str(SR), "-f", "f32le", "-"],
+def load(path, tempo=1.0):
+    filters = []
+    while tempo > 2.0:
+        filters.append("atempo=2.0")
+        tempo /= 2.0
+    if tempo != 1.0:
+        filters.append(f"atempo={tempo}")
+    af = ["-af", ",".join(filters)] if filters else []
+    raw = subprocess.run([FFMPEG, "-v", "error", "-i", str(path), *af, "-ac", "1", "-ar", str(SR), "-f", "f32le", "-"],
                          capture_output=True, check=True).stdout
     return np.frombuffer(raw, dtype=np.float32).copy()
 
@@ -150,10 +183,20 @@ def echo(x, tail, delays=(0.23, 0.37), feedback=0.68, wet=0.5):
 
 
 def render(spec, target):
-    x = load(SRC / spec["source"])
-    a = int(spec["start"] * SR)
-    b = len(x) if spec["end"] is None else min(len(x), int(spec["end"] * SR))
+    x = load(SRC / spec["source"], spec["tempo"])
+    a = int(spec["start"] / spec["tempo"] * SR)
+    b = len(x) if spec["end"] is None else min(len(x), int(spec["end"] / spec["tempo"] * SR))
     x = x[a:b] - np.mean(x[a:b])
+    if spec["loop"] > 0:
+        xf = int(spec["loop"] * SR)
+        body = x[:len(x) - xf].copy()
+        t = np.linspace(0, np.pi / 2, xf)
+        body[:xf] = body[:xf] * np.sin(t) + x[len(x) - xf:] * np.cos(t)
+        body *= 10 ** (spec["peak"] / 20) / max(1e-6, np.abs(body).max())
+        target.parent.mkdir(parents=True, exist_ok=True)
+        subprocess.run([FFMPEG, "-v", "error", "-y", "-f", "f32le", "-ar", str(SR), "-ac", "1", "-i", "-",
+                        "-c:a", "libvorbis", "-q:a", "5", str(target)], input=body.astype(np.float32).tobytes(), check=True)
+        return
     n_in = max(1, int(spec["fade_in"] * SR))
     n_out = min(len(x) // 2, max(1, int(spec["fade_out"] * SR)))
     x[:n_in] *= np.linspace(0, 1, n_in)
@@ -193,6 +236,11 @@ def main():
     sounds_file = ASSETS / "sounds.json"
     sounds = {k: v for k, v in json.loads(sounds_file.read_text(encoding="utf-8")).items()
               if k in ("light_fury.charge", "light_fury.blast")}
+    sounds.pop("light_fury.charge", None)
+    sounds["night_fury.charge"] = {"subtitle": subtitle("night_fury.charge"), "sounds": files("fury/night_charge")}
+    sounds["night_fury.crackle"] = {"subtitle": subtitle("night_fury.charge"), "sounds": files("fury/crackle")}
+    sounds["light_fury.charge"] = {"subtitle": subtitle("light_fury.charge"), "sounds": files("fury/light_charge")}
+    SUBTITLES["night_fury.charge"] = "Night Fury crackles"
     for fury, pitch in (("night_fury", 0.97), ("light_fury", 1.03)):
         name = "Night" if fury == "night_fury" else "Light"
         sounds[f"{fury}.dive"] = {"subtitle": subtitle(f"{fury}.dive"), "sounds": files("fury/dive")}
@@ -201,6 +249,7 @@ def main():
         SUBTITLES[f"{fury}.invisible"] = f"{name} Fury vanishes"
     for family in ("feather", "membrane", "leather", "insect", "strong"):
         sounds[f"wing.{family}.flap"] = {"sounds": files(f"wing/{family}/flap")}
+    sounds["wing.buzz.loop"] = {"sounds": files("wing/buzz/loop")}
     for base in FILES:
         if base.startswith(("gacha/", "ui/", "block/", "essence/", "flight/")):
             key = base.replace("/", ".")
@@ -220,6 +269,9 @@ def main():
             target = "simplywings:" + target
         sounds[f"wing.{pair}.flap"] = {"subtitle": subtitle("wing.flap"),
                                        "sounds": [event(target, volume * family_volume, pitch * family_pitch)]}
+        if family == "buzz" or pair == "daedalus":
+            target_loop = "simplywings:block.cloud_compressor.loop" if pair == "daedalus" else "simplywings:wing.buzz.loop"
+            sounds[f"wing.{pair}.buzz"] = {"subtitle": subtitle("wing.buzz"), "sounds": [event(target_loop, 1.0, pitch * (1.4 if pair == "daedalus" else 1.0))]}
         sounds[f"wing.{pair}.flap_strong"] = {"subtitle": subtitle("wing.flap_strong"),
                                               "sounds": [event("simplywings:wing.strong.flap", volume * STRONG_VOLUME.get(family, 1.0),
                                                                pitch * STRONG_PITCH.get(family, 1.0))]}

@@ -1,5 +1,7 @@
 package com.zorago.simplywings.client;
 
+import net.minecraft.sounds.SoundSource;
+import com.zorago.simplywings.sound.ModSounds;
 import net.minecraft.resources.ResourceLocation;
 import com.zorago.simplywings.client.gui.WingsScreen;
 import com.zorago.simplywings.anim.WingStyle;
@@ -468,6 +470,14 @@ public final class ClientFlight {
                 .orElse(stats.definition());
     }
 
+    private static void land(LocalPlayer player, double speed) {
+        boolean hard = speed > 10;
+        player.level().playLocalSound(player.getX(), player.getY(), player.getZ(),
+                hard ? ModSounds.LANDING_HARD.get() : ModSounds.LANDING_SOFT.get(), SoundSource.PLAYERS,
+                hard ? (float) Math.min(1.0, 0.5 + speed / 60) : 0.6f, 0.9f + player.getRandom().nextFloat() * 0.2f, false);
+        WingSounds.play(player, lookId(), false, hard ? 0.5f : 0.35f, 0.8f);
+    }
+
     private static Optional<ResourceLocation> lookId() {
         return ClientWings.appearance().or(() -> ClientWings.stats().map(EffectiveStats::wing));
     }
@@ -736,6 +746,7 @@ public final class ClientFlight {
                 player.yHeadRotO = prevHeading;
                 if (player.onGround() || player.verticalCollisionBelow) {
                     PacketDistributor.sendToServer(new Payloads.Impact((float) Math.max(0, -lastVelocity.y)));
+                    land(player, lastVelocity.length());
                     setMode(player, FlightMode.NONE, true);
                 } else if (player.horizontalCollision) {
                     Vec3 after = player.getDeltaMovement();
@@ -751,6 +762,7 @@ public final class ClientFlight {
             case STABILIZED -> {
                 boolean descending = !Minecraft.getInstance().options.keyJump.isDown();
                 if (player.onGround() && descending && lastVelocity.y <= 0.05) {
+                    land(player, 0);
                     setMode(player, FlightMode.NONE, true);
                 }
             }

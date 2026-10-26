@@ -324,4 +324,9 @@ Sources et licences : `art/sounds/SOURCES.md`. Ajuster dans `tools/sounds/build_
 - [ ] Autel : offrande, 6 flammes, nappe, onde du pilier, montée, étoile, battements, éclat, ailes ; volumes cohérents à 30 et à 100 blocs ; rien de saturé quand tout s'empile (éclat SSS).
 - [ ] Cartes ×10 : distribution (10 petits sons rapprochés, pas un mur de bruit), anticipation, retournement, couches par palier ; passer (« skip ») ne déclenche pas tous les sons d'un coup.
 - [ ] Sous-titres affichés et lisibles.
+- [ ] Furies : cri de piqué (coupé avant l'explosion, écho de 3 s), dash = sample entier + écho, Night un peu plus grave, Light un peu plus aigu ; charges de Night (grésillement) et de Light (montée de plasma).
+- [ ] Vent : monte avec la vitesse, ne coupe pas net, pas de saut audible à la boucle.
+- [ ] Vrombissement (colibri, abeille, scarabée, ancienne, Dédale) : démarre et s'arrête en fondu, suit le joueur, entendu des autres.
+- [ ] Atterrissages doux et durs, crash entendu par un autre joueur ; plus de double battement au saut ailé côté serveur.
+- [ ] Forge (marteau, trempe, infusion), compresseur (boucle qui suit la vitesse, s'arrête quand on le casse), table d'assemblage, essence versée, conteneur plein, boutons Équiper et Retirer.
 

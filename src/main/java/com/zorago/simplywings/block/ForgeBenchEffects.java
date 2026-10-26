@@ -1,5 +1,6 @@
 package com.zorago.simplywings.block;
 
+import com.zorago.simplywings.sound.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
@@ -41,7 +42,7 @@ public final class ForgeBenchEffects {
 
     private static void component(Level level, RandomSource random, double cx, double top, double cz, int t) {
         if (t == 0 || t == 6 || t == 12) {
-            level.playLocalSound(cx, top, cz, SoundEvents.ANVIL_USE, SoundSource.BLOCKS, 0.5F, 0.9F + t * 0.02F, false);
+            level.playLocalSound(cx, top, cz, ModSounds.FORGE_HAMMER.get(), SoundSource.BLOCKS, 0.8F, 0.95F + t * 0.01F, false);
             for (int i = 0; i < 10; i++) {
                 double angle = random.nextDouble() * Mth.TWO_PI;
                 double speed = 0.1 + random.nextDouble() * 0.15;
@@ -50,7 +51,7 @@ public final class ForgeBenchEffects {
             level.addParticle(ParticleTypes.LAVA, cx, top + 0.1, cz, 0, 0, 0);
         }
         if (t == 14) {
-            level.playLocalSound(cx, top, cz, SoundEvents.LAVA_EXTINGUISH, SoundSource.BLOCKS, 0.6F, 1.4F, false);
+            level.playLocalSound(cx, top, cz, ModSounds.FORGE_QUENCH.get(), SoundSource.BLOCKS, 0.7F, 1.0F, false);
             for (int i = 0; i < 12; i++) {
                 level.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, cx + (random.nextDouble() - 0.5) * 0.6, top + 0.1,
                         cz + (random.nextDouble() - 0.5) * 0.6, 0, 0.04 + random.nextDouble() * 0.03, 0);
@@ -63,7 +64,7 @@ public final class ForgeBenchEffects {
 
     private static void energy(Level level, RandomSource random, double cx, double top, double cz, int t) {
         if (t == 0) {
-            level.playLocalSound(cx, top, cz, SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.BLOCKS, 1.0F, 1.2F, false);
+            level.playLocalSound(cx, top, cz, ModSounds.UI_EQUIP.get(), SoundSource.BLOCKS, 0.8F, 1.1F, false);
             level.playLocalSound(cx, top, cz, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.BLOCKS, 1.0F, 1.5F, false);
         }
         float p = t / (float) ENERGY_LENGTH;

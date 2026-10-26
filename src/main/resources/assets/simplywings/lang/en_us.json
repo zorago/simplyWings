@@ -970,5 +970,17 @@
   "subtitles.simplywings.ui.confirm": "Card revealed",
   "subtitles.simplywings.ui.denied": "Not enough feathers",
   "subtitles.simplywings.night_fury.invisible": "Night Fury vanishes",
-  "subtitles.simplywings.light_fury.invisible": "Light Fury vanishes"
+  "subtitles.simplywings.light_fury.invisible": "Light Fury vanishes",
+  "subtitles.simplywings.ui.equip": "Wings unfold",
+  "subtitles.simplywings.ui.open": "Menu opens",
+  "subtitles.simplywings.wing.buzz": "Wings buzz",
+  "subtitles.simplywings.flight.wind": "Wind rushes",
+  "subtitles.simplywings.flight.landing_hard": "Heavy landing",
+  "subtitles.simplywings.flight.landing_soft": "Landing",
+  "subtitles.simplywings.block.forge_bench.hammer": "Hammer strikes",
+  "subtitles.simplywings.block.forge_bench.quench": "Metal hisses",
+  "subtitles.simplywings.block.cloud_compressor.loop": "Compressor churns",
+  "subtitles.simplywings.essence.pour": "Essence pours",
+  "subtitles.simplywings.essence.full": "Container fills up",
+  "subtitles.simplywings.night_fury.charge": "Night Fury crackles"
 }

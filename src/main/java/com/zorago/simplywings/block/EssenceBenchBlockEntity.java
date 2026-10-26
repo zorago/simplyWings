@@ -1,5 +1,7 @@
 package com.zorago.simplywings.block;
 
+import net.minecraft.sounds.SoundSource;
+import com.zorago.simplywings.sound.ModSounds;
 import com.zorago.simplywings.essence.EssenceContainerItem;
 import com.zorago.simplywings.essence.EssenceCost;
 import com.zorago.simplywings.essence.EssenceTanks;
@@ -89,6 +91,8 @@ public abstract class EssenceBenchBlockEntity extends BlockEntity implements Men
         }
     }
 
+    private long lastPourSound = -100;
+
     protected void tickServer() {
         ItemStack flask = items.getItem(FLASK);
         if (!EssenceContainerItem.isContainer(flask) || EssenceContainerItem.type(flask) == null) {
@@ -96,6 +100,10 @@ public abstract class EssenceBenchBlockEntity extends BlockEntity implements Men
         }
         ItemStack rest = flask.copy();
         if (tanks.pour(rest)) {
+            if (level != null && level.getGameTime() - lastPourSound >= 20) {
+                lastPourSound = level.getGameTime();
+                level.playSound(null, worldPosition, ModSounds.ESSENCE_POUR.get(), SoundSource.BLOCKS, 0.7F, 0.9F + level.random.nextFloat() * 0.2F);
+            }
             items.setItem(FLASK, rest);
             sync();
         }

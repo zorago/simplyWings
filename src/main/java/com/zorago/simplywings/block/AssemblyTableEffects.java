@@ -1,5 +1,6 @@
 package com.zorago.simplywings.block;
 
+import com.zorago.simplywings.sound.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.DustParticleOptions;
@@ -106,13 +107,13 @@ public final class AssemblyTableEffects {
             f.sound(emblem, SoundEvents.AMETHYST_BLOCK_RESONATE, 1.0F, 0.5F + 1.2F * p);
         }
         if (t == 0) {
-            f.sound(emblem, SoundEvents.BEACON_POWER_SELECT, 1.0F, 1.0F);
+            f.sound(emblem, ModSounds.GACHA_RUNE_CHARGE.get(), 1.0F, 1.1F);
         }
         if (t == 20 || t == 40 || t == 60) {
-            f.sound(emblem, SoundEvents.RESPAWN_ANCHOR_CHARGE, 0.8F, 0.8F + 0.3F * (t / 20.0F));
+            f.sound(emblem, ModSounds.GACHA_IGNITE.get(), 0.9F, 0.8F + 0.15F * (t / 20.0F));
         }
         if (t == CLIMAX - 12) {
-            f.sound(emblem, SoundEvents.BEACON_ACTIVATE, 1.0F, 1.4F);
+            f.sound(emblem, ModSounds.GACHA_BEAM.get(), 1.0F, 1.2F);
         }
     }
 
@@ -130,20 +131,19 @@ public final class AssemblyTableEffects {
             double angle = i * Mth.TWO_PI / 64;
             f.particle(ParticleTypes.END_ROD, emblem.x, emblem.y - 0.4, emblem.z, Math.cos(angle) * 0.35, 0, Math.sin(angle) * 0.35);
         }
-        f.sound(emblem, SoundEvents.TOTEM_USE, 1.0F, 1.0F);
-        f.sound(emblem, SoundEvents.FIREWORK_ROCKET_LARGE_BLAST, 1.0F, 1.0F);
-        f.sound(emblem, SoundEvents.ENDER_DRAGON_FLAP, 1.0F, 0.9F);
-        f.sound(emblem, SoundEvents.UI_TOAST_CHALLENGE_COMPLETE, 0.8F, 1.0F);
+        f.sound(emblem, ModSounds.GACHA_BLAST.get(), 1.0F, 1.2F);
+        f.sound(emblem, com.zorago.simplywings.client.WingSounds.flap(java.util.Optional.empty(), true), 1.0F, 1.0F);
+        f.sound(emblem, ModSounds.GACHA_BELL.get(), 0.9F, 1.1F);
     }
 
     private static void aftermath(Frame f, int t, Vec3 emblem) {
         RandomSource random = f.level.random;
         float q = t / 60.0F;
         if (t == 4) {
-            f.sound(emblem, SoundEvents.ENDER_DRAGON_FLAP, 1.0F, 1.1F);
+            f.sound(emblem, ModSounds.UI_EQUIP.get(), 1.0F, 1.0F);
         }
         if (t == 10) {
-            f.sound(emblem, SoundEvents.PLAYER_LEVELUP, 0.8F, 1.2F);
+            f.sound(emblem, ModSounds.CARD_CONFIRM.get(), 0.8F, 1.0F);
         }
         if (q < 0.8F && t % 2 == 0) {
             double flap = Math.sin(t * 0.25) * 0.35;
