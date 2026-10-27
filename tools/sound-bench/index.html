@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sound Bench</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <header id="top">
+      <strong>Simply Wings · Sound Bench</strong>
+      <span id="status"></span>
+      <span class="spacer"></span>
+      <label>Volume <input id="master" type="range" min="0" max="1" step="0.01" value="0.8" /></label>
+      <button id="measure-all" title="Mesure tous les fichiers du mod">Mesurer tout</button>
+      <button id="build-all" title="python -I tools/sounds/build_sounds.py">Construire tout</button>
+      <button id="audit" title="python -I tools/sounds/audit.py">Audit</button>
+      <button id="copy" title="gradlew build puis copie du jar vers l'instance de test">Copier vers l'instance</button>
+      <button id="help">?</button>
+    </header>
+    <main>
+      <aside id="list">
+        <div class="filters">
+          <input id="search" type="search" placeholder="Recherche (id, description, mots-clés)" />
+          <div class="row">
+            <select id="f-status"><option value="">statut : tous</option></select>
+            <select id="f-verdict"><option value="">verdict : tous</option></select>
+          </div>
+          <div class="row">
+            <label><input id="f-out" type="checkbox" /> hors cible</label>
+            <label><input id="f-silent" type="checkbox" /> montrer silent</label>
+            <select id="f-order">
+              <option value="passes">ordre des passes</option>
+              <option value="alpha">alphabétique</option>
+            </select>
+          </div>
+        </div>
+        <div id="tree"></div>
+      </aside>
+      <section id="detail"><p class="hint">Choisis un son à gauche. Espace = ▶ Jeu, R = référence, 1 à 9 = variation, K / X / V = keep / reject / revise, ↑ ↓ = son suivant.</p></section>
+      <section id="view"></section>
+    </main>
+    <dialog id="log"><pre></pre><form method="dialog"><button>Fermer</button></form></dialog>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

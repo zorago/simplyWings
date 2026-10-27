@@ -1,0 +1,11 @@
+{
+  "port": 5177,
+  "minecraftAssets": "A:/CurseForge/Install/assets",
+  "minecraftVersionJson": "A:/CurseForge/Install/versions/1.21.1/1.21.1.json",
+  "assetIndex": null,
+  "soundSources": "art/sounds/source",
+  "ffmpeg": "ffmpeg",
+  "ffprobe": "ffprobe",
+  "python": "python",
+  "testInstance": null
+}
