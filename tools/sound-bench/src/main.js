@@ -173,7 +173,7 @@ function step(dir) {
 async function verdict(stateName) {
   const e = state.selected;
   if (!e) return;
-  await save(e.id, { verdict: { ...e.verdict, state: stateName, date: new Date().toISOString().slice(0, 10) } });
+  await save(e.id, { verdict: { state: stateName, date: new Date().toISOString().slice(0, 10) } });
   renderDetail($("#detail"), state.selected);
 }
 

@@ -432,7 +432,10 @@ export function renderDetail(root, e) {
   };
   const note = h("textarea", { rows: 2, style: "width:100%", placeholder: "note" });
   note.value = e.verdict?.note || "";
-  note.onchange = () => save(e.id, { verdict: { ...e.verdict, note: note.value } });
+  note.oninput = () => {
+    clearTimeout(note.timer);
+    note.timer = setTimeout(() => save(e.id, { verdict: { note: note.value } }), 400);
+  };
   const kwInput = h("input", { value: keywords, size: 50 });
   kwInput.onchange = () => save(e.id, { keywords: kwInput.value.split(/\s*,\s*/).filter(Boolean) });
   kwInput.value = (e.keywords || []).join(", ");
@@ -470,7 +473,8 @@ export function renderDetail(root, e) {
           h("button", {
             class: e.verdict?.state === v ? `on v-${v}` : `v-${v}`,
             onclick: async () => {
-              await save(e.id, { verdict: { ...e.verdict, state: v, date: new Date().toISOString().slice(0, 10) } });
+              clearTimeout(note.timer);
+              await save(e.id, { verdict: { note: note.value, state: v, date: new Date().toISOString().slice(0, 10) } });
               renderDetail(root, state.selected);
             },
           }, v),

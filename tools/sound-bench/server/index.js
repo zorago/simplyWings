@@ -205,7 +205,8 @@ app.put(
     const cat = catalog();
     const i = cat.sounds.findIndex((e) => e.id === req.params.id);
     if (i < 0) return res.status(404).json({ error: "unknown id" });
-    cat.sounds[i] = { ...cat.sounds[i], ...req.body, id: cat.sounds[i].id };
+    const verdict = req.body.verdict ? { verdict: { ...cat.sounds[i].verdict, ...req.body.verdict } } : {};
+    cat.sounds[i] = { ...cat.sounds[i], ...req.body, ...verdict, id: cat.sounds[i].id };
     writeJson(CATALOG, cat);
     res.json(cat.sounds[i]);
   }),
