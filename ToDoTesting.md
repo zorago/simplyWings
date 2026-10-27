@@ -312,6 +312,13 @@ Codé sans lancer Minecraft (zorago utilisait le PC). Conception et choix par d�
 - [ ] Monde ancien (îles en triangle) : la fontaine se pose dans le plus grand écart.
 - [ ] Serveur dédié pour tout ce qui précède.
 
+## 16. Bugs à corriger : retours de zorago en build (27 octobre, rien de corrigé)
+
+Notés au fil des messages de zorago, à corriger seulement sur son feu vert.
+
+- [ ] Transparence : beaucoup de textures, notamment les flammes de l'autel du gacha, passent mal devant les nuages et l'eau (même souci qu'avant avec les ailes de feu).
+- [ ] Show du gacha : l'item 3D des plumes s'affiche deux fois et forme une croix ; il ne doit s'afficher qu'une fois par item.
+
 ## 15. Sons : passes d'écoute dans le banc, puis en jeu
 
 Les verdicts vivent dans le catalogue (`tools/sounds/catalog.json`) et se donnent dans le banc de son (`cd tools/sound-bench && npm run dev`, http://localhost:5177), passe par passe (`SOUND_PLAN.md` § 4). Santé du dépôt : `python -I tools/sounds/audit.py`. En jeu, `/simplywings sound <id> [pitch] [volume]` et `/simplywings sound list <groupe>` rejouent un son ou un groupe.
