@@ -61,6 +61,7 @@ public final class ShowSounds {
         final float fade;
         final String except;
         final String only;
+        final boolean once;
         final int tier;
         final int minTier;
         final int maxTier;
@@ -104,6 +105,7 @@ public final class ShowSounds {
             fade = number(o, "fade", 0);
             except = string(o, "except", null);
             only = string(o, "only", null);
+            once = o.has("once") && o.get("once").getAsBoolean();
             tier = tier(o.get("tier"), -1);
             minTier = tier(o.get("min_tier"), Integer.MIN_VALUE);
             maxTier = tier(o.get("max_tier"), Integer.MAX_VALUE);
@@ -255,26 +257,30 @@ public final class ShowSounds {
             }
             JsonArray points = a.meta.getAsJsonArray(c.each);
             int n = 0;
+            boolean fired = false;
             for (JsonElement p : points) {
+                if (c.once && fired) {
+                    break;
+                }
                 if (p.isJsonArray()) {
                     float start = p.getAsJsonArray().get(0).getAsFloat();
                     float dur = p.getAsJsonArray().get(1).getAsFloat();
-                    play(show, model, now, power, c, start, n++, 0);
-                    play(show, model, now, power, c, start + dur, n++, 1);
+                    fired |= play(show, model, now, power, c, start, n++, 0);
+                    fired |= play(show, model, now, power, c, start + dur, n++, 1);
                 } else {
-                    play(show, model, now, power, c, p.getAsFloat(), n++, 0);
+                    fired |= play(show, model, now, power, c, p.getAsFloat(), n++, 0);
                 }
             }
         }
     }
 
-    private static void play(ClientShows.Show show, ShowModel model, float now, float power, Cue c, float base, int i, int edge) {
+    private static boolean play(ClientShows.Show show, ShowModel model, float now, float power, Cue c, float base, int i, int edge) {
         if (c.index >= 0 && i != c.index || c.edge >= 0 && edge != c.edge) {
-            return;
+            return false;
         }
         int tier = i < show.payload.tiers().size() ? show.payload.tiers().get(i) : 0;
         if (!c.tierMatches(tier)) {
-            return;
+            return false;
         }
         boolean fire = false;
         for (float t : c.t) {
@@ -284,11 +290,11 @@ public final class ShowSounds {
             }
         }
         if (!fire) {
-            return;
+            return false;
         }
         Vec3 pos = anchor(show, model, c.at, i, base + c.sample);
         if (pos == null) {
-            return;
+            return false;
         }
         float step = c.byTier ? tier : i;
         float volume = c.volume + c.volumeStep * step + c.volumePower * power;
@@ -298,9 +304,10 @@ public final class ShowSounds {
             Vec3 at = pos.add(c.offset);
             Minecraft.getInstance().getSoundManager().play(new FadingSound(c.sound(i), SoundSource.BLOCKS, volume, pitch, at, c.fade,
                     () -> ClientShows.alive(show) && show.lastTime < stop));
-            return;
+            return true;
         }
         ClientShows.sound(show, pos.add(c.offset), c.sound(i), volume, pitch);
+        return true;
     }
 
     private static Vec3 anchor(ClientShows.Show show, ShowModel model, String at, int i, float time) {

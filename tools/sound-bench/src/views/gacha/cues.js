@@ -45,6 +45,7 @@ export function parseCue(o, extraTier) {
     maxRank: num(o, "max_rank", Infinity),
     except: o.except ?? null,
     only: o.only ?? null,
+    once: o.once === true,
     until: o.until ?? null,
     untilT: num(o, "until_t", 0),
     fade: num(o, "fade", 0),
@@ -137,10 +138,12 @@ export function fire(c, p, tier, pw) {
 
 export function tick(cues, anim, tiers, lastTime, now) {
   const pw = power(anim);
-  const fired = [];
+  const out = [];
   for (const c of cues) {
     if (!admitted(c, anim)) continue;
+    let fired = false;
     for (const p of points(c, anim)) {
+      if (c.once && fired) break;
       const tier = pointOk(c, p, tiers);
       if (tier === null) continue;
       let go = false;
@@ -148,10 +151,13 @@ export function tick(cues, anim, tiers, lastTime, now) {
         const at = p.base + t;
         if (lastTime < at && now >= at && (c.window < 0 || now < at + c.window)) go = true;
       }
-      if (go) fired.push({ ...fire(c, p, tier, pw), c });
+      if (go) {
+        out.push({ ...fire(c, p, tier, pw), c });
+        fired = true;
+      }
     }
   }
-  return fired;
+  return out;
 }
 
 export function parseCards(json) {

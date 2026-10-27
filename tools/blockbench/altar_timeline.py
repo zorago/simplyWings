@@ -6,6 +6,7 @@ from altar_anim import (B, CRYSTAL, FLAME_SPEC, HOVER, PLAYER, SIGIL_Y, WING_Y, 
 
 TIER_COLORS = ["white", "blue", "violet", "gold", "red"]
 TIERS = ["b", "a", "s", "ss", "sss"]
+MULTI_FALL = 3.2
 PRE = 2.4
 POST = 2.4
 FLAME_SPEED = {"fire": 1.0, "dark": 0.55, "earth": 0.45, "water": 0.75, "light": 0.8, "air": 1.3}
@@ -35,23 +36,16 @@ class Plan:
         self.birth = 4.6 if rank >= 2 else 4.4
         self.offerings = len(pulls) if pulls else 1
         self.crack_t = None
+        self.desc = self.birth + (1.6 if self.sigil else 0.8)
+        self.hover = self.desc + [1.8, 2.2, 2.8, 3.6, 4.2][rank]
         if pulls:
-            self.spawn = []
-            s = 4.7
-            for p in pulls:
-                self.spawn.append(s)
-                s += [0.42, 0.6, 0.95, 1.4, 1.95][TIERS.index(p)]
-            self.desc = s + 0.8
-            self.hover = self.desc + 3.4
-            self.crack_t = self.spawn[pulls.index("sss")] + 1.95 * 0.7 if "sss" in pulls else None
+            self.spawn = [self.birth] * len(pulls)
+            self.crack_t = self.desc + (self.hover - self.desc) * (0.18 + 0.72 * 4 / 5) if "sss" in pulls else None
             self.cracks = self.crack_t is not None
-        else:
-            self.desc = self.birth + (1.6 if self.sigil else 0.8)
-            self.hover = self.desc + [1.8, 2.2, 2.8, 3.6, 4.2][rank]
         chain = list(range(1, rank + 1))
         self.beats = [] if pulls else [(self.desc + (self.hover - self.desc) * (0.18 + 0.72 * (k + 1) / (len(chain) + 1)), c, 0.06 + 0.012 * c)
                                        for k, c in enumerate(chain)]
-        self.burst = self.hover + [0.7, 0.8, 1.2, 1.4, 1.6][rank] + (0.6 if mythic else 0)
+        self.burst = self.hover + [0.7, 0.8, 1.2, 1.4, 1.6][rank] + (0.6 if mythic or pulls else 0)
         self.reveal = self.burst + 0.3
         self.settle = self.reveal + ([1.2, 1.4, 3.6, 3.8, 4.0][rank])
         self.end = self.settle + [1.6, 1.8, 2.6, 3.0, 3.2][rank]
@@ -847,7 +841,7 @@ def multi(rig, A, P):
         b = f"multi_star_{i}"
         r = TIERS.index(p)
         t0 = P.spawn[i]
-        dur = [0.42, 0.6, 0.95, 1.4, 1.95][r]
+        dur = [0.42, 0.6, 0.95, 1.2, 1.4][r]
         a0 = 2 * math.pi * i / n
         ring_r = 330
 
@@ -876,30 +870,30 @@ def multi(rig, A, P):
         rig.sample(A, b, "position", t0 + dur + 0.05, fall0, orbit, rate=4)
 
         def fall(t, a0=a0, fall0=fall0, orbit=orbit):
-            u = ease_in_out(min(1, (t - fall0) / 2.6))
+            u = ease_in_out(min(1, (t - fall0) / MULTI_FALL))
             o = orbit(fall0)
             a = a0 + 0.35 * (fall0 - 4.7) + u * 2.4 * math.pi
             rr = ring_r * (1 - u) + 30 * math.sin(math.pi * u)
             return (rr * math.cos(a), o[1] * (1 - u) + HOVER[1] * u, rr * math.sin(a))
 
-        rig.sample(A, b, "position", fall0, fall0 + 2.6, fall, rate=10)
-        rig.key(A, b, "scale", fall0 + 2.5, (size,) * 3, "linear")
-        rig.key(A, b, "scale", fall0 + 2.62, (0, 0, 0), "linear")
-        rig.sample(A, b, "rotation", t0, fall0 + 2.6, lambda t: (40 * t, 160 * t, 0), rate=1, interp="linear")
+        rig.sample(A, b, "position", fall0, fall0 + MULTI_FALL, fall, rate=10)
+        rig.key(A, b, "scale", fall0 + MULTI_FALL - 0.1, (size,) * 3, "linear")
+        rig.key(A, b, "scale", fall0 + MULTI_FALL + 0.02, (0, 0, 0), "linear")
+        rig.sample(A, b, "rotation", t0, fall0 + MULTI_FALL, lambda t: (40 * t, 160 * t, 0), rate=1, interp="linear")
     best = max(TIERS.index(p) for p in P.pulls)
     for idx, c in enumerate(TIER_COLORS):
         rig.key(A, f"star_{c}", "scale", 0, (1, 1, 1) if idx == best else (0, 0, 0), "step", absolute=True)
     rig.key(A, "star", "position", 0, HOVER, "step", absolute=True)
-    rig.hide_until(A, "star", P.desc + 2.4)
-    rig.key(A, "star", "scale", P.desc + 2.6, (0.8,) * 3)
+    rig.hide_until(A, "star", P.desc + MULTI_FALL - 0.2)
+    rig.key(A, "star", "scale", P.desc + MULTI_FALL, (0.8,) * 3)
     for i in range(n):
-        t = P.desc + 0.09 * i + 2.62
+        t = P.desc + 0.09 * i + MULTI_FALL + 0.02
         rig.key(A, "star", "scale", t, (0.8 + 0.06 * i,) * 3)
         rig.key(A, "star", "scale", t + 0.05, (0.9 + 0.06 * i,) * 3)
     rig.key(A, "star", "scale", P.burst - 0.12, (1.6,) * 3)
     rig.key(A, "star", "scale", P.burst, (0.3,) * 3, "linear")
     rig.key(A, "star", "scale", P.burst + 0.06, (0, 0, 0), "linear")
-    rig.sample(A, "star_ring", "rotation", P.desc + 2.4, P.burst, lambda t: (70, 300 * t, 0), rate=2, interp="linear")
+    rig.sample(A, "star_ring", "rotation", P.desc + MULTI_FALL - 0.2, P.burst, lambda t: (70, 300 * t, 0), rate=2, interp="linear")
 
 
 def wings(rig, A, P):

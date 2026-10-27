@@ -117,7 +117,7 @@ Le master SSS contient tous les éléments. Les autres paliers en sont des coupe
 | SS | Sigil complet, trois battements, dragon spectral sans plongée, ailes à 80 % |
 | SSS | Tout |
 | Mythiques | SSS jusqu'à 9,75, puis l'éclipse (Night : tout s'éteint, sauf les yeux de la flamme des ténèbres) ou le blanc (Light : la flamme de lumière avale le ciel), voir `GACHA_ANIMATIONS.md` § 6.6 et § 6.7 |
-| ×10 | Dix étoiles naissent dans le sigil l'une après l'autre (couleur de leur propre tirage, arrivée plus forte selon le palier), descendent ensemble en spirale décalée et sont absorbées une à une. L'éclat prend la couleur de la meilleure ; les ailes sont celles du meilleur tirage |
+| ×10 | Même timing que le SSS mythique (24,9 s). Les dix étoiles naissent ensemble au moment de la naissance de l'étoile du SSS (couleur de leur propre tirage, arrivée plus forte selon le palier), descendent ensemble en spirale décalée (3,2 s) et sont absorbées une à une. L'éclat prend la couleur de la meilleure ; les ailes sont celles du meilleur tirage |
 
 ## 7. Sons et musique à récupérer
 
@@ -236,8 +236,8 @@ Retours de zorago appliqués :
 | `summon_sss` | 24,3 s | Le master : quatre battements, fissures rouges, ombres légendaires et épiques, ailes complètes |
 | `summon_mythic_night` | 24,9 s | SSS, puis l'éclipse : un disque noir et une couronne violette couvrent le sigil, les flammes s'éteignent sauf celle des ténèbres, qui grandit et ouvre les yeux. Un tir de plasma bleu-violet tombe du sigil jusqu'à l'éclat |
 | `summon_mythic_light` | 24,9 s | SSS, puis un prisme blanc géant naît sous le sigil, un voile nacré enveloppe l'île, et les flammes s'éteignent sauf celle de la lumière |
-| `summon_x10` | 30,2 s | Le ×10 du prototype (`B B B B B B A S SS SSS`) : dix étoiles arrivent l'une après l'autre dans le sigil, avec une arrivée propre à leur palier (B s'allume sur place, A descend, S tombe de haut, SS tombe du zénith, SSS arrive de l'horizon et fissure le ciel), tournent en anneau, puis descendent en spirale décalée et sont absorbées une à une. Éclat et ailes du meilleur palier |
-| `summon_x10_particles` | 30,2 s | Copie du ×10 avec les placeholders de particules (petits cubes) que le jeu remplacera par ses sprites |
+| `summon_x10` | 24,9 s | Le ×10 (`B B B B B B A S SS SSS`), au timing du SSS mythique depuis le 27 octobre (avant : 30,2 s, la musique se coupait) : dix étoiles arrivent ensemble dans le sigil, avec une arrivée propre à leur palier (B s'allume sur place, A descend, S tombe de haut, SS tombe du zénith, SSS arrive de l'horizon et fissure le ciel), tournent en anneau, puis descendent en spirale décalée et sont absorbées une à une. Éclat et ailes du meilleur palier |
+| `summon_x10_particles` | 24,9 s | Copie du ×10 avec les placeholders de particules (petits cubes) que le jeu remplacera par ses sprites |
 
 - **Modèles inutilisés cachés** : chaque animation met à l'échelle 0 tout groupe racine qu'elle n'anime pas (ombres des autres catégories, sigil dans B et A, éclipse hors Night, particules hors `summon_x10_particles`…). Dans `idle`, seuls le décor et les flammes restent.
 - **Durées** : elles sont calculées par palier dans `Plan` (naissance de l'étoile, descente, battements, éclat, révélation, retombée). Les battements sont répartis dans la descente.
