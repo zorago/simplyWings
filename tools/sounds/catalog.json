@@ -42,53 +42,53 @@
      "source": "fs_711122_cape_wings.mp3",
      "start": 22.225,
      "end": 22.75,
-     "peak": -3.0,
+     "peak": -3,
      "fade_in": 0.005,
      "fade_out": 0.25,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "wing/feather/flap_2",
      "source": "fs_711122_cape_wings.mp3",
      "start": 26.002,
      "end": 26.5,
-     "peak": -3.0,
+     "peak": -3,
      "fade_in": 0.005,
      "fade_out": 0.25,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "wing/feather/flap_3",
      "source": "fs_711122_cape_wings.mp3",
      "start": 29.444,
-     "end": 30.0,
-     "peak": -3.0,
+     "end": 30,
+     "peak": -3,
      "fade_in": 0.005,
      "fade_out": 0.25,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     }
    ],
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "revise",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    }
   },
   {
@@ -129,83 +129,83 @@
      "source": "fs_759529_large_flying_creature.mp3",
      "start": 2.347,
      "end": 3.03,
-     "peak": -2.0,
+     "peak": -2,
      "fade_in": 0.005,
      "fade_out": 0.25,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "wing/membrane/flap_2",
      "source": "fs_759529_large_flying_creature.mp3",
      "start": 3.431,
      "end": 4.140000000000001,
-     "peak": -2.0,
+     "peak": -2,
      "fade_in": 0.005,
      "fade_out": 0.25,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "wing/membrane/flap_3",
      "source": "fs_759529_large_flying_creature.mp3",
      "start": 4.522,
      "end": 5.24,
-     "peak": -2.0,
+     "peak": -2,
      "fade_in": 0.005,
      "fade_out": 0.25,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "wing/membrane/flap_4",
      "source": "fs_759529_large_flying_creature.mp3",
      "start": 5.543,
      "end": 6.29,
-     "peak": -2.0,
+     "peak": -2,
      "fade_in": 0.004,
      "fade_out": 0.25,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "wing/membrane/flap_5",
      "source": "fs_759529_large_flying_creature.mp3",
      "start": 6.577,
      "end": 7.3,
-     "peak": -2.0,
+     "peak": -2,
      "fade_in": 0.005,
      "fade_out": 0.25,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     }
    ],
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
-    "note": "",
-    "date": null
+    "state": "revise",
+    "note": "Pareille la reference est mieux que la version final. ",
+    "date": "2026-10-27"
    }
   },
   {
@@ -245,68 +245,68 @@
      "source": "fs_593487_umbrella_bat_wings.mp3",
      "start": 1.79,
      "end": 2.13,
-     "peak": -4.0,
+     "peak": -4,
      "fade_in": 0.005,
      "fade_out": 0.15,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "wing/leather/flap_2",
      "source": "fs_593487_umbrella_bat_wings.mp3",
      "start": 2.6900000000000004,
      "end": 3.04,
-     "peak": -4.0,
+     "peak": -4,
      "fade_in": 0.004,
      "fade_out": 0.15,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "wing/leather/flap_3",
      "source": "fs_593487_umbrella_bat_wings.mp3",
      "start": 3.56,
      "end": 3.9099999999999997,
-     "peak": -4.0,
+     "peak": -4,
      "fade_in": 0.004,
      "fade_out": 0.15,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "wing/leather/flap_4",
      "source": "fs_593487_umbrella_bat_wings.mp3",
      "start": 4.47,
      "end": 4.82,
-     "peak": -4.0,
+     "peak": -4,
      "fade_in": 0.004,
      "fade_out": 0.15,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     }
    ],
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "revise",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    }
   },
   {
@@ -346,53 +346,53 @@
      "source": "synth:burr_120",
      "start": 0,
      "end": null,
-     "peak": -8.0,
+     "peak": -8,
      "fade_in": 0.004,
      "fade_out": 0.05,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "wing/insect/flap_2",
      "source": "synth:burr_140",
      "start": 0,
      "end": null,
-     "peak": -8.0,
+     "peak": -8,
      "fade_in": 0.004,
      "fade_out": 0.05,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "wing/insect/flap_3",
      "source": "synth:burr_165",
      "start": 0,
      "end": null,
-     "peak": -8.0,
+     "peak": -8,
      "fade_in": 0.004,
      "fade_out": 0.05,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     }
    ],
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "reject",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    }
   },
   {
@@ -436,12 +436,12 @@
      "peak": -1.5,
      "fade_in": 0.005,
      "fade_out": 0.4,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "wing/strong/flap_2",
@@ -451,12 +451,12 @@
      "peak": -1.5,
      "fade_in": 0.005,
      "fade_out": 0.25,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "wing/strong/flap_3",
@@ -466,20 +466,20 @@
      "peak": -1.5,
      "fade_in": 0.004,
      "fade_out": 0.25,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     }
    ],
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    }
   },
   {
@@ -519,23 +519,23 @@
      "source": "synth:buzz_loop",
      "start": 0,
      "end": null,
-     "peak": -8.0,
+     "peak": -8,
      "fade_in": 0.004,
      "fade_out": 0.25,
-     "echo": 0.0,
+     "echo": 0,
      "loop": -1,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     }
    ],
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
-    "note": "",
-    "date": null
+    "state": "reject",
+    "note": "On dirait un hélicopter, faut un truc doux et leger qui casse pas le crane",
+    "date": "2026-10-27"
    },
    "loop": true
   },
@@ -570,98 +570,98 @@
      "source": "oga_magical_1_0.ogg",
      "start": 0.017,
      "end": null,
-     "peak": -2.0,
+     "peak": -2,
      "fade_in": 0.004,
      "fade_out": 0.3,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "gacha/ignite_2",
      "source": "oga_magical_2.ogg",
      "start": 0,
      "end": null,
-     "peak": -2.0,
+     "peak": -2,
      "fade_in": 0.004,
      "fade_out": 0.3,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "gacha/ignite_3",
      "source": "oga_magical_4.ogg",
      "start": 0,
      "end": null,
-     "peak": -2.0,
+     "peak": -2,
      "fade_in": 0.004,
      "fade_out": 0.3,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "gacha/ignite_4",
      "source": "oga_magical_5.ogg",
      "start": 0,
      "end": null,
-     "peak": -2.0,
+     "peak": -2,
      "fade_in": 0.004,
      "fade_out": 0.3,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "gacha/ignite_5",
      "source": "oga_magical_6_0.ogg",
      "start": 0,
      "end": null,
-     "peak": -2.0,
+     "peak": -2,
      "fade_in": 0.004,
      "fade_out": 0.3,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "gacha/ignite_6",
      "source": "oga_magical_7_0.ogg",
      "start": 0,
      "end": null,
-     "peak": -2.0,
+     "peak": -2,
      "fade_in": 0.004,
      "fade_out": 0.3,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     }
    ],
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
-    "note": "",
-    "date": null
+    "state": "reject",
+    "note": "Massif problème ignite c'est des flames, son de flammes / brassier ou grosse flamme de forge. ",
+    "date": "2026-10-27"
    },
    "loop": false
   },
@@ -696,23 +696,23 @@
      "source": "oga_magical_3.ogg",
      "start": 0,
      "end": null,
-     "peak": -2.0,
+     "peak": -2,
      "fade_in": 0.004,
      "fade_out": 0.4,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     }
    ],
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
-    "note": "",
-    "date": null
+    "state": "reject",
+    "note": "Plus doux et ethérée de nouveau, ça fait trop gameboy",
+    "date": "2026-10-27"
    },
    "loop": false
   },
@@ -746,40 +746,40 @@
     {
      "file": "gacha/rune_charge_1",
      "source": "fs_832552_crystal_ball.mp3",
-     "start": 1.0,
+     "start": 1,
      "end": 9.6,
-     "peak": -3.0,
+     "peak": -3,
      "fade_in": 0.3,
      "fade_out": 2.5,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "gacha/rune_charge_2",
      "source": "fs_832552_crystal_ball.mp3",
      "start": 9.2,
      "end": 17.6,
-     "peak": -3.0,
+     "peak": -3,
      "fade_in": 0.3,
      "fade_out": 2.5,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     }
    ],
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "loop": false
   },
@@ -815,23 +815,23 @@
      "source": "fs_859497_powerup_loop.mp3",
      "start": 0,
      "end": null,
-     "peak": -2.0,
+     "peak": -2,
      "fade_in": 0.05,
      "fade_out": 0.8,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     }
    ],
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
-    "note": "",
-    "date": null
+    "state": "reject",
+    "note": "Je veux un beam d'energie pure, comme le tire atomique de godzilla.",
+    "date": "2026-10-27"
    },
    "loop": false
   },
@@ -866,23 +866,23 @@
      "source": "fs_814053_shockwave.mp3",
      "start": 0,
      "end": 6.95,
-     "peak": -1.0,
+     "peak": -1,
      "fade_in": 0.004,
-     "fade_out": 2.0,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "fade_out": 2,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     }
    ],
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
-    "note": "",
-    "date": null
+    "state": "validated",
+    "note": "JE VALIDE FORT ET EN PLUS UTILISE LA POUR CHAQUE ETOILE QUI ATTEINT LE CERCLE. ",
+    "date": "2026-10-27"
    },
    "loop": false
   },
@@ -918,23 +918,23 @@
      "source": "fs_814044_creation_magic_blast.mp3",
      "start": 0,
      "end": 6.6,
-     "peak": -1.0,
+     "peak": -1,
      "fade_in": 0.004,
-     "fade_out": 2.0,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "fade_out": 2,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     }
    ],
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "loop": false
   },
@@ -969,23 +969,23 @@
      "source": "fs_814047_fantasy_implosion.mp3",
      "start": 0,
      "end": 7.7,
-     "peak": -1.0,
+     "peak": -1,
      "fade_in": 0.004,
-     "fade_out": 2.0,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "fade_out": 2,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     }
    ],
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "loop": false
   },
@@ -1019,23 +1019,23 @@
      "source": "fs_714257_puff_of_smoke.mp3",
      "start": 0,
      "end": null,
-     "peak": -3.0,
+     "peak": -3,
      "fade_in": 0.004,
      "fade_out": 0.15,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     }
    ],
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "loop": false
   },
@@ -1071,83 +1071,83 @@
      "source": "kenney_impact-sounds/Audio/impactBell_heavy_000.ogg",
      "start": 0,
      "end": null,
-     "peak": -2.0,
+     "peak": -2,
      "fade_in": 0.004,
      "fade_out": 0.3,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "gacha/bell_2",
      "source": "kenney_impact-sounds/Audio/impactBell_heavy_001.ogg",
      "start": 0,
      "end": null,
-     "peak": -2.0,
+     "peak": -2,
      "fade_in": 0.004,
      "fade_out": 0.3,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "gacha/bell_3",
      "source": "kenney_impact-sounds/Audio/impactBell_heavy_002.ogg",
      "start": 0,
      "end": null,
-     "peak": -2.0,
+     "peak": -2,
      "fade_in": 0.004,
      "fade_out": 0.3,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "gacha/bell_4",
      "source": "kenney_impact-sounds/Audio/impactBell_heavy_003.ogg",
      "start": 0,
      "end": null,
-     "peak": -2.0,
+     "peak": -2,
      "fade_in": 0.004,
      "fade_out": 0.3,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "gacha/bell_5",
      "source": "kenney_impact-sounds/Audio/impactBell_heavy_004.ogg",
      "start": 0,
      "end": null,
-     "peak": -2.0,
+     "peak": -2,
      "fade_in": 0.004,
      "fade_out": 0.3,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     }
    ],
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "loop": false
   },
@@ -1181,83 +1181,83 @@
      "source": "kenney_impact-sounds/Audio/impactGlass_medium_000.ogg",
      "start": 0,
      "end": null,
-     "peak": -4.0,
+     "peak": -4,
      "fade_in": 0.004,
      "fade_out": 0.2,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "gacha/chime_2",
      "source": "kenney_impact-sounds/Audio/impactGlass_medium_001.ogg",
      "start": 0,
      "end": null,
-     "peak": -4.0,
+     "peak": -4,
      "fade_in": 0.004,
      "fade_out": 0.2,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "gacha/chime_3",
      "source": "kenney_impact-sounds/Audio/impactGlass_medium_002.ogg",
      "start": 0,
      "end": null,
-     "peak": -4.0,
+     "peak": -4,
      "fade_in": 0.004,
      "fade_out": 0.2,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "gacha/chime_4",
      "source": "kenney_impact-sounds/Audio/impactGlass_medium_003.ogg",
      "start": 0,
      "end": null,
-     "peak": -4.0,
+     "peak": -4,
      "fade_in": 0.004,
      "fade_out": 0.2,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "gacha/chime_5",
      "source": "kenney_impact-sounds/Audio/impactGlass_medium_004.ogg",
      "start": 0,
      "end": null,
-     "peak": -4.0,
+     "peak": -4,
      "fade_in": 0.004,
      "fade_out": 0.2,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     }
    ],
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "loop": false
   },
@@ -1291,83 +1291,83 @@
      "source": "kenney_impact-sounds/Audio/impactGlass_light_000.ogg",
      "start": 0,
      "end": null,
-     "peak": -6.0,
+     "peak": -6,
      "fade_in": 0.004,
      "fade_out": 0.1,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "gacha/twinkle_2",
      "source": "kenney_impact-sounds/Audio/impactGlass_light_001.ogg",
      "start": 0,
      "end": null,
-     "peak": -6.0,
+     "peak": -6,
      "fade_in": 0.004,
      "fade_out": 0.1,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "gacha/twinkle_3",
      "source": "kenney_impact-sounds/Audio/impactGlass_light_002.ogg",
      "start": 0,
      "end": null,
-     "peak": -6.0,
+     "peak": -6,
      "fade_in": 0.004,
      "fade_out": 0.1,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "gacha/twinkle_4",
      "source": "kenney_impact-sounds/Audio/impactGlass_light_003.ogg",
      "start": 0,
      "end": null,
-     "peak": -6.0,
+     "peak": -6,
      "fade_in": 0.004,
      "fade_out": 0.1,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "gacha/twinkle_5",
      "source": "kenney_impact-sounds/Audio/impactGlass_light_004.ogg",
      "start": 0,
      "end": null,
-     "peak": -6.0,
+     "peak": -6,
      "fade_in": 0.004,
      "fade_out": 0.1,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     }
    ],
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "loop": false
   },
@@ -1401,128 +1401,128 @@
      "source": "kenney_casino-audio/Audio/card-slide-1.ogg",
      "start": 0.148,
      "end": null,
-     "peak": -8.0,
+     "peak": -8,
      "fade_in": 0.004,
      "fade_out": 0.1,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 6000,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "ui/card_deal_2",
      "source": "kenney_casino-audio/Audio/card-slide-2.ogg",
      "start": 0.058,
      "end": null,
-     "peak": -8.0,
+     "peak": -8,
      "fade_in": 0.005,
      "fade_out": 0.1,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 6000,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "ui/card_deal_3",
      "source": "kenney_casino-audio/Audio/card-slide-3.ogg",
      "start": 0.069,
      "end": null,
-     "peak": -8.0,
+     "peak": -8,
      "fade_in": 0.005,
      "fade_out": 0.1,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 6000,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "ui/card_deal_4",
      "source": "kenney_casino-audio/Audio/card-slide-4.ogg",
      "start": 0.097,
      "end": null,
-     "peak": -8.0,
+     "peak": -8,
      "fade_in": 0.005,
      "fade_out": 0.1,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 6000,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "ui/card_deal_5",
      "source": "kenney_casino-audio/Audio/card-slide-5.ogg",
      "start": 0.109,
      "end": null,
-     "peak": -8.0,
+     "peak": -8,
      "fade_in": 0.005,
      "fade_out": 0.1,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 6000,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "ui/card_deal_6",
      "source": "kenney_casino-audio/Audio/card-slide-6.ogg",
      "start": 0.142,
      "end": null,
-     "peak": -8.0,
+     "peak": -8,
      "fade_in": 0.005,
      "fade_out": 0.1,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 6000,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "ui/card_deal_7",
      "source": "kenney_casino-audio/Audio/card-slide-7.ogg",
      "start": 0.176,
      "end": null,
-     "peak": -8.0,
+     "peak": -8,
      "fade_in": 0.004,
      "fade_out": 0.1,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 6000,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "ui/card_deal_8",
      "source": "kenney_casino-audio/Audio/card-slide-8.ogg",
      "start": 0.254,
      "end": null,
-     "peak": -8.0,
+     "peak": -8,
      "fade_in": 0.005,
      "fade_out": 0.1,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 6000,
-     "gain_db": 0.0
+     "gain_db": 0
     }
    ],
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "loop": false
   },
@@ -1556,83 +1556,83 @@
      "source": "kenney_casino-audio/Audio/card-shove-1.ogg",
      "start": 0.114,
      "end": null,
-     "peak": -6.0,
+     "peak": -6,
      "fade_in": 0.004,
      "fade_out": 0.1,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 6000,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "ui/card_flip_2",
      "source": "kenney_casino-audio/Audio/card-shove-2.ogg",
      "start": 0.205,
      "end": null,
-     "peak": -6.0,
+     "peak": -6,
      "fade_in": 0.004,
      "fade_out": 0.1,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 6000,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "ui/card_flip_3",
      "source": "kenney_casino-audio/Audio/card-shove-3.ogg",
      "start": 0.117,
      "end": null,
-     "peak": -6.0,
+     "peak": -6,
      "fade_in": 0.005,
      "fade_out": 0.1,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 6000,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "ui/card_flip_4",
      "source": "kenney_casino-audio/Audio/card-shove-4.ogg",
      "start": 0.197,
      "end": null,
-     "peak": -6.0,
+     "peak": -6,
      "fade_in": 0.005,
      "fade_out": 0.1,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 6000,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "ui/card_flip_5",
      "source": "kenney_casino-audio/Audio/card-fan-1.ogg",
      "start": 0.027,
      "end": null,
-     "peak": -6.0,
+     "peak": -6,
      "fade_in": 0.004,
      "fade_out": 0.15,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 6000,
-     "gain_db": 0.0
+     "gain_db": 0
     }
    ],
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "loop": false
   },
@@ -1665,23 +1665,23 @@
      "source": "kenney_casino-audio/Audio/card-shuffle.ogg",
      "start": 0.18,
      "end": null,
-     "peak": -7.0,
+     "peak": -7,
      "fade_in": 0.005,
      "fade_out": 0.3,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 5000,
-     "gain_db": 0.0
+     "gain_db": 0
     }
    ],
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "loop": false
   },
@@ -1715,68 +1715,68 @@
      "source": "kenney_casino-audio/Audio/card-place-1.ogg",
      "start": 0.18,
      "end": null,
-     "peak": -6.0,
+     "peak": -6,
      "fade_in": 0.005,
      "fade_out": 0.1,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
      "pitch": 0.85,
      "lp": 4000,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "ui/card_place_2",
      "source": "kenney_casino-audio/Audio/card-place-2.ogg",
      "start": 0.048,
      "end": null,
-     "peak": -6.0,
+     "peak": -6,
      "fade_in": 0.004,
      "fade_out": 0.1,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
      "pitch": 0.85,
      "lp": 4000,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "ui/card_place_3",
      "source": "kenney_casino-audio/Audio/card-place-3.ogg",
      "start": 0.345,
      "end": null,
-     "peak": -6.0,
+     "peak": -6,
      "fade_in": 0.004,
      "fade_out": 0.1,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
      "pitch": 0.85,
      "lp": 4000,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "ui/card_place_4",
      "source": "kenney_casino-audio/Audio/card-place-4.ogg",
      "start": 0.294,
      "end": null,
-     "peak": -6.0,
+     "peak": -6,
      "fade_in": 0.005,
      "fade_out": 0.1,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
      "pitch": 0.85,
      "lp": 4000,
-     "gain_db": 0.0
+     "gain_db": 0
     }
    ],
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "loop": false
   },
@@ -1811,38 +1811,38 @@
      "source": "kenney_interface-sounds/Audio/bong_001.ogg",
      "start": 0,
      "end": null,
-     "peak": -9.0,
+     "peak": -9,
      "fade_in": 0.004,
      "fade_out": 0.06,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
      "pitch": 0.7,
      "lp": 1800,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "ui/confirm_2",
      "source": "kenney_ui-audio/Audio/switch3.ogg",
      "start": 0.066,
      "end": null,
-     "peak": -9.0,
+     "peak": -9,
      "fade_in": 0.004,
      "fade_out": 0.04,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
      "pitch": 0.7,
      "lp": 1800,
-     "gain_db": 0.0
+     "gain_db": 0
     }
    ],
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "loop": false
   },
@@ -1877,23 +1877,23 @@
      "source": "fs_711122_cape_wings.mp3",
      "start": 22.16,
      "end": 22.6,
-     "peak": -3.0,
+     "peak": -3,
      "fade_in": 0.004,
      "fade_out": 0.2,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
      "pitch": 0.8,
      "lp": 1600,
-     "gain_db": 0.0
+     "gain_db": 0
     }
    ],
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "loop": false
   },
@@ -1928,23 +1928,23 @@
      "source": "fs_561287.mp3",
      "start": 0.2,
      "end": 4.4,
-     "peak": -3.0,
+     "peak": -3,
      "fade_in": 0.004,
-     "fade_out": 1.0,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "fade_out": 1,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     }
    ],
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    }
   },
   {
@@ -1974,53 +1974,53 @@
      "source": "kenney_interface-sounds/Audio/open_002.ogg",
      "start": 0.004,
      "end": null,
-     "peak": -10.0,
+     "peak": -10,
      "fade_in": 0.004,
      "fade_out": 0.05,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
      "pitch": 0.75,
      "lp": 2000,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "ui/open_2",
      "source": "kenney_interface-sounds/Audio/open_003.ogg",
      "start": 0.005,
      "end": null,
-     "peak": -10.0,
+     "peak": -10,
      "fade_in": 0.005,
      "fade_out": 0.05,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
      "pitch": 0.75,
      "lp": 2000,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "ui/open_3",
      "source": "kenney_interface-sounds/Audio/open_004.ogg",
      "start": 0.297,
      "end": null,
-     "peak": -10.0,
+     "peak": -10,
      "fade_in": 0.005,
      "fade_out": 0.05,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
      "pitch": 0.75,
      "lp": 2000,
-     "gain_db": 0.0
+     "gain_db": 0
     }
    ],
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
-    "note": "",
-    "date": null
+    "state": "reject",
+    "note": "GROS GROS NON, ça fait bien trop jeu vidéo de 1990. Il faut un truc ethérée et doux. ",
+    "date": "2026-10-27"
    },
    "loop": false
   },
@@ -2053,25 +2053,25 @@
     {
      "file": "flight/wind_1",
      "source": "fs_454072.mp3",
-     "start": 30.0,
-     "end": 46.0,
-     "peak": -3.0,
+     "start": 30,
+     "end": 46,
+     "peak": -3,
      "fade_in": 0.004,
      "fade_out": 0.25,
-     "echo": 0.0,
+     "echo": 0,
      "loop": 1.5,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     }
    ],
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "loop": true
   },
@@ -2107,23 +2107,23 @@
      "source": "fs_504626.mp3",
      "start": 0.138,
      "end": 1.4,
-     "peak": -2.0,
+     "peak": -2,
      "fade_in": 0.005,
      "fade_out": 0.4,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     }
    ],
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "loop": false
   },
@@ -2158,68 +2158,68 @@
      "source": "kenney_impact-sounds/Audio/impactSoft_medium_000.ogg",
      "start": 0,
      "end": null,
-     "peak": -8.0,
+     "peak": -8,
      "fade_in": 0.004,
      "fade_out": 0.1,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "flight/landing_soft_2",
      "source": "kenney_impact-sounds/Audio/impactSoft_medium_001.ogg",
      "start": 0,
      "end": null,
-     "peak": -8.0,
+     "peak": -8,
      "fade_in": 0.004,
      "fade_out": 0.1,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "flight/landing_soft_3",
      "source": "kenney_impact-sounds/Audio/impactSoft_medium_002.ogg",
      "start": 0,
      "end": null,
-     "peak": -8.0,
+     "peak": -8,
      "fade_in": 0.004,
      "fade_out": 0.1,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "flight/landing_soft_4",
      "source": "kenney_impact-sounds/Audio/impactSoft_medium_003.ogg",
      "start": 0,
      "end": null,
-     "peak": -8.0,
+     "peak": -8,
      "fade_in": 0.004,
      "fade_out": 0.1,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     }
    ],
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "loop": false
   },
@@ -2253,98 +2253,98 @@
      "source": "fs_434339.mp3",
      "start": 0.23,
      "end": 1.1300000000000001,
-     "peak": -3.0,
+     "peak": -3,
      "fade_in": 0.004,
      "fade_out": 0.4,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "block/forge_bench/hammer_2",
      "source": "fs_434339.mp3",
      "start": 4.173,
      "end": 5.07,
-     "peak": -3.0,
+     "peak": -3,
      "fade_in": 0.004,
      "fade_out": 0.4,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "block/forge_bench/hammer_3",
      "source": "fs_434339.mp3",
      "start": 5.743,
      "end": 6.640000000000001,
-     "peak": -3.0,
+     "peak": -3,
      "fade_in": 0.004,
      "fade_out": 0.4,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "block/forge_bench/hammer_4",
      "source": "fs_434339.mp3",
      "start": 12.165,
      "end": 13.06,
-     "peak": -3.0,
+     "peak": -3,
      "fade_in": 0.004,
      "fade_out": 0.4,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "block/forge_bench/hammer_5",
      "source": "fs_434339.mp3",
      "start": 13.779,
      "end": 14.68,
-     "peak": -3.0,
+     "peak": -3,
      "fade_in": 0.004,
      "fade_out": 0.4,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "block/forge_bench/hammer_6",
      "source": "fs_434339.mp3",
      "start": 18.688,
      "end": 19.59,
-     "peak": -3.0,
+     "peak": -3,
      "fade_in": 0.004,
      "fade_out": 0.4,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     }
    ],
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "loop": false
   },
@@ -2378,23 +2378,23 @@
      "source": "fs_234782.mp3",
      "start": 0.142,
      "end": null,
-     "peak": -4.0,
+     "peak": -4,
      "fade_in": 0.005,
      "fade_out": 0.5,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     }
    ],
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "loop": false
   },
@@ -2427,25 +2427,25 @@
     {
      "file": "block/cloud_compressor/loop_1",
      "source": "fs_487748.mp3",
-     "start": 0.0,
+     "start": 0,
      "end": 7.6,
-     "peak": -4.0,
+     "peak": -4,
      "fade_in": 0.004,
      "fade_out": 0.25,
-     "echo": 0.0,
+     "echo": 0,
      "loop": 0.8,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     }
    ],
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "loop": true
   },
@@ -2479,38 +2479,38 @@
      "source": "fs_875132.mp3",
      "start": 1.69,
      "end": 2.6,
-     "peak": -5.0,
+     "peak": -5,
      "fade_in": 0.004,
      "fade_out": 0.2,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "essence/pour_2",
      "source": "fs_875132.mp3",
      "start": 2.988,
      "end": 3.95,
-     "peak": -5.0,
+     "peak": -5,
      "fade_in": 0.004,
      "fade_out": 0.2,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     }
    ],
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "loop": false
   },
@@ -2544,23 +2544,23 @@
      "source": "fs_511485.mp3",
      "start": 0,
      "end": null,
-     "peak": -6.0,
+     "peak": -6,
      "fade_in": 0.004,
      "fade_out": 0.3,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     }
    ],
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "loop": false
   },
@@ -2594,38 +2594,38 @@
      "source": "kenney_interface-sounds/Audio/back_002.ogg",
      "start": 0,
      "end": null,
-     "peak": -9.0,
+     "peak": -9,
      "fade_in": 0.004,
      "fade_out": 0.04,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
      "pitch": 0.6,
      "lp": 1500,
-     "gain_db": 0.0
+     "gain_db": 0
     },
     {
      "file": "ui/denied_2",
      "source": "kenney_interface-sounds/Audio/back_003.ogg",
      "start": 0.005,
      "end": null,
-     "peak": -9.0,
+     "peak": -9,
      "fade_in": 0.004,
      "fade_out": 0.04,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
      "pitch": 0.6,
      "lp": 1500,
-     "gain_db": 0.0
+     "gain_db": 0
     }
    ],
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "reject",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "loop": false
   },
@@ -2660,13 +2660,13 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.strong.flap",
-    "volume": 1.0,
+    "volume": 1,
     "pitch": 1.1
    }
   },
@@ -2699,25 +2699,25 @@
     {
      "file": "fury/dive_1",
      "source": "user/night_fury_dive.mp3",
-     "start": 0.0,
-     "end": 5.0,
-     "peak": -1.0,
+     "start": 0,
+     "end": 5,
+     "peak": -1,
      "fade_in": 0.004,
      "fade_out": 0.03,
-     "echo": 3.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 3,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     }
    ],
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "license_blocker": true
   },
@@ -2746,9 +2746,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "variants_from": "night_fury.dive",
    "license_blocker": true
@@ -2781,25 +2781,25 @@
     {
      "file": "fury/invisible_1",
      "source": "user/night_fury_dive.mp3",
-     "start": 0.0,
+     "start": 0,
      "end": null,
-     "peak": -1.0,
+     "peak": -1,
      "fade_in": 0.004,
      "fade_out": 0.05,
-     "echo": 3.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 3,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     }
    ],
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
-    "note": "",
-    "date": null
+    "state": "keep",
+    "note": "Je valide tant que y'a aussi la foudre minecraft vanilla qui tombe autour du player et sur le player (sans damages uniquement visuel). ",
+    "date": "2026-10-27"
    },
    "pitch": 0.97,
    "license_blocker": true
@@ -2829,9 +2829,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
-    "note": "",
-    "date": null
+    "state": "keep",
+    "note": "On ajoute l'explosion (blast) minecraft à 6s.",
+    "date": "2026-10-27"
    },
    "variants_from": "night_fury.invisible",
    "pitch": 1.03,
@@ -2866,25 +2866,25 @@
     {
      "file": "fury/night_charge_1",
      "source": "fs_814061.mp3",
-     "start": 0.0,
+     "start": 0,
      "end": 2.6,
-     "peak": -2.0,
+     "peak": -2,
      "fade_in": 0.4,
      "fade_out": 0.4,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     }
    ],
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    }
   },
   {
@@ -2917,23 +2917,23 @@
      "source": "fs_582631.mp3",
      "start": 0.123,
      "end": 0.9,
-     "peak": -4.0,
+     "peak": -4,
      "fade_in": 0.004,
      "fade_out": 0.2,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 1.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     }
    ],
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    }
   },
   {
@@ -2965,24 +2965,24 @@
      "file": "fury/light_charge_1",
      "source": "fs_407052.mp3",
      "start": 0.4,
-     "end": 20.0,
-     "peak": -2.0,
+     "end": 20,
+     "peak": -2,
      "fade_in": 0.2,
      "fade_out": 0.3,
-     "echo": 0.0,
-     "loop": 0.0,
-     "tempo": 8.0,
-     "pitch": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 8,
+     "pitch": 1,
      "lp": 0,
-     "gain_db": 0.0
+     "gain_db": 0
     }
    ],
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
-    "note": "",
-    "date": null
+    "state": "reject",
+    "note": "Trouve en un moins artificiel. ",
+    "date": "2026-10-27"
    }
   },
   {
@@ -3010,9 +3010,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "vanilla": {
     "event": "minecraft:entity.generic.explode",
@@ -3051,9 +3051,9 @@
    ],
    "candidates": [],
    "verdict": {
-    "state": "todo",
-    "note": "",
-    "date": null
+    "state": "revise",
+    "note": "baissé l'intensité des sifflements de breeze fortement mais sinon ok. ",
+    "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.feather.flap",
@@ -3093,9 +3093,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "revise",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "vanilla": {
     "event": "minecraft:entity.breeze.idle_air",
@@ -3132,9 +3132,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "family": "element",
    "alias": {
@@ -3174,9 +3174,9 @@
    ],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.feather.flap",
@@ -3216,14 +3216,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "vanilla": {
     "event": "minecraft:block.amethyst_block.chime",
     "volume": 0.5,
-    "pitch": 1.0
+    "pitch": 1
    }
   },
   {
@@ -3255,15 +3255,15 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "family": "feather_matter",
    "alias": {
     "target": "simplywings:wing.strong.flap",
-    "volume": 1.0,
-    "pitch": 1.0
+    "volume": 1,
+    "pitch": 1
    }
   },
   {
@@ -3295,9 +3295,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "revise",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.insect.flap",
@@ -3335,13 +3335,13 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "revise",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.buzz.loop",
-    "volume": 1.0,
+    "volume": 1,
     "pitch": 0.7
    },
    "loop": true
@@ -3375,9 +3375,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "family": "buzz",
    "alias": {
@@ -3417,13 +3417,13 @@
    ],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.feather.flap",
-    "volume": 1.0,
+    "volume": 1,
     "pitch": 0.9
    },
    "family": "feather"
@@ -3459,9 +3459,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "vanilla": {
     "event": "minecraft:block.amethyst_block.chime",
@@ -3498,14 +3498,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "family": "feather",
    "alias": {
     "target": "simplywings:wing.strong.flap",
-    "volume": 1.0,
+    "volume": 1,
     "pitch": 0.9
    }
   },
@@ -3540,9 +3540,9 @@
    ],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.feather.flap",
@@ -3582,9 +3582,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
-    "note": "",
-    "date": null
+    "state": "revise",
+    "note": "les ting aussi moins fort plus subtil. ",
+    "date": "2026-10-27"
    },
    "vanilla": {
     "event": "minecraft:block.amethyst_block.resonate",
@@ -3621,9 +3621,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "family": "element",
    "alias": {
@@ -3661,13 +3661,13 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "revise",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.leather.flap",
-    "volume": 1.0,
+    "volume": 1,
     "pitch": 1.1
    },
    "family": "leather"
@@ -3701,14 +3701,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "family": "leather",
    "alias": {
     "target": "simplywings:wing.strong.flap",
-    "volume": 1.0,
+    "volume": 1,
     "pitch": 1.32
    }
   },
@@ -3741,9 +3741,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "revise",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.insect.flap",
@@ -3781,13 +3781,13 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "revise",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.buzz.loop",
-    "volume": 1.0,
+    "volume": 1,
     "pitch": 1.4
    },
    "loop": true
@@ -3821,9 +3821,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "family": "buzz",
    "alias": {
@@ -3861,9 +3861,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "revise",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.insect.flap",
@@ -3901,13 +3901,13 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "revise",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.buzz.loop",
-    "volume": 1.0,
+    "volume": 1,
     "pitch": 0.9
    },
    "loop": true
@@ -3941,9 +3941,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "family": "buzz",
    "alias": {
@@ -3981,14 +3981,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "revise",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.feather.flap",
-    "volume": 1.0,
-    "pitch": 1.0
+    "volume": 1,
+    "pitch": 1
    },
    "family": "feather"
   },
@@ -4021,15 +4021,15 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "family": "feather",
    "alias": {
     "target": "simplywings:wing.strong.flap",
-    "volume": 1.0,
-    "pitch": 1.0
+    "volume": 1,
+    "pitch": 1
    }
   },
   {
@@ -4063,9 +4063,9 @@
    ],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.feather.flap",
@@ -4105,9 +4105,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "vanilla": {
     "event": "minecraft:block.copper.hit",
@@ -4144,14 +4144,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "family": "feather_matter",
    "alias": {
     "target": "simplywings:wing.strong.flap",
-    "volume": 1.0,
+    "volume": 1,
     "pitch": 0.95
    }
   },
@@ -4186,13 +4186,13 @@
    ],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.feather.flap",
-    "volume": 1.0,
+    "volume": 1,
     "pitch": 0.95
    },
    "family": "feather"
@@ -4228,9 +4228,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "vanilla": {
     "event": "minecraft:entity.parrot.fly",
@@ -4267,14 +4267,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "family": "feather",
    "alias": {
     "target": "simplywings:wing.strong.flap",
-    "volume": 1.0,
+    "volume": 1,
     "pitch": 0.95
    }
   },
@@ -4307,9 +4307,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "vanilla": {
     "event": "minecraft:block.wooden_trapdoor.open",
@@ -4347,13 +4347,13 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:block.cloud_compressor.loop",
-    "volume": 1.0,
+    "volume": 1,
     "pitch": 0.98
    },
    "loop": true
@@ -4387,9 +4387,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "family": "mechanism",
    "alias": {
@@ -4429,13 +4429,13 @@
    ],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.membrane.flap",
-    "volume": 1.0,
+    "volume": 1,
     "pitch": 0.8
    },
    "family": "membrane"
@@ -4471,14 +4471,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "vanilla": {
     "event": "minecraft:entity.blaze.shoot",
     "volume": 0.45,
-    "pitch": 0.55
+    "pitch": 0.5
    }
   },
   {
@@ -4510,14 +4510,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "family": "membrane",
    "alias": {
     "target": "simplywings:wing.strong.flap",
-    "volume": 1.0,
+    "volume": 1,
     "pitch": 0.68
    }
   },
@@ -4552,13 +4552,13 @@
    ],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "revise",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.feather.flap",
-    "volume": 1.0,
+    "volume": 1,
     "pitch": 0.85
    },
    "family": "feather"
@@ -4594,9 +4594,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "revise",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "vanilla": {
     "event": "minecraft:entity.parrot.fly",
@@ -4633,14 +4633,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "family": "feather",
    "alias": {
     "target": "simplywings:wing.strong.flap",
-    "volume": 1.0,
+    "volume": 1,
     "pitch": 0.85
    }
   },
@@ -4675,14 +4675,14 @@
    ],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.feather.flap",
     "volume": 0.6,
-    "pitch": 0.88
+    "pitch": 0.75
    },
    "family": "feather_matter"
   },
@@ -4717,9 +4717,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "vanilla": {
     "event": "minecraft:block.basalt.break",
@@ -4756,14 +4756,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "family": "feather_matter",
    "alias": {
     "target": "simplywings:wing.strong.flap",
-    "volume": 1.0,
+    "volume": 1,
     "pitch": 0.8
    }
   },
@@ -4840,14 +4840,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
-    "note": "",
-    "date": null
+    "state": "revise",
+    "note": "Sur celui ci et tout les autres sont de minecraft il faudrait un pitch aleatoire a chaque batement a + / - 0.05 autour du pitch choisi. Et ce partout.",
+    "date": "2026-10-27"
    },
    "vanilla": {
     "event": "minecraft:item.firecharge.use",
-    "volume": 0.35,
-    "pitch": 1.3
+    "volume": 0.05,
+    "pitch": 0.7
    }
   },
   {
@@ -4886,8 +4886,8 @@
    "family": "feather_matter",
    "alias": {
     "target": "simplywings:wing.strong.flap",
-    "volume": 1.0,
-    "pitch": 1.0
+    "volume": 1,
+    "pitch": 1
    }
   },
   {
@@ -4919,14 +4919,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.leather.flap",
-    "volume": 0.5,
-    "pitch": 0.935
+    "volume": 0.35,
+    "pitch": 1.2
    },
    "family": "glider"
   },
@@ -4959,9 +4959,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "family": "glider",
    "alias": {
@@ -5001,9 +5001,9 @@
    ],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.feather.flap",
@@ -5043,9 +5043,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "vanilla": {
     "event": "minecraft:block.azalea_leaves.break",
@@ -5082,9 +5082,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "family": "element",
    "alias": {
@@ -5124,13 +5124,13 @@
    ],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "revise",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.feather.flap",
-    "volume": 1.0,
+    "volume": 1,
     "pitch": 1.1
    },
    "family": "feather"
@@ -5166,9 +5166,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "vanilla": {
     "event": "minecraft:entity.parrot.fly",
@@ -5205,14 +5205,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "family": "feather",
    "alias": {
     "target": "simplywings:wing.strong.flap",
-    "volume": 1.0,
+    "volume": 1,
     "pitch": 1.1
    }
   },
@@ -5245,9 +5245,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "revise",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.insect.flap",
@@ -5285,13 +5285,13 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "revise",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.buzz.loop",
-    "volume": 1.0,
+    "volume": 1,
     "pitch": 1.6
    },
    "loop": true
@@ -5325,9 +5325,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "family": "buzz",
    "alias": {
@@ -5365,9 +5365,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.leather.flap",
@@ -5405,9 +5405,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "family": "glider",
    "alias": {
@@ -5445,13 +5445,13 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.membrane.flap",
-    "volume": 1.0,
+    "volume": 1,
     "pitch": 1.05
    },
    "family": "membrane"
@@ -5485,14 +5485,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "family": "membrane",
    "alias": {
     "target": "simplywings:wing.strong.flap",
-    "volume": 1.0,
+    "volume": 1,
     "pitch": 0.892
    }
   },
@@ -5525,9 +5525,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.feather.flap",
@@ -5565,9 +5565,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "family": "soft",
    "alias": {
@@ -5607,9 +5607,9 @@
    ],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.feather.flap",
@@ -5649,14 +5649,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "vanilla": {
     "event": "minecraft:block.amethyst_cluster.break",
-    "volume": 0.4,
-    "pitch": 1.5
+    "volume": 0.15,
+    "pitch": 1.3
    }
   },
   {
@@ -5688,15 +5688,15 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "family": "feather_matter",
    "alias": {
     "target": "simplywings:wing.strong.flap",
-    "volume": 1.0,
-    "pitch": 1.0
+    "volume": 1,
+    "pitch": 1
    }
   },
   {
@@ -5728,13 +5728,13 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.membrane.flap",
-    "volume": 1.0,
+    "volume": 1,
     "pitch": 0.9
    },
    "family": "membrane"
@@ -5768,14 +5768,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "family": "membrane",
    "alias": {
     "target": "simplywings:wing.strong.flap",
-    "volume": 1.0,
+    "volume": 1,
     "pitch": 0.765
    }
   },
@@ -5808,14 +5808,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "vanilla": {
     "event": "minecraft:block.wooden_trapdoor.open",
-    "volume": 0.6,
-    "pitch": 0.8
+    "volume": 0.2,
+    "pitch": 1.4
    },
    "family": "mechanism"
   },
@@ -5848,9 +5848,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "family": "mechanism",
    "alias": {
@@ -5888,9 +5888,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.feather.flap",
@@ -5928,9 +5928,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "family": "feather",
    "alias": {
@@ -5970,14 +5970,14 @@
    ],
    "candidates": [],
    "verdict": {
-    "state": "todo",
-    "note": "",
-    "date": null
+    "state": "revise",
+    "note": "un poile trop artificiel mais 95% bon sur celui la.",
+    "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.feather.flap",
-    "volume": 1.0,
-    "pitch": 1.2
+    "volume": 1,
+    "pitch": 1.4
    },
    "family": "feather"
   },
@@ -6012,9 +6012,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "vanilla": {
     "event": "minecraft:entity.parrot.fly",
@@ -6051,14 +6051,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "family": "feather",
    "alias": {
     "target": "simplywings:wing.strong.flap",
-    "volume": 1.0,
+    "volume": 1,
     "pitch": 1.2
    }
   },
@@ -6091,13 +6091,13 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.feather.flap",
-    "volume": 1.0,
+    "volume": 1,
     "pitch": 1.05
    },
    "family": "feather"
@@ -6131,14 +6131,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "family": "feather",
    "alias": {
     "target": "simplywings:wing.strong.flap",
-    "volume": 1.0,
+    "volume": 1,
     "pitch": 1.05
    }
   },
@@ -6173,13 +6173,13 @@
    ],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.feather.flap",
-    "volume": 1.0,
+    "volume": 1,
     "pitch": 0.95
    },
    "family": "feather"
@@ -6215,9 +6215,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "vanilla": {
     "event": "minecraft:entity.parrot.fly",
@@ -6254,14 +6254,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "family": "feather",
    "alias": {
     "target": "simplywings:wing.strong.flap",
-    "volume": 1.0,
+    "volume": 1,
     "pitch": 0.95
    }
   },
@@ -6296,13 +6296,13 @@
    ],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.membrane.flap",
-    "volume": 1.0,
+    "volume": 1,
     "pitch": 1.05
    },
    "family": "membrane"
@@ -6338,9 +6338,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "vanilla": {
     "event": "minecraft:entity.phantom.flap",
@@ -6377,14 +6377,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "family": "membrane",
    "alias": {
     "target": "simplywings:wing.strong.flap",
-    "volume": 1.0,
+    "volume": 1,
     "pitch": 0.892
    }
   },
@@ -6419,13 +6419,13 @@
    ],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.feather.flap",
-    "volume": 1.0,
+    "volume": 1,
     "pitch": 1.15
    },
    "family": "feather"
@@ -6461,9 +6461,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "vanilla": {
     "event": "minecraft:entity.parrot.fly",
@@ -6500,14 +6500,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "family": "feather",
    "alias": {
     "target": "simplywings:wing.strong.flap",
-    "volume": 1.0,
+    "volume": 1,
     "pitch": 1.15
    }
   },
@@ -6542,9 +6542,9 @@
    ],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.feather.flap",
@@ -6584,9 +6584,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "vanilla": {
     "event": "minecraft:particle.soul_escape",
@@ -6623,9 +6623,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "family": "soft",
    "alias": {
@@ -6665,13 +6665,13 @@
    ],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.membrane.flap",
-    "volume": 1.0,
+    "volume": 1,
     "pitch": 0.9
    },
    "family": "membrane"
@@ -6707,9 +6707,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "vanilla": {
     "event": "minecraft:entity.phantom.flap",
@@ -6746,14 +6746,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "family": "membrane",
    "alias": {
     "target": "simplywings:wing.strong.flap",
-    "volume": 1.0,
+    "volume": 1,
     "pitch": 0.765
    }
   },
@@ -6788,13 +6788,13 @@
    ],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.feather.flap",
-    "volume": 1.0,
+    "volume": 1,
     "pitch": 0.85
    },
    "family": "feather"
@@ -6836,7 +6836,7 @@
    },
    "vanilla": {
     "event": "minecraft:block.beacon.power_select",
-    "volume": 0.35,
+    "volume": 0.1,
     "pitch": 1.6
    }
   },
@@ -6869,14 +6869,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "family": "feather",
    "alias": {
     "target": "simplywings:wing.strong.flap",
-    "volume": 1.0,
+    "volume": 1,
     "pitch": 0.85
    }
   },
@@ -6911,9 +6911,9 @@
    ],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.feather.flap",
@@ -6953,14 +6953,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "vanilla": {
     "event": "minecraft:entity.enderman.teleport",
-    "volume": 0.25,
-    "pitch": 0.6
+    "volume": 0.05,
+    "pitch": 0.1
    }
   },
   {
@@ -6992,14 +6992,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "family": "feather_matter",
    "alias": {
     "target": "simplywings:wing.strong.flap",
-    "volume": 1.0,
+    "volume": 1,
     "pitch": 0.85
    }
   },
@@ -7032,14 +7032,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
-    "note": "",
-    "date": null
+    "state": "keep",
+    "note": "Très silencieux",
+    "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.leather.flap",
-    "volume": 0.5,
-    "pitch": 1.02
+    "volume": 0.2,
+    "pitch": 0.8
    },
    "family": "glider"
   },
@@ -7072,9 +7072,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "family": "glider",
    "alias": {
@@ -7114,9 +7114,9 @@
    ],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.feather.flap",
@@ -7156,14 +7156,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
-    "note": "",
-    "date": null
+    "state": "reject",
+    "note": "Utilis plutot le thunder et pas l'impact. Ou trouve un bruit d'éclair. ",
+    "date": "2026-10-27"
    },
    "vanilla": {
     "event": "minecraft:entity.lightning_bolt.impact",
-    "volume": 0.25,
-    "pitch": 1.8
+    "volume": 0.02,
+    "pitch": 1.2
    }
   },
   {
@@ -7195,14 +7195,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "family": "feather_matter",
    "alias": {
     "target": "simplywings:wing.strong.flap",
-    "volume": 1.0,
+    "volume": 1,
     "pitch": 1.05
    }
   },
@@ -7237,13 +7237,13 @@
    ],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.feather.flap",
-    "volume": 1.0,
+    "volume": 1,
     "pitch": 1.25
    },
    "family": "feather"
@@ -7279,9 +7279,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "vanilla": {
     "event": "minecraft:entity.parrot.fly",
@@ -7318,14 +7318,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "family": "feather",
    "alias": {
     "target": "simplywings:wing.strong.flap",
-    "volume": 1.0,
+    "volume": 1,
     "pitch": 1.25
    }
   },
@@ -7360,9 +7360,9 @@
    ],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.feather.flap",
@@ -7402,9 +7402,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "vanilla": {
     "event": "minecraft:entity.boat.paddle_water",
@@ -7441,9 +7441,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "family": "element",
    "alias": {
@@ -7484,14 +7484,14 @@
    ],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.feather.flap",
-    "volume": 1.0,
-    "pitch": 1.0
+    "volume": 1,
+    "pitch": 1
    },
    "family": "feather"
   },
@@ -7526,9 +7526,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "vanilla": {
     "event": "minecraft:block.amethyst_block.chime",
@@ -7567,9 +7567,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "vanilla": {
     "event": "minecraft:block.amethyst_block.chime",
@@ -7606,15 +7606,15 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "family": "feather",
    "alias": {
     "target": "simplywings:wing.strong.flap",
-    "volume": 1.0,
-    "pitch": 1.0
+    "volume": 1,
+    "pitch": 1
    }
   },
   {
@@ -8402,14 +8402,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "vanilla": {
     "event": "minecraft:entity.ender_dragon.growl",
-    "volume": 1.0,
-    "pitch": 1.0
+    "volume": 1,
+    "pitch": 0.5
    }
   },
   {
@@ -8437,14 +8437,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "vanilla": {
     "event": "minecraft:block.beacon.activate",
-    "volume": 1.0,
-    "pitch": 1.0
+    "volume": 1,
+    "pitch": 1
    }
   },
   {
@@ -8472,14 +8472,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "vanilla": {
     "event": "minecraft:item.firecharge.use",
-    "volume": 1.0,
-    "pitch": 1.0
+    "volume": 1,
+    "pitch": 1
    }
   },
   {
@@ -8507,14 +8507,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "vanilla": {
     "event": "minecraft:entity.warden.sonic_charge",
-    "volume": 1.0,
-    "pitch": 1.0
+    "volume": 1,
+    "pitch": 1
    }
   },
   {
@@ -8542,14 +8542,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "vanilla": {
     "event": "minecraft:block.basalt.break",
-    "volume": 1.0,
-    "pitch": 1.0
+    "volume": 1,
+    "pitch": 1
    }
   },
   {
@@ -8577,14 +8577,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "vanilla": {
     "event": "minecraft:entity.player.splash",
-    "volume": 1.0,
-    "pitch": 1.0
+    "volume": 1,
+    "pitch": 1
    }
   },
   {
@@ -8612,14 +8612,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "vanilla": {
     "event": "minecraft:block.amethyst_block.chime",
-    "volume": 1.0,
-    "pitch": 1.0
+    "volume": 1,
+    "pitch": 1
    }
   },
   {
@@ -8647,14 +8647,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "vanilla": {
     "event": "minecraft:entity.breeze.idle_air",
-    "volume": 1.0,
-    "pitch": 1.0
+    "volume": 1,
+    "pitch": 1
    }
   },
   {
@@ -8682,14 +8682,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "vanilla": {
     "event": "minecraft:block.amethyst_block.resonate",
-    "volume": 1.0,
-    "pitch": 1.0
+    "volume": 1,
+    "pitch": 1
    }
   },
   {
@@ -8717,14 +8717,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "vanilla": {
     "event": "minecraft:block.amethyst_block.chime",
-    "volume": 1.0,
-    "pitch": 1.0
+    "volume": 1,
+    "pitch": 1
    }
   },
   {
@@ -8752,14 +8752,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "vanilla": {
     "event": "minecraft:block.brewing_stand.brew",
-    "volume": 1.0,
-    "pitch": 1.0
+    "volume": 1,
+    "pitch": 1
    }
   },
   {
@@ -8787,14 +8787,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "vanilla": {
     "event": "minecraft:block.bubble_column.upwards_ambient",
-    "volume": 1.0,
-    "pitch": 1.0
+    "volume": 1,
+    "pitch": 1
    }
   },
   {
@@ -8822,14 +8822,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "vanilla": {
     "event": "minecraft:block.amethyst_block.resonate",
-    "volume": 1.0,
-    "pitch": 1.0
+    "volume": 1,
+    "pitch": 1
    }
   },
   {
@@ -8857,14 +8857,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "vanilla": {
     "event": "minecraft:entity.player.levelup",
-    "volume": 1.0,
-    "pitch": 1.0
+    "volume": 0.5,
+    "pitch": 0.7
    }
   }
  ]
