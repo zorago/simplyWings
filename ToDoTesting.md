@@ -318,6 +318,7 @@ Notés au fil des messages de zorago, à corriger seulement sur son feu vert.
 
 - [ ] Transparence : beaucoup de textures, notamment les flammes de l'autel du gacha, passent mal devant les nuages et l'eau (même souci qu'avant avec les ailes de feu).
 - [ ] Show du gacha : l'item 3D des plumes s'affiche deux fois et forme une croix ; il ne doit s'afficher qu'une fois par item.
+- [ ] Écran du gacha : nouvelle image de fond fournie par zorago, `art/gacha/altar_screen_background.png` (jardin céleste violet, six ailés élémentaires autour d'un temple flottant), à intégrer.
 
 ## 15. Sons : passes d'écoute dans le banc, puis en jeu
 
