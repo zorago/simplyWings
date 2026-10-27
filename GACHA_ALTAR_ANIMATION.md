@@ -94,10 +94,10 @@ Temps en secondes. Les paliers inférieurs coupent des blocs (§ 6). Le hit-stop
 | 3,60 – 4,00 | **Inspiration** | Tout se contracte : flammes basses, cercle qui rétrécit de 10 % |
 | 4,00 | **Colonne** | La colonne jaillit jusqu'au ciel en 0,18 s ; onde au sol ; les cercles empilés s'ouvrent l'un après l'autre (0,12 s) ; le sigil du ciel se déploie (de 0 à 1,08 puis 1) |
 | 4,60 – 6,20 | **Naissance de l'étoile** | Au centre du sigil, l'étoile se condense (éclats aspirés), anticipation, flash, anneau d'éveil |
-| 6,20 – 10,40 | **Descente** | L'étoile descend en spirale autour de la colonne, avec sa traînée. À partir de 6,6, le **dragon spectral** surgit de l'horizon et tourne autour du sigil |
+| 6,20 – 10,40 | **Descente** | L'étoile descend en spirale autour de la colonne, avec sa traînée (le dragon spectral prévu ici est supprimé, décision de zorago du 27 octobre) |
 | 7,20 / 8,05 / 8,90 / 9,75 | **Battements** | Bleu, violet, or, rouge. À chaque battement : hit-stop 70 à 110 ms, changement de couleur, onde dans le ciel, les flammes flambent ensemble, puis secousse |
 | 9,75 | **Fissure** | Au battement rouge, le ciel se fissure en rouge autour du sigil |
-| 10,40 – 12,00 | **Absorption** | L'étoile se fige à 3 blocs au-dessus de l'autel et tremble. Les six flammes s'étirent en flux vers elle et rapetissent. Le dragon plonge en piqué derrière l'île |
+| 10,40 – 12,00 | **Absorption** | L'étoile se fige à 3 blocs au-dessus de l'autel et tremble. Les six flammes s'étirent en flux vers elle et rapetissent. |
 | 12,00 | **Éclat** | Implosion (0,12 s), hit-stop 120 ms, explosion : 48 éclats, trois ondes de choc (rapide, moyenne, lente), flash vertical, le sigil vole en éclats et ses branches tournoient en s'éloignant |
 | 12,30 – 16,40 | **Révélation** | Six colonnes élémentaires jaillissent des flammes (12,30 à 14,10, 50 ms d’écart). Les ailes spectrales se déploient au-dessus de l’autel (+14 blocs, à partir de 12,40) et font deux grands battements (13,60 et 14,60) qui soufflent des plumes. Les flammes se rallument à la couleur du palier, deux fois plus hautes |
 | 16,40 – 19,60 | **Retombée** | Les ailes se replient et se dissolvent vers le ciel, les cercles se referment en spirale, la colonne s'amincit, les plumes finissent de tomber |

@@ -488,6 +488,38 @@
    }
   },
   {
+   "id": "wing.legendary.flap_strong",
+   "category": "wing",
+   "group": "legendary",
+   "status": "custom",
+   "trigger": "Coup puissant de l'ange (et du démon, plus grave)",
+   "code": [
+    "client/WingSounds.java"
+   ],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": "wing_flap_strong",
+   "attenuation": 48,
+   "preload": true,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": true,
+   "animations": [],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": "2026-10-27"
+   },
+   "loop": false,
+   "variants_from": "gacha.wing_beat"
+  },
+  {
    "id": "wing.buzz.loop",
    "category": "wing",
    "group": "buzz",
@@ -3548,15 +3580,15 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "keep",
+    "state": "todo",
     "note": "",
     "date": "2026-10-27"
    },
    "family": "feather",
    "alias": {
-    "target": "simplywings:wing.strong.flap",
-    "volume": 1,
-    "pitch": 0.9
+    "target": "simplywings:wing.legendary.flap_strong",
+    "volume": 1.0,
+    "pitch": 1.0
    }
   },
   {
@@ -4560,15 +4592,15 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "keep",
+    "state": "todo",
     "note": "",
     "date": "2026-10-27"
    },
    "family": "membrane",
    "alias": {
-    "target": "simplywings:wing.strong.flap",
-    "volume": 1,
-    "pitch": 0.68
+    "target": "simplywings:wing.legendary.flap_strong",
+    "volume": 1.0,
+    "pitch": 0.88
    }
   },
   {
@@ -9036,7 +9068,7 @@
    "category": "gacha",
    "group": "altar",
    "status": "custom",
-   "trigger": "Rayon central : le coup du son tombe quand la colonne jaillit",
+   "trigger": "Rayon central : le coup du son tombe quand la colonne jaillit ; −4 dB pour laisser dominer gacha.beam_punch",
    "code": [
     "client/show/ShowSounds.java"
    ],
@@ -9066,7 +9098,7 @@
      "tempo": 1,
      "pitch": 1,
      "lp": 0,
-     "gain_db": 0
+     "gain_db": -4
     }
    ],
    "layers": [],
@@ -9881,6 +9913,617 @@
      "pitch": 1,
      "lp": 0,
      "gain_db": -3
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": "2026-10-27"
+   },
+   "loop": false
+  },
+  {
+   "id": "gacha.offer_burst",
+   "category": "gacha",
+   "group": "altar",
+   "status": "custom",
+   "trigger": "Offrande posée sur l'autel (début du show)",
+   "code": [
+    "client/show/ShowSounds.java"
+   ],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": "gacha_small",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "gacha.offer",
+   "subtitle": "Offering burns",
+   "declared": true,
+   "slow_attack": true,
+   "animations": [],
+   "variants": [
+    {
+     "file": "gacha/offer_burst_1",
+     "source": "pixabay/biww-fire-burst-flame-sound-effect-561958.mp3",
+     "start": 0,
+     "end": null,
+     "peak": -3,
+     "fade_in": 0.005,
+     "fade_out": 0.3,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
+     "lp": 0,
+     "gain_db": 0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": "2026-10-27"
+   },
+   "loop": false
+  },
+  {
+   "id": "gacha.poof",
+   "category": "gacha",
+   "group": "altar",
+   "status": "custom",
+   "trigger": "Bouffée de fumée juste après l'offrande",
+   "code": [
+    "client/show/ShowSounds.java"
+   ],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": "gacha_small",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "gacha.puff",
+   "subtitle": "Cloud puffs",
+   "declared": true,
+   "slow_attack": true,
+   "animations": [],
+   "variants": [
+    {
+     "file": "gacha/poof_1",
+     "source": "pixabay/freesound_community-poof-of-smoke-87381.mp3",
+     "start": 0.15,
+     "end": null,
+     "peak": -3,
+     "fade_in": 0.005,
+     "fade_out": 0.2,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
+     "lp": 0,
+     "gain_db": 0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": "2026-10-27"
+   },
+   "loop": false
+  },
+  {
+   "id": "gacha.crystal",
+   "category": "gacha",
+   "group": "altar",
+   "status": "custom",
+   "trigger": "Allumage du cristal de l'autel",
+   "code": [
+    "client/show/ShowSounds.java"
+   ],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": "gacha_small",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": true,
+   "animations": [],
+   "variants": [
+    {
+     "file": "gacha/crystal_1",
+     "source": "pixabay/freesoundfx-spotlight-turning-on-388828.mp3",
+     "start": 0,
+     "end": 4.6,
+     "peak": -3,
+     "fade_in": 0.005,
+     "fade_out": 1.2,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
+     "lp": 0,
+     "gain_db": 0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": "2026-10-27"
+   },
+   "loop": false
+  },
+  {
+   "id": "gacha.rune",
+   "category": "gacha",
+   "group": "altar",
+   "status": "custom",
+   "trigger": "Charge des runes (une rune qui s'active, une seule fois)",
+   "code": [
+    "client/show/ShowSounds.java"
+   ],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": "gacha_small",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "gacha.rune_charge",
+   "subtitle": "Altar hums",
+   "declared": true,
+   "slow_attack": true,
+   "animations": [],
+   "variants": [
+    {
+     "file": "gacha/rune_1",
+     "source": "pixabay/coghezzi-sacred-rune-lock-holy-magic-seal-activation-533277.mp3",
+     "start": 0.05,
+     "end": 2.9,
+     "peak": -3,
+     "fade_in": 0.005,
+     "fade_out": 0.6,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
+     "lp": 0,
+     "gain_db": 0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": "2026-10-27"
+   },
+   "loop": false
+  },
+  {
+   "id": "gacha.inhale",
+   "category": "gacha",
+   "group": "altar",
+   "status": "custom",
+   "trigger": "Inspiration : le sommet de la montée tombe sur la colonne",
+   "code": [
+    "client/show/ShowSounds.java"
+   ],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": "gacha_big",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": true,
+   "animations": [],
+   "variants": [
+    {
+     "file": "gacha/inhale_1",
+     "source": "pixabay/yodguard-energy-charge-2-482499.mp3",
+     "start": 0,
+     "end": 3.0,
+     "peak": -3,
+     "fade_in": 0.005,
+     "fade_out": 0.2,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
+     "lp": 0,
+     "gain_db": 0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": "2026-10-27"
+   },
+   "loop": false
+  },
+  {
+   "id": "gacha.beam_punch",
+   "category": "gacha",
+   "group": "altar",
+   "status": "custom",
+   "trigger": "Corps du rayon, dominant : attaque pile à l'apparition de la colonne",
+   "code": [
+    "client/show/ShowSounds.java"
+   ],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": "gacha_big",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": true,
+   "animations": [],
+   "variants": [
+    {
+     "file": "gacha/beam_punch_1",
+     "source": "pixabay/freesound_community-heavy-beam-weapon-7052.mp3",
+     "start": 0,
+     "end": 7.2,
+     "peak": -3,
+     "fade_in": 0.005,
+     "fade_out": 1.5,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
+     "lp": 0,
+     "gain_db": 1
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": "2026-10-27"
+   },
+   "loop": false
+  },
+  {
+   "id": "gacha.shine",
+   "category": "gacha",
+   "group": "altar",
+   "status": "custom",
+   "trigger": "Naissance de l'étoile : flash et anneau d'éveil",
+   "code": [
+    "client/show/ShowSounds.java"
+   ],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": "gacha_small",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": true,
+   "animations": [],
+   "variants": [
+    {
+     "file": "gacha/shine_1",
+     "source": "pixabay/benkirb-shine-1-268902.mp3",
+     "start": 0,
+     "end": 2.2,
+     "peak": -3,
+     "fade_in": 0.005,
+     "fade_out": 0.6,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
+     "lp": 0,
+     "gain_db": 0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": "2026-10-27"
+   },
+   "loop": false
+  },
+  {
+   "id": "gacha.shooting_star",
+   "category": "gacha",
+   "group": "altar",
+   "status": "custom",
+   "trigger": "Descente de l'étoile en spirale",
+   "code": [
+    "client/show/ShowSounds.java"
+   ],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": "gacha_small",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": true,
+   "animations": [],
+   "variants": [
+    {
+     "file": "gacha/shooting_star_1",
+     "source": "pixabay/freesound_community-shooting-star-2-104073.mp3",
+     "start": 0,
+     "end": 1.0,
+     "peak": -3,
+     "fade_in": 0.005,
+     "fade_out": 0.2,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
+     "lp": 0,
+     "gain_db": 0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": "2026-10-27"
+   },
+   "loop": false
+  },
+  {
+   "id": "gacha.sky_crack",
+   "category": "gacha",
+   "group": "altar",
+   "status": "custom",
+   "trigger": "Fissure rouge du ciel (4e battement), jouée 3 fois à 0,1 s",
+   "code": [
+    "client/show/ShowSounds.java"
+   ],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": "gacha_big",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "gacha.thunder",
+   "subtitle": "Thunder cracks",
+   "declared": true,
+   "slow_attack": true,
+   "animations": [],
+   "variants": [
+    {
+     "file": "gacha/sky_crack_1",
+     "source": "pixabay/lordsonny-thunder-for-anime-161022.mp3",
+     "start": 0,
+     "end": 4.5,
+     "peak": -3,
+     "fade_in": 0.005,
+     "fade_out": 1.5,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
+     "lp": 0,
+     "gain_db": 0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": "2026-10-27"
+   },
+   "loop": false
+  },
+  {
+   "id": "gacha.absorb",
+   "category": "gacha",
+   "group": "altar",
+   "status": "custom",
+   "trigger": "Absorption : la fin de la montée tombe 0,3 s avant l'éclat",
+   "code": [
+    "client/show/ShowSounds.java"
+   ],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": "gacha_big",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": true,
+   "animations": [],
+   "variants": [
+    {
+     "file": "gacha/absorb_1",
+     "source": "pixabay/soundreality-riser-the-plane-391179.mp3",
+     "start": 5.65,
+     "end": 8.15,
+     "peak": -3,
+     "fade_in": 0.4,
+     "fade_out": 0.05,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
+     "lp": 0,
+     "gain_db": 0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": "2026-10-27"
+   },
+   "loop": false
+  },
+  {
+   "id": "gacha.implode",
+   "category": "gacha",
+   "group": "altar",
+   "status": "custom",
+   "trigger": "Implosion : 0,3 s d'aspiration puis le coup pile à l'éclat",
+   "code": [
+    "client/show/ShowSounds.java"
+   ],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": "gacha_big",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "gacha.implosion",
+   "subtitle": "Magic collapses",
+   "declared": true,
+   "slow_attack": true,
+   "animations": [],
+   "variants": [
+    {
+     "file": "gacha/implode_1",
+     "source": "pixabay/audiopapkin-riser-hit-sfx-127-508586.mp3",
+     "start": 2.36,
+     "end": 5.5,
+     "peak": -3,
+     "fade_in": 0.02,
+     "fade_out": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
+     "lp": 0,
+     "gain_db": 0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": "2026-10-27"
+   },
+   "loop": false
+  },
+  {
+   "id": "gacha.columns",
+   "category": "gacha",
+   "group": "altar",
+   "status": "custom",
+   "trigger": "Six colonnes élémentaires (une seule fois, elles jaillissent à 50 ms d'écart)",
+   "code": [
+    "client/show/ShowSounds.java"
+   ],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": "gacha_big",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": true,
+   "animations": [],
+   "variants": [
+    {
+     "file": "gacha/columns_1",
+     "source": "pixabay/dragon-studio-fire-spell-impact-448565.mp3",
+     "start": 0,
+     "end": 3.6,
+     "peak": -3,
+     "fade_in": 0.005,
+     "fade_out": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
+     "lp": 0,
+     "gain_db": 0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": "2026-10-27"
+   },
+   "loop": false
+  },
+  {
+   "id": "gacha.settle",
+   "category": "gacha",
+   "group": "altar",
+   "status": "custom",
+   "trigger": "Retombée de fin de show",
+   "code": [
+    "client/show/ShowSounds.java"
+   ],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": "gacha_big",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": true,
+   "animations": [],
+   "variants": [
+    {
+     "file": "gacha/settle_1",
+     "source": "pixabay/youssefmizani-bass-drop-407122.mp3",
+     "start": 0,
+     "end": null,
+     "peak": -3,
+     "fade_in": 0.005,
+     "fade_out": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
+     "lp": 0,
+     "gain_db": -4
     }
    ],
    "layers": [],

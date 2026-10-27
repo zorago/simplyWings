@@ -74,7 +74,7 @@ Tous les sons d'interface passent par deux passe-bas (6000 Hz pour les cartes, 1
 
 ## Pixabay, fournis par zorago (licence Pixabay)
 
-Dossier `pixabay/` : 20 fichiers choisis par zorago le 27 octobre pour refaire le son du gacha. Licence Pixabay Content License : usage gratuit dans un projet, y compris commercial, sans attribution obligatoire, mais pas de redistribution des fichiers seuls. Les sons sont intégrés au mod, donc l'usage est couvert. Les fichiers `freesound_community-*` sont des reprises Pixabay de sons Freesound. `openmindaudio-…-short-preview-492696` est un **extrait de démonstration** d'un morceau : à vérifier sur sa page Pixabay avant une publication.
+Dossier `pixabay/` : 33 fichiers choisis par zorago le 27 octobre pour refaire le son du gacha. Licence Pixabay Content License : usage gratuit dans un projet, y compris commercial, sans attribution obligatoire, mais pas de redistribution des fichiers seuls. Les sons sont intégrés au mod, donc l'usage est couvert. Les fichiers `freesound_community-*` sont des reprises Pixabay de sons Freesound. `openmindaudio-…-short-preview-492696` est un **extrait de démonstration** d'un morceau : à vérifier sur sa page Pixabay avant une publication.
 
 | Fichier local | Utilisé pour |
 |---|---|
@@ -98,6 +98,19 @@ Dossier `pixabay/` : 20 fichiers choisis par zorago le 27 octobre pour refaire l
 | `alex_kizenkov-epic-hit-aggressive-logo-142801.mp3` | `gacha.music_burst` (à l'éclat, sans la première seconde de silence) |
 | `freesound_community-shaman-choir-vocal-reverb-fantasy-loop-mastered-20200619_01-96374.mp3` | `gacha.choir` (affichage des loots) |
 | `mondamusic-dark-ambient-soundscape-dreamscape-2-491706.mp3` | `gacha.music_loot` (musique des loots, fondu à la fermeture) |
+| `biww-fire-burst-flame-sound-effect-561958.mp3` | `gacha.offer_burst` (offrande posée) |
+| `freesound_community-poof-of-smoke-87381.mp3` | `gacha.poof` (bouffée après l'offrande) |
+| `freesoundfx-spotlight-turning-on-388828.mp3` | `gacha.crystal` (allumage du cristal) |
+| `coghezzi-sacred-rune-lock-holy-magic-seal-activation-533277.mp3` | `gacha.rune` (charge des runes) |
+| `yodguard-energy-charge-2-482499.mp3` | `gacha.inhale` (inspiration, sommet sur la colonne) |
+| `freesound_community-heavy-beam-weapon-7052.mp3` | `gacha.beam_punch` (corps du rayon, dominant) |
+| `benkirb-shine-1-268902.mp3` | `gacha.shine` (naissance de l'étoile) |
+| `freesound_community-shooting-star-2-104073.mp3` | `gacha.shooting_star` (descente de l'étoile) |
+| `lordsonny-thunder-for-anime-161022.mp3` | `gacha.sky_crack` (fissure du ciel, 3 fois à 0,1 s) |
+| `soundreality-riser-the-plane-391179.mp3` | `gacha.absorb` (5,65 à 8,15 s : fin de la montée 0,3 s avant l'éclat) |
+| `audiopapkin-riser-hit-sfx-127-508586.mp3` | `gacha.implode` (à partir de 2,36 s : coup à 2,66 s calé sur l'éclat) |
+| `dragon-studio-fire-spell-impact-448565.mp3` | `gacha.columns` (six colonnes élémentaires, une fois) |
+| `youssefmizani-bass-drop-407122.mp3` | `gacha.settle` (retombée) |
 
 ## Sons synthétisés (aucune source externe)
 

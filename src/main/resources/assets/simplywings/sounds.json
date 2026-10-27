@@ -109,6 +109,15 @@
       }
     ]
   },
+  "wing.legendary.flap_strong": {
+    "sounds": [
+      {
+        "name": "simplywings:gacha/wing_beat_1",
+        "attenuation_distance": 48,
+        "preload": true
+      }
+    ]
+  },
   "wing.buzz.loop": {
     "sounds": [
       {
@@ -702,9 +711,8 @@
     "subtitle": "subtitles.simplywings.wing.flap_strong",
     "sounds": [
       {
-        "name": "simplywings:wing.strong.flap",
-        "type": "event",
-        "pitch": 0.9
+        "name": "simplywings:wing.legendary.flap_strong",
+        "type": "event"
       }
     ]
   },
@@ -958,9 +966,9 @@
     "subtitle": "subtitles.simplywings.wing.flap_strong",
     "sounds": [
       {
-        "name": "simplywings:wing.strong.flap",
+        "name": "simplywings:wing.legendary.flap_strong",
         "type": "event",
-        "pitch": 0.68
+        "pitch": 0.88
       }
     ]
   },
@@ -1902,6 +1910,102 @@
       {
         "name": "simplywings:gacha/music_loot_1",
         "stream": true
+      }
+    ]
+  },
+  "gacha.offer_burst": {
+    "subtitle": "subtitles.simplywings.gacha.offer",
+    "sounds": [
+      {
+        "name": "simplywings:gacha/offer_burst_1"
+      }
+    ]
+  },
+  "gacha.poof": {
+    "subtitle": "subtitles.simplywings.gacha.puff",
+    "sounds": [
+      {
+        "name": "simplywings:gacha/poof_1"
+      }
+    ]
+  },
+  "gacha.crystal": {
+    "sounds": [
+      {
+        "name": "simplywings:gacha/crystal_1"
+      }
+    ]
+  },
+  "gacha.rune": {
+    "subtitle": "subtitles.simplywings.gacha.rune_charge",
+    "sounds": [
+      {
+        "name": "simplywings:gacha/rune_1"
+      }
+    ]
+  },
+  "gacha.inhale": {
+    "sounds": [
+      {
+        "name": "simplywings:gacha/inhale_1"
+      }
+    ]
+  },
+  "gacha.beam_punch": {
+    "sounds": [
+      {
+        "name": "simplywings:gacha/beam_punch_1"
+      }
+    ]
+  },
+  "gacha.shine": {
+    "sounds": [
+      {
+        "name": "simplywings:gacha/shine_1"
+      }
+    ]
+  },
+  "gacha.shooting_star": {
+    "sounds": [
+      {
+        "name": "simplywings:gacha/shooting_star_1"
+      }
+    ]
+  },
+  "gacha.sky_crack": {
+    "subtitle": "subtitles.simplywings.gacha.thunder",
+    "sounds": [
+      {
+        "name": "simplywings:gacha/sky_crack_1"
+      }
+    ]
+  },
+  "gacha.absorb": {
+    "sounds": [
+      {
+        "name": "simplywings:gacha/absorb_1"
+      }
+    ]
+  },
+  "gacha.implode": {
+    "subtitle": "subtitles.simplywings.gacha.implosion",
+    "sounds": [
+      {
+        "name": "simplywings:gacha/implode_1"
+      }
+    ]
+  },
+  "gacha.columns": {
+    "sounds": [
+      {
+        "name": "simplywings:gacha/columns_1"
+      }
+    ]
+  },
+  "gacha.settle": {
+    "sounds": [
+      {
+        "name": "simplywings:gacha/settle_1"
       }
     ]
   }

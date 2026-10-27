@@ -60,6 +60,7 @@ public final class ShowSounds {
         final float untilT;
         final float fade;
         final String except;
+        final String only;
         final int tier;
         final int minTier;
         final int maxTier;
@@ -102,6 +103,7 @@ public final class ShowSounds {
             untilT = number(o, "until_t", 0);
             fade = number(o, "fade", 0);
             except = string(o, "except", null);
+            only = string(o, "only", null);
             tier = tier(o.get("tier"), -1);
             minTier = tier(o.get("min_tier"), Integer.MIN_VALUE);
             maxTier = tier(o.get("max_tier"), Integer.MAX_VALUE);
@@ -240,7 +242,7 @@ public final class ShowSounds {
         ShowModel.Anim a = show.anim;
         float rank = a.meta("rank", 0);
         for (Cue c : cues) {
-            if (c.meta != null && !(a.meta(c.meta, 0) > 0) || rank < c.minRank || rank > c.maxRank || a.name.equals(c.except)) {
+            if (c.meta != null && !(a.meta(c.meta, 0) > 0) || rank < c.minRank || rank > c.maxRank || a.name.equals(c.except) || c.only != null && !a.name.equals(c.only)) {
                 continue;
             }
             if (c.each == null) {
