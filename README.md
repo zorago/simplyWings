@@ -119,6 +119,9 @@ Operator only (permission level 2).
 /simplywings info            effective stats, stamina and flight mode
 /simplywings sanctum <name>  place or repair sky_sanctum, wing_forge or cloud_refinery and get its compass
 /simplywings dragon          count a dragon death (places the unlocked sanctums)
+/simplywings sound <id> [pitch] [volume]   client side: play a mod or vanilla sound event
+/simplywings sound list <group>            client side: play every variation of the matching events, 1.5 s apart
+/simplywings sound stop                    client side: stop the list and all playing sounds
 ```
 
 ## Configuration
