@@ -10,9 +10,6 @@ import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -96,11 +93,6 @@ public final class WingEffects {
 
         void add(ParticleOptions options, Vec3 p, Vec3 v) {
             add(options, p, v.x, v.y, v.z);
-        }
-
-        void sound(Player player, SoundEvent sound, float volume, float pitch) {
-            level.playLocalSound(player.getX(), player.getY(), player.getZ(), sound, SoundSource.PLAYERS,
-                    volume * (0.4f + 0.6f * density), pitch, false);
         }
     }
 
@@ -346,7 +338,6 @@ public final class WingEffects {
                     Vec3 p = f.alongWing(i % 2 == 0 ? 1 : -1, 0.6 + random.nextDouble() * 0.4);
                     e.add(ParticleTypes.CLOUD, p, f.back.scale(0.1));
                 }
-                e.sound(player, SoundEvents.AMETHYST_BLOCK_CHIME, 0.5f, 1.4f);
             }
             case DEMON -> {
                 for (int i = e.count(16); i > 0; i--) {
@@ -360,7 +351,6 @@ public final class WingEffects {
                 if (e.chance(1f)) {
                     e.add(ParticleTypes.LAVA, f.center.add(f.back.scale(0.5)), 0, 0, 0);
                 }
-                e.sound(player, SoundEvents.BLAZE_SHOOT, 0.45f, 0.55f);
             }
             case SERAPH -> {
                 int ring = e.count(24);
@@ -372,14 +362,12 @@ public final class WingEffects {
                 for (int i = e.count(8); i > 0; i--) {
                     e.add(GOLD, f.alongWing(i % 2 == 0 ? 1 : -1, random.nextDouble()), 0, 0.02, 0);
                 }
-                e.sound(player, SoundEvents.BEACON_POWER_SELECT, 0.35f, 1.6f);
             }
             case PSYCHE -> {
                 for (int i = e.count(14); i > 0; i--) {
                     Vec3 p = f.alongWing(i % 2 == 0 ? 1 : -1, random.nextDouble()).add(f.up.scale(random.nextDouble() * 0.6));
                     e.add(ParticleTypes.SOUL_FIRE_FLAME, p, f.back.x * 0.06, 0.03, f.back.z * 0.06);
                 }
-                e.sound(player, SoundEvents.SOUL_ESCAPE.value(), 0.6f, 1.2f);
             }
             case FIRE -> {
                 for (int i = e.count(14); i > 0; i--) {
@@ -390,7 +378,6 @@ public final class WingEffects {
                     Vec3 p = f.alongWing(i % 2 == 0 ? 1 : -1, random.nextDouble()).add(f.back.scale(0.3));
                     e.add(SPARK, p, f.back.scale(0.1).add(0, 0.08, 0));
                 }
-                e.sound(player, SoundEvents.FIRECHARGE_USE, 0.35f, 1.3f);
             }
             case WATER -> {
                 for (int i = e.count(14); i > 0; i--) {
@@ -401,7 +388,6 @@ public final class WingEffects {
                     Vec3 p = f.alongWing(i % 2 == 0 ? 1 : -1, random.nextDouble()).add(f.back.scale(0.2));
                     e.add(ParticleTypes.FALLING_WATER, p, 0, 0, 0);
                 }
-                e.sound(player, SoundEvents.BOAT_PADDLE_WATER, 0.5f, 0.9f);
             }
             case EARTH -> {
                 for (int i = e.count(12); i > 0; i--) {
@@ -412,7 +398,6 @@ public final class WingEffects {
                     Vec3 p = f.alongWing(i % 2 == 0 ? 1 : -1, random.nextDouble()).add(f.back.scale(0.4));
                     e.add(ParticleTypes.POOF, p, f.back.scale(0.04));
                 }
-                e.sound(player, SoundEvents.BASALT_BREAK, 0.6f, 0.6f);
             }
             case AIR -> {
                 for (int s = -1; s <= 1; s += 2) {
@@ -424,21 +409,18 @@ public final class WingEffects {
                     Vec3 p = f.alongWing(i % 2 == 0 ? 1 : -1, random.nextDouble()).add(f.back.scale(0.3));
                     e.add(WISP, p, f.back.scale(0.2));
                 }
-                e.sound(player, SoundEvents.BREEZE_IDLE_AIR, 0.6f, 1.2f);
             }
             case STORM -> {
                 for (int i = e.count(14); i > 0; i--) {
                     Vec3 p = f.alongWing(i % 2 == 0 ? 1 : -1, random.nextDouble());
                     e.add(ParticleTypes.ELECTRIC_SPARK, p, f.back.scale(0.2 + random.nextDouble() * 0.2));
                 }
-                e.sound(player, SoundEvents.LIGHTNING_BOLT_IMPACT, 0.25f, 1.8f);
             }
             case AURORA -> {
                 for (int i = e.count(16); i > 0; i--) {
                     Vec3 p = f.alongWing(i % 2 == 0 ? 1 : -1, random.nextDouble()).add(f.up.scale(random.nextDouble() * 0.5));
                     e.add(i % 3 == 0 ? AURORA_VIOLET : AURORA_GREEN, p, f.back.scale(0.08).add(0, 0.03, 0));
                 }
-                e.sound(player, SoundEvents.AMETHYST_BLOCK_RESONATE, 0.5f, 1.2f);
             }
             case SHADOW -> {
                 for (int i = e.count(12); i > 0; i--) {
@@ -449,7 +431,6 @@ public final class WingEffects {
                     Vec3 p = f.alongWing(i % 2 == 0 ? 1 : -1, random.nextDouble()).add(f.back.scale(0.5));
                     e.add(ParticleTypes.LARGE_SMOKE, p, f.back.scale(0.06));
                 }
-                e.sound(player, SoundEvents.ENDERMAN_TELEPORT, 0.25f, 0.6f);
             }
             case NEBULA -> {
                 for (int i = e.count(12); i > 0; i--) {
@@ -459,34 +440,29 @@ public final class WingEffects {
                 for (int i = e.count(8); i > 0; i--) {
                     e.add(STAR, f.alongWing(i % 2 == 0 ? 1 : -1, random.nextDouble()).add(f.back.scale(0.3)), 0, 0, 0);
                 }
-                e.sound(player, SoundEvents.AMETHYST_CLUSTER_BREAK, 0.4f, 1.5f);
             }
             case FOREST -> {
                 for (int i = e.count(12); i > 0; i--) {
                     Vec3 p = f.alongWing(i % 2 == 0 ? 1 : -1, random.nextDouble()).add(f.back.scale(0.2));
                     e.add(ParticleTypes.CHERRY_LEAVES, p, 0, 0, 0);
                 }
-                e.sound(player, SoundEvents.AZALEA_LEAVES_BREAK, 0.6f, 0.9f);
             }
             case FEATHERS -> {
                 for (int i = e.count(3); i > 0; i--) {
                     Vec3 p = f.alongWing(i % 2 == 0 ? 1 : -1, 0.5 + random.nextDouble() * 0.5).add(f.back.scale(0.2));
                     e.add(FEATHER, p, f.back.scale(0.08).add(0, -0.04, 0));
                 }
-                e.sound(player, SoundEvents.PARROT_FLY, 0.4f, 0.8f);
             }
             case AMETHYST -> {
                 for (int i = e.count(8); i > 0; i--) {
                     e.add(AMETHYST_DUST, f.alongWing(i % 2 == 0 ? 1 : -1, random.nextDouble()), f.back.scale(0.08));
                 }
-                e.sound(player, SoundEvents.AMETHYST_BLOCK_CHIME, 0.5f, 1.0f);
             }
             case COPPER -> {
                 for (int i = e.count(6); i > 0; i--) {
                     Vec3 p = f.alongWing(i % 2 == 0 ? 1 : -1, random.nextDouble()).add(f.back.scale(0.2));
                     e.add(ParticleTypes.SCRAPE, p, f.back.scale(0.1));
                 }
-                e.sound(player, SoundEvents.COPPER_HIT, 0.6f, 0.8f);
             }
             case FOSSIL -> {
                 for (int i = e.count(6); i > 0; i--) {
@@ -500,15 +476,12 @@ public final class WingEffects {
                     Vec3 offset = f.side.normalize().scale(Math.cos(angle) * 1.1).add(f.up.scale(Math.sin(angle) * 1.1));
                     e.add(i < ring / 2 ? YIN : YANG, f.center.add(f.back.scale(0.4)).add(offset), f.back.scale(0.08));
                 }
-                e.sound(player, SoundEvents.AMETHYST_BLOCK_CHIME, 0.5f, 0.6f);
-                e.sound(player, SoundEvents.AMETHYST_BLOCK_CHIME, 0.5f, 1.7f);
             }
             case PTERO -> {
                 for (int i = e.count(4); i > 0; i--) {
                     Vec3 p = f.alongWing(i % 2 == 0 ? 1 : -1, 0.8 + random.nextDouble() * 0.2).add(f.back.scale(0.3));
                     e.add(ParticleTypes.POOF, p, f.back.scale(0.05));
                 }
-                e.sound(player, SoundEvents.PHANTOM_FLAP, 0.7f, 0.6f);
             }
             default -> {
             }

@@ -280,7 +280,7 @@ Sources dans `GATCHA_ANIMATION_SOURCE/`, détail dans `GACHA_ANIMATIONS.md` § 0
 - [x] Single B validé par zorago (chorégraphie et caméra accélérée).
 - [ ] Regarder en mouvement et valider : `single_a`, `single_s`, `single_ss`, `single_sss`, `multi_x10`, `multi_x10_double_sss`. Sur l'autre PC, seules des images fixes ont été vérifiées. Le défaut possible à surveiller : des faces qui se chevauchent quand la caméra frôle les ailes de l'autel.
 - [ ] Trancher les points du § 10 de `GACHA_ANIMATIONS.md` (ajoutés le 26 octobre) : durée des communs, voie de portage, live ou pré-rendu, autel (scène du prototype ou build de zorago), flammes, dragon, plafonds de flash.
-- [ ] À produire : mythiques Night et Light, vraie paire en 3D sur la carte, mentions « New! » et « Duplicate », écran IDLE, sons calés sur les timelines (`SOUND_DESIGN.md` § 6.4).
+- [ ] À produire : mythiques Night et Light, vraie paire en 3D sur la carte, mentions « New! » et « Duplicate », écran IDLE, sons calés sur les timelines (`gacha/show_sounds.json`, réglés dans le banc de son).
 - [ ] Après le portage, en jeu : chaque palier, un ×10 avec deux SSS, saut et Échap, `reduceFlashes`, 60 i/s avec le pack (Sodium, Iris), même rendu que les films de référence.
 
 ### 13 bis. Retours de zorago du 24 octobre (corrigés, à revérifier)
@@ -312,9 +312,20 @@ Codé sans lancer Minecraft (zorago utilisait le PC). Conception et choix par d�
 - [ ] Monde ancien (îles en triangle) : la fontaine se pose dans le plus grand écart.
 - [ ] Serveur dédié pour tout ce qui précède.
 
-## 15. Sons CC0, première passe (26 octobre, rien d'écouté)
+## 15. Sons : passes d'écoute dans le banc, puis en jeu
 
-Sources et licences : `art/sounds/SOURCES.md`. Ajuster dans `tools/sounds/build_sounds.py` (découpes, pics) ou dans la table `PAIRS` (hauteur, volume par paire), puis relancer le script.
+Les verdicts vivent dans le catalogue (`tools/sounds/catalog.json`) et se donnent dans le banc de son (`cd tools/sound-bench && npm run dev`, http://localhost:5177), passe par passe (`SOUND_PLAN.md` § 4). Santé du dépôt : `python -I tools/sounds/audit.py`. En jeu, `/simplywings sound <id> [pitch] [volume]` et `/simplywings sound list <groupe>` rejouent un son ou un groupe.
+
+Corrections du 27 octobre (`SOUND_PLAN.md` § 1), à vérifier en jeu :
+
+- [ ] Particules coupées : les paires de matière (feu, eau, cuivre, améthyste, orage…) gardent leur couche (`wing.<paire>.layer`), pour soi et pour un joueur distant ; la chouette n'a plus de couche.
+- [ ] Battements entendus à 32 blocs, coups puissants à 48, vrombissements et atterrissages à 24, blocs à 12-16.
+- [ ] Niveaux après normalisation au RMS (plume et membrane au même niveau, onde de choc du gacha et charge de Night baissées, cartes alignées) ; attaques rognées, plus de retard au coup d'aile.
+- [ ] Boucles du vent et du compresseur sans clic au raccord.
+- [ ] Équiper / Retirer : nouveau son court et grave ; l'ancien son long reste à l'infusion de l'établi et à la table d'assemblage (`block.infusion`).
+- [ ] Gacha : un B et un SSS, sons identiques à avant l'extraction des cues dans `gacha/show_sounds.json` ; F3+T recharge le fichier.
+
+Liste de la première passe CC0 (26 octobre) :
 
 - [ ] Coups d'ailes en déplacement : chaque famille (plume, membrane, cuir, insecte, planeur, mécanique) sonne juste ; pas de clic en début ou fin de fichier ; la chouette reste quasi silencieuse.
 - [ ] Saut ailé, bascule Alt, sortie du déplacement, saut de secours : la version forte n'est pas fatigante à la longue.

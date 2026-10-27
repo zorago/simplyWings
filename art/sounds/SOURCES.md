@@ -1,6 +1,6 @@
 # Sources des sons
 
-Tous les sons du mod viennent de bibliothèques **CC0** (domaine public : usage commercial libre, sans attribution obligatoire). Licence vérifiée sur la page de chaque son le 26 octobre 2026. Les fichiers d'origine vont dans `art/sounds/source/` (ignoré par git, à retélécharger depuis les liens ci-dessous). `python -I tools/sounds/build_sounds.py` les découpe, les centre, ajoute les fondus, normalise le pic, les convertit en OGG mono 44,1 kHz dans `assets/simplywings/sounds/`, puis réécrit `sounds.json` (familles, une entrée `wing.<paire>.flap` et `flap_strong` par paire) et les sous-titres de `en_us.json`.
+Tous les sons du mod viennent de bibliothèques **CC0** (domaine public : usage commercial libre, sans attribution obligatoire). Licence vérifiée sur la page de chaque son le 26 octobre 2026. Les fichiers d'origine vont dans `art/sounds/source/` (ignoré par git, à retélécharger depuis les liens ci-dessous). `python -I tools/sounds/build_sounds.py` les découpe, les centre, ajoute les fondus, normalisent chaque fichier au RMS max de sa cible de sonie (`tools/sounds/loudness.json`, plafond de pic vrai à −1 dBTP), les convertit en OGG mono 44,1 kHz dans `assets/simplywings/sounds/`, puis réécrit `sounds.json` depuis le catalogue `tools/sounds/catalog.json` (familles, une entrée `wing.<paire>.flap` et `flap_strong` par paire) et les sous-titres de `en_us.json`.
 
 ## Freesound (aperçus HQ, CC0)
 
@@ -37,17 +37,19 @@ Tous les sons du mod viennent de bibliothèques **CC0** (domaine public : usage 
 | Fichier local | Source | Utilisé pour |
 |---|---|---|
 | `oga_wings_flap_large/wings_flap_large.flac` | https://opengameart.org/content/large-wings-flap | **rejeté** par zorago (« je déteste le son »), plus utilisé |
-| `oga_magical_1_0.ogg` … `oga_magical_7_0.ogg` | https://opengameart.org/sites/default/files/magical_1_0.ogg (et `magical_2.ogg`, `magical_3.ogg`, `magical_4.ogg`, `magical_5.ogg`, `magical_6_0.ogg`, `magical_7_0.ogg`) | `gacha/ignite` (6 variations), `gacha/offer` (`magical_3`) |
+| `oga_magical_1_0.ogg` … `oga_magical_7_0.ogg` (`oga_magical_*`) | https://opengameart.org/sites/default/files/magical_1_0.ogg (et `magical_2.ogg`, `magical_3.ogg`, `magical_4.ogg`, `magical_5.ogg`, `magical_6_0.ogg`, `magical_7_0.ogg`) | `gacha/ignite` (6 variations), `gacha/offer` (`magical_3`) |
 
 ## Kenney (CC0, https://kenney.nl)
 
 | Pack | Fichiers | Utilisé pour |
 |---|---|---|
-| Interface Sounds (https://kenney.nl/assets/interface-sounds) | `drop_001-004`, `maximize_001-004`, `confirmation_001-002`, `error_004`, `error_008`, `open_002-004` | `ui/card_deal`, `ui/card_flip`, `ui/confirm`, `ui/denied`, `ui/open` (pas encore joué) |
-| Impact Sounds (https://kenney.nl/assets/impact-sounds) | `impactBell_heavy_000-004`, `impactGlass_medium_000-004`, `impactGlass_light_000-004`, `impactSoft_medium_000-003` | `gacha/bell`, `gacha/chime`, `gacha/twinkle`, `flight/landing_soft` |
-| UI Audio (https://kenney.nl/assets/ui-audio) | téléchargé, pas encore utilisé | réserve pour l'interface |
+| Interface Sounds (https://kenney.nl/assets/interface-sounds), dossier `kenney_interface-sounds/` | `bong_001`, `back_002-003`, `open_002-004` | `ui/confirm`, `ui/denied`, `ui/open` (pas encore joué) |
+| Impact Sounds (https://kenney.nl/assets/impact-sounds), dossier `kenney_impact-sounds/` | `impactBell_heavy_000-004`, `impactGlass_medium_000-004`, `impactGlass_light_000-004`, `impactSoft_medium_000-003` | `gacha/bell`, `gacha/chime`, `gacha/twinkle`, `flight/landing_soft` |
+| UI Audio (https://kenney.nl/assets/ui-audio), dossier `kenney_ui-audio/` | `switch3` | `ui/confirm` (2e variation) |
 
 ## Kenney Casino Audio (CC0, https://kenney.nl/assets/casino-audio)
+
+Dossier local `kenney_casino-audio/`.
 
 | Fichiers | Utilisé pour |
 |---|---|
@@ -70,7 +72,7 @@ Tous les sons d'interface passent par deux passe-bas (6000 Hz pour les cartes, 1
 |---|---|---|
 | `user/night_fury_dive.mp3` | cri de piqué de Night Fury isolé par zorago (`audio-editor-output.mp3`, 6,48 s, explosion du piqué à ≈ 5,1 s) | `fury/dive` : 0 à 5,0 s + 3 s d'écho qui s'atténue (Night et Light) ; `fury/invisible` : sample entier + 3 s d'écho, hauteur 0,97 (Night) et 1,03 (Light), joué au dash qui rend invisible |
 
-Ce son vient du film : il n'est **pas** libre de droits. Il convient pour un usage privé (le pack entre amis) ; avant une publication du mod, il faudra le remplacer par une recréation originale (`SOUND_DESIGN.md` § 5).
+Ce son vient du film : il n'est **pas** libre de droits. Il convient pour un usage privé (le pack entre amis) ; avant une publication du mod, il faudra le remplacer par une recréation originale (`SOUND_PLAN.md` § 5).
 
 ## Choix faits sans écoute
 

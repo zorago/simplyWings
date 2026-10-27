@@ -64,7 +64,7 @@ public final class ForgeBenchEffects {
 
     private static void energy(Level level, RandomSource random, double cx, double top, double cz, int t) {
         if (t == 0) {
-            level.playLocalSound(cx, top, cz, ModSounds.UI_EQUIP.get(), SoundSource.BLOCKS, 0.8F, 1.1F, false);
+            level.playLocalSound(cx, top, cz, ModSounds.INFUSION.get(), SoundSource.BLOCKS, 0.8F, 1.1F, false);
             level.playLocalSound(cx, top, cz, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.BLOCKS, 1.0F, 1.5F, false);
         }
         float p = t / (float) ENERGY_LENGTH;

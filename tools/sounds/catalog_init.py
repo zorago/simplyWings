@@ -238,7 +238,12 @@ SILENT = {
 CODE_VANILLA = [
     ("gacha.dragon_growl", "gacha", "altar", "minecraft:entity.ender_dragon.growl", "Rugissement SSS et mythique, étoiles ×10", ["client/show/ClientShows.java", "client/gui/CardDeck.java"]),
     ("gacha.beacon", "gacha", "altar", "minecraft:block.beacon.activate", "Activation du pilier", ["client/show/ClientShows.java"]),
-    ("gacha.element_ignite", "gacha", "altar", "minecraft:item.firecharge.use", "Couches élémentaires des six flammes (firecharge, warden, basalte, plouf, améthyste, breeze)", ["client/show/ClientShows.java"]),
+    ("gacha.element_ignite.fire", "gacha", "altar", "minecraft:item.firecharge.use", "Couche de la flamme fire de l'autel", ["assets/simplywings/gacha/show_sounds.json"]),
+    ("gacha.element_ignite.darkness", "gacha", "altar", "minecraft:entity.warden.sonic_charge", "Couche de la flamme darkness de l'autel", ["assets/simplywings/gacha/show_sounds.json"]),
+    ("gacha.element_ignite.earth", "gacha", "altar", "minecraft:block.basalt.break", "Couche de la flamme earth de l'autel", ["assets/simplywings/gacha/show_sounds.json"]),
+    ("gacha.element_ignite.water", "gacha", "altar", "minecraft:entity.player.splash", "Couche de la flamme water de l'autel", ["assets/simplywings/gacha/show_sounds.json"]),
+    ("gacha.element_ignite.light", "gacha", "altar", "minecraft:block.amethyst_block.chime", "Couche de la flamme light de l'autel", ["assets/simplywings/gacha/show_sounds.json"]),
+    ("gacha.element_ignite.air", "gacha", "altar", "minecraft:entity.breeze.idle_air", "Couche de la flamme air de l'autel", ["assets/simplywings/gacha/show_sounds.json"]),
     ("block.assembly_table.resonate", "block", "assembly_table", "minecraft:block.amethyst_block.resonate", "Montée de la table d'assemblage", ["block/AssemblyTableEffects.java"]),
     ("block.forge_bench.chime", "block", "forge_bench", "minecraft:block.amethyst_block.chime", "Infusion d'énergie ailée", ["block/ForgeBenchEffects.java"]),
     ("block.cloud_compressor.brew", "block", "cloud_compressor", "minecraft:block.brewing_stand.brew", "Fin de cycle du compresseur", ["block/CloudCompressorBlockEntity.java"]),

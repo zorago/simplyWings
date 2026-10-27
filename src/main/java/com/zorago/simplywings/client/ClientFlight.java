@@ -422,6 +422,7 @@ public final class ClientFlight {
         ticksSinceFlap = 0;
         WingVisuals.local().animator.strike(look(stats).flapRate(), style(stats).strikeAt());
         WingEffects.strike(player, style(stats), FlightMode.TRAVEL);
+        WingSounds.layer(player, lookId(), 0.7f);
         travelKeyLock = TAKEOFF_KEY_LOCK_TICKS;
         setMode(player, FlightMode.TRAVEL, true);
     }

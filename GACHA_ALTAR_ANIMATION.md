@@ -146,7 +146,7 @@ Tous les sons sont positionnels à l'autel (sauf la musique de l'invocateur). La
 | 16,40 → 21,00 | `altar.settle` | Retombée : nappe qui se résout, carillons qui s'éteignent | `block.beacon.deactivate` | 64 |
 | — | Musique `music.summon` | Thème d'invocation, pour l'invocateur seulement (catégorie MUSIC) : intro mystérieuse sur l'éveil, montée orchestrale sur la descente, tutti sur l'éclat, thème sur la révélation. 21 s, synchronisé sur T = 0. Variantes : `music.summon.short` (B, A), `music.summon.mythic.night` / `.light` | aucune | — |
 
-Les ids sont à ajouter à `SOUND_DESIGN.md` § 6.4 (ils complètent ceux de l'animation d'interface).
+Les ids sont à ajouter à `SOUND_PLAN.md` (archive : `docs/archive/SOUND_DESIGN.md`) § 6.4 (ils complètent ceux de l'animation d'interface).
 
 ## 8. Portage en jeu (après validation dans Blockbench)
 

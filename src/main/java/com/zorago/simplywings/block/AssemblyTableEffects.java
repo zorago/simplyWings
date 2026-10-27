@@ -140,7 +140,7 @@ public final class AssemblyTableEffects {
         RandomSource random = f.level.random;
         float q = t / 60.0F;
         if (t == 4) {
-            f.sound(emblem, ModSounds.UI_EQUIP.get(), 1.0F, 1.0F);
+            f.sound(emblem, ModSounds.INFUSION.get(), 1.0F, 1.0F);
         }
         if (t == 10) {
             f.sound(emblem, ModSounds.CARD_CONFIRM.get(), 0.8F, 1.0F);

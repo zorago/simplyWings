@@ -14,6 +14,8 @@ FFMPEG = shutil.which("ffmpeg") or r"C:\Users\adamg\AppData\Local\Programs\Pytho
 SR = 44100
 
 CATALOG = ROOT / "tools/sounds/catalog.json"
+LOUDNESS = ROOT / "tools/sounds/loudness.json"
+CEILING_DB = -1.5
 
 
 def saw(f, t, top=3500):
@@ -96,7 +98,46 @@ def echo(x, tail, delays=(0.23, 0.37), feedback=0.68, wet=0.5):
     return out
 
 
-def render(spec, target):
+def rms_max(x, window=0.1, hop=0.01):
+    w = int(window * SR)
+    if len(x) <= w:
+        return float(np.sqrt(np.sum(x.astype(np.float64) ** 2) / w))
+    c = np.concatenate([[0.0], np.cumsum(x.astype(np.float64) ** 2)])
+    starts = np.arange(0, len(x) - w + 1, int(hop * SR))
+    return float(np.sqrt((c[starts + w] - c[starts]).max() / w))
+
+
+def true_peak(x):
+    up = np.fft.irfft(np.fft.rfft(x), 4 * len(x)) * 4
+    return float(max(np.abs(x).max(), np.abs(up).max()))
+
+
+def normalize(x, spec):
+    if spec.get("target") is not None:
+        gain = 10 ** ((spec["target"] + spec.get("gain_db", 0.0)) / 20) / max(1e-6, rms_max(x))
+        ceiling = 10 ** (CEILING_DB / 20) / max(1e-6, true_peak(x))
+        return x * min(gain, ceiling)
+    return x * (10 ** ((spec["peak"] + spec.get("gain_db", 0.0)) / 20) / max(1e-6, np.abs(x).max()))
+
+
+def zero_crossing(x, around, reach):
+    lo = max(1, around - reach)
+    hi = min(len(x) - 1, around + reach)
+    seg = x[lo - 1:hi]
+    idx = np.where((seg[:-1] <= 0) & (seg[1:] > 0))[0]
+    if len(idx) == 0:
+        return around
+    slope = np.abs(x[lo + idx] - x[lo + idx - 1])
+    return int(lo + idx[np.argmin(slope + 1e-4 * np.abs(lo + idx - around))])
+
+
+def encode(x, target):
+    target.parent.mkdir(parents=True, exist_ok=True)
+    subprocess.run([FFMPEG, "-v", "error", "-y", "-f", "f32le", "-ar", str(SR), "-ac", "1", "-i", "-",
+                    "-c:a", "libvorbis", "-q:a", "5", str(target)], input=x.astype(np.float32).tobytes(), check=True)
+
+
+def shape(spec):
     if spec["source"].startswith("synth:"):
         x = synth(spec["source"][6:])
     else:
@@ -109,24 +150,33 @@ def render(spec, target):
             body = x.copy()
         else:
             xf = int(spec["loop"] * SR)
-            body = x[:len(x) - xf].copy()
-            t = np.linspace(0, np.pi / 2, xf)
-            body[:xf] = body[:xf] * np.sin(t) + x[len(x) - xf:] * np.cos(t)
-        body *= 10 ** (spec["peak"] / 20) / max(1e-6, np.abs(body).max())
-        target.parent.mkdir(parents=True, exist_ok=True)
-        subprocess.run([FFMPEG, "-v", "error", "-y", "-f", "f32le", "-ar", str(SR), "-ac", "1", "-i", "-",
-                        "-c:a", "libvorbis", "-q:a", "5", str(target)], input=body.astype(np.float32).tobytes(), check=True)
-        return
+            start = zero_crossing(x, 0 + int(0.01 * SR), int(0.01 * SR))
+            cut = zero_crossing(x, len(x) - xf, int(0.01 * SR))
+            body = x[start:cut].copy()
+            tail = x[cut:cut + xf]
+            n = min(xf, len(tail), len(body))
+            t = np.linspace(0, np.pi / 2, n)
+            body[:n] = body[:n] * np.sin(t) + tail[:n] * np.cos(t)
+        return body
     n_in = max(1, int(spec["fade_in"] * SR))
     n_out = min(len(x) // 2, max(1, int(spec["fade_out"] * SR)))
     x[:n_in] *= np.linspace(0, 1, n_in)
     x[-n_out:] *= np.linspace(1, 0, n_out) ** 2
     if spec["echo"] > 0:
         x = echo(x, spec["echo"])
-    x *= 10 ** (spec["peak"] / 20) / max(1e-6, np.abs(x).max())
-    target.parent.mkdir(parents=True, exist_ok=True)
-    subprocess.run([FFMPEG, "-v", "error", "-y", "-f", "f32le", "-ar", str(SR), "-ac", "1", "-i", "-",
-                    "-c:a", "libvorbis", "-q:a", "5", str(target)], input=x.astype(np.float32).tobytes(), check=True)
+    return x
+
+
+def render_entry(entry, goal):
+    variants = entry.get("variants", [])
+    shaped = [shape(spec(v, goal)) for v in variants]
+    if goal is None:
+        return [(v, normalize(x, spec(v))) for v, x in zip(variants, shaped)]
+    level = goal
+    for v, x in zip(variants, shaped):
+        reach = 20 * np.log10(10 ** (CEILING_DB / 20) / max(1e-6, true_peak(x)) * max(1e-9, rms_max(x)))
+        level = min(level, reach - v.get("gain_db", 0.0))
+    return [(v, normalize(x, spec(v, level))) for v, x in zip(variants, shaped)]
 
 
 SPEC = ("source", "start", "end", "peak", "fade_in", "fade_out", "echo", "loop", "tempo", "pitch", "lp")
@@ -136,10 +186,16 @@ def catalog():
     return json.loads(CATALOG.read_text(encoding="utf-8"))["sounds"]
 
 
-def spec(variant):
+def spec(variant, target=None):
     out = {k: variant.get(k) for k in SPEC}
-    out["peak"] = (out["peak"] if out["peak"] is not None else -3.0) + variant.get("gain_db", 0.0)
+    out["peak"] = out["peak"] if out["peak"] is not None else -3.0
+    out["gain_db"] = variant.get("gain_db", 0.0)
+    out["target"] = target
     return out
+
+
+def targets():
+    return json.loads(LOUDNESS.read_text(encoding="utf-8")) if LOUDNESS.exists() else {}
 
 
 def event(target, volume=1.0, pitch=1.0):
@@ -182,14 +238,16 @@ def declared(e):
 def build(only=None):
     entries = catalog()
     by_id = {e["id"]: e for e in entries}
+    loudness = targets()
     if only is None and OUT.exists():
         shutil.rmtree(OUT)
     count = 0
     for e in entries:
         if only is not None and e["id"] not in only:
             continue
-        for v in e.get("variants", []):
-            render(spec(v), OUT / f"{v['file']}.ogg")
+        goal = loudness.get(e.get("loudness_target") or "", {}).get("rms_max_db")
+        for v, x in render_entry(e, goal):
+            encode(x, OUT / f"{v['file']}.ogg")
             count += 1
 
     sounds = {}

@@ -27,6 +27,7 @@ public final class ModSounds {
     public static final Supplier<SoundEvent> ESSENCE_POUR = sound("essence.pour");
     public static final Supplier<SoundEvent> ESSENCE_FULL = sound("essence.full");
     public static final Supplier<SoundEvent> UI_EQUIP = sound("ui.equip");
+    public static final Supplier<SoundEvent> INFUSION = sound("block.infusion");
     public static final Supplier<SoundEvent> UI_OPEN = sound("ui.open");
     public static final Supplier<SoundEvent> TAKEOFF_LAUNCH = sound("flight.takeoff_launch");
     public static final Supplier<SoundEvent> GACHA_OFFER = sound("gacha.offer");

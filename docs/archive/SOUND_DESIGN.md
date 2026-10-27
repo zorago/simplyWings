@@ -1,3 +1,5 @@
+> Archive. Vision long terme (≈ 730 fichiers), plus le plan actif. Voir `SOUND_PLAN.md`.
+
 # Cahier des charges du sound design
 
 Spécification de tous les sons de Simply Wings : les ailes (événements de vol communs, familles, 41 paires), les mythiques Night et Light, les blocs, les essences, les sanctuaires et le gacha. Pour chaque son : son déclencheur dans le code, ce qui sonne aujourd'hui (son vanilla provisoire ou rien) et la cible à livrer par un sound designer.

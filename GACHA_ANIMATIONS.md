@@ -1,6 +1,6 @@
 # Animations du gacha : cahier des charges
 
-Cahier des charges des animations d'invocation de l'autel draconique, **une animation 3D + 2D par rareté** : B, A, S, SS, SSS, mythique Night et mythique Light. Il complète `gatcha.md`, qui fait foi pour les règles du gacha, et `SOUND_DESIGN.md`, qui fait foi pour les sons.
+Cahier des charges des animations d'invocation de l'autel draconique, **une animation 3D + 2D par rareté** : B, A, S, SS, SSS, mythique Night et mythique Light. Il complète `gatcha.md`, qui fait foi pour les règles du gacha, et `SOUND_PLAN.md` (archive : `docs/archive/SOUND_DESIGN.md`), qui fait foi pour les sons.
 
 Ce document sert d'entrée unique au **skill Claude de motion design** qui générera les animations (voir § 9). Tout ce que le skill doit savoir y est écrit : intentions, découpage temporel, contenu 3D, contenu 2D, sons, contraintes techniques, formats de sortie et critères d'acceptation. Les points marqués **à valider** se posent à zorago avant la production de l'animation concernée.
 
@@ -133,7 +133,7 @@ Souhait de zorago : que Claude Code refasse ces animations à partir du code, av
    - la 3D passe en `ModelPart` dans un `PoseStack`, en pleine lumière, avec la couleur calculée face par face comme dans `shade()` de `renderer.js` (lune fixe et lumières ponctuelles des flammes et de l'étoile) ;
    - halos, rayons, flash et cartes deviennent des blits d'interface, en mélange additif si le § 3.2 l'autorise.
 6. **Accessibilité** : pour `reduceFlashes`, mettre le flash et la secousse à 0, comme le prévoit le README du prototype.
-7. **Sons** : les ids des événements du prototype sont listés dans `SOUND_DESIGN.md` § 6.4. Ils complètent ou remplacent les ids du § 6 de ce document.
+7. **Sons** : les ids des événements du prototype sont listés dans `docs/archive/SOUND_DESIGN.md` § 6.4. Ils complètent ou remplacent les ids du § 6 de ce document.
 8. **Reste à créer, comme le prévoit ce cahier** : la vraie paire en 3D, « New! » et « Duplicate », les deux mythiques et l'écran IDLE.
 
 ## 1. Intentions
@@ -185,7 +185,7 @@ Une animation = trois couches synchronisées par une même horloge (milliseconde
 
 ### 3.3 Couche son
 
-- Un événement sonore par temps fort, en `.ogg`, joué par `SoundManager` dans la catégorie MASTER (ou une catégorie dédiée si `SOUND_DESIGN.md` le décide). Les identifiants et descriptions sont dans `SOUND_DESIGN.md` (§ gacha). En attendant les vrais sons, le placeholder vanilla indiqué dans chaque fiche.
+- Un événement sonore par temps fort, en `.ogg`, joué par `SoundManager` dans la catégorie MASTER (ou une catégorie dédiée si `docs/archive/SOUND_DESIGN.md` le décide). Les identifiants et descriptions sont dans `docs/archive/SOUND_DESIGN.md` (§ gacha). En attendant les vrais sons, le placeholder vanilla indiqué dans chaque fiche.
 - Musique : une boucle d'ambiance pour l'écran IDLE et un sting par palier rare. Les stings démarrent à un temps précis de la timeline.
 
 ### 3.4 Horloge, saut et ×10
@@ -331,7 +331,7 @@ Les durées s'entendent pour un tirage ×1, sans saut. « t » = temps depuis le
   - 4,3 s : au lieu de l'impact, **éclipse** : la comète rouge s'arrête, le son se coupe net (silence de 400 ms), toutes les lumières s'éteignent du bord vers le centre (vignette noire qui se referme, 500 ms). Il ne reste que les étoiles.
   - 4,8–5,6 s : les étoiles s'éteignent une par une, de gauche à droite. Noir total. Un battement d'ailes lointain (son seul).
   - 5,6 s : deux **yeux** verts-jaunes à fente s'ouvrent dans le noir (sprite 2D, 400 ms), puis disparaissent.
-  - 6,0–6,8 s : **tir de plasma** : une boule bleu-violet traverse l'écran vers la caméra, sifflement montant (le sifflement caractéristique est remplacé par une création originale, voir `SOUND_DESIGN.md`), explosion de plasma plein écran (bleu, 250 ms, limité § 8.4).
+  - 6,0–6,8 s : **tir de plasma** : une boule bleu-violet traverse l'écran vers la caméra, sifflement montant (le sifflement caractéristique est remplacé par une création originale, voir `docs/archive/SOUND_DESIGN.md`), explosion de plasma plein écran (bleu, 250 ms, limité § 8.4).
   - 6,8–9,0 s : au centre, la paire **Night** déployée en contre-jour, éclairée seulement par des arcs de plasma qui courent sur ses bords d'attaque ; la queue (`render/TailModel`) ondule. Elle fait un battement qui souffle des particules d'ombre.
   - 9,0–13,0 s : « ✦ » qui s'ouvre comme un œil, 6 étoiles bleu-violet, nom en lettres blanches électriques, New!/Duplicate ; boucle : vol stationnaire, plasma qui pulse sur un temps de 2 s. Points de saut à 6,8 s et 9,0 s.
 - **3D** : décor SSS jusqu'à l'éclipse, puis vide noir ; paire Night réelle avec sa queue ; sphère de plasma low poly (icosaèdre, facettes en dégradé bleu → blanc au centre).
@@ -361,7 +361,7 @@ Pas une animation de palier, mais à produire dans le même lot :
 
 - Illustration de couverture (480 × 270 de référence, déjà en provisoire `textures/gui/summon_cover.png`) **animée par calques** : ciel qui défile lentement, silhouettes de Night et Light qui glissent très loin dans le ciel (une traversée toutes les 40 s environ), autel qui pulse, poussières de lumière. 4 à 6 calques en parallaxe, sans planche lourde.
 - Boutons ×1 et ×10 avec un état survol lumineux (balayage), tracker de pitié dont les jauges se remplissent avec une animation au retour d'un tirage.
-- Musique d'ambiance en boucle (voir `SOUND_DESIGN.md`).
+- Musique d'ambiance en boucle (voir `docs/archive/SOUND_DESIGN.md`).
 
 ## 8. Contraintes techniques et budgets
 
@@ -377,7 +377,7 @@ Pas une animation de palier, mais à produire dans le même lot :
 | Planches de sprites (PNG) | ≤ 4 atlas de 1024 × 1024 | ≤ 24 atlas, ≤ 12 Mo sur disque |
 | Modèles 3D (hors paires) | ≤ 300 cubes à l'écran | décor commun + dragon + extras ≤ 700 cubes |
 | Particules d'interface | ≤ 400 vivantes en même temps | — |
-| Sons | voir `SOUND_DESIGN.md` | — |
+| Sons | voir `docs/archive/SOUND_DESIGN.md` | — |
 
 - Les textures sont chargées à l'ouverture de l'écran de l'autel et libérées à la fermeture (pas en permanence en mémoire).
 - 60 i/s visés sur une machine modeste (GPU intégré récent) avec les mods lourds du pack (Sodium, Iris). Aucune allocation par frame dans la boucle de rendu.
@@ -418,7 +418,7 @@ Format de timeline, un fichier JSON par animation, dans `src/main/resources/asse
 - **Flashs** : jamais plus de 3 flashs par seconde ; un flash plein écran ne dépasse pas 70 % d'opacité, sauf le blanc SSS (100 %, 200 ms, une seule fois). Respect de la recommandation WCAG 2.3.1.
 - Option client **`reduceFlashes`** (config client du mod) : remplace les flashs par des fondus de 300 ms à 40 % et coupe les tremblements de caméra. Les animations restent identiques par ailleurs.
 - Le palier est toujours écrit en clair sur la carte (pas seulement en couleur) pour les joueurs daltoniens.
-- Volume pilotable par les curseurs de Minecraft (catégorie choisie dans `SOUND_DESIGN.md`).
+- Volume pilotable par les curseurs de Minecraft (catégorie choisie dans `docs/archive/SOUND_DESIGN.md`).
 
 ## 9. Contrat avec le skill de motion design
 

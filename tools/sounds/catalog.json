@@ -22,8 +22,8 @@
    ],
    "reference": "minecraft:entity.phantom.flap",
    "loudness_target": "wing_flap",
-   "attenuation": null,
-   "preload": false,
+   "attenuation": 32,
+   "preload": true,
    "stream": false,
    "subtitle_key": null,
    "subtitle": null,
@@ -40,10 +40,10 @@
     {
      "file": "wing/feather/flap_1",
      "source": "fs_711122_cape_wings.mp3",
-     "start": 22.16,
+     "start": 22.225,
      "end": 22.75,
      "peak": -3.0,
-     "fade_in": 0.004,
+     "fade_in": 0.005,
      "fade_out": 0.25,
      "echo": 0.0,
      "loop": 0.0,
@@ -55,10 +55,10 @@
     {
      "file": "wing/feather/flap_2",
      "source": "fs_711122_cape_wings.mp3",
-     "start": 25.94,
+     "start": 26.002,
      "end": 26.5,
      "peak": -3.0,
-     "fade_in": 0.004,
+     "fade_in": 0.005,
      "fade_out": 0.25,
      "echo": 0.0,
      "loop": 0.0,
@@ -70,10 +70,10 @@
     {
      "file": "wing/feather/flap_3",
      "source": "fs_711122_cape_wings.mp3",
-     "start": 29.39,
+     "start": 29.444,
      "end": 30.0,
      "peak": -3.0,
-     "fade_in": 0.004,
+     "fade_in": 0.005,
      "fade_out": 0.25,
      "echo": 0.0,
      "loop": 0.0,
@@ -109,8 +109,8 @@
    ],
    "reference": "minecraft:entity.ender_dragon.flap",
    "loudness_target": "wing_flap",
-   "attenuation": null,
-   "preload": false,
+   "attenuation": 32,
+   "preload": true,
    "stream": false,
    "subtitle_key": null,
    "subtitle": null,
@@ -127,10 +127,10 @@
     {
      "file": "wing/membrane/flap_1",
      "source": "fs_759529_large_flying_creature.mp3",
-     "start": 2.2399999999999998,
+     "start": 2.347,
      "end": 3.03,
      "peak": -2.0,
-     "fade_in": 0.004,
+     "fade_in": 0.005,
      "fade_out": 0.25,
      "echo": 0.0,
      "loop": 0.0,
@@ -142,10 +142,10 @@
     {
      "file": "wing/membrane/flap_2",
      "source": "fs_759529_large_flying_creature.mp3",
-     "start": 3.35,
+     "start": 3.431,
      "end": 4.140000000000001,
      "peak": -2.0,
-     "fade_in": 0.004,
+     "fade_in": 0.005,
      "fade_out": 0.25,
      "echo": 0.0,
      "loop": 0.0,
@@ -157,10 +157,10 @@
     {
      "file": "wing/membrane/flap_3",
      "source": "fs_759529_large_flying_creature.mp3",
-     "start": 4.45,
+     "start": 4.522,
      "end": 5.24,
      "peak": -2.0,
-     "fade_in": 0.004,
+     "fade_in": 0.005,
      "fade_out": 0.25,
      "echo": 0.0,
      "loop": 0.0,
@@ -172,7 +172,7 @@
     {
      "file": "wing/membrane/flap_4",
      "source": "fs_759529_large_flying_creature.mp3",
-     "start": 5.5,
+     "start": 5.543,
      "end": 6.29,
      "peak": -2.0,
      "fade_in": 0.004,
@@ -187,10 +187,10 @@
     {
      "file": "wing/membrane/flap_5",
      "source": "fs_759529_large_flying_creature.mp3",
-     "start": 6.51,
+     "start": 6.577,
      "end": 7.3,
      "peak": -2.0,
-     "fade_in": 0.004,
+     "fade_in": 0.005,
      "fade_out": 0.25,
      "echo": 0.0,
      "loop": 0.0,
@@ -225,8 +225,8 @@
    ],
    "reference": "minecraft:entity.bat.takeoff",
    "loudness_target": "wing_flap",
-   "attenuation": null,
-   "preload": false,
+   "attenuation": 32,
+   "preload": true,
    "stream": false,
    "subtitle_key": null,
    "subtitle": null,
@@ -243,10 +243,10 @@
     {
      "file": "wing/leather/flap_1",
      "source": "fs_593487_umbrella_bat_wings.mp3",
-     "start": 1.78,
+     "start": 1.79,
      "end": 2.13,
      "peak": -4.0,
-     "fade_in": 0.004,
+     "fade_in": 0.005,
      "fade_out": 0.15,
      "echo": 0.0,
      "loop": 0.0,
@@ -326,8 +326,8 @@
    ],
    "reference": "minecraft:entity.bee.loop",
    "loudness_target": "wing_flap",
-   "attenuation": null,
-   "preload": false,
+   "attenuation": 32,
+   "preload": true,
    "stream": false,
    "subtitle_key": null,
    "subtitle": null,
@@ -413,8 +413,8 @@
    ],
    "reference": "minecraft:entity.ender_dragon.flap",
    "loudness_target": "wing_flap_strong",
-   "attenuation": null,
-   "preload": false,
+   "attenuation": 48,
+   "preload": true,
    "stream": false,
    "subtitle_key": null,
    "subtitle": null,
@@ -431,10 +431,10 @@
     {
      "file": "wing/strong/flap_1",
      "source": "fs_670509_huge_wing_flaps.mp3",
-     "start": 2.42,
+     "start": 2.493,
      "end": 3.62,
      "peak": -1.5,
-     "fade_in": 0.004,
+     "fade_in": 0.005,
      "fade_out": 0.4,
      "echo": 0.0,
      "loop": 0.0,
@@ -446,10 +446,10 @@
     {
      "file": "wing/strong/flap_2",
      "source": "fs_670509_huge_wing_flaps.mp3",
-     "start": 3.72,
+     "start": 3.805,
      "end": 4.3,
      "peak": -1.5,
-     "fade_in": 0.004,
+     "fade_in": 0.005,
      "fade_out": 0.25,
      "echo": 0.0,
      "loop": 0.0,
@@ -461,7 +461,7 @@
     {
      "file": "wing/strong/flap_3",
      "source": "fs_670509_huge_wing_flaps.mp3",
-     "start": 5.06,
+     "start": 5.091,
      "end": 5.6,
      "peak": -1.5,
      "fade_in": 0.004,
@@ -499,8 +499,8 @@
    ],
    "reference": "minecraft:entity.bee.loop",
    "loudness_target": "buzz_loop",
-   "attenuation": null,
-   "preload": false,
+   "attenuation": 24,
+   "preload": true,
    "stream": false,
    "subtitle_key": null,
    "subtitle": null,
@@ -568,7 +568,7 @@
     {
      "file": "gacha/ignite_1",
      "source": "oga_magical_1_0.ogg",
-     "start": 0,
+     "start": 0.017,
      "end": null,
      "peak": -2.0,
      "fade_in": 0.004,
@@ -1399,7 +1399,7 @@
     {
      "file": "ui/card_deal_1",
      "source": "kenney_casino-audio/Audio/card-slide-1.ogg",
-     "start": 0,
+     "start": 0.148,
      "end": null,
      "peak": -8.0,
      "fade_in": 0.004,
@@ -1414,10 +1414,10 @@
     {
      "file": "ui/card_deal_2",
      "source": "kenney_casino-audio/Audio/card-slide-2.ogg",
-     "start": 0,
+     "start": 0.058,
      "end": null,
      "peak": -8.0,
-     "fade_in": 0.004,
+     "fade_in": 0.005,
      "fade_out": 0.1,
      "echo": 0.0,
      "loop": 0.0,
@@ -1429,10 +1429,10 @@
     {
      "file": "ui/card_deal_3",
      "source": "kenney_casino-audio/Audio/card-slide-3.ogg",
-     "start": 0,
+     "start": 0.069,
      "end": null,
      "peak": -8.0,
-     "fade_in": 0.004,
+     "fade_in": 0.005,
      "fade_out": 0.1,
      "echo": 0.0,
      "loop": 0.0,
@@ -1444,10 +1444,10 @@
     {
      "file": "ui/card_deal_4",
      "source": "kenney_casino-audio/Audio/card-slide-4.ogg",
-     "start": 0,
+     "start": 0.097,
      "end": null,
      "peak": -8.0,
-     "fade_in": 0.004,
+     "fade_in": 0.005,
      "fade_out": 0.1,
      "echo": 0.0,
      "loop": 0.0,
@@ -1459,10 +1459,10 @@
     {
      "file": "ui/card_deal_5",
      "source": "kenney_casino-audio/Audio/card-slide-5.ogg",
-     "start": 0,
+     "start": 0.109,
      "end": null,
      "peak": -8.0,
-     "fade_in": 0.004,
+     "fade_in": 0.005,
      "fade_out": 0.1,
      "echo": 0.0,
      "loop": 0.0,
@@ -1474,10 +1474,10 @@
     {
      "file": "ui/card_deal_6",
      "source": "kenney_casino-audio/Audio/card-slide-6.ogg",
-     "start": 0,
+     "start": 0.142,
      "end": null,
      "peak": -8.0,
-     "fade_in": 0.004,
+     "fade_in": 0.005,
      "fade_out": 0.1,
      "echo": 0.0,
      "loop": 0.0,
@@ -1489,7 +1489,7 @@
     {
      "file": "ui/card_deal_7",
      "source": "kenney_casino-audio/Audio/card-slide-7.ogg",
-     "start": 0,
+     "start": 0.176,
      "end": null,
      "peak": -8.0,
      "fade_in": 0.004,
@@ -1504,10 +1504,10 @@
     {
      "file": "ui/card_deal_8",
      "source": "kenney_casino-audio/Audio/card-slide-8.ogg",
-     "start": 0,
+     "start": 0.254,
      "end": null,
      "peak": -8.0,
-     "fade_in": 0.004,
+     "fade_in": 0.005,
      "fade_out": 0.1,
      "echo": 0.0,
      "loop": 0.0,
@@ -1554,7 +1554,7 @@
     {
      "file": "ui/card_flip_1",
      "source": "kenney_casino-audio/Audio/card-shove-1.ogg",
-     "start": 0,
+     "start": 0.114,
      "end": null,
      "peak": -6.0,
      "fade_in": 0.004,
@@ -1569,7 +1569,7 @@
     {
      "file": "ui/card_flip_2",
      "source": "kenney_casino-audio/Audio/card-shove-2.ogg",
-     "start": 0,
+     "start": 0.205,
      "end": null,
      "peak": -6.0,
      "fade_in": 0.004,
@@ -1584,10 +1584,10 @@
     {
      "file": "ui/card_flip_3",
      "source": "kenney_casino-audio/Audio/card-shove-3.ogg",
-     "start": 0,
+     "start": 0.117,
      "end": null,
      "peak": -6.0,
-     "fade_in": 0.004,
+     "fade_in": 0.005,
      "fade_out": 0.1,
      "echo": 0.0,
      "loop": 0.0,
@@ -1599,10 +1599,10 @@
     {
      "file": "ui/card_flip_4",
      "source": "kenney_casino-audio/Audio/card-shove-4.ogg",
-     "start": 0,
+     "start": 0.197,
      "end": null,
      "peak": -6.0,
-     "fade_in": 0.004,
+     "fade_in": 0.005,
      "fade_out": 0.1,
      "echo": 0.0,
      "loop": 0.0,
@@ -1614,7 +1614,7 @@
     {
      "file": "ui/card_flip_5",
      "source": "kenney_casino-audio/Audio/card-fan-1.ogg",
-     "start": 0,
+     "start": 0.027,
      "end": null,
      "peak": -6.0,
      "fade_in": 0.004,
@@ -1663,10 +1663,10 @@
     {
      "file": "ui/card_shuffle_1",
      "source": "kenney_casino-audio/Audio/card-shuffle.ogg",
-     "start": 0,
+     "start": 0.18,
      "end": null,
      "peak": -7.0,
-     "fade_in": 0.004,
+     "fade_in": 0.005,
      "fade_out": 0.3,
      "echo": 0.0,
      "loop": 0.0,
@@ -1713,10 +1713,10 @@
     {
      "file": "ui/card_place_1",
      "source": "kenney_casino-audio/Audio/card-place-1.ogg",
-     "start": 0,
+     "start": 0.18,
      "end": null,
      "peak": -6.0,
-     "fade_in": 0.004,
+     "fade_in": 0.005,
      "fade_out": 0.1,
      "echo": 0.0,
      "loop": 0.0,
@@ -1728,7 +1728,7 @@
     {
      "file": "ui/card_place_2",
      "source": "kenney_casino-audio/Audio/card-place-2.ogg",
-     "start": 0,
+     "start": 0.048,
      "end": null,
      "peak": -6.0,
      "fade_in": 0.004,
@@ -1743,7 +1743,7 @@
     {
      "file": "ui/card_place_3",
      "source": "kenney_casino-audio/Audio/card-place-3.ogg",
-     "start": 0,
+     "start": 0.345,
      "end": null,
      "peak": -6.0,
      "fade_in": 0.004,
@@ -1758,10 +1758,10 @@
     {
      "file": "ui/card_place_4",
      "source": "kenney_casino-audio/Audio/card-place-4.ogg",
-     "start": 0,
+     "start": 0.294,
      "end": null,
      "peak": -6.0,
-     "fade_in": 0.004,
+     "fade_in": 0.005,
      "fade_out": 0.1,
      "echo": 0.0,
      "loop": 0.0,
@@ -1824,7 +1824,7 @@
     {
      "file": "ui/confirm_2",
      "source": "kenney_ui-audio/Audio/switch3.ogg",
-     "start": 0,
+     "start": 0.066,
      "end": null,
      "peak": -9.0,
      "fade_in": 0.004,
@@ -1850,14 +1850,12 @@
    "id": "ui.equip",
    "category": "ui",
    "group": "ui",
-   "status": "todo",
-   "trigger": "Équiper / retirer (menu J), infusion de l'établi, table d'assemblage",
+   "status": "custom",
+   "trigger": "Boutons Équiper et Retirer du menu J",
    "code": [
-    "client/gui/WingsScreen.java",
-    "block/ForgeBenchEffects.java",
-    "block/AssemblyTableEffects.java"
+    "client/gui/WingsScreen.java"
    ],
-   "description": "Aujourd'hui 4,2 s et brillant ; à remplacer par un son court, grave et doux.",
+   "description": "Court (< 0,6 s), grave et doux : battement de cape abaissé et filtré. Proposition à écouter (SOUND_PLAN.md § 1.6).",
    "keywords": [
     "cloth unfold soft",
     "wings unfold",
@@ -1876,6 +1874,57 @@
    "variants": [
     {
      "file": "ui/equip_1",
+     "source": "fs_711122_cape_wings.mp3",
+     "start": 22.16,
+     "end": 22.6,
+     "peak": -3.0,
+     "fade_in": 0.004,
+     "fade_out": 0.2,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 0.8,
+     "lp": 1600,
+     "gain_db": 0.0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "loop": false
+  },
+  {
+   "id": "block.infusion",
+   "category": "block",
+   "group": "infusion",
+   "status": "custom",
+   "trigger": "Infusion d'énergie ailée (établi de la forge) et fin d'assemblage (table d'assemblage)",
+   "code": [
+    "block/ForgeBenchEffects.java",
+    "block/AssemblyTableEffects.java"
+   ],
+   "description": "Ancien son d'équipement (4,2 s, brillant), gardé ici en attendant l'écoute de zorago (SOUND_PLAN.md § 1.6).",
+   "keywords": [
+    "magic infusion",
+    "wings unfold shimmer"
+   ],
+   "reference": null,
+   "loudness_target": "block_oneshot",
+   "attenuation": 16,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "block.infusion",
+   "subtitle": "Winged energy infuses",
+   "declared": true,
+   "slow_attack": true,
+   "animations": [],
+   "variants": [
+    {
+     "file": "block/infusion_1",
      "source": "fs_561287.mp3",
      "start": 0.2,
      "end": 4.4,
@@ -1896,8 +1945,7 @@
     "state": "todo",
     "note": "",
     "date": null
-   },
-   "loop": false
+   }
   },
   {
    "id": "ui.open",
@@ -1924,7 +1972,7 @@
     {
      "file": "ui/open_1",
      "source": "kenney_interface-sounds/Audio/open_002.ogg",
-     "start": 0,
+     "start": 0.004,
      "end": null,
      "peak": -10.0,
      "fade_in": 0.004,
@@ -1939,10 +1987,10 @@
     {
      "file": "ui/open_2",
      "source": "kenney_interface-sounds/Audio/open_003.ogg",
-     "start": 0,
+     "start": 0.005,
      "end": null,
      "peak": -10.0,
-     "fade_in": 0.004,
+     "fade_in": 0.005,
      "fade_out": 0.05,
      "echo": 0.0,
      "loop": 0.0,
@@ -1954,10 +2002,10 @@
     {
      "file": "ui/open_3",
      "source": "kenney_interface-sounds/Audio/open_004.ogg",
-     "start": 0,
+     "start": 0.297,
      "end": null,
      "peak": -10.0,
-     "fade_in": 0.004,
+     "fade_in": 0.005,
      "fade_out": 0.05,
      "echo": 0.0,
      "loop": 0.0,
@@ -1994,7 +2042,7 @@
    "reference": "minecraft:item.elytra.flying",
    "loudness_target": "wind_loop",
    "attenuation": null,
-   "preload": false,
+   "preload": true,
    "stream": false,
    "subtitle_key": "flight.wind",
    "subtitle": "Wind rushes",
@@ -2045,7 +2093,7 @@
    ],
    "reference": null,
    "loudness_target": "landing",
-   "attenuation": null,
+   "attenuation": 24,
    "preload": false,
    "stream": false,
    "subtitle_key": "flight.landing_hard",
@@ -2057,10 +2105,10 @@
     {
      "file": "flight/landing_hard_1",
      "source": "fs_504626.mp3",
-     "start": 0.05,
+     "start": 0.138,
      "end": 1.4,
      "peak": -2.0,
-     "fade_in": 0.004,
+     "fade_in": 0.005,
      "fade_out": 0.4,
      "echo": 0.0,
      "loop": 0.0,
@@ -2096,7 +2144,7 @@
    ],
    "reference": null,
    "loudness_target": "landing",
-   "attenuation": null,
+   "attenuation": 24,
    "preload": false,
    "stream": false,
    "subtitle_key": "flight.landing_soft",
@@ -2191,7 +2239,7 @@
    ],
    "reference": "minecraft:block.anvil.use",
    "loudness_target": "block_oneshot",
-   "attenuation": null,
+   "attenuation": 16,
    "preload": false,
    "stream": false,
    "subtitle_key": "block.forge_bench.hammer",
@@ -2203,7 +2251,7 @@
     {
      "file": "block/forge_bench/hammer_1",
      "source": "fs_434339.mp3",
-     "start": 0.2,
+     "start": 0.23,
      "end": 1.1300000000000001,
      "peak": -3.0,
      "fade_in": 0.004,
@@ -2218,7 +2266,7 @@
     {
      "file": "block/forge_bench/hammer_2",
      "source": "fs_434339.mp3",
-     "start": 4.14,
+     "start": 4.173,
      "end": 5.07,
      "peak": -3.0,
      "fade_in": 0.004,
@@ -2233,7 +2281,7 @@
     {
      "file": "block/forge_bench/hammer_3",
      "source": "fs_434339.mp3",
-     "start": 5.71,
+     "start": 5.743,
      "end": 6.640000000000001,
      "peak": -3.0,
      "fade_in": 0.004,
@@ -2248,7 +2296,7 @@
     {
      "file": "block/forge_bench/hammer_4",
      "source": "fs_434339.mp3",
-     "start": 12.13,
+     "start": 12.165,
      "end": 13.06,
      "peak": -3.0,
      "fade_in": 0.004,
@@ -2263,7 +2311,7 @@
     {
      "file": "block/forge_bench/hammer_5",
      "source": "fs_434339.mp3",
-     "start": 13.75,
+     "start": 13.779,
      "end": 14.68,
      "peak": -3.0,
      "fade_in": 0.004,
@@ -2278,7 +2326,7 @@
     {
      "file": "block/forge_bench/hammer_6",
      "source": "fs_434339.mp3",
-     "start": 18.66,
+     "start": 18.688,
      "end": 19.59,
      "peak": -3.0,
      "fade_in": 0.004,
@@ -2316,7 +2364,7 @@
    ],
    "reference": "minecraft:block.fire.extinguish",
    "loudness_target": "block_oneshot",
-   "attenuation": null,
+   "attenuation": 16,
    "preload": false,
    "stream": false,
    "subtitle_key": "block.forge_bench.quench",
@@ -2328,10 +2376,10 @@
     {
      "file": "block/forge_bench/quench_1",
      "source": "fs_234782.mp3",
-     "start": 0.05,
+     "start": 0.142,
      "end": null,
      "peak": -4.0,
-     "fade_in": 0.004,
+     "fade_in": 0.005,
      "fade_out": 0.5,
      "echo": 0.0,
      "loop": 0.0,
@@ -2367,7 +2415,7 @@
    ],
    "reference": "minecraft:block.furnace.fire_crackle",
    "loudness_target": "block_loop",
-   "attenuation": null,
+   "attenuation": 12,
    "preload": false,
    "stream": false,
    "subtitle_key": "block.cloud_compressor.loop",
@@ -2417,7 +2465,7 @@
    ],
    "reference": "minecraft:item.bottle.fill",
    "loudness_target": "block_oneshot",
-   "attenuation": null,
+   "attenuation": 12,
    "preload": false,
    "stream": false,
    "subtitle_key": "essence.pour",
@@ -2429,7 +2477,7 @@
     {
      "file": "essence/pour_1",
      "source": "fs_875132.mp3",
-     "start": 1.6,
+     "start": 1.69,
      "end": 2.6,
      "peak": -5.0,
      "fade_in": 0.004,
@@ -2444,7 +2492,7 @@
     {
      "file": "essence/pour_2",
      "source": "fs_875132.mp3",
-     "start": 2.9,
+     "start": 2.988,
      "end": 3.95,
      "peak": -5.0,
      "fade_in": 0.004,
@@ -2482,7 +2530,7 @@
    ],
    "reference": null,
    "loudness_target": "block_oneshot",
-   "attenuation": null,
+   "attenuation": 12,
    "preload": false,
    "stream": false,
    "subtitle_key": "essence.full",
@@ -2559,7 +2607,7 @@
     {
      "file": "ui/denied_2",
      "source": "kenney_interface-sounds/Audio/back_003.ogg",
-     "start": 0,
+     "start": 0.005,
      "end": null,
      "peak": -9.0,
      "fade_in": 0.004,
@@ -2867,7 +2915,7 @@
     {
      "file": "fury/crackle_1",
      "source": "fs_582631.mp3",
-     "start": 0.08,
+     "start": 0.123,
      "end": 0.9,
      "peak": -4.0,
      "fade_in": 0.004,
@@ -2999,11 +3047,7 @@
    ],
    "variants": [],
    "layers": [
-    {
-     "event": "minecraft:entity.breeze.idle_air",
-     "volume": 0.6,
-     "pitch": 1.2
-    }
+    "wing.air.layer"
    ],
    "candidates": [],
    "verdict": {
@@ -3017,6 +3061,47 @@
     "pitch": 1.38
    },
    "family": "element"
+  },
+  {
+   "id": "wing.air.layer",
+   "category": "wing",
+   "group": "air",
+   "status": "vanilla",
+   "trigger": "Joué par WingSounds avec chaque battement de la paire, particules ou non",
+   "code": [
+    "client/WingSounds.java"
+   ],
+   "description": "Couche de matière vanilla de la paire.",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "air",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "vanilla": {
+    "event": "minecraft:entity.breeze.idle_air",
+    "volume": 0.6,
+    "pitch": 1.2
+   }
   },
   {
    "id": "wing.air.flap_strong",
@@ -3085,11 +3170,7 @@
    ],
    "variants": [],
    "layers": [
-    {
-     "event": "minecraft:block.amethyst_block.chime",
-     "volume": 0.5,
-     "pitch": 1.0
-    }
+    "wing.amethyst.layer"
    ],
    "candidates": [],
    "verdict": {
@@ -3103,6 +3184,47 @@
     "pitch": 1.1
    },
    "family": "feather_matter"
+  },
+  {
+   "id": "wing.amethyst.layer",
+   "category": "wing",
+   "group": "amethyst",
+   "status": "vanilla",
+   "trigger": "Joué par WingSounds avec chaque battement de la paire, particules ou non",
+   "code": [
+    "client/WingSounds.java"
+   ],
+   "description": "Couche de matière vanilla de la paire.",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "amethyst",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "vanilla": {
+    "event": "minecraft:block.amethyst_block.chime",
+    "volume": 0.5,
+    "pitch": 1.0
+   }
   },
   {
    "id": "wing.amethyst.flap_strong",
@@ -3291,11 +3413,7 @@
    ],
    "variants": [],
    "layers": [
-    {
-     "event": "minecraft:block.amethyst_block.chime",
-     "volume": 0.5,
-     "pitch": 1.4
-    }
+    "wing.angel.layer"
    ],
    "candidates": [],
    "verdict": {
@@ -3309,6 +3427,47 @@
     "pitch": 0.9
    },
    "family": "feather"
+  },
+  {
+   "id": "wing.angel.layer",
+   "category": "wing",
+   "group": "angel",
+   "status": "vanilla",
+   "trigger": "Joué par WingSounds avec chaque battement de la paire, particules ou non",
+   "code": [
+    "client/WingSounds.java"
+   ],
+   "description": "Couche de matière vanilla de la paire.",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "angel",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "vanilla": {
+    "event": "minecraft:block.amethyst_block.chime",
+    "volume": 0.5,
+    "pitch": 1.4
+   }
   },
   {
    "id": "wing.angel.flap_strong",
@@ -3377,11 +3536,7 @@
    ],
    "variants": [],
    "layers": [
-    {
-     "event": "minecraft:block.amethyst_block.resonate",
-     "volume": 0.5,
-     "pitch": 1.2
-    }
+    "wing.aurora.layer"
    ],
    "candidates": [],
    "verdict": {
@@ -3395,6 +3550,47 @@
     "pitch": 1.265
    },
    "family": "element"
+  },
+  {
+   "id": "wing.aurora.layer",
+   "category": "wing",
+   "group": "aurora",
+   "status": "vanilla",
+   "trigger": "Joué par WingSounds avec chaque battement de la paire, particules ou non",
+   "code": [
+    "client/WingSounds.java"
+   ],
+   "description": "Couche de matière vanilla de la paire.",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "aurora",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "vanilla": {
+    "event": "minecraft:block.amethyst_block.resonate",
+    "volume": 0.5,
+    "pitch": 1.2
+   }
   },
   {
    "id": "wing.aurora.flap_strong",
@@ -3863,11 +4059,7 @@
    ],
    "variants": [],
    "layers": [
-    {
-     "event": "minecraft:block.copper.hit",
-     "volume": 0.6,
-     "pitch": 0.8
-    }
+    "wing.copper.layer"
    ],
    "candidates": [],
    "verdict": {
@@ -3881,6 +4073,47 @@
     "pitch": 1.045
    },
    "family": "feather_matter"
+  },
+  {
+   "id": "wing.copper.layer",
+   "category": "wing",
+   "group": "copper",
+   "status": "vanilla",
+   "trigger": "Joué par WingSounds avec chaque battement de la paire, particules ou non",
+   "code": [
+    "client/WingSounds.java"
+   ],
+   "description": "Couche de matière vanilla de la paire.",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "copper",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "vanilla": {
+    "event": "minecraft:block.copper.hit",
+    "volume": 0.6,
+    "pitch": 0.8
+   }
   },
   {
    "id": "wing.copper.flap_strong",
@@ -3949,11 +4182,7 @@
    ],
    "variants": [],
    "layers": [
-    {
-     "event": "minecraft:entity.parrot.fly",
-     "volume": 0.4,
-     "pitch": 0.8
-    }
+    "wing.crow.layer"
    ],
    "candidates": [],
    "verdict": {
@@ -3967,6 +4196,47 @@
     "pitch": 0.95
    },
    "family": "feather"
+  },
+  {
+   "id": "wing.crow.layer",
+   "category": "wing",
+   "group": "crow",
+   "status": "vanilla",
+   "trigger": "Joué par WingSounds avec chaque battement de la paire, particules ou non",
+   "code": [
+    "client/WingSounds.java"
+   ],
+   "description": "Couche de matière vanilla de la paire.",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "crow",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "vanilla": {
+    "event": "minecraft:entity.parrot.fly",
+    "volume": 0.4,
+    "pitch": 0.8
+   }
   },
   {
    "id": "wing.crow.flap_strong",
@@ -4155,11 +4425,7 @@
    ],
    "variants": [],
    "layers": [
-    {
-     "event": "minecraft:entity.blaze.shoot",
-     "volume": 0.45,
-     "pitch": 0.55
-    }
+    "wing.demon.layer"
    ],
    "candidates": [],
    "verdict": {
@@ -4173,6 +4439,47 @@
     "pitch": 0.8
    },
    "family": "membrane"
+  },
+  {
+   "id": "wing.demon.layer",
+   "category": "wing",
+   "group": "demon",
+   "status": "vanilla",
+   "trigger": "Joué par WingSounds avec chaque battement de la paire, particules ou non",
+   "code": [
+    "client/WingSounds.java"
+   ],
+   "description": "Couche de matière vanilla de la paire.",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "demon",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "vanilla": {
+    "event": "minecraft:entity.blaze.shoot",
+    "volume": 0.45,
+    "pitch": 0.55
+   }
   },
   {
    "id": "wing.demon.flap_strong",
@@ -4241,11 +4548,7 @@
    ],
    "variants": [],
    "layers": [
-    {
-     "event": "minecraft:entity.parrot.fly",
-     "volume": 0.4,
-     "pitch": 0.8
-    }
+    "wing.eagle.layer"
    ],
    "candidates": [],
    "verdict": {
@@ -4259,6 +4562,47 @@
     "pitch": 0.85
    },
    "family": "feather"
+  },
+  {
+   "id": "wing.eagle.layer",
+   "category": "wing",
+   "group": "eagle",
+   "status": "vanilla",
+   "trigger": "Joué par WingSounds avec chaque battement de la paire, particules ou non",
+   "code": [
+    "client/WingSounds.java"
+   ],
+   "description": "Couche de matière vanilla de la paire.",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "eagle",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "vanilla": {
+    "event": "minecraft:entity.parrot.fly",
+    "volume": 0.4,
+    "pitch": 0.8
+   }
   },
   {
    "id": "wing.eagle.flap_strong",
@@ -4327,11 +4671,7 @@
    ],
    "variants": [],
    "layers": [
-    {
-     "event": "minecraft:block.basalt.break",
-     "volume": 0.6,
-     "pitch": 0.6
-    }
+    "wing.earth.layer"
    ],
    "candidates": [],
    "verdict": {
@@ -4345,6 +4685,47 @@
     "pitch": 0.88
    },
    "family": "feather_matter"
+  },
+  {
+   "id": "wing.earth.layer",
+   "category": "wing",
+   "group": "earth",
+   "status": "vanilla",
+   "trigger": "Joué par WingSounds avec chaque battement de la paire, particules ou non",
+   "code": [
+    "client/WingSounds.java"
+   ],
+   "description": "Couche de matière vanilla de la paire.",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "earth",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "vanilla": {
+    "event": "minecraft:block.basalt.break",
+    "volume": 0.6,
+    "pitch": 0.6
+   }
   },
   {
    "id": "wing.earth.flap_strong",
@@ -4413,11 +4794,7 @@
    ],
    "variants": [],
    "layers": [
-    {
-     "event": "minecraft:item.firecharge.use",
-     "volume": 0.35,
-     "pitch": 1.3
-    }
+    "wing.fire.layer"
    ],
    "candidates": [],
    "verdict": {
@@ -4431,6 +4808,47 @@
     "pitch": 1.1
    },
    "family": "feather_matter"
+  },
+  {
+   "id": "wing.fire.layer",
+   "category": "wing",
+   "group": "fire",
+   "status": "vanilla",
+   "trigger": "Joué par WingSounds avec chaque battement de la paire, particules ou non",
+   "code": [
+    "client/WingSounds.java"
+   ],
+   "description": "Couche de matière vanilla de la paire.",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "fire",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "vanilla": {
+    "event": "minecraft:item.firecharge.use",
+    "volume": 0.35,
+    "pitch": 1.3
+   }
   },
   {
    "id": "wing.fire.flap_strong",
@@ -4579,11 +4997,7 @@
    ],
    "variants": [],
    "layers": [
-    {
-     "event": "minecraft:block.azalea_leaves.break",
-     "volume": 0.6,
-     "pitch": 0.9
-    }
+    "wing.forest.layer"
    ],
    "candidates": [],
    "verdict": {
@@ -4597,6 +5011,47 @@
     "pitch": 1.092
    },
    "family": "element"
+  },
+  {
+   "id": "wing.forest.layer",
+   "category": "wing",
+   "group": "forest",
+   "status": "vanilla",
+   "trigger": "Joué par WingSounds avec chaque battement de la paire, particules ou non",
+   "code": [
+    "client/WingSounds.java"
+   ],
+   "description": "Couche de matière vanilla de la paire.",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "forest",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "vanilla": {
+    "event": "minecraft:block.azalea_leaves.break",
+    "volume": 0.6,
+    "pitch": 0.9
+   }
   },
   {
    "id": "wing.forest.flap_strong",
@@ -4665,11 +5120,7 @@
    ],
    "variants": [],
    "layers": [
-    {
-     "event": "minecraft:entity.parrot.fly",
-     "volume": 0.4,
-     "pitch": 0.8
-    }
+    "wing.gull.layer"
    ],
    "candidates": [],
    "verdict": {
@@ -4683,6 +5134,47 @@
     "pitch": 1.1
    },
    "family": "feather"
+  },
+  {
+   "id": "wing.gull.layer",
+   "category": "wing",
+   "group": "gull",
+   "status": "vanilla",
+   "trigger": "Joué par WingSounds avec chaque battement de la paire, particules ou non",
+   "code": [
+    "client/WingSounds.java"
+   ],
+   "description": "Couche de matière vanilla de la paire.",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "gull",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "vanilla": {
+    "event": "minecraft:entity.parrot.fly",
+    "volume": 0.4,
+    "pitch": 0.8
+   }
   },
   {
    "id": "wing.gull.flap_strong",
@@ -5111,11 +5603,7 @@
    ],
    "variants": [],
    "layers": [
-    {
-     "event": "minecraft:block.amethyst_cluster.break",
-     "volume": 0.4,
-     "pitch": 1.5
-    }
+    "wing.nebula.layer"
    ],
    "candidates": [],
    "verdict": {
@@ -5129,6 +5617,47 @@
     "pitch": 1.1
    },
    "family": "feather_matter"
+  },
+  {
+   "id": "wing.nebula.layer",
+   "category": "wing",
+   "group": "nebula",
+   "status": "vanilla",
+   "trigger": "Joué par WingSounds avec chaque battement de la paire, particules ou non",
+   "code": [
+    "client/WingSounds.java"
+   ],
+   "description": "Couche de matière vanilla de la paire.",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "nebula",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "vanilla": {
+    "event": "minecraft:block.amethyst_cluster.break",
+    "volume": 0.4,
+    "pitch": 1.5
+   }
   },
   {
    "id": "wing.nebula.flap_strong",
@@ -5337,7 +5866,7 @@
    "status": "alias",
    "trigger": "",
    "code": [],
-   "description": "",
+   "description": "Vol silencieux : aucune couche (SOUND_PLAN.md § 3.2).",
    "keywords": [],
    "reference": null,
    "loudness_target": null,
@@ -5356,13 +5885,7 @@
     }
    ],
    "variants": [],
-   "layers": [
-    {
-     "event": "minecraft:entity.parrot.fly",
-     "volume": 0.4,
-     "pitch": 0.8
-    }
-   ],
+   "layers": [],
    "candidates": [],
    "verdict": {
     "state": "todo",
@@ -5443,11 +5966,7 @@
    ],
    "variants": [],
    "layers": [
-    {
-     "event": "minecraft:entity.parrot.fly",
-     "volume": 0.4,
-     "pitch": 0.8
-    }
+    "wing.parrot.layer"
    ],
    "candidates": [],
    "verdict": {
@@ -5461,6 +5980,47 @@
     "pitch": 1.2
    },
    "family": "feather"
+  },
+  {
+   "id": "wing.parrot.layer",
+   "category": "wing",
+   "group": "parrot",
+   "status": "vanilla",
+   "trigger": "Joué par WingSounds avec chaque battement de la paire, particules ou non",
+   "code": [
+    "client/WingSounds.java"
+   ],
+   "description": "Couche de matière vanilla de la paire.",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "parrot",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "vanilla": {
+    "event": "minecraft:entity.parrot.fly",
+    "volume": 0.4,
+    "pitch": 0.8
+   }
   },
   {
    "id": "wing.parrot.flap_strong",
@@ -5609,11 +6169,7 @@
    ],
    "variants": [],
    "layers": [
-    {
-     "event": "minecraft:entity.parrot.fly",
-     "volume": 0.4,
-     "pitch": 0.8
-    }
+    "wing.peacock.layer"
    ],
    "candidates": [],
    "verdict": {
@@ -5627,6 +6183,47 @@
     "pitch": 0.95
    },
    "family": "feather"
+  },
+  {
+   "id": "wing.peacock.layer",
+   "category": "wing",
+   "group": "peacock",
+   "status": "vanilla",
+   "trigger": "Joué par WingSounds avec chaque battement de la paire, particules ou non",
+   "code": [
+    "client/WingSounds.java"
+   ],
+   "description": "Couche de matière vanilla de la paire.",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "peacock",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "vanilla": {
+    "event": "minecraft:entity.parrot.fly",
+    "volume": 0.4,
+    "pitch": 0.8
+   }
   },
   {
    "id": "wing.peacock.flap_strong",
@@ -5695,11 +6292,7 @@
    ],
    "variants": [],
    "layers": [
-    {
-     "event": "minecraft:entity.phantom.flap",
-     "volume": 0.7,
-     "pitch": 0.6
-    }
+    "wing.phantom.layer"
    ],
    "candidates": [],
    "verdict": {
@@ -5713,6 +6306,47 @@
     "pitch": 1.05
    },
    "family": "membrane"
+  },
+  {
+   "id": "wing.phantom.layer",
+   "category": "wing",
+   "group": "phantom",
+   "status": "vanilla",
+   "trigger": "Joué par WingSounds avec chaque battement de la paire, particules ou non",
+   "code": [
+    "client/WingSounds.java"
+   ],
+   "description": "Couche de matière vanilla de la paire.",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "phantom",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "vanilla": {
+    "event": "minecraft:entity.phantom.flap",
+    "volume": 0.7,
+    "pitch": 0.6
+   }
   },
   {
    "id": "wing.phantom.flap_strong",
@@ -5781,11 +6415,7 @@
    ],
    "variants": [],
    "layers": [
-    {
-     "event": "minecraft:entity.parrot.fly",
-     "volume": 0.4,
-     "pitch": 0.8
-    }
+    "wing.pigeon.layer"
    ],
    "candidates": [],
    "verdict": {
@@ -5799,6 +6429,47 @@
     "pitch": 1.15
    },
    "family": "feather"
+  },
+  {
+   "id": "wing.pigeon.layer",
+   "category": "wing",
+   "group": "pigeon",
+   "status": "vanilla",
+   "trigger": "Joué par WingSounds avec chaque battement de la paire, particules ou non",
+   "code": [
+    "client/WingSounds.java"
+   ],
+   "description": "Couche de matière vanilla de la paire.",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "pigeon",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "vanilla": {
+    "event": "minecraft:entity.parrot.fly",
+    "volume": 0.4,
+    "pitch": 0.8
+   }
   },
   {
    "id": "wing.pigeon.flap_strong",
@@ -5867,11 +6538,7 @@
    ],
    "variants": [],
    "layers": [
-    {
-     "event": "minecraft:particle.soul_escape",
-     "volume": 0.6,
-     "pitch": 1.2
-    }
+    "wing.psyche.layer"
    ],
    "candidates": [],
    "verdict": {
@@ -5885,6 +6552,47 @@
     "pitch": 1.495
    },
    "family": "soft"
+  },
+  {
+   "id": "wing.psyche.layer",
+   "category": "wing",
+   "group": "psyche",
+   "status": "vanilla",
+   "trigger": "Joué par WingSounds avec chaque battement de la paire, particules ou non",
+   "code": [
+    "client/WingSounds.java"
+   ],
+   "description": "Couche de matière vanilla de la paire.",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "psyche",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "vanilla": {
+    "event": "minecraft:particle.soul_escape",
+    "volume": 0.6,
+    "pitch": 1.2
+   }
   },
   {
    "id": "wing.psyche.flap_strong",
@@ -5953,11 +6661,7 @@
    ],
    "variants": [],
    "layers": [
-    {
-     "event": "minecraft:entity.phantom.flap",
-     "volume": 0.7,
-     "pitch": 0.6
-    }
+    "wing.ptero.layer"
    ],
    "candidates": [],
    "verdict": {
@@ -5971,6 +6675,47 @@
     "pitch": 0.9
    },
    "family": "membrane"
+  },
+  {
+   "id": "wing.ptero.layer",
+   "category": "wing",
+   "group": "ptero",
+   "status": "vanilla",
+   "trigger": "Joué par WingSounds avec chaque battement de la paire, particules ou non",
+   "code": [
+    "client/WingSounds.java"
+   ],
+   "description": "Couche de matière vanilla de la paire.",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "ptero",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "vanilla": {
+    "event": "minecraft:entity.phantom.flap",
+    "volume": 0.7,
+    "pitch": 0.6
+   }
   },
   {
    "id": "wing.ptero.flap_strong",
@@ -6039,11 +6784,7 @@
    ],
    "variants": [],
    "layers": [
-    {
-     "event": "minecraft:block.beacon.power_select",
-     "volume": 0.35,
-     "pitch": 1.6
-    }
+    "wing.seraph.layer"
    ],
    "candidates": [],
    "verdict": {
@@ -6057,6 +6798,47 @@
     "pitch": 0.85
    },
    "family": "feather"
+  },
+  {
+   "id": "wing.seraph.layer",
+   "category": "wing",
+   "group": "seraph",
+   "status": "vanilla",
+   "trigger": "Joué par WingSounds avec chaque battement de la paire, particules ou non",
+   "code": [
+    "client/WingSounds.java"
+   ],
+   "description": "Couche de matière vanilla de la paire.",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "seraph",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "vanilla": {
+    "event": "minecraft:block.beacon.power_select",
+    "volume": 0.35,
+    "pitch": 1.6
+   }
   },
   {
    "id": "wing.seraph.flap_strong",
@@ -6125,11 +6907,7 @@
    ],
    "variants": [],
    "layers": [
-    {
-     "event": "minecraft:entity.enderman.teleport",
-     "volume": 0.25,
-     "pitch": 0.6
-    }
+    "wing.shadow.layer"
    ],
    "candidates": [],
    "verdict": {
@@ -6143,6 +6921,47 @@
     "pitch": 0.935
    },
    "family": "feather_matter"
+  },
+  {
+   "id": "wing.shadow.layer",
+   "category": "wing",
+   "group": "shadow",
+   "status": "vanilla",
+   "trigger": "Joué par WingSounds avec chaque battement de la paire, particules ou non",
+   "code": [
+    "client/WingSounds.java"
+   ],
+   "description": "Couche de matière vanilla de la paire.",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "shadow",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "vanilla": {
+    "event": "minecraft:entity.enderman.teleport",
+    "volume": 0.25,
+    "pitch": 0.6
+   }
   },
   {
    "id": "wing.shadow.flap_strong",
@@ -6291,11 +7110,7 @@
    ],
    "variants": [],
    "layers": [
-    {
-     "event": "minecraft:entity.lightning_bolt.impact",
-     "volume": 0.25,
-     "pitch": 1.8
-    }
+    "wing.storm.layer"
    ],
    "candidates": [],
    "verdict": {
@@ -6309,6 +7124,47 @@
     "pitch": 1.155
    },
    "family": "feather_matter"
+  },
+  {
+   "id": "wing.storm.layer",
+   "category": "wing",
+   "group": "storm",
+   "status": "vanilla",
+   "trigger": "Joué par WingSounds avec chaque battement de la paire, particules ou non",
+   "code": [
+    "client/WingSounds.java"
+   ],
+   "description": "Couche de matière vanilla de la paire.",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "storm",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "vanilla": {
+    "event": "minecraft:entity.lightning_bolt.impact",
+    "volume": 0.25,
+    "pitch": 1.8
+   }
   },
   {
    "id": "wing.storm.flap_strong",
@@ -6377,11 +7233,7 @@
    ],
    "variants": [],
    "layers": [
-    {
-     "event": "minecraft:entity.parrot.fly",
-     "volume": 0.4,
-     "pitch": 0.8
-    }
+    "wing.swift.layer"
    ],
    "candidates": [],
    "verdict": {
@@ -6395,6 +7247,47 @@
     "pitch": 1.25
    },
    "family": "feather"
+  },
+  {
+   "id": "wing.swift.layer",
+   "category": "wing",
+   "group": "swift",
+   "status": "vanilla",
+   "trigger": "Joué par WingSounds avec chaque battement de la paire, particules ou non",
+   "code": [
+    "client/WingSounds.java"
+   ],
+   "description": "Couche de matière vanilla de la paire.",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "swift",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "vanilla": {
+    "event": "minecraft:entity.parrot.fly",
+    "volume": 0.4,
+    "pitch": 0.8
+   }
   },
   {
    "id": "wing.swift.flap_strong",
@@ -6463,11 +7356,7 @@
    ],
    "variants": [],
    "layers": [
-    {
-     "event": "minecraft:entity.boat.paddle_water",
-     "volume": 0.5,
-     "pitch": 0.9
-    }
+    "wing.water.layer"
    ],
    "candidates": [],
    "verdict": {
@@ -6481,6 +7370,47 @@
     "pitch": 1.035
    },
    "family": "element"
+  },
+  {
+   "id": "wing.water.layer",
+   "category": "wing",
+   "group": "water",
+   "status": "vanilla",
+   "trigger": "Joué par WingSounds avec chaque battement de la paire, particules ou non",
+   "code": [
+    "client/WingSounds.java"
+   ],
+   "description": "Couche de matière vanilla de la paire.",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "water",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "vanilla": {
+    "event": "minecraft:entity.boat.paddle_water",
+    "volume": 0.5,
+    "pitch": 0.9
+   }
   },
   {
    "id": "wing.water.flap_strong",
@@ -6549,16 +7479,8 @@
    ],
    "variants": [],
    "layers": [
-    {
-     "event": "minecraft:block.amethyst_block.chime",
-     "volume": 0.5,
-     "pitch": 0.6
-    },
-    {
-     "event": "minecraft:block.amethyst_block.chime",
-     "volume": 0.5,
-     "pitch": 1.7
-    }
+    "wing.yin_yang.layer",
+    "wing.yin_yang.layer_2"
    ],
    "candidates": [],
    "verdict": {
@@ -6572,6 +7494,88 @@
     "pitch": 1.0
    },
    "family": "feather"
+  },
+  {
+   "id": "wing.yin_yang.layer",
+   "category": "wing",
+   "group": "yin_yang",
+   "status": "vanilla",
+   "trigger": "Joué par WingSounds avec chaque battement de la paire, particules ou non",
+   "code": [
+    "client/WingSounds.java"
+   ],
+   "description": "Couche de matière vanilla de la paire.",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "yin_yang",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "vanilla": {
+    "event": "minecraft:block.amethyst_block.chime",
+    "volume": 0.5,
+    "pitch": 0.6
+   }
+  },
+  {
+   "id": "wing.yin_yang.layer_2",
+   "category": "wing",
+   "group": "yin_yang",
+   "status": "vanilla",
+   "trigger": "Joué par WingSounds avec chaque battement de la paire, particules ou non",
+   "code": [
+    "client/WingSounds.java"
+   ],
+   "description": "Couche de matière vanilla de la paire.",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "yin_yang",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "vanilla": {
+    "event": "minecraft:block.amethyst_block.chime",
+    "volume": 0.5,
+    "pitch": 1.7
+   }
   },
   {
    "id": "wing.yin_yang.flap_strong",
@@ -7171,7 +8175,8 @@
     "state": "todo",
     "note": "",
     "date": null
-   }
+   },
+   "note": "vanilla ui.button.click abaissé ou silent : à trancher à l'écoute"
   },
   {
    "id": "ui.locked",
@@ -7199,7 +8204,8 @@
     "state": "todo",
     "note": "",
     "date": null
-   }
+   },
+   "note": "vanilla ui.button.click abaissé ou silent : à trancher à l'écoute"
   },
   {
    "id": "ui.transmog",
@@ -7227,7 +8233,8 @@
     "state": "todo",
     "note": "",
     "date": null
-   }
+   },
+   "note": "vanilla ui.button.click abaissé ou silent : à trancher à l'écoute"
   },
   {
    "id": "ui.unlock",
@@ -7255,7 +8262,8 @@
     "state": "todo",
     "note": "",
     "date": null
-   }
+   },
+   "note": "vanilla ui.button.click abaissé ou silent : à trancher à l'écoute"
   },
   {
    "id": "block.ambient",
@@ -7376,8 +8384,7 @@
    "status": "vanilla",
    "trigger": "Rugissement SSS et mythique, étoiles ×10",
    "code": [
-    "client/show/ClientShows.java",
-    "client/gui/CardDeck.java"
+    "assets/simplywings/gacha/show_sounds.json"
    ],
    "description": "",
    "keywords": [],
@@ -7412,7 +8419,7 @@
    "status": "vanilla",
    "trigger": "Activation du pilier",
    "code": [
-    "client/show/ClientShows.java"
+    "assets/simplywings/gacha/show_sounds.json"
    ],
    "description": "",
    "keywords": [],
@@ -7441,13 +8448,13 @@
    }
   },
   {
-   "id": "gacha.element_ignite",
+   "id": "gacha.element_ignite.fire",
    "category": "gacha",
    "group": "altar",
    "status": "vanilla",
-   "trigger": "Couches élémentaires des six flammes (firecharge, warden, basalte, plouf, améthyste, breeze)",
+   "trigger": "Couche de la flamme fire de l'autel (show_sounds.json)",
    "code": [
-    "client/show/ClientShows.java"
+    "assets/simplywings/gacha/show_sounds.json"
    ],
    "description": "",
    "keywords": [],
@@ -7471,6 +8478,181 @@
    },
    "vanilla": {
     "event": "minecraft:item.firecharge.use",
+    "volume": 1.0,
+    "pitch": 1.0
+   }
+  },
+  {
+   "id": "gacha.element_ignite.darkness",
+   "category": "gacha",
+   "group": "altar",
+   "status": "vanilla",
+   "trigger": "Couche de la flamme darkness de l'autel (show_sounds.json)",
+   "code": [
+    "assets/simplywings/gacha/show_sounds.json"
+   ],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": false,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "vanilla": {
+    "event": "minecraft:entity.warden.sonic_charge",
+    "volume": 1.0,
+    "pitch": 1.0
+   }
+  },
+  {
+   "id": "gacha.element_ignite.earth",
+   "category": "gacha",
+   "group": "altar",
+   "status": "vanilla",
+   "trigger": "Couche de la flamme earth de l'autel (show_sounds.json)",
+   "code": [
+    "assets/simplywings/gacha/show_sounds.json"
+   ],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": false,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "vanilla": {
+    "event": "minecraft:block.basalt.break",
+    "volume": 1.0,
+    "pitch": 1.0
+   }
+  },
+  {
+   "id": "gacha.element_ignite.water",
+   "category": "gacha",
+   "group": "altar",
+   "status": "vanilla",
+   "trigger": "Couche de la flamme water de l'autel (show_sounds.json)",
+   "code": [
+    "assets/simplywings/gacha/show_sounds.json"
+   ],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": false,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "vanilla": {
+    "event": "minecraft:entity.player.splash",
+    "volume": 1.0,
+    "pitch": 1.0
+   }
+  },
+  {
+   "id": "gacha.element_ignite.light",
+   "category": "gacha",
+   "group": "altar",
+   "status": "vanilla",
+   "trigger": "Couche de la flamme light de l'autel (show_sounds.json)",
+   "code": [
+    "assets/simplywings/gacha/show_sounds.json"
+   ],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": false,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "vanilla": {
+    "event": "minecraft:block.amethyst_block.chime",
+    "volume": 1.0,
+    "pitch": 1.0
+   }
+  },
+  {
+   "id": "gacha.element_ignite.air",
+   "category": "gacha",
+   "group": "altar",
+   "status": "vanilla",
+   "trigger": "Couche de la flamme air de l'autel (show_sounds.json)",
+   "code": [
+    "assets/simplywings/gacha/show_sounds.json"
+   ],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": false,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "vanilla": {
+    "event": "minecraft:entity.breeze.idle_air",
     "volume": 1.0,
     "pitch": 1.0
    }
