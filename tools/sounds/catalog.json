@@ -9756,7 +9756,7 @@
    "category": "gacha",
    "group": "altar",
    "status": "custom",
-   "trigger": "Soundtrack à l'explosion de l'étoile",
+   "trigger": "Soundtrack : son drop (1,827 s dans le fichier d'origine, 0,827 s après la coupe du début) tombe à l'apparition des ailes (reveal)",
    "code": [
     "client/show/ShowSounds.java"
    ],

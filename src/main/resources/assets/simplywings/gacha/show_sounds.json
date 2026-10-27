@@ -22,7 +22,7 @@
     {"each": "beats", "sound": "simplywings:gacha.thunder", "volume": 12.0, "pitch": 0.95, "pitch_random": 0.1, "at": "star"},
     {"each": "flights", "edge": 0, "t": 0.3, "sound": "simplywings:gacha.flyby", "volume": 6.0, "pitch": 0.92, "pitch_random": 0.16, "at": "cloud_{i}"},
     {"from": "burst", "or": "end", "t": -7.7, "sound": "simplywings:gacha.rise", "volume": 8.0, "pitch": 1.0, "at": "hover"},
-    {"from": "burst", "or": "end", "sound": "simplywings:gacha.music_burst", "volume": 1.0, "pitch": 1.0, "at": "hover"},
+    {"from": "reveal", "or": "end", "t": -0.827, "sound": "simplywings:gacha.music_burst", "volume": 1.0, "pitch": 1.0, "at": "hover"},
     {"from": "reveal", "or": "end", "meta": "wings", "t": [0.35, 1.55], "sound": "simplywings:gacha.wing_beat", "volume": 10.0, "pitch": 1.0, "at": "hover"}
   ],
   "cards": {
