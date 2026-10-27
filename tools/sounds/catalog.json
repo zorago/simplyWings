@@ -87,7 +87,7 @@
    "candidates": [],
    "verdict": {
     "state": "revise",
-    "note": "",
+    "note": "Legerment trop grave",
     "date": "2026-10-27"
    }
   },
@@ -204,7 +204,7 @@
    "candidates": [],
    "verdict": {
     "state": "revise",
-    "note": "Pareille la reference est mieux que la version final. ",
+    "note": "",
     "date": "2026-10-27"
    }
   },
@@ -305,7 +305,7 @@
    "candidates": [],
    "verdict": {
     "state": "revise",
-    "note": "",
+    "note": "la reference est parfaite pour cette pair",
     "date": "2026-10-27"
    }
   },
@@ -391,7 +391,7 @@
    "candidates": [],
    "verdict": {
     "state": "reject",
-    "note": "",
+    "note": "Insect c'est mort tu sais quoi faire.",
     "date": "2026-10-27"
    }
   },
@@ -2623,7 +2623,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "reject",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -2981,7 +2981,7 @@
    "candidates": [],
    "verdict": {
     "state": "reject",
-    "note": "Trouve en un moins artificiel. ",
+    "note": "des tzzzt tzzzttt tzzzztt. ",
     "date": "2026-10-27"
    }
   },
@@ -3093,13 +3093,13 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "revise",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
    "vanilla": {
     "event": "minecraft:entity.breeze.idle_air",
-    "volume": 0.6,
+    "volume": 0.1,
     "pitch": 1.2
    }
   },
@@ -3661,13 +3661,13 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "revise",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.leather.flap",
-    "volume": 1,
+    "volume": 0.3,
     "pitch": 1.1
    },
    "family": "leather"
@@ -3981,14 +3981,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "revise",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.feather.flap",
     "volume": 1,
-    "pitch": 1
+    "pitch": 1.5
    },
    "family": "feather"
   },
@@ -4552,7 +4552,7 @@
    ],
    "candidates": [],
    "verdict": {
-    "state": "revise",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -4594,7 +4594,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "revise",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -4798,9 +4798,9 @@
    ],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.feather.flap",
@@ -4840,8 +4840,8 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "revise",
-    "note": "Sur celui ci et tout les autres sont de minecraft il faudrait un pitch aleatoire a chaque batement a + / - 0.05 autour du pitch choisi. Et ce partout.",
+    "state": "keep",
+    "note": "",
     "date": "2026-10-27"
    },
    "vanilla": {
@@ -4879,9 +4879,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "family": "feather_matter",
    "alias": {
@@ -4925,7 +4925,7 @@
    },
    "alias": {
     "target": "simplywings:wing.leather.flap",
-    "volume": 0.35,
+    "volume": 0.1,
     "pitch": 1.2
    },
    "family": "glider"
@@ -5124,14 +5124,14 @@
    ],
    "candidates": [],
    "verdict": {
-    "state": "revise",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.feather.flap",
     "volume": 1,
-    "pitch": 1.1
+    "pitch": 0.7
    },
    "family": "feather"
   },
@@ -5970,8 +5970,8 @@
    ],
    "candidates": [],
    "verdict": {
-    "state": "revise",
-    "note": "un poile trop artificiel mais 95% bon sur celui la.",
+    "state": "keep",
+    "note": "",
     "date": "2026-10-27"
    },
    "alias": {
@@ -7157,7 +7157,7 @@
    "candidates": [],
    "verdict": {
     "state": "reject",
-    "note": "Utilis plutot le thunder et pas l'impact. Ou trouve un bruit d'éclair. ",
+    "note": "Utilise un bruit electrique de charges statiques des tzzt tzzt tzzztt ",
     "date": "2026-10-27"
    },
    "vanilla": {
