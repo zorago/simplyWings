@@ -935,7 +935,7 @@
   "screen.simplywings.altar.rates_pity_sss": "SSS guaranteed by the 1000th, +0.5 % per summon from the 801st",
   "screen.simplywings.altar.rates_reset": "A tier resets its own counter and every lower one",
   "screen.simplywings.altar.rates_no_5050": "No featured banner: every pair of a tier is equally likely",
-  "screen.simplywings.altar.skip": "Click to skip",
+  "screen.simplywings.altar.reveal": "Click to reveal all",
   "screen.simplywings.altar.next": "Click to continue",
   "screen.simplywings.altar.close": "Click to close",
   "screen.simplywings.altar.summary": "Summon results",
@@ -987,5 +987,8 @@
   "subtitles.simplywings.ui.card_place": "Card laid down",
   "subtitles.simplywings.block.infusion": "Winged energy infuses",
   "subtitles.simplywings.gacha.energy_blast": "Energy blast",
-  "subtitles.simplywings.gacha.thunder": "Thunder cracks"
+  "subtitles.simplywings.gacha.thunder": "Thunder cracks",
+  "subtitles.simplywings.essence.reserve": "Essence burns",
+  "subtitles.simplywings.flight.brake": "Wings brake",
+  "subtitles.simplywings.flight.flyby": "Wings swoosh by"
 }

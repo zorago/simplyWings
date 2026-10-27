@@ -74,7 +74,7 @@ Tous les sons d'interface passent par deux passe-bas (6000 Hz pour les cartes, 1
 
 ## Pixabay, fournis par zorago (licence Pixabay)
 
-Dossier `pixabay/` : 34 fichiers choisis par zorago le 27 octobre pour refaire le son du gacha. Licence Pixabay Content License : usage gratuit dans un projet, y compris commercial, sans attribution obligatoire, mais pas de redistribution des fichiers seuls. Les sons sont intégrés au mod, donc l'usage est couvert. Les fichiers `freesound_community-*` sont des reprises Pixabay de sons Freesound. `openmindaudio-…-short-preview-492696` est un **extrait de démonstration** d'un morceau : à vérifier sur sa page Pixabay avant une publication.
+Dossier `pixabay/` : 40 fichiers choisis par zorago le 27 octobre pour refaire le son du gacha, puis combler les trous du vol et des essences. Licence Pixabay Content License : usage gratuit dans un projet, y compris commercial, sans attribution obligatoire, mais pas de redistribution des fichiers seuls. Les sons sont intégrés au mod, donc l'usage est couvert. Les fichiers `freesound_community-*` sont des reprises Pixabay de sons Freesound. `openmindaudio-…-short-preview-492696` est un **extrait de démonstration** d'un morceau : à vérifier sur sa page Pixabay avant une publication.
 
 | Fichier local | Utilisé pour |
 |---|---|
@@ -112,6 +112,12 @@ Dossier `pixabay/` : 34 fichiers choisis par zorago le 27 octobre pour refaire l
 | `dragon-studio-fire-spell-impact-448565.mp3` | `gacha.columns` (six colonnes élémentaires, une fois) |
 | `youssefmizani-bass-drop-407122.mp3` | `gacha.settle` (retombée) |
 | `u_1pruylktlg-riser-7-130957.mp3` | `gacha.opening_riser` (après la consumation des plumes, sommet sur l'allumage du cristal) |
+| `soundreality-sandstorm-222741.mp3` | `flight.brake` (3 à 12 s en boucle, après un coup d'aile fort, s'éteint avec la vitesse) |
+| `alexis_gaming_cam-woosh-saber-laser-346099.mp3` | `flight.flyby`, variation 1 (joueur ailé qui frôle) |
+| `alexzavesa-swoosh-1-463607.mp3` | `flight.flyby`, variation 2 |
+| `alexzavesa-swoosh-5-463611.mp3` | `flight.flyby`, variation 3 |
+| `mrstokes302-water-droplet-sfx-mrstokes302-417690.mp3` | `essence.drip` (4 gouttes séparées, récolte en vol quand un conteneur se remplit) |
+| `magiaz-smoke-454927.mp3` | `essence.reserve` (0,15 à 3,8 s en boucle, réserve d'essence intensifiée) |
 
 ## Sons synthétisés (aucune source externe)
 

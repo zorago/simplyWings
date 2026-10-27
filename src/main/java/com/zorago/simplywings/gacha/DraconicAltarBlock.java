@@ -1,11 +1,13 @@
 package com.zorago.simplywings.gacha;
 
 import com.mojang.serialization.MapCodec;
+import com.zorago.simplywings.sound.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.SimpleMenuProvider;
@@ -109,6 +111,10 @@ public class DraconicAltarBlock extends HorizontalDirectionalBlock implements ne
         if (random.nextInt(3) == 0) {
             level.addParticle(ParticleTypes.END_ROD, x + (random.nextDouble() - 0.5) * 0.4, y + 0.6, z + (random.nextDouble() - 0.5) * 0.4,
                     0, 0.02, 0);
+        }
+        if (random.nextInt(40) == 0) {
+            level.playLocalSound(x, y, z, ModSounds.ALTAR_AMBIENT.get(), SoundSource.BLOCKS,
+                    1f, 0.9f + random.nextFloat() * 0.2f, false);
         }
         if (random.nextInt(5) == 0) {
             level.addParticle(ParticleTypes.SOUL_FIRE_FLAME, x + (random.nextDouble() - 0.5) * 1.6, y - 0.3,

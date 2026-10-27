@@ -2,18 +2,27 @@ package com.zorago.simplywings.client;
 
 import com.zorago.simplywings.SimplyWings;
 import com.zorago.simplywings.anim.WingStyle;
+import com.zorago.simplywings.client.gui.AltarScreen;
+import com.zorago.simplywings.client.show.ClientShows;
 import com.zorago.simplywings.data.WingDefinition;
 import com.zorago.simplywings.data.WingRegistries;
 import com.zorago.simplywings.network.Payloads;
 import com.zorago.simplywings.player.FlightMode;
+import com.zorago.simplywings.sound.ModSounds;
 import java.util.Optional;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.world.entity.player.Player;
 
 public final class ClientNet {
     public static void onSync(Payloads.SyncWings payload) {
+        boolean unlocked = ClientWings.synced() && !ClientWings.collection().containsAll(payload.collection());
         ClientWings.apply(payload.collection(), payload.equipped(), payload.appearance(), payload.stamina(),
                 payload.rescueJumps());
+        Minecraft mc = Minecraft.getInstance();
+        if (unlocked && !ClientShows.summonerShowRunning() && !(mc.screen instanceof AltarScreen)) {
+            mc.getSoundManager().play(SimpleSoundInstance.forUI(ModSounds.UI_UNLOCK.get(), 1f, 1f));
+        }
     }
 
     public static void onGachaState(Payloads.GachaState payload) {

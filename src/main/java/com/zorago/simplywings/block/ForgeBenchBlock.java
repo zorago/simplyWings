@@ -1,7 +1,10 @@
 package com.zorago.simplywings.block;
 
 import com.mojang.serialization.MapCodec;
+import com.zorago.simplywings.sound.ModSounds;
 import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
@@ -44,5 +47,13 @@ public class ForgeBenchBlock extends AssemblyTableBlock {
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
         return createTickerHelper(type, ModBlocks.FORGE_BENCH_ENTITY.get(),
                 level.isClientSide ? ForgeBenchBlockEntity::clientTick : ForgeBenchBlockEntity::serverTick);
+    }
+
+    @Override
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+        if (random.nextInt(10) == 0) {
+            level.playLocalSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, ModSounds.FORGE_AMBIENT.get(), SoundSource.BLOCKS,
+                    1f, 0.9f + random.nextFloat() * 0.2f, false);
+        }
     }
 }

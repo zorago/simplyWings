@@ -325,6 +325,17 @@ Corrections du 27 octobre (`SOUND_PLAN.md` § 1), à vérifier en jeu :
 - [ ] Équiper / Retirer : nouveau son court et grave ; l'ancien son long reste à l'infusion de l'établi et à la table d'assemblage (`block.infusion`).
 - [ ] Gacha : un B et un SSS, sons identiques à avant l'extraction des cues dans `gacha/show_sounds.json` ; F3+T recharge le fichier.
 
+Trous comblés hors gacha (27 octobre, choix de zorago), à vérifier en jeu :
+
+- [ ] Stationnaire : battement de la paire à peine audible, espacement légèrement irrégulier, jamais pour les paires à vrombissement.
+- [ ] Frein en l'air : un coup d'aile fort, puis le souffle de sable qui s'éteint avec la vitesse et se coupe en fondu au relâchement ou à l'arrêt ; entendu aussi pour un joueur proche.
+- [ ] Frôlement : un joueur ailé rapide qui passe à moins de 5 blocs donne un des 3 swooshs, pas plus d'un toutes les 2 s.
+- [ ] Récolte en vol : gouttes très faibles à cadence irrégulière seulement quand un conteneur se remplit (rien quand tout est plein, rien sans absorbeur, rien hors zone).
+- [ ] Réserve d'essence intensifiée : fumée en boucle qui erre tant qu'elle remplit la stamina, fondu à la fin.
+- [ ] Menu J : clic vanilla à la sélection, coffre verrouillé sur une aile verrouillée, élytre à l'Equip appearance ; déblocage hors gacha (commande `unlock`, craft) = level up, rien pendant un tirage.
+- [ ] Ambiances discrètes de l'autel, de la fontaine et de l'établi de la forge ; portail de l'End à l'apparition d'un sanctuaire ; aimant de magnétite à la prise en main d'un compas.
+- [ ] Gacha : plus de skip pendant le show (clic, Échap, espace et Entrée ignorés), « Click to reveal all » pendant la distribution des cartes.
+
 Après la passe d'écoute de zorago (27 octobre), à réécouter dans le banc puis en jeu (verdicts remis à « todo ») :
 
 - [ ] Insectes : bourdon vanilla (`entity.bee.loop` en boucle, `entity.bee.pollinate` au coup d'aile) pour l'abeille, le scarabée, l'ancienne et le colibri ; la boucle vanilla ne porte qu'à 6 blocs pour les autres joueurs.

@@ -1,10 +1,12 @@
 package com.zorago.simplywings.gacha;
 
 import com.mojang.serialization.MapCodec;
+import com.zorago.simplywings.sound.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.SimpleMenuProvider;
@@ -56,6 +58,10 @@ public class OfferingFountainBlock extends Block {
         if (random.nextInt(2) == 0) {
             double a = random.nextDouble() * Math.PI * 2;
             level.addParticle(ParticleTypes.END_ROD, x + Math.cos(a) * 1.1, y - 0.6, z + Math.sin(a) * 1.1, 0, 0.04, 0);
+        }
+        if (random.nextInt(24) == 0) {
+            level.playLocalSound(x, y, z, ModSounds.FOUNTAIN_AMBIENT.get(), SoundSource.BLOCKS,
+                    1f, 0.9f + random.nextFloat() * 0.2f, false);
         }
         if (random.nextInt(4) == 0) {
             level.addParticle(ParticleTypes.ENCHANT, x, y + 0.8, z, (random.nextDouble() - 0.5) * 2, -0.5, (random.nextDouble() - 0.5) * 2);

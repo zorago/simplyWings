@@ -12,6 +12,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -40,7 +41,21 @@ public final class CloudHarvest {
         fill(player, inventory, type, (int) Math.round(CloudAbsorberItem.perSecond(tier) * INTERVAL_TICKS / 20.0));
     }
 
-    public static EssenceType zone(ServerPlayer player) {
+    public static boolean fillable(Inventory inventory, EssenceType type) {
+        for (int i = 0; i < inventory.getContainerSize(); i++) {
+            ItemStack stack = inventory.getItem(i);
+            if (!EssenceContainerItem.isContainer(stack)) {
+                continue;
+            }
+            EssenceType current = EssenceContainerItem.type(stack);
+            if (current == null || current == type && EssenceContainerItem.amount(stack) < EssenceContainerItem.capacity(stack)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static EssenceType zone(Player player) {
         Level level = player.level();
         if (level.dimension() == Level.OVERWORLD) {
             double y = player.getY();

@@ -115,7 +115,10 @@ Vrombissements `wing.<paire>.buzz` : `alias` vers `wing.buzz.loop` avec la haute
 | `flight.landing_soft` | custom existant (Kenney) |
 | `flight.landing_hard` | custom existant, aussi joué au crash |
 | saut ailé, saut de secours, bascules de mode | déjà couverts par les battements de la paire (pas d'id propre) |
-| `flight.takeoff_charge`, `dive`, `brake`, `stall`, `tuck`, `flyby`, `stamina_*`, `unfold`, `fold`, `glide`, `hover_flap` | **silent** en v1 |
+| `flight.hover_flap` | battement de la paire, très faible (volume 0,12), espacement légèrement aléatoire autour de la cadence du stationnaire (`ClientFlight`, local seulement) |
+| `flight.brake` | custom Pixabay (tempête de sable en boucle) : coup d'aile fort au début du frein, puis le souffle s'éteint avec la vitesse (`FlightLoops`, joueurs proches compris) |
+| `flight.flyby` | custom Pixabay, 3 variations au hasard : un joueur ailé frôle à moins de 5 blocs avec plus de 14 m/s de vitesse relative (2 s entre deux) |
+| `flight.takeoff_charge`, `dive`, `stall`, `tuck`, `stamina_*`, `unfold`, `fold`, `glide` | **silent**, choix de zorago (le vent suffit au plané et au piqué) |
 
 ### 3.4 Furies
 
@@ -124,7 +127,7 @@ Vrombissements `wing.<paire>.buzz` : `alias` vers `wing.buzz.loop` avec la haute
 | `night_fury.dive`, `light_fury.dive`, `night_fury.invisible`, `light_fury.invisible` | sample du film : OK pour le pack privé, **bloquant pour la publication** (§ 5) |
 | `night_fury.charge`, `night_fury.crackle`, `light_fury.charge` | custom existants, `night_fury.charge` à baisser (§ 1.1) |
 | `light_fury.blast` | vanilla (`entity.generic.explode`) |
-| idles, queue, battements spécifiques | silent ; les battements suivent la famille membrane |
+| idles, queue, battements spécifiques | silent (choix de zorago) ; les battements suivent la famille membrane |
 
 ### 3.5 Gacha et interface
 
@@ -132,11 +135,11 @@ Vrombissements `wing.<paire>.buzz` : `alias` vers `wing.buzz.loop` avec la haute
 |---|---|
 | `gacha.offer`, `ignite`, `rune_charge`, `beam`, `shockwave`, `blast`, `implosion`, `puff`, `bell`, `chime`, `twinkle` | custom existants, à régler sur la vraie animation du jeu dans le banc ; `shockwave` à baisser |
 | rugissement du dragon, activation de balise | vanilla |
-| musique d'invocation, `gacha.summary`, `skip`, `pity_soft`, sons propres des mythiques | silent en v1 |
+| `gacha.summary`, `pity_soft` | silent ; le skip du show est **supprimé** (il laissait les sons du show tourner) |
 | `ui.card_deal`, `card_flip`, `card_shuffle`, `card_place` | custom existants (Kenney Casino), niveaux à aligner |
 | `ui.confirm`, `ui.denied`, `ui.open` | custom existants |
 | `ui.equip` | **todo** : remplacer (§ 1.6) |
-| `ui.select`, `ui.locked`, `ui.transmog`, `ui.unlock.*` | vanilla `ui.button.click` (abaissé) ou silent |
+| `ui.select`, `ui.locked`, `ui.transmog`, `ui.unlock` | vanilla : `ui.button.click` (0,25, 1,4), `block.chest.locked`, `item.armor.equip_elytra`, `entity.player.levelup` (0,5, 1,2, hors gacha) |
 
 ### 3.6 Blocs et essences
 
@@ -144,7 +147,12 @@ Vrombissements `wing.<paire>.buzz` : `alias` vers `wing.buzz.loop` avec la haute
 |---|---|
 | `block.forge_bench.hammer`, `quench`, `block.cloud_compressor.loop`, `essence.pour`, `essence.full` | custom existants, à écouter (§ 1.5, § 1.7) |
 | matériaux des blocs (`SoundType`) | vanilla, inchangés |
-| ambiances (autel, fontaine, établi), sanctuaire, compas, plume | silent en v1 |
+| `block.altar.ambient`, `block.fountain.ambient`, `block.forge_bench.ambient` | vanilla discrets dans `animateTick` : `block.beacon.ambient` (1/40), `block.water.ambient` (1/24), `block.furnace.fire_crackle` (1/10) |
+| `structure.sanctum_appear` | vanilla `block.end_portal.spawn` (0,5, 0,8), pour tous les joueurs de l'End à la première apparition |
+| `item.compass` | vanilla `item.lodestone_compass.lock` à la prise en main |
+| `essence.drip` | custom Pixabay, 4 gouttes : très faibles, hauteur et cadence variables, seulement quand un conteneur se remplit en vol (client) |
+| `essence.reserve` | custom Pixabay, fumée en boucle dont volume et hauteur errent, tant que la réserve d'essence intensifiée remplit la stamina |
+| plume d'invocation | silent : couverte par le ramassage vanilla, la fontaine et l'offrande |
 | fontaine (`FountainMenu`) | vanilla actuel (`amethyst_block.resonate`, `player.levelup`) |
 
 ### 3.7 Bilan

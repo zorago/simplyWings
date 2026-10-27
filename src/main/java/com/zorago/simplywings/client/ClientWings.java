@@ -15,6 +15,7 @@ public final class ClientWings {
     private static float stamina;
     private static int rescueJumps;
     private static Optional<EffectiveStats> stats;
+    private static boolean synced;
 
     static void apply(List<ResourceLocation> collection, Optional<ResourceLocation> equippedWing,
                       Optional<ResourceLocation> appearanceWing, float staminaValue, int rescue) {
@@ -25,10 +26,16 @@ public final class ClientWings {
         stamina = staminaValue;
         rescueJumps = rescue;
         stats = null;
+        synced = true;
     }
 
     static void reset() {
         apply(List.of(), Optional.empty(), Optional.empty(), 0, 0);
+        synced = false;
+    }
+
+    static boolean synced() {
+        return synced;
     }
 
     public static Optional<EffectiveStats> stats() {

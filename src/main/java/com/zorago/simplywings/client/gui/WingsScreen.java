@@ -1,6 +1,5 @@
 package com.zorago.simplywings.client.gui;
 
-import com.zorago.simplywings.sound.ModSounds;
 import com.zorago.simplywings.SimplyWings;
 import com.zorago.simplywings.client.ClientWings;
 import com.zorago.simplywings.client.WingVisuals;
@@ -13,6 +12,7 @@ import com.zorago.simplywings.data.WingRegistries;
 import com.zorago.simplywings.data.WingStats;
 import com.zorago.simplywings.item.WingItem;
 import com.zorago.simplywings.network.Payloads;
+import com.zorago.simplywings.sound.ModSounds;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -25,10 +25,12 @@ import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
@@ -140,21 +142,24 @@ public class WingsScreen extends Screen {
             PacketDistributor.sendToServer(new Payloads.EquipAppearance(Optional.empty()));
         } else if (selected != null && owned(selected)) {
             PacketDistributor.sendToServer(new Payloads.EquipAppearance(Optional.of(selected)));
+            ui(ModSounds.UI_TRANSMOG.get(), 1f, 1f);
         }
+    }
+
+    private static void ui(SoundEvent sound, float pitch, float volume) {
+        Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(sound, pitch, volume));
     }
 
     private void equip() {
         if (selected != null && owned(selected)) {
             PacketDistributor.sendToServer(new Payloads.EquipWing(Optional.of(selected)));
-            net.minecraft.client.Minecraft.getInstance().getSoundManager().play(
-                    net.minecraft.client.resources.sounds.SimpleSoundInstance.forUI(ModSounds.UI_EQUIP.get(), 1.0F, 0.7F));
+            ui(ModSounds.UI_EQUIP.get(), 1.0F, 0.7F);
         }
     }
 
     private void unequip() {
         PacketDistributor.sendToServer(new Payloads.EquipWing(Optional.empty()));
-        net.minecraft.client.Minecraft.getInstance().getSoundManager().play(
-                net.minecraft.client.resources.sounds.SimpleSoundInstance.forUI(ModSounds.UI_EQUIP.get(), 0.75F, 0.5F));
+        ui(ModSounds.UI_EQUIP.get(), 0.75F, 0.5F);
     }
 
     @Override
@@ -175,6 +180,7 @@ public class WingsScreen extends Screen {
             if (row < entries.size()) {
                 selected = entries.get(row).id();
                 updateButtons();
+                ui(owned(selected) ? ModSounds.UI_SELECT.get() : ModSounds.UI_LOCKED.get(), 1f, 1f);
                 return true;
             }
         }

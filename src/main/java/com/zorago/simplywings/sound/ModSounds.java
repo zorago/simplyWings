@@ -49,6 +49,19 @@ public final class ModSounds {
     public static final Supplier<SoundEvent> CARD_PLACE = sound("ui.card_place");
     public static final Supplier<SoundEvent> CARD_CONFIRM = sound("ui.confirm");
     public static final Supplier<SoundEvent> DENIED = sound("ui.denied");
+    public static final Supplier<SoundEvent> FLIGHT_BRAKE = sound("flight.brake");
+    public static final Supplier<SoundEvent> FLIGHT_FLYBY = sound("flight.flyby");
+    public static final Supplier<SoundEvent> ESSENCE_DRIP = sound("essence.drip");
+    public static final Supplier<SoundEvent> ESSENCE_RESERVE = sound("essence.reserve");
+    public static final Supplier<SoundEvent> UI_SELECT = sound("ui.select");
+    public static final Supplier<SoundEvent> UI_LOCKED = sound("ui.locked");
+    public static final Supplier<SoundEvent> UI_TRANSMOG = sound("ui.transmog");
+    public static final Supplier<SoundEvent> UI_UNLOCK = sound("ui.unlock");
+    public static final Supplier<SoundEvent> ALTAR_AMBIENT = sound("block.altar.ambient");
+    public static final Supplier<SoundEvent> FOUNTAIN_AMBIENT = sound("block.fountain.ambient");
+    public static final Supplier<SoundEvent> FORGE_AMBIENT = sound("block.forge_bench.ambient");
+    public static final Supplier<SoundEvent> SANCTUM_APPEAR = sound("structure.sanctum_appear");
+    public static final Supplier<SoundEvent> COMPASS = sound("item.compass");
 
     private static Supplier<SoundEvent> sound(String name) {
         return SOUNDS.register(name, () -> SoundEvent.createVariableRangeEvent(SimplyWings.id(name)));

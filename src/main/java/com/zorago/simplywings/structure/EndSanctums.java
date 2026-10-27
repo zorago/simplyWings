@@ -3,23 +3,25 @@ package com.zorago.simplywings.structure;
 import com.zorago.simplywings.SimplyWings;
 import com.zorago.simplywings.config.ServerConfig;
 import com.zorago.simplywings.item.ModItems;
+import com.zorago.simplywings.sound.ModSounds;
+import java.nio.file.Path;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.Random;
 import java.util.function.Supplier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.GlobalPos;
-import java.nio.file.Path;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.Vec3i;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.monster.EnderMan;
@@ -150,7 +152,13 @@ public final class EndSanctums {
         boolean rebuild = data.kills >= ServerConfig.REBUILD_DRAGON.get();
         for (Sanctum sanctum : Sanctum.values()) {
             if (data.kills >= sanctum.dragon()) {
+                boolean fresh = data.centers[sanctum.ordinal()] == null;
                 BlockPos center = place(level, sanctum, rebuild);
+                if (fresh && center != null) {
+                    for (ServerPlayer player : level.players()) {
+                        player.playNotifySound(ModSounds.SANCTUM_APPEAR.get(), SoundSource.AMBIENT, 1f, 1f);
+                    }
+                }
                 if (center != null && data.kills >= sanctum.compassDragon()) {
                     giveCompasses(level, sanctum, center);
                 }

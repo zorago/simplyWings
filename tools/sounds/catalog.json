@@ -2545,6 +2545,145 @@
    "loop": false
   },
   {
+   "id": "essence.drip",
+   "category": "essence",
+   "group": "essence",
+   "status": "custom",
+   "trigger": "Récolte en vol : gouttes très faibles, hauteur et cadence variables, seulement quand un conteneur se remplit",
+   "code": [
+    "client/FlightLoops.java"
+   ],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": "block_oneshot",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": true,
+   "animations": [],
+   "variants": [
+    {
+     "file": "essence/drip_1",
+     "source": "pixabay/mrstokes302-water-droplet-sfx-mrstokes302-417690.mp3",
+     "start": 0.0,
+     "end": 0.42,
+     "peak": -3,
+     "fade_in": 0.005,
+     "fade_out": 0.08,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
+     "lp": 0,
+     "gain_db": 0
+    },
+    {
+     "file": "essence/drip_2",
+     "source": "pixabay/mrstokes302-water-droplet-sfx-mrstokes302-417690.mp3",
+     "start": 0.5,
+     "end": 0.95,
+     "peak": -3,
+     "fade_in": 0.005,
+     "fade_out": 0.08,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
+     "lp": 0,
+     "gain_db": 0
+    },
+    {
+     "file": "essence/drip_3",
+     "source": "pixabay/mrstokes302-water-droplet-sfx-mrstokes302-417690.mp3",
+     "start": 1.05,
+     "end": 1.45,
+     "peak": -3,
+     "fade_in": 0.005,
+     "fade_out": 0.08,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
+     "lp": 0,
+     "gain_db": 0
+    },
+    {
+     "file": "essence/drip_4",
+     "source": "pixabay/mrstokes302-water-droplet-sfx-mrstokes302-417690.mp3",
+     "start": 1.6,
+     "end": 2.0,
+     "peak": -3,
+     "fade_in": 0.005,
+     "fade_out": 0.08,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
+     "lp": 0,
+     "gain_db": 0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": "2026-10-27"
+   },
+   "loop": false
+  },
+  {
+   "id": "essence.reserve",
+   "category": "essence",
+   "group": "essence",
+   "status": "custom",
+   "trigger": "Réserve d'essence intensifiée qui prend le relais de la stamina : fumée en boucle, volume et hauteur qui errent",
+   "code": [
+    "client/FlightLoops.java"
+   ],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": "block_loop",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "essence.reserve",
+   "subtitle": "Essence burns",
+   "declared": true,
+   "slow_attack": true,
+   "animations": [],
+   "variants": [
+    {
+     "file": "essence/reserve_1",
+     "source": "pixabay/magiaz-smoke-454927.mp3",
+     "start": 0.15,
+     "end": 3.8,
+     "peak": -3,
+     "fade_in": 0.005,
+     "fade_out": 0.3,
+     "echo": 0,
+     "loop": 1.5,
+     "tempo": 1,
+     "pitch": 1,
+     "lp": 0,
+     "gain_db": 0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": "2026-10-27"
+   },
+   "loop": true
+  },
+  {
    "id": "ui.denied",
    "category": "ui",
    "group": "ui",
@@ -7789,9 +7928,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    }
   },
   {
@@ -7817,38 +7956,57 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    }
   },
   {
    "id": "flight.brake",
    "category": "flight",
    "group": "flight",
-   "status": "silent",
-   "trigger": "FLAG_BRAKE",
-   "code": [],
+   "status": "custom",
+   "trigger": "Frein en l'air : un coup d'aile fort puis ce souffle de sable, qui s'éteint avec la vitesse",
+   "code": [
+    "client/FlightLoops.java"
+   ],
    "description": "",
    "keywords": [],
    "reference": null,
-   "loudness_target": null,
+   "loudness_target": "wind_loop",
    "attenuation": null,
-   "preload": false,
+   "preload": true,
    "stream": false,
-   "subtitle_key": null,
-   "subtitle": null,
-   "declared": false,
-   "slow_attack": false,
+   "subtitle_key": "flight.brake",
+   "subtitle": "Wings brake",
+   "declared": true,
+   "slow_attack": true,
    "animations": [],
-   "variants": [],
+   "variants": [
+    {
+     "file": "flight/brake_1",
+     "source": "pixabay/soundreality-sandstorm-222741.mp3",
+     "start": 3.0,
+     "end": 12.0,
+     "peak": -3,
+     "fade_in": 0.005,
+     "fade_out": 0.3,
+     "echo": 0,
+     "loop": 1.5,
+     "tempo": 1,
+     "pitch": 1,
+     "lp": 0,
+     "gain_db": 0
+    }
+   ],
    "layers": [],
    "candidates": [],
    "verdict": {
     "state": "todo",
     "note": "",
-    "date": null
-   }
+    "date": "2026-10-27"
+   },
+   "loop": true
   },
   {
    "id": "flight.stall",
@@ -7873,9 +8031,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    }
   },
   {
@@ -7901,38 +8059,87 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    }
   },
   {
    "id": "flight.flyby",
    "category": "flight",
    "group": "flight",
-   "status": "silent",
-   "trigger": "Passage d'un joueur proche",
-   "code": [],
+   "status": "custom",
+   "trigger": "Un joueur ailé rapide frôle le joueur (moins de 5 blocs) ; une des trois variantes au hasard",
+   "code": [
+    "client/FlightLoops.java"
+   ],
    "description": "",
    "keywords": [],
    "reference": null,
-   "loudness_target": null,
-   "attenuation": null,
+   "loudness_target": "wing_flap",
+   "attenuation": 16,
    "preload": false,
    "stream": false,
-   "subtitle_key": null,
-   "subtitle": null,
-   "declared": false,
-   "slow_attack": false,
+   "subtitle_key": "flight.flyby",
+   "subtitle": "Wings swoosh by",
+   "declared": true,
+   "slow_attack": true,
    "animations": [],
-   "variants": [],
+   "variants": [
+    {
+     "file": "flight/flyby_1",
+     "source": "pixabay/alexis_gaming_cam-woosh-saber-laser-346099.mp3",
+     "start": 0.25,
+     "end": 2.6,
+     "peak": -3,
+     "fade_in": 0.005,
+     "fade_out": 0.5,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
+     "lp": 0,
+     "gain_db": 0
+    },
+    {
+     "file": "flight/flyby_2",
+     "source": "pixabay/alexzavesa-swoosh-1-463607.mp3",
+     "start": 0,
+     "end": 0.75,
+     "peak": -3,
+     "fade_in": 0.005,
+     "fade_out": 0.15,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
+     "lp": 0,
+     "gain_db": 0
+    },
+    {
+     "file": "flight/flyby_3",
+     "source": "pixabay/alexzavesa-swoosh-5-463611.mp3",
+     "start": 0.12,
+     "end": 1.5,
+     "peak": -3,
+     "fade_in": 0.005,
+     "fade_out": 0.4,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
+     "lp": 0,
+     "gain_db": 0
+    }
+   ],
    "layers": [],
    "candidates": [],
    "verdict": {
     "state": "todo",
     "note": "",
-    "date": null
-   }
+    "date": "2026-10-27"
+   },
+   "loop": false
   },
   {
    "id": "flight.stamina_low",
@@ -7957,9 +8164,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    }
   },
   {
@@ -7985,9 +8192,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    }
   },
   {
@@ -8013,9 +8220,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    }
   },
   {
@@ -8041,9 +8248,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    }
   },
   {
@@ -8069,18 +8276,20 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    }
   },
   {
    "id": "flight.hover_flap",
    "category": "flight",
    "group": "flight",
-   "status": "silent",
-   "trigger": "Battements du stationnaire",
-   "code": [],
+   "status": "alias",
+   "trigger": "Battements du stationnaire : le battement de la paire, très faible, espacement légèrement aléatoire",
+   "code": [
+    "client/ClientFlight.java"
+   ],
    "description": "",
    "keywords": [],
    "reference": null,
@@ -8099,7 +8308,12 @@
    "verdict": {
     "state": "todo",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
+   },
+   "alias": {
+    "target": "simplywings:wing.feather.flap",
+    "volume": 0.12,
+    "pitch": 1.05
    }
   },
   {
@@ -8125,9 +8339,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    }
   },
   {
@@ -8153,9 +8367,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    }
   },
   {
@@ -8181,9 +8395,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    }
   },
   {
@@ -8209,37 +8423,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
-   }
-  },
-  {
-   "id": "gacha.skip",
-   "category": "gacha",
-   "group": "altar",
-   "status": "silent",
-   "trigger": "Passer l'animation",
-   "code": [],
-   "description": "",
-   "keywords": [],
-   "reference": null,
-   "loudness_target": null,
-   "attenuation": null,
-   "preload": false,
-   "stream": false,
-   "subtitle_key": null,
-   "subtitle": null,
-   "declared": false,
-   "slow_attack": false,
-   "animations": [],
-   "variants": [],
-   "layers": [],
-   "candidates": [],
-   "verdict": {
-    "state": "todo",
-    "note": "",
-    "date": null
+    "date": "2026-10-27"
    }
   },
   {
@@ -8265,9 +8451,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    }
   },
   {
@@ -8293,28 +8479,30 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    }
   },
   {
    "id": "ui.select",
    "category": "ui",
    "group": "ui",
-   "status": "silent",
-   "trigger": "Sélection dans le menu J",
-   "code": [],
+   "status": "vanilla",
+   "trigger": "Sélection d'une aile dans le menu J",
+   "code": [
+    "client/gui/WingsScreen.java"
+   ],
    "description": "",
    "keywords": [],
-   "reference": null,
-   "loudness_target": null,
+   "reference": "minecraft:ui.button.click",
+   "loudness_target": "ui",
    "attenuation": null,
    "preload": false,
    "stream": false,
    "subtitle_key": null,
    "subtitle": null,
-   "declared": false,
+   "declared": true,
    "slow_attack": false,
    "animations": [],
    "variants": [],
@@ -8323,27 +8511,34 @@
    "verdict": {
     "state": "todo",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
-   "note": "vanilla ui.button.click abaissé ou silent : à trancher à l'écoute"
+   "loop": false,
+   "vanilla": {
+    "event": "minecraft:ui.button.click",
+    "volume": 0.25,
+    "pitch": 1.4
+   }
   },
   {
    "id": "ui.locked",
    "category": "ui",
    "group": "ui",
-   "status": "silent",
-   "trigger": "Aile verrouillée",
-   "code": [],
+   "status": "vanilla",
+   "trigger": "Clic sur une aile verrouillée",
+   "code": [
+    "client/gui/WingsScreen.java"
+   ],
    "description": "",
    "keywords": [],
-   "reference": null,
-   "loudness_target": null,
+   "reference": "minecraft:block.chest.locked",
+   "loudness_target": "ui",
    "attenuation": null,
    "preload": false,
    "stream": false,
    "subtitle_key": null,
    "subtitle": null,
-   "declared": false,
+   "declared": true,
    "slow_attack": false,
    "animations": [],
    "variants": [],
@@ -8352,27 +8547,34 @@
    "verdict": {
     "state": "todo",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
-   "note": "vanilla ui.button.click abaissé ou silent : à trancher à l'écoute"
+   "loop": false,
+   "vanilla": {
+    "event": "minecraft:block.chest.locked",
+    "volume": 0.5,
+    "pitch": 1.0
+   }
   },
   {
    "id": "ui.transmog",
    "category": "ui",
    "group": "ui",
-   "status": "silent",
-   "trigger": "Equip appearance",
-   "code": [],
+   "status": "vanilla",
+   "trigger": "Equip appearance (transmog de Light)",
+   "code": [
+    "client/gui/WingsScreen.java"
+   ],
    "description": "",
    "keywords": [],
-   "reference": null,
-   "loudness_target": null,
+   "reference": "minecraft:item.armor.equip_elytra",
+   "loudness_target": "ui",
    "attenuation": null,
    "preload": false,
    "stream": false,
    "subtitle_key": null,
    "subtitle": null,
-   "declared": false,
+   "declared": true,
    "slow_attack": false,
    "animations": [],
    "variants": [],
@@ -8381,27 +8583,34 @@
    "verdict": {
     "state": "todo",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
-   "note": "vanilla ui.button.click abaissé ou silent : à trancher à l'écoute"
+   "loop": false,
+   "vanilla": {
+    "event": "minecraft:item.armor.equip_elytra",
+    "volume": 0.8,
+    "pitch": 1.0
+   }
   },
   {
    "id": "ui.unlock",
    "category": "ui",
    "group": "ui",
-   "status": "silent",
-   "trigger": "Déblocage d'une aile",
-   "code": [],
+   "status": "vanilla",
+   "trigger": "Déblocage d'une aile hors gacha (commande, craft)",
+   "code": [
+    "client/ClientNet.java"
+   ],
    "description": "",
    "keywords": [],
-   "reference": null,
-   "loudness_target": null,
+   "reference": "minecraft:entity.player.levelup",
+   "loudness_target": "ui",
    "attenuation": null,
    "preload": false,
    "stream": false,
    "subtitle_key": null,
    "subtitle": null,
-   "declared": false,
+   "declared": true,
    "slow_attack": false,
    "animations": [],
    "variants": [],
@@ -8410,27 +8619,34 @@
    "verdict": {
     "state": "todo",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
-   "note": "vanilla ui.button.click abaissé ou silent : à trancher à l'écoute"
+   "loop": false,
+   "vanilla": {
+    "event": "minecraft:entity.player.levelup",
+    "volume": 0.5,
+    "pitch": 1.2
+   }
   },
   {
-   "id": "block.ambient",
+   "id": "block.altar.ambient",
    "category": "block",
    "group": "block",
-   "status": "silent",
-   "trigger": "Ambiances autel, fontaine, établi",
-   "code": [],
+   "status": "vanilla",
+   "trigger": "Ambiance discrète de l'autel draconique",
+   "code": [
+    "gacha/DraconicAltarBlock.java"
+   ],
    "description": "",
    "keywords": [],
-   "reference": null,
-   "loudness_target": null,
+   "reference": "minecraft:block.beacon.ambient",
+   "loudness_target": "ui",
    "attenuation": null,
    "preload": false,
    "stream": false,
    "subtitle_key": null,
    "subtitle": null,
-   "declared": false,
+   "declared": true,
    "slow_attack": false,
    "animations": [],
    "variants": [],
@@ -8439,26 +8655,106 @@
    "verdict": {
     "state": "todo",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
+   },
+   "loop": false,
+   "vanilla": {
+    "event": "minecraft:block.beacon.ambient",
+    "volume": 0.3,
+    "pitch": 0.7
+   }
+  },
+  {
+   "id": "block.fountain.ambient",
+   "category": "block",
+   "group": "block",
+   "status": "vanilla",
+   "trigger": "Ambiance discrète de la fontaine aux offrandes",
+   "code": [
+    "gacha/OfferingFountainBlock.java"
+   ],
+   "description": "",
+   "keywords": [],
+   "reference": "minecraft:block.water.ambient",
+   "loudness_target": "ui",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": "2026-10-27"
+   },
+   "loop": false,
+   "vanilla": {
+    "event": "minecraft:block.water.ambient",
+    "volume": 0.25,
+    "pitch": 1.0
+   }
+  },
+  {
+   "id": "block.forge_bench.ambient",
+   "category": "block",
+   "group": "block",
+   "status": "vanilla",
+   "trigger": "Ambiance discrète de l'établi de la forge",
+   "code": [
+    "block/ForgeBenchBlock.java"
+   ],
+   "description": "",
+   "keywords": [],
+   "reference": "minecraft:block.furnace.fire_crackle",
+   "loudness_target": "ui",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": "2026-10-27"
+   },
+   "loop": false,
+   "vanilla": {
+    "event": "minecraft:block.furnace.fire_crackle",
+    "volume": 0.35,
+    "pitch": 0.8
    }
   },
   {
    "id": "structure.sanctum_appear",
    "category": "structure",
    "group": "structure",
-   "status": "silent",
-   "trigger": "Apparition d'un sanctuaire",
-   "code": [],
+   "status": "vanilla",
+   "trigger": "Apparition d'un sanctuaire à la mort du dragon, pour tous les joueurs de l'End",
+   "code": [
+    "structure/EndSanctums.java"
+   ],
    "description": "",
    "keywords": [],
-   "reference": null,
-   "loudness_target": null,
+   "reference": "minecraft:block.end_portal.spawn",
+   "loudness_target": "ui",
    "attenuation": null,
    "preload": false,
    "stream": false,
    "subtitle_key": null,
    "subtitle": null,
-   "declared": false,
+   "declared": true,
    "slow_attack": false,
    "animations": [],
    "variants": [],
@@ -8467,26 +8763,34 @@
    "verdict": {
     "state": "todo",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
+   },
+   "loop": false,
+   "vanilla": {
+    "event": "minecraft:block.end_portal.spawn",
+    "volume": 0.5,
+    "pitch": 0.8
    }
   },
   {
    "id": "item.compass",
    "category": "structure",
-   "group": "item",
-   "status": "silent",
-   "trigger": "Compas des sanctuaires",
-   "code": [],
+   "group": "structure",
+   "status": "vanilla",
+   "trigger": "Prise en main d'un compas des sanctuaires",
+   "code": [
+    "client/FlightLoops.java"
+   ],
    "description": "",
    "keywords": [],
-   "reference": null,
-   "loudness_target": null,
+   "reference": "minecraft:item.lodestone_compass.lock",
+   "loudness_target": "ui",
    "attenuation": null,
    "preload": false,
    "stream": false,
    "subtitle_key": null,
    "subtitle": null,
-   "declared": false,
+   "declared": true,
    "slow_attack": false,
    "animations": [],
    "variants": [],
@@ -8495,7 +8799,13 @@
    "verdict": {
     "state": "todo",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
+   },
+   "loop": false,
+   "vanilla": {
+    "event": "minecraft:item.lodestone_compass.lock",
+    "volume": 0.5,
+    "pitch": 1.0
    }
   },
   {
@@ -8521,10 +8831,11 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
-   }
+    "date": "2026-10-27"
+   },
+   "note": "couverte par le ramassage vanilla, la fontaine (payout) et l'offrande de l'autel"
   },
   {
    "id": "gacha.dragon_growl",

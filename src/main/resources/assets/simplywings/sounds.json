@@ -488,6 +488,30 @@
       }
     ]
   },
+  "essence.drip": {
+    "sounds": [
+      {
+        "name": "simplywings:essence/drip_1"
+      },
+      {
+        "name": "simplywings:essence/drip_2"
+      },
+      {
+        "name": "simplywings:essence/drip_3"
+      },
+      {
+        "name": "simplywings:essence/drip_4"
+      }
+    ]
+  },
+  "essence.reserve": {
+    "subtitle": "subtitles.simplywings.essence.reserve",
+    "sounds": [
+      {
+        "name": "simplywings:essence/reserve_1"
+      }
+    ]
+  },
   "ui.denied": {
     "subtitle": "subtitles.simplywings.ui.denied",
     "sounds": [
@@ -1760,6 +1784,118 @@
       {
         "name": "simplywings:wing.strong.flap",
         "type": "event"
+      }
+    ]
+  },
+  "flight.brake": {
+    "subtitle": "subtitles.simplywings.flight.brake",
+    "sounds": [
+      {
+        "name": "simplywings:flight/brake_1",
+        "preload": true
+      }
+    ]
+  },
+  "flight.flyby": {
+    "subtitle": "subtitles.simplywings.flight.flyby",
+    "sounds": [
+      {
+        "name": "simplywings:flight/flyby_1",
+        "attenuation_distance": 16
+      },
+      {
+        "name": "simplywings:flight/flyby_2",
+        "attenuation_distance": 16
+      },
+      {
+        "name": "simplywings:flight/flyby_3",
+        "attenuation_distance": 16
+      }
+    ]
+  },
+  "ui.select": {
+    "sounds": [
+      {
+        "name": "minecraft:ui.button.click",
+        "type": "event",
+        "volume": 0.25,
+        "pitch": 1.4
+      }
+    ]
+  },
+  "ui.locked": {
+    "sounds": [
+      {
+        "name": "minecraft:block.chest.locked",
+        "type": "event",
+        "volume": 0.5
+      }
+    ]
+  },
+  "ui.transmog": {
+    "sounds": [
+      {
+        "name": "minecraft:item.armor.equip_elytra",
+        "type": "event",
+        "volume": 0.8
+      }
+    ]
+  },
+  "ui.unlock": {
+    "sounds": [
+      {
+        "name": "minecraft:entity.player.levelup",
+        "type": "event",
+        "volume": 0.5,
+        "pitch": 1.2
+      }
+    ]
+  },
+  "block.altar.ambient": {
+    "sounds": [
+      {
+        "name": "minecraft:block.beacon.ambient",
+        "type": "event",
+        "volume": 0.3,
+        "pitch": 0.7
+      }
+    ]
+  },
+  "block.fountain.ambient": {
+    "sounds": [
+      {
+        "name": "minecraft:block.water.ambient",
+        "type": "event",
+        "volume": 0.25
+      }
+    ]
+  },
+  "block.forge_bench.ambient": {
+    "sounds": [
+      {
+        "name": "minecraft:block.furnace.fire_crackle",
+        "type": "event",
+        "volume": 0.35,
+        "pitch": 0.8
+      }
+    ]
+  },
+  "structure.sanctum_appear": {
+    "sounds": [
+      {
+        "name": "minecraft:block.end_portal.spawn",
+        "type": "event",
+        "volume": 0.5,
+        "pitch": 0.8
+      }
+    ]
+  },
+  "item.compass": {
+    "sounds": [
+      {
+        "name": "minecraft:item.lodestone_compass.lock",
+        "type": "event",
+        "volume": 0.5
       }
     ]
   },

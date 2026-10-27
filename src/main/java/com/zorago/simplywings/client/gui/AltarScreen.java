@@ -107,11 +107,12 @@ public class AltarScreen extends AbstractContainerScreen<AltarMenu> {
     @Override
     public void render(GuiGraphics g, int mouseX, int mouseY, float partialTick) {
         switch (phase) {
-            case SHOW -> hint(g, Component.translatable("screen.simplywings.altar.skip"));
+            case SHOW -> {
+            }
             case CARDS -> {
                 float t = cardTime();
                 GachaData.Entry hovered = deck.render(g, font, t, width, height, mouseX, mouseY);
-                hint(g, Component.translatable(deck.done(t) ? "screen.simplywings.altar.close" : "screen.simplywings.altar.skip"));
+                hint(g, Component.translatable(deck.done(t) ? "screen.simplywings.altar.close" : "screen.simplywings.altar.reveal"));
                 if (hovered != null) {
                     g.renderTooltip(font, stackOf(hovered), mouseX, mouseY);
                 }
@@ -298,10 +299,6 @@ public class AltarScreen extends AbstractContainerScreen<AltarMenu> {
                 }
                 return super.mouseClicked(mouseX, mouseY, button);
             }
-            case SHOW -> {
-                startCards();
-                return true;
-            }
             case CARDS -> {
                 float t = cardTime();
                 if (deck.done(t)) {
@@ -319,8 +316,11 @@ public class AltarScreen extends AbstractContainerScreen<AltarMenu> {
 
     @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
+        if (phase == Phase.SHOW) {
+            return true;
+        }
         if (phase != Phase.IDLE && keyCode == 256) {
-            if (phase == Phase.SHOW || phase == Phase.CARDS) {
+            if (phase == Phase.CARDS) {
                 exitCards();
             } else {
                 phase = Phase.IDLE;

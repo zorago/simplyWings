@@ -34,6 +34,11 @@ public final class WingSounds {
         layer(player, pair, volume);
     }
 
+    public static void soft(Player player, Optional<ResourceLocation> pair, float volume) {
+        player.level().playLocalSound(player.getX(), player.getY() + 1.2, player.getZ(), flap(pair, false), SoundSource.PLAYERS,
+                volume, 1.05f * (0.94f + player.getRandom().nextFloat() * 0.12f), false);
+    }
+
     public static void layer(Player player, Optional<ResourceLocation> pair, float volume) {
         for (SoundEvent sound : layers(pair)) {
             player.level().playLocalSound(player.getX(), player.getY(), player.getZ(), sound, SoundSource.PLAYERS, volume / 0.7f, 1f, false);

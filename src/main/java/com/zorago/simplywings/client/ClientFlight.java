@@ -79,6 +79,8 @@ public final class ClientFlight {
     private static boolean furyCharging;
     private static boolean sprintWasDown;
     private static double cruiseMax;
+    private static int hoverSoundTicks;
+    private static int reserveTicks;
 
     public static FlightMode mode() {
         return mode;
@@ -114,7 +116,14 @@ public final class ClientFlight {
         return ServerConfig.FLAP_COST.get().floatValue();
     }
 
+    public static boolean reserveActive() {
+        return reserveTicks > 0;
+    }
+
     private static void refill(LocalPlayer player, EffectiveStats stats) {
+        if (reserveTicks > 0) {
+            reserveTicks--;
+        }
         if (creative(player)) {
             reserveSeen = -1;
             return;
@@ -130,6 +139,7 @@ public final class ClientFlight {
             int got = Math.min(available - reservePredicted, EssenceReserve.packet(stamina, stats.stamina(), need));
             if (got > 0) {
                 reservePredicted += got;
+                reserveTicks = 40;
                 ClientWings.setStamina(stamina + got);
             }
         }
@@ -571,6 +581,10 @@ public final class ClientFlight {
             }
         }
         drift = drift.scale(0.9);
+        if (!continuous && --hoverSoundTicks <= 0) {
+            hoverSoundTicks = Math.max(6, Math.round(20f / (float) hoverRate * (0.8f + RANDOM.nextFloat() * 0.5f)));
+            WingSounds.soft(player, lookId(), 0.12f);
+        }
         Vec3 sway = Vec3.ZERO;
         double swing = amp * ServerConfig.PERTURBATION_SWING.get();
         if (continuous) {
