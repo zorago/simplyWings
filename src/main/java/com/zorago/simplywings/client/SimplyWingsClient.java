@@ -101,6 +101,7 @@ public class SimplyWingsClient {
     private static void onReloadListeners(net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent event) {
         event.registerReloadListener((net.minecraft.server.packs.resources.ResourceManagerReloadListener) manager -> {
             com.zorago.simplywings.client.show.ShowModel.reload(manager);
+            com.zorago.simplywings.client.show.ShowSounds.reload(manager);
             com.zorago.simplywings.client.show.ShowRenderer.clearCache();
             WingSounds.clear();
             com.zorago.simplywings.client.wiki.WikiData.reload(manager);

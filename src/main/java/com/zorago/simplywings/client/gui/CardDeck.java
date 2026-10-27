@@ -1,19 +1,15 @@
 package com.zorago.simplywings.client.gui;
 
-import com.zorago.simplywings.sound.ModSounds;
 import com.mojang.math.Axis;
 import com.zorago.simplywings.gacha.GachaData;
 import com.zorago.simplywings.gacha.GachaTier;
+import com.zorago.simplywings.client.show.ShowSounds;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 
@@ -85,42 +81,6 @@ public final class CardDeck {
         }
     }
 
-    private static void sound(SoundEvent event, float pitch, float volume) {
-        Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(event, pitch, volume));
-    }
-
-    private static void openSound(GachaTier tier) {
-        switch (tier) {
-            case B -> sound(ModSounds.CARD_PLACE.get(), 1f, 0.5f);
-            case A -> {
-                sound(ModSounds.CARD_PLACE.get(), 0.9f, 0.6f);
-                sound(ModSounds.CARD_CONFIRM.get(), 1f, 0.5f);
-            }
-            case S -> {
-                sound(ModSounds.CARD_PLACE.get(), 0.85f, 0.7f);
-                sound(ModSounds.GACHA_BELL.get(), 0.8f, 0.45f);
-            }
-            case SS -> {
-                sound(ModSounds.CARD_PLACE.get(), 0.8f, 0.8f);
-                sound(ModSounds.GACHA_BELL.get(), 0.75f, 0.6f);
-                sound(ModSounds.GACHA_BLAST.get(), 1.3f, 0.3f);
-            }
-            case SSS -> {
-                sound(ModSounds.CARD_PLACE.get(), 0.75f, 0.8f);
-                sound(ModSounds.GACHA_BELL.get(), 0.7f, 0.8f);
-                sound(ModSounds.GACHA_SHOCKWAVE.get(), 1.1f, 0.45f);
-                sound(SoundEvents.ENDER_DRAGON_GROWL, 1.2f, 0.25f);
-            }
-            case MYTHIC -> {
-                sound(ModSounds.CARD_PLACE.get(), 0.7f, 0.8f);
-                sound(ModSounds.GACHA_BELL.get(), 0.6f, 0.8f);
-                sound(ModSounds.GACHA_IMPLOSION.get(), 0.8f, 0.6f);
-                sound(ModSounds.GACHA_SHOCKWAVE.get(), 0.8f, 0.5f);
-                sound(SoundEvents.ENDER_DRAGON_GROWL, 0.7f, 0.3f);
-            }
-        }
-    }
-
     private float[] slot(int i, int width, int height, float scale) {
         int n = results.size();
         if (n == 1) {
@@ -147,19 +107,19 @@ public final class CardDeck {
             if (!dealt[i] && t >= deal[i]) {
                 dealt[i] = true;
                 if (t - deal[i] < 0.15f) {
-                    sound(ModSounds.CARD_DEAL.get(), 0.85f + random.nextFloat() * 0.15f, 0.55f);
+                    ShowSounds.card("deal", rank, random);
                 }
             }
             if (!tensed[i] && rank.atLeast(GachaTier.S) && t >= antic[i]) {
                 tensed[i] = true;
                 if (t < flipStart[i]) {
-                    sound(ModSounds.CARD_SHUFFLE.get(), 0.8f + 0.05f * rank.ordinal(), 0.6f);
+                    ShowSounds.card("shuffle", rank, random);
                 }
             }
             if (!flipped[i] && t >= flipStart[i]) {
                 flipped[i] = true;
                 if (t < flipEnd[i]) {
-                    sound(ModSounds.CARD_FLIP.get(), rank.atLeast(GachaTier.SS) ? 0.8f : 0.9f, 0.7f);
+                    ShowSounds.card("flip", rank, random);
                 }
             }
             if (!opened[i] && t >= flipEnd[i]) {
@@ -253,7 +213,7 @@ public final class CardDeck {
         GachaTier tier = results.get(i).rank();
         int r = tier.ordinal();
         float[] s = slot(i, width, height, scale);
-        openSound(tier);
+        ShowSounds.card("open", tier, random);
         float power = 1f + r * 0.45f;
         for (int k = 0; k < SPARKS[r]; k++) {
             double a = random.nextDouble() * Math.PI * 2;
