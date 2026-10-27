@@ -30,6 +30,32 @@ const config = {
 const SOURCE_DIR = path.resolve(ROOT, config.soundSources);
 const measure = makeMeasurer(config.ffmpeg, path.join(BENCH, ".cache/measure"));
 
+function compact(value) {
+  const floats = ["volume", "pitch", "t", "volume_step", "pitch_step", "volume_power", "pitch_random", "window", "sample"];
+  const json = JSON.stringify(value, (k, v) => (typeof v === "number" && Number.isInteger(v) && floats.includes(k) ? `__num${v}.0__` : v)).replace(/"__num(-?\d+\.0)__"/g, "$1");
+  let out = "";
+  let inString = false;
+  for (let i = 0; i < json.length; i++) {
+    const c = json[i];
+    out += c;
+    if (c === '"' && json[i - 1] !== "\\") inString = !inString;
+    else if (!inString && (c === "," || c === ":")) out += " ";
+  }
+  return out;
+}
+
+function formatShowSounds(data) {
+  const block = (value, indent) => {
+    if (Array.isArray(value)) return "[\n" + value.map((c) => indent + "  " + compact(c)).join(",\n") + "\n" + indent + "]";
+    const entries = Object.entries(value);
+    if (entries.every(([, v]) => Array.isArray(v) || (v && typeof v === "object"))) {
+      return "{\n" + entries.map(([k, v]) => `${indent}  ${JSON.stringify(k)}: ${block(v, indent + "  ")}`).join(",\n") + "\n" + indent + "}";
+    }
+    return compact(value);
+  };
+  return block(data, "") + "\n";
+}
+
 function readJson(file) {
   return JSON.parse(fs.readFileSync(file, "utf8"));
 }
@@ -425,7 +451,7 @@ app.get("/api/gacha/sounds", (req, res) => {
 app.put(
   "/api/gacha/sounds",
   wrap((req, res) => {
-    writeJson(SHOW_SOUNDS, req.body, 2);
+    fs.writeFileSync(SHOW_SOUNDS, formatShowSounds(req.body), "utf8");
     res.json({ ok: true });
   }),
 );
