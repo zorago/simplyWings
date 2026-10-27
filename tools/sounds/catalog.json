@@ -1,0 +1,7689 @@
+{
+ "version": 1,
+ "sounds": [
+  {
+   "id": "wing.feather.flap",
+   "category": "wing",
+   "group": "feather",
+   "status": "custom",
+   "trigger": "Coup d'aile en déplacement, frappe de WingStyle.strikeAt ; distants via FlapEvent",
+   "code": [
+    "client/ClientFlight.java",
+    "client/ClientNet.java",
+    "client/WingSounds.java"
+   ],
+   "description": "Descente de l'aile : poussée d'air ronde et courte, froissement de plumes discret.",
+   "keywords": [
+    "wing flap",
+    "feather",
+    "cape flap",
+    "bird takeoff",
+    "whoosh short"
+   ],
+   "reference": "minecraft:entity.phantom.flap",
+   "loudness_target": "wing_flap",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "basic",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [
+    {
+     "file": "wing/feather/flap_1",
+     "source": "fs_711122_cape_wings.mp3",
+     "start": 22.16,
+     "end": 22.75,
+     "peak": -3.0,
+     "fade_in": 0.004,
+     "fade_out": 0.25,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    },
+    {
+     "file": "wing/feather/flap_2",
+     "source": "fs_711122_cape_wings.mp3",
+     "start": 25.94,
+     "end": 26.5,
+     "peak": -3.0,
+     "fade_in": 0.004,
+     "fade_out": 0.25,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    },
+    {
+     "file": "wing/feather/flap_3",
+     "source": "fs_711122_cape_wings.mp3",
+     "start": 29.39,
+     "end": 30.0,
+     "peak": -3.0,
+     "fade_in": 0.004,
+     "fade_out": 0.25,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   }
+  },
+  {
+   "id": "wing.membrane.flap",
+   "category": "wing",
+   "group": "membrane",
+   "status": "custom",
+   "trigger": "Coup d'aile des paires à membrane",
+   "code": [
+    "client/WingSounds.java"
+   ],
+   "description": "Membrane tendue qui claque, plus grave et plus sèche que la plume.",
+   "keywords": [
+    "leather wing flap",
+    "dragon wing",
+    "membrane flap",
+    "large creature wings"
+   ],
+   "reference": "minecraft:entity.ender_dragon.flap",
+   "loudness_target": "wing_flap",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "basic",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [
+    {
+     "file": "wing/membrane/flap_1",
+     "source": "fs_759529_large_flying_creature.mp3",
+     "start": 2.2399999999999998,
+     "end": 3.03,
+     "peak": -2.0,
+     "fade_in": 0.004,
+     "fade_out": 0.25,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    },
+    {
+     "file": "wing/membrane/flap_2",
+     "source": "fs_759529_large_flying_creature.mp3",
+     "start": 3.35,
+     "end": 4.140000000000001,
+     "peak": -2.0,
+     "fade_in": 0.004,
+     "fade_out": 0.25,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    },
+    {
+     "file": "wing/membrane/flap_3",
+     "source": "fs_759529_large_flying_creature.mp3",
+     "start": 4.45,
+     "end": 5.24,
+     "peak": -2.0,
+     "fade_in": 0.004,
+     "fade_out": 0.25,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    },
+    {
+     "file": "wing/membrane/flap_4",
+     "source": "fs_759529_large_flying_creature.mp3",
+     "start": 5.5,
+     "end": 6.29,
+     "peak": -2.0,
+     "fade_in": 0.004,
+     "fade_out": 0.25,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    },
+    {
+     "file": "wing/membrane/flap_5",
+     "source": "fs_759529_large_flying_creature.mp3",
+     "start": 6.51,
+     "end": 7.3,
+     "peak": -2.0,
+     "fade_in": 0.004,
+     "fade_out": 0.25,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   }
+  },
+  {
+   "id": "wing.leather.flap",
+   "category": "wing",
+   "group": "leather",
+   "status": "custom",
+   "trigger": "Coup d'aile de la chauve-souris et des planeurs",
+   "code": [
+    "client/WingSounds.java"
+   ],
+   "description": "Petit claquement de toile souple, court.",
+   "keywords": [
+    "bat wings",
+    "umbrella flap",
+    "cloth flap"
+   ],
+   "reference": "minecraft:entity.bat.takeoff",
+   "loudness_target": "wing_flap",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "basic",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [
+    {
+     "file": "wing/leather/flap_1",
+     "source": "fs_593487_umbrella_bat_wings.mp3",
+     "start": 1.78,
+     "end": 2.13,
+     "peak": -4.0,
+     "fade_in": 0.004,
+     "fade_out": 0.15,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    },
+    {
+     "file": "wing/leather/flap_2",
+     "source": "fs_593487_umbrella_bat_wings.mp3",
+     "start": 2.6900000000000004,
+     "end": 3.04,
+     "peak": -4.0,
+     "fade_in": 0.004,
+     "fade_out": 0.15,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    },
+    {
+     "file": "wing/leather/flap_3",
+     "source": "fs_593487_umbrella_bat_wings.mp3",
+     "start": 3.56,
+     "end": 3.9099999999999997,
+     "peak": -4.0,
+     "fade_in": 0.004,
+     "fade_out": 0.15,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    },
+    {
+     "file": "wing/leather/flap_4",
+     "source": "fs_593487_umbrella_bat_wings.mp3",
+     "start": 4.47,
+     "end": 4.82,
+     "peak": -4.0,
+     "fade_in": 0.004,
+     "fade_out": 0.15,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   }
+  },
+  {
+   "id": "wing.insect.flap",
+   "category": "wing",
+   "group": "insect",
+   "status": "custom",
+   "trigger": "Coup d'aile des paires à vrombissement",
+   "code": [
+    "client/WingSounds.java"
+   ],
+   "description": "Bref bourdonnement stylisé, pas de vrai insecte.",
+   "keywords": [
+    "insect wing",
+    "buzz short",
+    "burr"
+   ],
+   "reference": "minecraft:entity.bee.loop",
+   "loudness_target": "wing_flap",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "basic",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [
+    {
+     "file": "wing/insect/flap_1",
+     "source": "synth:burr_120",
+     "start": 0,
+     "end": null,
+     "peak": -8.0,
+     "fade_in": 0.004,
+     "fade_out": 0.05,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    },
+    {
+     "file": "wing/insect/flap_2",
+     "source": "synth:burr_140",
+     "start": 0,
+     "end": null,
+     "peak": -8.0,
+     "fade_in": 0.004,
+     "fade_out": 0.05,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    },
+    {
+     "file": "wing/insect/flap_3",
+     "source": "synth:burr_165",
+     "start": 0,
+     "end": null,
+     "peak": -8.0,
+     "fade_in": 0.004,
+     "fade_out": 0.05,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   }
+  },
+  {
+   "id": "wing.strong.flap",
+   "category": "wing",
+   "group": "strong",
+   "status": "custom",
+   "trigger": "Coup puissant : premier battement, saut ailé, envol",
+   "code": [
+    "client/ClientFlight.java",
+    "client/WingSounds.java"
+   ],
+   "description": "Grand battement lourd, plein de souffle.",
+   "keywords": [
+    "huge wing flap",
+    "dragon wings",
+    "large flap whoosh"
+   ],
+   "reference": "minecraft:entity.ender_dragon.flap",
+   "loudness_target": "wing_flap_strong",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "basic",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [
+    {
+     "file": "wing/strong/flap_1",
+     "source": "fs_670509_huge_wing_flaps.mp3",
+     "start": 2.42,
+     "end": 3.62,
+     "peak": -1.5,
+     "fade_in": 0.004,
+     "fade_out": 0.4,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    },
+    {
+     "file": "wing/strong/flap_2",
+     "source": "fs_670509_huge_wing_flaps.mp3",
+     "start": 3.72,
+     "end": 4.3,
+     "peak": -1.5,
+     "fade_in": 0.004,
+     "fade_out": 0.25,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    },
+    {
+     "file": "wing/strong/flap_3",
+     "source": "fs_670509_huge_wing_flaps.mp3",
+     "start": 5.06,
+     "end": 5.6,
+     "peak": -1.5,
+     "fade_in": 0.004,
+     "fade_out": 0.25,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   }
+  },
+  {
+   "id": "wing.buzz.loop",
+   "category": "wing",
+   "group": "buzz",
+   "status": "custom",
+   "trigger": "Poussée continue des paires à vrombissement (FLAG_THRUST)",
+   "code": [
+    "client/FlightLoops.java"
+   ],
+   "description": "Bourdonnement synthétique de jeu vidéo, rond, sans aigu.",
+   "keywords": [
+    "insect buzz loop",
+    "hum loop",
+    "drone wings"
+   ],
+   "reference": "minecraft:entity.bee.loop",
+   "loudness_target": "buzz_loop",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "bee",
+     "scenario": "hover",
+     "event": "loop"
+    }
+   ],
+   "variants": [
+    {
+     "file": "wing/buzz/loop_1",
+     "source": "synth:buzz_loop",
+     "start": 0,
+     "end": null,
+     "peak": -8.0,
+     "fade_in": 0.004,
+     "fade_out": 0.25,
+     "echo": 0.0,
+     "loop": -1,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "loop": true
+  },
+  {
+   "id": "gacha.ignite",
+   "category": "gacha",
+   "group": "altar",
+   "status": "custom",
+   "trigger": "Allumage d'une flamme élémentaire de l'autel",
+   "code": [
+    "client/show/ClientShows.java",
+    "block/AssemblyTableEffects.java"
+   ],
+   "description": "Embrasement magique court.",
+   "keywords": [
+    "magic ignite",
+    "fire whoosh magic"
+   ],
+   "reference": null,
+   "loudness_target": "gacha_small",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "gacha.ignite",
+   "subtitle": "Altar flame ignites",
+   "declared": true,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [
+    {
+     "file": "gacha/ignite_1",
+     "source": "oga_magical_1_0.ogg",
+     "start": 0,
+     "end": null,
+     "peak": -2.0,
+     "fade_in": 0.004,
+     "fade_out": 0.3,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    },
+    {
+     "file": "gacha/ignite_2",
+     "source": "oga_magical_2.ogg",
+     "start": 0,
+     "end": null,
+     "peak": -2.0,
+     "fade_in": 0.004,
+     "fade_out": 0.3,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    },
+    {
+     "file": "gacha/ignite_3",
+     "source": "oga_magical_4.ogg",
+     "start": 0,
+     "end": null,
+     "peak": -2.0,
+     "fade_in": 0.004,
+     "fade_out": 0.3,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    },
+    {
+     "file": "gacha/ignite_4",
+     "source": "oga_magical_5.ogg",
+     "start": 0,
+     "end": null,
+     "peak": -2.0,
+     "fade_in": 0.004,
+     "fade_out": 0.3,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    },
+    {
+     "file": "gacha/ignite_5",
+     "source": "oga_magical_6_0.ogg",
+     "start": 0,
+     "end": null,
+     "peak": -2.0,
+     "fade_in": 0.004,
+     "fade_out": 0.3,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    },
+    {
+     "file": "gacha/ignite_6",
+     "source": "oga_magical_7_0.ogg",
+     "start": 0,
+     "end": null,
+     "peak": -2.0,
+     "fade_in": 0.004,
+     "fade_out": 0.3,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "loop": false
+  },
+  {
+   "id": "gacha.offer",
+   "category": "gacha",
+   "group": "altar",
+   "status": "custom",
+   "trigger": "Offrande posée sur l'autel (début du show)",
+   "code": [
+    "client/show/ClientShows.java"
+   ],
+   "description": "Souffle magique bref.",
+   "keywords": [
+    "magic whoosh",
+    "offering",
+    "spell cast"
+   ],
+   "reference": null,
+   "loudness_target": "gacha_small",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "gacha.offer",
+   "subtitle": "Offering burns",
+   "declared": true,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [
+    {
+     "file": "gacha/offer_1",
+     "source": "oga_magical_3.ogg",
+     "start": 0,
+     "end": null,
+     "peak": -2.0,
+     "fade_in": 0.004,
+     "fade_out": 0.4,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "loop": false
+  },
+  {
+   "id": "gacha.rune_charge",
+   "category": "gacha",
+   "group": "altar",
+   "status": "custom",
+   "trigger": "Charge des runes, retombée finale",
+   "code": [
+    "client/show/ClientShows.java",
+    "block/AssemblyTableEffects.java"
+   ],
+   "description": "Nappe cristalline qui monte.",
+   "keywords": [
+    "crystal hum",
+    "magic charge",
+    "rising drone"
+   ],
+   "reference": null,
+   "loudness_target": "gacha_small",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "gacha.rune_charge",
+   "subtitle": "Altar hums",
+   "declared": true,
+   "slow_attack": true,
+   "animations": [],
+   "variants": [
+    {
+     "file": "gacha/rune_charge_1",
+     "source": "fs_832552_crystal_ball.mp3",
+     "start": 1.0,
+     "end": 9.6,
+     "peak": -3.0,
+     "fade_in": 0.3,
+     "fade_out": 2.5,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    },
+    {
+     "file": "gacha/rune_charge_2",
+     "source": "fs_832552_crystal_ball.mp3",
+     "start": 9.2,
+     "end": 17.6,
+     "peak": -3.0,
+     "fade_in": 0.3,
+     "fade_out": 2.5,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "loop": false
+  },
+  {
+   "id": "gacha.beam",
+   "category": "gacha",
+   "group": "altar",
+   "status": "custom",
+   "trigger": "Pilier de lumière",
+   "code": [
+    "client/show/ClientShows.java",
+    "block/AssemblyTableEffects.java"
+   ],
+   "description": "Montée d'énergie.",
+   "keywords": [
+    "power up",
+    "beam rise",
+    "energy"
+   ],
+   "reference": null,
+   "loudness_target": "gacha_big",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "gacha.beam",
+   "subtitle": "Pillar of light rises",
+   "declared": true,
+   "slow_attack": true,
+   "animations": [],
+   "variants": [
+    {
+     "file": "gacha/beam_1",
+     "source": "fs_859497_powerup_loop.mp3",
+     "start": 0,
+     "end": null,
+     "peak": -2.0,
+     "fade_in": 0.05,
+     "fade_out": 0.8,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "loop": false
+  },
+  {
+   "id": "gacha.shockwave",
+   "category": "gacha",
+   "group": "altar",
+   "status": "custom",
+   "trigger": "Onde de choc (pilier, SSS)",
+   "code": [
+    "client/show/ClientShows.java",
+    "client/gui/CardDeck.java"
+   ],
+   "description": "Grondement d'onde de choc.",
+   "keywords": [
+    "shockwave",
+    "boom deep"
+   ],
+   "reference": null,
+   "loudness_target": "gacha_big",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "gacha.shockwave",
+   "subtitle": "Sky shakes",
+   "declared": true,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [
+    {
+     "file": "gacha/shockwave_1",
+     "source": "fs_814053_shockwave.mp3",
+     "start": 0,
+     "end": 6.95,
+     "peak": -1.0,
+     "fade_in": 0.004,
+     "fade_out": 2.0,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "loop": false
+  },
+  {
+   "id": "gacha.blast",
+   "category": "gacha",
+   "group": "altar",
+   "status": "custom",
+   "trigger": "Éclat de l'étoile",
+   "code": [
+    "client/show/ClientShows.java",
+    "client/gui/CardDeck.java",
+    "block/AssemblyTableEffects.java"
+   ],
+   "description": "Explosion magique.",
+   "keywords": [
+    "magic blast",
+    "explosion fantasy"
+   ],
+   "reference": null,
+   "loudness_target": "gacha_big",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "gacha.blast",
+   "subtitle": "Star bursts",
+   "declared": true,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [
+    {
+     "file": "gacha/blast_1",
+     "source": "fs_814044_creation_magic_blast.mp3",
+     "start": 0,
+     "end": 6.6,
+     "peak": -1.0,
+     "fade_in": 0.004,
+     "fade_out": 2.0,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "loop": false
+  },
+  {
+   "id": "gacha.implosion",
+   "category": "gacha",
+   "group": "altar",
+   "status": "custom",
+   "trigger": "Implosion (palier SS et plus)",
+   "code": [
+    "client/show/ClientShows.java",
+    "client/gui/CardDeck.java"
+   ],
+   "description": "Implosion magique.",
+   "keywords": [
+    "implosion",
+    "reverse boom"
+   ],
+   "reference": null,
+   "loudness_target": "gacha_big",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "gacha.implosion",
+   "subtitle": "Magic collapses",
+   "declared": true,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [
+    {
+     "file": "gacha/implosion_1",
+     "source": "fs_814047_fantasy_implosion.mp3",
+     "start": 0,
+     "end": 7.7,
+     "peak": -1.0,
+     "fade_in": 0.004,
+     "fade_out": 2.0,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "loop": false
+  },
+  {
+   "id": "gacha.puff",
+   "category": "gacha",
+   "group": "altar",
+   "status": "custom",
+   "trigger": "Nuage qui éclate (vols des ailes)",
+   "code": [
+    "client/show/ClientShows.java"
+   ],
+   "description": "Pouf de fumée.",
+   "keywords": [
+    "puff smoke",
+    "poof"
+   ],
+   "reference": null,
+   "loudness_target": "gacha_small",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "gacha.puff",
+   "subtitle": "Cloud puffs",
+   "declared": true,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [
+    {
+     "file": "gacha/puff_1",
+     "source": "fs_714257_puff_of_smoke.mp3",
+     "start": 0,
+     "end": null,
+     "peak": -3.0,
+     "fade_in": 0.004,
+     "fade_out": 0.15,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "loop": false
+  },
+  {
+   "id": "gacha.bell",
+   "category": "gacha",
+   "group": "altar",
+   "status": "custom",
+   "trigger": "Battements de l'étoile, cartes S+",
+   "code": [
+    "client/show/ClientShows.java",
+    "client/gui/CardDeck.java",
+    "block/AssemblyTableEffects.java"
+   ],
+   "description": "Cloche lourde.",
+   "keywords": [
+    "bell heavy",
+    "gong"
+   ],
+   "reference": null,
+   "loudness_target": "gacha_small",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "gacha.bell",
+   "subtitle": "Star chimes",
+   "declared": true,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [
+    {
+     "file": "gacha/bell_1",
+     "source": "kenney_impact-sounds/Audio/impactBell_heavy_000.ogg",
+     "start": 0,
+     "end": null,
+     "peak": -2.0,
+     "fade_in": 0.004,
+     "fade_out": 0.3,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    },
+    {
+     "file": "gacha/bell_2",
+     "source": "kenney_impact-sounds/Audio/impactBell_heavy_001.ogg",
+     "start": 0,
+     "end": null,
+     "peak": -2.0,
+     "fade_in": 0.004,
+     "fade_out": 0.3,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    },
+    {
+     "file": "gacha/bell_3",
+     "source": "kenney_impact-sounds/Audio/impactBell_heavy_002.ogg",
+     "start": 0,
+     "end": null,
+     "peak": -2.0,
+     "fade_in": 0.004,
+     "fade_out": 0.3,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    },
+    {
+     "file": "gacha/bell_4",
+     "source": "kenney_impact-sounds/Audio/impactBell_heavy_003.ogg",
+     "start": 0,
+     "end": null,
+     "peak": -2.0,
+     "fade_in": 0.004,
+     "fade_out": 0.3,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    },
+    {
+     "file": "gacha/bell_5",
+     "source": "kenney_impact-sounds/Audio/impactBell_heavy_004.ogg",
+     "start": 0,
+     "end": null,
+     "peak": -2.0,
+     "fade_in": 0.004,
+     "fade_out": 0.3,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "loop": false
+  },
+  {
+   "id": "gacha.chime",
+   "category": "gacha",
+   "group": "altar",
+   "status": "custom",
+   "trigger": "Battements de l'étoile",
+   "code": [
+    "client/show/ClientShows.java"
+   ],
+   "description": "Verre qui sonne.",
+   "keywords": [
+    "glass chime",
+    "crystal ring"
+   ],
+   "reference": null,
+   "loudness_target": "gacha_small",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "gacha.chime",
+   "subtitle": "Crystal rings",
+   "declared": true,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [
+    {
+     "file": "gacha/chime_1",
+     "source": "kenney_impact-sounds/Audio/impactGlass_medium_000.ogg",
+     "start": 0,
+     "end": null,
+     "peak": -4.0,
+     "fade_in": 0.004,
+     "fade_out": 0.2,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    },
+    {
+     "file": "gacha/chime_2",
+     "source": "kenney_impact-sounds/Audio/impactGlass_medium_001.ogg",
+     "start": 0,
+     "end": null,
+     "peak": -4.0,
+     "fade_in": 0.004,
+     "fade_out": 0.2,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    },
+    {
+     "file": "gacha/chime_3",
+     "source": "kenney_impact-sounds/Audio/impactGlass_medium_002.ogg",
+     "start": 0,
+     "end": null,
+     "peak": -4.0,
+     "fade_in": 0.004,
+     "fade_out": 0.2,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    },
+    {
+     "file": "gacha/chime_4",
+     "source": "kenney_impact-sounds/Audio/impactGlass_medium_003.ogg",
+     "start": 0,
+     "end": null,
+     "peak": -4.0,
+     "fade_in": 0.004,
+     "fade_out": 0.2,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    },
+    {
+     "file": "gacha/chime_5",
+     "source": "kenney_impact-sounds/Audio/impactGlass_medium_004.ogg",
+     "start": 0,
+     "end": null,
+     "peak": -4.0,
+     "fade_in": 0.004,
+     "fade_out": 0.2,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "loop": false
+  },
+  {
+   "id": "gacha.twinkle",
+   "category": "gacha",
+   "group": "altar",
+   "status": "custom",
+   "trigger": "Étoiles B et A du ×10",
+   "code": [
+    "client/show/ClientShows.java"
+   ],
+   "description": "Petit éclat de verre.",
+   "keywords": [
+    "glass light",
+    "twinkle"
+   ],
+   "reference": null,
+   "loudness_target": "gacha_small",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "gacha.twinkle",
+   "subtitle": "Star twinkles",
+   "declared": true,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [
+    {
+     "file": "gacha/twinkle_1",
+     "source": "kenney_impact-sounds/Audio/impactGlass_light_000.ogg",
+     "start": 0,
+     "end": null,
+     "peak": -6.0,
+     "fade_in": 0.004,
+     "fade_out": 0.1,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    },
+    {
+     "file": "gacha/twinkle_2",
+     "source": "kenney_impact-sounds/Audio/impactGlass_light_001.ogg",
+     "start": 0,
+     "end": null,
+     "peak": -6.0,
+     "fade_in": 0.004,
+     "fade_out": 0.1,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    },
+    {
+     "file": "gacha/twinkle_3",
+     "source": "kenney_impact-sounds/Audio/impactGlass_light_002.ogg",
+     "start": 0,
+     "end": null,
+     "peak": -6.0,
+     "fade_in": 0.004,
+     "fade_out": 0.1,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    },
+    {
+     "file": "gacha/twinkle_4",
+     "source": "kenney_impact-sounds/Audio/impactGlass_light_003.ogg",
+     "start": 0,
+     "end": null,
+     "peak": -6.0,
+     "fade_in": 0.004,
+     "fade_out": 0.1,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    },
+    {
+     "file": "gacha/twinkle_5",
+     "source": "kenney_impact-sounds/Audio/impactGlass_light_004.ogg",
+     "start": 0,
+     "end": null,
+     "peak": -6.0,
+     "fade_in": 0.004,
+     "fade_out": 0.1,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "loop": false
+  },
+  {
+   "id": "ui.card_deal",
+   "category": "ui",
+   "group": "cards",
+   "status": "custom",
+   "trigger": "Carte distribuée",
+   "code": [
+    "client/gui/CardDeck.java"
+   ],
+   "description": "Glissement de carte.",
+   "keywords": [
+    "card slide",
+    "card deal"
+   ],
+   "reference": "minecraft:ui.button.click",
+   "loudness_target": "cards",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "ui.card_deal",
+   "subtitle": "Card dealt",
+   "declared": true,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [
+    {
+     "file": "ui/card_deal_1",
+     "source": "kenney_casino-audio/Audio/card-slide-1.ogg",
+     "start": 0,
+     "end": null,
+     "peak": -8.0,
+     "fade_in": 0.004,
+     "fade_out": 0.1,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 6000,
+     "gain_db": 0.0
+    },
+    {
+     "file": "ui/card_deal_2",
+     "source": "kenney_casino-audio/Audio/card-slide-2.ogg",
+     "start": 0,
+     "end": null,
+     "peak": -8.0,
+     "fade_in": 0.004,
+     "fade_out": 0.1,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 6000,
+     "gain_db": 0.0
+    },
+    {
+     "file": "ui/card_deal_3",
+     "source": "kenney_casino-audio/Audio/card-slide-3.ogg",
+     "start": 0,
+     "end": null,
+     "peak": -8.0,
+     "fade_in": 0.004,
+     "fade_out": 0.1,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 6000,
+     "gain_db": 0.0
+    },
+    {
+     "file": "ui/card_deal_4",
+     "source": "kenney_casino-audio/Audio/card-slide-4.ogg",
+     "start": 0,
+     "end": null,
+     "peak": -8.0,
+     "fade_in": 0.004,
+     "fade_out": 0.1,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 6000,
+     "gain_db": 0.0
+    },
+    {
+     "file": "ui/card_deal_5",
+     "source": "kenney_casino-audio/Audio/card-slide-5.ogg",
+     "start": 0,
+     "end": null,
+     "peak": -8.0,
+     "fade_in": 0.004,
+     "fade_out": 0.1,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 6000,
+     "gain_db": 0.0
+    },
+    {
+     "file": "ui/card_deal_6",
+     "source": "kenney_casino-audio/Audio/card-slide-6.ogg",
+     "start": 0,
+     "end": null,
+     "peak": -8.0,
+     "fade_in": 0.004,
+     "fade_out": 0.1,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 6000,
+     "gain_db": 0.0
+    },
+    {
+     "file": "ui/card_deal_7",
+     "source": "kenney_casino-audio/Audio/card-slide-7.ogg",
+     "start": 0,
+     "end": null,
+     "peak": -8.0,
+     "fade_in": 0.004,
+     "fade_out": 0.1,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 6000,
+     "gain_db": 0.0
+    },
+    {
+     "file": "ui/card_deal_8",
+     "source": "kenney_casino-audio/Audio/card-slide-8.ogg",
+     "start": 0,
+     "end": null,
+     "peak": -8.0,
+     "fade_in": 0.004,
+     "fade_out": 0.1,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 6000,
+     "gain_db": 0.0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "loop": false
+  },
+  {
+   "id": "ui.card_flip",
+   "category": "ui",
+   "group": "cards",
+   "status": "custom",
+   "trigger": "Carte retournée",
+   "code": [
+    "client/gui/CardDeck.java"
+   ],
+   "description": "Carte poussée.",
+   "keywords": [
+    "card flip",
+    "card shove"
+   ],
+   "reference": "minecraft:ui.button.click",
+   "loudness_target": "cards",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "ui.card_flip",
+   "subtitle": "Card turns",
+   "declared": true,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [
+    {
+     "file": "ui/card_flip_1",
+     "source": "kenney_casino-audio/Audio/card-shove-1.ogg",
+     "start": 0,
+     "end": null,
+     "peak": -6.0,
+     "fade_in": 0.004,
+     "fade_out": 0.1,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 6000,
+     "gain_db": 0.0
+    },
+    {
+     "file": "ui/card_flip_2",
+     "source": "kenney_casino-audio/Audio/card-shove-2.ogg",
+     "start": 0,
+     "end": null,
+     "peak": -6.0,
+     "fade_in": 0.004,
+     "fade_out": 0.1,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 6000,
+     "gain_db": 0.0
+    },
+    {
+     "file": "ui/card_flip_3",
+     "source": "kenney_casino-audio/Audio/card-shove-3.ogg",
+     "start": 0,
+     "end": null,
+     "peak": -6.0,
+     "fade_in": 0.004,
+     "fade_out": 0.1,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 6000,
+     "gain_db": 0.0
+    },
+    {
+     "file": "ui/card_flip_4",
+     "source": "kenney_casino-audio/Audio/card-shove-4.ogg",
+     "start": 0,
+     "end": null,
+     "peak": -6.0,
+     "fade_in": 0.004,
+     "fade_out": 0.1,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 6000,
+     "gain_db": 0.0
+    },
+    {
+     "file": "ui/card_flip_5",
+     "source": "kenney_casino-audio/Audio/card-fan-1.ogg",
+     "start": 0,
+     "end": null,
+     "peak": -6.0,
+     "fade_in": 0.004,
+     "fade_out": 0.15,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 6000,
+     "gain_db": 0.0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "loop": false
+  },
+  {
+   "id": "ui.card_shuffle",
+   "category": "ui",
+   "group": "cards",
+   "status": "custom",
+   "trigger": "Tension avant une carte S+",
+   "code": [
+    "client/gui/CardDeck.java"
+   ],
+   "description": "Battement de cartes.",
+   "keywords": [
+    "card shuffle"
+   ],
+   "reference": "minecraft:ui.button.click",
+   "loudness_target": "cards",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "ui.card_shuffle",
+   "subtitle": "Cards shuffle",
+   "declared": true,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [
+    {
+     "file": "ui/card_shuffle_1",
+     "source": "kenney_casino-audio/Audio/card-shuffle.ogg",
+     "start": 0,
+     "end": null,
+     "peak": -7.0,
+     "fade_in": 0.004,
+     "fade_out": 0.3,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 5000,
+     "gain_db": 0.0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "loop": false
+  },
+  {
+   "id": "ui.card_place",
+   "category": "ui",
+   "group": "cards",
+   "status": "custom",
+   "trigger": "Carte ouverte",
+   "code": [
+    "client/gui/CardDeck.java"
+   ],
+   "description": "Carte posée.",
+   "keywords": [
+    "card place",
+    "card down"
+   ],
+   "reference": "minecraft:ui.button.click",
+   "loudness_target": "cards",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "ui.card_place",
+   "subtitle": "Card laid down",
+   "declared": true,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [
+    {
+     "file": "ui/card_place_1",
+     "source": "kenney_casino-audio/Audio/card-place-1.ogg",
+     "start": 0,
+     "end": null,
+     "peak": -6.0,
+     "fade_in": 0.004,
+     "fade_out": 0.1,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 0.85,
+     "lp": 4000,
+     "gain_db": 0.0
+    },
+    {
+     "file": "ui/card_place_2",
+     "source": "kenney_casino-audio/Audio/card-place-2.ogg",
+     "start": 0,
+     "end": null,
+     "peak": -6.0,
+     "fade_in": 0.004,
+     "fade_out": 0.1,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 0.85,
+     "lp": 4000,
+     "gain_db": 0.0
+    },
+    {
+     "file": "ui/card_place_3",
+     "source": "kenney_casino-audio/Audio/card-place-3.ogg",
+     "start": 0,
+     "end": null,
+     "peak": -6.0,
+     "fade_in": 0.004,
+     "fade_out": 0.1,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 0.85,
+     "lp": 4000,
+     "gain_db": 0.0
+    },
+    {
+     "file": "ui/card_place_4",
+     "source": "kenney_casino-audio/Audio/card-place-4.ogg",
+     "start": 0,
+     "end": null,
+     "peak": -6.0,
+     "fade_in": 0.004,
+     "fade_out": 0.1,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 0.85,
+     "lp": 4000,
+     "gain_db": 0.0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "loop": false
+  },
+  {
+   "id": "ui.confirm",
+   "category": "ui",
+   "group": "ui",
+   "status": "custom",
+   "trigger": "Carte A révélée, table d'assemblage",
+   "code": [
+    "client/gui/CardDeck.java",
+    "block/AssemblyTableEffects.java"
+   ],
+   "description": "Bong grave et doux.",
+   "keywords": [
+    "soft bong",
+    "ui confirm low"
+   ],
+   "reference": "minecraft:ui.button.click",
+   "loudness_target": "ui",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "ui.confirm",
+   "subtitle": "Card revealed",
+   "declared": true,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [
+    {
+     "file": "ui/confirm_1",
+     "source": "kenney_interface-sounds/Audio/bong_001.ogg",
+     "start": 0,
+     "end": null,
+     "peak": -9.0,
+     "fade_in": 0.004,
+     "fade_out": 0.06,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 0.7,
+     "lp": 1800,
+     "gain_db": 0.0
+    },
+    {
+     "file": "ui/confirm_2",
+     "source": "kenney_ui-audio/Audio/switch3.ogg",
+     "start": 0,
+     "end": null,
+     "peak": -9.0,
+     "fade_in": 0.004,
+     "fade_out": 0.04,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 0.7,
+     "lp": 1800,
+     "gain_db": 0.0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "loop": false
+  },
+  {
+   "id": "ui.equip",
+   "category": "ui",
+   "group": "ui",
+   "status": "todo",
+   "trigger": "Équiper / retirer (menu J), infusion de l'établi, table d'assemblage",
+   "code": [
+    "client/gui/WingsScreen.java",
+    "block/ForgeBenchEffects.java",
+    "block/AssemblyTableEffects.java"
+   ],
+   "description": "Aujourd'hui 4,2 s et brillant ; à remplacer par un son court, grave et doux.",
+   "keywords": [
+    "cloth unfold soft",
+    "wings unfold",
+    "soft whoosh low"
+   ],
+   "reference": "minecraft:ui.button.click",
+   "loudness_target": "ui",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "ui.equip",
+   "subtitle": "Wings unfold",
+   "declared": true,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [
+    {
+     "file": "ui/equip_1",
+     "source": "fs_561287.mp3",
+     "start": 0.2,
+     "end": 4.4,
+     "peak": -3.0,
+     "fade_in": 0.004,
+     "fade_out": 1.0,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "loop": false
+  },
+  {
+   "id": "ui.open",
+   "category": "ui",
+   "group": "ui",
+   "status": "custom",
+   "trigger": "Ouverture du menu (prêt, pas branché)",
+   "code": [],
+   "description": "Ouverture douce.",
+   "keywords": [
+    "ui open soft"
+   ],
+   "reference": "minecraft:ui.button.click",
+   "loudness_target": "ui",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "ui.open",
+   "subtitle": "Menu opens",
+   "declared": true,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [
+    {
+     "file": "ui/open_1",
+     "source": "kenney_interface-sounds/Audio/open_002.ogg",
+     "start": 0,
+     "end": null,
+     "peak": -10.0,
+     "fade_in": 0.004,
+     "fade_out": 0.05,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 0.75,
+     "lp": 2000,
+     "gain_db": 0.0
+    },
+    {
+     "file": "ui/open_2",
+     "source": "kenney_interface-sounds/Audio/open_003.ogg",
+     "start": 0,
+     "end": null,
+     "peak": -10.0,
+     "fade_in": 0.004,
+     "fade_out": 0.05,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 0.75,
+     "lp": 2000,
+     "gain_db": 0.0
+    },
+    {
+     "file": "ui/open_3",
+     "source": "kenney_interface-sounds/Audio/open_004.ogg",
+     "start": 0,
+     "end": null,
+     "peak": -10.0,
+     "fade_in": 0.004,
+     "fade_out": 0.05,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 0.75,
+     "lp": 2000,
+     "gain_db": 0.0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "loop": false
+  },
+  {
+   "id": "flight.wind",
+   "category": "flight",
+   "group": "flight",
+   "status": "custom",
+   "trigger": "Vent de vol, volume piloté par la vitesse",
+   "code": [
+    "client/FlightLoops.java"
+   ],
+   "description": "Souffle continu sans motif reconnaissable.",
+   "keywords": [
+    "wind loop",
+    "air rush",
+    "flying wind"
+   ],
+   "reference": "minecraft:item.elytra.flying",
+   "loudness_target": "wind_loop",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "flight.wind",
+   "subtitle": "Wind rushes",
+   "declared": true,
+   "slow_attack": true,
+   "animations": [],
+   "variants": [
+    {
+     "file": "flight/wind_1",
+     "source": "fs_454072.mp3",
+     "start": 30.0,
+     "end": 46.0,
+     "peak": -3.0,
+     "fade_in": 0.004,
+     "fade_out": 0.25,
+     "echo": 0.0,
+     "loop": 1.5,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "loop": true
+  },
+  {
+   "id": "flight.landing_hard",
+   "category": "flight",
+   "group": "flight",
+   "status": "custom",
+   "trigger": "Atterrissage rapide et crash",
+   "code": [
+    "client/ClientFlight.java",
+    "flight/ServerFlight.java"
+   ],
+   "description": "Choc lourd au sol, sans effet de dégâts.",
+   "keywords": [
+    "heavy landing",
+    "body fall",
+    "thud heavy"
+   ],
+   "reference": null,
+   "loudness_target": "landing",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "flight.landing_hard",
+   "subtitle": "Heavy landing",
+   "declared": true,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [
+    {
+     "file": "flight/landing_hard_1",
+     "source": "fs_504626.mp3",
+     "start": 0.05,
+     "end": 1.4,
+     "peak": -2.0,
+     "fade_in": 0.004,
+     "fade_out": 0.4,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "loop": false
+  },
+  {
+   "id": "flight.landing_soft",
+   "category": "flight",
+   "group": "flight",
+   "status": "custom",
+   "trigger": "Atterrissage lent",
+   "code": [
+    "client/ClientFlight.java"
+   ],
+   "description": "Pose douce, petit bruit sourd.",
+   "keywords": [
+    "soft landing",
+    "thud soft",
+    "footstep land"
+   ],
+   "reference": null,
+   "loudness_target": "landing",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "flight.landing_soft",
+   "subtitle": "Landing",
+   "declared": true,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [
+    {
+     "file": "flight/landing_soft_1",
+     "source": "kenney_impact-sounds/Audio/impactSoft_medium_000.ogg",
+     "start": 0,
+     "end": null,
+     "peak": -8.0,
+     "fade_in": 0.004,
+     "fade_out": 0.1,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    },
+    {
+     "file": "flight/landing_soft_2",
+     "source": "kenney_impact-sounds/Audio/impactSoft_medium_001.ogg",
+     "start": 0,
+     "end": null,
+     "peak": -8.0,
+     "fade_in": 0.004,
+     "fade_out": 0.1,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    },
+    {
+     "file": "flight/landing_soft_3",
+     "source": "kenney_impact-sounds/Audio/impactSoft_medium_002.ogg",
+     "start": 0,
+     "end": null,
+     "peak": -8.0,
+     "fade_in": 0.004,
+     "fade_out": 0.1,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    },
+    {
+     "file": "flight/landing_soft_4",
+     "source": "kenney_impact-sounds/Audio/impactSoft_medium_003.ogg",
+     "start": 0,
+     "end": null,
+     "peak": -8.0,
+     "fade_in": 0.004,
+     "fade_out": 0.1,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "loop": false
+  },
+  {
+   "id": "block.forge_bench.hammer",
+   "category": "block",
+   "group": "forge_bench",
+   "status": "custom",
+   "trigger": "Coups de marteau de l'établi de la forge",
+   "code": [
+    "block/ForgeBenchEffects.java"
+   ],
+   "description": "Marteau sur enclume.",
+   "keywords": [
+    "hammer anvil",
+    "smith hammer"
+   ],
+   "reference": "minecraft:block.anvil.use",
+   "loudness_target": "block_oneshot",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "block.forge_bench.hammer",
+   "subtitle": "Hammer strikes",
+   "declared": true,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [
+    {
+     "file": "block/forge_bench/hammer_1",
+     "source": "fs_434339.mp3",
+     "start": 0.2,
+     "end": 1.1300000000000001,
+     "peak": -3.0,
+     "fade_in": 0.004,
+     "fade_out": 0.4,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    },
+    {
+     "file": "block/forge_bench/hammer_2",
+     "source": "fs_434339.mp3",
+     "start": 4.14,
+     "end": 5.07,
+     "peak": -3.0,
+     "fade_in": 0.004,
+     "fade_out": 0.4,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    },
+    {
+     "file": "block/forge_bench/hammer_3",
+     "source": "fs_434339.mp3",
+     "start": 5.71,
+     "end": 6.640000000000001,
+     "peak": -3.0,
+     "fade_in": 0.004,
+     "fade_out": 0.4,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    },
+    {
+     "file": "block/forge_bench/hammer_4",
+     "source": "fs_434339.mp3",
+     "start": 12.13,
+     "end": 13.06,
+     "peak": -3.0,
+     "fade_in": 0.004,
+     "fade_out": 0.4,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    },
+    {
+     "file": "block/forge_bench/hammer_5",
+     "source": "fs_434339.mp3",
+     "start": 13.75,
+     "end": 14.68,
+     "peak": -3.0,
+     "fade_in": 0.004,
+     "fade_out": 0.4,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    },
+    {
+     "file": "block/forge_bench/hammer_6",
+     "source": "fs_434339.mp3",
+     "start": 18.66,
+     "end": 19.59,
+     "peak": -3.0,
+     "fade_in": 0.004,
+     "fade_out": 0.4,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "loop": false
+  },
+  {
+   "id": "block.forge_bench.quench",
+   "category": "block",
+   "group": "forge_bench",
+   "status": "custom",
+   "trigger": "Trempe à la fin d'une forge",
+   "code": [
+    "block/ForgeBenchEffects.java"
+   ],
+   "description": "Sifflement de métal trempé.",
+   "keywords": [
+    "quench hiss",
+    "steam hiss"
+   ],
+   "reference": "minecraft:block.fire.extinguish",
+   "loudness_target": "block_oneshot",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "block.forge_bench.quench",
+   "subtitle": "Metal hisses",
+   "declared": true,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [
+    {
+     "file": "block/forge_bench/quench_1",
+     "source": "fs_234782.mp3",
+     "start": 0.05,
+     "end": null,
+     "peak": -4.0,
+     "fade_in": 0.004,
+     "fade_out": 0.5,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "loop": false
+  },
+  {
+   "id": "block.cloud_compressor.loop",
+   "category": "block",
+   "group": "cloud_compressor",
+   "status": "custom",
+   "trigger": "Boucle du compresseur en marche",
+   "code": [
+    "block/CloudCompressorEffects.java"
+   ],
+   "description": "Machine qui brasse, supportable longtemps.",
+   "keywords": [
+    "machine loop",
+    "pump loop",
+    "churn"
+   ],
+   "reference": "minecraft:block.furnace.fire_crackle",
+   "loudness_target": "block_loop",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "block.cloud_compressor.loop",
+   "subtitle": "Compressor churns",
+   "declared": true,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [
+    {
+     "file": "block/cloud_compressor/loop_1",
+     "source": "fs_487748.mp3",
+     "start": 0.0,
+     "end": 7.6,
+     "peak": -4.0,
+     "fade_in": 0.004,
+     "fade_out": 0.25,
+     "echo": 0.0,
+     "loop": 0.8,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "loop": true
+  },
+  {
+   "id": "essence.pour",
+   "category": "essence",
+   "group": "essence",
+   "status": "custom",
+   "trigger": "Essence versée dans un établi",
+   "code": [
+    "block/EssenceBenchBlockEntity.java"
+   ],
+   "description": "Liquide versé.",
+   "keywords": [
+    "pour liquid",
+    "potion pour"
+   ],
+   "reference": "minecraft:item.bottle.fill",
+   "loudness_target": "block_oneshot",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "essence.pour",
+   "subtitle": "Essence pours",
+   "declared": true,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [
+    {
+     "file": "essence/pour_1",
+     "source": "fs_875132.mp3",
+     "start": 1.6,
+     "end": 2.6,
+     "peak": -5.0,
+     "fade_in": 0.004,
+     "fade_out": 0.2,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    },
+    {
+     "file": "essence/pour_2",
+     "source": "fs_875132.mp3",
+     "start": 2.9,
+     "end": 3.95,
+     "peak": -5.0,
+     "fade_in": 0.004,
+     "fade_out": 0.2,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "loop": false
+  },
+  {
+   "id": "essence.full",
+   "category": "essence",
+   "group": "essence",
+   "status": "custom",
+   "trigger": "Conteneur plein en vol",
+   "code": [
+    "flight/CloudHarvest.java"
+   ],
+   "description": "Petit signal plein.",
+   "keywords": [
+    "bottle full",
+    "magic fill"
+   ],
+   "reference": null,
+   "loudness_target": "block_oneshot",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "essence.full",
+   "subtitle": "Container fills up",
+   "declared": true,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [
+    {
+     "file": "essence/full_1",
+     "source": "fs_511485.mp3",
+     "start": 0,
+     "end": null,
+     "peak": -6.0,
+     "fade_in": 0.004,
+     "fade_out": 0.3,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "loop": false
+  },
+  {
+   "id": "ui.denied",
+   "category": "ui",
+   "group": "ui",
+   "status": "custom",
+   "trigger": "Plumes insuffisantes à l'autel",
+   "code": [
+    "client/gui/AltarScreen.java"
+   ],
+   "description": "Refus grave et doux.",
+   "keywords": [
+    "ui back low",
+    "denied soft"
+   ],
+   "reference": "minecraft:ui.button.click",
+   "loudness_target": "ui",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "ui.denied",
+   "subtitle": "Not enough feathers",
+   "declared": true,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [
+    {
+     "file": "ui/denied_1",
+     "source": "kenney_interface-sounds/Audio/back_002.ogg",
+     "start": 0,
+     "end": null,
+     "peak": -9.0,
+     "fade_in": 0.004,
+     "fade_out": 0.04,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 0.6,
+     "lp": 1500,
+     "gain_db": 0.0
+    },
+    {
+     "file": "ui/denied_2",
+     "source": "kenney_interface-sounds/Audio/back_003.ogg",
+     "start": 0,
+     "end": null,
+     "peak": -9.0,
+     "fade_in": 0.004,
+     "fade_out": 0.04,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 0.6,
+     "lp": 1500,
+     "gain_db": 0.0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "loop": false
+  },
+  {
+   "id": "flight.takeoff_launch",
+   "category": "flight",
+   "group": "flight",
+   "status": "alias",
+   "trigger": "Envol chargé (Alt maintenu)",
+   "code": [
+    "client/SimplyWingsClient.java"
+   ],
+   "description": "Coup puissant un peu plus aigu.",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "flight.takeoff_launch",
+   "subtitle": "Wings launch",
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "basic",
+     "scenario": "takeoff",
+     "event": "launch"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "alias": {
+    "target": "simplywings:wing.strong.flap",
+    "volume": 1.0,
+    "pitch": 1.1
+   }
+  },
+  {
+   "id": "night_fury.dive",
+   "category": "fury",
+   "group": "night_fury",
+   "status": "custom",
+   "trigger": "Cri de piqué de Night",
+   "code": [
+    "client/FuryEffects.java"
+   ],
+   "description": "Cri de piqué qui monte (sample du film, privé).",
+   "keywords": [
+    "dive scream",
+    "jet whistle",
+    "raptor screech"
+   ],
+   "reference": null,
+   "loudness_target": "fury_big",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "night_fury.dive",
+   "subtitle": "Night Fury shrieks",
+   "declared": true,
+   "slow_attack": true,
+   "animations": [],
+   "variants": [
+    {
+     "file": "fury/dive_1",
+     "source": "user/night_fury_dive.mp3",
+     "start": 0.0,
+     "end": 5.0,
+     "peak": -1.0,
+     "fade_in": 0.004,
+     "fade_out": 0.03,
+     "echo": 3.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "license_blocker": true
+  },
+  {
+   "id": "light_fury.dive",
+   "category": "fury",
+   "group": "light_fury",
+   "status": "custom",
+   "trigger": "Cri de piqué de Light",
+   "code": [
+    "client/FuryEffects.java"
+   ],
+   "description": "Même cri que Night.",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": "fury_big",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "light_fury.dive",
+   "subtitle": "Light Fury shrieks",
+   "declared": true,
+   "slow_attack": true,
+   "animations": [],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "variants_from": "night_fury.dive",
+   "license_blocker": true
+  },
+  {
+   "id": "night_fury.invisible",
+   "category": "fury",
+   "group": "night_fury",
+   "status": "custom",
+   "trigger": "Dash d'invisibilité de Night",
+   "code": [
+    "client/FuryEffects.java"
+   ],
+   "description": "Sample complet avec écho (privé).",
+   "keywords": [
+    "vanish whoosh",
+    "jet pass"
+   ],
+   "reference": null,
+   "loudness_target": "fury_big",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "night_fury.invisible",
+   "subtitle": "Night Fury vanishes",
+   "declared": true,
+   "slow_attack": true,
+   "animations": [],
+   "variants": [
+    {
+     "file": "fury/invisible_1",
+     "source": "user/night_fury_dive.mp3",
+     "start": 0.0,
+     "end": null,
+     "peak": -1.0,
+     "fade_in": 0.004,
+     "fade_out": 0.05,
+     "echo": 3.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "pitch": 0.97,
+   "license_blocker": true
+  },
+  {
+   "id": "light_fury.invisible",
+   "category": "fury",
+   "group": "light_fury",
+   "status": "custom",
+   "trigger": "Dash d'invisibilité de Light",
+   "code": [
+    "client/FuryEffects.java"
+   ],
+   "description": "Comme Night, un peu plus aigu.",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": "fury_big",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "light_fury.invisible",
+   "subtitle": "Light Fury vanishes",
+   "declared": true,
+   "slow_attack": true,
+   "animations": [],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "variants_from": "night_fury.invisible",
+   "pitch": 1.03,
+   "license_blocker": true
+  },
+  {
+   "id": "night_fury.charge",
+   "category": "fury",
+   "group": "night_fury",
+   "status": "custom",
+   "trigger": "Charge au frein de Night (2 s)",
+   "code": [
+    "client/FuryEffects.java"
+   ],
+   "description": "Grésillement électrique qui monte.",
+   "keywords": [
+    "electric charge",
+    "plasma charge",
+    "crackle rise"
+   ],
+   "reference": null,
+   "loudness_target": "fury_big",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "night_fury.charge",
+   "subtitle": "Night Fury crackles",
+   "declared": true,
+   "slow_attack": true,
+   "animations": [],
+   "variants": [
+    {
+     "file": "fury/night_charge_1",
+     "source": "fs_814061.mp3",
+     "start": 0.0,
+     "end": 2.6,
+     "peak": -2.0,
+     "fade_in": 0.4,
+     "fade_out": 0.4,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   }
+  },
+  {
+   "id": "night_fury.crackle",
+   "category": "fury",
+   "group": "night_fury",
+   "status": "custom",
+   "trigger": "Grésillement pendant la charge de Night",
+   "code": [
+    "client/FuryEffects.java"
+   ],
+   "description": "Craquement court.",
+   "keywords": [
+    "electric crackle",
+    "spark"
+   ],
+   "reference": null,
+   "loudness_target": "fury_big",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "night_fury.charge",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [
+    {
+     "file": "fury/crackle_1",
+     "source": "fs_582631.mp3",
+     "start": 0.08,
+     "end": 0.9,
+     "peak": -4.0,
+     "fade_in": 0.004,
+     "fade_out": 0.2,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 1.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   }
+  },
+  {
+   "id": "light_fury.charge",
+   "category": "fury",
+   "group": "light_fury",
+   "status": "custom",
+   "trigger": "Charge au frein de Light",
+   "code": [
+    "client/FuryEffects.java"
+   ],
+   "description": "Montée plasma claire.",
+   "keywords": [
+    "plasma rise",
+    "energy charge"
+   ],
+   "reference": null,
+   "loudness_target": "fury_big",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "light_fury.charge",
+   "subtitle": "Light Fury charges plasma",
+   "declared": true,
+   "slow_attack": true,
+   "animations": [],
+   "variants": [
+    {
+     "file": "fury/light_charge_1",
+     "source": "fs_407052.mp3",
+     "start": 0.4,
+     "end": 20.0,
+     "peak": -2.0,
+     "fade_in": 0.2,
+     "fade_out": 0.3,
+     "echo": 0.0,
+     "loop": 0.0,
+     "tempo": 8.0,
+     "pitch": 1.0,
+     "lp": 0,
+     "gain_db": 0.0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   }
+  },
+  {
+   "id": "light_fury.blast",
+   "category": "fury",
+   "group": "light_fury",
+   "status": "vanilla",
+   "trigger": "Dash de Light",
+   "code": [
+    "client/FuryEffects.java"
+   ],
+   "description": "Explosion vanilla.",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "light_fury.blast",
+   "subtitle": "Plasma blast",
+   "declared": true,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "vanilla": {
+    "event": "minecraft:entity.generic.explode",
+    "volume": 0.8,
+    "pitch": 1.2
+   }
+  },
+  {
+   "id": "wing.air.flap",
+   "category": "wing",
+   "group": "air",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "air",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [
+    {
+     "event": "minecraft:entity.breeze.idle_air",
+     "volume": 0.6,
+     "pitch": 1.2
+    }
+   ],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "alias": {
+    "target": "simplywings:wing.feather.flap",
+    "volume": 0.35,
+    "pitch": 1.38
+   },
+   "family": "element"
+  },
+  {
+   "id": "wing.air.flap_strong",
+   "category": "wing",
+   "group": "air",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap_strong",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "air",
+     "scenario": "takeoff",
+     "event": "launch"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "family": "element",
+   "alias": {
+    "target": "simplywings:wing.strong.flap",
+    "volume": 0.5,
+    "pitch": 1.2
+   }
+  },
+  {
+   "id": "wing.amethyst.flap",
+   "category": "wing",
+   "group": "amethyst",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "amethyst",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [
+    {
+     "event": "minecraft:block.amethyst_block.chime",
+     "volume": 0.5,
+     "pitch": 1.0
+    }
+   ],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "alias": {
+    "target": "simplywings:wing.feather.flap",
+    "volume": 0.6,
+    "pitch": 1.1
+   },
+   "family": "feather_matter"
+  },
+  {
+   "id": "wing.amethyst.flap_strong",
+   "category": "wing",
+   "group": "amethyst",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap_strong",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "amethyst",
+     "scenario": "takeoff",
+     "event": "launch"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "family": "feather_matter",
+   "alias": {
+    "target": "simplywings:wing.strong.flap",
+    "volume": 1.0,
+    "pitch": 1.0
+   }
+  },
+  {
+   "id": "wing.ancient.flap",
+   "category": "wing",
+   "group": "ancient",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "dragonfly",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "alias": {
+    "target": "simplywings:wing.insect.flap",
+    "volume": 0.8,
+    "pitch": 0.84
+   },
+   "family": "buzz"
+  },
+  {
+   "id": "wing.ancient.buzz",
+   "category": "wing",
+   "group": "ancient",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.buzz",
+   "subtitle": "Wings buzz",
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "dragonfly",
+     "scenario": "hover",
+     "event": "loop"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "alias": {
+    "target": "simplywings:wing.buzz.loop",
+    "volume": 1.0,
+    "pitch": 0.7
+   },
+   "loop": true
+  },
+  {
+   "id": "wing.ancient.flap_strong",
+   "category": "wing",
+   "group": "ancient",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap_strong",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "dragonfly",
+     "scenario": "takeoff",
+     "event": "launch"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "family": "buzz",
+   "alias": {
+    "target": "simplywings:wing.strong.flap",
+    "volume": 0.35,
+    "pitch": 1.05
+   }
+  },
+  {
+   "id": "wing.angel.flap",
+   "category": "wing",
+   "group": "angel",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "angel",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [
+    {
+     "event": "minecraft:block.amethyst_block.chime",
+     "volume": 0.5,
+     "pitch": 1.4
+    }
+   ],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "alias": {
+    "target": "simplywings:wing.feather.flap",
+    "volume": 1.0,
+    "pitch": 0.9
+   },
+   "family": "feather"
+  },
+  {
+   "id": "wing.angel.flap_strong",
+   "category": "wing",
+   "group": "angel",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap_strong",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "angel",
+     "scenario": "takeoff",
+     "event": "launch"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "family": "feather",
+   "alias": {
+    "target": "simplywings:wing.strong.flap",
+    "volume": 1.0,
+    "pitch": 0.9
+   }
+  },
+  {
+   "id": "wing.aurora.flap",
+   "category": "wing",
+   "group": "aurora",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "aurora",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [
+    {
+     "event": "minecraft:block.amethyst_block.resonate",
+     "volume": 0.5,
+     "pitch": 1.2
+    }
+   ],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "alias": {
+    "target": "simplywings:wing.feather.flap",
+    "volume": 0.35,
+    "pitch": 1.265
+   },
+   "family": "element"
+  },
+  {
+   "id": "wing.aurora.flap_strong",
+   "category": "wing",
+   "group": "aurora",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap_strong",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "aurora",
+     "scenario": "takeoff",
+     "event": "launch"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "family": "element",
+   "alias": {
+    "target": "simplywings:wing.strong.flap",
+    "volume": 0.5,
+    "pitch": 1.1
+   }
+  },
+  {
+   "id": "wing.bat.flap",
+   "category": "wing",
+   "group": "bat",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "bat",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "alias": {
+    "target": "simplywings:wing.leather.flap",
+    "volume": 1.0,
+    "pitch": 1.1
+   },
+   "family": "leather"
+  },
+  {
+   "id": "wing.bat.flap_strong",
+   "category": "wing",
+   "group": "bat",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap_strong",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "bat",
+     "scenario": "takeoff",
+     "event": "launch"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "family": "leather",
+   "alias": {
+    "target": "simplywings:wing.strong.flap",
+    "volume": 1.0,
+    "pitch": 1.32
+   }
+  },
+  {
+   "id": "wing.bee.flap",
+   "category": "wing",
+   "group": "bee",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "bee",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "alias": {
+    "target": "simplywings:wing.insect.flap",
+    "volume": 0.8,
+    "pitch": 1.68
+   },
+   "family": "buzz"
+  },
+  {
+   "id": "wing.bee.buzz",
+   "category": "wing",
+   "group": "bee",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.buzz",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "bee",
+     "scenario": "hover",
+     "event": "loop"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "alias": {
+    "target": "simplywings:wing.buzz.loop",
+    "volume": 1.0,
+    "pitch": 1.4
+   },
+   "loop": true
+  },
+  {
+   "id": "wing.bee.flap_strong",
+   "category": "wing",
+   "group": "bee",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap_strong",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "bee",
+     "scenario": "takeoff",
+     "event": "launch"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "family": "buzz",
+   "alias": {
+    "target": "simplywings:wing.strong.flap",
+    "volume": 0.35,
+    "pitch": 2.1
+   }
+  },
+  {
+   "id": "wing.beetle.flap",
+   "category": "wing",
+   "group": "beetle",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "beetle",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "alias": {
+    "target": "simplywings:wing.insect.flap",
+    "volume": 0.8,
+    "pitch": 1.08
+   },
+   "family": "buzz"
+  },
+  {
+   "id": "wing.beetle.buzz",
+   "category": "wing",
+   "group": "beetle",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.buzz",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "beetle",
+     "scenario": "hover",
+     "event": "loop"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "alias": {
+    "target": "simplywings:wing.buzz.loop",
+    "volume": 1.0,
+    "pitch": 0.9
+   },
+   "loop": true
+  },
+  {
+   "id": "wing.beetle.flap_strong",
+   "category": "wing",
+   "group": "beetle",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap_strong",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "beetle",
+     "scenario": "takeoff",
+     "event": "launch"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "family": "buzz",
+   "alias": {
+    "target": "simplywings:wing.strong.flap",
+    "volume": 0.35,
+    "pitch": 1.35
+   }
+  },
+  {
+   "id": "wing.common.flap",
+   "category": "wing",
+   "group": "common",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap",
+   "subtitle": "Wings flap",
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "basic",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "alias": {
+    "target": "simplywings:wing.feather.flap",
+    "volume": 1.0,
+    "pitch": 1.0
+   },
+   "family": "feather"
+  },
+  {
+   "id": "wing.common.flap_strong",
+   "category": "wing",
+   "group": "common",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap_strong",
+   "subtitle": "Wings beat",
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "basic",
+     "scenario": "takeoff",
+     "event": "launch"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "family": "feather",
+   "alias": {
+    "target": "simplywings:wing.strong.flap",
+    "volume": 1.0,
+    "pitch": 1.0
+   }
+  },
+  {
+   "id": "wing.copper.flap",
+   "category": "wing",
+   "group": "copper",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "copper",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [
+    {
+     "event": "minecraft:block.copper.hit",
+     "volume": 0.6,
+     "pitch": 0.8
+    }
+   ],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "alias": {
+    "target": "simplywings:wing.feather.flap",
+    "volume": 0.6,
+    "pitch": 1.045
+   },
+   "family": "feather_matter"
+  },
+  {
+   "id": "wing.copper.flap_strong",
+   "category": "wing",
+   "group": "copper",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap_strong",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "copper",
+     "scenario": "takeoff",
+     "event": "launch"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "family": "feather_matter",
+   "alias": {
+    "target": "simplywings:wing.strong.flap",
+    "volume": 1.0,
+    "pitch": 0.95
+   }
+  },
+  {
+   "id": "wing.crow.flap",
+   "category": "wing",
+   "group": "crow",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "crow",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [
+    {
+     "event": "minecraft:entity.parrot.fly",
+     "volume": 0.4,
+     "pitch": 0.8
+    }
+   ],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "alias": {
+    "target": "simplywings:wing.feather.flap",
+    "volume": 1.0,
+    "pitch": 0.95
+   },
+   "family": "feather"
+  },
+  {
+   "id": "wing.crow.flap_strong",
+   "category": "wing",
+   "group": "crow",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap_strong",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "crow",
+     "scenario": "takeoff",
+     "event": "launch"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "family": "feather",
+   "alias": {
+    "target": "simplywings:wing.strong.flap",
+    "volume": 1.0,
+    "pitch": 0.95
+   }
+  },
+  {
+   "id": "wing.daedalus.flap",
+   "category": "wing",
+   "group": "daedalus",
+   "status": "vanilla",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "daedalus",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "vanilla": {
+    "event": "minecraft:block.wooden_trapdoor.open",
+    "volume": 0.6,
+    "pitch": 0.56
+   },
+   "family": "mechanism"
+  },
+  {
+   "id": "wing.daedalus.buzz",
+   "category": "wing",
+   "group": "daedalus",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.buzz",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "daedalus",
+     "scenario": "hover",
+     "event": "loop"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "alias": {
+    "target": "simplywings:block.cloud_compressor.loop",
+    "volume": 1.0,
+    "pitch": 0.98
+   },
+   "loop": true
+  },
+  {
+   "id": "wing.daedalus.flap_strong",
+   "category": "wing",
+   "group": "daedalus",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap_strong",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "daedalus",
+     "scenario": "takeoff",
+     "event": "launch"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "family": "mechanism",
+   "alias": {
+    "target": "simplywings:wing.strong.flap",
+    "volume": 0.4,
+    "pitch": 0.77
+   }
+  },
+  {
+   "id": "wing.demon.flap",
+   "category": "wing",
+   "group": "demon",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "demon",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [
+    {
+     "event": "minecraft:entity.blaze.shoot",
+     "volume": 0.45,
+     "pitch": 0.55
+    }
+   ],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "alias": {
+    "target": "simplywings:wing.membrane.flap",
+    "volume": 1.0,
+    "pitch": 0.8
+   },
+   "family": "membrane"
+  },
+  {
+   "id": "wing.demon.flap_strong",
+   "category": "wing",
+   "group": "demon",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap_strong",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "demon",
+     "scenario": "takeoff",
+     "event": "launch"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "family": "membrane",
+   "alias": {
+    "target": "simplywings:wing.strong.flap",
+    "volume": 1.0,
+    "pitch": 0.68
+   }
+  },
+  {
+   "id": "wing.eagle.flap",
+   "category": "wing",
+   "group": "eagle",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "eagle",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [
+    {
+     "event": "minecraft:entity.parrot.fly",
+     "volume": 0.4,
+     "pitch": 0.8
+    }
+   ],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "alias": {
+    "target": "simplywings:wing.feather.flap",
+    "volume": 1.0,
+    "pitch": 0.85
+   },
+   "family": "feather"
+  },
+  {
+   "id": "wing.eagle.flap_strong",
+   "category": "wing",
+   "group": "eagle",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap_strong",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "eagle",
+     "scenario": "takeoff",
+     "event": "launch"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "family": "feather",
+   "alias": {
+    "target": "simplywings:wing.strong.flap",
+    "volume": 1.0,
+    "pitch": 0.85
+   }
+  },
+  {
+   "id": "wing.earth.flap",
+   "category": "wing",
+   "group": "earth",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "earth",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [
+    {
+     "event": "minecraft:block.basalt.break",
+     "volume": 0.6,
+     "pitch": 0.6
+    }
+   ],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "alias": {
+    "target": "simplywings:wing.feather.flap",
+    "volume": 0.6,
+    "pitch": 0.88
+   },
+   "family": "feather_matter"
+  },
+  {
+   "id": "wing.earth.flap_strong",
+   "category": "wing",
+   "group": "earth",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap_strong",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "earth",
+     "scenario": "takeoff",
+     "event": "launch"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "family": "feather_matter",
+   "alias": {
+    "target": "simplywings:wing.strong.flap",
+    "volume": 1.0,
+    "pitch": 0.8
+   }
+  },
+  {
+   "id": "wing.fire.flap",
+   "category": "wing",
+   "group": "fire",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "fire",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [
+    {
+     "event": "minecraft:item.firecharge.use",
+     "volume": 0.35,
+     "pitch": 1.3
+    }
+   ],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "alias": {
+    "target": "simplywings:wing.feather.flap",
+    "volume": 0.6,
+    "pitch": 1.1
+   },
+   "family": "feather_matter"
+  },
+  {
+   "id": "wing.fire.flap_strong",
+   "category": "wing",
+   "group": "fire",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap_strong",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "fire",
+     "scenario": "takeoff",
+     "event": "launch"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "family": "feather_matter",
+   "alias": {
+    "target": "simplywings:wing.strong.flap",
+    "volume": 1.0,
+    "pitch": 1.0
+   }
+  },
+  {
+   "id": "wing.flying_fish.flap",
+   "category": "wing",
+   "group": "flying_fish",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "flying_fish",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "alias": {
+    "target": "simplywings:wing.leather.flap",
+    "volume": 0.5,
+    "pitch": 0.935
+   },
+   "family": "glider"
+  },
+  {
+   "id": "wing.flying_fish.flap_strong",
+   "category": "wing",
+   "group": "flying_fish",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap_strong",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "flying_fish",
+     "scenario": "takeoff",
+     "event": "launch"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "family": "glider",
+   "alias": {
+    "target": "simplywings:wing.strong.flap",
+    "volume": 0.5,
+    "pitch": 1.32
+   }
+  },
+  {
+   "id": "wing.forest.flap",
+   "category": "wing",
+   "group": "forest",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "forest",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [
+    {
+     "event": "minecraft:block.azalea_leaves.break",
+     "volume": 0.6,
+     "pitch": 0.9
+    }
+   ],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "alias": {
+    "target": "simplywings:wing.feather.flap",
+    "volume": 0.35,
+    "pitch": 1.092
+   },
+   "family": "element"
+  },
+  {
+   "id": "wing.forest.flap_strong",
+   "category": "wing",
+   "group": "forest",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap_strong",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "forest",
+     "scenario": "takeoff",
+     "event": "launch"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "family": "element",
+   "alias": {
+    "target": "simplywings:wing.strong.flap",
+    "volume": 0.5,
+    "pitch": 0.95
+   }
+  },
+  {
+   "id": "wing.gull.flap",
+   "category": "wing",
+   "group": "gull",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "gull",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [
+    {
+     "event": "minecraft:entity.parrot.fly",
+     "volume": 0.4,
+     "pitch": 0.8
+    }
+   ],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "alias": {
+    "target": "simplywings:wing.feather.flap",
+    "volume": 1.0,
+    "pitch": 1.1
+   },
+   "family": "feather"
+  },
+  {
+   "id": "wing.gull.flap_strong",
+   "category": "wing",
+   "group": "gull",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap_strong",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "gull",
+     "scenario": "takeoff",
+     "event": "launch"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "family": "feather",
+   "alias": {
+    "target": "simplywings:wing.strong.flap",
+    "volume": 1.0,
+    "pitch": 1.1
+   }
+  },
+  {
+   "id": "wing.hummingbird.flap",
+   "category": "wing",
+   "group": "hummingbird",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "hummingbird",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "alias": {
+    "target": "simplywings:wing.insect.flap",
+    "volume": 0.8,
+    "pitch": 1.92
+   },
+   "family": "buzz"
+  },
+  {
+   "id": "wing.hummingbird.buzz",
+   "category": "wing",
+   "group": "hummingbird",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.buzz",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "hummingbird",
+     "scenario": "hover",
+     "event": "loop"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "alias": {
+    "target": "simplywings:wing.buzz.loop",
+    "volume": 1.0,
+    "pitch": 1.6
+   },
+   "loop": true
+  },
+  {
+   "id": "wing.hummingbird.flap_strong",
+   "category": "wing",
+   "group": "hummingbird",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap_strong",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "hummingbird",
+     "scenario": "takeoff",
+     "event": "launch"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "family": "buzz",
+   "alias": {
+    "target": "simplywings:wing.strong.flap",
+    "volume": 0.35,
+    "pitch": 2.4
+   }
+  },
+  {
+   "id": "wing.kite.flap",
+   "category": "wing",
+   "group": "kite",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "kite",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "alias": {
+    "target": "simplywings:wing.leather.flap",
+    "volume": 0.5,
+    "pitch": 0.765
+   },
+   "family": "glider"
+  },
+  {
+   "id": "wing.kite.flap_strong",
+   "category": "wing",
+   "group": "kite",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap_strong",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "kite",
+     "scenario": "takeoff",
+     "event": "launch"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "family": "glider",
+   "alias": {
+    "target": "simplywings:wing.strong.flap",
+    "volume": 0.5,
+    "pitch": 1.08
+   }
+  },
+  {
+   "id": "wing.light.flap",
+   "category": "wing",
+   "group": "light",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "light",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "alias": {
+    "target": "simplywings:wing.membrane.flap",
+    "volume": 1.0,
+    "pitch": 1.05
+   },
+   "family": "membrane"
+  },
+  {
+   "id": "wing.light.flap_strong",
+   "category": "wing",
+   "group": "light",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap_strong",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "light",
+     "scenario": "takeoff",
+     "event": "launch"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "family": "membrane",
+   "alias": {
+    "target": "simplywings:wing.strong.flap",
+    "volume": 1.0,
+    "pitch": 0.892
+   }
+  },
+  {
+   "id": "wing.moth.flap",
+   "category": "wing",
+   "group": "moth",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "moth",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "alias": {
+    "target": "simplywings:wing.feather.flap",
+    "volume": 0.3,
+    "pitch": 1.3
+   },
+   "family": "soft"
+  },
+  {
+   "id": "wing.moth.flap_strong",
+   "category": "wing",
+   "group": "moth",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap_strong",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "moth",
+     "scenario": "takeoff",
+     "event": "launch"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "family": "soft",
+   "alias": {
+    "target": "simplywings:wing.strong.flap",
+    "volume": 0.3,
+    "pitch": 1.4
+   }
+  },
+  {
+   "id": "wing.nebula.flap",
+   "category": "wing",
+   "group": "nebula",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "nebula",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [
+    {
+     "event": "minecraft:block.amethyst_cluster.break",
+     "volume": 0.4,
+     "pitch": 1.5
+    }
+   ],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "alias": {
+    "target": "simplywings:wing.feather.flap",
+    "volume": 0.6,
+    "pitch": 1.1
+   },
+   "family": "feather_matter"
+  },
+  {
+   "id": "wing.nebula.flap_strong",
+   "category": "wing",
+   "group": "nebula",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap_strong",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "nebula",
+     "scenario": "takeoff",
+     "event": "launch"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "family": "feather_matter",
+   "alias": {
+    "target": "simplywings:wing.strong.flap",
+    "volume": 1.0,
+    "pitch": 1.0
+   }
+  },
+  {
+   "id": "wing.night.flap",
+   "category": "wing",
+   "group": "night",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "night",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "alias": {
+    "target": "simplywings:wing.membrane.flap",
+    "volume": 1.0,
+    "pitch": 0.9
+   },
+   "family": "membrane"
+  },
+  {
+   "id": "wing.night.flap_strong",
+   "category": "wing",
+   "group": "night",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap_strong",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "night",
+     "scenario": "takeoff",
+     "event": "launch"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "family": "membrane",
+   "alias": {
+    "target": "simplywings:wing.strong.flap",
+    "volume": 1.0,
+    "pitch": 0.765
+   }
+  },
+  {
+   "id": "wing.ornithopter.flap",
+   "category": "wing",
+   "group": "ornithopter",
+   "status": "vanilla",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "ornithopter",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "vanilla": {
+    "event": "minecraft:block.wooden_trapdoor.open",
+    "volume": 0.6,
+    "pitch": 0.8
+   },
+   "family": "mechanism"
+  },
+  {
+   "id": "wing.ornithopter.flap_strong",
+   "category": "wing",
+   "group": "ornithopter",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap_strong",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "ornithopter",
+     "scenario": "takeoff",
+     "event": "launch"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "family": "mechanism",
+   "alias": {
+    "target": "simplywings:wing.strong.flap",
+    "volume": 0.4,
+    "pitch": 1.1
+   }
+  },
+  {
+   "id": "wing.owl.flap",
+   "category": "wing",
+   "group": "owl",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "owl",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [
+    {
+     "event": "minecraft:entity.parrot.fly",
+     "volume": 0.4,
+     "pitch": 0.8
+    }
+   ],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "alias": {
+    "target": "simplywings:wing.feather.flap",
+    "volume": 0.25,
+    "pitch": 0.9
+   },
+   "family": "feather"
+  },
+  {
+   "id": "wing.owl.flap_strong",
+   "category": "wing",
+   "group": "owl",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap_strong",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "owl",
+     "scenario": "takeoff",
+     "event": "launch"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "family": "feather",
+   "alias": {
+    "target": "simplywings:wing.strong.flap",
+    "volume": 0.25,
+    "pitch": 0.9
+   }
+  },
+  {
+   "id": "wing.parrot.flap",
+   "category": "wing",
+   "group": "parrot",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "parrot",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [
+    {
+     "event": "minecraft:entity.parrot.fly",
+     "volume": 0.4,
+     "pitch": 0.8
+    }
+   ],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "alias": {
+    "target": "simplywings:wing.feather.flap",
+    "volume": 1.0,
+    "pitch": 1.2
+   },
+   "family": "feather"
+  },
+  {
+   "id": "wing.parrot.flap_strong",
+   "category": "wing",
+   "group": "parrot",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap_strong",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "parrot",
+     "scenario": "takeoff",
+     "event": "launch"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "family": "feather",
+   "alias": {
+    "target": "simplywings:wing.strong.flap",
+    "volume": 1.0,
+    "pitch": 1.2
+   }
+  },
+  {
+   "id": "wing.patchwork.flap",
+   "category": "wing",
+   "group": "patchwork",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "patchwork",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "alias": {
+    "target": "simplywings:wing.feather.flap",
+    "volume": 1.0,
+    "pitch": 1.05
+   },
+   "family": "feather"
+  },
+  {
+   "id": "wing.patchwork.flap_strong",
+   "category": "wing",
+   "group": "patchwork",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap_strong",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "patchwork",
+     "scenario": "takeoff",
+     "event": "launch"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "family": "feather",
+   "alias": {
+    "target": "simplywings:wing.strong.flap",
+    "volume": 1.0,
+    "pitch": 1.05
+   }
+  },
+  {
+   "id": "wing.peacock.flap",
+   "category": "wing",
+   "group": "peacock",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "peacock",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [
+    {
+     "event": "minecraft:entity.parrot.fly",
+     "volume": 0.4,
+     "pitch": 0.8
+    }
+   ],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "alias": {
+    "target": "simplywings:wing.feather.flap",
+    "volume": 1.0,
+    "pitch": 0.95
+   },
+   "family": "feather"
+  },
+  {
+   "id": "wing.peacock.flap_strong",
+   "category": "wing",
+   "group": "peacock",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap_strong",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "peacock",
+     "scenario": "takeoff",
+     "event": "launch"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "family": "feather",
+   "alias": {
+    "target": "simplywings:wing.strong.flap",
+    "volume": 1.0,
+    "pitch": 0.95
+   }
+  },
+  {
+   "id": "wing.phantom.flap",
+   "category": "wing",
+   "group": "phantom",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "phantom",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [
+    {
+     "event": "minecraft:entity.phantom.flap",
+     "volume": 0.7,
+     "pitch": 0.6
+    }
+   ],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "alias": {
+    "target": "simplywings:wing.membrane.flap",
+    "volume": 1.0,
+    "pitch": 1.05
+   },
+   "family": "membrane"
+  },
+  {
+   "id": "wing.phantom.flap_strong",
+   "category": "wing",
+   "group": "phantom",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap_strong",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "phantom",
+     "scenario": "takeoff",
+     "event": "launch"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "family": "membrane",
+   "alias": {
+    "target": "simplywings:wing.strong.flap",
+    "volume": 1.0,
+    "pitch": 0.892
+   }
+  },
+  {
+   "id": "wing.pigeon.flap",
+   "category": "wing",
+   "group": "pigeon",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "pigeon",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [
+    {
+     "event": "minecraft:entity.parrot.fly",
+     "volume": 0.4,
+     "pitch": 0.8
+    }
+   ],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "alias": {
+    "target": "simplywings:wing.feather.flap",
+    "volume": 1.0,
+    "pitch": 1.15
+   },
+   "family": "feather"
+  },
+  {
+   "id": "wing.pigeon.flap_strong",
+   "category": "wing",
+   "group": "pigeon",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap_strong",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "pigeon",
+     "scenario": "takeoff",
+     "event": "launch"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "family": "feather",
+   "alias": {
+    "target": "simplywings:wing.strong.flap",
+    "volume": 1.0,
+    "pitch": 1.15
+   }
+  },
+  {
+   "id": "wing.psyche.flap",
+   "category": "wing",
+   "group": "psyche",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "psyche",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [
+    {
+     "event": "minecraft:particle.soul_escape",
+     "volume": 0.6,
+     "pitch": 1.2
+    }
+   ],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "alias": {
+    "target": "simplywings:wing.feather.flap",
+    "volume": 0.3,
+    "pitch": 1.495
+   },
+   "family": "soft"
+  },
+  {
+   "id": "wing.psyche.flap_strong",
+   "category": "wing",
+   "group": "psyche",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap_strong",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "psyche",
+     "scenario": "takeoff",
+     "event": "launch"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "family": "soft",
+   "alias": {
+    "target": "simplywings:wing.strong.flap",
+    "volume": 0.3,
+    "pitch": 1.61
+   }
+  },
+  {
+   "id": "wing.ptero.flap",
+   "category": "wing",
+   "group": "ptero",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "ptero",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [
+    {
+     "event": "minecraft:entity.phantom.flap",
+     "volume": 0.7,
+     "pitch": 0.6
+    }
+   ],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "alias": {
+    "target": "simplywings:wing.membrane.flap",
+    "volume": 1.0,
+    "pitch": 0.9
+   },
+   "family": "membrane"
+  },
+  {
+   "id": "wing.ptero.flap_strong",
+   "category": "wing",
+   "group": "ptero",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap_strong",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "ptero",
+     "scenario": "takeoff",
+     "event": "launch"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "family": "membrane",
+   "alias": {
+    "target": "simplywings:wing.strong.flap",
+    "volume": 1.0,
+    "pitch": 0.765
+   }
+  },
+  {
+   "id": "wing.seraph.flap",
+   "category": "wing",
+   "group": "seraph",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "seraph",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [
+    {
+     "event": "minecraft:block.beacon.power_select",
+     "volume": 0.35,
+     "pitch": 1.6
+    }
+   ],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "alias": {
+    "target": "simplywings:wing.feather.flap",
+    "volume": 1.0,
+    "pitch": 0.85
+   },
+   "family": "feather"
+  },
+  {
+   "id": "wing.seraph.flap_strong",
+   "category": "wing",
+   "group": "seraph",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap_strong",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "seraph",
+     "scenario": "takeoff",
+     "event": "launch"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "family": "feather",
+   "alias": {
+    "target": "simplywings:wing.strong.flap",
+    "volume": 1.0,
+    "pitch": 0.85
+   }
+  },
+  {
+   "id": "wing.shadow.flap",
+   "category": "wing",
+   "group": "shadow",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "shadow",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [
+    {
+     "event": "minecraft:entity.enderman.teleport",
+     "volume": 0.25,
+     "pitch": 0.6
+    }
+   ],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "alias": {
+    "target": "simplywings:wing.feather.flap",
+    "volume": 0.6,
+    "pitch": 0.935
+   },
+   "family": "feather_matter"
+  },
+  {
+   "id": "wing.shadow.flap_strong",
+   "category": "wing",
+   "group": "shadow",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap_strong",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "shadow",
+     "scenario": "takeoff",
+     "event": "launch"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "family": "feather_matter",
+   "alias": {
+    "target": "simplywings:wing.strong.flap",
+    "volume": 1.0,
+    "pitch": 0.85
+   }
+  },
+  {
+   "id": "wing.squirrel.flap",
+   "category": "wing",
+   "group": "squirrel",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "squirrel",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "alias": {
+    "target": "simplywings:wing.leather.flap",
+    "volume": 0.5,
+    "pitch": 1.02
+   },
+   "family": "glider"
+  },
+  {
+   "id": "wing.squirrel.flap_strong",
+   "category": "wing",
+   "group": "squirrel",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap_strong",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "squirrel",
+     "scenario": "takeoff",
+     "event": "launch"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "family": "glider",
+   "alias": {
+    "target": "simplywings:wing.strong.flap",
+    "volume": 0.5,
+    "pitch": 1.44
+   }
+  },
+  {
+   "id": "wing.storm.flap",
+   "category": "wing",
+   "group": "storm",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "storm",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [
+    {
+     "event": "minecraft:entity.lightning_bolt.impact",
+     "volume": 0.25,
+     "pitch": 1.8
+    }
+   ],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "alias": {
+    "target": "simplywings:wing.feather.flap",
+    "volume": 0.6,
+    "pitch": 1.155
+   },
+   "family": "feather_matter"
+  },
+  {
+   "id": "wing.storm.flap_strong",
+   "category": "wing",
+   "group": "storm",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap_strong",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "storm",
+     "scenario": "takeoff",
+     "event": "launch"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "family": "feather_matter",
+   "alias": {
+    "target": "simplywings:wing.strong.flap",
+    "volume": 1.0,
+    "pitch": 1.05
+   }
+  },
+  {
+   "id": "wing.swift.flap",
+   "category": "wing",
+   "group": "swift",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "swift",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [
+    {
+     "event": "minecraft:entity.parrot.fly",
+     "volume": 0.4,
+     "pitch": 0.8
+    }
+   ],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "alias": {
+    "target": "simplywings:wing.feather.flap",
+    "volume": 1.0,
+    "pitch": 1.25
+   },
+   "family": "feather"
+  },
+  {
+   "id": "wing.swift.flap_strong",
+   "category": "wing",
+   "group": "swift",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap_strong",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "swift",
+     "scenario": "takeoff",
+     "event": "launch"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "family": "feather",
+   "alias": {
+    "target": "simplywings:wing.strong.flap",
+    "volume": 1.0,
+    "pitch": 1.25
+   }
+  },
+  {
+   "id": "wing.water.flap",
+   "category": "wing",
+   "group": "water",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "water",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [
+    {
+     "event": "minecraft:entity.boat.paddle_water",
+     "volume": 0.5,
+     "pitch": 0.9
+    }
+   ],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "alias": {
+    "target": "simplywings:wing.feather.flap",
+    "volume": 0.35,
+    "pitch": 1.035
+   },
+   "family": "element"
+  },
+  {
+   "id": "wing.water.flap_strong",
+   "category": "wing",
+   "group": "water",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap_strong",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "water",
+     "scenario": "takeoff",
+     "event": "launch"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "family": "element",
+   "alias": {
+    "target": "simplywings:wing.strong.flap",
+    "volume": 0.5,
+    "pitch": 0.9
+   }
+  },
+  {
+   "id": "wing.yin_yang.flap",
+   "category": "wing",
+   "group": "yin_yang",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "yin_yang",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [
+    {
+     "event": "minecraft:block.amethyst_block.chime",
+     "volume": 0.5,
+     "pitch": 0.6
+    },
+    {
+     "event": "minecraft:block.amethyst_block.chime",
+     "volume": 0.5,
+     "pitch": 1.7
+    }
+   ],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "alias": {
+    "target": "simplywings:wing.feather.flap",
+    "volume": 1.0,
+    "pitch": 1.0
+   },
+   "family": "feather"
+  },
+  {
+   "id": "wing.yin_yang.flap_strong",
+   "category": "wing",
+   "group": "yin_yang",
+   "status": "alias",
+   "trigger": "",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap_strong",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "yin_yang",
+     "scenario": "takeoff",
+     "event": "launch"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "family": "feather",
+   "alias": {
+    "target": "simplywings:wing.strong.flap",
+    "volume": 1.0,
+    "pitch": 1.0
+   }
+  },
+  {
+   "id": "flight.takeoff_charge",
+   "category": "flight",
+   "group": "flight",
+   "status": "silent",
+   "trigger": "Charge d'Alt maintenu",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": false,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   }
+  },
+  {
+   "id": "flight.dive",
+   "category": "flight",
+   "group": "flight",
+   "status": "silent",
+   "trigger": "Piqué rapide hors Furies",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": false,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   }
+  },
+  {
+   "id": "flight.brake",
+   "category": "flight",
+   "group": "flight",
+   "status": "silent",
+   "trigger": "FLAG_BRAKE",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": false,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   }
+  },
+  {
+   "id": "flight.stall",
+   "category": "flight",
+   "group": "flight",
+   "status": "silent",
+   "trigger": "FLAG_STALL",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": false,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   }
+  },
+  {
+   "id": "flight.tuck",
+   "category": "flight",
+   "group": "flight",
+   "status": "silent",
+   "trigger": "FLAG_TUCK",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": false,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   }
+  },
+  {
+   "id": "flight.flyby",
+   "category": "flight",
+   "group": "flight",
+   "status": "silent",
+   "trigger": "Passage d'un joueur proche",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": false,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   }
+  },
+  {
+   "id": "flight.stamina_low",
+   "category": "flight",
+   "group": "flight",
+   "status": "silent",
+   "trigger": "HUD de stamina",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": false,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   }
+  },
+  {
+   "id": "flight.stamina_empty",
+   "category": "flight",
+   "group": "flight",
+   "status": "silent",
+   "trigger": "HUD de stamina",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": false,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   }
+  },
+  {
+   "id": "flight.unfold",
+   "category": "flight",
+   "group": "flight",
+   "status": "silent",
+   "trigger": "Sortie des ailes",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": false,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   }
+  },
+  {
+   "id": "flight.fold",
+   "category": "flight",
+   "group": "flight",
+   "status": "silent",
+   "trigger": "Rangement des ailes",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": false,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   }
+  },
+  {
+   "id": "flight.glide",
+   "category": "flight",
+   "group": "flight",
+   "status": "silent",
+   "trigger": "Boucle de plané",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": false,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   }
+  },
+  {
+   "id": "flight.hover_flap",
+   "category": "flight",
+   "group": "flight",
+   "status": "silent",
+   "trigger": "Battements du stationnaire",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": false,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   }
+  },
+  {
+   "id": "fury.idle",
+   "category": "fury",
+   "group": "fury",
+   "status": "silent",
+   "trigger": "Idles au sol des Furies",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": false,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   }
+  },
+  {
+   "id": "fury.tail",
+   "category": "fury",
+   "group": "fury",
+   "status": "silent",
+   "trigger": "Queue des Furies",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": false,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   }
+  },
+  {
+   "id": "gacha.music",
+   "category": "gacha",
+   "group": "altar",
+   "status": "silent",
+   "trigger": "Musique d'invocation",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": false,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   }
+  },
+  {
+   "id": "gacha.summary",
+   "category": "gacha",
+   "group": "altar",
+   "status": "silent",
+   "trigger": "Écran de résumé",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": false,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   }
+  },
+  {
+   "id": "gacha.skip",
+   "category": "gacha",
+   "group": "altar",
+   "status": "silent",
+   "trigger": "Passer l'animation",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": false,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   }
+  },
+  {
+   "id": "gacha.pity_soft",
+   "category": "gacha",
+   "group": "altar",
+   "status": "silent",
+   "trigger": "Pitié douce",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": false,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   }
+  },
+  {
+   "id": "gacha.mythic",
+   "category": "gacha",
+   "group": "altar",
+   "status": "silent",
+   "trigger": "Sons propres des mythiques",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": false,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   }
+  },
+  {
+   "id": "ui.select",
+   "category": "ui",
+   "group": "ui",
+   "status": "silent",
+   "trigger": "Sélection dans le menu J",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": false,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   }
+  },
+  {
+   "id": "ui.locked",
+   "category": "ui",
+   "group": "ui",
+   "status": "silent",
+   "trigger": "Aile verrouillée",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": false,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   }
+  },
+  {
+   "id": "ui.transmog",
+   "category": "ui",
+   "group": "ui",
+   "status": "silent",
+   "trigger": "Equip appearance",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": false,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   }
+  },
+  {
+   "id": "ui.unlock",
+   "category": "ui",
+   "group": "ui",
+   "status": "silent",
+   "trigger": "Déblocage d'une aile",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": false,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   }
+  },
+  {
+   "id": "block.ambient",
+   "category": "block",
+   "group": "block",
+   "status": "silent",
+   "trigger": "Ambiances autel, fontaine, établi",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": false,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   }
+  },
+  {
+   "id": "structure.sanctum_appear",
+   "category": "structure",
+   "group": "structure",
+   "status": "silent",
+   "trigger": "Apparition d'un sanctuaire",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": false,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   }
+  },
+  {
+   "id": "item.compass",
+   "category": "structure",
+   "group": "item",
+   "status": "silent",
+   "trigger": "Compas des sanctuaires",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": false,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   }
+  },
+  {
+   "id": "item.summoning_feather",
+   "category": "structure",
+   "group": "item",
+   "status": "silent",
+   "trigger": "Plume d'invocation",
+   "code": [],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": false,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   }
+  },
+  {
+   "id": "gacha.dragon_growl",
+   "category": "gacha",
+   "group": "altar",
+   "status": "vanilla",
+   "trigger": "Rugissement SSS et mythique, étoiles ×10",
+   "code": [
+    "client/show/ClientShows.java",
+    "client/gui/CardDeck.java"
+   ],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": false,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "vanilla": {
+    "event": "minecraft:entity.ender_dragon.growl",
+    "volume": 1.0,
+    "pitch": 1.0
+   }
+  },
+  {
+   "id": "gacha.beacon",
+   "category": "gacha",
+   "group": "altar",
+   "status": "vanilla",
+   "trigger": "Activation du pilier",
+   "code": [
+    "client/show/ClientShows.java"
+   ],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": false,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "vanilla": {
+    "event": "minecraft:block.beacon.activate",
+    "volume": 1.0,
+    "pitch": 1.0
+   }
+  },
+  {
+   "id": "gacha.element_ignite",
+   "category": "gacha",
+   "group": "altar",
+   "status": "vanilla",
+   "trigger": "Couches élémentaires des six flammes (firecharge, warden, basalte, plouf, améthyste, breeze)",
+   "code": [
+    "client/show/ClientShows.java"
+   ],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": false,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "vanilla": {
+    "event": "minecraft:item.firecharge.use",
+    "volume": 1.0,
+    "pitch": 1.0
+   }
+  },
+  {
+   "id": "block.assembly_table.resonate",
+   "category": "block",
+   "group": "assembly_table",
+   "status": "vanilla",
+   "trigger": "Montée de la table d'assemblage",
+   "code": [
+    "block/AssemblyTableEffects.java"
+   ],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": false,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "vanilla": {
+    "event": "minecraft:block.amethyst_block.resonate",
+    "volume": 1.0,
+    "pitch": 1.0
+   }
+  },
+  {
+   "id": "block.forge_bench.chime",
+   "category": "block",
+   "group": "forge_bench",
+   "status": "vanilla",
+   "trigger": "Infusion d'énergie ailée",
+   "code": [
+    "block/ForgeBenchEffects.java"
+   ],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": false,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "vanilla": {
+    "event": "minecraft:block.amethyst_block.chime",
+    "volume": 1.0,
+    "pitch": 1.0
+   }
+  },
+  {
+   "id": "block.cloud_compressor.brew",
+   "category": "block",
+   "group": "cloud_compressor",
+   "status": "vanilla",
+   "trigger": "Fin de cycle du compresseur",
+   "code": [
+    "block/CloudCompressorBlockEntity.java"
+   ],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": false,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "vanilla": {
+    "event": "minecraft:block.brewing_stand.brew",
+    "volume": 1.0,
+    "pitch": 1.0
+   }
+  },
+  {
+   "id": "block.cloud_compressor.bubbles",
+   "category": "block",
+   "group": "cloud_compressor",
+   "status": "vanilla",
+   "trigger": "Bulles du compresseur",
+   "code": [
+    "block/CloudCompressorEffects.java"
+   ],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": false,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "vanilla": {
+    "event": "minecraft:block.bubble_column.upwards_ambient",
+    "volume": 1.0,
+    "pitch": 1.0
+   }
+  },
+  {
+   "id": "fountain.offer",
+   "category": "gacha",
+   "group": "fountain",
+   "status": "vanilla",
+   "trigger": "Offrande à la fontaine",
+   "code": [
+    "gacha/FountainMenu.java"
+   ],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": false,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "vanilla": {
+    "event": "minecraft:block.amethyst_block.resonate",
+    "volume": 1.0,
+    "pitch": 1.0
+   }
+  },
+  {
+   "id": "fountain.payout",
+   "category": "gacha",
+   "group": "fountain",
+   "status": "vanilla",
+   "trigger": "Gain de la fontaine",
+   "code": [
+    "gacha/FountainMenu.java"
+   ],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": false,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": null
+   },
+   "vanilla": {
+    "event": "minecraft:entity.player.levelup",
+    "volume": 1.0,
+    "pitch": 1.0
+   }
+  }
+ ]
+}

@@ -52,3 +52,7 @@ tools/*.jar
 __pycache__/
 art/scenes/
 art/sounds/source/
+tools/sounds/candidates/
+tools/sound-bench/node_modules/
+tools/sound-bench/bench.config.json
+tools/sound-bench/.cache/
