@@ -4,11 +4,13 @@ import com.mojang.math.Axis;
 import com.zorago.simplywings.SimplyWings;
 import com.zorago.simplywings.client.ClientGacha;
 import com.zorago.simplywings.client.show.ClientShows;
+import com.zorago.simplywings.client.show.ShowSounds;
 import com.zorago.simplywings.gacha.AltarMenu;
 import com.zorago.simplywings.gacha.GachaData;
 import com.zorago.simplywings.gacha.GachaTier;
 import com.zorago.simplywings.network.Payloads;
 import java.util.List;
+import java.util.Random;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -87,6 +89,7 @@ public class AltarScreen extends AbstractContainerScreen<AltarMenu> {
         phase = Phase.CARDS;
         phaseStart = now();
         ClientShows.hold(true);
+        ShowSounds.card("loot", GachaTier.B, new Random());
     }
 
     private float cardTime() {
@@ -94,6 +97,7 @@ public class AltarScreen extends AbstractContainerScreen<AltarMenu> {
     }
 
     private void exitCards() {
+        ShowSounds.fadeCards();
         ClientShows.release();
         PacketDistributor.sendToServer(new Payloads.GachaClaim());
         phase = Phase.OUTRO;
@@ -340,6 +344,7 @@ public class AltarScreen extends AbstractContainerScreen<AltarMenu> {
 
     @Override
     public void removed() {
+        ShowSounds.fadeCards();
         ClientShows.skip();
         super.removed();
     }

@@ -31,7 +31,7 @@ const SOURCE_DIR = path.resolve(ROOT, config.soundSources);
 const measure = makeMeasurer(config.ffmpeg, path.join(BENCH, ".cache/measure"));
 
 function compact(value) {
-  const floats = ["volume", "pitch", "t", "volume_step", "pitch_step", "volume_power", "pitch_random", "window", "sample"];
+  const floats = ["volume", "pitch", "t", "volume_step", "pitch_step", "volume_power", "pitch_random", "window", "sample", "fade", "until_t"];
   const json = JSON.stringify(value, (k, v) => (typeof v === "number" && Number.isInteger(v) && floats.includes(k) ? `__num${v}.0__` : v)).replace(/"__num(-?\d+\.0)__"/g, "$1");
   let out = "";
   let inString = false;

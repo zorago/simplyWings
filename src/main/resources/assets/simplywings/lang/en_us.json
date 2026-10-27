@@ -985,5 +985,7 @@
   "subtitles.simplywings.night_fury.charge": "Night Fury crackles",
   "subtitles.simplywings.ui.card_shuffle": "Cards shuffle",
   "subtitles.simplywings.ui.card_place": "Card laid down",
-  "subtitles.simplywings.block.infusion": "Winged energy infuses"
+  "subtitles.simplywings.block.infusion": "Winged energy infuses",
+  "subtitles.simplywings.gacha.energy_blast": "Energy blast",
+  "subtitles.simplywings.gacha.thunder": "Thunder cracks"
 }

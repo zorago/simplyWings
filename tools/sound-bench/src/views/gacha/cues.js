@@ -42,6 +42,11 @@ export function parseCue(o, extraTier) {
     index: o.index === undefined ? -1 : Number(o.index) | 0,
     edge: o.edge === undefined ? -1 : Number(o.edge) | 0,
     minRank: num(o, "min_rank", -Infinity),
+    maxRank: num(o, "max_rank", Infinity),
+    except: o.except ?? null,
+    until: o.until ?? null,
+    untilT: num(o, "until_t", 0),
+    fade: num(o, "fade", 0),
     tier: tierOf(extraTier ?? o.tier, -1),
     minTier: tierOf(o.min_tier, -Infinity),
     maxTier: tierOf(o.max_tier, Infinity),
@@ -92,7 +97,7 @@ function points(c, anim) {
 
 function admitted(c, anim) {
   const rank = meta(anim, "rank", 0);
-  return !((c.meta !== null && !metaPositive(anim, c.meta)) || rank < c.minRank);
+  return !((c.meta !== null && !metaPositive(anim, c.meta)) || rank < c.minRank || rank > c.maxRank || anim.name === c.except);
 }
 
 function pointOk(c, p, tiers) {

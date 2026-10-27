@@ -5,6 +5,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.zorago.simplywings.SimplyWings;
+import com.zorago.simplywings.client.FadingSound;
 import com.zorago.simplywings.gacha.GachaTier;
 import java.io.Reader;
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Vector3f;
 
@@ -30,6 +32,7 @@ public final class ShowSounds {
     private static final Map<String, List<Cue>> SHOWS = new HashMap<>();
     private static final Map<String, List<Cue>> CARDS = new HashMap<>();
     private static final Map<ResourceLocation, SoundEvent> EVENTS = new HashMap<>();
+    private static final List<FadingSound> CARD_BEDS = new ArrayList<>();
 
     static final class Cue {
         final ResourceLocation[] sounds;
@@ -52,6 +55,11 @@ public final class ShowSounds {
         final int index;
         final int edge;
         final float minRank;
+        final float maxRank;
+        final String until;
+        final float untilT;
+        final float fade;
+        final String except;
         final int tier;
         final int minTier;
         final int maxTier;
@@ -89,6 +97,11 @@ public final class ShowSounds {
             index = (int) number(o, "index", -1);
             edge = (int) number(o, "edge", -1);
             minRank = number(o, "min_rank", -Float.MAX_VALUE);
+            maxRank = number(o, "max_rank", Float.MAX_VALUE);
+            until = string(o, "until", null);
+            untilT = number(o, "until_t", 0);
+            fade = number(o, "fade", 0);
+            except = string(o, "except", null);
             tier = tier(o.get("tier"), -1);
             minTier = tier(o.get("min_tier"), Integer.MIN_VALUE);
             maxTier = tier(o.get("max_tier"), Integer.MAX_VALUE);
@@ -204,8 +217,19 @@ public final class ShowSounds {
                 continue;
             }
             float pitch = c.pitch(tier.ordinal(), c.pitchRandom > 0 ? random.nextFloat() * c.pitchRandom : 0);
-            Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(c.sound(0), pitch, c.volume));
+            if (c.fade > 0) {
+                FadingSound bed = new FadingSound(c.sound(0), SoundSource.MASTER, c.volume, pitch, null, c.fade, () -> true);
+                CARD_BEDS.add(bed);
+                Minecraft.getInstance().getSoundManager().play(bed);
+            } else {
+                Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(c.sound(0), pitch, c.volume));
+            }
         }
+    }
+
+    public static void fadeCards() {
+        CARD_BEDS.forEach(FadingSound::fadeOut);
+        CARD_BEDS.clear();
     }
 
     static void tick(ClientShows.Show show, ShowModel model, float now, float power) {
@@ -216,7 +240,7 @@ public final class ShowSounds {
         ShowModel.Anim a = show.anim;
         float rank = a.meta("rank", 0);
         for (Cue c : cues) {
-            if (c.meta != null && !(a.meta(c.meta, 0) > 0) || rank < c.minRank) {
+            if (c.meta != null && !(a.meta(c.meta, 0) > 0) || rank < c.minRank || rank > c.maxRank || a.name.equals(c.except)) {
                 continue;
             }
             if (c.each == null) {
@@ -267,6 +291,13 @@ public final class ShowSounds {
         float step = c.byTier ? tier : i;
         float volume = c.volume + c.volumeStep * step + c.volumePower * power;
         float pitch = c.pitch(step, c.pitchRandom > 0 ? show.random.nextFloat() * c.pitchRandom : 0);
+        if (c.fade > 0) {
+            float stop = c.until == null ? Float.MAX_VALUE : show.anim.meta(c.until, show.anim.length) + c.untilT;
+            Vec3 at = pos.add(c.offset);
+            Minecraft.getInstance().getSoundManager().play(new FadingSound(c.sound(i), SoundSource.BLOCKS, volume, pitch, at, c.fade,
+                    () -> ClientShows.alive(show) && show.lastTime < stop));
+            return;
+        }
         ClientShows.sound(show, pos.add(c.offset), c.sound(i), volume, pitch);
     }
 

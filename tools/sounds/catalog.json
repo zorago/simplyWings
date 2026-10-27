@@ -86,7 +86,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "Legerment trop grave",
     "date": "2026-10-27"
    },
@@ -204,7 +204,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "revise",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    }
@@ -244,14 +244,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "la reference est parfaite pour cette pair",
     "date": "2026-10-27"
    },
    "vanilla": {
     "event": "minecraft:entity.bat.takeoff",
-    "volume": 1.0,
-    "pitch": 1.0
+    "volume": 1,
+    "pitch": 1
    }
   },
   {
@@ -390,14 +390,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "Remplacé par le bourdon vanilla (entity.bee.pollinate)",
     "date": "2026-10-27"
    },
    "vanilla": {
     "event": "minecraft:entity.bee.pollinate",
-    "volume": 1.0,
-    "pitch": 1.0
+    "volume": 1,
+    "pitch": 1
    }
   },
   {
@@ -522,15 +522,15 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "Remplacé par le bourdon vanilla (entity.bee.loop)",
     "date": "2026-10-27"
    },
    "loop": true,
    "vanilla": {
     "event": "minecraft:entity.bee.loop",
-    "volume": 1.0,
-    "pitch": 1.0
+    "volume": 1,
+    "pitch": 1
    }
   },
   {
@@ -609,8 +609,8 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
-    "note": "Massif problème ignite c'est des flames, son de flammes / brassier ou grosse flamme de forge. ",
+    "state": "revise",
+    "note": "Nouveau dans le prompt",
     "date": "2026-10-27"
    },
    "loop": false
@@ -644,14 +644,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "Plus doux et ethérée de nouveau, ça fait trop gameboy",
     "date": "2026-10-27"
    },
    "loop": false,
    "vanilla": {
     "event": "minecraft:block.beacon.power_select",
-    "volume": 1.0,
+    "volume": 1,
     "pitch": 0.8
    }
   },
@@ -753,7 +753,7 @@
      "file": "gacha/beam_1",
      "source": "fs_651108_energy_beam_3.mp3",
      "start": 0,
-     "end": 5.0,
+     "end": 5,
      "peak": -3,
      "fade_in": 0.15,
      "fade_out": 1.5,
@@ -818,7 +818,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -1961,7 +1961,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "GROS GROS NON, ça fait bien trop jeu vidéo de 1990. Il faut un truc ethérée et doux. ",
     "date": "2026-10-27"
    },
@@ -1969,7 +1969,7 @@
    "vanilla": {
     "event": "minecraft:block.enchantment_table.use",
     "volume": 0.6,
-    "pitch": 1.0
+    "pitch": 1
    }
   },
   {
@@ -2753,6 +2753,42 @@
    "license_blocker": true
   },
   {
+   "id": "night_fury.thunder",
+   "category": "fury",
+   "group": "night_fury",
+   "status": "alias",
+   "trigger": "Dash d'invisibilité de Night, joué par le serveur au volume 12 (entendu à 12 chunks)",
+   "code": [
+    "flight/FuryServer.java"
+   ],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": null,
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": "2026-10-27"
+   },
+   "loop": false,
+   "alias": {
+    "target": "simplywings:gacha.thunder",
+    "volume": 1.0,
+    "pitch": 1.0
+   }
+  },
+  {
    "id": "light_fury.invisible",
    "category": "fury",
    "group": "light_fury",
@@ -2810,14 +2846,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
    "vanilla": {
     "event": "minecraft:entity.generic.explode",
-    "volume": 1.0,
-    "pitch": 1.0
+    "volume": 1,
+    "pitch": 1
    }
   },
   {
@@ -2994,7 +3030,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "des tzzzt tzzzttt tzzzztt. ",
     "date": "2026-10-27"
    }
@@ -3065,7 +3101,7 @@
    ],
    "candidates": [],
    "verdict": {
-    "state": "revise",
+    "state": "keep",
     "note": "baissé l'intensité des sifflements de breeze fortement mais sinon ok. ",
     "date": "2026-10-27"
    },
@@ -3309,7 +3345,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -3349,7 +3385,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -3596,7 +3632,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "les ting aussi moins fort plus subtil. ",
     "date": "2026-10-27"
    },
@@ -3675,14 +3711,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "Passé sur la référence vanilla (entity.bat.takeoff) de wing.leather.flap, volume et hauteur remis à 1",
     "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.leather.flap",
-    "volume": 1.0,
-    "pitch": 1.0
+    "volume": 0.2,
+    "pitch": 1
    },
    "family": "leather"
   },
@@ -3755,14 +3791,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.insect.flap",
     "volume": 0.8,
-    "pitch": 1.0
+    "pitch": 1
    },
    "family": "buzz"
   },
@@ -3795,14 +3831,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.buzz.loop",
     "volume": 1,
-    "pitch": 1.0
+    "pitch": 1
    },
    "loop": true
   },
@@ -3875,7 +3911,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -3915,7 +3951,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -5259,14 +5295,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.insect.flap",
     "volume": 0.8,
-    "pitch": 1.3
+    "pitch": 0.7
    },
    "family": "buzz"
   },
@@ -5299,14 +5335,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.buzz.loop",
     "volume": 1,
-    "pitch": 1.35
+    "pitch": 0.6
    },
    "loop": true
   },
@@ -7174,7 +7210,7 @@
     {
      "file": "wing/storm/layer_1",
      "source": "fs_871766_arc_sparking.mp3",
-     "start": 1.0,
+     "start": 1,
      "end": null,
      "peak": -3,
      "fade_in": 0.005,
@@ -7195,7 +7231,7 @@
     {
      "file": "wing/storm/layer_2",
      "source": "fs_871766_arc_sparking.mp3",
-     "start": 3.0,
+     "start": 3,
      "end": null,
      "peak": -3,
      "fade_in": 0.005,
@@ -7242,7 +7278,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "Utilise un bruit electrique de charges statiques des tzzt tzzt tzzztt ",
     "date": "2026-10-27"
    }
@@ -8947,6 +8983,914 @@
     "volume": 0.5,
     "pitch": 0.7
    }
+  },
+  {
+   "id": "gacha.flame_ignite",
+   "category": "gacha",
+   "group": "altar",
+   "status": "custom",
+   "trigger": "Allumage de chacune des six flammes (hauteur au hasard par flamme)",
+   "code": [
+    "client/show/ShowSounds.java"
+   ],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": "gacha_small",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "gacha.ignite",
+   "subtitle": "Altar flame ignites",
+   "declared": true,
+   "slow_attack": true,
+   "animations": [],
+   "variants": [
+    {
+     "file": "gacha/flame_ignite_1",
+     "source": "pixabay/dragon-studio-elemental-spell-impact-flame-448566.mp3",
+     "start": 0,
+     "end": 4.4,
+     "peak": -3,
+     "fade_in": 0.005,
+     "fade_out": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
+     "lp": 0,
+     "gain_db": 0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": "2026-10-27"
+   },
+   "loop": false
+  },
+  {
+   "id": "gacha.laser",
+   "category": "gacha",
+   "group": "altar",
+   "status": "custom",
+   "trigger": "Rayon central : le coup du son tombe quand la colonne jaillit",
+   "code": [
+    "client/show/ShowSounds.java"
+   ],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": "gacha_big",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "gacha.beam",
+   "subtitle": "Pillar of light rises",
+   "declared": true,
+   "slow_attack": true,
+   "animations": [],
+   "variants": [
+    {
+     "file": "gacha/laser_1",
+     "source": "pixabay/yodguard-energy-beam-blast-1-482513.mp3",
+     "start": 0,
+     "end": 3.02,
+     "peak": -3,
+     "fade_in": 0.005,
+     "fade_out": 0.2,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
+     "lp": 0,
+     "gain_db": 0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": "2026-10-27"
+   },
+   "loop": false
+  },
+  {
+   "id": "gacha.blast_small",
+   "category": "gacha",
+   "group": "altar",
+   "status": "custom",
+   "trigger": "Blast petit : anneaux empilés et naissance d'une étoile, selon le palier",
+   "code": [
+    "client/show/ShowSounds.java"
+   ],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": "gacha_big",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "gacha.energy_blast",
+   "subtitle": "Energy blast",
+   "declared": true,
+   "slow_attack": true,
+   "animations": [],
+   "variants": [
+    {
+     "file": "gacha/blast_small_1",
+     "source": "pixabay/yodguard-short-energy-beam-shot-3-482517.mp3",
+     "start": 0,
+     "end": 2.3,
+     "peak": -3,
+     "fade_in": 0.005,
+     "fade_out": 0.6,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
+     "lp": 0,
+     "gain_db": -4
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": "2026-10-27"
+   },
+   "loop": false
+  },
+  {
+   "id": "gacha.blast_medium",
+   "category": "gacha",
+   "group": "altar",
+   "status": "custom",
+   "trigger": "Blast moyen : anneaux empilés et naissance d'une étoile, selon le palier",
+   "code": [
+    "client/show/ShowSounds.java"
+   ],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": "gacha_big",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "gacha.energy_blast",
+   "subtitle": "Energy blast",
+   "declared": true,
+   "slow_attack": true,
+   "animations": [],
+   "variants": [
+    {
+     "file": "gacha/blast_medium_1",
+     "source": "pixabay/yodguard-short-energy-beam-shot-1-482495.mp3",
+     "start": 0,
+     "end": 2.3,
+     "peak": -3,
+     "fade_in": 0.005,
+     "fade_out": 0.6,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
+     "lp": 0,
+     "gain_db": -2
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": "2026-10-27"
+   },
+   "loop": false
+  },
+  {
+   "id": "gacha.blast_big",
+   "category": "gacha",
+   "group": "altar",
+   "status": "custom",
+   "trigger": "Blast gros : anneaux empilés et naissance d'une étoile, selon le palier",
+   "code": [
+    "client/show/ShowSounds.java"
+   ],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": "gacha_big",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "gacha.energy_blast",
+   "subtitle": "Energy blast",
+   "declared": true,
+   "slow_attack": true,
+   "animations": [],
+   "variants": [
+    {
+     "file": "gacha/blast_big_1",
+     "source": "pixabay/yodguard-short-energy-beam-shot-2-482496.mp3",
+     "start": 0,
+     "end": 2.3,
+     "peak": -3,
+     "fade_in": 0.005,
+     "fade_out": 0.6,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
+     "lp": 0,
+     "gain_db": 0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": "2026-10-27"
+   },
+   "loop": false
+  },
+  {
+   "id": "gacha.circle",
+   "category": "gacha",
+   "group": "altar",
+   "status": "custom",
+   "trigger": "Premier anneau central (cercle magique au sol)",
+   "code": [
+    "client/show/ShowSounds.java"
+   ],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": "gacha_big",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": true,
+   "animations": [],
+   "variants": [
+    {
+     "file": "gacha/circle_1",
+     "source": "pixabay/asproductionmusic-cinematic-sound-fx-582073.mp3",
+     "start": 0.25,
+     "end": 5.4,
+     "peak": -3,
+     "fade_in": 0.005,
+     "fade_out": 1.5,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
+     "lp": 0,
+     "gain_db": 0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": "2026-10-27"
+   },
+   "loop": false
+  },
+  {
+   "id": "gacha.beam_bed",
+   "category": "gacha",
+   "group": "altar",
+   "status": "custom",
+   "trigger": "Nappe grave tant que le rayon est actif (fondu à l'extinction)",
+   "code": [
+    "client/show/ShowSounds.java"
+   ],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": "gacha_bed",
+   "attenuation": 192,
+   "preload": false,
+   "stream": true,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": true,
+   "animations": [],
+   "variants": [
+    {
+     "file": "gacha/beam_bed_1",
+     "source": "pixabay/freesound_community-low-frequency-layer-34381.mp3",
+     "start": 0,
+     "end": 24,
+     "peak": -3,
+     "fade_in": 0.5,
+     "fade_out": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
+     "lp": 0,
+     "gain_db": 0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": "2026-10-27"
+   },
+   "loop": false
+  },
+  {
+   "id": "gacha.sub_medium",
+   "category": "gacha",
+   "group": "altar",
+   "status": "custom",
+   "trigger": "Apparition du rayon, à 50 %",
+   "code": [
+    "client/show/ShowSounds.java"
+   ],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": "gacha_big",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": true,
+   "animations": [],
+   "variants": [
+    {
+     "file": "gacha/sub_medium_1",
+     "source": "pixabay/fronbondi_skegs-sfx-cinematic-medium-subdown-sound-effect-238492.mp3",
+     "start": 0.1,
+     "end": 2.8,
+     "peak": -3,
+     "fade_in": 0.005,
+     "fade_out": 0.4,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
+     "lp": 0,
+     "gain_db": -6
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": "2026-10-27"
+   },
+   "loop": false
+  },
+  {
+   "id": "gacha.sub_slow",
+   "category": "gacha",
+   "group": "altar",
+   "status": "custom",
+   "trigger": "Apparition du rayon, à 50 %",
+   "code": [
+    "client/show/ShowSounds.java"
+   ],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": "gacha_big",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": true,
+   "animations": [],
+   "variants": [
+    {
+     "file": "gacha/sub_slow_1",
+     "source": "pixabay/fronbondi_skegs-sfx-cinematic-slow-subdown-sound-effect-238489.mp3",
+     "start": 0.05,
+     "end": 4.7,
+     "peak": -3,
+     "fade_in": 0.005,
+     "fade_out": 0.5,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
+     "lp": 0,
+     "gain_db": -6
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": "2026-10-27"
+   },
+   "loop": false
+  },
+  {
+   "id": "gacha.sky_storm",
+   "category": "gacha",
+   "group": "altar",
+   "status": "custom",
+   "trigger": "Orage dans le ciel (déploiement du sigil, S et plus)",
+   "code": [
+    "client/show/ShowSounds.java"
+   ],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": "gacha_big",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": true,
+   "animations": [],
+   "variants": [
+    {
+     "file": "gacha/sky_storm_1",
+     "source": "pixabay/lordsonny-rock-cinematic-161648.mp3",
+     "start": 0.3,
+     "end": 6.4,
+     "peak": -3,
+     "fade_in": 0.005,
+     "fade_out": 1.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
+     "lp": 0,
+     "gain_db": 0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": "2026-10-27"
+   },
+   "loop": false
+  },
+  {
+   "id": "gacha.rise",
+   "category": "gacha",
+   "group": "altar",
+   "status": "custom",
+   "trigger": "Montée inversée avant l'éclat : sa fin tombe 0,3 s avant l'explosion",
+   "code": [
+    "client/show/ShowSounds.java"
+   ],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": "gacha_big",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": true,
+   "animations": [],
+   "variants": [
+    {
+     "file": "gacha/rise_1",
+     "source": "pixabay/lordsonny-cinematic-reverse-162590.mp3",
+     "start": 0,
+     "end": 7.4,
+     "peak": -3,
+     "fade_in": 0.005,
+     "fade_out": 0.15,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
+     "lp": 0,
+     "gain_db": 0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": "2026-10-27"
+   },
+   "loop": false
+  },
+  {
+   "id": "gacha.wing_beat",
+   "category": "gacha",
+   "group": "altar",
+   "status": "custom",
+   "trigger": "Battements des ailes révélées (ailes légendaires et lourdes à plumes)",
+   "code": [
+    "client/show/ShowSounds.java"
+   ],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": "gacha_big",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "wing.flap",
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": true,
+   "animations": [],
+   "variants": [
+    {
+     "file": "gacha/wing_beat_1",
+     "source": "pixabay/dragon-studio-cinematic-flashback-transition-463199.mp3",
+     "start": 0.3,
+     "end": 2.0,
+     "peak": -3,
+     "fade_in": 0.005,
+     "fade_out": 0.3,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
+     "lp": 0,
+     "gain_db": 0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": "2026-10-27"
+   },
+   "loop": false
+  },
+  {
+   "id": "ui.card_pop",
+   "category": "ui",
+   "group": "cards",
+   "status": "custom",
+   "trigger": "Retournement de chaque carte",
+   "code": [
+    "client/gui/CardDeck.java"
+   ],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": "cards",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": true,
+   "animations": [],
+   "variants": [
+    {
+     "file": "ui/card_pop_1",
+     "source": "pixabay/oxidvideos-soft-pop-sfx-433612.mp3",
+     "start": 0,
+     "end": null,
+     "peak": -3,
+     "fade_in": 0.005,
+     "fade_out": 0.05,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
+     "lp": 0,
+     "gain_db": 0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": "2026-10-27"
+   },
+   "loop": false
+  },
+  {
+   "id": "gacha.flyby",
+   "category": "gacha",
+   "group": "altar",
+   "status": "custom",
+   "trigger": "Personnages ailés qui passent devant la caméra",
+   "code": [
+    "client/show/ShowSounds.java"
+   ],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": "gacha_small",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": true,
+   "animations": [],
+   "variants": [
+    {
+     "file": "gacha/flyby_1",
+     "source": "pixabay/keannix-whoosh-1-522923.mp3",
+     "start": 0.1,
+     "end": 1.8,
+     "peak": -3,
+     "fade_in": 0.005,
+     "fade_out": 0.4,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
+     "lp": 0,
+     "gain_db": 0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": "2026-10-27"
+   },
+   "loop": false
+  },
+  {
+   "id": "gacha.thunder",
+   "category": "gacha",
+   "group": "altar",
+   "status": "custom",
+   "trigger": "Battements de l'étoile (éclairs de l'invocation) ; repris par night_fury.thunder ; portée 12 chunks via le volume 12",
+   "code": [
+    "client/show/ShowSounds.java"
+   ],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": "gacha_big",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": "gacha.thunder",
+   "subtitle": "Thunder cracks",
+   "declared": true,
+   "slow_attack": true,
+   "animations": [],
+   "variants": [
+    {
+     "file": "gacha/thunder_1",
+     "source": "pixabay/u_q2hb2391vb-thunder-clap-521194.mp3",
+     "start": 0.55,
+     "end": 7.1,
+     "peak": -3,
+     "fade_in": 0.005,
+     "fade_out": 1.5,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
+     "lp": 0,
+     "gain_db": 0
+    },
+    {
+     "file": "gacha/thunder_2",
+     "source": "pixabay/u_vrs223ln83-loud-thunder-439064.mp3",
+     "start": 0.08,
+     "end": 5.4,
+     "peak": -3,
+     "fade_in": 0.005,
+     "fade_out": 1.5,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
+     "lp": 0,
+     "gain_db": 0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": "2026-10-27"
+   },
+   "loop": false
+  },
+  {
+   "id": "gacha.music_summon",
+   "category": "gacha",
+   "group": "altar",
+   "status": "custom",
+   "trigger": "Musique de l'invocation : premier temps fort (0,94 s) calé sur la première flamme",
+   "code": [
+    "client/show/ShowSounds.java"
+   ],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": "gacha_music",
+   "attenuation": 192,
+   "preload": false,
+   "stream": true,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": true,
+   "animations": [],
+   "variants": [
+    {
+     "file": "gacha/music_summon_1",
+     "source": "pixabay/openmindaudio-epic-vocal-trailer-thunder-in-the-marble-cathedral-short-preview-492696.mp3",
+     "start": 0,
+     "end": null,
+     "peak": -3,
+     "fade_in": 0.005,
+     "fade_out": 0.8,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
+     "lp": 0,
+     "gain_db": 0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": "2026-10-27"
+   },
+   "loop": false
+  },
+  {
+   "id": "gacha.music_burst",
+   "category": "gacha",
+   "group": "altar",
+   "status": "custom",
+   "trigger": "Soundtrack à l'explosion de l'étoile",
+   "code": [
+    "client/show/ShowSounds.java"
+   ],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": "gacha_music",
+   "attenuation": 192,
+   "preload": false,
+   "stream": true,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": true,
+   "animations": [],
+   "variants": [
+    {
+     "file": "gacha/music_burst_1",
+     "source": "pixabay/alex_kizenkov-epic-hit-aggressive-logo-142801.mp3",
+     "start": 1.0,
+     "end": null,
+     "peak": -3,
+     "fade_in": 0.005,
+     "fade_out": 1.5,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
+     "lp": 0,
+     "gain_db": 0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": "2026-10-27"
+   },
+   "loop": false
+  },
+  {
+   "id": "gacha.choir",
+   "category": "gacha",
+   "group": "cards",
+   "status": "custom",
+   "trigger": "Chœur à l'affichage des loots",
+   "code": [
+    "client/gui/AltarScreen.java"
+   ],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": "gacha_music",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": true,
+   "animations": [],
+   "variants": [
+    {
+     "file": "gacha/choir_1",
+     "source": "pixabay/freesound_community-shaman-choir-vocal-reverb-fantasy-loop-mastered-20200619_01-96374.mp3",
+     "start": 0,
+     "end": null,
+     "peak": -3,
+     "fade_in": 0.005,
+     "fade_out": 0.8,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
+     "lp": 0,
+     "gain_db": -4
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": "2026-10-27"
+   },
+   "loop": false
+  },
+  {
+   "id": "gacha.music_loot",
+   "category": "gacha",
+   "group": "cards",
+   "status": "custom",
+   "trigger": "Musique des loots, jusqu'à la fin ou la fermeture (fondu de 2 s)",
+   "code": [
+    "client/gui/AltarScreen.java"
+   ],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": "gacha_music",
+   "attenuation": null,
+   "preload": false,
+   "stream": true,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": true,
+   "animations": [],
+   "variants": [
+    {
+     "file": "gacha/music_loot_1",
+     "source": "pixabay/mondamusic-dark-ambient-soundscape-dreamscape-2-491706.mp3",
+     "start": 0,
+     "end": null,
+     "peak": -3,
+     "fade_in": 0.005,
+     "fade_out": 3.0,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
+     "lp": 0,
+     "gain_db": -3
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": "2026-10-27"
+   },
+   "loop": false
   }
  ]
 }

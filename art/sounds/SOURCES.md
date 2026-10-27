@@ -72,6 +72,33 @@ Dossier local `kenney_casino-audio/`.
 
 Tous les sons d'interface passent par deux passe-bas (6000 Hz pour les cartes, 1500 à 2000 Hz pour `ui/confirm`, `ui/denied`, `ui/open`) et sont rabaissés (hauteur 0,6 à 0,75) : discrets, graves et doux, comme le veut zorago.
 
+## Pixabay, fournis par zorago (licence Pixabay)
+
+Dossier `pixabay/` : 20 fichiers choisis par zorago le 27 octobre pour refaire le son du gacha. Licence Pixabay Content License : usage gratuit dans un projet, y compris commercial, sans attribution obligatoire, mais pas de redistribution des fichiers seuls. Les sons sont intégrés au mod, donc l'usage est couvert. Les fichiers `freesound_community-*` sont des reprises Pixabay de sons Freesound. `openmindaudio-…-short-preview-492696` est un **extrait de démonstration** d'un morceau : à vérifier sur sa page Pixabay avant une publication.
+
+| Fichier local | Utilisé pour |
+|---|---|
+| `dragon-studio-elemental-spell-impact-flame-448566.mp3` | `gacha.flame_ignite` (six flammes, hauteur au hasard) |
+| `yodguard-energy-beam-blast-1-482513.mp3` | `gacha.laser` (rayon central, coup calé sur la colonne) |
+| `yodguard-short-energy-beam-shot-3-482517.mp3` | `gacha.blast_small` (anneaux et étoiles S et moins) |
+| `yodguard-short-energy-beam-shot-1-482495.mp3` | `gacha.blast_medium` (SS) |
+| `yodguard-short-energy-beam-shot-2-482496.mp3` | `gacha.blast_big` (SSS et mythiques) |
+| `asproductionmusic-cinematic-sound-fx-582073.mp3` | `gacha.circle` (premier anneau central) |
+| `freesound_community-low-frequency-layer-34381.mp3` | `gacha.beam_bed` (24 premières secondes, tant que le rayon est actif) |
+| `fronbondi_skegs-sfx-cinematic-medium-subdown-sound-effect-238492.mp3` | `gacha.sub_medium` (apparition du rayon, −6 dB) |
+| `fronbondi_skegs-sfx-cinematic-slow-subdown-sound-effect-238489.mp3` | `gacha.sub_slow` (apparition du rayon, −6 dB) |
+| `lordsonny-rock-cinematic-161648.mp3` | `gacha.sky_storm` (orage dans le ciel) |
+| `lordsonny-cinematic-reverse-162590.mp3` | `gacha.rise` (coupé à 7,4 s, à la chute de niveau de 7,3 s, 0,3 s avant l'éclat) |
+| `dragon-studio-cinematic-flashback-transition-463199.mp3` | `gacha.wing_beat` (battements des ailes révélées) |
+| `oxidvideos-soft-pop-sfx-433612.mp3` | `ui.card_pop` (retournement des cartes) |
+| `keannix-whoosh-1-522923.mp3` | `gacha.flyby` (ailés qui passent devant la caméra) |
+| `u_q2hb2391vb-thunder-clap-521194.mp3` | `gacha.thunder`, variation 1 (battements de l'étoile, Night invisible) |
+| `u_vrs223ln83-loud-thunder-439064.mp3` | `gacha.thunder`, variation 2 |
+| `openmindaudio-epic-vocal-trailer-thunder-in-the-marble-cathedral-short-preview-492696.mp3` | `gacha.music_summon` (premier temps fort à 0,94 s, calé sur la première flamme) |
+| `alex_kizenkov-epic-hit-aggressive-logo-142801.mp3` | `gacha.music_burst` (à l'éclat, sans la première seconde de silence) |
+| `freesound_community-shaman-choir-vocal-reverb-fantasy-loop-mastered-20200619_01-96374.mp3` | `gacha.choir` (affichage des loots) |
+| `mondamusic-dark-ambient-soundscape-dreamscape-2-491706.mp3` | `gacha.music_loot` (musique des loots, fondu à la fermeture) |
+
 ## Sons synthétisés (aucune source externe)
 
 `tools/sounds/build_sounds.py`, fonction `synth`. Les deux ont été **rejetés** par zorago (« hélicoptère ») le 27 octobre et remplacés par le bourdon vanilla (`entity.bee.loop`, `entity.bee.pollinate`) ; la fonction reste pour mémoire :

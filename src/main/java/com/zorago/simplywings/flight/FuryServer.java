@@ -5,8 +5,10 @@ import com.zorago.simplywings.data.FurySet;
 import com.zorago.simplywings.network.Payloads;
 import com.zorago.simplywings.player.ModAttachments;
 import com.zorago.simplywings.player.WingsData;
+import com.zorago.simplywings.sound.ModSounds;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
@@ -18,6 +20,7 @@ public final class FuryServer {
     private static final int DASH_COOLDOWN_TICKS = 100;
     private static final int LATENCY_TICKS = 6;
     private static final int DASH_BOLTS = 4;
+    private static final float THUNDER_RANGE_VOLUME = 12f;
 
     public static void onCharge(ServerPlayer player, Payloads.FuryCharge request) {
         WingsData data = ModAttachments.get(player);
@@ -80,6 +83,8 @@ public final class FuryServer {
             return;
         }
         bolt(level, player.getX(), player.getY(), player.getZ());
+        level.playSound(null, player.getX(), player.getY(), player.getZ(), ModSounds.NIGHT_THUNDER.get(), SoundSource.WEATHER,
+                THUNDER_RANGE_VOLUME, 1f);
         for (int i = 0; i < DASH_BOLTS; i++) {
             around(level, player, 3, 4);
         }

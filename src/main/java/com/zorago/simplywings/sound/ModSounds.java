@@ -12,6 +12,7 @@ public final class ModSounds {
 
     public static final Supplier<SoundEvent> NIGHT_DIVE = sound("night_fury.dive");
     public static final Supplier<SoundEvent> NIGHT_INVISIBLE = sound("night_fury.invisible");
+    public static final Supplier<SoundEvent> NIGHT_THUNDER = sound("night_fury.thunder");
     public static final Supplier<SoundEvent> LIGHT_INVISIBLE = sound("light_fury.invisible");
     public static final Supplier<SoundEvent> LIGHT_INVISIBLE_BLAST = sound("light_fury.invisible_blast");
     public static final Supplier<SoundEvent> LIGHT_DIVE = sound("light_fury.dive");

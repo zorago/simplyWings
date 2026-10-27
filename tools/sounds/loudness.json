@@ -1,14 +1,59 @@
 {
-  "wing_flap": {"rms_max_db": -14, "reference": "minecraft:entity.phantom.flap"},
-  "wing_flap_strong": {"rms_max_db": -11, "reference": "minecraft:entity.ender_dragon.flap"},
-  "buzz_loop": {"rms_max_db": -19, "reference": "minecraft:entity.bee.loop"},
-  "wind_loop": {"rms_max_db": -17, "reference": "minecraft:item.elytra.flying"},
-  "landing": {"rms_max_db": -16, "reference": null},
-  "ui": {"rms_max_db": -24, "reference": "minecraft:ui.button.click"},
-  "cards": {"rms_max_db": -24, "reference": "minecraft:ui.button.click", "max_spread_db": 2},
-  "gacha_small": {"rms_max_db": -16, "reference": null},
-  "gacha_big": {"rms_max_db": -10, "reference": "minecraft:ui.toast.challenge_complete"},
-  "block_loop": {"rms_max_db": -22, "reference": "minecraft:block.furnace.fire_crackle"},
-  "block_oneshot": {"rms_max_db": -18, "reference": "minecraft:block.anvil.use"},
-  "fury_big": {"rms_max_db": -10, "reference": null}
+  "wing_flap": {
+    "rms_max_db": -14,
+    "reference": "minecraft:entity.phantom.flap"
+  },
+  "wing_flap_strong": {
+    "rms_max_db": -11,
+    "reference": "minecraft:entity.ender_dragon.flap"
+  },
+  "buzz_loop": {
+    "rms_max_db": -19,
+    "reference": "minecraft:entity.bee.loop"
+  },
+  "wind_loop": {
+    "rms_max_db": -17,
+    "reference": "minecraft:item.elytra.flying"
+  },
+  "landing": {
+    "rms_max_db": -16,
+    "reference": null
+  },
+  "ui": {
+    "rms_max_db": -24,
+    "reference": "minecraft:ui.button.click"
+  },
+  "cards": {
+    "rms_max_db": -24,
+    "reference": "minecraft:ui.button.click",
+    "max_spread_db": 2
+  },
+  "gacha_small": {
+    "rms_max_db": -16,
+    "reference": null
+  },
+  "gacha_big": {
+    "rms_max_db": -10,
+    "reference": "minecraft:ui.toast.challenge_complete"
+  },
+  "block_loop": {
+    "rms_max_db": -22,
+    "reference": "minecraft:block.furnace.fire_crackle"
+  },
+  "block_oneshot": {
+    "rms_max_db": -18,
+    "reference": "minecraft:block.anvil.use"
+  },
+  "fury_big": {
+    "rms_max_db": -10,
+    "reference": null
+  },
+  "gacha_music": {
+    "rms_max_db": -14,
+    "reference": "musiques et soundtracks de l'invocation et des cartes (fichiers Pixabay de zorago)"
+  },
+  "gacha_bed": {
+    "rms_max_db": -20,
+    "reference": "nappe grave tenue sous le rayon"
+  }
 }

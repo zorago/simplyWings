@@ -1,34 +1,29 @@
 {
   "default": [
-    {"t": 0.05, "sound": "simplywings:gacha.offer", "volume": 2.0, "pitch": 1.0, "at": "altar"},
-    {"t": 0.35, "sound": "simplywings:gacha.puff", "volume": 1.4, "pitch": 0.7, "at": "altar"},
-    {"t": 1.8, "window": 0.25, "sound": "simplywings:gacha.ignite", "volume": 2.0, "pitch": 1.3, "at": "crystal"},
-    {"each": "ignite", "t": 0.1, "sound": "simplywings:gacha.ignite", "volume": 2.5, "pitch": 0.85, "pitch_step": 0.06, "at": "flame"},
-    {"each": "ignite", "t": 0.1, "sound": ["minecraft:item.firecharge.use", "minecraft:entity.warden.sonic_charge", "minecraft:block.basalt.break", "minecraft:entity.player.splash", "minecraft:block.amethyst_block.chime", "minecraft:entity.breeze.idle_air"], "volume": 0.8, "pitch": 0.9, "pitch_step": 0.1, "at": "flame"},
-    {"from": "pre", "t": 1.9, "sound": "simplywings:gacha.rune_charge", "volume": 4.0, "pitch": 0.9, "at": "altar"},
-    {"from": "pre", "t": 4.0, "sound": "simplywings:gacha.shockwave", "volume": 6.0, "pitch": 1.2, "at": "altar"},
-    {"from": "pre", "t": 4.0, "sound": "minecraft:block.beacon.activate", "volume": 3.0, "pitch": 0.7, "at": "altar"},
-    {"from": "pre", "t": 4.1, "sound": "simplywings:gacha.beam", "volume": 4.0, "pitch": 0.8, "at": "altar", "offset": [0, 10, 0]},
-    {"from": "pre", "t": 4.1, "sound": "simplywings:gacha.beam_roar", "volume": 4.0, "pitch": 1.0, "at": "altar", "offset": [0, 10, 0]},
-    {"from": "pre", "t": 4.22, "sound": "simplywings:gacha.beam", "volume": 4.0, "pitch": 0.95, "at": "altar", "offset": [0, 25, 0]},
-    {"from": "pre", "t": 4.34, "sound": "simplywings:gacha.beam", "volume": 4.0, "pitch": 1.1, "at": "altar", "offset": [0, 40, 0]},
-    {"from": "birth", "t": 1.0, "sound": "simplywings:gacha.bell", "volume": 8.0, "pitch": 0.7, "at": "top"},
-    {"from": "birth", "t": 1.0, "sound": "simplywings:gacha.ignite", "volume": 8.0, "pitch": 0.6, "at": "top"},
-    {"each": "beats", "sound": "simplywings:gacha.bell", "volume": 8.0, "pitch": 0.7, "pitch_step": 0.15, "at": "star"},
-    {"each": "beats", "sound": "simplywings:gacha.chime", "volume": 4.0, "volume_step": 1.0, "pitch": 0.8, "pitch_step": 0.12, "at": "star"},
-    {"each": "beats", "index": 3, "sound": "minecraft:entity.ender_dragon.growl", "volume": 6.0, "pitch": 0.6, "at": "star"},
-    {"each": "beats", "index": 3, "sound": "simplywings:gacha.shockwave", "volume": 10.0, "pitch": 0.8, "at": "star"},
-    {"each": "spawn", "t": 0.3, "sample": 0.4, "min_tier": "s", "sound": "simplywings:gacha.bell", "volume": 6.0, "pitch": 0.7, "pitch_step": 0.12, "step_by": "tier", "at": "multi_star_{i}"},
-    {"each": "spawn", "t": 0.3, "sample": 0.4, "max_tier": "a", "sound": "simplywings:gacha.twinkle", "volume": 6.0, "pitch": 0.7, "pitch_step": 0.12, "step_by": "tier", "at": "multi_star_{i}"},
-    {"each": "spawn", "t": 0.3, "sample": 0.4, "sound": "simplywings:gacha.shockwave", "volume": 3.0, "pitch": 1.3, "pitch_step": -0.08, "step_by": "tier", "at": "multi_star_{i}"},
-    {"each": "spawn", "t": 0.3, "sample": 0.4, "min_tier": "sss", "sound": "minecraft:entity.ender_dragon.growl", "volume": 4.0, "pitch": 0.7, "at": "multi_star_{i}"},
-    {"each": "flights", "t": -0.1, "sound": "simplywings:gacha.puff", "volume": 4.0, "pitch": 0.7, "pitch_random": 0.3, "at": "cloud_{i}"},
-    {"each": "flights", "edge": 1, "t": -0.1, "sound": "simplywings:wing.common.flap_strong", "volume": 4.0, "pitch": 0.9, "pitch_random": 0.2, "at": "cloud_{i}"},
-    {"from": "burst", "or": "end", "sound": "simplywings:gacha.blast", "volume": 10.0, "pitch": 1.0, "at": "hover"},
-    {"from": "burst", "or": "end", "sound": "simplywings:gacha.shockwave", "volume": 6.0, "volume_power": 6.0, "pitch": 0.9, "at": "hover"},
-    {"from": "burst", "or": "end", "min_rank": 3, "sound": "simplywings:gacha.implosion", "volume": 8.0, "pitch": 0.8, "at": "hover"},
-    {"from": "reveal", "or": "end", "meta": "wings", "t": [1.2, 2.4], "sound": "simplywings:wing.common.flap_strong", "volume": 8.0, "pitch": 0.7, "at": "hover"},
-    {"from": "settle", "or": "end", "sound": "simplywings:gacha.rune_charge", "volume": 2.0, "pitch": 0.6, "at": "altar"}
+    {"t": 1.86, "sound": "simplywings:gacha.music_summon", "volume": 1.0, "pitch": 1.0, "at": "altar"},
+    {"each": "ignite", "t": 0.0, "sound": "simplywings:gacha.flame_ignite", "volume": 3.0, "pitch": 0.92, "pitch_random": 0.16, "at": "flame"},
+    {"t": 4.56, "sound": "simplywings:gacha.circle", "volume": 6.0, "pitch": 1.0, "at": "altar"},
+    {"t": 4.03, "sound": "simplywings:gacha.laser", "volume": 8.0, "pitch": 1.0, "at": "altar", "offset": [0, 10, 0]},
+    {"t": 6.29, "sound": "simplywings:gacha.sub_medium", "volume": 8.0, "pitch": 1.0, "at": "altar"},
+    {"t": 6.37, "sound": "simplywings:gacha.sub_slow", "volume": 8.0, "pitch": 1.0, "at": "altar"},
+    {"t": 6.46, "sound": "simplywings:gacha.beam_bed", "volume": 1.0, "pitch": 1.0, "at": "altar", "until": "end", "until_t": -1.4, "fade": 1.0},
+    {"t": [6.41], "max_rank": 0, "sound": "simplywings:gacha.blast_small", "volume": 6.0, "pitch": 1.0, "at": "altar", "offset": [0, 10, 0]},
+    {"t": [6.41, 6.53], "min_rank": 1, "max_rank": 1, "sound": "simplywings:gacha.blast_small", "volume": 6.0, "pitch": 1.0, "at": "altar", "offset": [0, 17, 0]},
+    {"t": [6.41, 6.53, 6.65], "min_rank": 2, "max_rank": 2, "sound": "simplywings:gacha.blast_small", "volume": 6.0, "pitch": 1.0, "at": "altar", "offset": [0, 24, 0]},
+    {"t": [6.41, 6.53, 6.65], "min_rank": 3, "max_rank": 3, "sound": "simplywings:gacha.blast_medium", "volume": 8.0, "pitch": 1.0, "at": "altar", "offset": [0, 24, 0]},
+    {"t": [6.41, 6.53, 6.65], "min_rank": 4, "sound": "simplywings:gacha.blast_big", "volume": 10.0, "pitch": 1.0, "at": "altar", "offset": [0, 24, 0]},
+    {"t": 6.79, "min_rank": 2, "sound": "simplywings:gacha.sky_storm", "volume": 8.0, "pitch": 1.0, "at": "top"},
+    {"from": "birth", "t": 0.7, "except": "summon_x10", "max_tier": "s", "sound": "simplywings:gacha.blast_small", "volume": 8.0, "pitch": 1.0, "at": "top"},
+    {"from": "birth", "t": 0.7, "except": "summon_x10", "tier": "ss", "sound": "simplywings:gacha.blast_medium", "volume": 8.0, "pitch": 1.0, "at": "top"},
+    {"from": "birth", "t": 0.7, "except": "summon_x10", "min_tier": "sss", "sound": "simplywings:gacha.blast_big", "volume": 10.0, "pitch": 1.0, "at": "top"},
+    {"each": "spawn", "t": 0.0, "sample": 0.4, "max_tier": "s", "sound": "simplywings:gacha.blast_small", "volume": 6.0, "pitch": 1.0, "at": "multi_star_{i}"},
+    {"each": "spawn", "t": 0.0, "sample": 0.4, "tier": "ss", "sound": "simplywings:gacha.blast_medium", "volume": 8.0, "pitch": 1.0, "at": "multi_star_{i}"},
+    {"each": "spawn", "t": 0.0, "sample": 0.4, "min_tier": "sss", "sound": "simplywings:gacha.blast_big", "volume": 10.0, "pitch": 1.0, "at": "multi_star_{i}"},
+    {"each": "beats", "sound": "simplywings:gacha.thunder", "volume": 12.0, "pitch": 0.95, "pitch_random": 0.1, "at": "star"},
+    {"each": "flights", "edge": 0, "t": 0.3, "sound": "simplywings:gacha.flyby", "volume": 6.0, "pitch": 0.92, "pitch_random": 0.16, "at": "cloud_{i}"},
+    {"from": "burst", "or": "end", "t": -7.7, "sound": "simplywings:gacha.rise", "volume": 8.0, "pitch": 1.0, "at": "hover"},
+    {"from": "burst", "or": "end", "sound": "simplywings:gacha.music_burst", "volume": 1.0, "pitch": 1.0, "at": "hover"},
+    {"from": "reveal", "or": "end", "meta": "wings", "t": [0.35, 1.55], "sound": "simplywings:gacha.wing_beat", "volume": 10.0, "pitch": 1.0, "at": "hover"}
   ],
   "cards": {
     "deal": [
@@ -39,38 +34,32 @@
     ],
     "flip": [
       {"max_tier": "s", "sound": "simplywings:ui.card_flip", "pitch": 0.9, "volume": 0.7},
-      {"min_tier": "ss", "sound": "simplywings:ui.card_flip", "pitch": 0.8, "volume": 0.7}
+      {"min_tier": "ss", "sound": "simplywings:ui.card_flip", "pitch": 0.8, "volume": 0.7},
+      {"sound": "simplywings:ui.card_pop", "pitch": 1.0, "volume": 0.8}
     ],
     "open": {
       "b": [
         {"sound": "simplywings:ui.card_place", "pitch": 1.0, "volume": 0.5}
       ],
       "a": [
-        {"sound": "simplywings:ui.card_place", "pitch": 0.9, "volume": 0.6},
-        {"sound": "simplywings:ui.confirm", "pitch": 1.0, "volume": 0.5}
+        {"sound": "simplywings:ui.card_place", "pitch": 0.9, "volume": 0.6}
       ],
       "s": [
-        {"sound": "simplywings:ui.card_place", "pitch": 0.85, "volume": 0.7},
-        {"sound": "simplywings:gacha.bell", "pitch": 0.8, "volume": 0.45}
+        {"sound": "simplywings:ui.card_place", "pitch": 0.85, "volume": 0.7}
       ],
       "ss": [
-        {"sound": "simplywings:ui.card_place", "pitch": 0.8, "volume": 0.8},
-        {"sound": "simplywings:gacha.bell", "pitch": 0.75, "volume": 0.6},
-        {"sound": "simplywings:gacha.blast", "pitch": 1.3, "volume": 0.3}
+        {"sound": "simplywings:ui.card_place", "pitch": 0.8, "volume": 0.8}
       ],
       "sss": [
-        {"sound": "simplywings:ui.card_place", "pitch": 0.75, "volume": 0.8},
-        {"sound": "simplywings:gacha.bell", "pitch": 0.7, "volume": 0.8},
-        {"sound": "simplywings:gacha.shockwave", "pitch": 1.1, "volume": 0.45},
-        {"sound": "minecraft:entity.ender_dragon.growl", "pitch": 1.2, "volume": 0.25}
+        {"sound": "simplywings:ui.card_place", "pitch": 0.75, "volume": 0.8}
       ],
       "mythic": [
-        {"sound": "simplywings:ui.card_place", "pitch": 0.7, "volume": 0.8},
-        {"sound": "simplywings:gacha.bell", "pitch": 0.6, "volume": 0.8},
-        {"sound": "simplywings:gacha.implosion", "pitch": 0.8, "volume": 0.6},
-        {"sound": "simplywings:gacha.shockwave", "pitch": 0.8, "volume": 0.5},
-        {"sound": "minecraft:entity.ender_dragon.growl", "pitch": 0.7, "volume": 0.3}
+        {"sound": "simplywings:ui.card_place", "pitch": 0.7, "volume": 0.8}
       ]
-    }
+    },
+    "loot": [
+      {"sound": "simplywings:gacha.choir", "pitch": 1.0, "volume": 0.8},
+      {"sound": "simplywings:gacha.music_loot", "pitch": 1.0, "volume": 0.6, "fade": 2.0}
+    ]
   }
 }

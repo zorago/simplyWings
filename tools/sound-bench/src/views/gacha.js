@@ -499,7 +499,8 @@ export function create(root, ctx) {
     const dist = pos.distanceTo(listenerPos);
     const h = await ctx.playEvent(f.sound, { volume: f.volume, pitch: f.pitch, distance: dist, positional: true });
     if (!h) return { dist, missing: true };
-    const a = { h, pos, volume: f.volume };
+    const c = f.c;
+    const a = { h, pos, volume: f.volume, fade: c?.fade || 0, stopAt: c?.fade > 0 && c.until ? meta(anim, c.until, anim.length) + c.untilT : Infinity };
     active.push(a);
     h.src.addEventListener("ended", () => {
       const k = active.indexOf(a);
@@ -552,6 +553,7 @@ export function create(root, ctx) {
   function startCards(at) {
     sim.cards = { start: at, s: deckState(deck(tiers)), closed: false };
     sim.holding = true;
+    playCard("loot", 0);
   }
 
   function cardTime() {
@@ -630,7 +632,9 @@ export function create(root, ctx) {
   function updateGains() {
     for (const a of active) {
       const leaf = a.h.leaf;
-      a.h.gainNode.gain.value = gain(a.volume * (leaf?.volume ?? 1), a.pos.distanceTo(listener), leaf?.attenuation ?? 16);
+      const k = sim.t > a.stopAt ? 1 - (sim.t - a.stopAt) / a.fade : 1;
+      if (k <= 0) a.h.stop();
+      a.h.gainNode.gain.value = Math.max(0, k) * gain(a.volume * (leaf?.volume ?? 1), a.pos.distanceTo(listener), leaf?.attenuation ?? 16);
     }
   }
 

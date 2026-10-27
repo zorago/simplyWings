@@ -114,6 +114,10 @@ public final class ClientShows {
         SHOWS.add(show);
     }
 
+    static boolean alive(Show show) {
+        return SHOWS.contains(show);
+    }
+
     public static boolean active(BlockPos pos) {
         for (Show s : SHOWS) {
             if (s.payload.pos().equals(pos)) {
