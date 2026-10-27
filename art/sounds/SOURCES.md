@@ -25,12 +25,24 @@ Tous les sons du mod viennent de bibliothèques **CC0** (domaine public : usage 
 | `fs_487748.mp3` | https://freesound.org/s/487748/ | stib | `block/cloud_compressor/loop` : boucle du compresseur (et poussée de Dédale, hauteur 1,4) |
 | `fs_814061.mp3` | https://freesound.org/s/814061/ | YouMightLikeThis | `fury/night_charge` : grésillement électrique de la charge de Night |
 | `fs_582631.mp3` | https://freesound.org/s/582631/ | ironcross32 | `fury/crackle` : craquement en couche sur la charge de Night |
-| `fs_407052.mp3` | https://freesound.org/s/407052/ | Sojan | `fury/light_charge` : charge de plasma de Light (20 s accélérés 8 fois, sans changer la hauteur) |
+| `fs_407052.mp3` | https://freesound.org/s/407052/ | Sojan | **rejeté** par zorago (trop artificiel), remplacé par `fs_871766` ; plus utilisé |
 | `fs_875132.mp3` | https://freesound.org/s/875132/ | hotpin7 | `essence/pour` : essence versée dans une jauge |
 | `fs_511485.mp3` | https://freesound.org/s/511485/ | MLaudio | `essence/full` : conteneur plein |
 | `fs_561287.mp3` | https://freesound.org/s/561287/ | angelkunev | `ui/equip` : ailes équipées ou retirées, infusion d'énergie, ailes de la table d'assemblage |
 | `fs_841982.mp3` | https://freesound.org/s/841982/ | kevinklang | téléchargé, pas encore utilisé (vent de rechange) |
 | `fs_521972.mp3` | https://freesound.org/s/521972/ | Kastenfrosch | téléchargé, pas encore utilisé (marteau de rechange) |
+| `fs_260554_fire_whoosh.mp3` | https://freesound.org/s/260554/ | LookIMadeAThing | `gacha/ignite` (flamme de forge, hauteur 0,85) |
+| `fs_260555_fire_whoosh_2.mp3` | https://freesound.org/s/260555/ | LookIMadeAThing | `gacha/ignite` |
+| `fs_244926_fire_whoosh.mp3` | https://freesound.org/s/244926/ | hnhnh | `gacha/ignite` |
+| `fs_651108_energy_beam_3.mp3` | https://freesound.org/s/651108/ | LPHypeR | `gacha/beam` : rayon d'énergie pure (hauteur 0,85) |
+| `fs_387924_fire_massive.mp3` | https://freesound.org/s/387924/ | Aegersum | `gacha/beam_roar` : grondement de flammes joué sous le rayon (souffle atomique) |
+| `fs_871766_arc_sparking.mp3` | https://freesound.org/s/871766/ | harrisonlace | « tzzt » d'électricité statique découpés en rafales (`bursts`) : `fury/light_charge`, `wing/storm/layer` |
+| `fs_650516_energy_beam_2.mp3` | https://freesound.org/s/650516/ | LPHypeR | téléchargé, pas encore utilisé (rayon de rechange) |
+| `fs_393066_electric_zap.mp3` | https://freesound.org/s/393066/ | Wakerone | téléchargé, pas encore utilisé (électricité de rechange) |
+| `fs_524588_sparks_fly.mp3` | https://freesound.org/s/524588/ | _bliind | téléchargé, pas encore utilisé (étincelles de rechange) |
+| `fs_186374_bonfire_lit.mp3` | https://freesound.org/s/186374/ | samararaine | téléchargé, pas encore utilisé (allumage de brasier de rechange) |
+| `fs_466795_bumblebee.mp3` | https://freesound.org/s/466795/ | Breviceps | téléchargé, pas encore utilisé (bourdon, si le bourdon vanilla ne convient pas) |
+| `fs_570203_dragonfly_by.mp3` | https://freesound.org/s/570203/ | RatBird | téléchargé, pas encore utilisé (libellule, enregistrement faible et bruité) |
 
 ## OpenGameArt (CC0)
 
@@ -62,7 +74,7 @@ Tous les sons d'interface passent par deux passe-bas (6000 Hz pour les cartes, 1
 
 ## Sons synthétisés (aucune source externe)
 
-`tools/sounds/build_sounds.py`, fonction `synth` :
+`tools/sounds/build_sounds.py`, fonction `synth`. Les deux ont été **rejetés** par zorago (« hélicoptère ») le 27 octobre et remplacés par le bourdon vanilla (`entity.bee.loop`, `entity.bee.pollinate`) ; la fonction reste pour mémoire :
 - `wing/buzz/loop` : vrombissement « jeu vidéo » en boucle parfaite de 2 s, deux dents de scie à 92 et 92,5 Hz (battement lent), sous-octave carrée, trémolo à 30 Hz, souffle filtré, passe-bas 1300 Hz avec bosse à 650 Hz (filtrage par FFT, donc sans couture à la boucle) ;
 - `wing/insect/flap` : « brrrp » de 0,3 s (glissando 120, 140 ou 165 Hz vers −35 %, trémolo à 34 Hz), coups d'aile des paires à vrombissement.
 

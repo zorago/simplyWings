@@ -86,10 +86,11 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "revise",
+    "state": "todo",
     "note": "Legerment trop grave",
     "date": "2026-10-27"
-   }
+   },
+   "pitch": 1.06
   },
   {
    "id": "wing.membrane.flap",
@@ -212,8 +213,53 @@
    "id": "wing.leather.flap",
    "category": "wing",
    "group": "leather",
+   "status": "vanilla",
+   "trigger": "Coup d'aile de la chauve-souris",
+   "code": [
+    "client/WingSounds.java"
+   ],
+   "description": "Petit claquement de toile souple, court.",
+   "keywords": [
+    "bat wings",
+    "umbrella flap",
+    "cloth flap"
+   ],
+   "reference": "minecraft:entity.bat.takeoff",
+   "loudness_target": "wing_flap",
+   "attenuation": 32,
+   "preload": true,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [
+    {
+     "rig": "basic",
+     "scenario": "cruise_flap",
+     "event": "strike"
+    }
+   ],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "la reference est parfaite pour cette pair",
+    "date": "2026-10-27"
+   },
+   "vanilla": {
+    "event": "minecraft:entity.bat.takeoff",
+    "volume": 1.0,
+    "pitch": 1.0
+   }
+  },
+  {
+   "id": "wing.glider.flap",
+   "category": "wing",
+   "group": "glider",
    "status": "custom",
-   "trigger": "Coup d'aile de la chauve-souris et des planeurs",
+   "trigger": "Coup d'aile des planeurs (poisson volant, cerf-volant, écureuil volant)",
    "code": [
     "client/WingSounds.java"
    ],
@@ -241,7 +287,7 @@
    ],
    "variants": [
     {
-     "file": "wing/leather/flap_1",
+     "file": "wing/glider/flap_1",
      "source": "fs_593487_umbrella_bat_wings.mp3",
      "start": 1.79,
      "end": 2.13,
@@ -256,7 +302,7 @@
      "gain_db": 0
     },
     {
-     "file": "wing/leather/flap_2",
+     "file": "wing/glider/flap_2",
      "source": "fs_593487_umbrella_bat_wings.mp3",
      "start": 2.6900000000000004,
      "end": 3.04,
@@ -271,7 +317,7 @@
      "gain_db": 0
     },
     {
-     "file": "wing/leather/flap_3",
+     "file": "wing/glider/flap_3",
      "source": "fs_593487_umbrella_bat_wings.mp3",
      "start": 3.56,
      "end": 3.9099999999999997,
@@ -286,7 +332,7 @@
      "gain_db": 0
     },
     {
-     "file": "wing/leather/flap_4",
+     "file": "wing/glider/flap_4",
      "source": "fs_593487_umbrella_bat_wings.mp3",
      "start": 4.47,
      "end": 4.82,
@@ -304,8 +350,8 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "revise",
-    "note": "la reference est parfaite pour cette pair",
+    "state": "keep",
+    "note": "Ancienne wing.leather.flap, gardée pour les planeurs dont le réglage a été validé",
     "date": "2026-10-27"
    }
   },
@@ -313,7 +359,7 @@
    "id": "wing.insect.flap",
    "category": "wing",
    "group": "insect",
-   "status": "custom",
+   "status": "vanilla",
    "trigger": "Coup d'aile des paires à vrombissement",
    "code": [
     "client/WingSounds.java"
@@ -340,59 +386,18 @@
      "event": "strike"
     }
    ],
-   "variants": [
-    {
-     "file": "wing/insect/flap_1",
-     "source": "synth:burr_120",
-     "start": 0,
-     "end": null,
-     "peak": -8,
-     "fade_in": 0.004,
-     "fade_out": 0.05,
-     "echo": 0,
-     "loop": 0,
-     "tempo": 1,
-     "pitch": 1,
-     "lp": 0,
-     "gain_db": 0
-    },
-    {
-     "file": "wing/insect/flap_2",
-     "source": "synth:burr_140",
-     "start": 0,
-     "end": null,
-     "peak": -8,
-     "fade_in": 0.004,
-     "fade_out": 0.05,
-     "echo": 0,
-     "loop": 0,
-     "tempo": 1,
-     "pitch": 1,
-     "lp": 0,
-     "gain_db": 0
-    },
-    {
-     "file": "wing/insect/flap_3",
-     "source": "synth:burr_165",
-     "start": 0,
-     "end": null,
-     "peak": -8,
-     "fade_in": 0.004,
-     "fade_out": 0.05,
-     "echo": 0,
-     "loop": 0,
-     "tempo": 1,
-     "pitch": 1,
-     "lp": 0,
-     "gain_db": 0
-    }
-   ],
+   "variants": [],
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "reject",
-    "note": "Insect c'est mort tu sais quoi faire.",
+    "state": "todo",
+    "note": "Remplacé par le bourdon vanilla (entity.bee.pollinate)",
     "date": "2026-10-27"
+   },
+   "vanilla": {
+    "event": "minecraft:entity.bee.pollinate",
+    "volume": 1.0,
+    "pitch": 1.0
    }
   },
   {
@@ -486,7 +491,7 @@
    "id": "wing.buzz.loop",
    "category": "wing",
    "group": "buzz",
-   "status": "custom",
+   "status": "vanilla",
    "trigger": "Poussée continue des paires à vrombissement (FLAG_THRUST)",
    "code": [
     "client/FlightLoops.java"
@@ -513,31 +518,20 @@
      "event": "loop"
     }
    ],
-   "variants": [
-    {
-     "file": "wing/buzz/loop_1",
-     "source": "synth:buzz_loop",
-     "start": 0,
-     "end": null,
-     "peak": -8,
-     "fade_in": 0.004,
-     "fade_out": 0.25,
-     "echo": 0,
-     "loop": -1,
-     "tempo": 1,
-     "pitch": 1,
-     "lp": 0,
-     "gain_db": 0
-    }
-   ],
+   "variants": [],
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "reject",
-    "note": "On dirait un hélicopter, faut un truc doux et leger qui casse pas le crane",
+    "state": "todo",
+    "note": "Remplacé par le bourdon vanilla (entity.bee.loop)",
     "date": "2026-10-27"
    },
-   "loop": true
+   "loop": true,
+   "vanilla": {
+    "event": "minecraft:entity.bee.loop",
+    "volume": 1.0,
+    "pitch": 1.0
+   }
   },
   {
    "id": "gacha.ignite",
@@ -551,8 +545,9 @@
    ],
    "description": "Embrasement magique court.",
    "keywords": [
-    "magic ignite",
-    "fire whoosh magic"
+    "fire whoosh",
+    "fireball",
+    "forge flame"
    ],
    "reference": null,
    "loudness_target": "gacha_small",
@@ -562,96 +557,51 @@
    "subtitle_key": "gacha.ignite",
    "subtitle": "Altar flame ignites",
    "declared": true,
-   "slow_attack": false,
+   "slow_attack": true,
    "animations": [],
    "variants": [
     {
      "file": "gacha/ignite_1",
-     "source": "oga_magical_1_0.ogg",
-     "start": 0.017,
-     "end": null,
-     "peak": -2,
-     "fade_in": 0.004,
-     "fade_out": 0.3,
+     "source": "fs_260554_fire_whoosh.mp3",
+     "start": 0,
+     "end": 2.4,
+     "peak": -3,
+     "fade_in": 0.005,
+     "fade_out": 0.8,
      "echo": 0,
      "loop": 0,
      "tempo": 1,
-     "pitch": 1,
+     "pitch": 0.85,
      "lp": 0,
      "gain_db": 0
     },
     {
      "file": "gacha/ignite_2",
-     "source": "oga_magical_2.ogg",
+     "source": "fs_260555_fire_whoosh_2.mp3",
      "start": 0,
-     "end": null,
-     "peak": -2,
-     "fade_in": 0.004,
-     "fade_out": 0.3,
+     "end": 2.6,
+     "peak": -3,
+     "fade_in": 0.005,
+     "fade_out": 0.8,
      "echo": 0,
      "loop": 0,
      "tempo": 1,
-     "pitch": 1,
+     "pitch": 0.85,
      "lp": 0,
      "gain_db": 0
     },
     {
      "file": "gacha/ignite_3",
-     "source": "oga_magical_4.ogg",
+     "source": "fs_244926_fire_whoosh.mp3",
      "start": 0,
-     "end": null,
-     "peak": -2,
-     "fade_in": 0.004,
-     "fade_out": 0.3,
+     "end": 2.2,
+     "peak": -3,
+     "fade_in": 0.005,
+     "fade_out": 0.8,
      "echo": 0,
      "loop": 0,
      "tempo": 1,
-     "pitch": 1,
-     "lp": 0,
-     "gain_db": 0
-    },
-    {
-     "file": "gacha/ignite_4",
-     "source": "oga_magical_5.ogg",
-     "start": 0,
-     "end": null,
-     "peak": -2,
-     "fade_in": 0.004,
-     "fade_out": 0.3,
-     "echo": 0,
-     "loop": 0,
-     "tempo": 1,
-     "pitch": 1,
-     "lp": 0,
-     "gain_db": 0
-    },
-    {
-     "file": "gacha/ignite_5",
-     "source": "oga_magical_6_0.ogg",
-     "start": 0,
-     "end": null,
-     "peak": -2,
-     "fade_in": 0.004,
-     "fade_out": 0.3,
-     "echo": 0,
-     "loop": 0,
-     "tempo": 1,
-     "pitch": 1,
-     "lp": 0,
-     "gain_db": 0
-    },
-    {
-     "file": "gacha/ignite_6",
-     "source": "oga_magical_7_0.ogg",
-     "start": 0,
-     "end": null,
-     "peak": -2,
-     "fade_in": 0.004,
-     "fade_out": 0.3,
-     "echo": 0,
-     "loop": 0,
-     "tempo": 1,
-     "pitch": 1,
+     "pitch": 0.85,
      "lp": 0,
      "gain_db": 0
     }
@@ -659,7 +609,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "reject",
+    "state": "todo",
     "note": "Massif problème ignite c'est des flames, son de flammes / brassier ou grosse flamme de forge. ",
     "date": "2026-10-27"
    },
@@ -669,7 +619,7 @@
    "id": "gacha.offer",
    "category": "gacha",
    "group": "altar",
-   "status": "custom",
+   "status": "vanilla",
    "trigger": "Offrande posée sur l'autel (début du show)",
    "code": [
     "client/show/ClientShows.java"
@@ -690,31 +640,20 @@
    "declared": true,
    "slow_attack": false,
    "animations": [],
-   "variants": [
-    {
-     "file": "gacha/offer_1",
-     "source": "oga_magical_3.ogg",
-     "start": 0,
-     "end": null,
-     "peak": -2,
-     "fade_in": 0.004,
-     "fade_out": 0.4,
-     "echo": 0,
-     "loop": 0,
-     "tempo": 1,
-     "pitch": 1,
-     "lp": 0,
-     "gain_db": 0
-    }
-   ],
+   "variants": [],
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "reject",
+    "state": "todo",
     "note": "Plus doux et ethérée de nouveau, ça fait trop gameboy",
     "date": "2026-10-27"
    },
-   "loop": false
+   "loop": false,
+   "vanilla": {
+    "event": "minecraft:block.beacon.power_select",
+    "volume": 1.0,
+    "pitch": 0.8
+   }
   },
   {
    "id": "gacha.rune_charge",
@@ -795,9 +734,9 @@
    ],
    "description": "Montée d'énergie.",
    "keywords": [
-    "power up",
-    "beam rise",
-    "energy"
+    "energy beam",
+    "atomic breath",
+    "laser beam"
    ],
    "reference": null,
    "loudness_target": "gacha_big",
@@ -812,16 +751,16 @@
    "variants": [
     {
      "file": "gacha/beam_1",
-     "source": "fs_859497_powerup_loop.mp3",
+     "source": "fs_651108_energy_beam_3.mp3",
      "start": 0,
-     "end": null,
-     "peak": -2,
-     "fade_in": 0.05,
-     "fade_out": 0.8,
+     "end": 5.0,
+     "peak": -3,
+     "fade_in": 0.15,
+     "fade_out": 1.5,
      "echo": 0,
      "loop": 0,
      "tempo": 1,
-     "pitch": 1,
+     "pitch": 0.85,
      "lp": 0,
      "gain_db": 0
     }
@@ -829,8 +768,58 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "reject",
+    "state": "todo",
     "note": "Je veux un beam d'energie pure, comme le tire atomique de godzilla.",
+    "date": "2026-10-27"
+   },
+   "loop": false
+  },
+  {
+   "id": "gacha.beam_roar",
+   "category": "gacha",
+   "group": "altar",
+   "status": "custom",
+   "trigger": "Grondement du souffle sous le pilier (avec gacha.beam)",
+   "code": [
+    "client/show/ShowSounds.java"
+   ],
+   "description": "Montée d'énergie.",
+   "keywords": [
+    "fire roar",
+    "flamethrower"
+   ],
+   "reference": null,
+   "loudness_target": "gacha_big",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": true,
+   "animations": [],
+   "variants": [
+    {
+     "file": "gacha/beam_roar_1",
+     "source": "fs_387924_fire_massive.mp3",
+     "start": 0.3,
+     "end": 5.3,
+     "peak": -3,
+     "fade_in": 0.1,
+     "fade_out": 1.5,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 0.75,
+     "lp": 2500,
+     "gain_db": -3
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
     "date": "2026-10-27"
    },
    "loop": false
@@ -1951,7 +1940,7 @@
    "id": "ui.open",
    "category": "ui",
    "group": "ui",
-   "status": "custom",
+   "status": "vanilla",
    "trigger": "Ouverture du menu (prêt, pas branché)",
    "code": [],
    "description": "Ouverture douce.",
@@ -1968,61 +1957,20 @@
    "declared": true,
    "slow_attack": false,
    "animations": [],
-   "variants": [
-    {
-     "file": "ui/open_1",
-     "source": "kenney_interface-sounds/Audio/open_002.ogg",
-     "start": 0.004,
-     "end": null,
-     "peak": -10,
-     "fade_in": 0.004,
-     "fade_out": 0.05,
-     "echo": 0,
-     "loop": 0,
-     "tempo": 1,
-     "pitch": 0.75,
-     "lp": 2000,
-     "gain_db": 0
-    },
-    {
-     "file": "ui/open_2",
-     "source": "kenney_interface-sounds/Audio/open_003.ogg",
-     "start": 0.005,
-     "end": null,
-     "peak": -10,
-     "fade_in": 0.005,
-     "fade_out": 0.05,
-     "echo": 0,
-     "loop": 0,
-     "tempo": 1,
-     "pitch": 0.75,
-     "lp": 2000,
-     "gain_db": 0
-    },
-    {
-     "file": "ui/open_3",
-     "source": "kenney_interface-sounds/Audio/open_004.ogg",
-     "start": 0.297,
-     "end": null,
-     "peak": -10,
-     "fade_in": 0.005,
-     "fade_out": 0.05,
-     "echo": 0,
-     "loop": 0,
-     "tempo": 1,
-     "pitch": 0.75,
-     "lp": 2000,
-     "gain_db": 0
-    }
-   ],
+   "variants": [],
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "reject",
+    "state": "todo",
     "note": "GROS GROS NON, ça fait bien trop jeu vidéo de 1990. Il faut un truc ethérée et doux. ",
     "date": "2026-10-27"
    },
-   "loop": false
+   "loop": false,
+   "vanilla": {
+    "event": "minecraft:block.enchantment_table.use",
+    "volume": 0.6,
+    "pitch": 1.0
+   }
   },
   {
    "id": "flight.wind",
@@ -2838,6 +2786,41 @@
    "license_blocker": true
   },
   {
+   "id": "light_fury.invisible_blast",
+   "category": "fury",
+   "group": "light_fury",
+   "status": "vanilla",
+   "trigger": "6 s après le dash d'invisibilité de Light",
+   "code": [
+    "client/FuryEffects.java"
+   ],
+   "description": "Comme Night, un peu plus aigu.",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": "fury_big",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": false,
+   "animations": [],
+   "variants": [],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "todo",
+    "note": "",
+    "date": "2026-10-27"
+   },
+   "vanilla": {
+    "event": "minecraft:entity.generic.explode",
+    "volume": 1.0,
+    "pitch": 1.0
+   }
+  },
+  {
    "id": "night_fury.charge",
    "category": "fury",
    "group": "night_fury",
@@ -2947,8 +2930,9 @@
    ],
    "description": "Montée plasma claire.",
    "keywords": [
-    "plasma rise",
-    "energy charge"
+    "static zap",
+    "electric spark",
+    "tzzt"
    ],
    "reference": null,
    "loudness_target": "fury_big",
@@ -2963,24 +2947,54 @@
    "variants": [
     {
      "file": "fury/light_charge_1",
-     "source": "fs_407052.mp3",
-     "start": 0.4,
-     "end": 20,
-     "peak": -2,
-     "fade_in": 0.2,
-     "fade_out": 0.3,
+     "source": "fs_871766_arc_sparking.mp3",
+     "start": 0.2,
+     "end": null,
+     "peak": -3,
+     "fade_in": 0.005,
+     "fade_out": 0.05,
      "echo": 0,
      "loop": 0,
-     "tempo": 8,
+     "tempo": 1,
      "pitch": 1,
      "lp": 0,
-     "gain_db": 0
+     "gain_db": 0,
+     "bursts": [
+      [
+       0,
+       0.12
+      ],
+      [
+       0.3,
+       0.2
+      ],
+      [
+       0.62,
+       0.1
+      ],
+      [
+       0.85,
+       0.28
+      ],
+      [
+       1.28,
+       0.14
+      ],
+      [
+       1.5,
+       0.32
+      ],
+      [
+       1.92,
+       0.45
+      ]
+     ]
     }
    ],
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "reject",
+    "state": "todo",
     "note": "des tzzzt tzzzttt tzzzztt. ",
     "date": "2026-10-27"
    }
@@ -3058,7 +3072,7 @@
    "alias": {
     "target": "simplywings:wing.feather.flap",
     "volume": 0.35,
-    "pitch": 1.38
+    "pitch": 1.302
    },
    "family": "element"
   },
@@ -3181,7 +3195,7 @@
    "alias": {
     "target": "simplywings:wing.feather.flap",
     "volume": 0.6,
-    "pitch": 1.1
+    "pitch": 1.038
    },
    "family": "feather_matter"
   },
@@ -3295,14 +3309,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "revise",
+    "state": "todo",
     "note": "",
     "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.insect.flap",
     "volume": 0.8,
-    "pitch": 0.84
+    "pitch": 0.8
    },
    "family": "buzz"
   },
@@ -3335,14 +3349,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "revise",
+    "state": "todo",
     "note": "",
     "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.buzz.loop",
     "volume": 1,
-    "pitch": 0.7
+    "pitch": 0.75
    },
    "loop": true
   },
@@ -3424,7 +3438,7 @@
    "alias": {
     "target": "simplywings:wing.feather.flap",
     "volume": 1,
-    "pitch": 0.9
+    "pitch": 0.849
    },
    "family": "feather"
   },
@@ -3547,7 +3561,7 @@
    "alias": {
     "target": "simplywings:wing.feather.flap",
     "volume": 0.35,
-    "pitch": 1.265
+    "pitch": 1.193
    },
    "family": "element"
   },
@@ -3582,13 +3596,13 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "revise",
+    "state": "todo",
     "note": "les ting aussi moins fort plus subtil. ",
     "date": "2026-10-27"
    },
    "vanilla": {
     "event": "minecraft:block.amethyst_block.resonate",
-    "volume": 0.5,
+    "volume": 0.25,
     "pitch": 1.2
    }
   },
@@ -3661,14 +3675,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "keep",
-    "note": "",
+    "state": "todo",
+    "note": "Passé sur la référence vanilla (entity.bat.takeoff) de wing.leather.flap, volume et hauteur remis à 1",
     "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.leather.flap",
-    "volume": 0.3,
-    "pitch": 1.1
+    "volume": 1.0,
+    "pitch": 1.0
    },
    "family": "leather"
   },
@@ -3741,14 +3755,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "revise",
+    "state": "todo",
     "note": "",
     "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.insect.flap",
     "volume": 0.8,
-    "pitch": 1.68
+    "pitch": 1.0
    },
    "family": "buzz"
   },
@@ -3781,14 +3795,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "revise",
+    "state": "todo",
     "note": "",
     "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.buzz.loop",
     "volume": 1,
-    "pitch": 1.4
+    "pitch": 1.0
    },
    "loop": true
   },
@@ -3861,14 +3875,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "revise",
+    "state": "todo",
     "note": "",
     "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.insect.flap",
     "volume": 0.8,
-    "pitch": 1.08
+    "pitch": 0.9
    },
    "family": "buzz"
   },
@@ -3901,14 +3915,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "revise",
+    "state": "todo",
     "note": "",
     "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.buzz.loop",
     "volume": 1,
-    "pitch": 0.9
+    "pitch": 0.85
    },
    "loop": true
   },
@@ -3988,7 +4002,7 @@
    "alias": {
     "target": "simplywings:wing.feather.flap",
     "volume": 1,
-    "pitch": 1.5
+    "pitch": 1.415
    },
    "family": "feather"
   },
@@ -4070,7 +4084,7 @@
    "alias": {
     "target": "simplywings:wing.feather.flap",
     "volume": 0.6,
-    "pitch": 1.045
+    "pitch": 0.986
    },
    "family": "feather_matter"
   },
@@ -4193,7 +4207,7 @@
    "alias": {
     "target": "simplywings:wing.feather.flap",
     "volume": 1,
-    "pitch": 0.95
+    "pitch": 0.896
    },
    "family": "feather"
   },
@@ -4559,7 +4573,7 @@
    "alias": {
     "target": "simplywings:wing.feather.flap",
     "volume": 1,
-    "pitch": 0.85
+    "pitch": 0.802
    },
    "family": "feather"
   },
@@ -4682,7 +4696,7 @@
    "alias": {
     "target": "simplywings:wing.feather.flap",
     "volume": 0.6,
-    "pitch": 0.75
+    "pitch": 0.708
    },
    "family": "feather_matter"
   },
@@ -4805,7 +4819,7 @@
    "alias": {
     "target": "simplywings:wing.feather.flap",
     "volume": 0.6,
-    "pitch": 1.1
+    "pitch": 1.038
    },
    "family": "feather_matter"
   },
@@ -4924,7 +4938,7 @@
     "date": "2026-10-27"
    },
    "alias": {
-    "target": "simplywings:wing.leather.flap",
+    "target": "simplywings:wing.glider.flap",
     "volume": 0.1,
     "pitch": 1.2
    },
@@ -5008,7 +5022,7 @@
    "alias": {
     "target": "simplywings:wing.feather.flap",
     "volume": 0.35,
-    "pitch": 1.092
+    "pitch": 1.03
    },
    "family": "element"
   },
@@ -5131,7 +5145,7 @@
    "alias": {
     "target": "simplywings:wing.feather.flap",
     "volume": 1,
-    "pitch": 0.7
+    "pitch": 0.66
    },
    "family": "feather"
   },
@@ -5245,14 +5259,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "revise",
+    "state": "todo",
     "note": "",
     "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.insect.flap",
     "volume": 0.8,
-    "pitch": 1.92
+    "pitch": 1.3
    },
    "family": "buzz"
   },
@@ -5285,14 +5299,14 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "revise",
+    "state": "todo",
     "note": "",
     "date": "2026-10-27"
    },
    "alias": {
     "target": "simplywings:wing.buzz.loop",
     "volume": 1,
-    "pitch": 1.6
+    "pitch": 1.35
    },
    "loop": true
   },
@@ -5370,7 +5384,7 @@
     "date": "2026-10-27"
    },
    "alias": {
-    "target": "simplywings:wing.leather.flap",
+    "target": "simplywings:wing.glider.flap",
     "volume": 0.5,
     "pitch": 0.765
    },
@@ -5532,7 +5546,7 @@
    "alias": {
     "target": "simplywings:wing.feather.flap",
     "volume": 0.3,
-    "pitch": 1.3
+    "pitch": 1.226
    },
    "family": "soft"
   },
@@ -5614,7 +5628,7 @@
    "alias": {
     "target": "simplywings:wing.feather.flap",
     "volume": 0.6,
-    "pitch": 1.1
+    "pitch": 1.038
    },
    "family": "feather_matter"
   },
@@ -5895,7 +5909,7 @@
    "alias": {
     "target": "simplywings:wing.feather.flap",
     "volume": 0.25,
-    "pitch": 0.9
+    "pitch": 0.849
    },
    "family": "feather"
   },
@@ -5977,7 +5991,7 @@
    "alias": {
     "target": "simplywings:wing.feather.flap",
     "volume": 1,
-    "pitch": 1.4
+    "pitch": 1.321
    },
    "family": "feather"
   },
@@ -6098,7 +6112,7 @@
    "alias": {
     "target": "simplywings:wing.feather.flap",
     "volume": 1,
-    "pitch": 1.05
+    "pitch": 0.991
    },
    "family": "feather"
   },
@@ -6180,7 +6194,7 @@
    "alias": {
     "target": "simplywings:wing.feather.flap",
     "volume": 1,
-    "pitch": 0.95
+    "pitch": 0.896
    },
    "family": "feather"
   },
@@ -6426,7 +6440,7 @@
    "alias": {
     "target": "simplywings:wing.feather.flap",
     "volume": 1,
-    "pitch": 1.15
+    "pitch": 1.085
    },
    "family": "feather"
   },
@@ -6549,7 +6563,7 @@
    "alias": {
     "target": "simplywings:wing.feather.flap",
     "volume": 0.3,
-    "pitch": 1.495
+    "pitch": 1.41
    },
    "family": "soft"
   },
@@ -6795,7 +6809,7 @@
    "alias": {
     "target": "simplywings:wing.feather.flap",
     "volume": 1,
-    "pitch": 0.85
+    "pitch": 0.802
    },
    "family": "feather"
   },
@@ -6918,7 +6932,7 @@
    "alias": {
     "target": "simplywings:wing.feather.flap",
     "volume": 0.6,
-    "pitch": 0.935
+    "pitch": 0.882
    },
    "family": "feather_matter"
   },
@@ -7037,7 +7051,7 @@
     "date": "2026-10-27"
    },
    "alias": {
-    "target": "simplywings:wing.leather.flap",
+    "target": "simplywings:wing.glider.flap",
     "volume": 0.2,
     "pitch": 0.8
    },
@@ -7121,7 +7135,7 @@
    "alias": {
     "target": "simplywings:wing.feather.flap",
     "volume": 0.6,
-    "pitch": 1.155
+    "pitch": 1.09
    },
    "family": "feather_matter"
   },
@@ -7129,17 +7143,21 @@
    "id": "wing.storm.layer",
    "category": "wing",
    "group": "storm",
-   "status": "vanilla",
+   "status": "custom",
    "trigger": "Joué par WingSounds avec chaque battement de la paire, particules ou non",
    "code": [
     "client/WingSounds.java"
    ],
    "description": "Couche de matière vanilla de la paire.",
-   "keywords": [],
+   "keywords": [
+    "static zap",
+    "electric spark",
+    "tzzt"
+   ],
    "reference": null,
-   "loudness_target": null,
-   "attenuation": null,
-   "preload": false,
+   "loudness_target": "ui",
+   "attenuation": 32,
+   "preload": true,
    "stream": false,
    "subtitle_key": null,
    "subtitle": null,
@@ -7152,18 +7170,81 @@
      "event": "strike"
     }
    ],
-   "variants": [],
+   "variants": [
+    {
+     "file": "wing/storm/layer_1",
+     "source": "fs_871766_arc_sparking.mp3",
+     "start": 1.0,
+     "end": null,
+     "peak": -3,
+     "fade_in": 0.005,
+     "fade_out": 0.03,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
+     "lp": 0,
+     "gain_db": 0,
+     "bursts": [
+      [
+       0,
+       0.14
+      ]
+     ]
+    },
+    {
+     "file": "wing/storm/layer_2",
+     "source": "fs_871766_arc_sparking.mp3",
+     "start": 3.0,
+     "end": null,
+     "peak": -3,
+     "fade_in": 0.005,
+     "fade_out": 0.03,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
+     "lp": 0,
+     "gain_db": 0,
+     "bursts": [
+      [
+       0,
+       0.07
+      ],
+      [
+       0.11,
+       0.12
+      ]
+     ]
+    },
+    {
+     "file": "wing/storm/layer_3",
+     "source": "fs_871766_arc_sparking.mp3",
+     "start": 5.5,
+     "end": null,
+     "peak": -3,
+     "fade_in": 0.005,
+     "fade_out": 0.03,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
+     "lp": 0,
+     "gain_db": 0,
+     "bursts": [
+      [
+       0,
+       0.2
+      ]
+     ]
+    }
+   ],
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "reject",
+    "state": "todo",
     "note": "Utilise un bruit electrique de charges statiques des tzzt tzzt tzzztt ",
     "date": "2026-10-27"
-   },
-   "vanilla": {
-    "event": "minecraft:entity.lightning_bolt.impact",
-    "volume": 0.02,
-    "pitch": 1.2
    }
   },
   {
@@ -7244,7 +7325,7 @@
    "alias": {
     "target": "simplywings:wing.feather.flap",
     "volume": 1,
-    "pitch": 1.25
+    "pitch": 1.179
    },
    "family": "feather"
   },
@@ -7367,7 +7448,7 @@
    "alias": {
     "target": "simplywings:wing.feather.flap",
     "volume": 0.35,
-    "pitch": 1.035
+    "pitch": 0.976
    },
    "family": "element"
   },
@@ -7491,7 +7572,7 @@
    "alias": {
     "target": "simplywings:wing.feather.flap",
     "volume": 1,
-    "pitch": 1
+    "pitch": 0.943
    },
    "family": "feather"
   },

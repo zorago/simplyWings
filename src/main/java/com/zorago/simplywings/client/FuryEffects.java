@@ -26,16 +26,22 @@ import org.joml.Vector3f;
 
 public final class FuryEffects {
     private static final int SCREAM_COOLDOWN_TICKS = 60;
+    private static final int LIGHT_BLAST_DELAY_TICKS = 120;
     private static final double BLAST_DISTANCE = 30;
     private static final ParticleOptions GHOST = new DustParticleOptions(new Vector3f(0.85f, 0.92f, 1f), 0.6f);
     private static final ParticleOptions PLASMA = new DustParticleOptions(new Vector3f(0.55f, 0.75f, 1f), 1.4f);
     private static final IntSet CHARGING = new IntOpenHashSet();
     private static final IntSet TUCKED = new IntOpenHashSet();
     private static final Int2IntMap LAST_SCREAM = new Int2IntOpenHashMap();
+    private static final Int2IntMap LIGHT_BLAST_AT = new Int2IntOpenHashMap();
 
     static void tick(Player player, WingVisuals.Visual visual) {
         Optional<ResourceLocation> wing = visual.equipped;
         int id = player.getId();
+        if (LIGHT_BLAST_AT.containsKey(id) && player.tickCount >= LIGHT_BLAST_AT.get(id)) {
+            LIGHT_BLAST_AT.remove(id);
+            playDash(player, ModSounds.LIGHT_INVISIBLE_BLAST.get());
+        }
         if (!FurySet.isFury(wing)) {
             CHARGING.remove(id);
             TUCKED.remove(id);
@@ -124,6 +130,7 @@ public final class FuryEffects {
         CHARGING.clear();
         TUCKED.clear();
         LAST_SCREAM.clear();
+        LIGHT_BLAST_AT.clear();
     }
 
     private static void follow(Player player, SoundEvent sound, float volume) {
@@ -201,6 +208,7 @@ public final class FuryEffects {
         }
         playDash(player, ModSounds.LIGHT_BLAST.get());
         playDash(player, ModSounds.LIGHT_INVISIBLE.get());
+        LIGHT_BLAST_AT.put(player.getId(), player.tickCount + LIGHT_BLAST_DELAY_TICKS);
     }
 
     private FuryEffects() {

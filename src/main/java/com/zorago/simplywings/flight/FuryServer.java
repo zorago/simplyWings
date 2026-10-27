@@ -17,6 +17,7 @@ public final class FuryServer {
     private static final int LIGHTNING_INTERVAL = 9;
     private static final int DASH_COOLDOWN_TICKS = 100;
     private static final int LATENCY_TICKS = 6;
+    private static final int DASH_BOLTS = 4;
 
     public static void onCharge(ServerPlayer player, Payloads.FuryCharge request) {
         WingsData data = ModAttachments.get(player);
@@ -49,6 +50,9 @@ public final class FuryServer {
         }
         data.setFuryReadyTick(player.level().getGameTime() + DASH_COOLDOWN_TICKS);
         player.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, ServerConfig.FURY_INVISIBILITY_TICKS.get(), 0, false, false, true));
+        if (FurySet.isNight(data.equipped())) {
+            strikeDash(player);
+        }
         broadcast(player, Payloads.FuryEvent.DASH);
     }
 
@@ -67,15 +71,32 @@ public final class FuryServer {
         long elapsed = now - start;
         if (FurySet.isNight(data.equipped()) && elapsed > 4 && elapsed <= FurySet.CHARGE_TICKS
                 && elapsed % LIGHTNING_INTERVAL == 0 && player.level() instanceof ServerLevel level) {
-            LightningBolt bolt = EntityType.LIGHTNING_BOLT.create(level);
-            if (bolt != null) {
-                double angle = player.getRandom().nextDouble() * Math.PI * 2;
-                double distance = 4 + player.getRandom().nextDouble() * 4;
-                bolt.moveTo(player.getX() + Math.cos(angle) * distance, player.getY() - 1,
-                        player.getZ() + Math.sin(angle) * distance);
-                bolt.setVisualOnly(true);
-                level.addFreshEntity(bolt);
-            }
+            around(level, player, 4, 4);
+        }
+    }
+
+    private static void strikeDash(ServerPlayer player) {
+        if (!(player.level() instanceof ServerLevel level)) {
+            return;
+        }
+        bolt(level, player.getX(), player.getY(), player.getZ());
+        for (int i = 0; i < DASH_BOLTS; i++) {
+            around(level, player, 3, 4);
+        }
+    }
+
+    private static void around(ServerLevel level, ServerPlayer player, double min, double spread) {
+        double angle = player.getRandom().nextDouble() * Math.PI * 2;
+        double distance = min + player.getRandom().nextDouble() * spread;
+        bolt(level, player.getX() + Math.cos(angle) * distance, player.getY() - 1, player.getZ() + Math.sin(angle) * distance);
+    }
+
+    private static void bolt(ServerLevel level, double x, double y, double z) {
+        LightningBolt bolt = EntityType.LIGHTNING_BOLT.create(level);
+        if (bolt != null) {
+            bolt.moveTo(x, y, z);
+            bolt.setVisualOnly(true);
+            level.addFreshEntity(bolt);
         }
     }
 

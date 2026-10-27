@@ -3,16 +3,19 @@
     "sounds": [
       {
         "name": "simplywings:wing/feather/flap_1",
+        "pitch": 1.06,
         "attenuation_distance": 32,
         "preload": true
       },
       {
         "name": "simplywings:wing/feather/flap_2",
+        "pitch": 1.06,
         "attenuation_distance": 32,
         "preload": true
       },
       {
         "name": "simplywings:wing/feather/flap_3",
+        "pitch": 1.06,
         "attenuation_distance": 32,
         "preload": true
       }
@@ -50,22 +53,30 @@
   "wing.leather.flap": {
     "sounds": [
       {
-        "name": "simplywings:wing/leather/flap_1",
+        "name": "minecraft:entity.bat.takeoff",
+        "type": "event"
+      }
+    ]
+  },
+  "wing.glider.flap": {
+    "sounds": [
+      {
+        "name": "simplywings:wing/glider/flap_1",
         "attenuation_distance": 32,
         "preload": true
       },
       {
-        "name": "simplywings:wing/leather/flap_2",
+        "name": "simplywings:wing/glider/flap_2",
         "attenuation_distance": 32,
         "preload": true
       },
       {
-        "name": "simplywings:wing/leather/flap_3",
+        "name": "simplywings:wing/glider/flap_3",
         "attenuation_distance": 32,
         "preload": true
       },
       {
-        "name": "simplywings:wing/leather/flap_4",
+        "name": "simplywings:wing/glider/flap_4",
         "attenuation_distance": 32,
         "preload": true
       }
@@ -74,19 +85,8 @@
   "wing.insect.flap": {
     "sounds": [
       {
-        "name": "simplywings:wing/insect/flap_1",
-        "attenuation_distance": 32,
-        "preload": true
-      },
-      {
-        "name": "simplywings:wing/insect/flap_2",
-        "attenuation_distance": 32,
-        "preload": true
-      },
-      {
-        "name": "simplywings:wing/insect/flap_3",
-        "attenuation_distance": 32,
-        "preload": true
+        "name": "minecraft:entity.bee.pollinate",
+        "type": "event"
       }
     ]
   },
@@ -112,9 +112,8 @@
   "wing.buzz.loop": {
     "sounds": [
       {
-        "name": "simplywings:wing/buzz/loop_1",
-        "attenuation_distance": 24,
-        "preload": true
+        "name": "minecraft:entity.bee.loop",
+        "type": "event"
       }
     ]
   },
@@ -129,15 +128,6 @@
       },
       {
         "name": "simplywings:gacha/ignite_3"
-      },
-      {
-        "name": "simplywings:gacha/ignite_4"
-      },
-      {
-        "name": "simplywings:gacha/ignite_5"
-      },
-      {
-        "name": "simplywings:gacha/ignite_6"
       }
     ]
   },
@@ -145,7 +135,9 @@
     "subtitle": "subtitles.simplywings.gacha.offer",
     "sounds": [
       {
-        "name": "simplywings:gacha/offer_1"
+        "name": "minecraft:block.beacon.power_select",
+        "type": "event",
+        "pitch": 0.8
       }
     ]
   },
@@ -165,6 +157,13 @@
     "sounds": [
       {
         "name": "simplywings:gacha/beam_1"
+      }
+    ]
+  },
+  "gacha.beam_roar": {
+    "sounds": [
+      {
+        "name": "simplywings:gacha/beam_roar_1"
       }
     ]
   },
@@ -366,13 +365,9 @@
     "subtitle": "subtitles.simplywings.ui.open",
     "sounds": [
       {
-        "name": "simplywings:ui/open_1"
-      },
-      {
-        "name": "simplywings:ui/open_2"
-      },
-      {
-        "name": "simplywings:ui/open_3"
+        "name": "minecraft:block.enchantment_table.use",
+        "type": "event",
+        "volume": 0.6
       }
     ]
   },
@@ -539,6 +534,14 @@
       }
     ]
   },
+  "light_fury.invisible_blast": {
+    "sounds": [
+      {
+        "name": "minecraft:entity.generic.explode",
+        "type": "event"
+      }
+    ]
+  },
   "night_fury.charge": {
     "subtitle": "subtitles.simplywings.night_fury.charge",
     "sounds": [
@@ -581,7 +584,7 @@
         "name": "simplywings:wing.feather.flap",
         "type": "event",
         "volume": 0.35,
-        "pitch": 1.38
+        "pitch": 1.302
       }
     ]
   },
@@ -590,7 +593,7 @@
       {
         "name": "minecraft:entity.breeze.idle_air",
         "type": "event",
-        "volume": 0.6,
+        "volume": 0.1,
         "pitch": 1.2
       }
     ]
@@ -613,7 +616,7 @@
         "name": "simplywings:wing.feather.flap",
         "type": "event",
         "volume": 0.6,
-        "pitch": 1.1
+        "pitch": 1.038
       }
     ]
   },
@@ -642,7 +645,7 @@
         "name": "simplywings:wing.insect.flap",
         "type": "event",
         "volume": 0.8,
-        "pitch": 0.84
+        "pitch": 0.8
       }
     ]
   },
@@ -652,7 +655,7 @@
       {
         "name": "simplywings:wing.buzz.loop",
         "type": "event",
-        "pitch": 0.7
+        "pitch": 0.75
       }
     ]
   },
@@ -673,7 +676,7 @@
       {
         "name": "simplywings:wing.feather.flap",
         "type": "event",
-        "pitch": 0.9
+        "pitch": 0.849
       }
     ]
   },
@@ -704,7 +707,7 @@
         "name": "simplywings:wing.feather.flap",
         "type": "event",
         "volume": 0.35,
-        "pitch": 1.265
+        "pitch": 1.193
       }
     ]
   },
@@ -713,7 +716,7 @@
       {
         "name": "minecraft:block.amethyst_block.resonate",
         "type": "event",
-        "volume": 0.5,
+        "volume": 0.25,
         "pitch": 1.2
       }
     ]
@@ -734,8 +737,7 @@
     "sounds": [
       {
         "name": "simplywings:wing.leather.flap",
-        "type": "event",
-        "pitch": 1.1
+        "type": "event"
       }
     ]
   },
@@ -755,8 +757,7 @@
       {
         "name": "simplywings:wing.insect.flap",
         "type": "event",
-        "volume": 0.8,
-        "pitch": 1.68
+        "volume": 0.8
       }
     ]
   },
@@ -765,8 +766,7 @@
     "sounds": [
       {
         "name": "simplywings:wing.buzz.loop",
-        "type": "event",
-        "pitch": 1.4
+        "type": "event"
       }
     ]
   },
@@ -788,7 +788,7 @@
         "name": "simplywings:wing.insect.flap",
         "type": "event",
         "volume": 0.8,
-        "pitch": 1.08
+        "pitch": 0.9
       }
     ]
   },
@@ -798,7 +798,7 @@
       {
         "name": "simplywings:wing.buzz.loop",
         "type": "event",
-        "pitch": 0.9
+        "pitch": 0.85
       }
     ]
   },
@@ -818,7 +818,8 @@
     "sounds": [
       {
         "name": "simplywings:wing.feather.flap",
-        "type": "event"
+        "type": "event",
+        "pitch": 1.415
       }
     ]
   },
@@ -838,7 +839,7 @@
         "name": "simplywings:wing.feather.flap",
         "type": "event",
         "volume": 0.6,
-        "pitch": 1.045
+        "pitch": 0.986
       }
     ]
   },
@@ -868,7 +869,7 @@
       {
         "name": "simplywings:wing.feather.flap",
         "type": "event",
-        "pitch": 0.95
+        "pitch": 0.896
       }
     ]
   },
@@ -940,7 +941,7 @@
         "name": "minecraft:entity.blaze.shoot",
         "type": "event",
         "volume": 0.45,
-        "pitch": 0.55
+        "pitch": 0.5
       }
     ]
   },
@@ -960,7 +961,7 @@
       {
         "name": "simplywings:wing.feather.flap",
         "type": "event",
-        "pitch": 0.85
+        "pitch": 0.802
       }
     ]
   },
@@ -991,7 +992,7 @@
         "name": "simplywings:wing.feather.flap",
         "type": "event",
         "volume": 0.6,
-        "pitch": 0.88
+        "pitch": 0.708
       }
     ]
   },
@@ -1022,7 +1023,7 @@
         "name": "simplywings:wing.feather.flap",
         "type": "event",
         "volume": 0.6,
-        "pitch": 1.1
+        "pitch": 1.038
       }
     ]
   },
@@ -1031,8 +1032,8 @@
       {
         "name": "minecraft:item.firecharge.use",
         "type": "event",
-        "volume": 0.35,
-        "pitch": 1.3
+        "volume": 0.05,
+        "pitch": 0.7
       }
     ]
   },
@@ -1049,10 +1050,10 @@
     "subtitle": "subtitles.simplywings.wing.flap",
     "sounds": [
       {
-        "name": "simplywings:wing.leather.flap",
+        "name": "simplywings:wing.glider.flap",
         "type": "event",
-        "volume": 0.5,
-        "pitch": 0.935
+        "volume": 0.1,
+        "pitch": 1.2
       }
     ]
   },
@@ -1074,7 +1075,7 @@
         "name": "simplywings:wing.feather.flap",
         "type": "event",
         "volume": 0.35,
-        "pitch": 1.092
+        "pitch": 1.03
       }
     ]
   },
@@ -1105,7 +1106,7 @@
       {
         "name": "simplywings:wing.feather.flap",
         "type": "event",
-        "pitch": 1.1
+        "pitch": 0.66
       }
     ]
   },
@@ -1136,7 +1137,7 @@
         "name": "simplywings:wing.insect.flap",
         "type": "event",
         "volume": 0.8,
-        "pitch": 1.92
+        "pitch": 1.3
       }
     ]
   },
@@ -1146,7 +1147,7 @@
       {
         "name": "simplywings:wing.buzz.loop",
         "type": "event",
-        "pitch": 1.6
+        "pitch": 1.35
       }
     ]
   },
@@ -1165,7 +1166,7 @@
     "subtitle": "subtitles.simplywings.wing.flap",
     "sounds": [
       {
-        "name": "simplywings:wing.leather.flap",
+        "name": "simplywings:wing.glider.flap",
         "type": "event",
         "volume": 0.5,
         "pitch": 0.765
@@ -1210,7 +1211,7 @@
         "name": "simplywings:wing.feather.flap",
         "type": "event",
         "volume": 0.3,
-        "pitch": 1.3
+        "pitch": 1.226
       }
     ]
   },
@@ -1232,7 +1233,7 @@
         "name": "simplywings:wing.feather.flap",
         "type": "event",
         "volume": 0.6,
-        "pitch": 1.1
+        "pitch": 1.038
       }
     ]
   },
@@ -1241,8 +1242,8 @@
       {
         "name": "minecraft:block.amethyst_cluster.break",
         "type": "event",
-        "volume": 0.4,
-        "pitch": 1.5
+        "volume": 0.15,
+        "pitch": 1.3
       }
     ]
   },
@@ -1281,8 +1282,8 @@
       {
         "name": "minecraft:block.wooden_trapdoor.open",
         "type": "event",
-        "volume": 0.6,
-        "pitch": 0.8
+        "volume": 0.2,
+        "pitch": 1.4
       }
     ]
   },
@@ -1304,7 +1305,7 @@
         "name": "simplywings:wing.feather.flap",
         "type": "event",
         "volume": 0.25,
-        "pitch": 0.9
+        "pitch": 0.849
       }
     ]
   },
@@ -1325,7 +1326,7 @@
       {
         "name": "simplywings:wing.feather.flap",
         "type": "event",
-        "pitch": 1.2
+        "pitch": 1.321
       }
     ]
   },
@@ -1355,7 +1356,7 @@
       {
         "name": "simplywings:wing.feather.flap",
         "type": "event",
-        "pitch": 1.05
+        "pitch": 0.991
       }
     ]
   },
@@ -1375,7 +1376,7 @@
       {
         "name": "simplywings:wing.feather.flap",
         "type": "event",
-        "pitch": 0.95
+        "pitch": 0.896
       }
     ]
   },
@@ -1435,7 +1436,7 @@
       {
         "name": "simplywings:wing.feather.flap",
         "type": "event",
-        "pitch": 1.15
+        "pitch": 1.085
       }
     ]
   },
@@ -1466,7 +1467,7 @@
         "name": "simplywings:wing.feather.flap",
         "type": "event",
         "volume": 0.3,
-        "pitch": 1.495
+        "pitch": 1.41
       }
     ]
   },
@@ -1527,7 +1528,7 @@
       {
         "name": "simplywings:wing.feather.flap",
         "type": "event",
-        "pitch": 0.85
+        "pitch": 0.802
       }
     ]
   },
@@ -1536,7 +1537,7 @@
       {
         "name": "minecraft:block.beacon.power_select",
         "type": "event",
-        "volume": 0.35,
+        "volume": 0.1,
         "pitch": 1.6
       }
     ]
@@ -1558,7 +1559,7 @@
         "name": "simplywings:wing.feather.flap",
         "type": "event",
         "volume": 0.6,
-        "pitch": 0.935
+        "pitch": 0.882
       }
     ]
   },
@@ -1567,8 +1568,8 @@
       {
         "name": "minecraft:entity.enderman.teleport",
         "type": "event",
-        "volume": 0.25,
-        "pitch": 0.6
+        "volume": 0.05,
+        "pitch": 0.1
       }
     ]
   },
@@ -1586,10 +1587,10 @@
     "subtitle": "subtitles.simplywings.wing.flap",
     "sounds": [
       {
-        "name": "simplywings:wing.leather.flap",
+        "name": "simplywings:wing.glider.flap",
         "type": "event",
-        "volume": 0.5,
-        "pitch": 1.02
+        "volume": 0.2,
+        "pitch": 0.8
       }
     ]
   },
@@ -1611,17 +1612,26 @@
         "name": "simplywings:wing.feather.flap",
         "type": "event",
         "volume": 0.6,
-        "pitch": 1.155
+        "pitch": 1.09
       }
     ]
   },
   "wing.storm.layer": {
     "sounds": [
       {
-        "name": "minecraft:entity.lightning_bolt.impact",
-        "type": "event",
-        "volume": 0.25,
-        "pitch": 1.8
+        "name": "simplywings:wing/storm/layer_1",
+        "attenuation_distance": 32,
+        "preload": true
+      },
+      {
+        "name": "simplywings:wing/storm/layer_2",
+        "attenuation_distance": 32,
+        "preload": true
+      },
+      {
+        "name": "simplywings:wing/storm/layer_3",
+        "attenuation_distance": 32,
+        "preload": true
       }
     ]
   },
@@ -1641,7 +1651,7 @@
       {
         "name": "simplywings:wing.feather.flap",
         "type": "event",
-        "pitch": 1.25
+        "pitch": 1.179
       }
     ]
   },
@@ -1672,7 +1682,7 @@
         "name": "simplywings:wing.feather.flap",
         "type": "event",
         "volume": 0.35,
-        "pitch": 1.035
+        "pitch": 0.976
       }
     ]
   },
@@ -1702,7 +1712,8 @@
     "sounds": [
       {
         "name": "simplywings:wing.feather.flap",
-        "type": "event"
+        "type": "event",
+        "pitch": 0.943
       }
     ]
   },

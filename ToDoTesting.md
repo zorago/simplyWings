@@ -325,6 +325,17 @@ Corrections du 27 octobre (`SOUND_PLAN.md` § 1), à vérifier en jeu :
 - [ ] Équiper / Retirer : nouveau son court et grave ; l'ancien son long reste à l'infusion de l'établi et à la table d'assemblage (`block.infusion`).
 - [ ] Gacha : un B et un SSS, sons identiques à avant l'extraction des cues dans `gacha/show_sounds.json` ; F3+T recharge le fichier.
 
+Après la passe d'écoute de zorago (27 octobre), à réécouter dans le banc puis en jeu (verdicts remis à « todo ») :
+
+- [ ] Insectes : bourdon vanilla (`entity.bee.loop` en boucle, `entity.bee.pollinate` au coup d'aile) pour l'abeille, le scarabée, l'ancienne et le colibri ; la boucle vanilla ne porte qu'à 6 blocs pour les autres joueurs.
+- [ ] Chauve-souris : `entity.bat.takeoff` (la référence) ; poisson volant, cerf-volant et écureuil volant gardent l'ancien son de cuir (`wing.glider.flap`).
+- [ ] Plume un peu plus aiguë (×1,06), les paires qui en dépendent compensées (même rendu qu'à la validation).
+- [ ] Orage : « tzzt » d'électricité statique à chaque battement ; aurore : tintements à moitié moins forts.
+- [ ] Gacha : flammes de forge à l'allumage, offrande éthérée (`block.beacon.power_select`), rayon d'énergie et grondement de flammes sous le pilier, onde de choc pour chaque étoile du ×10.
+- [ ] Night : au dash d'invisibilité, foudre visuelle (sans dégâts ni feu) sur le joueur et 4 éclairs autour.
+- [ ] Light : explosion vanilla 6 s après le dash d'invisibilité (`light_fury.invisible_blast`, son seul) ; charge en rafales de « tzzt ».
+- [ ] Menu : ouverture douce (`block.enchantment_table.use`), quand le son sera branché.
+
 Liste de la première passe CC0 (26 octobre) :
 
 - [ ] Coups d'ailes en déplacement : chaque famille (plume, membrane, cuir, insecte, planeur, mécanique) sonne juste ; pas de clic en début ou fin de fichier ; la chouette reste quasi silencieuse.

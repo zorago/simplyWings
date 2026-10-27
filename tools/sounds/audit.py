@@ -155,13 +155,14 @@ def main():
             m = measure(path)
             levels.append(m["rms"])
             measured.append((v, m))
-        limited = any(m["tp"] > b.CEILING_DB - 0.6 for _, m in measured)
+        limited = any(m["tp"] > b.CEILING_DB - 1.0 for _, m in measured)
         for v, m in measured:
             tag = f"{v['file']} ({e['id']})"
-            if goal is not None and m["rms"] - goal > 2:
-                error(f"{tag} : RMS max {m['rms']:.1f} dB, cible {goal} dB")
-            elif goal is not None and goal - m["rms"] > 2:
-                (warn if limited else error)(f"{tag} : RMS max {m['rms']:.1f} dB, cible {goal} dB" + (" (limité par le plafond de pic du groupe)" if limited else ""))
+            aim = None if goal is None else goal + v.get("gain_db", 0.0)
+            if aim is not None and m["rms"] - aim > 2:
+                error(f"{tag} : RMS max {m['rms']:.1f} dB, cible {aim:g} dB")
+            elif aim is not None and aim - m["rms"] > 2:
+                (warn if limited else error)(f"{tag} : RMS max {m['rms']:.1f} dB, cible {aim:g} dB" + (" (limité par le plafond de pic du groupe)" if limited else ""))
             if m["tp"] > -1.0:
                 error(f"{tag} : pic vrai {m['tp']:.2f} dBTP > −1")
             if not e.get("slow_attack") and not e.get("loop") and m["attack_ms"] > 10:

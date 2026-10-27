@@ -137,6 +137,23 @@ def encode(x, target):
                     "-c:a", "libvorbis", "-q:a", "5", str(target)], input=x.astype(np.float32).tobytes(), check=True)
 
 
+def bursts(x, pattern):
+    out = np.zeros(int((max(t + d for t, d in pattern) + 0.01) * SR), dtype=np.float32)
+    pos = 0
+    for t, d in pattern:
+        n = int(d * SR)
+        if pos + n > len(x):
+            pos = 0
+        seg = x[pos:pos + n].copy()
+        pos += n
+        a = min(len(seg) // 2, int(0.003 * SR))
+        z = min(len(seg) // 2, int(min(0.04, d / 3) * SR))
+        seg[:a] *= np.linspace(0, 1, a)
+        seg[-z:] *= np.linspace(1, 0, z) ** 2
+        out[int(t * SR):int(t * SR) + len(seg)] += seg
+    return out
+
+
 def shape(spec):
     if spec["source"].startswith("synth:"):
         x = synth(spec["source"][6:])
@@ -158,6 +175,8 @@ def shape(spec):
             t = np.linspace(0, np.pi / 2, n)
             body[:n] = body[:n] * np.sin(t) + tail[:n] * np.cos(t)
         return body
+    if spec.get("bursts"):
+        x = bursts(x, spec["bursts"])
     n_in = max(1, int(spec["fade_in"] * SR))
     n_out = min(len(x) // 2, max(1, int(spec["fade_out"] * SR)))
     x[:n_in] *= np.linspace(0, 1, n_in)
@@ -179,7 +198,7 @@ def render_entry(entry, goal):
     return [(v, normalize(x, spec(v, level))) for v, x in zip(variants, shaped)]
 
 
-SPEC = ("source", "start", "end", "peak", "fade_in", "fade_out", "echo", "loop", "tempo", "pitch", "lp")
+SPEC = ("source", "start", "end", "peak", "fade_in", "fade_out", "echo", "loop", "tempo", "pitch", "lp", "bursts")
 
 
 def catalog():

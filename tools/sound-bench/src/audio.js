@@ -111,6 +111,24 @@ export async function playEvent(id, { volume = 1, pitch = 1, distance = 0, posit
   return handle;
 }
 
+function bursts(x, pattern, rate) {
+  const out = new Float32Array(Math.floor((Math.max(...pattern.map(([t, d]) => t + d)) + 0.01) * rate));
+  let pos = 0;
+  for (const [t, d] of pattern) {
+    const n = Math.floor(d * rate);
+    if (pos + n > x.length) pos = 0;
+    const seg = x.slice(pos, pos + n);
+    pos += n;
+    const a = Math.min(seg.length >> 1, Math.floor(0.003 * rate));
+    const z = Math.min(seg.length >> 1, Math.floor(Math.min(0.04, d / 3) * rate));
+    for (let i = 0; i < a; i++) seg[i] *= i / a;
+    for (let i = 0; i < z; i++) seg[seg.length - 1 - i] *= (i / z) ** 2;
+    const at = Math.floor(t * rate);
+    for (let i = 0; i < seg.length && at + i < out.length; i++) out[at + i] += seg[i];
+  }
+  return out;
+}
+
 export function previewBuffer(source, v, target) {
   const sr = source.sampleRate;
   const tempo = v.tempo || 1;
@@ -124,11 +142,12 @@ export function previewBuffer(source, v, target) {
   const scale = pitch;
   const a = Math.max(0, Math.floor((v.start || 0) / tempo * scale * sr));
   const b = v.end == null ? mono.length : Math.min(mono.length, Math.floor((v.end / tempo) * scale * sr));
-  const x = mono.slice(a, Math.max(a + 1, b));
+  let x = mono.slice(a, Math.max(a + 1, b));
   let mean = 0;
   for (const s of x) mean += s;
   mean /= x.length;
   for (let i = 0; i < x.length; i++) x[i] -= mean;
+  if (v.bursts?.length) x = bursts(x, v.bursts, sr * scale);
   if (!v.loop) {
     const nIn = Math.max(1, Math.floor((v.fade_in || 0.004) * sr * scale));
     const nOut = Math.min(Math.floor(x.length / 2), Math.max(1, Math.floor((v.fade_out ?? 0.25) * sr * scale)));
