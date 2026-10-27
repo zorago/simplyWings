@@ -74,7 +74,7 @@ Tous les sons d'interface passent par deux passe-bas (6000 Hz pour les cartes, 1
 
 ## Pixabay, fournis par zorago (licence Pixabay)
 
-Dossier `pixabay/` : 33 fichiers choisis par zorago le 27 octobre pour refaire le son du gacha. Licence Pixabay Content License : usage gratuit dans un projet, y compris commercial, sans attribution obligatoire, mais pas de redistribution des fichiers seuls. Les sons sont intégrés au mod, donc l'usage est couvert. Les fichiers `freesound_community-*` sont des reprises Pixabay de sons Freesound. `openmindaudio-…-short-preview-492696` est un **extrait de démonstration** d'un morceau : à vérifier sur sa page Pixabay avant une publication.
+Dossier `pixabay/` : 34 fichiers choisis par zorago le 27 octobre pour refaire le son du gacha. Licence Pixabay Content License : usage gratuit dans un projet, y compris commercial, sans attribution obligatoire, mais pas de redistribution des fichiers seuls. Les sons sont intégrés au mod, donc l'usage est couvert. Les fichiers `freesound_community-*` sont des reprises Pixabay de sons Freesound. `openmindaudio-…-short-preview-492696` est un **extrait de démonstration** d'un morceau : à vérifier sur sa page Pixabay avant une publication.
 
 | Fichier local | Utilisé pour |
 |---|---|
@@ -111,6 +111,7 @@ Dossier `pixabay/` : 33 fichiers choisis par zorago le 27 octobre pour refaire l
 | `audiopapkin-riser-hit-sfx-127-508586.mp3` | `gacha.implode` (à partir de 2,36 s : coup à 2,66 s calé sur l'éclat) |
 | `dragon-studio-fire-spell-impact-448565.mp3` | `gacha.columns` (six colonnes élémentaires, une fois) |
 | `youssefmizani-bass-drop-407122.mp3` | `gacha.settle` (retombée) |
+| `u_1pruylktlg-riser-7-130957.mp3` | `gacha.opening_riser` (après la consumation des plumes, sommet sur l'allumage du cristal) |
 
 ## Sons synthétisés (aucune source externe)
 

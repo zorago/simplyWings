@@ -2,6 +2,7 @@
   "default": [
     {"t": 0.0, "sound": "simplywings:gacha.offer_burst", "volume": 4.0, "pitch": 1.0, "at": "altar"},
     {"t": 0.45, "sound": "simplywings:gacha.poof", "volume": 3.0, "pitch": 1.0, "at": "altar"},
+    {"t": 0.0, "sound": "simplywings:gacha.opening_riser", "volume": 4.0, "pitch": 1.0, "at": "altar"},
     {"t": 1.74, "sound": "simplywings:gacha.crystal", "volume": 4.0, "pitch": 1.0, "at": "crystal"},
     {"t": 1.86, "sound": "simplywings:gacha.music_summon", "volume": 1.0, "pitch": 1.0, "at": "altar"},
     {"each": "ignite", "t": 0.0, "sound": "simplywings:gacha.flame_ignite", "volume": 3.0, "pitch": 0.92, "pitch_random": 0.16, "at": "flame"},

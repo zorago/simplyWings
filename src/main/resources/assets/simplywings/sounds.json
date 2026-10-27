@@ -1929,6 +1929,13 @@
       }
     ]
   },
+  "gacha.opening_riser": {
+    "sounds": [
+      {
+        "name": "simplywings:gacha/opening_riser_1"
+      }
+    ]
+  },
   "gacha.crystal": {
     "sounds": [
       {

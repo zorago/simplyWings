@@ -512,7 +512,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -641,7 +641,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "revise",
+    "state": "keep",
     "note": "Nouveau dans le prompt",
     "date": "2026-10-27"
    },
@@ -800,7 +800,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "Je veux un beam d'energie pure, comme le tire atomique de godzilla.",
     "date": "2026-10-27"
    },
@@ -2809,7 +2809,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -3580,7 +3580,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -4592,7 +4592,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -6912,9 +6912,9 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
-    "date": null
+    "date": "2026-10-27"
    },
    "vanilla": {
     "event": "minecraft:block.beacon.power_select",
@@ -9057,7 +9057,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -9104,7 +9104,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -9151,7 +9151,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -9198,7 +9198,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -9245,7 +9245,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -9292,7 +9292,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -9339,7 +9339,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -9386,7 +9386,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -9433,7 +9433,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -9480,7 +9480,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -9527,7 +9527,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -9574,7 +9574,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -9621,7 +9621,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -9668,7 +9668,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -9730,7 +9730,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -9777,7 +9777,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -9824,7 +9824,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -9871,7 +9871,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -9918,7 +9918,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -9965,7 +9965,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -10012,7 +10012,54 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
+    "note": "",
+    "date": "2026-10-27"
+   },
+   "loop": false
+  },
+  {
+   "id": "gacha.opening_riser",
+   "category": "gacha",
+   "group": "altar",
+   "status": "custom",
+   "trigger": "Montée après la consumation des plumes : son sommet tombe sur l'allumage du cristal",
+   "code": [
+    "client/show/ShowSounds.java"
+   ],
+   "description": "",
+   "keywords": [],
+   "reference": null,
+   "loudness_target": "gacha_small",
+   "attenuation": null,
+   "preload": false,
+   "stream": false,
+   "subtitle_key": null,
+   "subtitle": null,
+   "declared": true,
+   "slow_attack": true,
+   "animations": [],
+   "variants": [
+    {
+     "file": "gacha/opening_riser_1",
+     "source": "pixabay/u_1pruylktlg-riser-7-130957.mp3",
+     "start": 0.25,
+     "end": 3.6,
+     "peak": -3,
+     "fade_in": 0.2,
+     "fade_out": 0.8,
+     "echo": 0,
+     "loop": 0,
+     "tempo": 1,
+     "pitch": 1,
+     "lp": 0,
+     "gain_db": 0
+    }
+   ],
+   "layers": [],
+   "candidates": [],
+   "verdict": {
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -10059,7 +10106,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -10106,7 +10153,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -10153,7 +10200,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -10200,7 +10247,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -10247,7 +10294,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -10294,7 +10341,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -10341,7 +10388,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -10388,7 +10435,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -10435,7 +10482,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -10482,7 +10529,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -10529,7 +10576,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
