@@ -234,5 +234,15 @@ tasks.register('bakeRig', JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
     mainClass = 'com.zorago.simplywings.client.studio.RigBake'
     workingDir = rootDir
-    args = [project.findProperty('wing') ?: 'basic', "build/rigbake/${project.findProperty('wing') ?: 'basic'}.json", rootDir.absolutePath]
+    args = [project.findProperty('wing') ?: 'basic', "build/rigbake/${project.findProperty('wing') ?: 'basic'}${project.findProperty('format') == 'bench' ? '.bench' : ''}.json", rootDir.absolutePath, project.findProperty('format') ?: 'rig']
+}
+
+tasks.register('bakeBench', JavaExec) {
+    group = 'simplywings'
+    description = 'Samples every wing rig with timestamped sound events for the sound bench (build/rigbake/<model>.bench.json and index.json)'
+    dependsOn tasks.named('classes')
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'com.zorago.simplywings.client.studio.RigBake'
+    workingDir = rootDir
+    args = ['all', 'build/rigbake', rootDir.absolutePath, 'bench']
 }

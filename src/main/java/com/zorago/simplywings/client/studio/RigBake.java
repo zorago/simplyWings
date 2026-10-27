@@ -8,6 +8,7 @@ import com.zorago.simplywings.SimplyWings;
 import com.zorago.simplywings.anim.RigMemory;
 import com.zorago.simplywings.anim.WingMotion;
 import com.zorago.simplywings.anim.WingStyle;
+import com.zorago.simplywings.data.WingDefinition;
 import com.zorago.simplywings.player.FlightMode;
 import com.zorago.simplywings.render.FlightPose;
 import com.zorago.simplywings.render.RigLoader;
@@ -37,11 +38,14 @@ public final class RigBake {
     private final WingStyle style;
     private final float flapRate;
     private final float hoverRate;
+    private final String pair;
+    private final boolean bench;
     private final Map<String, ModelPart> bones = new LinkedHashMap<>();
     private final PlayerModel<?> player;
     private final Map<String, ModelPart> body = new LinkedHashMap<>();
 
-    private RigBake(String name, Path root) throws IOException {
+    private RigBake(String name, Path root, boolean bench) throws IOException {
+        this.bench = bench;
         rig = WingRigs.byName(name);
         if (rig == null) {
             throw new IllegalArgumentException("Unknown rig " + name);
@@ -62,9 +66,10 @@ public final class RigBake {
             }
             bones.put(entry.getKey(), part);
         }
-        float[] rates = rates(root, name);
-        flapRate = rates[0];
-        hoverRate = rates[1];
+        JsonObject definition = definition(root, name);
+        flapRate = definition == null ? 2f : definition.get("flap_rate").getAsFloat();
+        hoverRate = definition == null ? 1.2f : definition.get("hover_rate").getAsFloat();
+        pair = definition == null ? null : definition.get("id").getAsString();
         style = WingStyle.of(SimplyWings.id(name));
         player = new PlayerModel<>(LayerDefinition.create(PlayerModel.createMesh(CubeDeformation.NONE, false), 64, 64).bakeRoot(), false);
         body.put("head", player.head);
@@ -75,17 +80,27 @@ public final class RigBake {
         body.put("left_leg", player.leftLeg);
     }
 
-    private static float[] rates(Path root, String name) throws IOException {
+    private static List<JsonObject> definitions(Path root) throws IOException {
         Path dir = root.resolve("src/main/resources/data/simplywings/simplywings/wing");
+        List<JsonObject> out = new ArrayList<>();
         try (Stream<Path> files = Files.list(dir)) {
             for (Path p : files.sorted().toList()) {
                 JsonObject json = JsonParser.parseString(Files.readString(p)).getAsJsonObject();
-                if (json.get("model").getAsString().equals("simplywings:" + name)) {
-                    return new float[]{json.get("flap_rate").getAsFloat(), json.get("hover_rate").getAsFloat()};
-                }
+                String file = p.getFileName().toString();
+                json.addProperty("id", file.substring(0, file.length() - ".json".length()));
+                out.add(json);
             }
         }
-        return new float[]{2f, 1.2f};
+        return out;
+    }
+
+    private static JsonObject definition(Path root, String name) throws IOException {
+        for (JsonObject json : definitions(root)) {
+            if (json.get("model").getAsString().equals("simplywings:" + name)) {
+                return json;
+            }
+        }
+        return null;
     }
 
     private static final class Step {
@@ -101,6 +116,8 @@ public final class RigBake {
         float bank;
         boolean rouse;
         int variant;
+        boolean airJump;
+        boolean hard;
     }
 
     private final class Sim {
@@ -275,6 +292,124 @@ public final class RigBake {
     private record Segment(int ticks, Step step) {
     }
 
+    private final class Cues {
+        final JsonArray events = new JsonArray();
+        final int interval = Math.max(1, Math.round(20f / Math.max(0.1f, flapRate)));
+        final int strike = Math.max(1, Math.round(interval * style.strikeAt()));
+        final boolean continuous = flapRate >= WingDefinition.CONTINUOUS_FLAP_RATE;
+        Step step;
+        int cooldown;
+        int pending = -1;
+        boolean buzzing;
+        int hoverFrom;
+
+        void add(float ticks, String type, float volume, float pitch) {
+            JsonObject event = new JsonObject();
+            event.addProperty("t", round(ticks / 20f));
+            event.addProperty("type", type);
+            if (volume > 0f) {
+                event.addProperty("volume", volume);
+                event.addProperty("pitch", pitch);
+            }
+            events.add(event);
+        }
+
+        JsonObject last() {
+            return events.get(events.size() - 1).getAsJsonObject();
+        }
+
+        void enter(Step next, int tick) {
+            Step prev = step;
+            step = next;
+            if (next.launch) {
+                add(tick, "launch", 1.1f, 1f);
+                add(tick, "strike_strong", 0.7f, 1f);
+            } else if (prev != null && next.mode == FlightMode.TRAVEL && prev.mode == FlightMode.STABILIZED) {
+                add(tick, "mode_travel", 0.7f, 1f);
+                last().addProperty("strong", true);
+            }
+            if (prev != null && next.mode == FlightMode.STABILIZED && prev.mode == FlightMode.TRAVEL) {
+                add(tick, "mode_hover", 0.8f, 0.9f);
+            }
+            if (next.mode == FlightMode.STABILIZED && (prev == null || prev.mode != FlightMode.STABILIZED)) {
+                hoverFrom = tick;
+            }
+            if (next.airJump) {
+                add(tick, "air_jump", 0.6f, 1.1f);
+                last().addProperty("strong", true);
+            }
+            if (next.state == WingMotion.LANDING && (prev == null || prev.state != WingMotion.LANDING)) {
+                add(tick, next.hard ? "land_hard" : "land_soft", next.hard ? 0.75f : 0.6f, 1f);
+                last().addProperty("flap_volume", next.hard ? 0.5f : 0.35f);
+                last().addProperty("flap_pitch", 0.8f);
+            }
+            if (next.state == WingMotion.TUCK && (prev == null || prev.state != WingMotion.TUCK)) {
+                add(tick, "tuck", 0f, 1f);
+            }
+            if (next.state == WingMotion.BRAKE && (prev == null || prev.state != WingMotion.BRAKE)) {
+                add(tick, "brake", 0f, 1f);
+            }
+            if (next.stall && (prev == null || !prev.stall)) {
+                add(tick, "stall", 0f, 1f);
+            }
+            if (next.rouse) {
+                add(tick, "rouse", 0f, 1f);
+                last().addProperty("variant", next.variant);
+            }
+            if (continuous && next.beating != buzzing) {
+                buzzing = next.beating;
+                add(tick, buzzing ? "buzz_start" : "buzz_stop", 0f, 1f);
+            }
+        }
+
+        void tick(int tick) {
+            if (continuous) {
+                return;
+            }
+            if (cooldown > 0) {
+                cooldown--;
+            }
+            if (pending > 0) {
+                pending--;
+            }
+            if (pending == 0) {
+                pending = -1;
+                if (step.state != WingMotion.BRAKE) {
+                    add(tick, "strike", 0.7f, 1f);
+                }
+            }
+            if (step.beating && step.mode == FlightMode.TRAVEL && cooldown <= 0 && pending < 0) {
+                cooldown = interval;
+                pending = strike;
+                add(tick, "beat", 0f, 1f);
+            }
+        }
+
+        void hover(Sim sim, int tick) {
+            if (sim.step.mode != FlightMode.STABILIZED) {
+                return;
+            }
+            double from = Math.floor(sim.prevHoverPhase / Mth.TWO_PI);
+            double to = Math.floor(sim.hoverPhase / Mth.TWO_PI);
+            if (to > from && tick - 1 + (to * Mth.TWO_PI - sim.prevHoverPhase) / (sim.hoverPhase - sim.prevHoverPhase) >= hoverFrom) {
+                double frac = (to * Mth.TWO_PI - sim.prevHoverPhase) / (sim.hoverPhase - sim.prevHoverPhase);
+                add((float) (tick - 1 + frac), "hover_flap", 0f, 1f);
+                last().addProperty("silent", true);
+            }
+        }
+    }
+
+    private static float round(float v) {
+        return Math.round(v * 100000f) / 100000f;
+    }
+
+    private static float speed(Step step) {
+        if (step.mode != FlightMode.TRAVEL) {
+            return 0f;
+        }
+        return step.state == WingMotion.DIVE ? 25f : step.state == WingMotion.BRAKE ? 6f : 15f;
+    }
+
     private JsonObject clip(String name, String loop, float lengthTicks, boolean preroll, List<Segment> segments) {
         Sim sim = new Sim();
         sim.enter(segments.get(0).step(), true);
@@ -290,6 +425,10 @@ public final class RigBake {
             sim.hoverPhase -= Math.floor(sim.hoverPhase / Mth.TWO_PI) * Mth.TWO_PI;
             sim.prevHoverPhase = sim.hoverPhase - Mth.TWO_PI * hoverRate / 20f;
         }
+        Cues cues = bench ? new Cues() : null;
+        if (cues != null) {
+            cues.enter(segments.get(0).step(), 0);
+        }
         JsonArray frames = new JsonArray();
         int tick = 0;
         int last = (int) Math.ceil(lengthTicks);
@@ -299,8 +438,14 @@ public final class RigBake {
         while (tick <= last) {
             if (!first) {
                 sim.tick();
+                if (cues != null) {
+                    cues.hover(sim, tick);
+                }
             }
             first = false;
+            if (cues != null && tick <= lengthTicks + 1e-4f) {
+                cues.tick(tick);
+            }
             for (float sub : SUBSTEPS) {
                 float t = tick + sub;
                 if (t > lengthTicks + 1e-4f) {
@@ -313,12 +458,30 @@ public final class RigBake {
                 segment++;
                 segmentEnd += segments.get(segment).ticks();
                 sim.enter(segments.get(segment).step(), false);
+                if (cues != null && tick <= lengthTicks + 1e-4f) {
+                    cues.enter(segments.get(segment).step(), tick);
+                }
             }
         }
         JsonObject clip = new JsonObject();
         clip.addProperty("name", name);
         clip.addProperty("loop", loop);
         clip.addProperty("length", lengthTicks / 20f);
+        if (cues != null) {
+            clip.addProperty("flap_rate", flapRate);
+            clip.addProperty("hover_rate", hoverRate);
+            clip.addProperty("strike_at", round(style.strikeAt()));
+            clip.addProperty("continuous", cues.continuous);
+            clip.addProperty("flap_interval", cues.interval);
+            clip.addProperty("strike_tick", cues.strike);
+            clip.addProperty("speed", speed(segments.get(0).step()));
+            List<JsonObject> sorted = new ArrayList<>();
+            cues.events.forEach(e -> sorted.add(e.getAsJsonObject()));
+            sorted.sort(java.util.Comparator.comparingDouble(e -> e.get("t").getAsDouble()));
+            JsonArray events = new JsonArray();
+            sorted.forEach(events::add);
+            clip.add("events", events);
+        }
         clip.add("frames", frames);
         return clip;
     }
@@ -350,6 +513,9 @@ public final class RigBake {
         frame.addProperty("pitch", pitch);
         frame.addProperty("billow", rig.membraneBillow());
         frame.addProperty("roll", roll);
+        if (bench) {
+            frame.addProperty("speed", speed(step));
+        }
         return frame;
     }
 
@@ -406,9 +572,17 @@ public final class RigBake {
         charge.add(new Segment(1, launch));
         charge.add(new Segment(30, travel(WingMotion.CRUISE, -40f)));
         clips.add(clip("takeoff", "once", 62, true, charge));
-        clips.add(clip("air_jump", "loop", 40, true, List.of(new Segment(1, step(FlightMode.NONE, WingMotion.AIR)))));
+        Step jump = step(FlightMode.NONE, WingMotion.AIR);
+        jump.airJump = true;
+        clips.add(clip("air_jump", "loop", 40, true, List.of(new Segment(1, jump))));
         clips.add(clip("landing", "once", 40, true, List.of(new Segment(1, step(FlightMode.NONE, WingMotion.AIR)),
                 new Segment(14, step(FlightMode.NONE, WingMotion.LANDING)), new Segment(1, step(FlightMode.NONE, WingMotion.GROUND)))));
+        if (bench) {
+            Step hard = step(FlightMode.NONE, WingMotion.LANDING);
+            hard.hard = true;
+            clips.add(clip("landing_hard", "once", 40, true, List.of(new Segment(1, step(FlightMode.NONE, WingMotion.AIR)),
+                    new Segment(14, hard), new Segment(1, step(FlightMode.NONE, WingMotion.GROUND)))));
+        }
 
         Step flap = travel(WingMotion.CRUISE, 0f);
         flap.beating = true;
@@ -467,24 +641,77 @@ public final class RigBake {
         return clips;
     }
 
-    public static void main(String[] args) throws IOException {
-        Path root = Path.of(args.length > 2 ? args[2] : ".").toAbsolutePath();
-        RigBake bake = new RigBake(args[0], root);
+    private JsonObject bake(String name) {
         JsonObject out = new JsonObject();
-        out.addProperty("rig", args[0]);
-        out.addProperty("flap_rate", bake.flapRate);
-        out.addProperty("hover_rate", bake.hoverRate);
+        out.addProperty("rig", name);
+        out.addProperty("flap_rate", flapRate);
+        out.addProperty("hover_rate", hoverRate);
+        if (bench) {
+            out.addProperty("pair", pair);
+            out.addProperty("strike_at", round(style.strikeAt()));
+            out.addProperty("continuous", flapRate >= WingDefinition.CONTINUOUS_FLAP_RATE);
+            out.addProperty("fps", 40);
+        }
         JsonObject rest = new JsonObject();
-        for (Map.Entry<String, ModelPart> entry : bake.bones.entrySet()) {
+        for (Map.Entry<String, ModelPart> entry : bones.entrySet()) {
             ModelPart part = entry.getValue();
             part.loadPose(part.getInitialPose());
             rest.add(entry.getKey(), state(part));
         }
         out.add("rest", rest);
-        out.add("clips", bake.clips());
+        out.add("clips", clips());
+        return out;
+    }
+
+    private static void write(Path target, JsonObject json) throws IOException {
+        Files.createDirectories(target.toAbsolutePath().getParent());
+        Files.writeString(target, new GsonBuilder().create().toJson(json), StandardCharsets.UTF_8);
+    }
+
+    private static void all(Path dir, Path root) throws IOException {
+        List<JsonObject> definitions = definitions(root);
+        JsonArray models = new JsonArray();
+        for (String name : WingRigs.names()) {
+            RigBake bake = new RigBake(name, root, true);
+            write(dir.resolve(name + ".bench.json"), bake.bake(name));
+            JsonObject model = new JsonObject();
+            model.addProperty("model", name);
+            model.addProperty("file", name + ".bench.json");
+            model.addProperty("baked_pair", bake.pair);
+            JsonArray pairs = new JsonArray();
+            for (JsonObject json : definitions) {
+                if (json.get("model").getAsString().equals("simplywings:" + name)) {
+                    float rate = json.get("flap_rate").getAsFloat();
+                    JsonObject p = new JsonObject();
+                    p.addProperty("id", json.get("id").getAsString());
+                    p.addProperty("rarity", json.has("rarity") ? json.get("rarity").getAsString() : null);
+                    p.addProperty("flap_rate", rate);
+                    p.addProperty("hover_rate", json.get("hover_rate").getAsFloat());
+                    p.addProperty("continuous", rate >= WingDefinition.CONTINUOUS_FLAP_RATE);
+                    pairs.add(p);
+                }
+            }
+            model.add("pairs", pairs);
+            models.add(model);
+            System.out.println("Baked " + name + " bench");
+        }
+        JsonObject index = new JsonObject();
+        index.addProperty("fps", 40);
+        index.add("models", models);
+        write(dir.resolve("index.json"), index);
+        System.out.println("Wrote " + models.size() + " rigs to " + dir);
+    }
+
+    public static void main(String[] args) throws IOException {
+        Path root = Path.of(args.length > 2 ? args[2] : ".").toAbsolutePath();
+        boolean bench = args.length > 3 && args[3].equals("bench");
+        if (args[0].equals("all")) {
+            all(Path.of(args[1]), root);
+            return;
+        }
+        RigBake bake = new RigBake(args[0], root, bench);
         Path target = Path.of(args[1]);
-        Files.createDirectories(target.getParent());
-        Files.writeString(target, new GsonBuilder().create().toJson(out), StandardCharsets.UTF_8);
+        write(target, bake.bake(args[0]));
         System.out.println("Baked " + args[0] + " to " + target);
     }
 }

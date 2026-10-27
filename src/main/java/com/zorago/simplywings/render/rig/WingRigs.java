@@ -120,6 +120,10 @@ public final class WingRigs {
         }
     }
 
+    public static List<String> names() {
+        return ALL.stream().map(WingRig::name).toList();
+    }
+
     public static WingRig byName(String name) {
         return ALL.stream().filter(rig -> rig.name().equals(name)).findFirst().orElse(null);
     }
