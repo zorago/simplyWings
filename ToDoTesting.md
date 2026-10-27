@@ -321,6 +321,8 @@ Notés au fil des messages de zorago, à corriger seulement sur son feu vert.
 - [ ] Écran du gacha : nouvelle image de fond fournie par zorago, `art/gacha/altar_screen_background.png` (jardin céleste violet, six ailés élémentaires autour d'un temple flottant), à intégrer.
 - [ ] Refaire les modèles 3D de l'autel draconique et de la fontaine aux offrandes. Les textures du bloc de la fontaine sont actuellement cassées en jeu : à couvrir par la refonte, pas à corriger à part.
 - [ ] Ailes d'ange : l'auréole n'est pas au-dessus de la tête au repos, et elle est globalement mal placée (à recaler sur la tête dans toutes les poses).
+- [ ] Furies (Night et Light), modèle 3D : la première paire d'ailes est un peu trop petite ; allonger un peu ses os et agrandir ses membranes.
+- [ ] Furies, queue : l'animer au repos (idles) et pendant la marche, et l'allonger de 1 ou 2 segments.
 - [ ] **Crash** : ouvrir le wiki depuis la table d'assemblage fait planter le jeu (`crash-2026-10-27_22.30.42-client.txt` de `temp_buildSimplyWings`) : `NullPointerException` dans `WikiScreen.<init>` ligne 53, `history.push(null)` (le chemin trouvé par `find(null, start, path)` commence par `null`, que l'`ArrayDeque` refuse). Ouvert depuis `AssemblyTableScreen` ligne 26. Note : l'instance tourne sous NeoForge 21.1.265.
 
 ## 15. Sons : passes d'écoute dans le banc, puis en jeu
