@@ -243,6 +243,16 @@ Tous les sons sont validés à l'oreille par zorago (27 octobre au soir) : on ne
 
 - S1. `run-pack/` (copie locale du pack, `runPackStudio`) avec le nouveau jar : démarrage, aucune erreur `simplywings`, un vol, un tirage, la table ; Iris et un shaderpack : ailes, show et transparence (captures).
 
+### T. Release 1.0.0 (fin de matinée, après le round 2)
+
+Objectif de la campagne : si tout va bien, le mod sort de la matinée en **v1.0 prête pour la bêta** dans le modpack de zorago et sur CurseForge. La publication elle-même (compte CurseForge, page, mise en ligne) reste faite par zorago.
+- T1. Version `1.0.0` (`gradle.properties`), borne basse de NeoForge dans `neoforge.mods.toml`, `CHANGELOG.md`.
+- T2. Licence **MIT** (décidée le 27 octobre au soir) : `LICENSE` et `mod_license` faits ; vérifier qu'elle apparaît dans le jar et dans l'écran des mods.
+- T3. `README.md` : liste « TODO before release » remise à jour (son, wiki, structures et show sont faits) ; les points encore ouverts (passe de particules par paire, panneaux tutoriel du menu des ailes, mise en page finale de ce menu, contrôle avec les mods de l'End du pack) classés « v1 » ou « après la bêta », à trancher par zorago.
+- T4. Commandes de debug (`unlock`, `stamina`, `gacha force`, `sanctum`, `dragon`, `energy`, `sound`…) réservées aux opérateurs : vérifier le niveau de permission de chacune avec un joueur non op (Dev2 désopé).
+- T5. Brouillon de la page CurseForge dans `docs/CURSEFORGE.md` : description en anglais, fonctionnalités, captures prises pendant la campagne, dépendances (NeoForge 1.21.1, JEI optionnel), licence.
+- T6. Sons des Furies tirés du film : **gardés** (décision de zorago le 27 au soir : fortement modifiés, jugés assez différents ; retirés si CurseForge le demande). L'audit les signale toujours comme bloquants : c'est attendu, à ne pas « corriger ». Musique d'invocation Pixabay « short-preview » : vérification de la licence sur sa page, par zorago.
+
 ## 4. Corrections entre les deux rounds
 
 ### 4.1 Ordre

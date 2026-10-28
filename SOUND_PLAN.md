@@ -124,7 +124,7 @@ Vrombissements `wing.<paire>.buzz` : `alias` vers `wing.buzz.loop` avec la haute
 
 | Id | Statut |
 |---|---|
-| `night_fury.dive`, `light_fury.dive`, `night_fury.invisible`, `light_fury.invisible` | sample du film : OK pour le pack privé, **bloquant pour la publication** (§ 5) |
+| `night_fury.dive`, `light_fury.dive`, `night_fury.invisible`, `light_fury.invisible` | sample du film, fortement modifié : **gardé pour la publication** (décision de zorago du 27 octobre au soir, avis d'un étudiant en droit : trop différent de l'original) ; retiré si CurseForge le demande. L'audit continue de le signaler (§ 5) |
 | `night_fury.charge`, `night_fury.crackle`, `light_fury.charge` | custom existants, `night_fury.charge` à baisser (§ 1.1) |
 | `light_fury.blast` | vanilla (`entity.generic.explode`) |
 | idles, queue, battements spécifiques | silent (choix de zorago) ; les battements suivent la famille membrane |
