@@ -165,7 +165,7 @@ Paires de référence : la commune, la chouette, l'aigle, l'abeille (poussée co
 - K2. **Transparence (§ 16)** : flammes de l'autel, ailes de feu, ailes émissives et translucides devant l'eau et sous ou au-dessus des nuages (captures dans la même scène).
 - K3. **Plans fins (§ 16)** : lignes de 0,1 px sur les membranes des Furies et sur toutes les paires à plans (captures de près, de profil).
 - K4. **Auréole de l'ange (§ 16)** : capture au repos, en marche, en vol, en stationnaire.
-- K5. **Cape (§ 16)** : skin avec cape (le joueur de dev en a une si un skin cape est chargé ; sinon noter non testable), en vol.
+- K5. **Cape (§ 16)** : `cape on` (cape de test posée sur le joueur de dev), en vol : capture avant correctif ; après correctif, plus aucune cape tant que des ailes sont équipées, cape de retour sans ailes.
 - K6. Ailes émissives la nuit ; z-fighting des faces superposées de près et de loin.
 - K7. Traînées au freinage depuis les bons os (orage, méganeure).
 - K8. Polatouche : bout de l'aile collé à la main en marche, frappe et minage.
@@ -178,7 +178,7 @@ Paires de référence : la commune, la chouette, l'aigle, l'abeille (poussée co
 - L3. Show dans le monde, un tirage par palier forcé (`gacha force ss|sss|mythic|x10`, puis un B et un A naturels) : captures à t = 0, 2, 5, 7, 10 s, à l'éclat et aux ailes. Le show suit la timeline (`altar_show.json.gz`), la caméra suit l'os caméra puis revient au joueur.
 - L4. **Plus de skip** : clic, Échap, espace et Entrée ignorés pendant le show.
 - L5. Cartes : distribution, retournement, « Click to reveal all », fermeture, objets donnés en une fois (ou jetés si l'inventaire est plein), réclamation à la déconnexion.
-- L6. Sons du show (`soundlog`) comparés à `show_sounds.json` : chaque cue au bon moment (±1 tick) et au bon endroit, par palier ; musique du ×10 jusqu'au bout (24,9 s) ; musique des loots en fondu à la fermeture.
+- L6. Sons du show (`soundlog`) comparés à `show_sounds.json` : chaque cue au bon moment (±1 tick) et au bon endroit, par palier ; musique du ×10 jusqu'au bout (24,9 s) ; musique des loots en fondu à la fermeture. **Chez celui qui invoque ET chez un spectateur (Dev2, MP)** : aujourd'hui les cartes, le chœur et la musique des loots ne jouent que chez celui qui invoque (§ 16) ; chercher aussi la musique finale que zorago n'a pas entendue (`music_burst`, `music_loot`).
 - L7. Pitié : `gacha pity 99 0 0` → S garanti ; `0 499 0` → SS ; `0 0 999` → SSS ; compteurs remis à zéro ; `gacha info` ; `gacha reset`.
 - L8. Un B ou un A donne un seul objet ; onglet Taux à jour.
 - L9. Dev2 à moins de 512 blocs voit et entend le show de Dev (MP) ; au-delà, rien.
@@ -216,7 +216,7 @@ Sur les **nouveaux templates** exportés en P3.
 
 ### P. Sons (≈ 30 min)
 
-Par déclenchement (`soundlog`) ; le rendu à l'oreille est `HUMAIN`.
+Tous les sons sont validés à l'oreille par zorago (27 octobre au soir) : on ne vérifie plus que leur déclenchement (`soundlog`), l'absence d'erreur, et l'audibilité du gacha pour les spectateurs. Un correctif qui touche un son le fait réécouter (`HUMAIN`).
 
 - P1. `/simplywings sound list` puis chaque id joué une fois : aucun « Unable to play unknown soundEvent », aucun fichier OGG manquant au journal.
 - P2. Vol : battement par paire, coup fort, vrombissement (et son arrêt), vent, envol, atterrissages, crash, **stationnaire** (battement très faible, espacement irrégulier, jamais pour les paires à vrombissement), **frein** (coup fort puis souffle qui baisse avec la vitesse, fondu au relâchement), **frôlement** (Dev2 passe vite à moins de 5 blocs, MP).
@@ -236,7 +236,7 @@ Par déclenchement (`soundlog`) ; le rendu à l'oreille est `HUMAIN`.
 ### R. Configs et touches (≈ 15 min)
 
 - R1. Config serveur : changer `rescueJumps`, `flapCost`, `[cloud] minY`, `[gacha] rateSSS` dans `serverconfig`, redémarrer : pris en compte.
-- R2. **Touches (§ 16, après correctif)** : catégorie SimplyWings du menu Touches avec les directions des ailes (monter, descendre, gauche, droite) ; par défaut W monte et S descend ; `invertPitch` supprimé ; touches remappées prises en compte en vol.
+- R2. **Touches (§ 16, après correctif)** : catégorie SimplyWings du menu Touches avec **toutes** les actions du mod (directions, monter, descendre, saut ailé, stationnaire, battements, frein, déplacement, menu, dash) ; par défaut W monte et S descend ; `invertPitch` supprimé ; chaque touche remappée (dont W et S échangées) prise en compte en vol, et sauvegardée dans `options.txt`.
 - R3. Touche Frein non assignée par défaut ; sneak freine.
 
 ### S. Pack complet (en dernier, ≈ 30 min, si le temps le permet)
@@ -248,10 +248,10 @@ Par déclenchement (`soundlog`) ; le rendu à l'oreille est `HUMAIN`.
 ### 4.1 Ordre
 
 1. Crashs (wiki, et tout crash du round 1).
-2. Gameplay : barre de charge et cooldown des Furies, maniabilité au frein, touches des ailes et suppression de `invertPitch`.
+2. Gameplay : barre de charge et cooldown des Furies, maniabilité au frein, toutes les touches du mod configurables et suppression de `invertPitch`, sons du gacha relayés aux joueurs autour (cartes comprises).
 3. Gacha : cercle d'invocation à hauteur du sol de l'autel, plume dessinée une seule fois, nouveau fond d'écran.
 4. Structures : loot de la forge retiré, tonneaux fixes de la table d'assemblage remis à neuf à la régénération, dépendances aux positions des établis.
-5. Rendu : transparence devant l'eau et les nuages, lignes des plans fins, auréole de l'ange, cape masquée quand des ailes sont équipées (sans mixin si possible, sinon correction de son mouvement).
+5. Rendu : transparence devant l'eau et les nuages, lignes des plans fins, auréole de l'ange, cape supprimée tant que des ailes sont équipées (sans mixin).
 6. Art : Furies (première paire plus grande, queue animée et plus longue), refonte de l'autel puis de la fontaine (octogone de 4 blocs, blocs de collision invisibles, densité de texels juste). Ces livrables restent **à valider par zorago** : captures et scène Blockbench à son retour.
 7. Les KO du round 1 qui ne sont pas dans cette liste, selon leur gravité.
 
@@ -275,7 +275,7 @@ Chaque correctif met à jour les documents concernés (`ToDoTesting.md`, `README
 ## 5. Liste pour zorago (à son retour)
 
 Préparée pendant la campagne, avec captures et liens :
-- écoute dans le banc de son (`cd tools/sound-bench && npm run dev`) des 14 sons ajoutés le 27 octobre (frein, frôlement, gouttes, réserve, ids vanilla), puis en jeu (§ 15) ;
+- sons : tous validés le 27 au soir ; seulement réécouter le gacha côté spectateur après le correctif ;
 - ressenti du vol : frein à 10 % de maniabilité, nouvelles touches (W monte), barre des Furies ;
 - art : refonte de l'autel et de la fontaine, ailes et queue des Furies, auréole ;
 - structures exportées : fidèles au build (captures comparées) ;

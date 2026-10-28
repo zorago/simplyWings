@@ -339,61 +339,64 @@ Notés au fil des messages de zorago (liste close le 28 octobre). Ils sont corri
 - [ ] Furies (Night et Light), modèle 3D : la première paire d'ailes est un peu trop petite ; allonger un peu ses os et agrandir ses membranes.
 - [ ] Furies, queue : l'animer au repos (idles) et pendant la marche, et l'allonger de 1 ou 2 segments.
 - [ ] Show du gacha : remonter le cercle d'invocation au sol, aujourd'hui à −2 blocs sous l'autel, au niveau du sol de l'autel, à hauteur d'un tapis (juste au-dessus du sol). zorago a changé son build et le cercle y est caché.
-- [ ] Contrôles : ajouter les touches de direction des ailes dans le menu Touches de Minecraft (catégorie SimplyWings), pour que le joueur choisisse. Aujourd'hui le vol en déplacement lit directement les touches vanilla avancer, reculer, gauche et droite (`ClientFlight` lignes 534-536 et 624-625). L'inversion de l'axe W/S est une option de config client (`ClientConfig.INVERT_PITCH`, `invertPitch`) : la **supprimer** au profit de touches « monter » et « descendre ». Par défaut, W pour monter et S pour descendre : l'inverse d'aujourd'hui, que peu de joueurs trouvaient logique.
+- [ ] **Contrôles : toutes les touches du mod configurables** dans le menu Touches de Minecraft (catégorie SimplyWings). Aujourd'hui seules Déplacement (Alt), Menu (J) et Frein sont des touches du mod ; le reste lit les touches vanilla (`ClientFlight` : avancer, reculer, gauche, droite lignes 534-536 et 624-625, saut pour le saut ailé, le double tap et la montée en stationnaire, sneak pour la descente et le frein, sprint pour les battements et le dash des Furies). Chaque action devient une touche du mod, avec ces touches vanilla par défaut. Tangage : deux touches « monter » et « descendre », **W monte et S descend par défaut**, et le joueur qui préfère l'inverse (simulateur d'hélico) échange les deux touches. L'option `invertPitch` de la config client est **supprimée**.
 - [ ] Plans fins (cubes plats ou partiels, par exemple les membranes des Furies) : des lignes d'environ 0,1 px dépassent et restent visibles. C'est probablement lié aux faces latérales qu'un cube plat Minecraft garde forcément : vérifier leurs UV, leur taille et leur transparence. À contrôler sur **toutes** les ailes, la queue et les modèles du mod.
-- [ ] Cape du joueur : elle part complètement en vrille en vol. Solution préférée : la masquer quand une paire d'ailes est équipée, sans mixin, si NeoForge le permet. Sinon, corriger son mouvement en vol à partir de la direction et de la vitesse.
+- [ ] **Cape du joueur : la supprimer** (ne plus la dessiner) tant qu'une paire d'ailes est équipée, sans mixin. Elle part complètement en vrille en vol. Test en jeu sans compte à cape : commande de studio `cape on` (pose une cape de test sur le joueur de dev), `cape off`.
+- [ ] **Sons du gacha entendus par tous les joueurs autour**, sans exception, cartes comprises. Aujourd'hui les cues du show sont positionnés pour tous les spectateurs, mais les sons des cartes (distribution, mélange, retournement, pop, carte posée par palier), le chœur et la musique des loots (`ShowSounds.card`, joués en `forUI` ou en nappe relative) ne s'entendent que chez celui qui invoque. Il faut les relayer par le serveur (événement de carte, pas un paquet par tick) et les jouer en positionnel à l'autel pour les joueurs proches. Puis **revérifier tous les sons du gacha**, pour celui qui invoque et pour un spectateur : zorago n'a pas entendu une musique finale (musique de l'éclat `music_burst` ou des loots `music_loot`, à identifier).
 - [ ] **Crash** : ouvrir le wiki depuis la table d'assemblage fait planter le jeu (`crash-2026-10-27_22.30.42-client.txt` de `temp_buildSimplyWings`) : `NullPointerException` dans `WikiScreen.<init>` ligne 53, `history.push(null)` (le chemin trouvé par `find(null, start, path)` commence par `null`, que l'`ArrayDeque` refuse). Ouvert depuis `AssemblyTableScreen` ligne 26. Note : l'instance tourne sous NeoForge 21.1.265.
 
 ## 15. Sons : passes d'écoute dans le banc, puis en jeu
+
+**Validé par zorago le 27 octobre au soir : tous les sons du mod sont validés et testés en jeu.** Les cases ci-dessous sont closes, sauf l'audibilité du gacha par les autres joueurs (§ 16).
 
 Les verdicts vivent dans le catalogue (`tools/sounds/catalog.json`) et se donnent dans le banc de son (`cd tools/sound-bench && npm run dev`, http://localhost:5177), passe par passe (`SOUND_PLAN.md` § 4). Santé du dépôt : `python -I tools/sounds/audit.py`. En jeu, `/simplywings sound <id> [pitch] [volume]` et `/simplywings sound list <groupe>` rejouent un son ou un groupe.
 
 Corrections du 27 octobre (`SOUND_PLAN.md` § 1), à vérifier en jeu :
 
-- [ ] Particules coupées : les paires de matière (feu, eau, cuivre, améthyste, orage…) gardent leur couche (`wing.<paire>.layer`), pour soi et pour un joueur distant ; la chouette n'a plus de couche.
-- [ ] Battements entendus à 32 blocs, coups puissants à 48, vrombissements et atterrissages à 24, blocs à 12-16.
-- [ ] Niveaux après normalisation au RMS (plume et membrane au même niveau, onde de choc du gacha et charge de Night baissées, cartes alignées) ; attaques rognées, plus de retard au coup d'aile.
-- [ ] Boucles du vent et du compresseur sans clic au raccord.
-- [ ] Équiper / Retirer : nouveau son court et grave ; l'ancien son long reste à l'infusion de l'établi et à la table d'assemblage (`block.infusion`).
-- [ ] Gacha : un B et un SSS, sons identiques à avant l'extraction des cues dans `gacha/show_sounds.json` ; F3+T recharge le fichier.
+- [x] Particules coupées : les paires de matière (feu, eau, cuivre, améthyste, orage…) gardent leur couche (`wing.<paire>.layer`), pour soi et pour un joueur distant ; la chouette n'a plus de couche.
+- [x] Battements entendus à 32 blocs, coups puissants à 48, vrombissements et atterrissages à 24, blocs à 12-16.
+- [x] Niveaux après normalisation au RMS (plume et membrane au même niveau, onde de choc du gacha et charge de Night baissées, cartes alignées) ; attaques rognées, plus de retard au coup d'aile.
+- [x] Boucles du vent et du compresseur sans clic au raccord.
+- [x] Équiper / Retirer : nouveau son court et grave ; l'ancien son long reste à l'infusion de l'établi et à la table d'assemblage (`block.infusion`).
+- [x] Gacha : un B et un SSS, sons identiques à avant l'extraction des cues dans `gacha/show_sounds.json` ; F3+T recharge le fichier.
 
 Trous comblés hors gacha (27 octobre, choix de zorago), à vérifier en jeu :
 
-- [ ] Stationnaire : battement de la paire à peine audible, espacement légèrement irrégulier, jamais pour les paires à vrombissement.
-- [ ] Frein en l'air : un coup d'aile fort, puis le souffle de sable qui s'éteint avec la vitesse et se coupe en fondu au relâchement ou à l'arrêt ; entendu aussi pour un joueur proche.
-- [ ] Frôlement : un joueur ailé rapide qui passe à moins de 5 blocs donne un des 3 swooshs, pas plus d'un toutes les 2 s.
-- [ ] Récolte en vol : gouttes très faibles à cadence irrégulière seulement quand un conteneur se remplit (rien quand tout est plein, rien sans absorbeur, rien hors zone).
-- [ ] Réserve d'essence intensifiée : fumée en boucle qui erre tant qu'elle remplit la stamina, fondu à la fin.
-- [ ] Menu J : clic vanilla à la sélection, coffre verrouillé sur une aile verrouillée, élytre à l'Equip appearance ; déblocage hors gacha (commande `unlock`, craft) = level up, rien pendant un tirage.
-- [ ] Ambiances discrètes de l'autel, de la fontaine et de l'établi de la forge ; portail de l'End à l'apparition d'un sanctuaire ; aimant de magnétite à la prise en main d'un compas.
-- [ ] Gacha : plus de skip pendant le show (clic, Échap, espace et Entrée ignorés), « Click to reveal all » pendant la distribution des cartes.
+- [x] Stationnaire : battement de la paire à peine audible, espacement légèrement irrégulier, jamais pour les paires à vrombissement.
+- [x] Frein en l'air : un coup d'aile fort, puis le souffle de sable qui s'éteint avec la vitesse et se coupe en fondu au relâchement ou à l'arrêt ; entendu aussi pour un joueur proche.
+- [x] Frôlement : un joueur ailé rapide qui passe à moins de 5 blocs donne un des 3 swooshs, pas plus d'un toutes les 2 s.
+- [x] Récolte en vol : gouttes très faibles à cadence irrégulière seulement quand un conteneur se remplit (rien quand tout est plein, rien sans absorbeur, rien hors zone).
+- [x] Réserve d'essence intensifiée : fumée en boucle qui erre tant qu'elle remplit la stamina, fondu à la fin.
+- [x] Menu J : clic vanilla à la sélection, coffre verrouillé sur une aile verrouillée, élytre à l'Equip appearance ; déblocage hors gacha (commande `unlock`, craft) = level up, rien pendant un tirage.
+- [x] Ambiances discrètes de l'autel, de la fontaine et de l'établi de la forge ; portail de l'End à l'apparition d'un sanctuaire ; aimant de magnétite à la prise en main d'un compas.
+- [x] Gacha : plus de skip pendant le show (clic, Échap, espace et Entrée ignorés), « Click to reveal all » pendant la distribution des cartes.
 
 Après la passe d'écoute de zorago (27 octobre), à réécouter dans le banc puis en jeu (verdicts remis à « todo ») :
 
-- [ ] Insectes : bourdon vanilla (`entity.bee.loop` en boucle, `entity.bee.pollinate` au coup d'aile) pour l'abeille, le scarabée, l'ancienne et le colibri ; la boucle vanilla ne porte qu'à 6 blocs pour les autres joueurs.
-- [ ] Chauve-souris : `entity.bat.takeoff` (la référence) ; poisson volant, cerf-volant et écureuil volant gardent l'ancien son de cuir (`wing.glider.flap`).
-- [ ] Plume un peu plus aiguë (×1,06), les paires qui en dépendent compensées (même rendu qu'à la validation).
-- [ ] Orage : « tzzt » d'électricité statique à chaque battement ; aurore : tintements à moitié moins forts.
-- [ ] Gacha : flammes de forge à l'allumage, offrande éthérée (`block.beacon.power_select`), rayon d'énergie et grondement de flammes sous le pilier, onde de choc pour chaque étoile du ×10.
-- [ ] Night : au dash d'invisibilité, foudre visuelle (sans dégâts ni feu) sur le joueur et 4 éclairs autour.
-- [ ] Light : explosion vanilla 6 s après le dash d'invisibilité (`light_fury.invisible_blast`, son seul) ; charge en rafales de « tzzt ».
-- [ ] Menu : ouverture douce (`block.enchantment_table.use`), quand le son sera branché.
+- [x] Insectes : bourdon vanilla (`entity.bee.loop` en boucle, `entity.bee.pollinate` au coup d'aile) pour l'abeille, le scarabée, l'ancienne et le colibri ; la boucle vanilla ne porte qu'à 6 blocs pour les autres joueurs.
+- [x] Chauve-souris : `entity.bat.takeoff` (la référence) ; poisson volant, cerf-volant et écureuil volant gardent l'ancien son de cuir (`wing.glider.flap`).
+- [x] Plume un peu plus aiguë (×1,06), les paires qui en dépendent compensées (même rendu qu'à la validation).
+- [x] Orage : « tzzt » d'électricité statique à chaque battement ; aurore : tintements à moitié moins forts.
+- [x] Gacha : flammes de forge à l'allumage, offrande éthérée (`block.beacon.power_select`), rayon d'énergie et grondement de flammes sous le pilier, onde de choc pour chaque étoile du ×10.
+- [x] Night : au dash d'invisibilité, foudre visuelle (sans dégâts ni feu) sur le joueur et 4 éclairs autour.
+- [x] Light : explosion vanilla 6 s après le dash d'invisibilité (`light_fury.invisible_blast`, son seul) ; charge en rafales de « tzzt ».
+- [x] Menu : ouverture douce (`block.enchantment_table.use`), quand le son sera branché.
 
 Liste de la première passe CC0 (26 octobre) :
 
-- [ ] Coups d'ailes en déplacement : chaque famille (plume, membrane, cuir, insecte, planeur, mécanique) sonne juste ; pas de clic en début ou fin de fichier ; la chouette reste quasi silencieuse.
-- [ ] Saut ailé, bascule Alt, sortie du déplacement, saut de secours : la version forte n'est pas fatigante à la longue.
-- [ ] Envol chargé : `flight.takeoff_launch` une seule fois, sans doublon.
-- [ ] Joueur distant (serveur dédié) : ses battements s'entendent, rien quand il est invisible.
-- [ ] Transmog Light : le son suit l'apparence.
-- [ ] Autel : offrande, 6 flammes, nappe, onde du pilier, montée, étoile, battements, éclat, ailes ; volumes cohérents à 30 et à 100 blocs ; rien de saturé quand tout s'empile (éclat SSS).
-- [ ] Cartes ×10 : distribution (10 petits sons rapprochés, pas un mur de bruit), anticipation, retournement, couches par palier ; « Click to reveal all » ne déclenche pas tous les sons d'un coup.
-- [ ] Sous-titres affichés et lisibles.
-- [ ] Furies : cri de piqué (coupé avant l'explosion, écho de 3 s), dash = sample entier + écho, Night un peu plus grave, Light un peu plus aigu ; charges de Night (grésillement) et de Light (montée de plasma).
-- [ ] Vent : monte avec la vitesse, ne coupe pas net, pas de saut audible à la boucle.
-- [ ] Vrombissement (colibri, abeille, scarabée, ancienne, Dédale) : démarre et s'arrête en fondu, suit le joueur, entendu des autres.
-- [ ] Atterrissages doux et durs, crash entendu par un autre joueur ; plus de double battement au saut ailé côté serveur.
-- [ ] Forge (marteau, trempe, infusion), compresseur (boucle qui suit la vitesse, s'arrête quand on le casse), table d'assemblage, essence versée, conteneur plein, boutons Équiper et Retirer.
-- [ ] Après les retours du 26 octobre : plume (3 coups de cape seuls), vrombissement synthétisé (colibri, abeille, scarabée, ancienne : vibrant mais pas agressif au casque), coups d'insecte synthétisés, papillon de nuit et Psyché très doux, coups puissants sans les variantes 4 et 5.
-- [ ] Cartes : glissement à la distribution, mélange avant une S et plus, retournement, carte posée ; plus aucun tintement en B et A ; bouton refusé (plumes manquantes) grave et doux.
+- [x] Coups d'ailes en déplacement : chaque famille (plume, membrane, cuir, insecte, planeur, mécanique) sonne juste ; pas de clic en début ou fin de fichier ; la chouette reste quasi silencieuse.
+- [x] Saut ailé, bascule Alt, sortie du déplacement, saut de secours : la version forte n'est pas fatigante à la longue.
+- [x] Envol chargé : `flight.takeoff_launch` une seule fois, sans doublon.
+- [x] Joueur distant (serveur dédié) : ses battements s'entendent, rien quand il est invisible.
+- [x] Transmog Light : le son suit l'apparence.
+- [x] Autel : offrande, 6 flammes, nappe, onde du pilier, montée, étoile, battements, éclat, ailes ; volumes cohérents à 30 et à 100 blocs ; rien de saturé quand tout s'empile (éclat SSS).
+- [x] Cartes ×10 : distribution (10 petits sons rapprochés, pas un mur de bruit), anticipation, retournement, couches par palier ; « Click to reveal all » ne déclenche pas tous les sons d'un coup.
+- [x] Sous-titres affichés et lisibles.
+- [x] Furies : cri de piqué (coupé avant l'explosion, écho de 3 s), dash = sample entier + écho, Night un peu plus grave, Light un peu plus aigu ; charges de Night (grésillement) et de Light (montée de plasma).
+- [x] Vent : monte avec la vitesse, ne coupe pas net, pas de saut audible à la boucle.
+- [x] Vrombissement (colibri, abeille, scarabée, ancienne, Dédale) : démarre et s'arrête en fondu, suit le joueur, entendu des autres.
+- [x] Atterrissages doux et durs, crash entendu par un autre joueur ; plus de double battement au saut ailé côté serveur.
+- [x] Forge (marteau, trempe, infusion), compresseur (boucle qui suit la vitesse, s'arrête quand on le casse), table d'assemblage, essence versée, conteneur plein, boutons Équiper et Retirer.
+- [x] Après les retours du 26 octobre : plume (3 coups de cape seuls), vrombissement synthétisé (colibri, abeille, scarabée, ancienne : vibrant mais pas agressif au casque), coups d'insecte synthétisés, papillon de nuit et Psyché très doux, coups puissants sans les variantes 4 et 5.
+- [x] Cartes : glissement à la distribution, mélange avant une S et plus, retournement, carte posée ; plus aucun tintement en B et A ; bouton refusé (plumes manquantes) grave et doux.
 

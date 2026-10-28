@@ -234,6 +234,26 @@ final class StudioTest {
                 log.accept("wikicheck " + ids.size() + " pages, " + failed + " failed");
             }
             case "flight" -> log.accept("flight " + ClientFlight.debugState());
+            case "cape" -> {
+                net.minecraft.client.multiplayer.PlayerInfo info = mc.getConnection().getPlayerInfo(player.getUUID());
+                try {
+                    java.lang.reflect.Field field = net.minecraft.client.multiplayer.PlayerInfo.class.getDeclaredField("skinLookup");
+                    field.setAccessible(true);
+                    @SuppressWarnings("unchecked")
+                    java.util.function.Supplier<net.minecraft.client.resources.PlayerSkin> original =
+                            (java.util.function.Supplier<net.minecraft.client.resources.PlayerSkin>) field.get(info);
+                    boolean on = a[1].equals("on");
+                    ResourceLocation cape = ResourceLocation.parse(a.length > 2 ? a[2] : "minecraft:textures/entity/elytra.png");
+                    field.set(info, (java.util.function.Supplier<net.minecraft.client.resources.PlayerSkin>) () -> {
+                        net.minecraft.client.resources.PlayerSkin skin = original.get();
+                        return new net.minecraft.client.resources.PlayerSkin(skin.texture(), skin.textureUrl(), on ? cape : null,
+                                skin.elytraTexture(), skin.model(), skin.secure());
+                    });
+                    log.accept("cape " + on + " " + cape);
+                } catch (ReflectiveOperationException e) {
+                    log.accept("cape error " + e);
+                }
+            }
             case "status" -> log.accept(String.format(Locale.ROOT,
                     "status pos=%.2f,%.2f,%.2f vel=%.3f,%.3f,%.3f ground=%s mode=%s flags=%d stamina=%.1f rescue=%d equipped=%s screen=%s",
                     player.getX(), player.getY(), player.getZ(), player.getDeltaMovement().x, player.getDeltaMovement().y,

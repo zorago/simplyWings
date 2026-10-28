@@ -901,7 +901,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "validated",
+    "state": "keep",
     "note": "JE VALIDE FORT ET EN PLUS UTILISE LA POUR CHAQUE ETOILE QUI ATTEINT LE CERCLE. ",
     "date": "2026-10-27"
    },
@@ -2630,7 +2630,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -2677,7 +2677,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -8002,7 +8002,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -8135,7 +8135,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -8306,7 +8306,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -8509,7 +8509,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -8545,7 +8545,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -8581,7 +8581,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -8617,7 +8617,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -8653,7 +8653,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -8689,7 +8689,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -8725,7 +8725,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -8761,7 +8761,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
@@ -8797,7 +8797,7 @@
    "layers": [],
    "candidates": [],
    "verdict": {
-    "state": "todo",
+    "state": "keep",
     "note": "",
     "date": "2026-10-27"
    },
