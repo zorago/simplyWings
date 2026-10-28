@@ -2,9 +2,11 @@
 
 Tout ce qui doit être testé et validé en jeu, puis les modèles 3D qui restent à faire. Chaque ligne se coche quand elle est validée **en solo et sur le serveur dédié** (règle du projet). Un échec se note directement sous la ligne, avec ce qui a été observé.
 
-Dernière mise à jour : 26 octobre 2026 (section 14 bis : prototype des animations du gacha). Avant : 25 octobre 2026 (section 12 : ailes terminées ; prochain chantier : le gacha, voir `gatcha.md`). Avant : 23 octobre 2026 (section 13 : refonte essences et sanctuaires). Avant : 22 octobre au soir. Session de test sur le PC de jeu, **en solo dans le client de dev** (Simply Wings + JEI), pilotée par le studio (`tools/studio/send.py`, commandes de test de `client/studio/StudioTest`). Les cases cochées ce soir l'ont été en solo seulement : la règle « solo et serveur dédié » reste à compléter pour elles.
+Dernière mise à jour : 28 octobre 2026 (section 16 close : retours de zorago en build ; campagne de test complète décrite dans `TEST_PLAN.md`, qui fait foi pour l'ordre et la méthode des tests ; ce fichier reste la liste des points et de leur état). Avant : 26 octobre 2026 (section 14 bis : prototype des animations du gacha). Avant : 25 octobre 2026 (section 12 : ailes terminées ; prochain chantier : le gacha, voir `gatcha.md`). Avant : 23 octobre 2026 (section 13 : refonte essences et sanctuaires). Avant : 22 octobre au soir. Session de test sur le PC de jeu, **en solo dans le client de dev** (Simply Wings + JEI), pilotée par le studio (`tools/studio/send.py`, commandes de test de `client/studio/StudioTest`). Les cases cochées ce soir l'ont été en solo seulement : la règle « solo et serveur dédié » reste à compléter pour elles.
 
-## Reprise (état au 23/10, 2 h)
+## Reprise (état au 23/10, 2 h, historique)
+
+Remplacé par `TEST_PLAN.md` (campagne complète du 28 octobre) ; gardé pour l'historique.
 
 Fait cette session : passe studio des 21 rares, correctif 1 (battement sans saut, `WingAnimator`), les 19 modèles restants, sections 2 à 6 et 9-10 validées en solo par le studio, JEI corrigé, forge testée, vol testé en solo.
 Reste, dans l'ordre :
@@ -171,6 +173,8 @@ Une ligne par source (« ok » quand le drop tombe dans la bonne condition **et*
 
 ## 7. Forge de l'End et compas
 
+Note du 28 octobre : la forge générée (piliers en purpur, 6 tonneaux de `forge_supplies`) est remplacée par le build de zorago, sans loot (§ 16). Les lignes sur ses tonneaux et son design sont caduques ; le reste (apparition, compas, réparation) reste à tester sur le nouveau template.
+
 - [x] Premier dragon tué : aucune forge, aucun compas. *(22/10, studio, mort attribuée au joueur avec `/damage … by @s`.)*
 - [ ] Deuxième dragon (réinvoqué avec 4 cristaux) : la forge apparaît dans le vide à environ 512 blocs de (0, 0), à Y 80. Les joueurs à moins de 192 blocs de (0, 0) reçoivent un compas (inventaire plein : il tombe au sol) et un message.
   - 22/10 : avec des dragons invoqués par `/summon`, la forge et le compas (message compris) sont apparus au **troisième** dragon et non au deuxième ; forge posée en (274, 80, 432), à 511 blocs. À refaire avec un vrai respawn (4 cristaux) avant de conclure à un bug.
@@ -204,12 +208,12 @@ Une ligne par source (« ok » quand le drop tombe dans la bonne condition **et*
 - [ ] REI : seulement avec l'addon « REI Plugin Compatibilities » ; à vérifier si le pack l'utilise.
 - [ ] Bouton Ailes de l'inventaire : il ne chevauche ni la bande de favoris de JEI ni le livre de recettes.
 
-## 8 bis. Wiki (quatrième onglet de la table) : plan à valider
+## 8 bis. Wiki (codex)
 
-Rien n'est codé : le plan est dans `docs/WIKI_PLAN.md`.
-- [ ] Lire le plan et répondre aux 6 questions de sa dernière section (accès depuis le menu J, niveau de révélation des routes, chiffres dans le wiki ou seulement dans JEI, langue, arbre dessiné ou renvoi JEI, découvertes par joueur ou par équipe).
-- [ ] Valider le principe anti-spoil : pages cachées, teaser (énigme seule) puis révélées, révélation par paliers, mythiques cachées jusqu'à la première légendaire.
-- [ ] Une fois validé : implémentation (suivi des découvertes dans `WingsData`, pages JSON générées, quatrième onglet), puis une section de tests dédiée ici.
+Codé le 26 octobre (`client/wiki`) : écran à plusieurs niveaux, 24 chapitres écrits à la main et une page générée par paire, matériau et composant (256 pages). Boutons Wiki sur la table d'assemblage, l'établi de la forge, le compresseur (ouverture sur leur propre page) et le menu des ailes. Le plan anti-spoil de `docs/WIKI_PLAN.md` n'a pas été retenu tel quel.
+- [ ] Ouvrir le wiki depuis chacun de ses points d'entrée (crash connu depuis la table d'assemblage, § 16).
+- [ ] Navigation : catégories, sous-catégories, retour, fil d'Ariane, défilement, liens entre pages.
+- [ ] Contenus : textes, items, blocs 3D qui tournent, aperçus 3D des ailes, grilles de craft, recettes d'assemblage, barres de stats ; aucune page vide ni lien mort sur les 256.
 
 ## 9. Ailes de Yin et Yang
 
@@ -274,9 +278,11 @@ Reste à tester :
 - [ ] JEI : catégorie « Cloud Compression », coûts par essence affichés dans les catégories assemblage et composants.
 - [ ] Serveur dédié pour tout ce qui précède.
 
-### 14 bis. Animations du gacha : prototype du 26 octobre (hors jeu)
+### 14 bis. Animations du gacha : prototype du 26 octobre (hors jeu), dépassé
 
-Sources dans `GATCHA_ANIMATION_SOURCE/`, détail dans `GACHA_ANIMATIONS.md` § 0. Rien n'est encore porté dans le jeu : l'écran de l'autel garde les animations provisoires.
+Dépassé depuis le 26-27 octobre : le show est joué **dans le monde** autour de l'autel (`GACHA_ALTAR_ANIMATION.md`, `altar_show.json.gz`, cartes par-dessus le show en direct, sons de `show_sounds.json`). Les cases ci-dessous restent pour mémoire ; les tests du show sont au § 14 et dans `TEST_PLAN.md`.
+
+Sources dans `GATCHA_ANIMATION_SOURCE/`, détail dans `GACHA_ANIMATIONS.md` § 0.
 - [x] Single B validé par zorago (chorégraphie et caméra accélérée).
 - [ ] Regarder en mouvement et valider : `single_a`, `single_s`, `single_ss`, `single_sss`, `multi_x10`, `multi_x10_double_sss`. Sur l'autre PC, seules des images fixes ont été vérifiées. Le défaut possible à surveiller : des faces qui se chevauchent quand la caméra frôle les ailes de l'autel.
 - [ ] Trancher les points du § 10 de `GACHA_ANIMATIONS.md` (ajoutés le 26 octobre) : durée des communs, voie de portage, live ou pré-rendu, autel (scène du prototype ou build de zorago), flammes, dragon, plafonds de flash.
@@ -302,7 +308,7 @@ Codé sans lancer Minecraft (zorago utilisait le PC). Conception et choix par d�
 - [x] (26 octobre, posées) Monde de construction `run/saves/SimplyWings Builds` : `/simplywings sanctum build` pose maintenant les cinq structures (x 0 à 400), dont le sanctuaire d'invocation (x 300) et l'île de la fontaine (x 400), pour la retouche à la main.
 - [ ] Coffres : `/loot spawn ~ ~ ~ loot minecraft:chests/simple_dungeon` une centaine de fois dans l'Overworld (environ 5 % avec 1 à 3 plumes), puis dans le Nether (10 %) et dans l'End avec `minecraft:chests/end_city_treasure` (20 %) ; jamais plus de 3 plumes, même avec Chance ; avec Lootr dans le pack.
 - [ ] Gacha corrigé : un tirage B ou A donne **un seul** objet (plus de piles) ; onglet Taux à jour (valeurs de revente).
-- [ ] Autel : `/setblock ~ ~ ~ simplywings:draconic_altar`, clic droit : fenêtre, illustration, tracker, onglets Historique et Taux ; `/simplywings gacha feathers 64` ; ×1 et ×10 ; plumes retirées ; objets donnés (ou jetés si l'inventaire est plein) ; animation (comète, flash, cartes, rayons S et plus, récapitulatif), clic et Échap pour passer.
+- [ ] Autel : `/setblock ~ ~ ~ simplywings:draconic_altar`, clic droit : fenêtre, illustration, tracker, onglets Historique et Taux ; `/simplywings gacha feathers 64` ; ×1 et ×10 ; plumes retirées ; objets donnés (ou jetés si l'inventaire est plein) ; show dans le monde puis cartes ; le show ne se passe plus (clic, Échap, espace et Entrée ignorés), seul « Click to reveal all » accélère la distribution des cartes.
 - [ ] Garanties : `/simplywings gacha pity 99 0 0` puis ×1 → S garanti ; `pity 0 499 0` → SS ; `pity 0 0 999` → SSS ; compteurs remis à zéro dans le tracker ; `gacha info`.
 - [ ] Le tirage est refusé sans la fenêtre ouverte et sans assez de plumes (message) ; en créatif, pas de coût.
 - [ ] Fontaine : `/setblock ~ ~ ~ simplywings:offering_fountain`, 100 objets B → 1 plume, 10 objets A → 1, une paire rare → 1, épique → 10, légendaire → 100 ; réserve des fractions ; les objets sans valeur restent et reviennent à la fermeture.
@@ -312,14 +318,23 @@ Codé sans lancer Minecraft (zorago utilisait le PC). Conception et choix par d�
 - [ ] Monde ancien (îles en triangle) : la fontaine se pose dans le plus grand écart.
 - [ ] Serveur dédié pour tout ce qui précède.
 
-## 16. Bugs à corriger : retours de zorago en build (27 octobre, rien de corrigé)
+## 16. Bugs à corriger : retours de zorago en build (27 et 28 octobre, rien de corrigé)
 
-Notés au fil des messages de zorago, à corriger seulement sur son feu vert.
+Notés au fil des messages de zorago (liste close le 28 octobre). Ils sont corrigés pendant la campagne de test autonome du 28 octobre au matin (`TEST_PLAN.md`), après le round 1.
 
 - [ ] Transparence : beaucoup de textures, notamment les flammes de l'autel du gacha, passent mal devant les nuages et l'eau (même souci qu'avant avec les ailes de feu).
 - [ ] Show du gacha : l'item 3D des plumes s'affiche deux fois et forme une croix ; il ne doit s'afficher qu'une fois par item.
 - [ ] Écran du gacha : nouvelle image de fond fournie par zorago, `art/gacha/altar_screen_background.png` (jardin céleste violet, six ailés élémentaires autour d'un temple flottant), à intégrer.
-- [ ] Refaire les modèles 3D de l'autel draconique et de la fontaine aux offrandes. Les textures du bloc de la fontaine sont actuellement cassées en jeu : à couvrir par la refonte, pas à corriger à part.
+- [ ] **Autel draconique, refonte du modèle 3D** : même taille qu'aujourd'hui, très poli. Densité de texels juste partout : une face de 4 × 16 reçoit 4 × 16 pixels de texture, jamais une texture 16 × 16 écrasée. Thème cohérent avec la table d'assemblage : plus de dragon ni d'ange, seulement des ailes réussies et symétriques.
+- [ ] **Fontaine aux offrandes, refonte du modèle 3D** : une belle fontaine en **octogone de 4 blocs de large**, centrée sur son bloc, qui déborde de 1,5 bloc tout autour. Collision sur tout l'octogone par des **blocs invisibles**, comme le multibloc du compresseur : on ne traverse pas le bassin, casser une partie casse tout et rend l'item, la pose est refusée s'il manque de la place. Les textures du bloc actuel sont cassées en jeu : la refonte les remplace, pas de correctif à part.
+- [ ] **Furies, barre de charge** : aujourd'hui, une fois la fenêtre de lancement passée, la barre se recharge tant que le frein reste enfoncé, malgré le cooldown du serveur (`FuryServer.DASH_COOLDOWN_TICKS`, 5 s, inconnu du client). Logique voulue : la barre se charge en 2 s ; pleine, elle reste prête pendant la fenêtre ; ensuite la compétence est consommée **qu'elle ait été lancée ou non** et passe en cooldown ; pendant le cooldown, la barre n'existe pas (pas d'affichage, pas de charge, pas de son de charge).
+- [ ] **Frein, maniabilité** : en vol de déplacement, pendant le freinage, les **touches** de direction n'ont plus que 10 % de leur effet (pénalité de 90 %), pour **toutes** les paires. La visée à la souris reste libre. Manœuvrer en freinant ruinait le ressenti du frein.
+- [ ] **Les 5 structures construites par zorago** (validées) : les exporter depuis le monde `SimplyWings Builds` de `A:\CurseForge\Instances\temp_buildSimplyWings\saves` (à recopier d'abord dans `run/saves`, l'ancien monde en sauvegarde), avec `/simplywings sanctum export <nom>` dans le client `runBuilds` : `sky_sanctum` (x 0), `wing_forge` (x 100), `cloud_refinery` (x 200), `summoning_sanctum` (x 300), `offering_fountain` (x 400).
+  - Beaucoup de blocs orientés et à états (trappes, escaliers, dalles, portes…) : vérifier après la pose que chaque état est conservé (orientation, demi, ouvert, waterlogged), en comparant le monde de build et une pose fraîche dans un monde neuf.
+  - Les builds sont plus petits que leurs cadres rouges et y tiennent : garder la taille du cadre (le centre d'île `ISLAND_CENTER` reste valable), ne rien exporter hors cadre.
+  - Chaque établi est présent, mais pas forcément au même endroit qu'avant : vérifier tout ce qui dépend de leur position (réparation à la mort du dragon, renderers, show du gacha centré sur l'autel, compas).
+  - `tools/crafting_gen/sanctums.py` n'est plus la source de ces 5 templates : ne plus le relancer par-dessus (ou le limiter à ce qui reste généré).
+- [ ] **Loot des structures** : la forge ne contient plus de loot (retirer `simplywings:chests/forge_supplies` et ses références). La table d'assemblage en a : cuir et plumes dans des tonneaux, **contenu fixe** (exactement ce que zorago a posé), remis à neuf à chaque régénération de la structure.
 - [ ] Ailes d'ange : l'auréole n'est pas au-dessus de la tête au repos, et elle est globalement mal placée (à recaler sur la tête dans toutes les poses).
 - [ ] Furies (Night et Light), modèle 3D : la première paire d'ailes est un peu trop petite ; allonger un peu ses os et agrandir ses membranes.
 - [ ] Furies, queue : l'animer au repos (idles) et pendant la marche, et l'allonger de 1 ou 2 segments.
@@ -372,7 +387,7 @@ Liste de la première passe CC0 (26 octobre) :
 - [ ] Joueur distant (serveur dédié) : ses battements s'entendent, rien quand il est invisible.
 - [ ] Transmog Light : le son suit l'apparence.
 - [ ] Autel : offrande, 6 flammes, nappe, onde du pilier, montée, étoile, battements, éclat, ailes ; volumes cohérents à 30 et à 100 blocs ; rien de saturé quand tout s'empile (éclat SSS).
-- [ ] Cartes ×10 : distribution (10 petits sons rapprochés, pas un mur de bruit), anticipation, retournement, couches par palier ; passer (« skip ») ne déclenche pas tous les sons d'un coup.
+- [ ] Cartes ×10 : distribution (10 petits sons rapprochés, pas un mur de bruit), anticipation, retournement, couches par palier ; « Click to reveal all » ne déclenche pas tous les sons d'un coup.
 - [ ] Sous-titres affichés et lisibles.
 - [ ] Furies : cri de piqué (coupé avant l'explosion, écho de 3 s), dash = sample entier + écho, Night un peu plus grave, Light un peu plus aigu ; charges de Night (grésillement) et de Light (montée de plasma).
 - [ ] Vent : monte avec la vitesse, ne coupe pas net, pas de saut audible à la boucle.

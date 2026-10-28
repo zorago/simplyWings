@@ -56,3 +56,4 @@ tools/sounds/candidates/
 tools/sound-bench/node_modules/
 tools/sound-bench/bench.config.json
 tools/sound-bench/.cache/
+run-mp2/

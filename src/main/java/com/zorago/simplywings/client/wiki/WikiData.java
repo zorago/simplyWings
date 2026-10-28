@@ -25,6 +25,13 @@ public final class WikiData {
     private static Map<String, Category> categories = Map.of();
     private static Map<String, Page> pages = Map.of();
 
+    public static List<String> ids() {
+        List<String> out = new java.util.ArrayList<>(categories.keySet());
+        out.addAll(pages.keySet());
+        out.sort(null);
+        return out;
+    }
+
     public static List<String> root() {
         return root;
     }

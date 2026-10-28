@@ -3,6 +3,8 @@ package com.zorago.simplywings.client.studio;
 import com.zorago.simplywings.client.ClientFlight;
 import com.zorago.simplywings.client.ClientWings;
 import com.zorago.simplywings.client.gui.WingsScreen;
+import com.zorago.simplywings.client.wiki.WikiData;
+import com.zorago.simplywings.client.wiki.WikiScreen;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -17,6 +19,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -33,9 +36,11 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.client.event.ClientChatReceivedEvent;
+import net.neoforged.neoforge.client.event.sound.PlaySoundEvent;
 
 final class StudioTest {
     private static final Map<KeyMapping, Integer> HELD = new HashMap<>();
+    private static boolean soundLog;
 
     static boolean run(Minecraft mc, LocalPlayer player, String[] a, String line, Consumer<String> log) {
         switch (a[0].toLowerCase(Locale.ROOT)) {
@@ -203,6 +208,32 @@ final class StudioTest {
                 key.setDown(true);
                 HELD.put(key, ticks);
             }
+            case "soundlog" -> {
+                soundLog = a[1].equals("on");
+                log.accept("soundlog " + soundLog);
+            }
+            case "wikipages" -> {
+                List<String> ids = WikiData.ids();
+                log.accept("wikipages " + ids.size() + " " + String.join(",", ids));
+            }
+            case "wikicheck" -> {
+                int failed = 0;
+                List<String> ids = a.length > 1 ? List.of(a[1].split(",")) : WikiData.ids();
+                for (String id : ids) {
+                    try {
+                        WikiScreen screen = new WikiScreen(null, id);
+                        screen.init(mc, mc.getWindow().getGuiScaledWidth(), mc.getWindow().getGuiScaledHeight());
+                        GuiGraphics g = new GuiGraphics(mc, mc.renderBuffers().bufferSource());
+                        screen.render(g, 0, 0, 0f);
+                        g.flush();
+                    } catch (RuntimeException e) {
+                        failed++;
+                        log.accept("wikifail " + id + " " + e);
+                    }
+                }
+                log.accept("wikicheck " + ids.size() + " pages, " + failed + " failed");
+            }
+            case "flight" -> log.accept("flight " + ClientFlight.debugState());
             case "status" -> log.accept(String.format(Locale.ROOT,
                     "status pos=%.2f,%.2f,%.2f vel=%.3f,%.3f,%.3f ground=%s mode=%s flags=%d stamina=%.1f rescue=%d equipped=%s screen=%s",
                     player.getX(), player.getY(), player.getZ(), player.getDeltaMovement().x, player.getDeltaMovement().y,
@@ -226,6 +257,15 @@ final class StudioTest {
             entry.setValue(left);
             return false;
         });
+    }
+
+    static void sound(PlaySoundEvent event, Consumer<String> log) {
+        if (!soundLog || event.getOriginalSound() == null) {
+            return;
+        }
+        SoundInstance s = event.getOriginalSound();
+        log.accept(String.format(Locale.ROOT, "sound %s %s at=%.1f,%.1f,%.1f relative=%s played=%s", s.getLocation(),
+                s.getSource().getName(), s.getX(), s.getY(), s.getZ(), s.isRelative(), event.getSound() != null));
     }
 
     static void chat(ClientChatReceivedEvent event, Consumer<String> log) {

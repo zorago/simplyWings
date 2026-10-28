@@ -68,6 +68,7 @@ public final class Studio {
             game.addListener(Studio::onFrame);
             game.addListener(EventPriority.LOWEST, Studio::onAngles);
             game.addListener((net.neoforged.neoforge.client.event.ClientChatReceivedEvent e) -> StudioTest.chat(e, Studio::log));
+            game.addListener((net.neoforged.neoforge.client.event.sound.PlaySoundEvent e) -> StudioTest.sound(e, Studio::log));
             SimplyWings.LOGGER.info("Wing studio enabled, reading {}", dir().resolve("commands.txt"));
         }
     }

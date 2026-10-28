@@ -85,6 +85,13 @@ neoForge {
             programArguments.addAll '--quickPlayMultiplayer', 'localhost:25565', '--width', '1280', '--height', '960'
         }
 
+        studioMp2 {
+            client()
+            gameDirectory = project.file('run-mp2')
+            systemProperty 'simplywings.studio', 'true'
+            programArguments.addAll '--quickPlayMultiplayer', 'localhost:25565', '--username', 'Dev2', '--width', '1280', '--height', '960'
+        }
+
         packStudio {
             client()
             gameDirectory = project.file('run-pack')
