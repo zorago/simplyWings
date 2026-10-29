@@ -18,6 +18,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
 public final class NightRig extends WingRig {
+    private static final float MAIN_SCALE = 1.15f;
     private static final int IDLE = 0;
     private static final int SETTLE = 1;
     private static final int PLASMA = 2;
@@ -124,9 +125,11 @@ public final class NightRig extends WingRig {
         float time = m.time;
         for (int k = 0; k < 6; k++) {
             float wave = Mth.sin(time * 0.25f - k * 0.8f);
-            tailPitch[k] = ground * TAIL_GROUND[k] + hang * TAIL_HANG[k] + travel * (k == 0 ? 0.18f : 0.02f + 0.03f * wave)
+            tailPitch[k] = ground * (TAIL_GROUND[k] + 0.05f * Mth.sin(time * 0.07f - k * 0.7f) + 0.08f * walk * Mth.sin(time * 1.24f - k * 0.6f))
+                    + hang * TAIL_HANG[k] + travel * (k == 0 ? 0.18f : 0.02f + 0.03f * wave)
                     + brake * (k == 0 ? 0.35f : 0f) + (m.launch >= 0f ? (k == 0 ? 0.45f : 0.12f) : 0f) + charge * (k == 0 ? 0.9f : k < 3 ? 0.3f : 0.05f);
-            tailYaw[k] = ground * (TAIL_CURL[k] + 0.18f * walk * Mth.sin(time * 0.62f - k * 0.55f) + 0.04f * Mth.sin(time * 0.05f - k * 0.6f))
+            tailYaw[k] = ground * (TAIL_CURL[k] + 0.34f * walk * Mth.sin(time * 0.62f - k * 0.55f)
+                    + (1f - walk) * (0.12f * Mth.sin(time * 0.05f - k * 0.6f) + 0.05f * Mth.sin(time * 0.13f - k * 0.9f)))
                     + hang * 0.1f * Mth.sin(time * 0.1f - k * 0.5f)
                     + travel * (-m.bank * 0.28f * (1f + 0.3f * k) + 0.05f * wave)
                     + brake * 0.08f * Mth.sin(time * 0.3f - k);
@@ -224,6 +227,7 @@ public final class NightRig extends WingRig {
             side.set(RigPose.FOLD, Mth.clamp(side.get(RigPose.FOLD), 0f, 1f));
             float thumb = variant == 3 ? scratch * 0.3f * Math.max(0f, Mth.sin(time * 1.4f)) : 0f;
             main[i].apply(side, billow, flutter, thumb);
+            main[i].shoulder.scale(MAIN_SCALE, MAIN_SCALE, MAIN_SCALE);
             FlightRules.chuteArm(main[i].arm, i == 0 ? 1f : -1f, chute);
             hind.copy(side);
             if (m.beating()) {

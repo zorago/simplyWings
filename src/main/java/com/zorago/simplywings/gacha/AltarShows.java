@@ -2,13 +2,16 @@ package com.zorago.simplywings.gacha;
 
 import com.zorago.simplywings.network.Payloads;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.GlobalPos;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
@@ -27,6 +30,8 @@ public final class AltarShows {
     public static final double RANGE = 512;
     private static final int MAX_TICKS = 36 * 20;
     private static final List<Show> ACTIVE = new ArrayList<>();
+    private static final double CARD_RANGE = 64;
+    private static final Map<UUID, GlobalPos> LAST_ALTAR = new HashMap<>();
     private static final int[][] FLAMES = {{-4, 6}, {-7, 0}, {-4, -6}, {4, -6}, {7, 0}, {4, 6}};
 
     private static final class Show {
@@ -108,7 +113,21 @@ public final class AltarShows {
             light(level, rotate(altar, facing, f[0], 4, f[1]), 15, show.lights);
         }
         ACTIVE.add(show);
+        LAST_ALTAR.put(player.getUUID(), GlobalPos.of(level.dimension(), altar));
         broadcast(level, show);
+    }
+
+    public static void relayCard(ServerPlayer sender, Payloads.CardSound sound) {
+        GlobalPos altar = LAST_ALTAR.get(sender.getUUID());
+        if (altar == null || altar.dimension() != sender.level().dimension()) {
+            return;
+        }
+        Payloads.CardSoundEvent event = new Payloads.CardSoundEvent(sender.getId(), altar.pos(), sound.key(), sound.tier());
+        for (ServerPlayer player : sender.serverLevel().players()) {
+            if (player != sender && player.distanceToSqr(altar.pos().getCenter()) <= CARD_RANGE * CARD_RANGE) {
+                PacketDistributor.sendToPlayer(player, event);
+            }
+        }
     }
 
     private static void light(ServerLevel level, BlockPos pos, int value, List<BlockPos> placed) {

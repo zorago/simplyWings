@@ -10,14 +10,18 @@ import com.zorago.simplywings.render.rig.Bones;
 import com.zorago.simplywings.render.rig.FeatherWing;
 import com.zorago.simplywings.render.rig.FlightRules;
 import com.zorago.simplywings.render.rig.WingRig;
+import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
 
 public final class AngelRig extends WingRig {
     private static final int IDLE = 0;
     private static final int SETTLE = 1;
     private static final int ALULA = 2;
     private static final int HALO = 3;
+    private static final float HALO_HEIGHT = -9.5f;
     private static final int[] IDLES = {80, 96, 84, 40, 90};
     private static final float UP = 0.62f;
     private static final float DOWN = 0.1f;
@@ -44,6 +48,10 @@ public final class AngelRig extends WingRig {
     private Bone rightAlula;
     private Bone leftAlula;
     private Bone halo;
+    private final Quaternionf bodyRot = new Quaternionf();
+    private final Quaternionf headRot = new Quaternionf();
+    private final Vector3f bodyPos = new Vector3f();
+    private final Vector3f headPos = new Vector3f();
 
     public AngelRig() {
         super("angel");
@@ -62,6 +70,14 @@ public final class AngelRig extends WingRig {
     @Override
     public String[] tipBones() {
         return TIPS;
+    }
+
+    @Override
+    public void playerHead(ModelPart body, ModelPart head) {
+        bodyPos.set(body.x, body.y, body.z);
+        bodyRot.rotationZYX(body.zRot, body.yRot, body.xRot);
+        headPos.set(head.x, head.y, head.z);
+        headRot.rotationZYX(head.zRot, head.yRot, head.xRot);
     }
 
     @Override
@@ -203,7 +219,14 @@ public final class AngelRig extends WingRig {
         }
         float spin = memory.get(HALO, pt);
         float breathe = 1f + 0.04f * Mth.sin(time * 0.05f) + 0.15f * glory;
-        halo.rotate(0f, 0f, spin).scale(breathe, breathe, 1f).move(0f, -0.4f * Mth.sin(time * 0.04f), 0f);
+        Quaternionf toBody = new Quaternionf(bodyRot).conjugate();
+        Vector3f center = headRot.transform(new Vector3f(0f, HALO_HEIGHT + 0.4f * Mth.sin(time * 0.04f), 0f)).add(headPos).sub(bodyPos);
+        toBody.transform(center);
+        Vector3f angles = toBody.mul(headRot).rotateX(Mth.HALF_PI).rotateZ(spin).getEulerAnglesZYX(new Vector3f());
+        halo.part().x = center.x;
+        halo.part().y = center.y;
+        halo.part().z = center.z;
+        halo.rotation(angles.x, angles.y, angles.z).scale(breathe, breathe, 1f);
     }
 
     private static float smooth(float x) {

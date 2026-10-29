@@ -25,8 +25,7 @@ public final class ShowRenderer {
     private static final Vector3f SCALE = new Vector3f();
     private static final Matrix3f NM = new Matrix3f();
     private static final Matrix3f NW = new Matrix3f();
-    private static final Map<Integer, RenderType> EMISSIVE = new HashMap<>();
-    private static final Map<Integer, RenderType> LIT = new HashMap<>();
+    private static final Map<Integer, RenderType> TYPES = new HashMap<>();
     public static final Map<Integer, Vector3f> OFFSETS = new HashMap<>();
 
     public static void local(ShowModel.Bone b, ShowModel.Anim anim, int i, float time, Matrix4f out) {
@@ -102,14 +101,11 @@ public final class ShowRenderer {
     }
 
     public static RenderType type(ShowModel model, int tex, boolean lit) {
-        Map<Integer, RenderType> cache = lit ? LIT : EMISSIVE;
-        return cache.computeIfAbsent(tex, t -> lit ? RenderType.entityTranslucent(model.textures[t].path())
-                : RenderType.entityTranslucentEmissive(model.textures[t].path()));
+        return TYPES.computeIfAbsent(tex, t -> RenderType.entityTranslucent(model.textures[t].path()));
     }
 
     public static void clearCache() {
-        EMISSIVE.clear();
-        LIT.clear();
+        TYPES.clear();
     }
 
     public static void warmUp(ShowModel model) {

@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import com.zorago.simplywings.render.BodyPose;
+import com.zorago.simplywings.render.CapeHider;
 import com.zorago.simplywings.render.rig.WingRig;
 import com.zorago.simplywings.render.rig.WingRigs;
 import com.zorago.simplywings.anim.WingMotion;
@@ -65,6 +66,8 @@ public class SimplyWingsClient {
         game.addListener(FlightCamera::onTurn);
         game.addListener(BodyPose::onPre);
         game.addListener(BodyPose::onPost);
+        game.addListener(CapeHider::onPre);
+        game.addListener(CapeHider::onPost);
         game.addListener(SimplyWingsClient::onPlayerTickPre);
         game.addListener(SimplyWingsClient::onPlayerTickPost);
         game.addListener(SimplyWingsClient::onLogout);

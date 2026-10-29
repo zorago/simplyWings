@@ -30,6 +30,7 @@ public final class ClientFlight {
     private static final int AIR_JUMP_REFUND_TICKS = 6;
     private static final int TAKEOFF_KEY_LOCK_TICKS = 30;
     private static final int TURN_SUBSTEPS = 4;
+    private static final double BRAKE_STEERING = 0.1;
     private static final RandomSource RANDOM = RandomSource.create();
 
     private static FlightMode mode = FlightMode.NONE;
@@ -76,6 +77,7 @@ public final class ClientFlight {
     private static int travelKeyLock;
     private static int furyCharge;
     private static int furyWindow;
+    private static int furyCooldown;
     private static boolean furyCharging;
     private static boolean sprintWasDown;
     private static double cruiseMax;
@@ -231,7 +233,7 @@ public final class ClientFlight {
             }
         }
         Optional<EffectiveStats> maybeStats = ClientWings.stats();
-        boolean jumpDown = Minecraft.getInstance().options.keyJump.isDown();
+        boolean jumpDown = ModKeys.ASCEND.isDown();
         boolean jumpPressed = jumpDown && !jumpWasDown;
         jumpWasDown = jumpDown;
         ticksSinceJump++;
@@ -271,9 +273,12 @@ public final class ClientFlight {
     }
 
     private static void tickFury(LocalPlayer player, EffectiveStats stats) {
-        boolean sprint = Minecraft.getInstance().options.keySprint.isDown();
+        boolean sprint = ModKeys.BEAT.isDown();
         boolean sprintPressed = sprint && !sprintWasDown;
         sprintWasDown = sprint;
+        if (furyCooldown > 0) {
+            furyCooldown--;
+        }
         if (!FurySet.isFury(ClientWings.equipped()) || mode != FlightMode.TRAVEL) {
             cancelFury();
             return;
@@ -283,7 +288,11 @@ public final class ClientFlight {
                 furyDash(player, stats);
             } else if (--furyWindow == 0) {
                 cancelFury();
+                furyCooldown = FurySet.DASH_COOLDOWN_TICKS;
             }
+            return;
+        }
+        if (furyCooldown > 0) {
             return;
         }
         if (ModKeys.brakeDown()) {
@@ -309,6 +318,7 @@ public final class ClientFlight {
     }
 
     private static void furyDash(LocalPlayer player, EffectiveStats stats) {
+        furyCooldown = FurySet.DASH_COOLDOWN_TICKS;
         furyCharging = false;
         furyCharge = 0;
         furyWindow = 0;
@@ -536,9 +546,9 @@ public final class ClientFlight {
 
     private static void tickStabilized(LocalPlayer player, EffectiveStats stats) {
         Options o = Minecraft.getInstance().options;
-        double forward = (o.keyUp.isDown() ? 1 : 0) - (o.keyDown.isDown() ? 1 : 0);
-        double strafe = (o.keyLeft.isDown() ? 1 : 0) - (o.keyRight.isDown() ? 1 : 0);
-        double vertical = (o.keyJump.isDown() ? 1 : 0) - (o.keyShift.isDown() ? 1 : 0);
+        double forward = ModKeys.axis(ModKeys.FORWARD, ModKeys.BACK);
+        double strafe = ModKeys.axis(ModKeys.LEFT, ModKeys.RIGHT);
+        double vertical = ModKeys.axis(ModKeys.ASCEND, ModKeys.DESCEND);
         double s = stats.stabilization();
         double ramp = ServerConfig.STABILIZED_RAMP_TICKS.get() + (10 - s) * ServerConfig.STABILIZED_RAMP_TICKS_PER_POINT.get();
         ClientConfig.RampCurve curve = ClientConfig.STABILIZED_CURVE.get();
@@ -625,9 +635,9 @@ public final class ClientFlight {
         double accelStat = stats.acceleration();
         cruiseMax = vMax;
 
-        double invert = ClientConfig.INVERT_PITCH.get() ? -1 : 1;
-        double pitchIn = ((o.keyUp.isDown() ? 1 : 0) - (o.keyDown.isDown() ? 1 : 0)) * invert;
-        double yawIn = (o.keyRight.isDown() ? 1 : 0) - (o.keyLeft.isDown() ? 1 : 0);
+        double steer = ModKeys.brakeDown() && speed > 0 ? BRAKE_STEERING : 1;
+        double pitchIn = ModKeys.axis(ModKeys.BACK, ModKeys.FORWARD) * steer;
+        double yawIn = ModKeys.axis(ModKeys.RIGHT, ModKeys.LEFT) * steer;
         float handling = stats.handling();
         aimYaw += (float) (yawIn * handling * DT);
         aimPitch = (float) FlightMath.clamp(aimPitch + pitchIn * handling * DT, -80, 85);
@@ -652,7 +662,7 @@ public final class ClientFlight {
         double drag = (glideDrag + (diveDrag - glideDrag) * Math.max(0, sin)) * ServerConfig.AIR_DRAG.get()
                 * stats.drag();
 
-        boolean sprint = o.keySprint.isDown();
+        boolean sprint = ModKeys.BEAT.isDown();
         braking = ModKeys.brakeDown() && speed > 0;
         tucked = sprint && !braking && speed > vMax && pitch >= ServerConfig.TUCK_MIN_PITCH.get();
         double dragFactor = tucked ? ServerConfig.TUCK_DRAG_FACTOR.get() : 1.0;
@@ -780,7 +790,7 @@ public final class ClientFlight {
                 }
             }
             case STABILIZED -> {
-                boolean descending = !Minecraft.getInstance().options.keyJump.isDown();
+                boolean descending = !ModKeys.ASCEND.isDown();
                 if (player.onGround() && descending && lastVelocity.y <= 0.05) {
                     land(player, 0);
                     setMode(player, FlightMode.NONE, true);

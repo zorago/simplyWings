@@ -7,6 +7,7 @@ import com.google.gson.JsonParser;
 import com.zorago.simplywings.SimplyWings;
 import com.zorago.simplywings.client.FadingSound;
 import com.zorago.simplywings.gacha.GachaTier;
+import com.zorago.simplywings.network.Payloads;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,6 +18,7 @@ import java.util.Optional;
 import java.util.Random;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
+import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
@@ -24,6 +26,7 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.joml.Vector3f;
 
 public final class ShowSounds {
@@ -33,6 +36,9 @@ public final class ShowSounds {
     private static final Map<String, List<Cue>> CARDS = new HashMap<>();
     private static final Map<ResourceLocation, SoundEvent> EVENTS = new HashMap<>();
     private static final List<FadingSound> CARD_BEDS = new ArrayList<>();
+    private static final Map<Integer, List<FadingSound>> REMOTE_BEDS = new HashMap<>();
+    private static final float REMOTE_MIN_VOLUME = 2f;
+    private static final String FADE = "fade";
 
     static final class Cue {
         final ResourceLocation[] sounds;
@@ -216,6 +222,7 @@ public final class ShowSounds {
         if (cues == null) {
             return;
         }
+        PacketDistributor.sendToServer(new Payloads.CardSound(key, tier.ordinal()));
         for (Cue c : cues) {
             if (!c.tierMatches(tier.ordinal())) {
                 continue;
@@ -232,8 +239,42 @@ public final class ShowSounds {
     }
 
     public static void fadeCards() {
+        if (!CARD_BEDS.isEmpty()) {
+            PacketDistributor.sendToServer(new Payloads.CardSound(FADE, 0));
+        }
         CARD_BEDS.forEach(FadingSound::fadeOut);
         CARD_BEDS.clear();
+    }
+
+    public static void remoteCard(Payloads.CardSoundEvent event) {
+        if (event.key().equals(FADE)) {
+            List<FadingSound> beds = REMOTE_BEDS.remove(event.summoner());
+            if (beds != null) {
+                beds.forEach(FadingSound::fadeOut);
+            }
+            return;
+        }
+        List<Cue> cues = CARDS.get(event.key());
+        if (cues == null) {
+            return;
+        }
+        Vec3 at = Vec3.atCenterOf(event.pos()).add(0, 1, 0);
+        Random random = new Random();
+        for (Cue c : cues) {
+            if (!c.tierMatches(event.tier())) {
+                continue;
+            }
+            float pitch = c.pitch(event.tier(), c.pitchRandom > 0 ? random.nextFloat() * c.pitchRandom : 0);
+            float volume = Math.max(c.volume, REMOTE_MIN_VOLUME);
+            if (c.fade > 0) {
+                FadingSound bed = new FadingSound(c.sound(0), SoundSource.BLOCKS, volume, pitch, at, c.fade, () -> true);
+                REMOTE_BEDS.computeIfAbsent(event.summoner(), k -> new ArrayList<>()).add(bed);
+                Minecraft.getInstance().getSoundManager().play(bed);
+            } else {
+                Minecraft.getInstance().getSoundManager().play(new SimpleSoundInstance(c.sound(0), SoundSource.BLOCKS, volume, pitch,
+                        SoundInstance.createUnseededRandom(), at.x, at.y, at.z));
+            }
+        }
     }
 
     static void tick(ClientShows.Show show, ShowModel model, float now, float power) {

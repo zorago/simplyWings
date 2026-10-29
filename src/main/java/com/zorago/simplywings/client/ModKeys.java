@@ -2,29 +2,61 @@ package com.zorago.simplywings.client;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
-import net.minecraft.client.Minecraft;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
+import net.neoforged.neoforge.client.settings.IKeyConflictContext;
 import net.neoforged.neoforge.client.settings.KeyConflictContext;
 import org.lwjgl.glfw.GLFW;
 
 public final class ModKeys {
     private static final String CATEGORY = "key.categories.simplywings";
+    private static final IKeyConflictContext FLIGHT = new IKeyConflictContext() {
+        @Override
+        public boolean isActive() {
+            return KeyConflictContext.IN_GAME.isActive();
+        }
+
+        @Override
+        public boolean conflicts(IKeyConflictContext other) {
+            return false;
+        }
+    };
 
     public static final KeyMapping TRAVEL = new KeyMapping("key.simplywings.travel", KeyConflictContext.IN_GAME,
             InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_LEFT_ALT, CATEGORY);
     public static final KeyMapping MENU = new KeyMapping("key.simplywings.menu", KeyConflictContext.IN_GAME,
             InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_J, CATEGORY);
-    public static final KeyMapping BRAKE = new KeyMapping("key.simplywings.brake", KeyConflictContext.IN_GAME,
-            InputConstants.UNKNOWN, CATEGORY);
+    public static final KeyMapping FORWARD = flight("forward", GLFW.GLFW_KEY_W);
+    public static final KeyMapping BACK = flight("back", GLFW.GLFW_KEY_S);
+    public static final KeyMapping LEFT = flight("left", GLFW.GLFW_KEY_A);
+    public static final KeyMapping RIGHT = flight("right", GLFW.GLFW_KEY_D);
+    public static final KeyMapping ASCEND = flight("ascend", GLFW.GLFW_KEY_SPACE);
+    public static final KeyMapping DESCEND = flight("descend", GLFW.GLFW_KEY_LEFT_SHIFT);
+    public static final KeyMapping BEAT = flight("beat", GLFW.GLFW_KEY_LEFT_CONTROL);
+    public static final KeyMapping BRAKE = new KeyMapping("key.simplywings.brake", FLIGHT, InputConstants.UNKNOWN, CATEGORY);
+
+    private static KeyMapping flight(String name, int key) {
+        return new KeyMapping("key.simplywings." + name, FLIGHT, InputConstants.Type.KEYSYM, key, CATEGORY);
+    }
 
     static void register(RegisterKeyMappingsEvent event) {
         event.register(TRAVEL);
-        event.register(BRAKE);
         event.register(MENU);
+        event.register(FORWARD);
+        event.register(BACK);
+        event.register(LEFT);
+        event.register(RIGHT);
+        event.register(ASCEND);
+        event.register(DESCEND);
+        event.register(BEAT);
+        event.register(BRAKE);
     }
 
     public static boolean brakeDown() {
-        return BRAKE.isUnbound() ? Minecraft.getInstance().options.keyShift.isDown() : BRAKE.isDown();
+        return BRAKE.isUnbound() ? DESCEND.isDown() : BRAKE.isDown();
+    }
+
+    public static int axis(KeyMapping positive, KeyMapping negative) {
+        return (positive.isDown() ? 1 : 0) - (negative.isDown() ? 1 : 0);
     }
 
     private ModKeys() {

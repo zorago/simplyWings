@@ -71,6 +71,7 @@ public class WingsLayer extends RenderLayer<AbstractClientPlayer, PlayerModel<Ab
         if (rig != null) {
             visual.rig.claim(rig.name());
             rig.playerArms(getParentModel().body, getParentModel().rightArm, getParentModel().leftArm);
+            rig.playerHead(getParentModel().body, getParentModel().head);
             rig.setup(visual.animator.motion(partialTick, style, motion), visual.rig);
             rig.render(poseStack, buffer.getBuffer(rig.renderType(ghost)), rig.light(light), OverlayTexture.NO_OVERLAY,
                     ghost ? GHOST_COLOR : -1);
