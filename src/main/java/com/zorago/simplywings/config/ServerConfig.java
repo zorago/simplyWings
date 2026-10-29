@@ -42,6 +42,7 @@ public final class ServerConfig {
     public static final ModConfigSpec.DoubleValue ETHEREAL_MIN_DISTANCE;
     public static final ModConfigSpec.BooleanValue CLOUD_HOVER_HARVEST;
     public static final ModConfigSpec.IntValue FORGE_RADIUS;
+    public static final ModConfigSpec.IntValue SUMMONING_RADIUS;
     public static final ModConfigSpec.IntValue FORGE_Y;
     public static final ModConfigSpec.DoubleValue FORGE_ISLAND_RADIUS;
     public static final ModConfigSpec.IntValue RESCUE_JUMPS;
@@ -188,6 +189,8 @@ public final class ServerConfig {
         b.push("forge");
         FORGE_RADIUS = b.comment("Horizontal distance from (0, 0) of the four End islands (Sky Sanctum, Wing Forge, Cloud Refinery, Offering Fountain), set 90 degrees apart, in blocks. Read once, at the first placement.")
                 .defineInRange("radius", 512, 64, 100000);
+        SUMMONING_RADIUS = b.comment("Horizontal distance from (0, 0) of the Summoning Sanctum, floating at the top of the world over the edge of the main End island, halfway between two of the four islands. Read once, at the first placement.")
+                .defineInRange("summoningRadius", 100, 0, 100000);
         FORGE_Y = b.comment("Height of the top of the sanctum islands in the End. Read once, at the first placement.")
                 .defineInRange("y", 80, 0, 250);
         FORGE_ISLAND_RADIUS = b.comment("Players within this horizontal distance of (0, 0) receive the compass of each unlocked sanctum when a dragon dies.")

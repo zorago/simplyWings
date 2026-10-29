@@ -179,15 +179,18 @@ public final class EndSanctums {
     public static BlockPos center(ServerLevel level, Sanctum sanctum) {
         Data data = data(level);
         if (data.centers[sanctum.ordinal()] == null) {
-            if (!sanctum.island()) {
-                int height = level.getStructureManager().getOrCreate(SimplyWings.id(sanctum.id())).getSize().getY();
-                data.centers[sanctum.ordinal()] = new BlockPos(0, level.getMaxBuildHeight() - height + sanctum.templateCenter.getY(), 0);
-                data.setDirty();
-                return data.centers[sanctum.ordinal()];
-            }
             if (Double.isNaN(data.angle)) {
                 data.angle = new Random(level.getSeed() ^ 0x57494E47L).nextDouble() * Math.PI * 2;
                 data.square = true;
+            }
+            if (!sanctum.island()) {
+                int height = level.getStructureManager().getOrCreate(SimplyWings.id(sanctum.id())).getSize().getY();
+                double angle = data.angle + Math.PI / 4;
+                int radius = ServerConfig.SUMMONING_RADIUS.get();
+                data.centers[sanctum.ordinal()] = new BlockPos((int) Math.round(Math.cos(angle) * radius),
+                        level.getMaxBuildHeight() - height + sanctum.templateCenter.getY(), (int) Math.round(Math.sin(angle) * radius));
+                data.setDirty();
+                return data.centers[sanctum.ordinal()];
             }
             double angle;
             if (data.square) {
