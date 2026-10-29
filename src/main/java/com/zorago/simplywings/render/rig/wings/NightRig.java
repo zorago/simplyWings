@@ -129,13 +129,14 @@ public final class NightRig extends WingRig {
             tailPitch[k] = ground * (TAIL_GROUND[k] + 0.05f * Mth.sin(time * 0.07f - k * 0.7f) + 0.08f * walk * Mth.sin(time * 1.24f - k * 0.6f))
                     + hang * TAIL_HANG[k] + travel * (k == 0 ? 0.18f : 0.02f + 0.03f * wave)
                     + brake * (k == 0 ? 0.35f : 0f) + (m.launch >= 0f ? (k == 0 ? 0.45f : 0.12f) : 0f) + charge * (k == 0 ? 0.9f : k < 3 ? 0.3f : 0.05f);
-            tailYaw[k] = ground * (TAIL_CURL[k] + 0.34f * walk * Mth.sin(time * 0.62f - k * 0.55f)
+            tailYaw[k] = ground * (TAIL_CURL[k]
                     + (1f - walk) * (0.12f * Mth.sin(time * 0.05f - k * 0.6f) + 0.05f * Mth.sin(time * 0.13f - k * 0.9f)))
                     + hang * 0.1f * Mth.sin(time * 0.1f - k * 0.5f)
                     + travel * (-m.bank * 0.28f * (1f + 0.3f * k) + 0.05f * wave)
                     + brake * 0.08f * Mth.sin(time * 0.3f - k);
         }
         tail.follow(memory, tailPitch, tailYaw, 0.32f, 0.62f);
+        tail.swing(memory, walk, Mth.clamp((m.speed - 4.5f) / 1.2f, 0f, 1f) * ground);
     }
 
     @Override

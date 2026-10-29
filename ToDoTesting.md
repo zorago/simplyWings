@@ -363,6 +363,11 @@ Notés au fil des messages de zorago (liste close le 28 octobre). Ils sont corri
 - [x] **Crash** : ouvrir le wiki depuis la table d'assemblage fait planter le jeu (`crash-2026-10-27_22.30.42-client.txt` de `temp_buildSimplyWings`) : `NullPointerException` dans `WikiScreen.<init>` ligne 53, `history.push(null)` (le chemin trouvé par `find(null, start, path)` commence par `null`, que l'`ArrayDeque` refuse). Ouvert depuis `AssemblyTableScreen` ligne 26. Note : l'instance tourne sous NeoForge 21.1.265.
   *(29 octobre : corrigé ; 270 pages ouvertes sans erreur, retour arrière testé.)*
 
+### 16 ter. Retours de zorago du 29 octobre après-midi
+
+- [x] Nageoires du bout de la queue des Furies : encore les lignes de 0,1 px (cubes de 0,02 px d'épaisseur, pas exactement plats). Corrigé : tout cube de moins de 0,1 px est traité comme plat.
+- [ ] Queue des Furies : vague de balancement gauche-droite sur toute la queue, amplitude croissante vers la pointe, rythmée par la marche et plus ample en courant (`DragonTail.swing`, commun à Night et Light). Clips `walk` et `run` ajoutés aux scènes Blockbench. À valider par zorago (en jeu et dans `art/scenes/night.bbmodel`).
+
 ### 16 bis. Trouvés par la campagne de test du 29 octobre (`docs/test-runs/2026-10-29/`)
 
 - [x] Reconnexion en plein vol sur un serveur : expulsion « floating » 5 s après la connexion. Corrigé (reprise en stationnaire à la connexion), testé.

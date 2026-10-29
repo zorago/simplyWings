@@ -28,6 +28,7 @@ import net.minecraft.util.Mth;
 public final class RigLoader {
     private static final float ROOT_Y = 24f;
     private static final float DEPTH_STEP = 0.012f;
+    private static final float THIN = 0.1f;
     private static final int DEPTH_LAYERS = 5;
 
     public record Rig(LayerDefinition layer, Map<String, List<String>> paths, JsonObject membranes, int width, int height) {
@@ -180,9 +181,9 @@ public final class RigLoader {
         float y = -e.from()[1] - sy + pivot[1];
         float z = e.from()[2] - pivot[2];
         builder.texOffs(e.u(), e.v()).mirror(e.mirror());
-        Set<Direction> faces = sx == 0f ? EnumSet.of(Direction.EAST, Direction.WEST)
-                : sy == 0f ? EnumSet.of(Direction.UP, Direction.DOWN)
-                : sz == 0f ? EnumSet.of(Direction.NORTH, Direction.SOUTH) : null;
+        Set<Direction> faces = sx < THIN ? EnumSet.of(Direction.EAST, Direction.WEST)
+                : sy < THIN ? EnumSet.of(Direction.UP, Direction.DOWN)
+                : sz < THIN ? EnumSet.of(Direction.NORTH, Direction.SOUTH) : null;
         if (faces == null) {
             builder.addBox(x, y, z, sx, sy, sz, new CubeDeformation(e.inflate()));
         } else {

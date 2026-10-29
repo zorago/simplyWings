@@ -11,6 +11,7 @@ public final class DragonTail {
     public final Bone midLeft;
     public final Bone tipRight;
     public final Bone tipLeft;
+    private static final float SWING_LAG = 0.45f;
     private final int slot;
 
     public DragonTail(Bones b, int slot, int mid, int tip) {
@@ -25,7 +26,22 @@ public final class DragonTail {
     }
 
     public int slots() {
-        return segment.size() * 2;
+        return segment.size() * 2 + 2;
+    }
+
+    private int phaseSlot() {
+        return slot + segment.size() * 2;
+    }
+
+    public void swing(RigMemory memory, float gait, float run) {
+        int phase = phaseSlot();
+        float next = memory.now(phase) + 0.17f + 0.09f * run;
+        if (next > Mth.TWO_PI) {
+            memory.snap(phase, memory.now(phase) - Mth.TWO_PI);
+            next -= Mth.TWO_PI;
+        }
+        memory.set(phase, next);
+        memory.ease(phase + 1, gait * (1f + 0.6f * run), 0.08f);
     }
 
     public void follow(RigMemory memory, float[] pitch, float[] yaw, float stiffness, float damping) {
@@ -37,9 +53,12 @@ public final class DragonTail {
     }
 
     public void apply(RigMemory memory, float partialTick, float[] extraPitch, float[] extraYaw) {
+        float phase = memory.get(phaseSlot(), partialTick);
+        float amplitude = memory.get(phaseSlot() + 1, partialTick);
         for (int k = 0; k < segment.size(); k++) {
             float p = memory.get(slot + 2 * k, partialTick) + (extraPitch == null ? 0f : extraPitch[k]);
-            float y = memory.get(slot + 2 * k + 1, partialTick) + (extraYaw == null ? 0f : extraYaw[k]);
+            float y = memory.get(slot + 2 * k + 1, partialTick) + (extraYaw == null ? 0f : extraYaw[k])
+                    + amplitude * (0.055f + 0.02f * k) * Mth.sin(phase - k * SWING_LAG);
             segment.get(k).rotate(p, y * Mth.sin(p), -y * Mth.cos(p));
         }
     }

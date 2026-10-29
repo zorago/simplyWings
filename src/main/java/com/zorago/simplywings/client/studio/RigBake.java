@@ -106,6 +106,7 @@ public final class RigBake {
     private static final class Step {
         FlightMode mode = FlightMode.NONE;
         int state = WingMotion.GROUND;
+        float walk;
         float charge;
         boolean beating;
         boolean stall;
@@ -278,7 +279,7 @@ public final class RigBake {
                 out.rouse = Mth.sin((float) Math.PI * out.rouseProgress);
             }
             boolean travel = step.mode == FlightMode.TRAVEL;
-            out.speed = travel ? (step.state == WingMotion.DIVE ? 25f : step.state == WingMotion.BRAKE ? 6f : 15f) : 0f;
+            out.speed = travel ? (step.state == WingMotion.DIVE ? 25f : step.state == WingMotion.BRAKE ? 6f : 15f) : step.walk;
             out.climb = travel && step.state == WingMotion.DIVE ? -15f : 0f;
             out.flapRate = flapRate;
             out.hoverRate = hoverRate;
@@ -550,6 +551,12 @@ public final class RigBake {
         JsonArray clips = new JsonArray();
 
         clips.add(clip("idle_ground", "loop", 157, true, List.of(new Segment(1, step(FlightMode.NONE, WingMotion.GROUND)))));
+        Step walk = step(FlightMode.NONE, WingMotion.GROUND);
+        walk.walk = 4.3f;
+        clips.add(clip("walk", "loop", 74, true, List.of(new Segment(1, walk))));
+        Step run = step(FlightMode.NONE, WingMotion.GROUND);
+        run.walk = 5.6f;
+        clips.add(clip("run", "loop", 48, true, List.of(new Segment(1, run))));
         int[] lengths = rig.idleLengths();
         for (int v = 0; v < lengths.length; v++) {
             Step rest = step(FlightMode.NONE, WingMotion.GROUND);
