@@ -364,7 +364,9 @@ public final class ServerFlight {
     private static void onLogin(PlayerEvent.PlayerLoggedInEvent event) {
         if (event.getEntity() instanceof ServerPlayer player) {
             WingsData data = ModAttachments.get(player);
-            setMode(player, data, FlightMode.NONE, 0, false);
+            boolean airborne = data.equipped().isPresent() && !player.onGround() && !player.isInWater() && !player.isInLava()
+                    && !player.isPassenger() && !player.getAbilities().flying;
+            setMode(player, data, airborne ? FlightMode.STABILIZED : FlightMode.NONE, 0, airborne);
             syncAll(player);
         }
     }
