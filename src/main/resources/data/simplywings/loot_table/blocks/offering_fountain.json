@@ -12,6 +12,14 @@
       "conditions": [
         {
           "condition": "minecraft:survives_explosion"
+        },
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "simplywings:offering_fountain",
+          "properties": {
+            "x": "2",
+            "z": "2"
+          }
         }
       ]
     }

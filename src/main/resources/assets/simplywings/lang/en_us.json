@@ -918,6 +918,7 @@
   "message.simplywings.summoning_sanctum": "A Summoning Compass appears in your bag. Its needle points straight up, to the top of the sky.",
   "message.simplywings.offering_fountain": "A Fountain Compass appears in your bag. A fourth island has risen in the End.",
   "message.simplywings.gacha_feathers": "Not enough Summoning Feathers.",
+  "message.simplywings.fountain_no_room": "The fountain needs a free octagon, four blocks wide, around this block.",
   "message.simplywings.fountain_offered": "The fountain gives you %s feathers (%s kept in reserve).",
   "message.simplywings.fountain_offered_one": "The fountain gives you 1 feather (%s kept in reserve).",
   "screen.simplywings.altar.title": "Draconic Convene",

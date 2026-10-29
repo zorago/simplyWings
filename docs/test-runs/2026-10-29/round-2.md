@@ -17,3 +17,11 @@ Build corrigé (`main` après fusion de `fixes-1029`). Retests des KO du round 1
 | K2 | OK | flammes de l'autel au repos et du show au-dessus d'un bassin d'eau : plus recouvertes par l'eau | shots/L_r2.png |
 | M5 | OK | tonneau de la table d'assemblage vidé puis structure régénérée : cuir et plumes de retour | data get block |
 | O0 | OK | plus d'avertissement « duplicate items » de JEI au chargement (interpréteur de sous-type des conteneurs d'essence) | latest.log |
+| A4 | OK | serveur dédié : Dev et Dev2 rejoignent sans registry mismatch, aucune erreur | build/server.log |
+| Q2 | OK | Dev2 voit les ailes d'ange de Dev et l'auréole au-dessus de sa tête | run-mp2/studio/shots/Q2_dev2_sees_angel.png |
+| L6 | OK | ×10 de Dev à l'autel : Dev2 (à 5 blocs) reçoit tout le show et maintenant aussi les cartes (10 deal, 6 shuffle, 10 flip, 10 pop, 10 place), le chœur et la musique des loots, en positionnel à l'autel | run-mp2 soundlog |
+| P2b | OK | frôlement : Dev passe à 1,5 bloc de Dev2 à environ 35 m/s, Dev2 entend flight.flyby et les battements | run-mp2 soundlog |
+| I5 | OK | dash de Night près de Dev2 : charge, grésillement, tonnerre (night_fury.thunder) et invisible reçus par Dev2 | run-mp2 soundlog |
+| H17 | OK partiel | 30 s de vol varié sans kick ; en revanche, téléportation par commande (/tp) pendant le vol : le serveur signale « moved too quickly » à chaque /tp (aussi pour Dev2 sans ailes) et Dev a été expulsé pour « floating » deux fois juste après un /tp. Non reproduit sur un /tp pendant le stationnaire. À surveiller en jeu réel (portails, perles, mods de téléportation) | build/server.log |
+| A6 | KO → corrigé | reconnexion en plein vol : expulsé pour « floating » 5 s après la connexion (serveur en mode sans vol, gravité normale). Corrigé (reprise en stationnaire), retesté : en l'air à la reconnexion, mode STABILIZED des deux côtés, pas de kick après 15 s | build/server.log, status |
+| A5 | OK partiel | redémarrage du serveur dédié : collection, paire équipée (eagle) et stamina de Dev conservées ; le reste (pitié, historique, jauges, compresseur) non revérifié | status, simplywings info |

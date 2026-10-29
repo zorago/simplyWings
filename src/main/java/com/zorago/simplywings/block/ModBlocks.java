@@ -95,11 +95,14 @@ public final class ModBlocks {
                     .mapColor(MapColor.QUARTZ)
                     .strength(6.0F, 1200.0F)
                     .requiresCorrectToolForDrops()
-                    .lightLevel(state -> 13)
+                    .lightLevel(state -> OfferingFountainBlock.isController(state) ? 13 : 0)
                     .sound(SoundType.AMETHYST)
                     .noOcclusion()));
     public static final DeferredItem<BlockItem> OFFERING_FOUNTAIN_ITEM = ITEMS.register("offering_fountain",
             () -> new BlockItem(OFFERING_FOUNTAIN.get(), new Item.Properties().rarity(Rarity.EPIC)));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<com.zorago.simplywings.gacha.OfferingFountainBlockEntity>> OFFERING_FOUNTAIN_ENTITY =
+            BLOCK_ENTITIES.register("offering_fountain",
+                    () -> BlockEntityType.Builder.of(com.zorago.simplywings.gacha.OfferingFountainBlockEntity::new, OFFERING_FOUNTAIN.get()).build(null));
     public static final DeferredHolder<MenuType<?>, MenuType<FountainMenu>> FOUNTAIN_MENU =
             MENUS.register("offering_fountain", () -> IMenuTypeExtension.create(FountainMenu::new));
 
