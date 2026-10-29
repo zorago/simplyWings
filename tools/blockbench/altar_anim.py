@@ -201,7 +201,7 @@ class Rig:
     def plane(self, bone, center, w, h, texture, rot=None, uv=(16, 16)):
         frm = [center[0] - w / 2, center[1] - h / 2, center[2]]
         to = [center[0] + w / 2, center[1] + h / 2, center[2]]
-        faces = {"north": {"uv": [0, 0, uv[0], uv[1]], "texture": texture}, "south": {"uv": [0, 0, uv[0], uv[1]], "texture": texture}}
+        faces = {"north": {"uv": [0, 0, uv[0], uv[1]], "texture": texture}}
         element = scene.cube(f"{bone}_plane_{len(self.groups[bone]['children'])}", frm, to, faces, origin=list(center), rotation=rot)
         return self.add_element(bone, element)
 
