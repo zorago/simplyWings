@@ -185,7 +185,7 @@ Paires de référence : la commune, la chouette, l'aigle, l'abeille (poussée co
 - L10. **Bugs connus (§ 16)** : item de plume dessiné deux fois en croix ; cercle d'invocation 2 blocs sous l'autel (caché par le build) ; captures.
 - L11. Fontaine : 100 objets B → 1 plume, 10 objets A → 1, paires rare, épique, légendaire → 1, 10, 100 ; réserve des fractions ; objets sans valeur rendus à la fermeture ; ambiance de la fontaine.
 - L12. Autel et fontaine : cassés à la pioche (pas à la main), tombent en item, reposés ailleurs, fonctionnent ; ambiance de l'autel.
-- L13. Coffres : `/loot spawn` cent fois sur `chests/simple_dungeon` (≈ 5 %, 1 à 3 plumes), Nether (10 %), `end_city_treasure` (20 %) ; jamais plus de 3 plumes.
+- L13. Coffres : `/loot spawn` cent fois sur `chests/simple_dungeon` (≈ 10 %, 1 à 3 plumes), Nether (20 %), `end_city_treasure` (30 %) ; jamais plus de 3 plumes.
 
 ### M. Structures, dragon et compas (≈ 45 min)
 
