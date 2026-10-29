@@ -8,7 +8,11 @@ import net.neoforged.neoforge.client.settings.IKeyConflictContext;
 import net.neoforged.neoforge.client.settings.KeyConflictContext;
 import org.lwjgl.glfw.GLFW;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public final class ModKeys {
+    public static final Set<KeyMapping> SIMULATED = new HashSet<>();
     private static final String CATEGORY = "key.categories.simplywings";
     private static final IKeyConflictContext FLIGHT = new IKeyConflictContext() {
         @Override
@@ -58,7 +62,7 @@ public final class ModKeys {
         boolean held = code.getType() == InputConstants.Type.MOUSE
                 ? GLFW.glfwGetMouseButton(window, code.getValue()) == GLFW.GLFW_PRESS
                 : code.getType() == InputConstants.Type.KEYSYM && InputConstants.isKeyDown(window, code.getValue());
-        return held || key.isDown();
+        return held || SIMULATED.contains(key);
     }
 
     public static boolean accelerating() {

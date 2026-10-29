@@ -7,7 +7,7 @@ First public version.
 ### Flight
 - Two flight modes: a stabilized hover for building and a keyboard-steered travel flight with wing beats, glide, dive, tuck, stall, brake, crash and stamina.
 - Air jumps, free rescue jumps, very fast double tap to hover, charged takeoff, mouse-orbited camera.
-- Hovering uses the vanilla movement keys; travel flight has six keys of its own in the *Simply Wings* category (go up, go down, turn left, turn right, accelerate, brake), opposite keys cancel each other, steering at 10 % while braking.
+- Hovering uses the vanilla movement keys; travel flight has six keys of its own in the *Simply Wings* category (go up, go down, turn left, turn right, accelerate, brake), opposite keys cancel each other, steering at 10 % while braking. Flight keys read the real keyboard state, so a key bound to Shift, Ctrl or Alt never leaves another key stuck down.
 - Logging back in while flying resumes the hover, so servers do not kick for floating.
 - Crashes: hitting anything (ground, wall, tree…) in travel flight and losing more than 10 m/s within 0.15 s hurts, ignoring armor like an elytra crash. A wall hit at the top speed of common wings kills (21 damage), slightly slower survives; losing the whole terminal velocity deals 100 (50 hearts), so it stays lethal with modded extra hearts. Braking and stall recovery never hurt.
 

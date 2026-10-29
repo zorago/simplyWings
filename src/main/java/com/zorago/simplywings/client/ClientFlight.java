@@ -449,7 +449,7 @@ public final class ClientFlight {
             while (ModKeys.TRAVEL.consumeClick()) {
             }
             boolean affordable = creative(player) || ClientWings.stamina() >= flapCost();
-            if (ModKeys.TRAVEL.isDown() && canFly(player) && affordable) {
+            if (ModKeys.down(ModKeys.TRAVEL) && canFly(player) && affordable) {
                 if (++chargeTicks >= ServerConfig.TAKEOFF_CHARGE_TICKS.get()) {
                     chargeTicks = 0;
                     takeoff(player, stats);

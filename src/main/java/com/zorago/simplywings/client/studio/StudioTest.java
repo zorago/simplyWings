@@ -207,6 +207,7 @@ final class StudioTest {
                 int ticks = a.length > 2 ? Integer.parseInt(a[2]) : 1;
                 KeyMapping.click(key.getKey());
                 key.setDown(true);
+                com.zorago.simplywings.client.ModKeys.SIMULATED.add(key);
                 HELD.put(key, ticks);
             }
             case "soundlog" -> {
@@ -301,6 +302,7 @@ final class StudioTest {
             int left = entry.getValue() - 1;
             if (left <= 0) {
                 entry.getKey().setDown(false);
+                com.zorago.simplywings.client.ModKeys.SIMULATED.remove(entry.getKey());
                 return true;
             }
             entry.setValue(left);
