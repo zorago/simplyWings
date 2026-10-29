@@ -368,6 +368,8 @@ Notés au fil des messages de zorago (liste close le 28 octobre). Ils sont corri
 - [x] Nageoires du bout de la queue des Furies : encore les lignes de 0,1 px (cubes de 0,02 px d'épaisseur, pas exactement plats). Corrigé : tout cube de moins de 0,1 px est traité comme plat.
 - [ ] Queue des Furies : vague de balancement gauche-droite sur toute la queue, amplitude croissante vers la pointe, rythmée par la marche et plus ample en courant (`DragonTail.swing`, commun à Night et Light). Clips `walk` et `run` ajoutés aux scènes Blockbench. À valider par zorago (en jeu et dans `art/scenes/night.bbmodel`).
 
+- [ ] Touches de vol bloquées par Maj (et Ctrl) : NeoForge considère comme relâchée toute touche sans modificateur dont le contexte ne recoupe pas celui du jeu dès que Maj, Ctrl ou Alt est enfoncé. Maj lié à « accélérer » ne faisait rien et gelait les autres touches ; Ctrl, l'accélération par défaut, avait le même défaut. Corrigé : les 6 touches de vol lisent l'état réel du clavier et de la souris. À revérifier par zorago avec de vraies touches (le studio ne simule pas Maj ni Ctrl physiques).
+
 ### 16 bis. Trouvés par la campagne de test du 29 octobre (`docs/test-runs/2026-10-29/`)
 
 - [x] Reconnexion en plein vol sur un serveur : expulsion « floating » 5 s après la connexion. Corrigé (reprise en stationnaire à la connexion), testé.

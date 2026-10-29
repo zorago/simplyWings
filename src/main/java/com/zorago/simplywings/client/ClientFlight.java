@@ -273,7 +273,7 @@ public final class ClientFlight {
     }
 
     private static void tickFury(LocalPlayer player, EffectiveStats stats) {
-        boolean sprint = ModKeys.ACCELERATE.isDown();
+        boolean sprint = ModKeys.down(ModKeys.ACCELERATE);
         boolean sprintPressed = sprint && !sprintWasDown;
         sprintWasDown = sprint;
         if (furyCooldown > 0) {

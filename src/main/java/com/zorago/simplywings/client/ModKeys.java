@@ -2,6 +2,7 @@ package com.zorago.simplywings.client;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
+import net.minecraft.client.Minecraft;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.client.settings.IKeyConflictContext;
 import net.neoforged.neoforge.client.settings.KeyConflictContext;
@@ -47,16 +48,29 @@ public final class ModKeys {
         event.register(BRAKE);
     }
 
+    public static boolean down(KeyMapping key) {
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.screen != null || key.isUnbound()) {
+            return false;
+        }
+        InputConstants.Key code = key.getKey();
+        long window = mc.getWindow().getWindow();
+        boolean held = code.getType() == InputConstants.Type.MOUSE
+                ? GLFW.glfwGetMouseButton(window, code.getValue()) == GLFW.GLFW_PRESS
+                : code.getType() == InputConstants.Type.KEYSYM && InputConstants.isKeyDown(window, code.getValue());
+        return held || key.isDown();
+    }
+
     public static boolean accelerating() {
-        return ACCELERATE.isDown() && !BRAKE.isDown();
+        return down(ACCELERATE) && !down(BRAKE);
     }
 
     public static boolean brakeDown() {
-        return BRAKE.isDown() && !ACCELERATE.isDown();
+        return down(BRAKE) && !down(ACCELERATE);
     }
 
     public static int axis(KeyMapping positive, KeyMapping negative) {
-        return (positive.isDown() ? 1 : 0) - (negative.isDown() ? 1 : 0);
+        return (down(positive) ? 1 : 0) - (down(negative) ? 1 : 0);
     }
 
     private ModKeys() {
