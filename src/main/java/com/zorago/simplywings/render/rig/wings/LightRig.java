@@ -20,6 +20,7 @@ public final class LightRig extends WingRig {
     private static final int SETTLE = 1;
     private static final int GLEAM = 2;
     private static final int TAIL = 10;
+    private static final int TAIL_SEGMENTS = 8;
     private static final int[] IDLES = {84, 60, 90, 76, 70, 96, 110};
     private static final float UP = 0.5f;
     private static final float DOWN = 0.2f;
@@ -37,19 +38,19 @@ public final class LightRig extends WingRig {
             BEND_ELBOW, BEND_WRIST);
     private static final float GLIDE_BILLOW = 0.55f;
     private static final String[] TIPS = {"right_finger_1_tip", "left_finger_1_tip"};
-    private static final float[] TAIL_GROUND = {0.6f, 0.45f, 0.4f, 0.12f, 0.06f, 0.04f};
-    private static final float[] TAIL_CURL = {0f, 0.05f, 0.15f, 0.22f, 0.26f, 0.28f};
-    private static final float[] TAIL_HANG = {0.35f, 0.08f, 0.08f, 0.07f, 0.05f, 0.05f};
+    private static final float[] TAIL_GROUND = {0.6f, 0.45f, 0.4f, 0.12f, 0.06f, 0.04f, 0.03f, 0.03f};
+    private static final float[] TAIL_CURL = {0f, 0.05f, 0.15f, 0.22f, 0.26f, 0.28f, 0.3f, 0.32f};
+    private static final float[] TAIL_HANG = {0.35f, 0.08f, 0.08f, 0.07f, 0.05f, 0.05f, 0.04f, 0.04f};
     private static final ResourceLocation GLOW = SimplyWings.id("textures/entity/light_glow.png");
 
     private final RigPose drive = new RigPose();
     private final RigPose state = new RigPose();
     private final RigPose side = new RigPose();
     private final RigPose hind = new RigPose();
-    private final float[] tailPitch = new float[6];
-    private final float[] tailYaw = new float[6];
-    private final float[] extraPitch = new float[6];
-    private final float[] extraYaw = new float[6];
+    private final float[] tailPitch = new float[TAIL_SEGMENTS];
+    private final float[] tailYaw = new float[TAIL_SEGMENTS];
+    private final float[] extraPitch = new float[TAIL_SEGMENTS];
+    private final float[] extraYaw = new float[TAIL_SEGMENTS];
     private DragonWing[] main;
     private DragonWing[] back;
     private DragonTail tail;
@@ -79,7 +80,7 @@ public final class LightRig extends WingRig {
                 new DragonWing(bones, "left_", -1f, 1.22f, 2.7f, 2.75f)};
         back = new DragonWing[]{new DragonWing(bones, "right_hind_", 1f, 1.15f, 2.55f, 2.55f),
                 new DragonWing(bones, "left_hind_", -1f, 1.15f, 2.55f, 2.55f)};
-        tail = new DragonTail(bones, TAIL, 2, 5);
+        tail = new DragonTail(bones, TAIL, 2, TAIL_SEGMENTS - 1);
     }
 
     @Override
@@ -96,7 +97,7 @@ public final class LightRig extends WingRig {
         float walk = Mth.clamp(m.speed / 4.5f, 0f, 1f) * ground;
         float time = m.time;
         boolean coil = m.rouse > 0f && m.rouseVariant % 7 == 2;
-        for (int k = 0; k < 6; k++) {
+        for (int k = 0; k < TAIL_SEGMENTS; k++) {
             float wave = Mth.sin(time * 0.2f - k * 0.7f);
             tailPitch[k] = ground * (TAIL_GROUND[k] + 0.05f * Mth.sin(time * 0.06f - k * 0.7f) + 0.08f * walk * Mth.sin(time * 1f - k * 0.6f))
                     + hang * TAIL_HANG[k] + travel * (k == 0 ? 0.18f : 0.02f + 0.04f * wave)
@@ -218,7 +219,7 @@ public final class LightRig extends WingRig {
             hind.set(RigPose.FOLD, Mth.clamp(hind.get(RigPose.FOLD) + 0.05f, 0f, 1f));
             back[i].apply(hind, billow * 0.8f, flutter * 1.1f, 0f);
         }
-        for (int k = 0; k < 6; k++) {
+        for (int k = 0; k < TAIL_SEGMENTS; k++) {
             extraPitch[k] = 0f;
             extraYaw[k] = sway * 0.2f * Mth.sin(time * 0.15f - k * 0.4f) + gleam * 0.03f * Mth.sin(time * 5.3f - k);
         }
