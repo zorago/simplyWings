@@ -50,7 +50,7 @@ public class WikiScreen extends Screen {
             List<String> path = new ArrayList<>();
             if (find(null, start, path)) {
                 for (int i = 0; i < path.size() - 1; i++) {
-                    history.push(path.get(i));
+                    history.push(path.get(i) == null ? "" : path.get(i));
                 }
                 current = start;
             }

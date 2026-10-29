@@ -33,6 +33,10 @@ public final class ClientNet {
         ClientGacha.onResults(payload);
     }
 
+    public static void onCardSound(Payloads.CardSoundEvent payload) {
+        com.zorago.simplywings.client.show.ShowSounds.remoteCard(payload);
+    }
+
     public static void onSummonShow(Payloads.SummonShow payload) {
         com.zorago.simplywings.client.show.ClientShows.start(payload);
     }

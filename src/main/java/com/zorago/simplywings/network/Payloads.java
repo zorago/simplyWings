@@ -294,6 +294,34 @@ public final class Payloads {
         }
     }
 
+    public record CardSound(String key, int tier) implements CustomPacketPayload {
+        public static final Type<CardSound> TYPE = payloadType("card_sound");
+        public static final StreamCodec<RegistryFriendlyByteBuf, CardSound> CODEC = StreamCodec.composite(
+                ByteBufCodecs.STRING_UTF8, CardSound::key,
+                ByteBufCodecs.VAR_INT, CardSound::tier,
+                CardSound::new);
+
+        @Override
+        public Type<? extends CustomPacketPayload> type() {
+            return TYPE;
+        }
+    }
+
+    public record CardSoundEvent(int summoner, net.minecraft.core.BlockPos pos, String key, int tier) implements CustomPacketPayload {
+        public static final Type<CardSoundEvent> TYPE = payloadType("card_sound_event");
+        public static final StreamCodec<RegistryFriendlyByteBuf, CardSoundEvent> CODEC = StreamCodec.composite(
+                ByteBufCodecs.VAR_INT, CardSoundEvent::summoner,
+                net.minecraft.core.BlockPos.STREAM_CODEC, CardSoundEvent::pos,
+                ByteBufCodecs.STRING_UTF8, CardSoundEvent::key,
+                ByteBufCodecs.VAR_INT, CardSoundEvent::tier,
+                CardSoundEvent::new);
+
+        @Override
+        public Type<? extends CustomPacketPayload> type() {
+            return TYPE;
+        }
+    }
+
     public record GachaClaim() implements CustomPacketPayload {
         public static final Type<GachaClaim> TYPE = payloadType("gacha_claim");
         public static final StreamCodec<RegistryFriendlyByteBuf, GachaClaim> CODEC = StreamCodec.unit(new GachaClaim());

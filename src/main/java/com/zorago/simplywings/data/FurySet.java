@@ -10,6 +10,7 @@ public final class FurySet {
     public static final ResourceLocation LIGHT = SimplyWings.id("light");
     public static final int CHARGE_TICKS = 40;
     public static final int DASH_WINDOW_TICKS = 10;
+    public static final int DASH_COOLDOWN_TICKS = 100;
 
     public static boolean infiniteStamina(Collection<ResourceLocation> collection) {
         return collection.contains(NIGHT);

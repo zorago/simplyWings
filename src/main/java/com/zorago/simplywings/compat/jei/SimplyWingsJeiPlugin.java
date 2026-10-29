@@ -19,6 +19,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 import mezz.jei.api.IModPlugin;
+import com.zorago.simplywings.essence.EssenceContainerItem;
+import mezz.jei.api.ingredients.subtypes.UidContext;
+import mezz.jei.api.ingredients.subtypes.ISubtypeInterpreter;
+import mezz.jei.api.registration.ISubtypeRegistration;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.gui.handlers.IGuiClickableArea;
 import mezz.jei.api.gui.handlers.IGuiContainerHandler;
@@ -57,6 +61,24 @@ public class SimplyWingsJeiPlugin implements IModPlugin {
     @Override
     public ResourceLocation getPluginUid() {
         return SimplyWings.id("jei");
+    }
+
+    @Override
+    public void registerItemSubtypes(ISubtypeRegistration registration) {
+        ISubtypeInterpreter<ItemStack> essence = new ISubtypeInterpreter<>() {
+            @Override
+            public Object getSubtypeData(ItemStack stack, UidContext context) {
+                EssenceType type = EssenceContainerItem.type(stack);
+                return type == null ? null : type.getSerializedName();
+            }
+
+            @Override
+            public String getLegacyStringSubtypeInfo(ItemStack stack, UidContext context) {
+                Object data = getSubtypeData(stack, context);
+                return data == null ? "" : data.toString();
+            }
+        };
+        ModItems.CONTAINERS.forEach(container -> registration.registerSubtypeInterpreter(container.get(), essence));
     }
 
     @Override

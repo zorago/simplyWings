@@ -17,7 +17,6 @@ import net.neoforged.neoforge.network.PacketDistributor;
 
 public final class FuryServer {
     private static final int LIGHTNING_INTERVAL = 9;
-    private static final int DASH_COOLDOWN_TICKS = 100;
     private static final int LATENCY_TICKS = 6;
     private static final int DASH_BOLTS = 4;
     private static final float THUNDER_RANGE_VOLUME = 12f;
@@ -51,7 +50,7 @@ public final class FuryServer {
             broadcast(player, Payloads.FuryEvent.CHARGE_STOP);
             return;
         }
-        data.setFuryReadyTick(player.level().getGameTime() + DASH_COOLDOWN_TICKS);
+        data.setFuryReadyTick(player.level().getGameTime() + FurySet.DASH_COOLDOWN_TICKS);
         player.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, ServerConfig.FURY_INVISIBILITY_TICKS.get(), 0, false, false, true));
         if (FurySet.isNight(data.equipped())) {
             strikeDash(player);

@@ -2,8 +2,9 @@ package com.zorago.simplywings.network;
 
 import com.zorago.simplywings.client.ClientNet;
 import com.zorago.simplywings.flight.FuryServer;
-import com.zorago.simplywings.gacha.Gacha;
 import com.zorago.simplywings.flight.ServerFlight;
+import com.zorago.simplywings.gacha.AltarShows;
+import com.zorago.simplywings.gacha.Gacha;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
@@ -21,6 +22,7 @@ public final class ModNetwork {
         r.playToClient(Payloads.GachaState.TYPE, Payloads.GachaState.CODEC, (p, ctx) -> ClientNet.onGachaState(p));
         r.playToClient(Payloads.GachaResults.TYPE, Payloads.GachaResults.CODEC, (p, ctx) -> ClientNet.onGachaResults(p));
         r.playToClient(Payloads.SummonShow.TYPE, Payloads.SummonShow.CODEC, (p, ctx) -> ClientNet.onSummonShow(p));
+        r.playToClient(Payloads.CardSoundEvent.TYPE, Payloads.CardSoundEvent.CODEC, (p, ctx) -> ClientNet.onCardSound(p));
 
         r.playToServer(Payloads.RequestMode.TYPE, Payloads.RequestMode.CODEC,
                 (p, ctx) -> ServerFlight.onRequestMode((ServerPlayer) ctx.player(), p));
@@ -42,6 +44,8 @@ public final class ModNetwork {
                 (p, ctx) -> FuryServer.onDash((ServerPlayer) ctx.player()));
         r.playToServer(Payloads.GachaPull.TYPE, Payloads.GachaPull.CODEC,
                 (p, ctx) -> Gacha.onPull((ServerPlayer) ctx.player(), p));
+        r.playToServer(Payloads.CardSound.TYPE, Payloads.CardSound.CODEC,
+                (p, ctx) -> AltarShows.relayCard((ServerPlayer) ctx.player(), p));
         r.playToServer(Payloads.GachaClaim.TYPE, Payloads.GachaClaim.CODEC,
                 (p, ctx) -> Gacha.claim((ServerPlayer) ctx.player()));
         r.playToServer(Payloads.Impact.TYPE, Payloads.Impact.CODEC,

@@ -17,6 +17,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -320,6 +321,9 @@ public final class EndSanctums {
                                                                  StructureTemplate.StructureBlockInfo blockInfo,
                                                                  StructureTemplate.StructureBlockInfo relative,
                                                                  StructurePlaceSettings settings) {
+            if (relative.nbt() != null && relative.state().is(Blocks.BARREL) && !relative.nbt().getList("Items", Tag.TAG_COMPOUND).isEmpty()) {
+                return relative;
+            }
             if (!everything && !SimplyWings.MOD_ID.equals(BuiltInRegistries.BLOCK.getKey(relative.state().getBlock()).getNamespace())) {
                 return null;
             }
