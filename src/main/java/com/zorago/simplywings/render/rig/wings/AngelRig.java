@@ -52,6 +52,8 @@ public final class AngelRig extends WingRig {
     private final Quaternionf headRot = new Quaternionf();
     private final Vector3f bodyPos = new Vector3f();
     private final Vector3f headPos = new Vector3f();
+    private final Vector3f bodyAngles = new Vector3f();
+    private final Vector3f headAngles = new Vector3f();
 
     public AngelRig() {
         super("angel");
@@ -78,6 +80,8 @@ public final class AngelRig extends WingRig {
         bodyRot.rotationZYX(body.zRot, body.yRot, body.xRot);
         headPos.set(head.x, head.y, head.z);
         headRot.rotationZYX(head.zRot, head.yRot, head.xRot);
+        bodyAngles.set(body.xRot, body.yRot, body.zRot);
+        headAngles.set(head.xRot, head.yRot, head.zRot);
     }
 
     @Override
@@ -95,12 +99,6 @@ public final class AngelRig extends WingRig {
         memory.spring(SETTLE, m.w(WingMotion.LANDING), 0.18f, 0.72f);
         float slow = m.w(WingMotion.BRAKE) + m.w(WingMotion.LANDING) + m.stall + 0.6f * m.w(WingMotion.HOVER);
         memory.spring(ALULA, Math.min(1f, slow), 0.2f, 0.65f);
-        boolean heaven = m.rouse > 0f && m.rouseVariant % 5 == 4;
-        float speed = 0.012f + (heaven ? 0.05f * m.rouse : 0f) + 0.01f * Mth.clamp(m.speed / 40f, 0f, 1f);
-        if (memory.now(HALO) > Mth.TWO_PI) {
-            memory.snap(HALO, memory.now(HALO) - Mth.TWO_PI);
-        }
-        memory.set(HALO, memory.now(HALO) + speed);
     }
 
     @Override
@@ -217,12 +215,11 @@ public final class AngelRig extends WingRig {
             float a = alula * (1f - fold);
             (i == 0 ? rightAlula : leftAlula).rotate(0f, s * 0.35f * a, s * 0.55f * a);
         }
-        float spin = memory.get(HALO, pt);
         float breathe = 1f + 0.04f * Mth.sin(time * 0.05f) + 0.15f * glory;
         Quaternionf toBody = new Quaternionf(bodyRot).conjugate();
         Vector3f center = headRot.transform(new Vector3f(0f, HALO_HEIGHT + 0.4f * Mth.sin(time * 0.04f), 0f)).add(headPos).sub(bodyPos);
         toBody.transform(center);
-        Vector3f angles = toBody.mul(headRot).rotateX(Mth.HALF_PI).rotateZ(spin).getEulerAnglesZYX(new Vector3f());
+        Vector3f angles = new Vector3f(headAngles).sub(bodyAngles).add(Mth.HALF_PI, 0f, 0f);
         halo.part().x = center.x;
         halo.part().y = center.y;
         halo.part().z = center.z;
