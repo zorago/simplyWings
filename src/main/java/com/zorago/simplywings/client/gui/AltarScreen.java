@@ -108,8 +108,8 @@ public class AltarScreen extends AbstractContainerScreen<AltarMenu> {
     @Override
     public void render(GuiGraphics g, int mouseX, int mouseY, float partialTick) {
         switch (phase) {
-            case SHOW -> {
-            }
+            case SHOW -> button(g, width - 130, height - 46, 112, 30, Component.translatable("screen.simplywings.altar.skip"),
+                    Component.literal("▶▶"), true, mouseX, mouseY);
             case CARDS -> {
                 float t = cardTime();
                 GachaData.Entry hovered = deck.render(g, font, t, width, height, mouseX, mouseY);
@@ -168,11 +168,16 @@ public class AltarScreen extends AbstractContainerScreen<AltarMenu> {
         int by = height - 46;
         int one = width - 250;
         int ten = width - 130;
+        float busy = busy();
         button(g, one, by, 112, 30, Component.translatable("screen.simplywings.altar.pull_one"), Component.literal("×1"),
-                state.feathers() >= 1 || creative(), mouseX, mouseY);
+                busy <= 0 && (state.feathers() >= 1 || creative()), mouseX, mouseY);
         button(g, ten, by, 112, 30, Component.translatable("screen.simplywings.altar.pull_ten"), Component.literal("×10"),
-                state.feathers() >= 10 || creative(), mouseX, mouseY);
+                busy <= 0 && (state.feathers() >= 10 || creative()), mouseX, mouseY);
         g.drawString(font, Component.translatable("screen.simplywings.altar.feathers", state.feathers()), one, by - 14, 0xFFFFE9B0, true);
+        if (busy > 0) {
+            Component text = Component.translatable("screen.simplywings.altar.busy", (int) Math.ceil(busy));
+            g.drawString(font, text, width - 18 - font.width(text), by - 28, 0xFFFF9A7A, true);
+        }
         g.drawString(font, Component.translatable("screen.simplywings.altar.total", state.total()), 18, height - 20, 0xFF9C8CBC, true);
 
         tabButton(g, 18, height - 46, Component.translatable("screen.simplywings.altar.history"), tab == Tab.HISTORY, mouseX, mouseY);
@@ -182,6 +187,15 @@ public class AltarScreen extends AbstractContainerScreen<AltarMenu> {
         } else if (tab == Tab.RATES) {
             drawRates(g);
         }
+    }
+
+    private float busy() {
+        return menu.pos().map(ClientShows::busy).orElse(0f);
+    }
+
+    private void skip() {
+        ClientShows.skip();
+        startCards();
     }
 
     private boolean creative() {
@@ -297,11 +311,11 @@ public class AltarScreen extends AbstractContainerScreen<AltarMenu> {
         switch (phase) {
             case IDLE -> {
                 int by = height - 46;
-                if (inside(mx, my, width - 250, by, 112, 30)) {
+                if (inside(mx, my, width - 250, by, 112, 30) && busy() <= 0) {
                     pull(1);
                     return true;
                 }
-                if (inside(mx, my, width - 130, by, 112, 30)) {
+                if (inside(mx, my, width - 130, by, 112, 30) && busy() <= 0) {
                     pull(10);
                     return true;
                 }
@@ -314,6 +328,12 @@ public class AltarScreen extends AbstractContainerScreen<AltarMenu> {
                     return true;
                 }
                 return super.mouseClicked(mouseX, mouseY, button);
+            }
+            case SHOW -> {
+                if (inside(mx, my, width - 130, height - 46, 112, 30)) {
+                    skip();
+                }
+                return true;
             }
             case CARDS -> {
                 float t = cardTime();
@@ -333,6 +353,9 @@ public class AltarScreen extends AbstractContainerScreen<AltarMenu> {
     @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
         if (phase == Phase.SHOW) {
+            if (keyCode == 256 || keyCode == 32 || keyCode == 257) {
+                skip();
+            }
             return true;
         }
         if (phase != Phase.IDLE && keyCode == 256) {
@@ -360,6 +383,9 @@ public class AltarScreen extends AbstractContainerScreen<AltarMenu> {
 
     @Override
     public void removed() {
+        if (phase == Phase.SHOW || phase == Phase.CARDS) {
+            PacketDistributor.sendToServer(new Payloads.GachaClaim());
+        }
         ShowSounds.fadeCards();
         ClientShows.skip();
         super.removed();

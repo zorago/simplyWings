@@ -129,6 +129,7 @@ Les cinq structures seront ensuite **polies à la main par zorago** (générées
 - Boutons **Invoquer ×1** et **Invoquer ×10**, avec le nombre d'invocations possédées.
 - **Tracker de pitié** toujours visible : trois jauges S (sur 50), SS (sur 120), SSS (sur 200), avec la zone de garantie douce marquée et le pourcentage actuel de chaque palier.
 - Onglets : historique (les 100 derniers tirages), taux et règles (ce document, en clair).
+- **Skip (zorago, 29 octobre)** : pendant l'animation, un bouton « Skip » (ou Espace, Entrée, Échap) affiche tout de suite les cartes. L'animation continue dans le monde pour tout le monde, et l'autel reste en **cooldown** jusqu'à sa fin : boutons grisés et compte à rebours dans l'écran, toute invocation refusée par le serveur (durée lue dans `gacha/altar_show.json.gz`).
 - Texte en anglais, comme tout le mod.
 
 ### Animation d'invocation

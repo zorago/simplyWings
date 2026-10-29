@@ -32,19 +32,22 @@ public final class AltarShows {
     private static final List<Show> ACTIVE = new ArrayList<>();
     private static final double CARD_RANGE = 64;
     private static final Map<UUID, GlobalPos> LAST_ALTAR = new HashMap<>();
+    private static Map<String, Integer> LENGTHS;
     private static final int[][] FLAMES = {{-4, 6}, {-7, 0}, {-4, -6}, {4, -6}, {7, 0}, {4, 6}};
 
     private static final class Show {
         final ResourceKey<Level> dimension;
         final Payloads.SummonShow payload;
         final long end;
+        final long busyUntil;
         final Set<UUID> sent = new HashSet<>();
         final List<BlockPos> lights = new ArrayList<>();
 
-        Show(ResourceKey<Level> dimension, Payloads.SummonShow payload, long end) {
+        Show(ResourceKey<Level> dimension, Payloads.SummonShow payload, long end, long busyUntil) {
             this.dimension = dimension;
             this.payload = payload;
             this.end = end;
+            this.busyUntil = busyUntil;
         }
     }
 
@@ -104,7 +107,8 @@ public final class AltarShows {
         int facing = facing(level.getBlockState(altar));
         Payloads.SummonShow payload = new Payloads.SummonShow(altar, facing, anim, level.getGameTime() + 2,
                 player.getRandom().nextInt(), tiers, player.getId());
-        Show show = new Show(level.dimension(), payload, level.getGameTime() + MAX_TICKS);
+        long start = level.getGameTime() + 2;
+        Show show = new Show(level.dimension(), payload, start + Math.max(MAX_TICKS, length(anim) + 40), start + length(anim) + 10);
         int top = level.getMaxBuildHeight() - 1;
         for (int dy = 3; dy <= 64 && altar.getY() + dy <= top; dy += 5) {
             light(level, altar.above(dy), 15, show.lights);
@@ -115,6 +119,35 @@ public final class AltarShows {
         ACTIVE.add(show);
         LAST_ALTAR.put(player.getUUID(), GlobalPos.of(level.dimension(), altar));
         broadcast(level, show);
+    }
+
+    public static int busy(ServerLevel level, BlockPos altar) {
+        long left = 0;
+        for (Show s : ACTIVE) {
+            if (s.dimension == level.dimension() && s.payload.pos().equals(altar)) {
+                left = Math.max(left, s.busyUntil - level.getGameTime());
+            }
+        }
+        return (int) left;
+    }
+
+    private static int length(String anim) {
+        if (LENGTHS == null) {
+            Map<String, Integer> lengths = new HashMap<>();
+            try (java.io.InputStream in = AltarShows.class.getResourceAsStream("/assets/simplywings/gacha/altar_show.json.gz")) {
+                if (in != null) {
+                    com.google.gson.JsonObject root = com.google.gson.JsonParser.parseReader(new java.io.InputStreamReader(
+                            new java.util.zip.GZIPInputStream(in), java.nio.charset.StandardCharsets.UTF_8)).getAsJsonObject();
+                    for (Map.Entry<String, com.google.gson.JsonElement> e : root.getAsJsonObject("anims").entrySet()) {
+                        lengths.put(e.getKey(), Math.round(e.getValue().getAsJsonObject().get("length").getAsFloat() * 20));
+                    }
+                }
+            } catch (java.io.IOException | RuntimeException e) {
+                com.zorago.simplywings.SimplyWings.LOGGER.warn("Could not read the summoning show lengths", e);
+            }
+            LENGTHS = lengths;
+        }
+        return LENGTHS.getOrDefault(anim, MAX_TICKS);
     }
 
     public static void relayCard(ServerPlayer sender, Payloads.CardSound sound) {

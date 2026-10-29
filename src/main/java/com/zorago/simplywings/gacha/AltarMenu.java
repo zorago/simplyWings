@@ -12,8 +12,7 @@ public class AltarMenu extends AbstractContainerMenu {
     private final ContainerLevelAccess access;
 
     public AltarMenu(int containerId, Inventory inventory, RegistryFriendlyByteBuf buf) {
-        this(containerId, inventory, ContainerLevelAccess.NULL);
-        buf.readBlockPos();
+        this(containerId, inventory, ContainerLevelAccess.create(inventory.player.level(), buf.readBlockPos()));
     }
 
     public AltarMenu(int containerId, Inventory inventory, ContainerLevelAccess access) {

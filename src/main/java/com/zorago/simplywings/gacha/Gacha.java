@@ -89,6 +89,11 @@ public final class Gacha {
         if (!(player.containerMenu instanceof AltarMenu)) {
             return;
         }
+        java.util.Optional<net.minecraft.core.BlockPos> altar = ((AltarMenu) player.containerMenu).pos();
+        if (altar.isPresent() && AltarShows.busy(player.serverLevel(), altar.get()) > 0) {
+            player.displayClientMessage(Component.translatable("message.simplywings.altar_busy"), true);
+            return;
+        }
         List<GachaTier> forced = FORCED.remove(player.getUUID());
         int count = forced != null ? forced.size() : request.count() >= MULTI ? MULTI : 1;
         if (forced == null && !player.isCreative() && feathers(player) < count) {
@@ -115,7 +120,7 @@ public final class Gacha {
             pending.add(new ItemStack(BuiltInRegistries.ITEM.get(entry.item()), entry.count()));
         }
         PacketDistributor.sendToPlayer(player, new Payloads.GachaResults(results, state(player)));
-        ((AltarMenu) player.containerMenu).pos().ifPresent(pos -> AltarShows.start(player, pos, results));
+        altar.ifPresent(pos -> AltarShows.start(player, pos, results));
     }
 
     public static void claim(ServerPlayer player) {

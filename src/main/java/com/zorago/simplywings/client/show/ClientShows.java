@@ -127,6 +127,16 @@ public final class ClientShows {
         return false;
     }
 
+    public static float busy(BlockPos pos) {
+        float left = 0;
+        for (Show s : SHOWS) {
+            if (s.payload.pos().equals(pos)) {
+                left = Math.max(left, s.anim.length - s.time(0));
+            }
+        }
+        return left;
+    }
+
     public static float holdTime(Show show) {
         return show.anim.length - show.anim.meta("post", 0);
     }
