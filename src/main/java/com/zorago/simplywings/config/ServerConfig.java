@@ -220,9 +220,9 @@ public final class ServerConfig {
         b.pop();
 
         b.push("damage");
-        CRASH_THRESHOLD = b.comment("Impact speed (perpendicular to the surface) below which a crash does no damage, in m/s.")
+        CRASH_THRESHOLD = b.comment("Speed lost within 3 ticks (0.15 s) of travel flight below which a crash does no damage, in m/s.")
                 .defineInRange("crashThreshold", 10.0, 0.0, 200.0);
-        CRASH_DAMAGE_PER_SPEED = b.comment("Damage per m/s above the threshold.")
+        CRASH_DAMAGE_PER_SPEED = b.comment("Damage per m/s of speed lost above the threshold.")
                 .defineInRange("crashDamagePerSpeed", 0.5, 0.0, 100.0);
         b.pop();
 

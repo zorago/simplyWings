@@ -235,6 +235,16 @@ final class StudioTest {
                 log.accept("wikicheck " + ids.size() + " pages, " + failed + " failed");
             }
             case "flight" -> log.accept("flight " + ClientFlight.debugState());
+            case "keys" -> {
+                StringBuilder out = new StringBuilder("keys");
+                for (KeyMapping k : new KeyMapping[]{com.zorago.simplywings.client.ModKeys.UP, com.zorago.simplywings.client.ModKeys.DOWN,
+                        com.zorago.simplywings.client.ModKeys.LEFT, com.zorago.simplywings.client.ModKeys.RIGHT,
+                        com.zorago.simplywings.client.ModKeys.ACCELERATE, com.zorago.simplywings.client.ModKeys.BRAKE}) {
+                    out.append(' ').append(k.getName()).append('=').append(k.getKey().getName()).append('/').append(k.getKeyModifier())
+                            .append(" isDown=").append(k.isDown()).append(" down=").append(com.zorago.simplywings.client.ModKeys.down(k));
+                }
+                log.accept(out.toString());
+            }
             case "press" -> {
                 com.mojang.blaze3d.platform.InputConstants.Key key = com.mojang.blaze3d.platform.InputConstants.getKey("key.keyboard." + a[1]);
                 int ticks = a.length > 2 ? Integer.parseInt(a[2]) : 1;

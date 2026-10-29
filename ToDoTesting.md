@@ -372,6 +372,8 @@ Notés au fil des messages de zorago (liste close le 28 octobre). Ils sont corri
 
 - [x] Dégâts de crash : aucun dégât après plus d'une demi-seconde de vol stable. Le serveur n'acceptait l'impact que dans les 10 ticks suivant le dernier changement d'état du vol (entrée en déplacement, frein, poussée…). Corrigé : l'impact compte si le joueur est encore en vol de déplacement, ou l'a quitté depuis moins de 10 ticks. Testé (survie, 20 PV, sans régénération) : piqué à 54 m/s vertical → 22 dégâts, mort ; plané rasant à 33 m/s et 4° → 0 ; mur à 25,8 m/s → 7,88 (formule exacte) ; chute en décrochage de 20 blocs après le mur → 0,64. Formule : 0,5 × (vitesse perpendiculaire à la surface − 10 m/s), dégâts `fly_into_wall` qui ignorent l'armure comme un crash d'élytre.
 
+- [ ] **Dégâts de crash, nouvelle règle (idée de zorago)** : on ne cherche plus la surface touchée ; pendant le vol de déplacement, toute perte de vitesse de plus de 10 m/s en 3 ticks (0,15 s) est un crash, dégâts = 0,5 × (vitesse perdue − 10), type `fly_into_wall` (ignore l'armure). La vitesse est celle que Minecraft garde après la collision (composante bloquée remise à zéro). Mesuré : piqué ≈ 48 m/s perdus → 19,3 ; plané rasant à 33 m/s → 0 ; mur à 25,8 m/s → 6,7 ; chute en décrochage de 20 blocs après le mur → 4,4 ; mur à ≈ 49 m/s → 19,4 ; frein juste après un dash de Night (105 → 73 m/s en 1 s) → 0. Réglages : `crashThreshold` et `crashDamagePerSpeed` dans la config serveur. À valider en jeu par zorago (ressenti).
+
 ### 16 bis. Trouvés par la campagne de test du 29 octobre (`docs/test-runs/2026-10-29/`)
 
 - [x] Reconnexion en plein vol sur un serveur : expulsion « floating » 5 s après la connexion. Corrigé (reprise en stationnaire à la connexion), testé.

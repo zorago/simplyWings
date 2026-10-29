@@ -31,6 +31,9 @@ public final class ClientFlight {
     private static final int TAKEOFF_KEY_LOCK_TICKS = 30;
     private static final int TURN_SUBSTEPS = 4;
     private static final double BRAKE_STEERING = 0.1;
+    private static final int IMPACT_TICKS = 3;
+    private static final double[] RECENT_SPEED = new double[IMPACT_TICKS];
+    private static int recentCount;
     private static final RandomSource RANDOM = RandomSource.create();
 
     private static FlightMode mode = FlightMode.NONE;
@@ -152,6 +155,25 @@ public final class ClientFlight {
         }
     }
 
+    private static void checkImpact(LocalPlayer player) {
+        double actual = player.getDeltaMovement().length() * 20;
+        if (actual > ServerConfig.TERMINAL_VELOCITY.get() * 2) {
+            recentCount = 0;
+            return;
+        }
+        double peak = actual;
+        for (int i = 0; i < Math.min(recentCount, IMPACT_TICKS); i++) {
+            peak = Math.max(peak, RECENT_SPEED[i]);
+        }
+        RECENT_SPEED[recentCount % IMPACT_TICKS] = actual;
+        recentCount++;
+        double drop = peak - actual;
+        if (drop > ServerConfig.CRASH_THRESHOLD.get()) {
+            PacketDistributor.sendToServer(new Payloads.Impact((float) drop));
+            recentCount = 0;
+        }
+    }
+
     private static void spend(LocalPlayer player, float amount) {
         if (!creative(player)) {
             ClientWings.setStamina(Math.max(0, ClientWings.stamina() - amount));
@@ -164,6 +186,7 @@ public final class ClientFlight {
             return;
         }
         mode = next;
+        recentCount = 0;
         if (next != FlightMode.TRAVEL) {
             flags = 0;
             bank = 0;
@@ -767,6 +790,7 @@ public final class ClientFlight {
     static void postTick(LocalPlayer player) {
         switch (mode) {
             case TRAVEL -> {
+                checkImpact(player);
                 player.setYRot(heading);
                 player.yRotO = prevHeading;
                 player.setXRot(pitch);
@@ -776,17 +800,12 @@ public final class ClientFlight {
                 player.yHeadRot = heading;
                 player.yHeadRotO = prevHeading;
                 if (player.onGround() || player.verticalCollisionBelow) {
-                    PacketDistributor.sendToServer(new Payloads.Impact((float) Math.max(0, -lastVelocity.y)));
                     land(player, lastVelocity.length());
                     setMode(player, FlightMode.NONE, true);
                 } else if (player.horizontalCollision) {
                     Vec3 after = player.getDeltaMovement();
                     double lostX = after.x == 0 ? lastVelocity.x : 0;
                     double lostZ = after.z == 0 ? lastVelocity.z : 0;
-                    double impact = Math.sqrt(lostX * lostX + lostZ * lostZ);
-                    if (impact > 0.5) {
-                        PacketDistributor.sendToServer(new Payloads.Impact((float) impact));
-                    }
                     speed = lastVelocity.subtract(lostX, 0, lostZ).length();
                 }
             }
