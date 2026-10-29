@@ -370,6 +370,8 @@ Notés au fil des messages de zorago (liste close le 28 octobre). Ils sont corri
 
 - [ ] Touches de vol bloquées par Maj (et Ctrl) : NeoForge considère comme relâchée toute touche sans modificateur dont le contexte ne recoupe pas celui du jeu dès que Maj, Ctrl ou Alt est enfoncé. Maj lié à « accélérer » ne faisait rien et gelait les autres touches ; Ctrl, l'accélération par défaut, avait le même défaut. Corrigé : les 6 touches de vol lisent l'état réel du clavier et de la souris. À revérifier par zorago avec de vraies touches (le studio ne simule pas Maj ni Ctrl physiques).
 
+- [x] Dégâts de crash : aucun dégât après plus d'une demi-seconde de vol stable. Le serveur n'acceptait l'impact que dans les 10 ticks suivant le dernier changement d'état du vol (entrée en déplacement, frein, poussée…). Corrigé : l'impact compte si le joueur est encore en vol de déplacement, ou l'a quitté depuis moins de 10 ticks. Testé (survie, 20 PV, sans régénération) : piqué à 54 m/s vertical → 22 dégâts, mort ; plané rasant à 33 m/s et 4° → 0 ; mur à 25,8 m/s → 7,88 (formule exacte) ; chute en décrochage de 20 blocs après le mur → 0,64. Formule : 0,5 × (vitesse perpendiculaire à la surface − 10 m/s), dégâts `fly_into_wall` qui ignorent l'armure comme un crash d'élytre.
+
 ### 16 bis. Trouvés par la campagne de test du 29 octobre (`docs/test-runs/2026-10-29/`)
 
 - [x] Reconnexion en plein vol sur un serveur : expulsion « floating » 5 s après la connexion. Corrigé (reprise en stationnaire à la connexion), testé.

@@ -227,7 +227,7 @@ public final class ServerFlight {
 
     public static void onImpact(ServerPlayer player, Payloads.Impact impact) {
         WingsData data = ModAttachments.get(player);
-        if (player.level().getGameTime() - data.lastTravelTick() > CRASH_WINDOW_TICKS) {
+        if (data.mode() != FlightMode.TRAVEL && player.level().getGameTime() - data.lastTravelTick() > CRASH_WINDOW_TICKS) {
             return;
         }
         double max = ServerConfig.TERMINAL_VELOCITY.get() * 1.5;
