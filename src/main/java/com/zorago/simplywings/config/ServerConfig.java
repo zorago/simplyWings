@@ -208,10 +208,10 @@ public final class ServerConfig {
         STEP_SS = b.defineInRange("stepSS", 0.01, 0.0, 1.0);
         STEP_SSS = b.defineInRange("stepSSS", 0.005, 0.0, 1.0);
         CHEST_CHANCE = b.comment("Chance that a loot chest of the Overworld (or of any other dimension) holds Summoning Feathers.")
-                .defineInRange("chestChance", 0.05, 0.0, 1.0);
-        NETHER_CHEST_CHANCE = b.comment("Same chance for a loot chest of the Nether.").defineInRange("netherChestChance", 0.10, 0.0, 1.0);
-        END_CHEST_CHANCE = b.comment("Same chance for a loot chest of the End.").defineInRange("endChestChance", 0.20, 0.0, 1.0);
-        CHEST_LUCK_BONUS = b.comment("Added chance per point of luck.").defineInRange("chestLuckBonus", 0.02, 0.0, 1.0);
+                .defineInRange("chestChance", 0.10, 0.0, 1.0);
+        NETHER_CHEST_CHANCE = b.comment("Same chance for a loot chest of the Nether.").defineInRange("netherChestChance", 0.20, 0.0, 1.0);
+        END_CHEST_CHANCE = b.comment("Same chance for a loot chest of the End.").defineInRange("endChestChance", 0.30, 0.0, 1.0);
+        CHEST_LUCK_BONUS = b.comment("Added chance per point of luck.").defineInRange("chestLuckBonus", 0.05, 0.0, 1.0);
         CHEST_MIN = b.comment("Feathers in such a chest: chestMin to chestMax, never more, whatever the luck.").defineInRange("chestMin", 1, 1, 64);
         CHEST_MAX = b.defineInRange("chestMax", 3, 1, 64);
         MODDED_CHESTS = b.comment("Also add feathers to the chest loot tables of other mods (any loot table under chests/).").define("moddedChests", true);

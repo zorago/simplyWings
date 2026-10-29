@@ -6,7 +6,7 @@ Dernier morceau de gameplay du mod, imaginé par zorago le 25 octobre 2026. Ce d
 
 **Animations (26 octobre 2026)** : un prototype de motion design existe, hors jeu, dans `GATCHA_ANIMATION_SOURCE/` (7 films MP4 et le code qui les produit). Le single B est validé par zorago, caméra comprise ; les singles A à SSS et deux ×10 restent à valider. Il n'y a pas encore les mythiques ni le son. Le détail est dans `GACHA_ANIMATIONS.md` § 0, et l'écran du jeu tourne toujours avec les animations provisoires.
 
-**Correction de zorago (25 octobre, nuit)** : un seul exemplaire par tirage B et A (plus de piles), économie **exponentielle** à la fontaine (B 100 pour 1, A 10 pour 1, S 1 pour 1, SS 1 pour 10, SSS 1 pour 100), coffres à 5 % / 10 % / 20 % selon la dimension avec toujours 1 à 3 invocations, autel et fontaine **cassables et récupérables**, blocs du mod régénérés à chaque dragon et structures entièrement reconstruites à partir du sixième. Le présent document est à jour de cette correction ; les animations finales sont spécifiées dans `GACHA_ANIMATIONS.md`.
+**Correction de zorago (25 octobre, nuit)** : un seul exemplaire par tirage B et A (plus de piles), économie **exponentielle** à la fontaine (B 100 pour 1, A 10 pour 1, S 1 pour 1, SS 1 pour 10, SSS 1 pour 100), coffres à 10 % / 20 % / 30 % selon la dimension avec toujours 1 à 3 invocations, autel et fontaine **cassables et récupérables**, blocs du mod régénérés à chaque dragon et structures entièrement reconstruites à partir du sixième. Le présent document est à jour de cette correction ; les animations finales sont spécifiées dans `GACHA_ANIMATIONS.md`.
 
 ## Pourquoi un gacha, et pourquoi il ne casse pas le jeu
 
@@ -25,8 +25,8 @@ Le gacha est une **voie bonus** pour obtenir des ailes et des ressources, à cô
 ### Où on la trouve
 
 1. **Coffres de loot du monde** : un Global Loot Modifier ajoute des invocations à **toutes les loot tables de coffres vanilla** (`minecraft:chests/*`), au rang des trésors. Compatible Lootr (Lootr régénère chaque coffre par joueur à partir des mêmes loot tables, donc le modificateur s'applique à chaque joueur). Les tables de coffres des autres mods (`*:chests/*`) sont incluses par défaut, désactivables en config.
-   - Chance par coffre selon la dimension où le coffre est ouvert : **5 %** dans l'Overworld (et toute autre dimension), **10 %** dans le Nether (et les tables `bastion` et `nether_bridge`), **20 %** dans l'End (et les tables `end_city`). **+2 % par niveau de chance** (attribut `luck`).
-   - Contenu : **toujours 1 à 3 invocations, jamais plus**, quelle que soit la chance ou la dimension. Soit en moyenne 0,10 invocation par coffre dans l'Overworld, 0,20 dans le Nether, 0,40 dans l'End.
+   - Chance par coffre selon la dimension où le coffre est ouvert : **10 %** dans l'Overworld (et toute autre dimension), **20 %** dans le Nether (et les tables `bastion` et `nether_bridge`), **30 %** dans l'End (et les tables `end_city`). **+5 % par niveau de chance** (attribut `luck`).
+   - Contenu : **toujours 1 à 3 invocations, jamais plus**, quelle que soit la chance ou la dimension. Soit en moyenne 0,20 invocation par coffre dans l'Overworld, 0,40 dans le Nether, 0,60 dans l'End.
 2. **Fontaine aux offrandes** (cinquième structure, voir plus bas) : elle transforme les items du mod en invocations.
 
 ## Les paliers de loot
