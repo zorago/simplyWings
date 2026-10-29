@@ -77,6 +77,9 @@ public abstract class WingRig {
     public void playerArms(ModelPart body, ModelPart right, ModelPart left) {
     }
 
+    public void playerHead(ModelPart body, ModelPart head) {
+    }
+
     protected final ModelPart root() {
         return bones.root();
     }
