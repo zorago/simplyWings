@@ -385,6 +385,16 @@ Notés au fil des messages de zorago (liste close le 28 octobre). Ils sont corri
 - [ ] Sanctuaire d'invocation (centré en x 0, z 0, en haut du ciel de l'End) : posé par commande **avant** la première visite de l'End, le portail de sortie du dragon s'est construit dessus, sur l'autel. En jeu normal (1re mort du dragon) le portail existe déjà ; à vérifier avec YUNG's Better End Island, qui réécrit le combat.
 - [ ] En dev, le rechargement des ressources (F3+T) lit le dossier de build : relancer `processResources` avant (piège d'outillage, pas un bug du mod).
 
+## 16 ter. Retours du test entre amis (29 octobre, corrigés le soir même)
+
+- [x] Commandes admin sur les autres joueurs : sélecteur de joueur optionnel en fin de commande (`unlock`, `equip`, `unequip`, `stamina`, `reset`, `info`, `energy`, `sanctum <nom>`, `gacha feathers|pity|reset|info|force`). Compilé, à essayer sur serveur avec deux joueurs.
+- [x] Île du gacha déplacée du centre de l'End vers le bord de l'île principale (100 blocs, config `summoningRadius`). **Les mondes où elle est déjà posée la gardent au centre** (position enregistrée) : à vérifier sur un monde neuf.
+- [x] Bouton Skip du gacha (et Espace, Entrée, Échap) : cartes tout de suite, animation qui continue dans le monde, autel en cooldown jusqu'à la fin (boutons grisés + compte à rebours, refus serveur). Vérifié dans le studio en solo.
+- [x] Garanties : S 21→50, SS 81→120, SSS 151→200, hausse égale jusqu'à 100 %. Jauges et onglet des taux lisent la config.
+- [x] Halo de l'ange : il ne part plus en vrille quand la tête tourne (blocage de cardan). Vérifié dans le studio, tête à 0, 50, 95 et 140°, et penchée.
+- [x] Main en première personne : elle ne prend plus la pose de vol (inclinée et tremblante au rythme des battements). Corrigé d'après le code de Minecraft, **à vérifier à l'œil en jeu** avec des ailes d'insecte en stationnaire.
+- [ ] Sons des tables : banc de son rouvert, en attente des samples de zorago (`block.forge_bench.*`, `block.assembly_table.resonate`, `block.cloud_compressor.*`).
+
 ## 15. Sons : passes d'écoute dans le banc, puis en jeu
 
 **Validé par zorago le 27 octobre au soir : tous les sons du mod sont validés et testés en jeu.** Les cases ci-dessous sont closes, sauf l'audibilité du gacha par les autres joueurs (§ 16).

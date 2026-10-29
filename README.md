@@ -107,7 +107,7 @@ Collect components: mob, block and fishing drops only fall when the killing blow
 
 ## Commands
 
-Operator only (permission level 2).
+Operator only (permission level 2). Every command that acts on a player takes an optional player selector at the end (`@a`, a name…) and acts on the caller without one: `unlock`, `equip`, `unequip`, `stamina`, `reset`, `info`, `energy`, `sanctum <name>` and every `gacha` command except `show`.
 
 ```
 /simplywings unlock <wing>   unlock and equip a pair

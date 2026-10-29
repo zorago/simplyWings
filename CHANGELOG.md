@@ -22,11 +22,14 @@ First public version.
 - Five End sanctums placed on successive dragon deaths and repaired on later ones, one compass each; the Sky Sanctum's barrels of leather and feathers are restocked on every repair.
 
 ### Wing gacha
-- Summoning feathers in chest loot, five tiers plus mythics, pity counters.
-- Draconic Altar with an in-world summoning show seen and heard by every nearby player, cards, history and rates.
+- Summoning feathers in chest loot (10 % Overworld, 20 % Nether, 30 % End, +5 % per luck point), five tiers plus mythics.
+- Pity counters: S guaranteed at 50 summons (rising from 21), SS at 120 (from 81), SSS at 200 (from 151).
+- Draconic Altar with an in-world summoning show seen and heard by every nearby player, cards, history and rates; a Skip button shows the cards at once while the show goes on in the world, and the altar waits for the show to end before the next summon.
+- The Summoning Sanctum floats above the edge of the main End island, away from the exit portal.
 - Offering Fountain, an octagonal four-block multiblock that turns mod items back into feathers.
 
 ### Other
 - In-game wiki (270 pages), optional JEI plugin (essence containers told apart by type).
 - Full sound design, heard by nearby players.
-- No dependency besides NeoForge, no mixin, no access transformer.
+- Operator commands can target other players.
+- No dependency besides NeoForge, one mixin (player model pose in flight), no access transformer.
