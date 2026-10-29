@@ -28,8 +28,8 @@ import net.neoforged.neoforge.network.PacketDistributor;
 
 public class AltarScreen extends AbstractContainerScreen<AltarMenu> {
     private static final ResourceLocation COVER = SimplyWings.id("textures/gui/summon_cover.png");
-    private static final int COVER_W = 480;
-    private static final int COVER_H = 270;
+    private static final int COVER_W = 960;
+    private static final int COVER_H = 540;
     private enum Phase { IDLE, SHOW, CARDS, OUTRO }
 
     private enum Tab { NONE, HISTORY, RATES }
