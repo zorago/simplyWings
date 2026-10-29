@@ -18,6 +18,7 @@ RIGS = ROOT / "src/main/resources/assets/simplywings/rigs"
 ITEM_TEX = ROOT / "src/main/resources/assets/simplywings/textures/item/summoning_feather.png"
 B = 16
 FLOOR_TOP = 0
+FLOOR_LIFT = 32.2
 FLAME_BASE = 2 * B
 HOVER = (0, 6 * B, 0)
 SIGIL_Y = 96 * B
@@ -412,20 +413,20 @@ def build_floor(rig):
     for i in range(24):
         a = 2 * math.pi * i / 24
         x, z = 72 * math.cos(a), 72 * math.sin(a)
-        b = rig.bone(f"rune_{i}", (x, 0.5, z), "runes")
-        rig.box(b, (x, 0.6, z), (3, 1, 7), "rune", rot=[0, -math.degrees(a), 0])
-        rig.box(b, (x, 1.1, z), (1.5, 0.6, 2.5), "circle_hot", rot=[0, -math.degrees(a) + 45, 0])
-    rig.bone("floor_circle", (0, 0.4, 0))
-    rig.bone("floor_ring_outer", (0, 0.4, 0), "floor_circle")
-    ring(rig, "floor_ring_outer", (0, 0.4, 0), 128, 80, "circle", thick=2.5, height=0.8, glow="energy")
+        b = rig.bone(f"rune_{i}", (x, FLOOR_LIFT + 0.5, z), "runes")
+        rig.box(b, (x, FLOOR_LIFT + 0.6, z), (3, 1, 7), "rune", rot=[0, -math.degrees(a), 0])
+        rig.box(b, (x, FLOOR_LIFT + 1.1, z), (1.5, 0.6, 2.5), "circle_hot", rot=[0, -math.degrees(a) + 45, 0])
+    rig.bone("floor_circle", (0, FLOOR_LIFT + 0.4, 0))
+    rig.bone("floor_ring_outer", (0, FLOOR_LIFT + 0.4, 0), "floor_circle")
+    ring(rig, "floor_ring_outer", (0, FLOOR_LIFT + 0.4, 0), 128, 80, "circle", thick=2.5, height=0.8, glow="energy")
     for i in range(24):
         a = 2 * math.pi * i / 24
-        rig.box("floor_ring_outer", (134 * math.cos(a), 0.5, 134 * math.sin(a)), (3, 1, 3), "circle_hot", rot=[0, 45 + i * 15, 0])
-    rig.bone("floor_ring_inner", (0, 0.4, 0), "floor_circle")
-    ring(rig, "floor_ring_inner", (0, 0.4, 0), 96, 60, "circle", thick=1.5, height=0.8)
+        rig.box("floor_ring_outer", (134 * math.cos(a), FLOOR_LIFT + 0.5, 134 * math.sin(a)), (3, 1, 3), "circle_hot", rot=[0, 45 + i * 15, 0])
+    rig.bone("floor_ring_inner", (0, FLOOR_LIFT + 0.4, 0), "floor_circle")
+    ring(rig, "floor_ring_inner", (0, FLOOR_LIFT + 0.4, 0), 96, 60, "circle", thick=1.5, height=0.8)
     for _, x, z, _ in flame_positions():
         a = math.atan2(z, x)
-        rig.box("floor_circle", (76 * math.cos(a), 0.5, 76 * math.sin(a)), (70, 0.8, 1.5), "circle_hot", rot=[0, -math.degrees(a), 0])
+        rig.box("floor_circle", (76 * math.cos(a), FLOOR_LIFT + 0.5, 76 * math.sin(a)), (70, 0.8, 1.5), "circle_hot", rot=[0, -math.degrees(a), 0])
 
 
 BEAM_COLORS = {"fire": "f_fire_3", "dark": "f_dark_3", "earth": "f_earth_3", "water": "f_water_3", "light": "f_light_3", "air": "f_air_2"}
