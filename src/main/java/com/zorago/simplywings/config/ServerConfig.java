@@ -70,7 +70,9 @@ public final class ServerConfig {
     public static final ModConfigSpec.IntValue REBUILD_DRAGON;
 
     public static final ModConfigSpec.DoubleValue CRASH_THRESHOLD;
-    public static final ModConfigSpec.DoubleValue CRASH_DAMAGE_PER_SPEED;
+    public static final ModConfigSpec.DoubleValue CRASH_LETHAL_SPEED;
+    public static final ModConfigSpec.DoubleValue CRASH_LETHAL_DAMAGE;
+    public static final ModConfigSpec.DoubleValue CRASH_TERMINAL_DAMAGE;
 
     public static final ModConfigSpec.DoubleValue ENDURANCE_MIN;
     public static final ModConfigSpec.DoubleValue ENDURANCE_MAX;
@@ -222,8 +224,12 @@ public final class ServerConfig {
         b.push("damage");
         CRASH_THRESHOLD = b.comment("Speed lost within 3 ticks (0.15 s) of travel flight below which a crash does no damage, in m/s.")
                 .defineInRange("crashThreshold", 10.0, 0.0, 200.0);
-        CRASH_DAMAGE_PER_SPEED = b.comment("Damage per m/s of speed lost above the threshold.")
-                .defineInRange("crashDamagePerSpeed", 0.5, 0.0, 100.0);
+        CRASH_LETHAL_SPEED = b.comment("Speed lost that deals crashLethalDamage: a wall hit at the top speed of the weakest pairs. Damage rises linearly from the threshold to here.")
+                .defineInRange("crashLethalSpeed", 16.5, 0.0, 400.0);
+        CRASH_LETHAL_DAMAGE = b.comment("Damage dealt at crashLethalSpeed (20 = a full vanilla health bar).")
+                .defineInRange("crashLethalDamage", 21.0, 0.0, 10000.0);
+        CRASH_TERMINAL_DAMAGE = b.comment("Damage dealt when losing the whole terminal velocity at once. Damage rises linearly from crashLethalSpeed to here, and keeps rising beyond.")
+                .defineInRange("crashTerminalDamage", 100.0, 0.0, 10000.0);
         b.pop();
 
         b.comment("Physical value of each wing stat at score 0 and at score 100 (wing JSON stats use a 0-100 scale).").push("stats");

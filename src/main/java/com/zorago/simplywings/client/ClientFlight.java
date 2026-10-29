@@ -34,6 +34,8 @@ public final class ClientFlight {
     private static final int IMPACT_TICKS = 3;
     private static final double[] RECENT_SPEED = new double[IMPACT_TICKS];
     private static int recentCount;
+    private static double lastImpact;
+    private static int sinceHit = IMPACT_TICKS;
     private static final RandomSource RANDOM = RandomSource.create();
 
     private static FlightMode mode = FlightMode.NONE;
@@ -122,8 +124,8 @@ public final class ClientFlight {
     }
 
     public static String debugState() {
-        return String.format(java.util.Locale.ROOT, "mode=%s flags=%d speed=%.2f heading=%.1f pitch=%.1f aim=%.1f,%.1f braking=%s stalled=%s tucked=%s thrust=%s furyCharge=%d furyWindow=%d reserve=%d",
-                mode, flags, speed, heading, pitch, aimYaw, aimPitch, braking, stalled, tucked, thrusting, furyCharge, furyWindow, reserveTicks);
+        return String.format(java.util.Locale.ROOT, "mode=%s flags=%d speed=%.2f heading=%.1f pitch=%.1f aim=%.1f,%.1f braking=%s stalled=%s tucked=%s thrust=%s furyCharge=%d furyWindow=%d reserve=%d impact=%.2f",
+                mode, flags, speed, heading, pitch, aimYaw, aimPitch, braking, stalled, tucked, thrusting, furyCharge, furyWindow, reserveTicks, lastImpact);
     }
 
     public static boolean reserveActive() {
@@ -157,6 +159,7 @@ public final class ClientFlight {
 
     private static void checkImpact(LocalPlayer player) {
         double actual = player.getDeltaMovement().length() * 20;
+        sinceHit = player.horizontalCollision || player.verticalCollision || player.onGround() ? 0 : sinceHit + 1;
         if (actual > ServerConfig.TERMINAL_VELOCITY.get() * 2) {
             recentCount = 0;
             return;
@@ -168,8 +171,9 @@ public final class ClientFlight {
         RECENT_SPEED[recentCount % IMPACT_TICKS] = actual;
         recentCount++;
         double drop = peak - actual;
-        if (drop > ServerConfig.CRASH_THRESHOLD.get()) {
+        if (drop > ServerConfig.CRASH_THRESHOLD.get() && sinceHit < IMPACT_TICKS) {
             PacketDistributor.sendToServer(new Payloads.Impact((float) drop));
+            lastImpact = drop;
             recentCount = 0;
         }
     }
@@ -187,6 +191,7 @@ public final class ClientFlight {
         }
         mode = next;
         recentCount = 0;
+        sinceHit = IMPACT_TICKS;
         if (next != FlightMode.TRAVEL) {
             flags = 0;
             bank = 0;

@@ -9,7 +9,7 @@ First public version.
 - Air jumps, free rescue jumps, very fast double tap to hover, charged takeoff, mouse-orbited camera.
 - Hovering uses the vanilla movement keys; travel flight has six keys of its own in the *Simply Wings* category (go up, go down, turn left, turn right, accelerate, brake), opposite keys cancel each other, steering at 10 % while braking.
 - Logging back in while flying resumes the hover, so servers do not kick for floating.
-- Crashes: losing more than 10 m/s within 0.15 s of travel flight (ground, wall, tree…) deals 0.5 damage per m/s above that, ignoring armor like an elytra crash; braking never hurts.
+- Crashes: hitting anything (ground, wall, tree…) in travel flight and losing more than 10 m/s within 0.15 s hurts, ignoring armor like an elytra crash. A wall hit at the top speed of common wings kills (21 damage), slightly slower survives; losing the whole terminal velocity deals 100 (50 hearts), so it stays lethal with modded extra hearts. Braking and stall recovery never hurt.
 
 ### Wings
 - 41 pairs, each with its own model, texture, animation, stats, collection bonus, sounds and identity.

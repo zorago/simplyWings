@@ -225,6 +225,20 @@ public final class ServerFlight {
         sendStamina(player, data);
     }
 
+    public static double crashDamage(double speed) {
+        double threshold = ServerConfig.CRASH_THRESHOLD.get();
+        double lethal = Math.max(threshold + 0.01, ServerConfig.CRASH_LETHAL_SPEED.get());
+        double terminal = Math.max(lethal + 0.01, ServerConfig.TERMINAL_VELOCITY.get());
+        double lethalDamage = ServerConfig.CRASH_LETHAL_DAMAGE.get();
+        if (speed <= threshold) {
+            return 0;
+        }
+        if (speed <= lethal) {
+            return lethalDamage * (speed - threshold) / (lethal - threshold);
+        }
+        return lethalDamage + (ServerConfig.CRASH_TERMINAL_DAMAGE.get() - lethalDamage) * (speed - lethal) / (terminal - lethal);
+    }
+
     public static void onImpact(ServerPlayer player, Payloads.Impact impact) {
         WingsData data = ModAttachments.get(player);
         if (data.mode() != FlightMode.TRAVEL && player.level().getGameTime() - data.lastTravelTick() > CRASH_WINDOW_TICKS) {
@@ -232,7 +246,7 @@ public final class ServerFlight {
         }
         double max = ServerConfig.TERMINAL_VELOCITY.get() * 1.5;
         double speed = Math.min(max, Math.max(0, impact.speed()));
-        double damage = ServerConfig.CRASH_DAMAGE_PER_SPEED.get() * Math.max(0, speed - ServerConfig.CRASH_THRESHOLD.get());
+        double damage = crashDamage(speed);
         if (damage > 0) {
             player.level().playSound(player, player.getX(), player.getY(), player.getZ(), ModSounds.LANDING_HARD.get(),
                     SoundSource.PLAYERS, 1.0f, 0.8f);

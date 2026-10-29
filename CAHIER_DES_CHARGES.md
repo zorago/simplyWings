@@ -170,13 +170,11 @@ Maintenir le frein en fonçant vers le sol applique la décélération du frein 
 
 - Sous V min sans freiner (en cabrant trop longtemps, par exemple), les ailes décrochent : plus de portance, le joueur tombe et prend de la vitesse.
 - Pour récupérer, il faut piquer pour retrouver un angle de plané et repasser au-dessus de V min.
-- Sinon, il s'écrase au sol avec des dégâts proportionnels à la vitesse d'impact :
+- Sinon, il s'écrase avec des dégâts fonction de la vitesse perdue (règle de zorago, 29/10) : en vol de déplacement, une collision (sol, mur, arbre…) qui fait perdre plus de v seuil en 3 ticks (0,15 s) est un crash. La vitesse est celle que Minecraft garde après la collision ; sans collision (frein, sortie de décrochage), jamais de dégâts. Les dégâts suivent deux droites :
+  - de v seuil = 10 m/s (0) à v létal = 16,5 m/s perdus (21 PV, soit un mur pris à la VMAX des ailes communes, 18,4 m/s : mort, et survie juste en dessous) ;
+  - de v létal à V term = 220 m/s (100 PV, 50 cœurs, létal même avec des cœurs de mods), puis la même pente au-delà.
 
-```latex
-d\acute{e}g\hat{a}ts = c \cdot \max(0,\; v_{impact} - v_{seuil})
-```
-
-Ici v impact est la composante de vitesse perpendiculaire au sol, et c et v seuil viennent de la config serveur (`crashDamagePerSpeed` = 0,5, `crashThreshold` = 10 m/s). Un atterrissage rasant à grande vitesse reste donc survivable, contrairement à un piqué droit dans le sol.
+Mesuré : mur à 18,25 m/s → 16,6 perdus → 21,4 PV (mort) ; mur à 16,1 m/s → 17,2 PV (survie à 2,8). Config serveur `[damage]` : `crashThreshold`, `crashLethalSpeed`, `crashLethalDamage`, `crashTerminalDamage`. Un atterrissage rasant reste survivable, contrairement à un piqué droit dans le sol.
 
 ## Stamina et chute
 
