@@ -25,14 +25,12 @@ public final class ModKeys {
             InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_LEFT_ALT, CATEGORY);
     public static final KeyMapping MENU = new KeyMapping("key.simplywings.menu", KeyConflictContext.IN_GAME,
             InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_J, CATEGORY);
-    public static final KeyMapping FORWARD = flight("forward", GLFW.GLFW_KEY_W);
-    public static final KeyMapping BACK = flight("back", GLFW.GLFW_KEY_S);
+    public static final KeyMapping UP = flight("up", GLFW.GLFW_KEY_W);
+    public static final KeyMapping DOWN = flight("down", GLFW.GLFW_KEY_S);
     public static final KeyMapping LEFT = flight("left", GLFW.GLFW_KEY_A);
     public static final KeyMapping RIGHT = flight("right", GLFW.GLFW_KEY_D);
-    public static final KeyMapping ASCEND = flight("ascend", GLFW.GLFW_KEY_SPACE);
-    public static final KeyMapping DESCEND = flight("descend", GLFW.GLFW_KEY_LEFT_SHIFT);
-    public static final KeyMapping BEAT = flight("beat", GLFW.GLFW_KEY_LEFT_CONTROL);
-    public static final KeyMapping BRAKE = new KeyMapping("key.simplywings.brake", FLIGHT, InputConstants.UNKNOWN, CATEGORY);
+    public static final KeyMapping ACCELERATE = flight("accelerate", GLFW.GLFW_KEY_LEFT_CONTROL);
+    public static final KeyMapping BRAKE = flight("brake", GLFW.GLFW_KEY_LEFT_SHIFT);
 
     private static KeyMapping flight(String name, int key) {
         return new KeyMapping("key.simplywings." + name, FLIGHT, InputConstants.Type.KEYSYM, key, CATEGORY);
@@ -41,18 +39,20 @@ public final class ModKeys {
     static void register(RegisterKeyMappingsEvent event) {
         event.register(TRAVEL);
         event.register(MENU);
-        event.register(FORWARD);
-        event.register(BACK);
+        event.register(UP);
+        event.register(DOWN);
         event.register(LEFT);
         event.register(RIGHT);
-        event.register(ASCEND);
-        event.register(DESCEND);
-        event.register(BEAT);
+        event.register(ACCELERATE);
         event.register(BRAKE);
     }
 
+    public static boolean accelerating() {
+        return ACCELERATE.isDown() && !BRAKE.isDown();
+    }
+
     public static boolean brakeDown() {
-        return BRAKE.isUnbound() ? DESCEND.isDown() : BRAKE.isDown();
+        return BRAKE.isDown() && !ACCELERATE.isDown();
     }
 
     public static int axis(KeyMapping positive, KeyMapping negative) {

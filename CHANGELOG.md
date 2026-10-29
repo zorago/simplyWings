@@ -7,7 +7,7 @@ First public version.
 ### Flight
 - Two flight modes: a stabilized hover for building and a keyboard-steered travel flight with wing beats, glide, dive, tuck, stall, brake, crash and stamina.
 - Air jumps, free rescue jumps, very fast double tap to hover, charged takeoff, mouse-orbited camera.
-- Every action is a configurable key in the *Simply Wings* category (W climbs and S dives by default); steering keys at 10 % while braking.
+- Hovering uses the vanilla movement keys; travel flight has six keys of its own in the *Simply Wings* category (go up, go down, turn left, turn right, accelerate, brake), opposite keys cancel each other, steering at 10 % while braking.
 - Logging back in while flying resumes the hover, so servers do not kick for floating.
 
 ### Wings

@@ -68,17 +68,17 @@ The physical value of each score is set in the server config, section `[stats]`.
 
 | Action | Default |
 | --- | --- |
-| Air jump (costs stamina) | Wing jump / Hover / Ascend (Space) in the air |
-| Hover (stabilized mode) | Very fast double tap on Wing jump |
+| Air jump (costs stamina) | Jump in the air |
+| Hover (stabilized mode) | Very fast double tap on jump; then the vanilla movement keys, jump to rise, sneak to sink |
 | Hover ↔ travel flight | Travel flight (Left Alt) |
 | Charged takeoff into travel flight | Hold Travel flight for 1 s on the ground |
-| Wing beats, Fury dash | Beat wings / Fury dash (Left Ctrl) |
-| Brake | Descend / Brake (Left Shift), or the dedicated Brake key (unbound) |
-| Climb / dive (travel flight), forward / back (hover) | W / S |
-| Turn (travel flight), strafe (hover) | A / D |
+| Go up / go down (travel flight) | W / S |
+| Turn left / turn right (travel flight) | A / D |
+| Accelerate: wing beats, Fury dash (travel flight) | Left Ctrl |
+| Brake (travel flight) | Left Shift |
 | Wings menu | J |
 
-Every action is a key of its own in the *Simply Wings* category of the Controls menu: swap W and S there if you prefer an inverted pitch. In travel flight, the mouse only orbits the camera; the keys move an aim point that the heading follows smoothly, at 10 % while braking. When stamina is too low for an air jump, 2 free rescue jumps reset the fall and cancel fall damage, and recharge on the ground.
+The six travel flight keys are keys of their own in the *Simply Wings* category of the Controls menu (swap Go up and Go down there for an inverted pitch; hovering keeps the vanilla keys). Opposite keys cancel each other: W with S, A with D, Accelerate with Brake. In travel flight, the mouse only orbits the camera; the keys move an aim point that the heading follows smoothly, at 10 % while braking. When stamina is too low for an air jump, 2 free rescue jumps reset the fall and cancel fall damage, and recharge on the ground.
 
 ### Progression
 

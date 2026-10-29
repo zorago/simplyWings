@@ -40,6 +40,7 @@ import net.neoforged.neoforge.client.event.sound.PlaySoundEvent;
 
 final class StudioTest {
     private static final Map<KeyMapping, Integer> HELD = new HashMap<>();
+    private static final Map<com.mojang.blaze3d.platform.InputConstants.Key, Integer> PRESSED = new HashMap<>();
     private static boolean soundLog;
 
     static boolean run(Minecraft mc, LocalPlayer player, String[] a, String line, Consumer<String> log) {
@@ -234,6 +235,14 @@ final class StudioTest {
                 log.accept("wikicheck " + ids.size() + " pages, " + failed + " failed");
             }
             case "flight" -> log.accept("flight " + ClientFlight.debugState());
+            case "press" -> {
+                com.mojang.blaze3d.platform.InputConstants.Key key = com.mojang.blaze3d.platform.InputConstants.getKey("key.keyboard." + a[1]);
+                int ticks = a.length > 2 ? Integer.parseInt(a[2]) : 1;
+                KeyMapping.set(key, true);
+                KeyMapping.click(key);
+                PRESSED.put(key, ticks);
+                log.accept("press " + a[1] + " " + ticks);
+            }
             case "cape" -> {
                 net.minecraft.client.multiplayer.PlayerInfo info = mc.getConnection().getPlayerInfo(player.getUUID());
                 try {
@@ -268,6 +277,16 @@ final class StudioTest {
     }
 
     static void tick() {
+        PRESSED.entrySet().removeIf(entry -> {
+            int left = entry.getValue() - 1;
+            if (left <= 0) {
+                KeyMapping.set(entry.getKey(), false);
+                return true;
+            }
+            entry.setValue(left);
+            KeyMapping.set(entry.getKey(), true);
+            return false;
+        });
         HELD.entrySet().removeIf(entry -> {
             int left = entry.getValue() - 1;
             if (left <= 0) {
