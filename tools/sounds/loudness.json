@@ -55,5 +55,9 @@
   "gacha_bed": {
     "rms_max_db": -20,
     "reference": "nappe grave tenue sous le rayon"
+  },
+  "table_craft": {
+    "rms_max_db": -24,
+    "reference": null
   }
 }

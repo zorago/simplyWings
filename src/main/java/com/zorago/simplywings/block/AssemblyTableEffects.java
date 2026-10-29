@@ -104,16 +104,13 @@ public final class AssemblyTableEffects {
         }
         if (t % 10 == 0) {
             ring(f, base.add(0, 0.05, 0), 1.2 + 0.3 * p, 24, dust(VIOLET, 1.0F));
-            f.sound(emblem, SoundEvents.AMETHYST_BLOCK_RESONATE, 1.0F, 0.5F + 1.2F * p);
+            f.sound(emblem, SoundEvents.AMETHYST_BLOCK_RESONATE, 0.35F, 0.5F + 1.2F * p);
         }
         if (t == 0) {
-            f.sound(emblem, ModSounds.GACHA_RUNE_CHARGE.get(), 1.0F, 1.1F);
+            f.sound(emblem, SoundEvents.ENCHANTMENT_TABLE_USE, 0.5F, 0.9F);
         }
         if (t == 20 || t == 40 || t == 60) {
-            f.sound(emblem, ModSounds.GACHA_IGNITE.get(), 0.9F, 0.8F + 0.15F * (t / 20.0F));
-        }
-        if (t == CLIMAX - 12) {
-            f.sound(emblem, ModSounds.GACHA_BEAM.get(), 1.0F, 1.2F);
+            f.sound(emblem, SoundEvents.AMETHYST_BLOCK_CHIME, 0.45F, 0.8F + 0.15F * (t / 20.0F));
         }
     }
 
@@ -131,20 +128,13 @@ public final class AssemblyTableEffects {
             double angle = i * Mth.TWO_PI / 64;
             f.particle(ParticleTypes.END_ROD, emblem.x, emblem.y - 0.4, emblem.z, Math.cos(angle) * 0.35, 0, Math.sin(angle) * 0.35);
         }
-        f.sound(emblem, ModSounds.GACHA_BLAST.get(), 1.0F, 1.2F);
-        f.sound(emblem, com.zorago.simplywings.client.WingSounds.flap(java.util.Optional.empty(), true), 1.0F, 1.0F);
-        f.sound(emblem, ModSounds.GACHA_BELL.get(), 0.9F, 1.1F);
+        f.sound(emblem, ModSounds.INFUSION.get(), 0.8F, 1.0F);
+        f.sound(emblem, com.zorago.simplywings.client.WingSounds.flap(java.util.Optional.empty(), true), 0.5F, 1.0F);
     }
 
     private static void aftermath(Frame f, int t, Vec3 emblem) {
         RandomSource random = f.level.random;
         float q = t / 60.0F;
-        if (t == 4) {
-            f.sound(emblem, ModSounds.INFUSION.get(), 1.0F, 1.0F);
-        }
-        if (t == 10) {
-            f.sound(emblem, ModSounds.CARD_CONFIRM.get(), 0.8F, 1.0F);
-        }
         if (q < 0.8F && t % 2 == 0) {
             double flap = Math.sin(t * 0.25) * 0.35;
             for (int side = -1; side <= 1; side += 2) {

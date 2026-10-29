@@ -572,8 +572,7 @@
    "status": "custom",
    "trigger": "Allumage d'une flamme élémentaire de l'autel",
    "code": [
-    "client/show/ClientShows.java",
-    "block/AssemblyTableEffects.java"
+    "client/show/ClientShows.java"
    ],
    "description": "Embrasement magique court.",
    "keywords": [
@@ -694,8 +693,7 @@
    "status": "custom",
    "trigger": "Charge des runes, retombée finale",
    "code": [
-    "client/show/ClientShows.java",
-    "block/AssemblyTableEffects.java"
+    "client/show/ClientShows.java"
    ],
    "description": "Nappe cristalline qui monte.",
    "keywords": [
@@ -761,8 +759,7 @@
    "status": "custom",
    "trigger": "Pilier de lumière",
    "code": [
-    "client/show/ClientShows.java",
-    "block/AssemblyTableEffects.java"
+    "client/show/ClientShows.java"
    ],
    "description": "Montée d'énergie.",
    "keywords": [
@@ -915,8 +912,7 @@
    "trigger": "Éclat de l'étoile",
    "code": [
     "client/show/ClientShows.java",
-    "client/gui/CardDeck.java",
-    "block/AssemblyTableEffects.java"
+    "client/gui/CardDeck.java"
    ],
    "description": "Explosion magique.",
    "keywords": [
@@ -1068,8 +1064,7 @@
    "trigger": "Battements de l'étoile, cartes S+",
    "code": [
     "client/show/ClientShows.java",
-    "client/gui/CardDeck.java",
-    "block/AssemblyTableEffects.java"
+    "client/gui/CardDeck.java"
    ],
    "description": "Cloche lourde.",
    "keywords": [
@@ -1808,8 +1803,7 @@
    "status": "custom",
    "trigger": "Carte A révélée, table d'assemblage",
    "code": [
-    "client/gui/CardDeck.java",
-    "block/AssemblyTableEffects.java"
+    "client/gui/CardDeck.java"
    ],
    "description": "Bong grave et doux.",
    "keywords": [
@@ -1923,18 +1917,17 @@
    "category": "block",
    "group": "infusion",
    "status": "custom",
-   "trigger": "Infusion d'énergie ailée (établi de la forge) et fin d'assemblage (table d'assemblage)",
+   "trigger": "Craft de la table d'assemblage (éclat final) et infusion d'énergie ailée (établi de la forge)",
    "code": [
     "block/ForgeBenchEffects.java",
     "block/AssemblyTableEffects.java"
    ],
-   "description": "Ancien son d'équipement (4,2 s, brillant), gardé ici en attendant l'écoute de zorago (SOUND_PLAN.md § 1.6).",
+   "description": "Impact de sort élémentaire (sample de zorago du 29 octobre), discret.",
    "keywords": [
-    "magic infusion",
-    "wings unfold shimmer"
+    "elemental magic spell impact"
    ],
    "reference": null,
-   "loudness_target": "block_oneshot",
+   "loudness_target": "table_craft",
    "attenuation": 16,
    "preload": false,
    "stream": false,
@@ -1946,12 +1939,12 @@
    "variants": [
     {
      "file": "block/infusion_1",
-     "source": "fs_561287.mp3",
-     "start": 0.2,
-     "end": 4.4,
+     "source": "pixabay/rescopicsound-elemental-magic-spell-impact-outgoing-228342.mp3",
+     "start": 0,
+     "end": 3.19,
      "peak": -3,
      "fade_in": 0.004,
-     "fade_out": 1,
+     "fade_out": 0.6,
      "echo": 0,
      "loop": 0,
      "tempo": 1,
@@ -1964,8 +1957,8 @@
    "candidates": [],
    "verdict": {
     "state": "keep",
-    "note": "",
-    "date": "2026-10-27"
+    "note": "Remplacé par le sample de zorago, joué seulement au craft des tables.",
+    "date": "2026-10-29"
    }
   },
   {
@@ -2218,7 +2211,7 @@
     "smith hammer"
    ],
    "reference": "minecraft:block.anvil.use",
-   "loudness_target": "block_oneshot",
+   "loudness_target": "table_craft",
    "attenuation": 16,
    "preload": false,
    "stream": false,
@@ -2343,7 +2336,7 @@
     "steam hiss"
    ],
    "reference": "minecraft:block.fire.extinguish",
-   "loudness_target": "block_oneshot",
+   "loudness_target": "table_craft",
    "attenuation": 16,
    "preload": false,
    "stream": false,

@@ -28,7 +28,7 @@ Tous les sons du mod viennent de bibliothèques **CC0** (domaine public : usage 
 | `fs_407052.mp3` | https://freesound.org/s/407052/ | Sojan | **rejeté** par zorago (trop artificiel), remplacé par `fs_871766` ; plus utilisé |
 | `fs_875132.mp3` | https://freesound.org/s/875132/ | hotpin7 | `essence/pour` : essence versée dans une jauge |
 | `fs_511485.mp3` | https://freesound.org/s/511485/ | MLaudio | `essence/full` : conteneur plein |
-| `fs_561287.mp3` | https://freesound.org/s/561287/ | angelkunev | `ui/equip` : ailes équipées ou retirées, infusion d'énergie, ailes de la table d'assemblage |
+| `fs_561287.mp3` | https://freesound.org/s/561287/ | angelkunev | `ui/equip` : ailes équipées ou retirées |
 | `fs_841982.mp3` | https://freesound.org/s/841982/ | kevinklang | téléchargé, pas encore utilisé (vent de rechange) |
 | `fs_521972.mp3` | https://freesound.org/s/521972/ | Kastenfrosch | téléchargé, pas encore utilisé (marteau de rechange) |
 | `fs_260554_fire_whoosh.mp3` | https://freesound.org/s/260554/ | LookIMadeAThing | `gacha/ignite` (flamme de forge, hauteur 0,85) |
@@ -78,6 +78,7 @@ Dossier `pixabay/` : 40 fichiers choisis par zorago le 27 octobre pour refaire l
 
 | Fichier local | Utilisé pour |
 |---|---|
+| `rescopicsound-elemental-magic-spell-impact-outgoing-228342.mp3` | `block.infusion` (craft de la table d'assemblage et de l'établi de la forge, ajouté par zorago le 29 octobre) |
 | `dragon-studio-elemental-spell-impact-flame-448566.mp3` | `gacha.flame_ignite` (six flammes, hauteur au hasard) |
 | `yodguard-energy-beam-blast-1-482513.mp3` | `gacha.laser` (rayon central, coup calé sur la colonne) |
 | `yodguard-short-energy-beam-shot-3-482517.mp3` | `gacha.blast_small` (anneaux et étoiles S et moins) |
