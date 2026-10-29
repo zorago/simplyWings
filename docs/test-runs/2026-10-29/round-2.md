@@ -25,3 +25,10 @@ Build corrigé (`main` après fusion de `fixes-1029`). Retests des KO du round 1
 | H17 | OK partiel | 30 s de vol varié sans kick ; en revanche, téléportation par commande (/tp) pendant le vol : le serveur signale « moved too quickly » à chaque /tp (aussi pour Dev2 sans ailes) et Dev a été expulsé pour « floating » deux fois juste après un /tp. Non reproduit sur un /tp pendant le stationnaire. À surveiller en jeu réel (portails, perles, mods de téléportation) | build/server.log |
 | A6 | KO → corrigé | reconnexion en plein vol : expulsé pour « floating » 5 s après la connexion (serveur en mode sans vol, gravité normale). Corrigé (reprise en stationnaire), retesté : en l'air à la reconnexion, mode STABILIZED des deux côtés, pas de kick après 15 s | build/server.log, status |
 | A5 | OK partiel | redémarrage du serveur dédié : collection, paire équipée (eagle) et stamina de Dev conservées ; le reste (pitié, historique, jauges, compresseur) non revérifié | status, simplywings info |
+| F1 | OK | nouvelle fontaine : octogone de 4 blocs, 21 cellules (coins exclus), menu depuis n'importe quelle cellule, casse de tout le multibloc, pose refusée avec message sans place, acceptée sinon ; assemblée aussi dans la structure offering_fountain | shots/F_sheet.png, F_close.png, chat |
+| A1b | OK | nouvel autel draconique : même taille, ailes symétriques, atlas pixel pour pixel | shots/A_sheet2.png |
+| I8 | OK | queues de Night et Light : 8 segments, idles et marche ; 15 états sans traverser les jambes | run/studio/sheets/night_poses.png, light_poses.png |
+
+## Bilan du round 2
+
+Tous les KO du round 1 corrigés repassent. Une régression de fond trouvée et corrigée (reconnexion en plein vol). Restent ouverts : /tp en vol sur serveur (non reproduit) et le portail de sortie posé sur le sanctuaire d'invocation quand il précède la première visite de l'End. Voir `report.md`.

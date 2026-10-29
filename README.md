@@ -2,14 +2,13 @@
 
 Collectible magic wings for Minecraft **1.21.1** on **NeoForge**. Wings are made only for flight: a stabilized hover for building, and a keyboard-steered travel flight with wing beats, dives, stalls and stamina. Every pair has its own identity and stats, and the collection rewards exploring the whole vanilla game.
 
-- Mod id: `simplywings` · Version: `0.1.0` (pre-release) · NeoForge `21.1.257` · License: All Rights Reserved
+- Mod id: `simplywings` · Version: `1.0.0` (beta) · NeoForge `21.1.257` · License: MIT
 - Standalone: no dependency besides NeoForge. JEI support is optional (a JEI plugin, also read by EMI).
 - Built for the *PleasePlayWithMe* modpack (195 mods: Iris, Sodium, Distant Horizons, Create Aeronautics + Sable, YUNG's Better End Island…), with **zero mixins and zero access transformers** to avoid conflicts.
-- Developed largely with AI assistance (code, textures, animations).
 
 ## Status
 
-**Prototype.** The flight, the wing rendering and the 40 pairs are in, all available through a debug command. The survival progression (three End sanctums, Assembly Table, Forge Bench, four essences, Cloud Compressor, loot) is implemented and being play-tested; `/simplywings unlock` stays available to operators.
+**Beta (1.0.0).** Everything is in: flight, 41 pairs, the survival progression (five End sanctums, Assembly Table, Forge Bench, four essences, Cloud Compressor, winged drops), the wing gacha with its in-world summoning show, the Offering Fountain, the wiki and the full sound design. A complete automated test campaign ran on October 29, 2026 in single player and on a dedicated server (`docs/test-runs/2026-10-29/`). Debug commands (`/simplywings …`) are reserved to operators.
 
 | Area | State |
 | --- | --- |
@@ -69,16 +68,17 @@ The physical value of each score is set in the server config, section `[stats]`.
 
 | Action | Default |
 | --- | --- |
-| Air jump (costs stamina) | Jump in the air |
-| Hover (stabilized mode) | Very fast double tap on jump |
-| Hover ↔ travel flight | Left Alt |
-| Charged takeoff into travel flight | Hold Left Alt for 1 s on the ground |
-| Wing beats | Hold sprint |
-| Brake | Sneak (dedicated key, unbound by default) |
-| Steer (travel flight) / move (hover) | WASD |
+| Air jump (costs stamina) | Wing jump / Hover / Ascend (Space) in the air |
+| Hover (stabilized mode) | Very fast double tap on Wing jump |
+| Hover ↔ travel flight | Travel flight (Left Alt) |
+| Charged takeoff into travel flight | Hold Travel flight for 1 s on the ground |
+| Wing beats, Fury dash | Beat wings / Fury dash (Left Ctrl) |
+| Brake | Descend / Brake (Left Shift), or the dedicated Brake key (unbound) |
+| Climb / dive (travel flight), forward / back (hover) | W / S |
+| Turn (travel flight), strafe (hover) | A / D |
 | Wings menu | J |
 
-In travel flight, the mouse only orbits the camera; WASD moves an aim point that the heading follows smoothly. When stamina is too low for an air jump, 2 free rescue jumps reset the fall and cancel fall damage, and recharge on the ground.
+Every action is a key of its own in the *Simply Wings* category of the Controls menu: swap W and S there if you prefer an inverted pitch. In travel flight, the mouse only orbits the camera; the keys move an aim point that the heading follows smoothly, at 10 % while braking. When stamina is too low for an air jump, 2 free rescue jumps reset the fall and cancel fall damage, and recharge on the ground.
 
 ### Progression
 
@@ -127,7 +127,7 @@ Operator only (permission level 2).
 ## Configuration
 
 - `simplywings-server.toml`: physics (gravity, terminal velocity 220 m/s, drag, brake, takeoff), stabilized mode, stamina costs and regeneration, crash damage, Fury invisibility, and the physical scale of every stat.
-- `simplywings-client.toml`: camera distance and transitions, inverted pitch, double-tap window, hover speed curve (`EASE_IN` or `SMOOTHSTEP`), particles.
+- `simplywings-client.toml`: camera distance and transitions, double-tap window, hover speed curve (`EASE_IN` or `SMOOTHSTEP`), particles.
 - Pair data lives in datapack JSON: `data/simplywings/simplywings/wing/<id>.json` (rarity, model, color, flap and hover cadence, equipped stats, collection bonuses).
 
 ## Building
@@ -160,46 +160,35 @@ Written in French.
 
 ## TODO before release
 
-Progress as of October 25, 2026. Design documents are in French; `gatcha.md` describes the last gameplay feature.
+State on October 29, 2026, after the test campaign. Design documents are in French. Items marked *after beta* can ship later without blocking the beta.
 
-### Wings
-- [x] **41 pairs finished**: Blockbench model, pxl texture and dedicated animation class for each pair, polished one by one with the author and validated on October 25 (rules and journal in `wingsRules.md`): feather rows, continuous skins for membranes, veils and fluids, anatomical beats, parachute brake, charged take-off, flat hover, tip trails, tails that never cross the legs.
-- [ ] **Particles and effects**: polish the in-game particles of every pair (beats, glide, brake trails, idles, take-off blast), check them with Iris shaderpacks.
-- [ ] **Sound design**: a first CC0 pass is in (wing beats per family and per pair, take-off, summoning altar show, card reveal; sources in `art/sounds/SOURCES.md`). Still to do: wind, glide, hover, buzz loops, landings, blocks, essences, menu sounds, summoning music, Fury charge sounds. The Fury dive shriek and vanish use a film sample isolated for private play: it must be replaced by an original recreation before any public release.
-- [ ] **In-game check of the art**: skins (membranes) rendering and lighting, emissive pairs at night and with shaders, z-fighting, remote players on a dedicated server.
+### Done
+- [x] **41 pairs**: Blockbench model, pxl texture and dedicated animation class for each pair, polished one by one with the author (`wingsRules.md`).
+- [x] **Survival progression**: Assembly Table, Forge Bench, four essences, flask and tanks, harvest in the three dimensions, Cloud Compressor, stamina substitute, winged energy and 59 drop sources, crafting routes of every pair, optional JEI plugin.
+- [x] **Wing gacha** (`gatcha.md`): summoning feathers in chest loot, five tiers plus mythics, pity, Draconic Altar with its in-world summoning show and cards, Offering Fountain.
+- [x] **Five End sanctums** built by hand by the author, placed on dragon deaths and repaired on later ones, one compass each.
+- [x] **Sound design** complete and validated by the author (`SOUND_PLAN.md`), heard by nearby players.
+- [x] **Wiki**: 24 chapters and a page per pair, material and component (270 pages).
+- [x] Debug commands reserved to operators; every flight action is a configurable key.
 
-### Gameplay
-- [x] Assembly Table and Forge Bench: blocks, block entities, menus, four essence gauges, the two recipe types.
-- [x] Four essences, flask and tiered tanks, harvest in the three dimensions, Cloud Compressor, stamina substitute.
-- [x] Winged energy data component, `simplywings:loot_source` registry (59 sources) and the winged drops Global Loot Modifier.
-- [x] Component items, textures, lore and riddle tooltips; crafting routes of the 40 non-common pairs generated as recipe JSON; mythic recipes for Night and Light.
-- [x] Optional JEI plugin (EMI reads JEI plugins).
-- [x] **Wing gacha** (`gatcha.md`), implemented on October 25, not yet play-tested: summoning item in every chest loot table (much more in the End, Lootr compatible), five loot tiers (B, A, S, SS, SSS + 1 % mythic), pity counters (S 100, SS 500, SSS 1000 with soft pity, no 50/50), Draconic Altar, Offering Fountain that recycles mod items into summons, item values computed from the crafting routes.
-- [ ] Remove `/simplywings unlock` from normal play (keep it for operators).
+### To validate by the author
+- [ ] New Draconic Altar and Offering Fountain models, larger Fury wings and longer tails, brake handling at 10 %.
+
+### To check in the full modpack
+- [ ] High-speed dives with Distant Horizons, Iris shaderpacks (emissive pairs, translucency, summoning show).
+- [ ] YUNG's Better End Island and the other End mods: the summoning sanctum sits at the top of the sky above the main island.
+- [ ] Teleports while flying on a server (portals, pearls, teleport mods): a kick for floating was seen twice after a `/tp` during the test campaign.
+
+### After beta
+- [ ] Particles of every pair polished and checked with shaderpacks.
+- [ ] Tutorial panels and final layout of the Wings screen.
 - [ ] Open question in the specification: name of the block drops category.
 
-### Structures
-- [x] Three End sanctums (Sky Sanctum, Wing Forge, Cloud Refinery) placed on the 2nd, 3rd and 4th dragon deaths, repaired on later deaths, one compass each.
-- [x] **Summoning sanctum** (generated template, to be hand-polished) hidden under the main End island behind a veil of black blocks, placed on the 1st dragon death, compass given on the 5th.
-- [x] **Offering Fountain** (generated template, to be hand-polished), a fourth floating island placed on the 5th dragon death; the islands move from a triangle to a square (four corners).
-- [ ] Hand polish of the five structures by the author.
-- [ ] Check with YUNG's Better End Island, BetterEnd and the other End mods of the pack.
-
-### Interface
-- [x] **Summoning screen** (first version, placeholder art) in the style of Wuthering Waves: AI-assisted cover art with Night and Light as dark silhouettes in the sky, x1 and x10 summons, pity tracker, history, rates.
-- [ ] **Summoning animations** (placeholders in place: comet, flash, card reveal, rays): final launch, reveal, and one appearance animation per tier from S up, plus the mythic one (low-poly motion design, lights and shadows, full sound design and music; masters exported as MP4, replayed in game without any dependency).
-- [ ] Tutorial panels of the Wings screen (flight modes, keys, stamina, collection and stats).
-- [ ] Final layout of the Wings screen, check the inventory button against the other mods' buttons.
-
-### Wiki
-- [ ] Write the whole wiki (fourth tab of the table, plan in `docs/WIKI_PLAN.md`): flight, collection and stats, every pair, crafting, essences, sanctums, gacha, altar and fountain.
-- [ ] Final wiki pass so it covers every key aspect of the mod.
-
 ### Release
-- [ ] Full pass in single player and on a dedicated server, including high-speed dives with Distant Horizons.
-- [ ] Choose the license, set the `versionRange` lower bound, version `1.0.0`.
-- [ ] CurseForge page, screenshots, the AI-assisted development notice.
+- [x] Full pass in single player and on a dedicated server (October 29, 2026, `docs/test-runs/2026-10-29/`).
+- [x] License (MIT), version `1.0.0`, `CHANGELOG.md`.
+- [ ] CurseForge page (draft in `docs/CURSEFORGE.md`) and screenshots, published by the author.
 
 ## Credits
 
-Sound effects are CC0 (public domain) from [Freesound](https://freesound.org) (2create, Cerise_Virtuelle, Scottrex05, Cultureshock007, kalhan, qubodup, harrisonlace, simranzenov), [OpenGameArt](https://opengameart.org) and [Kenney](https://kenney.nl). Full list in `art/sounds/SOURCES.md`.
+Sound effects are CC0 (public domain) or under the Pixabay Content License, from [Pixabay](https://pixabay.com), [Freesound](https://freesound.org) (2create, Cerise_Virtuelle, Scottrex05, Cultureshock007, kalhan, qubodup, harrisonlace, simranzenov), [OpenGameArt](https://opengameart.org) and [Kenney](https://kenney.nl). Full list in `art/sounds/SOURCES.md`.
