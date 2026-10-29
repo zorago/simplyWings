@@ -55,9 +55,9 @@ public final class ServerConfig {
     public static final ModConfigSpec.IntValue SOFT_S;
     public static final ModConfigSpec.IntValue SOFT_SS;
     public static final ModConfigSpec.IntValue SOFT_SSS;
-    public static final ModConfigSpec.DoubleValue STEP_S;
-    public static final ModConfigSpec.DoubleValue STEP_SS;
-    public static final ModConfigSpec.DoubleValue STEP_SSS;
+    public static final ModConfigSpec.IntValue HARD_S;
+    public static final ModConfigSpec.IntValue HARD_SS;
+    public static final ModConfigSpec.IntValue HARD_SSS;
     public static final ModConfigSpec.DoubleValue CHEST_CHANCE;
     public static final ModConfigSpec.DoubleValue NETHER_CHEST_CHANCE;
     public static final ModConfigSpec.DoubleValue END_CHEST_CHANCE;
@@ -200,13 +200,14 @@ public final class ServerConfig {
         RATE_SS = b.comment("Base chance of an SS pull (an epic pair).").defineInRange("rateSS", 0.001, 0.0, 1.0);
         RATE_SSS = b.comment("Base chance of an SSS pull (a legendary pair).").defineInRange("rateSSS", 0.0003, 0.0, 1.0);
         MYTHIC_CHANCE = b.comment("Chance that an SSS pull turns into a mythic pair (Night or Light).").defineInRange("mythicChance", 0.01, 0.0, 1.0);
-        SOFT_S = b.comment("Soft pity: pull count after which the S chance rises by stepS per pull (100 % at the hard pity).")
-                .defineInRange("softS", 80, 1, 100000);
-        SOFT_SS = b.defineInRange("softSS", 400, 1, 100000);
-        SOFT_SSS = b.defineInRange("softSSS", 800, 1, 100000);
-        STEP_S = b.defineInRange("stepS", 0.05, 0.0, 1.0);
-        STEP_SS = b.defineInRange("stepSS", 0.01, 0.0, 1.0);
-        STEP_SSS = b.defineInRange("stepSSS", 0.005, 0.0, 1.0);
+        SOFT_S = b.comment("Soft pity: pull count after which the chance of the tier rises the same amount every pull, up to 100 % at the hard pity.")
+                .defineInRange("softS", 20, 0, 100000);
+        SOFT_SS = b.defineInRange("softSS", 80, 0, 100000);
+        SOFT_SSS = b.defineInRange("softSSS", 150, 0, 100000);
+        HARD_S = b.comment("Hard pity: this pull of the tier is guaranteed. Kept above the soft pity.")
+                .defineInRange("hardS", 50, 1, 100000);
+        HARD_SS = b.defineInRange("hardSS", 120, 1, 100000);
+        HARD_SSS = b.defineInRange("hardSSS", 200, 1, 100000);
         CHEST_CHANCE = b.comment("Chance that a loot chest of the Overworld (or of any other dimension) holds Summoning Feathers.")
                 .defineInRange("chestChance", 0.10, 0.0, 1.0);
         NETHER_CHEST_CHANCE = b.comment("Same chance for a loot chest of the Nether.").defineInRange("netherChestChance", 0.20, 0.0, 1.0);

@@ -6,6 +6,7 @@ import com.zorago.simplywings.client.ClientGacha;
 import com.zorago.simplywings.client.show.ClientShows;
 import com.zorago.simplywings.client.show.ShowSounds;
 import com.zorago.simplywings.gacha.AltarMenu;
+import com.zorago.simplywings.gacha.Gacha;
 import com.zorago.simplywings.gacha.GachaData;
 import com.zorago.simplywings.gacha.GachaTier;
 import com.zorago.simplywings.network.Payloads;
@@ -160,9 +161,9 @@ public class AltarScreen extends AbstractContainerScreen<AltarMenu> {
         g.fill(px - 8, py - 8, width - 10, py + 96, 0x99100818);
         g.renderOutline(px - 8, py - 8, width - 10 - (px - 8), 104, 0x66B46CFF);
         g.drawString(font, Component.translatable("screen.simplywings.altar.pity"), px, py, 0xFFE8DDFF, true);
-        bar(g, px, py + 16, GachaTier.S, state.pityS(), 100, 80);
-        bar(g, px, py + 42, GachaTier.SS, state.pitySS(), 500, 400);
-        bar(g, px, py + 68, GachaTier.SSS, state.pitySSS(), 1000, 800);
+        bar(g, px, py + 16, GachaTier.S, state.pityS());
+        bar(g, px, py + 42, GachaTier.SS, state.pitySS());
+        bar(g, px, py + 68, GachaTier.SSS, state.pitySSS());
 
         int by = height - 46;
         int one = width - 250;
@@ -187,7 +188,9 @@ public class AltarScreen extends AbstractContainerScreen<AltarMenu> {
         return minecraft != null && minecraft.player != null && minecraft.player.isCreative();
     }
 
-    private void bar(GuiGraphics g, int x, int y, GachaTier tier, int count, int hard, int soft) {
+    private void bar(GuiGraphics g, int x, int y, GachaTier tier, int count) {
+        int hard = Gacha.hard(tier);
+        int soft = Gacha.softStart(tier);
         int w = 160;
         g.drawString(font, tier.label(), x, y, tier.color(), true);
         Component text = Component.literal(count + " / " + hard);
@@ -251,13 +254,26 @@ public class AltarScreen extends AbstractContainerScreen<AltarMenu> {
                 "rates_pity_sss", "rates_reset", "rates_no_5050"};
         int w = 0;
         for (String key : keys) {
-            w = Math.max(w, font.width(Component.translatable("screen.simplywings.altar." + key)));
+            w = Math.max(w, font.width(rateLine(key)));
         }
         g.fill(x - 6, y - 6, x + w + 8, y + 18 + keys.length * 11, 0xCC0C0614);
         g.drawString(font, Component.translatable("screen.simplywings.altar.rates_title"), x, y, 0xFFE8DDFF, true);
         for (int i = 0; i < keys.length; i++) {
-            g.drawString(font, Component.translatable("screen.simplywings.altar." + keys[i]), x, y + 14 + i * 11, 0xFFCFC6DE, false);
+            g.drawString(font, rateLine(keys[i]), x, y + 14 + i * 11, 0xFFCFC6DE, false);
         }
+    }
+
+    private Component rateLine(String key) {
+        GachaTier tier = switch (key) {
+            case "rates_pity_s" -> GachaTier.S;
+            case "rates_pity_ss" -> GachaTier.SS;
+            case "rates_pity_sss" -> GachaTier.SSS;
+            default -> null;
+        };
+        if (tier == null) {
+            return Component.translatable("screen.simplywings.altar." + key);
+        }
+        return Component.translatable("screen.simplywings.altar." + key, Gacha.hard(tier), Gacha.softStart(tier) + 1);
     }
 
 

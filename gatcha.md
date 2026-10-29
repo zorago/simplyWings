@@ -49,13 +49,15 @@ Trois compteurs par joueur, un par palier garanti, sauvegardés avec la collecti
 
 | Palier | Garantie douce | Garantie dure | Hausse par tirage pendant la garantie douce |
 | --- | --- | --- | --- |
-| S | à partir du 81e tirage | 100e tirage | +5 % par tirage (100 % au 100e) |
-| SS | à partir du 401e tirage | 500e tirage | +1 % par tirage (100 % au 500e) |
-| SSS | à partir du 801e tirage | 1000e tirage | +0,5 % par tirage (100 % au 1000e) |
+| S | à partir du 21e tirage | 50e tirage | ≈ +3,3 % par tirage (100 % au 50e) |
+| SS | à partir du 81e tirage | 120e tirage | ≈ +2,5 % par tirage (100 % au 120e) |
+| SSS | à partir du 151e tirage | 200e tirage | ≈ +2 % par tirage (100 % au 200e) |
+
+Garanties resserrées par zorago le 29 octobre (avant : 81-100, 401-500, 801-1000).
 
 Règles :
 
-- Taux du tirage n° *n* d'un palier : `taux de base + max(0, n − début de la garantie douce) × hausse`, plafonné à 100 %.
+- Taux du tirage n° *n* d'un palier : `taux de base + (1 − taux de base) × max(0, n − début) / (garantie − début)`, donc une hausse égale à chaque tirage jusqu'à 100 % pile à la garantie (config `softS`/`hardS`, `softSS`/`hardSS`, `softSSS`/`hardSSS`).
 - On tire du plus rare au moins rare : SSS d'abord, puis SS, puis S, puis A, puis B.
 - Un compteur **repart à zéro** dès qu'un objet de **son palier ou d'un palier supérieur** tombe (un SS compte comme « au moins un S » : il remet aussi le compteur S à zéro). C'est le fonctionnement habituel des gachas.
 - Si deux garanties dures tombent sur le même tirage, le palier le plus haut gagne ; le compteur de l'autre continue.
@@ -125,7 +127,7 @@ Les cinq structures seront ensuite **polies à la main par zorago** (générées
 
 - Plein écran : une **illustration de couverture** du mod (générée par IA, retravaillée) avec **Night et Light Fury en ombres noires discrètes dans le ciel**.
 - Boutons **Invoquer ×1** et **Invoquer ×10**, avec le nombre d'invocations possédées.
-- **Tracker de pitié** toujours visible : trois jauges S (sur 100), SS (sur 500), SSS (sur 1000), avec la zone de garantie douce marquée et le pourcentage actuel de chaque palier.
+- **Tracker de pitié** toujours visible : trois jauges S (sur 50), SS (sur 120), SSS (sur 200), avec la zone de garantie douce marquée et le pourcentage actuel de chaque palier.
 - Onglets : historique (les 100 derniers tirages), taux et règles (ce document, en clair).
 - Texte en anglais, comme tout le mod.
 

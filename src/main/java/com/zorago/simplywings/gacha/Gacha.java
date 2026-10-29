@@ -24,24 +24,42 @@ import net.neoforged.neoforge.registries.DeferredItem;
 
 public final class Gacha {
     public static final int MULTI = 10;
-    public static final int HARD_S = 100;
-    public static final int HARD_SS = 500;
-    public static final int HARD_SSS = 1000;
     public static final java.util.Map<java.util.UUID, List<GachaTier>> FORCED = new java.util.HashMap<>();
     private static final java.util.Map<java.util.UUID, List<ItemStack>> PENDING = new java.util.HashMap<>();
 
     public static double rate(GachaTier tier, int pulls) {
         return switch (tier) {
-            case S -> soft(ServerConfig.RATE_S.get(), ServerConfig.SOFT_S.get(), ServerConfig.STEP_S.get(), pulls);
-            case SS -> soft(ServerConfig.RATE_SS.get(), ServerConfig.SOFT_SS.get(), ServerConfig.STEP_SS.get(), pulls);
-            case SSS -> soft(ServerConfig.RATE_SSS.get(), ServerConfig.SOFT_SSS.get(), ServerConfig.STEP_SSS.get(), pulls);
+            case S -> soft(ServerConfig.RATE_S.get(), tier, pulls);
+            case SS -> soft(ServerConfig.RATE_SS.get(), tier, pulls);
+            case SSS -> soft(ServerConfig.RATE_SSS.get(), tier, pulls);
             case A -> ServerConfig.RATE_A.get();
             default -> 0.0;
         };
     }
 
-    private static double soft(double base, int start, double step, int pulls) {
-        return Math.min(1.0, base + Math.max(0, pulls - start) * step);
+    public static int hard(GachaTier tier) {
+        return switch (tier) {
+            case S -> ServerConfig.HARD_S.get();
+            case SS -> ServerConfig.HARD_SS.get();
+            default -> ServerConfig.HARD_SSS.get();
+        };
+    }
+
+    public static int softStart(GachaTier tier) {
+        int start = switch (tier) {
+            case S -> ServerConfig.SOFT_S.get();
+            case SS -> ServerConfig.SOFT_SS.get();
+            default -> ServerConfig.SOFT_SSS.get();
+        };
+        return Math.min(start, hard(tier) - 1);
+    }
+
+    private static double soft(double base, GachaTier tier, int pulls) {
+        int start = softStart(tier);
+        if (pulls >= hard(tier)) {
+            return 1.0;
+        }
+        return Math.min(1.0, base + (1.0 - base) * Math.max(0, pulls - start) / (hard(tier) - start));
     }
 
     public static int feathers(ServerPlayer player) {

@@ -162,8 +162,8 @@ public final class WingsCommand {
         ServerPlayer player = ctx.getSource().getPlayerOrException();
         GachaData data = ModAttachments.gacha(player);
         ctx.getSource().sendSuccess(() -> Component.literal("Pity S " + data.pity(GachaTier.S)
-                + "/" + Gacha.HARD_S + ", SS " + data.pity(GachaTier.SS) + "/" + Gacha.HARD_SS
-                + ", SSS " + data.pity(GachaTier.SSS) + "/" + Gacha.HARD_SSS
+                + "/" + Gacha.hard(GachaTier.S) + ", SS " + data.pity(GachaTier.SS) + "/" + Gacha.hard(GachaTier.SS)
+                + ", SSS " + data.pity(GachaTier.SSS) + "/" + Gacha.hard(GachaTier.SSS)
                 + ", total " + data.total() + ", reserve " + String.format(Locale.ROOT, "%.3f", data.reserve())), false);
         return 1;
     }
