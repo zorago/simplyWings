@@ -328,9 +328,9 @@ Notés au fil des messages de zorago (liste close le 28 octobre). Ils sont corri
   *(29 octobre : corrigé, plan à une seule face ; vérifié en capture.)*
 - [x] Écran du gacha : nouvelle image de fond fournie par zorago, `art/gacha/altar_screen_background.png` (jardin céleste violet, six ailés élémentaires autour d'un temple flottant), à intégrer.
   *(29 octobre : intégrée en 960 × 540 ; vérifiée.)*
-- [ ] **Autel draconique, refonte du modèle 3D** : même taille qu'aujourd'hui, très poli. Densité de texels juste partout : une face de 4 × 16 reçoit 4 × 16 pixels de texture, jamais une texture 16 × 16 écrasée. Thème cohérent avec la table d'assemblage : plus de dragon ni d'ange, seulement des ailes réussies et symétriques.
+- [x] **Autel draconique, refonte du modèle 3D** *(validé par zorago le 29 octobre)* : même taille qu'aujourd'hui, très poli. Densité de texels juste partout : une face de 4 × 16 reçoit 4 × 16 pixels de texture, jamais une texture 16 × 16 écrasée. Thème cohérent avec la table d'assemblage : plus de dragon ni d'ange, seulement des ailes réussies et symétriques.
   *(29 octobre : refait, `tools/crafting_gen/altar_model.py`. **À valider par zorago** (captures `run/studio/shots/A_sheet2.png`).)*
-- [ ] **Fontaine aux offrandes, refonte du modèle 3D** : une belle fontaine en **octogone de 4 blocs de large**, centrée sur son bloc, qui déborde de 1,5 bloc tout autour. Collision sur tout l'octogone par des **blocs invisibles**, comme le multibloc du compresseur : on ne traverse pas le bassin, casser une partie casse tout et rend l'item, la pose est refusée s'il manque de la place. Les textures du bloc actuel sont cassées en jeu : la refonte les remplace, pas de correctif à part.
+- [x] **Fontaine aux offrandes, refonte du modèle 3D** *(validé par zorago le 29 octobre)* : une belle fontaine en **octogone de 4 blocs de large**, centrée sur son bloc, qui déborde de 1,5 bloc tout autour. Collision sur tout l'octogone par des **blocs invisibles**, comme le multibloc du compresseur : on ne traverse pas le bassin, casser une partie casse tout et rend l'item, la pose est refusée s'il manque de la place. Les textures du bloc actuel sont cassées en jeu : la refonte les remplace, pas de correctif à part.
   *(29 octobre : refaite, `tools/crafting_gen/fountain_model.py`, multibloc de 21 cellules, rendu par `render/FountainRenderer`. Testée : pose, refus sans place, menu, casse, assemblage dans la structure. **À valider par zorago** (captures `F_sheet.png`, `F_close.png`).)*
 - [x] **Furies, barre de charge** : aujourd'hui, une fois la fenêtre de lancement passée, la barre se recharge tant que le frein reste enfoncé, malgré le cooldown du serveur (`FuryServer.DASH_COOLDOWN_TICKS`, 5 s, inconnu du client). Logique voulue : la barre se charge en 2 s ; pleine, elle reste prête pendant la fenêtre ; ensuite la compétence est consommée **qu'elle ait été lancée ou non** et passe en cooldown ; pendant le cooldown, la barre n'existe pas (pas d'affichage, pas de charge, pas de son de charge).
   *(29 octobre : corrigé et testé, plus de recharge après la fenêtre, cooldown de 5 s connu du client.)*
@@ -345,9 +345,9 @@ Notés au fil des messages de zorago (liste close le 28 octobre). Ils sont corri
   *(29 octobre : `forge_supplies` supprimé ; tonneaux garnis remis à neuf à chaque régénération, testé.)*
 - [x] Ailes d'ange : l'auréole n'est pas au-dessus de la tête au repos, et elle est globalement mal placée (à recaler sur la tête dans toutes les poses).
   *(29 octobre : anneau à plat au-dessus de la tête, suit la tête ; testé.)*
-- [ ] Furies (Night et Light), modèle 3D : la première paire d'ailes est un peu trop petite ; allonger un peu ses os et agrandir ses membranes.
+- [x] Furies (Night et Light), modèle 3D *(validé par zorago le 29 octobre)* : la première paire d'ailes est un peu trop petite ; allonger un peu ses os et agrandir ses membranes.
   *(29 octobre : ailes principales × 1,15 ; à valider par zorago.)*
-- [ ] Furies, queue : l'animer au repos (idles) et pendant la marche, et l'allonger de 1 ou 2 segments.
+- [x] Furies, queue *(validé par zorago le 29 octobre)* : l'animer au repos (idles) et pendant la marche, et l'allonger de 1 ou 2 segments.
   *(29 octobre : idles et marche plus visibles, 8 segments au lieu de 6 ; 15 états sans traverser les jambes ; à valider par zorago.)*
 - [x] Show du gacha : remonter le cercle d'invocation au sol, aujourd'hui à −2 blocs sous l'autel, au niveau du sol de l'autel, à hauteur d'un tapis (juste au-dessus du sol). zorago a changé son build et le cercle y est caché.
   *(29 octobre : cercle et runes remontés au sol de l'autel ; vérifié.)*

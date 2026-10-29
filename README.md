@@ -172,7 +172,8 @@ State on October 29, 2026, after the test campaign. Design documents are in Fren
 - [x] Debug commands reserved to operators; every flight action is a configurable key.
 
 ### To validate by the author
-- [ ] New Draconic Altar and Offering Fountain models, larger Fury wings and longer tails, brake handling at 10 %.
+- [x] New Draconic Altar and Offering Fountain models, larger Fury wings and longer tails (validated on October 29).
+- [ ] Brake handling at 10 % and the travel flight keys, in real play.
 
 ### To check in the full modpack
 - [ ] High-speed dives with Distant Horizons, Iris shaderpacks (emissive pairs, translucency, summoning show).
