@@ -7,10 +7,12 @@ import com.google.gson.JsonParser;
 import com.zorago.simplywings.SimplyWings;
 import java.io.Reader;
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
@@ -18,6 +20,7 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.util.Mth;
@@ -176,8 +179,16 @@ public final class RigLoader {
         float x = pivot[0] - e.to()[0];
         float y = -e.from()[1] - sy + pivot[1];
         float z = e.from()[2] - pivot[2];
-        builder.texOffs(e.u(), e.v()).mirror(e.mirror())
-                .addBox(x, y, z, sx, sy, sz, new CubeDeformation(e.inflate()));
+        builder.texOffs(e.u(), e.v()).mirror(e.mirror());
+        Set<Direction> faces = sx == 0f ? EnumSet.of(Direction.EAST, Direction.WEST)
+                : sy == 0f ? EnumSet.of(Direction.UP, Direction.DOWN)
+                : sz == 0f ? EnumSet.of(Direction.NORTH, Direction.SOUTH) : null;
+        if (faces == null) {
+            builder.addBox(x, y, z, sx, sy, sz, new CubeDeformation(e.inflate()));
+        } else {
+            float g = e.inflate();
+            builder.addBox(x - g, y - g, z - g, sx + 2 * g, sy + 2 * g, sz + 2 * g, faces);
+        }
     }
 
     private static PartPose pose(float[] origin, float[] parentOrigin, float[] rotation) {
