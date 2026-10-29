@@ -15,6 +15,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
 public final class LightRig extends WingRig {
+    private static final float MAIN_SCALE = 1.15f;
     private static final int IDLE = 0;
     private static final int SETTLE = 1;
     private static final int GLEAM = 2;
@@ -97,10 +98,12 @@ public final class LightRig extends WingRig {
         boolean coil = m.rouse > 0f && m.rouseVariant % 7 == 2;
         for (int k = 0; k < 6; k++) {
             float wave = Mth.sin(time * 0.2f - k * 0.7f);
-            tailPitch[k] = ground * TAIL_GROUND[k] + hang * TAIL_HANG[k] + travel * (k == 0 ? 0.18f : 0.02f + 0.04f * wave)
+            tailPitch[k] = ground * (TAIL_GROUND[k] + 0.05f * Mth.sin(time * 0.06f - k * 0.7f) + 0.08f * walk * Mth.sin(time * 1f - k * 0.6f))
+                    + hang * TAIL_HANG[k] + travel * (k == 0 ? 0.18f : 0.02f + 0.04f * wave)
                     + brake * (k == 0 ? 0.35f : 0f) + (m.launch >= 0f ? (k == 0 ? 0.45f : 0.12f) : 0f) + charge * (k == 0 ? 0.75f : k < 3 ? 0.25f : 0.05f)
                     + (coil ? m.rouse * (k == 0 ? -0.2f : 0.25f) : 0f);
-            tailYaw[k] = ground * (TAIL_CURL[k] + 0.14f * walk * Mth.sin(time * 0.5f - k * 0.5f) + 0.05f * Mth.sin(time * 0.04f - k * 0.5f))
+            tailYaw[k] = ground * (TAIL_CURL[k] + 0.3f * walk * Mth.sin(time * 0.5f - k * 0.5f)
+                    + (1f - walk) * (0.12f * Mth.sin(time * 0.04f - k * 0.5f) + 0.05f * Mth.sin(time * 0.11f - k * 0.9f)))
                     + hang * 0.12f * Mth.sin(time * 0.08f - k * 0.45f)
                     + travel * (-m.bank * 0.24f * (1f + 0.3f * k) + 0.07f * wave)
                     + (coil ? m.rouse * 0.42f : 0f);
@@ -201,6 +204,7 @@ public final class LightRig extends WingRig {
             side.add(RigPose.STROKE, gleam * 0.03f * Mth.sin(time * 6.1f + i));
             side.set(RigPose.FOLD, Mth.clamp(side.get(RigPose.FOLD), 0f, 1f));
             main[i].apply(side, billow, flutter, 0f);
+            main[i].shoulder.scale(MAIN_SCALE, MAIN_SCALE, MAIN_SCALE);
             FlightRules.chuteArm(main[i].arm, i == 0 ? 1f : -1f, chute);
             hind.copy(side);
             if (m.beating()) {
