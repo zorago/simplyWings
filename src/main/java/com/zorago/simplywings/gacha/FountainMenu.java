@@ -119,8 +119,9 @@ public class FountainMenu extends AbstractContainerMenu {
         if (given > 0) {
             server.level().playSound(null, server.blockPosition(), SoundEvents.PLAYER_LEVELUP, SoundSource.BLOCKS, 0.6f, 1.4f);
         }
-        server.displayClientMessage(Component.translatable("message.simplywings.fountain_offered", given,
-                String.format(Locale.ROOT, "%.2f", gacha.reserve())), true);
+        String reserve = String.format(Locale.ROOT, "%.2f", gacha.reserve());
+        server.displayClientMessage(given == 1 ? Component.translatable("message.simplywings.fountain_offered_one", reserve)
+                : Component.translatable("message.simplywings.fountain_offered", given, reserve), true);
         refresh();
         return true;
     }

@@ -919,6 +919,7 @@
   "message.simplywings.offering_fountain": "A Fountain Compass appears in your bag. A fourth island has risen in the End.",
   "message.simplywings.gacha_feathers": "Not enough Summoning Feathers.",
   "message.simplywings.fountain_offered": "The fountain gives you %s feathers (%s kept in reserve).",
+  "message.simplywings.fountain_offered_one": "The fountain gives you 1 feather (%s kept in reserve).",
   "screen.simplywings.altar.title": "Draconic Convene",
   "screen.simplywings.altar.subtitle": "Burn a feather, call a pair of wings.",
   "screen.simplywings.altar.pity": "Guarantees",
