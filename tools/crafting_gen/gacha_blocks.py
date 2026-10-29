@@ -327,13 +327,9 @@ def cover():
 def main():
     TEX.mkdir(parents=True, exist_ok=True)
     GUI.mkdir(parents=True, exist_ok=True)
-    painters = {"draconic_altar_obsidian": obsidian, "draconic_altar_blackstone": blackstone, "draconic_altar_gold": gold,
-                "draconic_altar_bone": bone, "draconic_altar_crystal": crystal, "draconic_altar_feather": feather,
-                "draconic_altar_membrane": membrane, "draconic_altar_ember": ember, "offering_fountain_quartz": quartz}
+    painters = {"offering_fountain_quartz": quartz}
     for name, fn in painters.items():
         fn().save(TEX / f"{name}.png")
-    els, tex = altar()
-    write_block("draconic_altar", els, tex, True)
     feather_item().save(ITEM_TEX / "summoning_feather.png")
     (ASSETS / "models/item/summoning_feather.json").write_text(json.dumps(
         {"parent": "minecraft:item/generated", "textures": {"layer0": "simplywings:item/summoning_feather"}}, indent=2) + "\n",
