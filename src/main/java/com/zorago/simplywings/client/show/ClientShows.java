@@ -127,14 +127,14 @@ public final class ClientShows {
         return false;
     }
 
-    public static float busy(BlockPos pos) {
-        float left = 0;
+    public static boolean playing(BlockPos pos) {
         for (Show s : SHOWS) {
-            if (s.payload.pos().equals(pos)) {
-                left = Math.max(left, s.anim.length - s.time(0));
+            float t = s.time(0);
+            if (s.payload.pos().equals(pos) && t > 0.5f && t < s.anim.length) {
+                return true;
             }
         }
-        return left;
+        return false;
     }
 
     public static float holdTime(Show show) {

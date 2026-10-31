@@ -269,7 +269,7 @@ public class WikiScreen extends Screen {
                 case "wings3d" -> {
                     int h = 104;
                     if (y + h > ctop && y < cbottom) {
-                        renderWings(g, b.get("wing").getAsString(), x + w / 2, y + h - 8, ctop, cbottom);
+                        renderWings(g, b.get("wing").getAsString(), x + w / 2, y + h / 2, ctop, cbottom);
                     }
                     y += h;
                     y = caption(g, b, x, y, w);
@@ -404,7 +404,7 @@ public class WikiScreen extends Screen {
         g.pose().popPose();
     }
 
-    private void renderWings(GuiGraphics g, String wing, int cx, int baseY, int ctop, int cbottom) {
+    private void renderWings(GuiGraphics g, String wing, int cx, int cy, int ctop, int cbottom) {
         LocalPlayer player = Minecraft.getInstance().player;
         ResourceLocation id = ResourceLocation.tryParse(wing);
         if (player == null || id == null) {
@@ -429,7 +429,7 @@ public class WikiScreen extends Screen {
         player.yHeadRot = 180f;
         player.yHeadRotO = 180f;
         WingVisuals.setPreview(Optional.of(id));
-        InventoryScreen.renderEntityInInventory(g, cx, baseY, 36f, new Vector3f(0, player.getBbHeight() / 2f + 0.0625f, 0), pose, null, player);
+        InventoryScreen.renderEntityInInventory(g, cx, cy, 36f, new Vector3f(0, player.getBbHeight() / 2f + 0.0625f, 0), pose, null, player);
         WingVisuals.setPreview(null);
         player.yBodyRot = bodyRot;
         player.yBodyRotO = bodyRotO;

@@ -92,6 +92,10 @@ public final class AltarShows {
     }
 
     public static void start(ServerPlayer player, BlockPos altar, List<GachaData.Entry> results) {
+        if (busy(player.serverLevel(), altar) > 0) {
+            LAST_ALTAR.put(player.getUUID(), GlobalPos.of(player.level().dimension(), altar));
+            return;
+        }
         List<Integer> tiers = new ArrayList<>();
         for (GachaData.Entry e : results) {
             tiers.add(e.tier());
@@ -108,7 +112,7 @@ public final class AltarShows {
         Payloads.SummonShow payload = new Payloads.SummonShow(altar, facing, anim, level.getGameTime() + 2,
                 player.getRandom().nextInt(), tiers, player.getId());
         long start = level.getGameTime() + 2;
-        Show show = new Show(level.dimension(), payload, start + Math.max(MAX_TICKS, length(anim) + 40), start + length(anim) + 10);
+        Show show = new Show(level.dimension(), payload, start + Math.max(MAX_TICKS, length(anim) + 40), start + length(anim));
         int top = level.getMaxBuildHeight() - 1;
         for (int dy = 3; dy <= 64 && altar.getY() + dy <= top; dy += 5) {
             light(level, altar.above(dy), 15, show.lights);

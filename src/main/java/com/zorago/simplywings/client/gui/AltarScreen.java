@@ -74,6 +74,9 @@ public class AltarScreen extends AbstractContainerScreen<AltarMenu> {
             phase = Phase.SHOW;
             phaseStart = now();
             tab = Tab.NONE;
+            if (menu.pos().map(ClientShows::playing).orElse(false)) {
+                skip();
+            }
         }
         if (phase == Phase.SHOW) {
             float t = ClientShows.summonerTime();
@@ -168,16 +171,11 @@ public class AltarScreen extends AbstractContainerScreen<AltarMenu> {
         int by = height - 46;
         int one = width - 250;
         int ten = width - 130;
-        float busy = busy();
         button(g, one, by, 112, 30, Component.translatable("screen.simplywings.altar.pull_one"), Component.literal("×1"),
-                busy <= 0 && (state.feathers() >= 1 || creative()), mouseX, mouseY);
+                state.feathers() >= 1 || creative(), mouseX, mouseY);
         button(g, ten, by, 112, 30, Component.translatable("screen.simplywings.altar.pull_ten"), Component.literal("×10"),
-                busy <= 0 && (state.feathers() >= 10 || creative()), mouseX, mouseY);
+                state.feathers() >= 10 || creative(), mouseX, mouseY);
         g.drawString(font, Component.translatable("screen.simplywings.altar.feathers", state.feathers()), one, by - 14, 0xFFFFE9B0, true);
-        if (busy > 0) {
-            Component text = Component.translatable("screen.simplywings.altar.busy", (int) Math.ceil(busy));
-            g.drawString(font, text, width - 18 - font.width(text), by - 28, 0xFFFF9A7A, true);
-        }
         g.drawString(font, Component.translatable("screen.simplywings.altar.total", state.total()), 18, height - 20, 0xFF9C8CBC, true);
 
         tabButton(g, 18, height - 46, Component.translatable("screen.simplywings.altar.history"), tab == Tab.HISTORY, mouseX, mouseY);
@@ -187,10 +185,6 @@ public class AltarScreen extends AbstractContainerScreen<AltarMenu> {
         } else if (tab == Tab.RATES) {
             drawRates(g);
         }
-    }
-
-    private float busy() {
-        return menu.pos().map(ClientShows::busy).orElse(0f);
     }
 
     private void skip() {
@@ -311,11 +305,11 @@ public class AltarScreen extends AbstractContainerScreen<AltarMenu> {
         switch (phase) {
             case IDLE -> {
                 int by = height - 46;
-                if (inside(mx, my, width - 250, by, 112, 30) && busy() <= 0) {
+                if (inside(mx, my, width - 250, by, 112, 30)) {
                     pull(1);
                     return true;
                 }
-                if (inside(mx, my, width - 130, by, 112, 30) && busy() <= 0) {
+                if (inside(mx, my, width - 130, by, 112, 30)) {
                     pull(10);
                     return true;
                 }

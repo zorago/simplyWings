@@ -24,7 +24,7 @@ First public version.
 ### Wing gacha
 - Summoning feathers in chest loot (10 % Overworld, 20 % Nether, 30 % End, +5 % per luck point), five tiers plus mythics.
 - Pity counters: S guaranteed at 50 summons (rising from 21), SS at 120 (from 81), SSS at 200 (from 151).
-- Draconic Altar with an in-world summoning show seen and heard by every nearby player, cards, history and rates; a Skip button shows the cards at once while the show goes on in the world, and the altar waits for the show to end before the next summon.
+- Draconic Altar with an in-world summoning show seen and heard by every nearby player, cards, history and rates; a Skip button shows the cards at once while the show goes on in the world; summoning again while a show is playing at that altar gives the cards without restarting the show.
 - The Summoning Sanctum floats above the edge of the main End island, away from the exit portal.
 - Offering Fountain, an octagonal four-block multiblock that turns mod items back into feathers.
 

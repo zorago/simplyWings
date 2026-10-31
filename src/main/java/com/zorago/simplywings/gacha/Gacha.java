@@ -90,10 +90,6 @@ public final class Gacha {
             return;
         }
         java.util.Optional<net.minecraft.core.BlockPos> altar = ((AltarMenu) player.containerMenu).pos();
-        if (altar.isPresent() && AltarShows.busy(player.serverLevel(), altar.get()) > 0) {
-            player.displayClientMessage(Component.translatable("message.simplywings.altar_busy"), true);
-            return;
-        }
         List<GachaTier> forced = FORCED.remove(player.getUUID());
         int count = forced != null ? forced.size() : request.count() >= MULTI ? MULTI : 1;
         if (forced == null && !player.isCreative() && feathers(player) < count) {
